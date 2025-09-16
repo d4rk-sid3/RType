@@ -1,5 +1,7 @@
 [requires]
 sfml/2.6.2
+asio/1.36.0
 
-[generator]
-cmake
+[generators]
+CMakeDeps
+CMakeToolchain
