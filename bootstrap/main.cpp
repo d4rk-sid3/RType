@@ -34,9 +34,10 @@ int main() {
     registry.add_component<component::position>(e1, {5, 10});
     registry.add_component<component::velocity>(e1, {1, 2});
 
-    registry.add_component<component::position>(e2, {5, 10});
+    registry.add_component<component::position>(e2, {20, 40});
+    registry.add_component<component::velocity>(e2, {0, 0});
 
-    // position_system(registry);
+    position_system(registry);
 
     return 0;
 }

@@ -34,7 +34,7 @@ namespace component {
         int vy;
     }velocity;
 
-    typedef std::unique_ptr<sf::Drawable> drawable;
+    using drawable = std::shared_ptr<sf::Drawable>;
 
     typedef struct controllable_s {
         bool up;

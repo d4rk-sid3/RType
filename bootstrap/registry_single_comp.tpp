@@ -39,5 +39,5 @@ Component &registry::add_component(entity const &to, Component &&c)
     // Move the component into the entity's place
     table[to] = std::move(c);
 
-    return table[to];
+    return *table[to];
 }

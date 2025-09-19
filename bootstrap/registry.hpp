@@ -62,7 +62,7 @@ class registry {
         unordered_map<type_index, function<void(const entity &)>> _erase_functions;
 
         vector<entity> dead_entities;
-        size_t entity_num;
+        size_t entity_num = 0;
 
 };
 

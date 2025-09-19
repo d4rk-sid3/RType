@@ -30,7 +30,7 @@ class entity {
             return id;
         }
 
-        operator size_t(void) {
+        operator size_t(void) const {
             return id;
         }
 };

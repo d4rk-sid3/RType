@@ -28,7 +28,7 @@ entity registry::spawn_entity()
     } else {
         // Else increment the number of ids
         entity_num += 1;
-        return entity(entity_num - 2);
+        return entity(entity_num - 1);
     }
 }
 

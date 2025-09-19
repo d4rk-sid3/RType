@@ -35,3 +35,28 @@ void position_system(registry &reg)
         }
     }
 }
+
+void position_system_improved(registry &reg,
+                                std::vector<optional<component::position>> &positions,
+                                std::vector<optional<component::velocity>> &velocities)
+{
+    for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
+        if (i >= positions.size() || i >= velocities.size())
+            continue;
+
+        auto const &pos = positions[i];
+        auto const &vel = velocities[i];
+
+        if (pos != nullopt && vel != nullopt) {
+            std::cerr << i << " : Position = {" << pos.value().x << " ," << pos.value().y
+                << "}, Velocity = {" << vel.value().vx << " ," << vel.value().vy
+                << "}" << std::endl;
+        }
+    }
+}
+
+template <class ... Components, typename Function>
+void add_system (Function const &f)
+{
+    auto lambda = [] ()
+}
