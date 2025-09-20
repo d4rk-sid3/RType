@@ -1,6 +1,11 @@
 #include <iostream>
+#include "header/server.hpp"
 
 int main() {
-    std::cout << "Hello R-Type Server!" << std::endl;
-    return 0;
+    try {     
+        Server s(8080);
+    } catch(const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
+    
 }

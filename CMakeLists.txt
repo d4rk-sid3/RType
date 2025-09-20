@@ -54,7 +54,7 @@ if(BUILD_CLIENT)
     endif()
     
     add_executable(r-type_client ${CLIENT_SOURCES})
-    target_include_directories(r-type_client PRIVATE include)
+    target_include_directories(r-type_client PRIVATE include ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
     target_link_libraries(r-type_client PRIVATE)
     
     # Compiler flags for debug builds
@@ -72,7 +72,7 @@ if(BUILD_SERVER)
     endif()
     
     add_executable(r-type_server ${SERVER_SOURCES})
-    target_include_directories(r-type_server PRIVATE include)
+    target_include_directories(r-type_server PRIVATE include ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
     target_link_libraries(r-type_server PRIVATE)
     
     # Compiler flags for debug builds
