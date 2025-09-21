@@ -27,6 +27,11 @@ namespace component {
     typedef struct position_s {
         int x;
         int y;
+        int z;
+        void setPosition( int _x, int _y) {
+            this->x += _x;
+            this->y += _y;
+        }
     }position;
 
     typedef struct velocity_s {
