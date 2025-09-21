@@ -25,7 +25,9 @@
 #include <optional>
 #include <functional>
 #include <any>
+#include <algorithm>
 #include "entity.hpp"
+#include "exceptions.hpp"
 
 using namespace std;
 
@@ -52,9 +54,17 @@ class registry {
         entity spawn_entity();
         void kill_entity(const entity &e);
 
-
+        /* Getters */
         size_t getEntityNum(void) const {
             return entity_num;
+        }
+
+        size_t getComponentNum(void) const {
+            return _components_arrays.size();
+        }
+
+        size_t getEraseFunctionNum(void) const {
+            return _erase_functions.size();
         }
     
     private:

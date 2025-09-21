@@ -53,6 +53,10 @@ vector<optional<Component>> &registry::register_components()
 template<typename Component>
 vector<optional<Component>> &registry::get_components()
 {
+    // Check if the type is registered
+    if (_components_arrays.find(typeid(Component)) == _components_arrays.end()) {
+        throw NonExistentComponentType();
+    }
     // Get the corresponding table as an any
     any &table = _components_arrays[typeid(Component)];
 
@@ -63,6 +67,10 @@ vector<optional<Component>> &registry::get_components()
 template<typename Component>
 vector<optional<Component>> const &registry::get_components() const
 {
+    // Check if the type is registered
+    if (_components_arrays.find(typeid(Component)) == _components_arrays.end()) {
+        throw NonExistentComponentType();
+    }
     // Get the corresponding table as an any
     const any &table = _components_arrays.at(typeid(Component));
 

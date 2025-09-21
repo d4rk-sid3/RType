@@ -1,62 +1,35 @@
 /* ------------------------------------------------------------------------------------ *
  *                                                                                      *
- * EPITECH PROJECT - Thu, Sep, 2025                                                     *
- * Title           - r-type_bs                                                          *
+ * EPITECH PROJECT - Sun, Sep, 2025                                                     *
+ * Title           - G-CPP-500-COT-5-1-rtype-8                                          *
  * Description     -                                                                    *
- *     components                                                                       *
+ *     exceptions                                                                       *
  *                                                                                      *
  * ------------------------------------------------------------------------------------ *
  *                                                                                      *
- *       ▄▀▀█▄▄▄▄  ▄▀▀▄▀▀▀▄  ▄▀▀█▀▄    ▄▀▀▀█▀▀▄  ▄▀▀█▄▄▄▄  ▄▀▄▄▄▄   ▄▀▀▄ ▄▄             *
- *      ▐  ▄▀   ▐ █   █   █ █   █  █  █    █  ▐ ▐  ▄▀   ▐ █ █    ▌ █  █   ▄▀            *
- *        █▄▄▄▄▄  ▐  █▀▀▀▀  ▐   █  ▐  ▐   █       █▄▄▄▄▄  ▐ █      ▐  █▄▄▄█             *
- *        █    ▌     █          █        █        █    ▌    █         █   █             *
- *       ▄▀▄▄▄▄    ▄▀        ▄▀▀▀▀▀▄   ▄▀        ▄▀▄▄▄▄    ▄▀▄▄▄▄▀   ▄▀  ▄▀             *
- *       █    ▐   █         █       █ █          █    ▐   █     ▐   █   █               *
- *       ▐        ▐         ▐       ▐ ▐          ▐        ▐         ▐   ▐               *
+ *         ░        ░       ░░        ░        ░        ░░      ░░  ░░░░  ░             *
+ *         ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒             *
+ *         ▓      ▓▓▓       ▓▓▓▓▓  ▓▓▓▓▓▓▓  ▓▓▓▓      ▓▓▓  ▓▓▓▓▓▓▓        ▓             *
+ *         █  ███████  ██████████  ███████  ████  ███████  ████  █  ████  █             *
+ *         █        █  ███████        ████  ████        ██      ██  ████  █             *
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
-#ifndef INCLUDED_COMPONENTS_HPP
-    #define INCLUDED_COMPONENTS_HPP
+#ifndef INCLUDED_EXCEPTIONS_HPP
+    #define INCLUDED_EXCEPTIONS_HPP
 
-#include <SFML/Graphics.hpp>
-#include <memory>
-#include <string>
+#include <exception>
 
-namespace component {
-    typedef struct position_s {
-        int x;
-        int y;
-        int z;
-        void setPosition( int _x, int _y) {
-            this->x += _x;
-            this->y += _y;
-        }
-    }position;
+class NonExistentComponentType : public std::exception {
+    const char *what() const noexcept override {
+        return "NonExistentComponentType: The type of component you passed in a template is not registered in the registry.";
+    }
+};
 
-    typedef struct velocity_s {
-        int vx;
-        int vy;
-    }velocity;
-
-    typedef struct drawable_s {
-        sf::Texture texture;
-        sf::Sprite sprite;
-
-        void setTextureFromPath(std::string path) {
-            this->texture.loadFromFile(path);
-            this->sprite.setTexture(this->texture);
-        }
-    }drawable;
-
-    typedef struct controllable_s {
-        bool up;
-        bool down;
-        bool left;
-        bool right;
-        bool space;
-    }controllable;
+class NonExistentEntityID : public std::exception {
+    const char *what() const noexcept override {
+        return "NonExistentEntityID: The id of entity you're trying to access is not registered in the registry.";
+    }
 };
 
 #endif

@@ -34,6 +34,11 @@ entity registry::spawn_entity()
 
 void registry::kill_entity(const entity &e)
 {
+    // Check if the entity is really registered
+    if (find(dead_entities.begin(), dead_entities.end(), e) != dead_entities.end()
+        || (size_t)e >= entity_num)
+        throw NonExistentEntityID();
+
     // Add the entity to the dead_entities
     dead_entities.push_back(e);
 

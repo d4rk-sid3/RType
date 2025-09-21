@@ -24,7 +24,7 @@ void position_system(registry &reg)
         }
 }
 
-void draw_system(registry &reg)
+void draw_system(registry &reg, sf::RenderWindow &window)
 {
     auto &positions = reg.get_components<component::position>();
     auto &draws = reg.get_components<component::drawable>();
@@ -36,9 +36,9 @@ void draw_system(registry &reg)
 
             if (pos && draw) {
                 auto tmp =  draw.value();
-                cout << i << " : Position = {" << pos.value().x << " ," << pos.value().y
-                        << "}, Velocity = {" << draw.value().vx << " ," << draw.value().vy
-                        << "}" << std::endl;
+
+                tmp.sprite.setPosition(pos.value().x, pos.value().y);
+                window.draw(tmp.sprite);
             }
         } catch (...) {
         }
@@ -57,25 +57,23 @@ int main() {
     entity e1 = registry.spawn_entity();
     entity e2 = registry.spawn_entity();
 
-    registry.add_component<component::position>(e1, {5, 10});
-    registry.add_component<component::velocity>(e1, {1, 2});
+    registry.add_component<component::position>(e1, {5, 5});
+    registry.add_component<component::velocity>(e1, {1, 1});
 
-    registry.add_component<component::position>(e2, {20, 40});
-    registry.add_component<component::velocity>(e2, {0, 0});
+    auto &sprite = registry.add_component<component::drawable>(e1, component::drawable());
+
+    sprite.setTextureFromPath("leaf.png");
+    // registry.add_component<component::position>(e2, {20, 40});
+    // registry.add_component<component::velocity>(e2, {0, 0});
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Drawable");
 
-    sf::CircleShape circle(50.f);
-
-    circle.setFillColor(sf::Color::Green);
-
-    circle.setPosition(
-        (window.getSize().x / 3.f) - circle.getRadius(),
-        (window.getSize().y / 3.f) - circle.getRadius()
-    );
-
     while (window.isOpen()) {
         position_system(registry);
+        
+        window.clear();
+        draw_system(registry, window);
+        window.display();
         this_thread::sleep_for(chrono::milliseconds((500)));
     }
 
