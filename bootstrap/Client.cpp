@@ -15,17 +15,17 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
-#include "Game.hpp"
+#include "Client.hpp"
 #include "Factory.hpp"
 
-Game::Game(registry &_reg)
+Client::Client(registry &_reg)
 {
     Factory fac(_reg);
 
     fac.make_player();
 }
 
-void Game::runGame(void)
+void Client::runGame(void)
 {
     // Game loop
 }

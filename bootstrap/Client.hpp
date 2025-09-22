@@ -22,8 +22,19 @@
 #include <iostream>
 #include "registry.hpp"
 
+typedef enum {
+    CONNEXION,
+    GAME,
+    GAME_OVER
+}mode_t;
+
 class Game
 {
+    private:
+        mode_t _mode = CONNEXION;
+        registry &_reg;
+        NetworkManager _network_manager;
+
     public:
         Game(registry &_reg);
         ~Game() = default;

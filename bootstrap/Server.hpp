@@ -1,9 +1,9 @@
 /* ------------------------------------------------------------------------------------ *
  *                                                                                      *
- * EPITECH PROJECT - Wed, Sep, 2025                                                     *
- * Title           - r-type_bs                                                          *
+ * EPITECH PROJECT - Tue, Sep, 2025                                                     *
+ * Title           - G-CPP-500-COT-5-1-rtype-8                                          *
  * Description     -                                                                    *
- *     registry                                                                         *
+ *     Server                                                                           *
  *                                                                                      *
  * ------------------------------------------------------------------------------------ *
  *                                                                                      *
@@ -15,79 +15,31 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
-#ifndef INCLUDED_REGISTRY_HPP
-    #define INCLUDED_REGISTRY_HPP
+#ifndef INCLUDED_SERVER_HPP
+    #define INCLUDED_SERVER_HPP
 
 #include <iostream>
-#include <unordered_map>
-#include <typeindex>
-#include <vector>
-#include <optional>
-#include <functional>
-#include <any>
-#include <algorithm>
-#include "entity.hpp"
-#include "exceptions.hpp"
+#include "registry.hpp"
 
-using namespace std;
+typedef enum {
+    CONNEXION,
+    GAME,
+    GAME_OVER
+}mode_t;
 
-class registry {
-    public:
-        registry();
-
-        /* Tables management */
-        template<typename Component>
-        vector<optional<Component>> &register_components();
-        
-        template<typename Component>
-        vector<optional<Component>> &get_components();
-        
-        template<typename Component>
-        vector<optional<Component>> const &get_components() const;
-
-        /* Single component management */
-        template<typename Component>
-        void remove_component(entity const &from);
-
-        template<typename Component>
-        Component &add_component(entity const &to, Component &&c);
-    
-        /* Entities managament */
-        entity spawn_entity();
-        void kill_entity(const entity &e);
-
-        /* Systems managment */
-        void add_system(const function<void()> &system);
-        void run_systems(void);
-
-        /* Getters */
-        size_t getEntityNum(void) const {
-            return entity_num;
-        }
-
-        size_t getComponentNum(void) const {
-            return _components_arrays.size();
-        }
-
-        size_t getEraseFunctionNum(void) const {
-            return _erase_functions.size();
-        }
-    
+class Server
+{
     private:
-        unordered_map<type_index, any> _components_arrays;
-        unordered_map<type_index, function<void(const entity &)>> _erase_functions;
-
-        vector<function<void()>> _systems;
-
+        mode_t _mode = CONNEXION;
+        registry &_reg;
         NetworkManager _network_manager;
 
-        vector<entity> dead_entities;
-        size_t entity_num = 0;
+    public:
+        Server(registry &_reg) : _reg(_reg) {};
+        ~Server() = default;
 
+        void runServer();
 };
-
-#include "registry_single_comp.tpp"
-#include "registry_tables.tpp"
 
 #endif
 
