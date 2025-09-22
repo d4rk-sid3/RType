@@ -21,7 +21,6 @@
     #define INCLUDED_COMPONENTS_HPP
 
 #include <SFML/Graphics.hpp>
-#include <memory>
 #include <string>
 
 namespace component {

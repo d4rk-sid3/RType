@@ -88,8 +88,6 @@ class registry {
 
         vector<function<void()>> _systems;
 
-        NetworkManager _network_manager;
-
         vector<entity> dead_entities;
         size_t entity_num = 0;
 

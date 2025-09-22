@@ -29,9 +29,6 @@ void position_system(registry &reg, std::vector<optional<component::position>> &
 
                 if (pos && vel) {
                     pos.value().setPosition( vel.value().vx,  vel.value().vy);
-                    cout << i << " : Position = {" << pos.value().x << " ," << pos.value().y
-                            << "}, Velocity = {" << vel.value().vx << " ," << vel.value().vy
-                            << "}" << std::endl;
                 }
             } catch (...) {
             }
@@ -52,7 +49,6 @@ void draw_system(registry &reg, sf::RenderWindow &window,
             if (pos && draw) {  
                 draw.value().sprite.setPosition(pos.value().x, pos.value().y);
                 window.draw(draw.value().sprite);
-                cout << i << " : Drawing at {" << pos.value().x << " ," << pos.value().y << "}" << std::endl;
             }
         } catch (...) {
         }

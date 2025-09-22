@@ -21,6 +21,7 @@
 #define INCLUDED_REGISTRY_SINGLE_COMP_TPP
 
 #include "registry.hpp"
+#include "components.hpp"
 
 template<typename Component>
 void registry::remove_component(entity const &from)
@@ -50,6 +51,10 @@ Component &registry::add_component(entity const &to, Component &&c)
         || (size_t)to >= entity_num)
         throw NonExistentEntityID();
 
+    if (typeid(Component) == typeid(component::drawable)) {
+        printf("Component type: %s to entity %d\n", typeid(Component).name(), to.getId());
+    }
+
     // Get the table corresponding to the component type
     vector<optional<Component>> &table = get_components<Component>();
 
@@ -59,10 +64,10 @@ Component &registry::add_component(entity const &to, Component &&c)
         table.resize((size_t)to + 1);
     }
     // Move the component into the entity's place
-    table[to].reset();
-    table[to] = std::move(c);
+    table[(size_t)to].reset();
+    table[(size_t)to] = std::move(c);
 
-    return *table[to];
+    return *table[(size_t)to];
 }
 
 #endif
