@@ -16,6 +16,10 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+
+#ifndef INCLUDED_REGISTRY_SINGLE_COMP_TPP
+#define INCLUDED_REGISTRY_SINGLE_COMP_TPP
+
 #include "registry.hpp"
 
 template<typename Component>
@@ -60,3 +64,5 @@ Component &registry::add_component(entity const &to, Component &&c)
 
     return *table[to];
 }
+
+#endif

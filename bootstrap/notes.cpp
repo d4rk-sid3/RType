@@ -1,1 +1,0 @@
-sparce_array<Composent> = registry.get_components<Composent>(

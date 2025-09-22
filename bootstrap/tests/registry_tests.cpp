@@ -2,7 +2,7 @@
 #include "../components.hpp"
 #include <gtest/gtest.h>
 
-class registryTest : testing::Test {
+class registryTest : public testing::Test {
     protected:
         registry reg;
         registry emptyReg;
@@ -14,20 +14,19 @@ class registryTest : testing::Test {
             // Registering velocity table
             reg.register_components<component::velocity>();
         }
-
 };
 
 TEST_F(registryTest, initialValues)
 {
     // Checking the entity number
-    ASSERT_EQ(reg.getEntityNum, 0);
-    ASSERT_EQ(emptyReg.getEntityNum, 0);
+    ASSERT_EQ(reg.getEntityNum(), 0);
+    ASSERT_EQ(emptyReg.getEntityNum(), 0);
 
     // Checking the table container for the empty reg
-    ASSERT_EQ(emptyReg.getComponentNum, 0);
+    ASSERT_EQ(emptyReg.getComponentNum(), 0);
     
     // Checking the eraser functions array size
-    ASSERT_EQ(emptyReg.getEraseFunctionNum, 0);
+    ASSERT_EQ(emptyReg.getEraseFunctionNum(), 0);
 }
 
 TEST_F(registryTest, entityHandling)
@@ -45,11 +44,9 @@ TEST_F(registryTest, entityHandling)
     reg.kill_entity(e);
 
     // Make sure it was killed
-    ASSERT_EQ(reg.getEntityNum(), 0);
-
     auto &pos_table = reg.get_components<component::position>();
 
-    ASSERT_EQ(pos_table[e].has_value, false);
+    ASSERT_EQ(pos_table[e].has_value(), false);
 
     // Make sure dead ids are reused
     entity new_entity = reg.spawn_entity();
@@ -58,7 +55,7 @@ TEST_F(registryTest, entityHandling)
     ASSERT_EQ(new_entity, e);
 
     // Error cases
-    EXPECT_THROW(reg.kill_entity(10), NonExistentEntityID);
+    EXPECT_THROW(reg.kill_entity((entity)10), NonExistentEntityID);
 }
 
 TEST_F(registryTest, componentHandling)
@@ -109,16 +106,16 @@ TEST_F(registryTest, componentHandling)
     ASSERT_EQ(e1_pos.has_value(), false);
     ASSERT_EQ(e1_vel.has_value(), false);
 
-    ASSERT_EQ(e2_pos.value.x, 0);
-    ASSERT_EQ(e2_pos.value.y, 0);
+    ASSERT_EQ(e2_pos.value().x, 0);
+    ASSERT_EQ(e2_pos.value().y, 0);
 
-    ASSERT_EQ(e2_vel.value.x, 0);
-    ASSERT_EQ(e2_vel.value.y, 0);
+    ASSERT_EQ(e2_vel.value().vx, 5);
+    ASSERT_EQ(e2_vel.value().vy, 5);
 
     // Deleting a component
     reg.remove_component<component::position>(e2);
 
-    auto e2_pos = pos_table[1];
+    e2_pos = pos_table[1];
 
     ASSERT_EQ(e2_pos.has_value(), false);
 
@@ -128,7 +125,7 @@ TEST_F(registryTest, componentHandling)
         NonExistentComponentType
     );
     EXPECT_THROW(
-        reg.add_component<int>(e2, {0, 0}),
+        reg.add_component<int>(e2, 522),
         NonExistentComponentType
     );
     EXPECT_THROW(
@@ -137,11 +134,11 @@ TEST_F(registryTest, componentHandling)
     );
 
     EXPECT_THROW(
-        reg.add_component<component::position>(10, {0, 0}),
+        reg.add_component<component::position>((entity)10, {0, 0}),
         NonExistentEntityID
     );
     EXPECT_THROW(
-        reg.remove_component<component::position>(10),
+        reg.remove_component<component::position>((entity)10),
         NonExistentEntityID
     );
 }

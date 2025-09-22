@@ -20,43 +20,42 @@
 
 void position_system(registry &reg)
 {
-    auto const &positions = reg.get_components<component::position>();
-    auto const &velocities = reg.get_components<component::velocity>();
+    auto &positions = reg.get_components<component::position>();
+    auto &velocities = reg.get_components<component::velocity>();
 
+        for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
+            try {
+                auto &pos = positions.at(i);
+                auto &vel = velocities.at(i);
 
-    for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
-        auto const &pos = i < positions.size() ? positions[i] : nullopt;
-        auto const &vel = i < velocities.size() ? velocities[i] : nullopt;
-
-        if (pos && vel) {
-            std::cerr << i << " : Position = {" << pos.value().x << " ," << pos.value().y
-                << "}, Velocity = {" << vel.value().vx << " ," << vel.value().vy
-                << "}" << std::endl;
+                if (pos && vel) {
+                    pos.value().setPosition( vel.value().vx,  vel.value().vy);
+                    cout << i << " : Position = {" << pos.value().x << " ," << pos.value().y
+                            << "}, Velocity = {" << vel.value().vx << " ," << vel.value().vy
+                            << "}" << std::endl;
+                }
+            } catch (...) {
+            }
         }
-    }
 }
 
-void position_system_improved(registry &reg,
-                                std::vector<optional<component::position>> &positions,
-                                std::vector<optional<component::velocity>> &velocities)
+void draw_system(registry &reg, sf::RenderWindow &window)
 {
+    auto &positions = reg.get_components<component::position>();
+    auto &draws = reg.get_components<component::drawable>();
+
     for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
-        if (i >= positions.size() || i >= velocities.size())
-            continue;
+        try {
+            auto &pos = positions.at(i);
+            auto &draw = draws.at(i);
 
-        auto const &pos = positions[i];
-        auto const &vel = velocities[i];
+            if (pos && draw) {
+                auto tmp =  draw.value();
 
-        if (pos != nullopt && vel != nullopt) {
-            std::cerr << i << " : Position = {" << pos.value().x << " ," << pos.value().y
-                << "}, Velocity = {" << vel.value().vx << " ," << vel.value().vy
-                << "}" << std::endl;
+                tmp.sprite.setPosition(pos.value().x, pos.value().y);
+                window.draw(tmp.sprite);
+            }
+        } catch (...) {
         }
     }
-}
-
-template <class ... Components, typename Function>
-void add_system (Function const &f)
-{
-    auto lambda = [] ()
 }

@@ -16,6 +16,10 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+
+#ifndef INCLUDED_REGISTRY_TABLES_TPP
+#define INCLUDED_REGISTRY_TABLES_TPP
+
 #include "registry.hpp"
 
 template<typename Component>
@@ -77,3 +81,5 @@ vector<optional<Component>> const &registry::get_components() const
     // Casting the any into its real type
     return any_cast<vector<optional<Component>>&>(table);
 }
+
+#endif

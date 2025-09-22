@@ -3,55 +3,8 @@
 #include "registry.hpp"
 #include "components.hpp"
 
-void position_system(registry &reg)
-{
-    auto &positions = reg.get_components<component::position>();
-    auto &velocities = reg.get_components<component::velocity>();
-
-        for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
-            try {
-                auto &pos = positions.at(i);
-                auto &vel = velocities.at(i);
-
-                if (pos && vel) {
-                    pos.value().setPosition( vel.value().vx,  vel.value().vy);
-                    cout << i << " : Position = {" << pos.value().x << " ," << pos.value().y
-                            << "}, Velocity = {" << vel.value().vx << " ," << vel.value().vy
-                            << "}" << std::endl;
-                }
-            } catch (...) {
-            }
-        }
-}
-
-void draw_system(registry &reg, sf::RenderWindow &window)
-{
-    auto &positions = reg.get_components<component::position>();
-    auto &draws = reg.get_components<component::drawable>();
-
-    for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
-        try {
-            auto &pos = positions.at(i);
-            auto &draw = draws.at(i);
-
-            if (pos && draw) {
-                auto tmp =  draw.value();
-
-                tmp.sprite.setPosition(pos.value().x, pos.value().y);
-                window.draw(tmp.sprite);
-            }
-        } catch (...) {
-        }
-    }
-}
-
 int main() {
     registry registry;
-
-    registry.register_components<component::position>();
-    registry.register_components<component::velocity>();
-    registry.register_components<component::drawable>();
-    registry.register_components<component::controllable>();
 
 
     entity e1 = registry.spawn_entity();
@@ -60,22 +13,24 @@ int main() {
     registry.add_component<component::position>(e1, {5, 5});
     registry.add_component<component::velocity>(e1, {1, 1});
 
-    auto &sprite = registry.add_component<component::drawable>(e1, component::drawable());
+    // auto &sprite = registry.add_component<component::drawable>(e1, component::drawable());
 
-    sprite.setTextureFromPath("leaf.png");
+    // sprite.setTextureFromPath("leaf.png");
     // registry.add_component<component::position>(e2, {20, 40});
     // registry.add_component<component::velocity>(e2, {0, 0});
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Drawable");
+    // sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Drawable");
 
-    while (window.isOpen()) {
-        position_system(registry);
-        
-        window.clear();
-        draw_system(registry, window);
-        window.display();
-        this_thread::sleep_for(chrono::milliseconds((500)));
-    }
+    registry.run_systems();
+    registry.run_systems();
+    registry.run_systems();
+
+    registry.add_component<component::position>(e2, {10, 10});
+    registry.add_component<component::velocity>(e2, {100, 100});
+
+    registry.run_systems();
+    registry.run_systems();
+    registry.run_systems();
 
     return 0;
 }
