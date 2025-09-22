@@ -23,7 +23,7 @@ SpaceBeforeAssignmentOperators: true
 SpaceInEmptyParentheses: false
 
 # Alignement
-AlignAfterOpenBracket: Align
+AlignAfterOpenBracket: BlockIndent
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
 AlignOperands: true

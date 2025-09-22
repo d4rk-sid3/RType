@@ -7,49 +7,48 @@
 
 #ifndef NETWORK_HPP_
 #define NETWORK_HPP_
-    #include <asio.hpp>
-    #include <sys/socket.h>
-    #include <arpa/inet.h>
-    #include <netinet/in.h>
-    #include <netinet/ip.h>
-    #include <stdio.h>
-    #include <unistd.h>
-    #include <stdlib.h>
-    #include <string.h>
-    #include <poll.h>
-    #include <sys/stat.h>
-    #include <fcntl.h>
-    #include <stdbool.h>
-    #include <ctype.h>
-    #include <time.h>
-    #include <limits.h>
-    #include <string>
-    #include <sstream>
-    #include <iostream>
-    #include <filesystem>
-    #include <bits/stdc++.h>
-    #include <cstdlib>
-    #include <vector>
-    #include <thread>
-    #include <sys/ioctl.h>
+#include <asio.hpp>
+#include <cstdlib>
+#include <ctype.h>
+#include <fcntl.h>
+#include <filesystem>
+#include <iostream>
+#include <limits.h>
+#include <poll.h>
+#include <sstream>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <string>
+#include <thread>
+#include <time.h>
+#include <unistd.h>
+#include <vector>
 
+#include <arpa/inet.h>
+#include <bits/stdc++.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
 
-    class NetworkManager {
-        public:
-            NetworkManager(int port);
-            ~NetworkManager();
-            void run();
-            void Receive();
-            void Sendit(const std::string &msg, const asio::ip::udp::endpoint& client);
+class NetworkManager {
+  public:
+    NetworkManager(int port);
+    ~NetworkManager();
+    void run();
+    void Receive();
+    void Sendit(const std::string& msg, const asio::ip::udp::endpoint& client);
 
-        protected:
-
-        private: 
-            asio::io_context context;
-            asio::ip::udp::socket socket;
-            std::array<char, 1024> buff;
-            asio::ip::udp::endpoint client_;
-            bool isrunning;
-    };
+  protected:
+  private:
+    asio::io_context context;
+    asio::ip::udp::socket socket;
+    std::array<char, 1024> buff;
+    asio::ip::udp::endpoint client_;
+    bool isrunning;
+};
 
 #endif /* !NETWORK_HPP_ */
