@@ -5,30 +5,59 @@
 ** init_server
 */
 
-#include "header/server.hpp"
+#include "header/Network.hpp"
 
-Server::Server(int _port)
+NetworkManager::NetworkManager(int port): socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)), isrunning(true)
 {
-    port = _port;
-    asio::io_context context; //création des évènements
+    std::cout << "Serveur pret à être lancé" << std::endl;
+    Receive();
+}
 
-    asio::ip::udp::socket socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)); // création des sockets
+NetworkManager::~NetworkManager()
+{
+    isrunning = false;
+    socket.close();
+}
 
-    std::cout << "Serveur lancé" << std::endl;
-
-    while (1) {
-        char buff[1024];
-
-        asio::ip::udp::endpoint client; // adresse ip + port du client
-
-        size_t l = socket.receive_from(asio::buffer(buff), client); // reception des informations envoyé du serveur
-        std::cout << "Reçu: " << std::string(buff, l) << " de " << client << std::endl;
-
-        std::string msg = "J'ai reçue" + std::string(buff, l);
-        socket.send_to(asio::buffer(msg), client); // envoie du message par le client
+void NetworkManager::run()
+{
+    if (isrunning) {
+        context.run();
     }
 }
 
-Server::~Server() {
+void NetworkManager::Receive()
+{
+    socket.async_receive_from(asio::buffer(buff), client_, 
+        
+        [this](std::error_code error ,std::size_t bytes_receive) {
 
+            std::string data(buff.data(), bytes_receive);
+                std::cout << "Reçu: " << data << std::endl;
+
+            if (!error && bytes_receive > 0) {
+                Sendit("Recieve", client_);
+            }
+
+            if (isrunning) {
+                Receive();
+            }
+        
+        }
+    );
+
+}
+
+void NetworkManager::Sendit(const std::string &msg, const asio::ip::udp::endpoint& client)
+{
+    socket.async_send_to(asio::buffer(msg), client, 
+        [this](std::error_code error, std::size_t byte_send) {
+            
+            if (!error) {
+                std::cout << "Send  " << byte_send <<  std::endl;
+            } else {
+                std::cerr << error.message() << std::endl;
+            }
+        }
+    );
 }

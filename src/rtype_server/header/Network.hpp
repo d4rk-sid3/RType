@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2025
 ** G-CPP-500-COT-5-1-rtype-8
 ** File description:
-** server
+** Network
 */
 
-#ifndef SERVER_HPP_
-#define SERVER_HPP_
-
+#ifndef NETWORK_HPP_
+#define NETWORK_HPP_
+    #include <asio.hpp>
     #include <sys/socket.h>
     #include <arpa/inet.h>
     #include <netinet/in.h>
@@ -32,17 +32,24 @@
     #include <vector>
     #include <thread>
     #include <sys/ioctl.h>
-    #include <asio.hpp>
 
 
-    class Server {
-        private:
-            int fd;
-            int port;
-
+    class NetworkManager {
         public:
-            Server(int _port);
-            ~Server();
+            NetworkManager(int port);
+            ~NetworkManager();
+            void run();
+            void Receive();
+            void Sendit(const std::string &msg, const asio::ip::udp::endpoint& client);
+
+        protected:
+
+        private: 
+            asio::io_context context;
+            asio::ip::udp::socket socket;
+            std::array<char, 1024> buff;
+            asio::ip::udp::endpoint client_;
+            bool isrunning;
     };
 
-#endif /* !SERVER_HPP_ */
+#endif /* !NETWORK_HPP_ */
