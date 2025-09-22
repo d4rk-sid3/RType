@@ -20,12 +20,25 @@
 #include "registry.hpp"
 #include "systems.hpp"
 
-registry::registry()
+registry::registry() : window(std::make_optional<sf::RenderWindow>(sf::VideoMode(800, 600), "SFML Drawable")), event(std::make_optional<sf::Event>())
 {
     register_components<component::position>();
     register_components<component::velocity>();
     register_components<component::drawable>();
     register_components<component::controllable>();
+
+
+    add_system(
+        [
+            this,
+            &event = this->event.value(),
+            &controllables = this->get_components<component::controllable>(),
+            &velocities = this->get_components<component::velocity>()
+        ]
+        () {
+            control_system(*this, event, controllables, velocities);
+        }
+    );
 
     add_system(
         [
@@ -34,7 +47,19 @@ registry::registry()
             &velocities = this->get_components<component::velocity>()
         ]
         () {
-            position_system_improved(*this, positions, velocities);
+            position_system(*this, positions, velocities);
+        }
+    );
+
+    add_system(
+        [
+            this,
+            &window = this->window.value(),
+            &positions = this->get_components<component::position>(),
+            &draws = this->get_components<component::drawable>()
+        ]
+        () {
+            draw_system(*this, window, positions, draws);
         }
     );
 }

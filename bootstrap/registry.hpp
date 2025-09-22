@@ -28,6 +28,7 @@
 #include <algorithm>
 #include "entity.hpp"
 #include "exceptions.hpp"
+#include <SFML/Graphics.hpp>
 
 using namespace std;
 
@@ -72,6 +73,14 @@ class registry {
         size_t getEraseFunctionNum(void) const {
             return _erase_functions.size();
         }
+
+        std::optional<sf::RenderWindow> &get_window() {
+            return window;
+        }
+
+        std::optional<sf::Event> &get_event() {
+            return event;
+        }
     
     private:
         unordered_map<type_index, any> _components_arrays;
@@ -81,6 +90,9 @@ class registry {
 
         vector<entity> dead_entities;
         size_t entity_num = 0;
+
+        std::optional<sf::RenderWindow> window;
+        std::optional<sf::Event> event;
 
 };
 
