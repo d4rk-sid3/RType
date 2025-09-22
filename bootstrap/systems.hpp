@@ -27,6 +27,15 @@ void position_system(registry &reg,
                                 std::vector<optional<component::position>> &positions,
                                 std::vector<optional<component::velocity>> &velocities);
 
+void draw_system(registry &reg, sf::RenderWindow &window,
+                        std::vector<optional<component::position>> &positions,
+                        std::vector<optional<component::drawable>> &draws);
+
+void control_system(registry &reg, sf::Event &event,
+                        std::vector<optional<component::controllable>> &controls,
+                        std::vector<optional<component::velocity>> &velocities);
+
+
 #endif
 
 /* ------------------------------------------------------------------------------------ *

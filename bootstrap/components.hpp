@@ -56,6 +56,8 @@ namespace component {
         bool left;
         bool right;
         bool space;
+        controllable_s() : up(false), down(false), left(false), right(false), space(false) {}
+        controllable_s(bool u, bool d, bool l, bool r, bool s) : up(u), down(d), left(l), right(r), space(s) {}
     }controllable;
 };
 
