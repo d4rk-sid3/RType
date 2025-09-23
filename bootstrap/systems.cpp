@@ -69,15 +69,15 @@ void control_system(registry &reg, sf::Event &event,
                 auto &ctl =  control.value();
                 auto &vl =  vel.value();
 
-                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up && ctl.up)
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && ctl.up)
                     vl.vy = -1;
-                else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down && ctl.down)
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && ctl.down)
                     vl.vy = 1;
                 else
                     vl.vy = 0;
-                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left && ctl.left)
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && ctl.left)
                     vl.vx = -1;
-                else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right && ctl.right)
+                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && ctl.right)
                     vl.vx = 1;
                 else
                     vl.vx = 0;
