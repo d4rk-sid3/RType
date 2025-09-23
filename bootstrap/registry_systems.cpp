@@ -63,7 +63,7 @@ void registry::register_all_systems()
 }
 
 /**
- * @brief Construct a new registry::registry object. 
+ * @brief Construct a new registry::registry object. This version doesn't use a window and doesn't register the drawable system
  * 
  */
 registry::registry() : tmp(sf::RenderWindow()), window(tmp)
@@ -71,6 +71,11 @@ registry::registry() : tmp(sf::RenderWindow()), window(tmp)
     register_all_systems();
 }
 
+/**
+ * @brief Construct a new registry::registry object. This version takes a renderwindow as parameter and registers the drawable system
+ * 
+ * @param _window 
+ */
 registry::registry(sf::RenderWindow &_window) : window(_window)
 {
     register_all_systems();

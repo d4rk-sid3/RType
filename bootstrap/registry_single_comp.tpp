@@ -16,6 +16,10 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+/**
+ * @brief This file contains the implementation of the registry methods that handle the single component operations
+ * 
+ */
 
 #ifndef INCLUDED_REGISTRY_SINGLE_COMP_TPP
 #define INCLUDED_REGISTRY_SINGLE_COMP_TPP
@@ -23,6 +27,12 @@
 #include "registry.hpp"
 #include "components.hpp"
 
+/**
+ * @brief This function removes a component from an entity
+ * 
+ * @tparam Component the type of the component to be removed
+ * @param from The entity from which the component will be removed
+ */
 template<typename Component>
 void registry::remove_component(entity const &from)
 {
@@ -39,6 +49,14 @@ void registry::remove_component(entity const &from)
     _erase_functions[typeid(Component)](from);
 }
 
+/**
+ * @brief This function adds a component to an entity
+ * 
+ * @tparam Component the type of the component
+ * @param to The id of the entity the component will be associated with
+ * @param c The component value
+ * @return Component& A reference to the newly created component
+ */
 template<typename Component>
 Component &registry::add_component(entity const &to, Component &&c)
 {

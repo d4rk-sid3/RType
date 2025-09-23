@@ -72,18 +72,38 @@ class registry {
         void run_systems(void);
 
         /* Getters */
+        /**
+         * @brief Get the highest entity id
+         * 
+         * @return size_t 
+         */
         size_t getEntityNum(void) const {
             return entity_num;
         }
 
+        /**
+         * @brief Get the number of registered types of components
+         * 
+         * @return size_t 
+         */
         size_t getComponentNum(void) const {
             return _components_arrays.size();
         }
 
+        /**
+         * @brief Get the number of registered erase functions
+         * 
+         * @return size_t 
+         */
         size_t getEraseFunctionNum(void) const {
             return _erase_functions.size();
         }
 
+        /**
+         * @brief Get the window
+         * 
+         * @return sf::RenderWindow& 
+         */
         sf::RenderWindow &get_window() {
             return window;
         }

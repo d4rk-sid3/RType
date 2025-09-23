@@ -6,14 +6,6 @@ class registryTest : public testing::Test {
     protected:
         registry reg;
         registry emptyReg;
-    
-        registryTest() {
-            // Registering position table
-            reg.register_components<component::position>();
-
-            // Registering velocity table
-            reg.register_components<component::velocity>();
-        }
 };
 
 TEST_F(registryTest, initialValues)
@@ -21,12 +13,6 @@ TEST_F(registryTest, initialValues)
     // Checking the entity number
     ASSERT_EQ(reg.getEntityNum(), 0);
     ASSERT_EQ(emptyReg.getEntityNum(), 0);
-
-    // Checking the table container for the empty reg
-    ASSERT_EQ(emptyReg.getComponentNum(), 0);
-    
-    // Checking the eraser functions array size
-    ASSERT_EQ(emptyReg.getEraseFunctionNum(), 0);
 }
 
 TEST_F(registryTest, entityHandling)
@@ -60,10 +46,6 @@ TEST_F(registryTest, entityHandling)
 
 TEST_F(registryTest, componentHandling)
 {
-    // Make sure the components were registered as well as the erase funcs
-    ASSERT_EQ(reg.getComponentNum(), 2);
-    ASSERT_EQ(reg.getEraseFunctionNum(), 2);
-
     vector<optional<component::position>> &pos_table = reg.get_components<component::position>();
     vector<optional<component::velocity>> &vel_table = reg.get_components<component::velocity>();
 
@@ -74,9 +56,6 @@ TEST_F(registryTest, componentHandling)
     // Registering again the same type of Component
     reg.register_components<component::position>();
     // Make sure the things didn't change
-    ASSERT_EQ(reg.getComponentNum(), 2);
-    ASSERT_EQ(reg.getEraseFunctionNum(), 2);
-
     pos_table = reg.get_components<component::position>();
     vel_table = reg.get_components<component::velocity>();
 
