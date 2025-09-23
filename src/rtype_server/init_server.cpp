@@ -5,59 +5,36 @@
 ** init_server
 */
 
-#include "header/Network.hpp"
+#include "../../include/server.hpp"
 
-NetworkManager::NetworkManager(int port): socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)), isrunning(true)
-{
-    std::cout << "Serveur pret à être lancé" << std::endl;
-    Receive();
-}
 
-NetworkManager::~NetworkManager()
+Server::Server(int p): p_(p)
 {
-    isrunning = false;
-    socket.close();
-}
+    NetworkManager server(8080, "127.0.0.1");
+    asio::ip::udp::endpoint client_endpoint;
+    bool client_valid = false;
 
-void NetworkManager::run()
-{
-    if (isrunning) {
-        context.run();
+
+    while (1) {
+        server.poll();
+
+        std::string msg = server.getLastMsg();
+        if (!msg.empty()) {
+            client_endpoint = server.getLastSender();
+            client_valid = true;
+            std::cout << "Client: " << msg << std::endl;
+
+            std::string input;
+            if (std::getline(std::cin, input) && !input.empty()) {
+                if (client_valid)
+                    server.send(input, client_endpoint);
+            }
+        }
     }
 }
 
-void NetworkManager::Receive()
+
+Server::~Server()
 {
-    socket.async_receive_from(asio::buffer(buff), client_, 
-        
-        [this](std::error_code error ,std::size_t bytes_receive) {
 
-            std::string data(buff.data(), bytes_receive);
-                std::cout << "Reçu: " << data << std::endl;
-
-            if (!error && bytes_receive > 0) {
-                Sendit("Recieve", client_);
-            }
-
-            if (isrunning) {
-                Receive();
-            }
-        
-        }
-    );
-
-}
-
-void NetworkManager::Sendit(const std::string &msg, const asio::ip::udp::endpoint& client)
-{
-    socket.async_send_to(asio::buffer(msg), client, 
-        [this](std::error_code error, std::size_t byte_send) {
-            
-            if (!error) {
-                std::cout << "Send  " << byte_send <<  std::endl;
-            } else {
-                std::cerr << error.message() << std::endl;
-            }
-        }
-    );
 }

@@ -1,11 +1,8 @@
-#include <iostream>
-#include "header/Network.hpp"
+#include "server.hpp"
 
 int main() {
     try {
-        NetworkManager network(8080);
-        std::cout << "Serveur en cours." << std::endl;
-        network.run();
+        Server server(8080);
 
     } catch(const std::exception& e) {
         std::cerr << e.what() << '\n';
