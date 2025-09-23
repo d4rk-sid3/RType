@@ -63,6 +63,17 @@ void control_system(registry &reg,
                         std::vector<optional<component::velocity>> &velocities);
 
 
+/**
+ * @brief The collision system goes through each hurtbox and hitbox component and checks if they are colliding
+ * 
+ * @param reg The reference to the registry
+ * @param positions The positions components
+ * @param hurtboxes The hurtbox components
+ * @param hitboxes The hitbox components
+ */
+void collision_system(registry &reg, std::vector<optional<component::position>> &positions,
+    std::vector<optional<component::hurtbox>> &hurtboxes,
+    std::vector<optional<component::hitbox>> &hitboxes);
 #endif
 
 /* ------------------------------------------------------------------------------------ *

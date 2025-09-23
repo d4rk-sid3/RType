@@ -37,7 +37,8 @@ void registry::register_all_systems()
     register_components<component::position>();
     register_components<component::velocity>();
     register_components<component::controllable>();
-
+    register_components<component::hurtbox>();
+    register_components<component::hitbox>();
 
     add_system(
         [
@@ -58,6 +59,18 @@ void registry::register_all_systems()
         ]
         () {
             position_system(*this, positions, velocities);
+        }
+    );
+
+    add_system(
+        [
+            this,
+            &positions = this->get_components<component::position>(),
+            &hurtboxes = this->get_components<component::hurtbox>(),
+            &hitboxes = this->get_components<component::hitbox>()
+        ]
+        () {
+            collision_system(*this, positions, hurtboxes, hitboxes);
         }
     );
 }

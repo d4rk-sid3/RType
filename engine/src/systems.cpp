@@ -96,3 +96,37 @@ void control_system(registry &reg, std::vector<optional<component::controllable>
         }
     }
 }
+
+void collision_system(registry &reg, std::vector<optional<component::position>> &positions,
+    std::vector<optional<component::hurtbox>> &hurtboxes,
+    std::vector<optional<component::hitbox>> &hitboxes)
+{
+    for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
+        try {
+            // Go through each hurtbox and their positions
+            auto &pos = positions.at(i);
+            auto &hurtbox = hurtboxes.at(i);
+
+            if (pos && hurtbox) {
+                for (size_t j = 0; j < reg.getEntityNum(); ++ j) {
+                    // Go through each hitbox and their positions
+                    auto &hit_pos = positions.at(j);
+                    auto &hitbox = hitboxes.at(j);
+
+                    if (hit_pos && hitbox) {
+                        // Create the hitbox and hurtbox rects with their dimensions
+                        sf::IntRect hurt_rect = sf::IntRect(sf::Vector2i(pos.value().x, pos.value().y), sf::Vector2i(hurtbox.value().width, hurtbox.value().height));
+                        sf::IntRect hit_rect = sf::IntRect(sf::Vector2i(hit_pos.value().x, hit_pos.value().y), sf::Vector2i(hitbox.value().width, hitbox.value().height));
+
+                        if (hurt_rect.intersects(hit_rect) && hurtbox.value().group == hitbox.value().targeted_group) {
+                            std::cout << "Collision between " << i << " and " << j << "!\n";
+                            hurtbox.value().health -= hitbox.value().damage;
+                            std::cout << hurtbox.value().health << "\n";
+                        }
+                    }
+                }
+            }
+        } catch (...) {
+        }
+    }  
+}

@@ -85,7 +85,32 @@ namespace component {
         controllable_s() : up(false), down(false), left(false), right(false), space(false) {}
         controllable_s(bool u, bool d, bool l, bool r, bool s) : up(u), down(d), left(l), right(r), space(s) {}
     }controllable;
-};
+
+
+    /**
+     * @brief The hurtbox component, defined by a size, health and a group (1 for the player, 2 for the enemies for example). A hitbox will detect collision with a hurtbox if its targeted group corresponds to the hurtbox group 
+     * 
+     */
+    typedef struct hurtbox_s{
+        int health;
+        int group;
+        
+        int width;
+        int height;
+    }hurtbox;
+
+    /**
+     * @brief The hitbox component, defined by a size, damage and a targeted_group (2 for the player, 1 for the enemies for example). A hitbox will detect collision with a hurtbox if its targeted group corresponds to the hurtbox group 
+     * 
+     */
+    typedef struct hitbox_s{
+        int damage;
+        int targeted_group;
+
+        int width;
+        int height;
+    }hitbox;
+}
 
 #endif
 
