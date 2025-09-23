@@ -15,6 +15,17 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+/**
+ * @file systems.cpp
+ * @author Farouk OKANLA
+ * @brief 
+ * @version 0.1
+ * @date 2025-09-23
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include "registry.hpp"
 #include "components.hpp"
 
@@ -56,8 +67,7 @@ void draw_system(registry &reg, sf::RenderWindow &window,
     window.display();
 }
 
-void control_system(registry &reg, sf::Event &event,
-                        std::vector<optional<component::controllable>> &controls,
+void control_system(registry &reg, std::vector<optional<component::controllable>> &controls,
                         std::vector<optional<component::velocity>> &velocities)
 {
     for (size_t i = 0; i < reg.getEntityNum(); ++ i) {

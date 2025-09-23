@@ -16,12 +16,22 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+/**
+ * @brief This file contains the implementation of the registry methods that handle the component tables
+ * 
+ */
 
 #ifndef INCLUDED_REGISTRY_TABLES_TPP
 #define INCLUDED_REGISTRY_TABLES_TPP
 
 #include "registry.hpp"
 
+/**
+ * @brief Registers a table of a new type of components
+ * 
+ * @tparam Component The new type of component
+ * @return vector<optional<Component>>& a reference to the newly added table
+ */
 template<typename Component>
 vector<optional<Component>> &registry::register_components()
 {
@@ -54,6 +64,12 @@ vector<optional<Component>> &registry::register_components()
     return table;
 }
 
+/**
+ * @brief Get the table of a specific type of component
+ * 
+ * @tparam Component The type of the component table
+ * @return vector<optional<Component>>& a reference to the table
+ */
 template<typename Component>
 vector<optional<Component>> &registry::get_components()
 {
@@ -68,6 +84,13 @@ vector<optional<Component>> &registry::get_components()
     return any_cast<vector<optional<Component>>&>(table);
 }
 
+/**
+ * @brief Get the table of a specific type of component (Const version)
+ * 
+ * @tparam Component The type of the component table
+ * @return vector<optional<Component>>& a reference to the table
+ *
+ */
 template<typename Component>
 vector<optional<Component>> const &registry::get_components() const
 {

@@ -17,21 +17,48 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+/**
+ * @brief This file contains the declaration of the different systems of the registry. Systems are functions that will be executed at each frame to update the state of all the components
+ * 
+ */
+
 #ifndef INCLUDED_SYSTEMS_HPP
     #define INCLUDED_SYSTEMS_HPP
 
 #include "registry.hpp"
 #include "components.hpp"
 
+/**
+ * @brief The position system goes through each entity and updates its position based on its velocity
+ * 
+ * @param reg The reference to the registry
+ * @param positions The table of positions components
+ * @param velocities The table of velocities components
+ */
 void position_system(registry &reg,
                                 std::vector<optional<component::position>> &positions,
                                 std::vector<optional<component::velocity>> &velocities);
 
+/**
+ * @brief 
+ * 
+ * @param reg  The reference to the registry
+ * @param window The reference to a sf::RenderWindow
+ * @param positions The table of positions components
+ * @param draws The table of drawable components
+ */
 void draw_system(registry &reg, sf::RenderWindow &window,
                         std::vector<optional<component::position>> &positions,
                         std::vector<optional<component::drawable>> &draws);
 
-void control_system(registry &reg, sf::Event &event,
+/**
+ * @brief The control system goes through each constrollable component and updates its state based on the player input
+ * 
+ * @param reg The reference to the registry
+ * @param controls The controllable components
+ * @param velocities The velocities components
+ */
+void control_system(registry &reg,
                         std::vector<optional<component::controllable>> &controls,
                         std::vector<optional<component::velocity>> &velocities);
 

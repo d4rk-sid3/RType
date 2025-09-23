@@ -17,26 +17,36 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+/**
+ * @file registry_systems.cpp
+ * @author Farouk OKANLA
+ * @brief This file contains the definition of the registry functions that handle the systems
+ * @version 0.1
+ * @date 2025-09-23
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include "registry.hpp"
 #include "systems.hpp"
 
-registry::registry() : window(std::make_optional<sf::RenderWindow>(sf::VideoMode(800, 600), "SFML Drawable")), event(std::make_optional<sf::Event>())
+
+void registry::register_all_systems()
 {
     register_components<component::position>();
     register_components<component::velocity>();
-    register_components<component::drawable>();
     register_components<component::controllable>();
 
 
     add_system(
         [
             this,
-            &event = this->event.value(),
             &controllables = this->get_components<component::controllable>(),
             &velocities = this->get_components<component::velocity>()
         ]
         () {
-            control_system(*this, event, controllables, velocities);
+            control_system(*this, controllables, velocities);
         }
     );
 
@@ -50,11 +60,27 @@ registry::registry() : window(std::make_optional<sf::RenderWindow>(sf::VideoMode
             position_system(*this, positions, velocities);
         }
     );
+}
+
+/**
+ * @brief Construct a new registry::registry object. 
+ * 
+ */
+registry::registry() : tmp(sf::RenderWindow()), window(tmp)
+{
+    register_all_systems();
+}
+
+registry::registry(sf::RenderWindow &_window) : window(_window)
+{
+    register_all_systems();
+
+    register_components<component::drawable>();
 
     add_system(
         [
             this,
-            &window = this->window.value(),
+            &window = this->window,
             &positions = this->get_components<component::position>(),
             &draws = this->get_components<component::drawable>()
         ]
@@ -64,12 +90,21 @@ registry::registry() : window(std::make_optional<sf::RenderWindow>(sf::VideoMode
     );
 }
 
+/**
+ * @brief Add a system to the registry. The best way to add a system is by passing a lambda capturing by reference all the needed components
+ * 
+ * @param system a lambda capturing by reference all the needed components
+ */
 void registry::add_system(const function<void()> &system)
 {
     _systems.push_back(system);
 }
 
-void registry::run_systems(void)
+/**
+ * @brief This function runs all the systems registered in the registry
+ * 
+ */
+void registry::run_systems()
 {
     for (const auto& system : _systems) {
         system();

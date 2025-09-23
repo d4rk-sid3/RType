@@ -15,17 +15,30 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+/**
+ * @brief This file contains the definition of the exceptions thrown by the engine
+ * 
+ */
+
 #ifndef INCLUDED_EXCEPTIONS_HPP
     #define INCLUDED_EXCEPTIONS_HPP
 
 #include <exception>
 
+/**
+ * @brief Thrown when the type of component you passed in a template is not registered in the registry
+ * 
+ */
 class NonExistentComponentType : public std::exception {
     const char *what() const noexcept override {
         return "NonExistentComponentType: The type of component you passed in a template is not registered in the registry.";
     }
 };
 
+/**
+ * @brief Thrown when the id of entity you're trying to access is not registered in the registry
+ * 
+ */
 class NonExistentEntityID : public std::exception {
     const char *what() const noexcept override {
         return "NonExistentEntityID: The id of entity you're trying to access is not registered in the registry.";

@@ -15,6 +15,11 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+/**
+ * @brief This file defines the registry class. The registry is a container for all the entities and components of the game. It is home to the ECS engine. It stores the entities and the components and provides ways to interact with them. It also provides the systems that will be executed at each frame to update the state of the entities and their components
+ * 
+ */
+
 #ifndef INCLUDED_REGISTRY_HPP
     #define INCLUDED_REGISTRY_HPP
 
@@ -32,8 +37,13 @@
 
 using namespace std;
 
+/**
+ * @brief The registry class
+ * 
+ */
 class registry {
     public:
+        registry(sf::RenderWindow &window);
         registry();
 
         /* Tables management */
@@ -74,12 +84,8 @@ class registry {
             return _erase_functions.size();
         }
 
-        std::optional<sf::RenderWindow> &get_window() {
+        sf::RenderWindow &get_window() {
             return window;
-        }
-
-        std::optional<sf::Event> &get_event() {
-            return event;
         }
     
     private:
@@ -91,9 +97,10 @@ class registry {
         vector<entity> dead_entities;
         size_t entity_num = 0;
 
-        std::optional<sf::RenderWindow> window;
-        std::optional<sf::Event> event;
+        sf::RenderWindow &window;
+        sf::RenderWindow tmp;
 
+        void register_all_systems();
 };
 
 #include "registry_single_comp.tpp"

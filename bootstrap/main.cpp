@@ -5,10 +5,10 @@
 
 int main() {
 
+    sf::RenderWindow win(sf::VideoMode(800, 600), "SFML Drawable");
+
     registry registry;
-    
-    sf::RenderWindow &window = registry.get_window().value();
-    sf::Event &event = registry.get_event().value();
+
 
     entity e1 = registry.spawn_entity();
     entity e2 = registry.spawn_entity();
@@ -32,17 +32,19 @@ int main() {
     sprite3.setTextureFromPath("cloud.png");
     registry.add_component<component::controllable>(e3, component::controllable(false, false, true, true, false));
 
-    window.setFramerateLimit(100);
+    win.setFramerateLimit(100);
 
-    while (window.isOpen())
+    sf::Event event;
+    while (win.isOpen())
     {
-        while (window.pollEvent(event))
+        while (win.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
-                window.close();
+                win.close();
         }
         registry.run_systems();
     }
 
+    this_thread::sleep_for(chrono::seconds(3));
     return 0;
 }

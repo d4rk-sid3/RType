@@ -20,10 +20,25 @@
 #ifndef INCLUDED_COMPONENTS_HPP
     #define INCLUDED_COMPONENTS_HPP
 
+/**
+ * @file components.hpp
+ * @author Farouk OKANLA
+ * @brief This file defines the different types of components available to the engine
+ * @version 0.1
+ * @date 2025-09-23
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include <SFML/Graphics.hpp>
 #include <string>
 
 namespace component {
+    /**
+     * @brief The position component, with an x and y position
+     * 
+     */
     typedef struct position_s {
         int x;
         int y;
@@ -34,11 +49,19 @@ namespace component {
         }
     }position;
 
+    /**
+     * @brief The velocity component, with an x and y velocity. This component allows an entity to move
+     * 
+     */
     typedef struct velocity_s {
         int vx;
         int vy;
     }velocity;
 
+    /**
+     * @brief The drawable component, defined by an sf::Sprite. This component allows an entity to be drawn on the screen
+     * 
+     */
     typedef struct drawable_s {
         sf::Texture texture;
         sf::Sprite sprite;
@@ -49,6 +72,10 @@ namespace component {
         }
     }drawable;
 
+    /**
+     * @brief The controllable component, defined by a set of booleans. This component allows an entity to be controlled by the user's keyboard input
+     * 
+     */
     typedef struct controllable_s {
         bool up;
         bool down;
