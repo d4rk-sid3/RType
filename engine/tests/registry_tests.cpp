@@ -1,5 +1,5 @@
-#include "../registry.hpp"
-#include "../components.hpp"
+#include "../include/registry.hpp"
+#include "../include/components.hpp"
 #include <gtest/gtest.h>
 
 class registryTest : public testing::Test {
