@@ -5,30 +5,36 @@
 ** init_server
 */
 
-#include "header/server.hpp"
+#include "../../include/server.hpp"
 
-Server::Server(int _port)
+
+Server::Server(int p): p_(p)
 {
-    port = _port;
-    asio::io_context context; //création des évènements
+    NetworkManager server(8080, "127.0.0.1");
+    asio::ip::udp::endpoint client_endpoint;
+    bool client_valid = false;
 
-    asio::ip::udp::socket socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)); // création des sockets
-
-    std::cout << "Serveur lancé" << std::endl;
 
     while (1) {
-        char buff[1024];
+        server.poll();
 
-        asio::ip::udp::endpoint client; // adresse ip + port du client
+        std::string msg = server.getLastMsg();
+        if (!msg.empty()) {
+            client_endpoint = server.getLastSender();
+            client_valid = true;
+            std::cout << "Client: " << msg << std::endl;
 
-        size_t l = socket.receive_from(asio::buffer(buff), client); // reception des informations envoyé du serveur
-        std::cout << "Reçu: " << std::string(buff, l) << " de " << client << std::endl;
-
-        std::string msg = "J'ai reçue" + std::string(buff, l);
-        socket.send_to(asio::buffer(msg), client); // envoie du message par le client
+            std::string input;
+            if (std::getline(std::cin, input) && !input.empty()) {
+                if (client_valid)
+                    server.send(input, client_endpoint);
+            }
+        }
     }
 }
 
-Server::~Server() {
+
+Server::~Server()
+{
 
 }

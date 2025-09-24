@@ -1,6 +1,10 @@
-#include <iostream>
+#include "client.hpp"
 
 int main() {
-    std::cout << "Hello R-Type Client!" << std::endl;
-    return 0;
+    try {
+        Client client(8080, "");
+
+    } catch(const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
 }
