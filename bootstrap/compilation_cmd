@@ -1,1 +1,0 @@
-g++ main.cpp registry_systems.cpp systems.cpp registry_entities.cpp -lsfml-graphics -lsfml-window -lsfml-system 

@@ -119,9 +119,8 @@ void collision_system(registry &reg, std::vector<optional<component::position>> 
                         sf::IntRect hit_rect = sf::IntRect(sf::Vector2i(hit_pos.value().x, hit_pos.value().y), sf::Vector2i(hitbox.value().width, hitbox.value().height));
 
                         if (hurt_rect.intersects(hit_rect) && hurtbox.value().group == hitbox.value().targeted_group) {
-                            std::cout << "Collision between " << i << " and " << j << "!\n";
+                            std::cout << "COLLISION " << i << " " << j << "\n";
                             hurtbox.value().health -= hitbox.value().damage;
-                            std::cout << hurtbox.value().health << "\n";
                         }
                     }
                 }

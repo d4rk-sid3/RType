@@ -23,7 +23,7 @@ Chaque **feature** suit un cycle précis pour garantir qualité, cohérence et r
 ### 3. Implémentation
 - Développer la feature dans une **branche dédiée**
 - Respecter les standards de code de l’équipe
-- Faire de petits commits clairs et fréquents
+- Faire de petits commits clairs et fréquents en respectant la convention (voir commit_convention.md)
 
 ---
 
