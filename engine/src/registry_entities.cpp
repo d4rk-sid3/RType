@@ -27,7 +27,7 @@
  * 
  */
 
-#include "registry.hpp"
+#include "../include/registry.hpp"
 
 /**
  * @brief This function creates a new entity

@@ -1,6 +1,6 @@
 #include <thread>
-#include "registry.hpp"
-#include "components.hpp"
+#include "../include/registry.hpp"
+#include "../include/components.hpp"
 
 int main() {
 
@@ -17,14 +17,14 @@ int main() {
     auto &sprite1 = registry.add_component<component::drawable>(e1, component::drawable());
     sprite1.setTextureFromPath("leaf.png");
     registry.add_component<component::hurtbox>(e1, {500, 1, 32, 32});
-    registry.add_component<component::controllable>(e1, component::controllable(true, true, false, false, false));
+    registry.add_component<component::controllable>(e1, component::controllable());
     
     registry.add_component<component::position>(e2, {100, 50});
     registry.add_component<component::velocity>(e2, {0, 0});
     auto &sprite2 = registry.add_component<component::drawable>(e2, component::drawable());
     registry.add_component<component::hitbox>(e2, {5, 1, 32, 32});
     sprite2.setTextureFromPath("cloud.png");
-    registry.add_component<component::controllable>(e2, component::controllable(false, false, true, true, false));
+    registry.add_component<component::controllable>(e2, component::controllable());
 
     win.setFramerateLimit(100);
 

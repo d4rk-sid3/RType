@@ -83,7 +83,14 @@ namespace component {
         bool right;
         bool space;
         controllable_s() : up(false), down(false), left(false), right(false), space(false) {}
-        controllable_s(bool u, bool d, bool l, bool r, bool s) : up(u), down(d), left(l), right(r), space(s) {}
+
+        void getKeyboardInput() {
+            this->up = sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
+            this->down = sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
+            this->left = sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
+            this->right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
+            this->space = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+        }
     }controllable;
 
 

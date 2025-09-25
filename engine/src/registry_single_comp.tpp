@@ -24,8 +24,8 @@
 #ifndef INCLUDED_REGISTRY_SINGLE_COMP_TPP
 #define INCLUDED_REGISTRY_SINGLE_COMP_TPP
 
-#include "registry.hpp"
-#include "components.hpp"
+#include "../include/registry.hpp"
+#include "../include/components.hpp"
 
 /**
  * @brief This function removes a component from an entity
@@ -68,10 +68,6 @@ Component &registry::add_component(entity const &to, Component &&c)
     if (find(dead_entities.begin(), dead_entities.end(), to) != dead_entities.end()
         || (size_t)to >= entity_num)
         throw NonExistentEntityID();
-
-    if (typeid(Component) == typeid(component::drawable)) {
-        printf("Component type: %s to entity %d\n", typeid(Component).name(), to.getId());
-    }
 
     // Get the table corresponding to the component type
     vector<optional<Component>> &table = get_components<Component>();

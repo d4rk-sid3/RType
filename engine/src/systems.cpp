@@ -26,13 +26,12 @@
  * 
  */
 
-#include "registry.hpp"
-#include "components.hpp"
+#include "../include/registry.hpp"
+#include "../include/components.hpp"
 
 void position_system(registry &reg, std::vector<optional<component::position>> &positions,
                                 std::vector<optional<component::velocity>> &velocities)
 {
-
         for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
             try {
                 auto &pos = positions.at(i);
@@ -72,26 +71,27 @@ void control_system(registry &reg, std::vector<optional<component::controllable>
 {
     for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
         try {
-            auto &control = controls.at(i);
-            auto &vel = velocities.at(i);
+            if (i >= controls.size() || i >= velocities.size() || !controls.at(i).has_value() || !velocities.at(i).has_value())
+                continue;
 
-            if (control && vel) {
-                auto &ctl =  control.value();
-                auto &vl =  vel.value();
+            auto &control = controls.at(i).value();
+            auto &velocity = velocities.at(i).value();
 
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && ctl.up)
-                    vl.vy = -1;
-                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && ctl.down)
-                    vl.vy = 1;
-                else
-                    vl.vy = 0;
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && ctl.left)
-                    vl.vx = -1;
-                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && ctl.right)
-                    vl.vx = 1;
-                else
-                    vl.vx = 0;
-            }
+            control.getKeyboardInput();
+
+            if (control.up)
+                velocity.vy = -1;
+            else if (control.down)
+                velocity.vy = 1;
+            else
+                velocity.vy = 0;
+            if (control.left)
+                velocity.vx = -1;
+            else if (control.right)
+                velocity.vx = 1;
+            else
+                velocity.vx = 0;
+
         } catch (...) {
         }
     }

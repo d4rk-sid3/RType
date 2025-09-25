@@ -28,8 +28,8 @@
  * 
  */
 
-#include "registry.hpp"
-#include "systems.hpp"
+#include "../include/registry.hpp"
+#include "../include/systems.hpp"
 
 
 void registry::register_all_systems()
