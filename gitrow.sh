@@ -44,11 +44,11 @@ echo "Redigez le commit"
 read COMMITS
 
 case $choice in 
-    1) prefix="[add]:" ;;
-    2) prefix="[fix]:" ;;
-    3) prefix="[refactor]:" ;;
-    4) prefix="[delete]:" ;;
-    5) prefix="[doc]:" ;;
+    1) prefix="add:" ;;
+    2) prefix="fix:" ;;
+    3) prefix="refactor:" ;;
+    4) prefix="delete:" ;;
+    5) prefix="doc:" ;;
     *) echo "Choix invalide"; exit 1 ;;
 esac
 
