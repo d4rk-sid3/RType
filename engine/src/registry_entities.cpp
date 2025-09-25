@@ -1,41 +1,43 @@
-/* ------------------------------------------------------------------------------------ *
+/* ------------------------------------------------------------------------------------
+ * *
  *                                                                                      *
- * EPITECH PROJECT - Wed, Sep, 2025                                                     *
- * Title           - r-type_bs                                                          *
- * Description     -                                                                    *
- *     registry                                                                         *
+ * EPITECH PROJECT - Wed, Sep, 2025 * Title           - r-type_bs * Description
+ * -                                                                    *
+ *     registry *
  *                                                                                      *
- * ------------------------------------------------------------------------------------ *
+ * ------------------------------------------------------------------------------------
+ * *
  *                                                                                      *
- *             ███████╗██████╗ ██╗████████╗███████╗ ██████╗██╗  ██╗                     *
- *             ██╔════╝██╔══██╗██║╚══██╔══╝██╔════╝██╔════╝██║  ██║                     *
- *             █████╗  ██████╔╝██║   ██║   █████╗  ██║     ███████║                     *
- *             ██╔══╝  ██╔═══╝ ██║   ██║   ██╔══╝  ██║     ██╔══██║                     *
- *             ███████╗██║     ██║   ██║   ███████╗╚██████╗██║  ██║                     *
- *             ╚══════╝╚═╝     ╚═╝   ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═╝                     *
+ *             ███████╗██████╗ ██╗████████╗███████╗ ██████╗██╗  ██╗ *
+ *             ██╔════╝██╔══██╗██║╚══██╔══╝██╔════╝██╔════╝██║  ██║ * █████╗
+ * ██████╔╝██║   ██║   █████╗  ██║     ███████║                     * ██╔══╝
+ * ██╔═══╝ ██║   ██║   ██╔══╝  ██║     ██╔══██║                     *
+ *             ███████╗██║     ██║   ██║   ███████╗╚██████╗██║  ██║ *
+ *             ╚══════╝╚═╝     ╚═╝   ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═╝ *
  *                                                                                      *
- * ------------------------------------------------------------------------------------ */
+ * ------------------------------------------------------------------------------------
+ */
 
 /**
  * @file registry_entities.cpp
  * @author Farouk OKANLA
- * @brief This file contains the definition of the registry functions that handle the entities
+ * @brief This file contains the definition of the registry functions that
+ * handle the entities
  * @version 0.1
  * @date 2025-09-23
- * 
+ *
  * @copyright Copyright (c) 2025
- * 
+ *
  */
 
 #include "registry.hpp"
 
 /**
  * @brief This function creates a new entity
- * 
- * @return entity The id of the newly created entity 
+ *
+ * @return entity The id of the newly created entity
  */
-entity registry::spawn_entity()
-{
+entity registry::spawn_entity() {
     // If there's a dead entity id, just re-use it
     if (dead_entities.size() > 0) {
         entity last_id = dead_entities[dead_entities.size() - 1];
@@ -49,15 +51,16 @@ entity registry::spawn_entity()
 }
 
 /**
- * @brief This function deletes an entity and all the components associated with itbased on its id
- * 
+ * @brief This function deletes an entity and all the components associated with
+ * itbased on its id
+ *
  * @param e The id of the entity to be deleted
  */
-void registry::kill_entity(const entity &e)
-{
+void registry::kill_entity(const entity& e) {
     // Check if the entity is really registered
-    if (find(dead_entities.begin(), dead_entities.end(), e) != dead_entities.end()
-        || (size_t)e >= entity_num)
+    if (find(dead_entities.begin(), dead_entities.end(), e) !=
+            dead_entities.end() ||
+        (size_t)e >= entity_num)
         throw NonExistentEntityID();
 
     // Add the entity to the dead_entities

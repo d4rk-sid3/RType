@@ -37,7 +37,7 @@ endif()
 # Clang-Format
 find_program(CLANG_FORMAT_EXE NAMES clang-format)
 if(CLANG_FORMAT_EXE)
-    file(GLOB_RECURSE ALL_CXX_SOURCE_FILES "src/*.cpp" "include/*.hpp")
+    file(GLOB_RECURSE ALL_CXX_SOURCE_FILES "rtype_client/src/*.cpp" "rtype_client/include/*.hpp" "rtype_server/src/*.cpp" "rtype_server/include/*.hpp")
     add_custom_target(
         clang_format
         COMMAND ${CLANG_FORMAT_EXE} -i ${ALL_CXX_SOURCE_FILES}
@@ -48,9 +48,9 @@ endif()
 # -------------------------------------------------------------
 # Client
 if(BUILD_CLIENT)
-    file(GLOB_RECURSE CLIENT_SOURCES "src/rtype_client/*.cpp" "src/utility_classes/*.cpp")
+    file(GLOB_RECURSE CLIENT_SOURCES "rtype_client/src/*.cpp" "utility_classes/src/*.cpp")
     if(NOT CLIENT_SOURCES)
-        message(FATAL_ERROR "No client source files found in src/rtype_client/")
+        message(FATAL_ERROR "No client source files found in rtype_client/src/")
     endif()
     
     add_executable(r-type_client ${CLIENT_SOURCES})
@@ -66,9 +66,9 @@ endif()
 # -------------------------------------------------------------
 # Serveur
 if(BUILD_SERVER)
-    file(GLOB_RECURSE SERVER_SOURCES "src/rtype_server/*.cpp" "src/utility_classes/*.cpp")
+    file(GLOB_RECURSE SERVER_SOURCES "rtype_server/src/*.cpp" "utility_classes/src/*.cpp")
     if(NOT SERVER_SOURCES)
-        message(FATAL_ERROR "No server source files found in src/rtype_server/")
+        message(FATAL_ERROR "No server source files found in rtype_server/src/")
     endif()
     
     add_executable(r-type_server ${SERVER_SOURCES})

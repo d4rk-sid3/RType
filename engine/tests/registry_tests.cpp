@@ -1,22 +1,21 @@
-#include "../include/registry.hpp"
-#include "../include/components.hpp"
 #include <gtest/gtest.h>
 
+#include "../include/components.hpp"
+#include "../include/registry.hpp"
+
 class registryTest : public testing::Test {
-    protected:
-        registry reg;
-        registry emptyReg;
+  protected:
+    registry reg;
+    registry emptyReg;
 };
 
-TEST_F(registryTest, initialValues)
-{
+TEST_F(registryTest, initialValues) {
     // Checking the entity number
     ASSERT_EQ(reg.getEntityNum(), 0);
     ASSERT_EQ(emptyReg.getEntityNum(), 0);
 }
 
-TEST_F(registryTest, entityHandling)
-{
+TEST_F(registryTest, entityHandling) {
     // Spawning an entity
     entity e = reg.spawn_entity();
 
@@ -30,7 +29,7 @@ TEST_F(registryTest, entityHandling)
     reg.kill_entity(e);
 
     // Make sure it was killed
-    auto &pos_table = reg.get_components<component::position>();
+    auto& pos_table = reg.get_components<component::position>();
 
     ASSERT_EQ(pos_table[e].has_value(), false);
 
@@ -44,10 +43,11 @@ TEST_F(registryTest, entityHandling)
     EXPECT_THROW(reg.kill_entity((entity)10), NonExistentEntityID);
 }
 
-TEST_F(registryTest, componentHandling)
-{
-    vector<optional<component::position>> &pos_table = reg.get_components<component::position>();
-    vector<optional<component::velocity>> &vel_table = reg.get_components<component::velocity>();
+TEST_F(registryTest, componentHandling) {
+    vector<optional<component::position>>& pos_table =
+        reg.get_components<component::position>();
+    vector<optional<component::velocity>>& vel_table =
+        reg.get_components<component::velocity>();
 
     // Check initial size
     ASSERT_EQ(pos_table.size(), 0);
@@ -99,18 +99,9 @@ TEST_F(registryTest, componentHandling)
     ASSERT_EQ(e2_pos.has_value(), false);
 
     // Error cases
-    EXPECT_THROW(
-        reg.get_components<int>(),
-        NonExistentComponentType
-    );
-    EXPECT_THROW(
-        reg.add_component<int>(e2, 522),
-        NonExistentComponentType
-    );
-    EXPECT_THROW(
-        reg.remove_component<int>(e2),
-        NonExistentComponentType
-    );
+    EXPECT_THROW(reg.get_components<int>(), NonExistentComponentType);
+    EXPECT_THROW(reg.add_component<int>(e2, 522), NonExistentComponentType);
+    EXPECT_THROW(reg.remove_component<int>(e2), NonExistentComponentType);
 
     EXPECT_THROW(
         reg.add_component<component::position>((entity)10, {0, 0}),

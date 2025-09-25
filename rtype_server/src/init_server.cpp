@@ -7,13 +7,10 @@
 
 #include "../../include/server.hpp"
 
-
-Server::Server(int p): p_(p)
-{
+Server::Server(int p) : p_(p) {
     NetworkManager server(8080, "127.0.0.1");
     asio::ip::udp::endpoint client_endpoint;
     bool client_valid = false;
-
 
     while (1) {
         server.poll();
@@ -33,8 +30,4 @@ Server::Server(int p): p_(p)
     }
 }
 
-
-Server::~Server()
-{
-
-}
+Server::~Server() {}

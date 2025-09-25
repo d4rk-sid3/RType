@@ -7,10 +7,11 @@
 
 #include "../../include/client.hpp"
 
-Client::Client(int p, std::string address): port_(p)
-{
+Client::Client(int p, std::string address) : port_(p) {
     NetworkManager client(8080, "client");
-    asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
+    asio::ip::udp::endpoint server_endpoint(
+        asio::ip::make_address("127.0.0.1"), 8080
+    );
 
     client.send("Hello", server_endpoint);
 
@@ -24,11 +25,7 @@ Client::Client(int p, std::string address): port_(p)
         std::string reponse;
         if (std::getline(std::cin, reponse) && !reponse.empty())
             client.send(reponse, server_endpoint);
-
     }
 }
 
-Client::~Client()
-{
-
-}
+Client::~Client() {}
