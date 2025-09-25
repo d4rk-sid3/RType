@@ -18,7 +18,7 @@ int main() {
     sprite1.setTextureFromPath("leaf.png");
     registry.add_component<component::hurtbox>(e1, {500, 1, 32, 32});
     registry.add_component<component::controllable>(e1, component::controllable(true, true, false, false, false));
-    
+
     registry.add_component<component::position>(e2, {100, 50});
     registry.add_component<component::velocity>(e2, {0, 0});
     auto &sprite2 = registry.add_component<component::drawable>(e2, component::drawable());

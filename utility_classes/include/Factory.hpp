@@ -33,6 +33,18 @@ class Factory {
         entity make_player_missile();
 
         entity make_enemy_missile();
+
+        entity make_walker();
+
+        entity make_red_trooper();
+
+        entity make_wall();
+
+        entity make_floor();
+
+        entity make_ceiling();
+
+        entity make_background();
 };
 
 #endif
