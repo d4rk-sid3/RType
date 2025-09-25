@@ -33,6 +33,7 @@
 #include <algorithm>
 #include "entity.hpp"
 #include "exceptions.hpp"
+#include "TextureManager.hpp"
 #include <SFML/Graphics.hpp>
 
 using namespace std;
