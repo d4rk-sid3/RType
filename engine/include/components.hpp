@@ -41,10 +41,10 @@ namespace component {
      * 
      */
     typedef struct position_s {
-        int x;
-        int y;
-        int z;
-        void setPosition( int _x, int _y) {
+        double x;
+        double y;
+        double z;
+        void setPosition( double _x, double _y) {
             this->x += _x;
             this->y += _y;
         }
@@ -55,8 +55,8 @@ namespace component {
      * 
      */
     typedef struct velocity_s {
-        int vx;
-        int vy;
+        double vx;
+        double vy;
     }velocity;
 
     /**
@@ -86,6 +86,7 @@ namespace component {
             sf::Texture &texture = TextureManager::Instance().getTexture(texture_name);
             this->sprite.setTexture(texture);
         }
+
 
         void setFrameRect(int width, int height) {
             this->frame_rect = sf::IntRect(0, 0, width, height);

@@ -35,7 +35,7 @@
  * @param positions The table of positions components
  * @param velocities The table of velocities components
  */
-void position_system(registry &reg,
+void position_system(double delta, registry &reg,
                                 std::vector<optional<component::position>> &positions,
                                 std::vector<optional<component::velocity>> &velocities);
 
@@ -47,7 +47,7 @@ void position_system(registry &reg,
  * @param positions The table of positions components
  * @param draws The table of drawable components
  */
-void draw_system(registry &reg, sf::RenderWindow &window,
+void draw_system(double delta, registry &reg, sf::RenderWindow &window,
                         std::vector<optional<component::position>> &positions,
                         std::vector<optional<component::drawable>> &draws);
 
@@ -58,7 +58,7 @@ void draw_system(registry &reg, sf::RenderWindow &window,
  * @param controls The controllable components
  * @param velocities The velocities components
  */
-void control_system(registry &reg,
+void control_system(double delta, registry &reg,
                         std::vector<optional<component::controllable>> &controls,
                         std::vector<optional<component::velocity>> &velocities);
 
@@ -71,7 +71,7 @@ void control_system(registry &reg,
  * @param hurtboxes The hurtbox components
  * @param hitboxes The hitbox components
  */
-void collision_system(registry &reg, std::vector<optional<component::position>> &positions,
+void collision_system(double delta, registry &reg, std::vector<optional<component::position>> &positions,
     std::vector<optional<component::hurtbox>> &hurtboxes,
     std::vector<optional<component::hitbox>> &hitboxes);
 #endif
