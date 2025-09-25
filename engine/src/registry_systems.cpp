@@ -47,7 +47,7 @@ void registry::register_all_systems()
             &velocities = this->get_components<component::velocity>()
         ]
         (double delta) {
-            control_system(*this, controllables, velocities);
+            control_system(delta, *this, controllables, velocities);
         }
     );
 
@@ -58,7 +58,7 @@ void registry::register_all_systems()
             &velocities = this->get_components<component::velocity>()
         ]
         (double delta) {
-            position_system(*this, positions, velocities);
+            position_system(delta, *this, positions, velocities);
         }
     );
 
@@ -70,7 +70,7 @@ void registry::register_all_systems()
             &hitboxes = this->get_components<component::hitbox>()
         ]
         (double delta) {
-            collision_system(*this, positions, hurtboxes, hitboxes);
+            collision_system(delta, *this, positions, hurtboxes, hitboxes);
         }
     );
 }
@@ -103,7 +103,7 @@ registry::registry(sf::RenderWindow &_window) : window(_window)
             &draws = this->get_components<component::drawable>()
         ]
         (double delta) {
-            draw_system(*this, window, positions, draws);
+            draw_system(delta, *this, window, positions, draws);
         }
     );
 }
