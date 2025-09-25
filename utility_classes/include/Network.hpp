@@ -36,19 +36,22 @@
 
 class NetworkManager {
   public:
-    NetworkManager(int port);
+    NetworkManager(int port, std::string address = "");
     ~NetworkManager();
-    void run();
-    void Receive();
-    void Sendit(const std::string& msg, const asio::ip::udp::endpoint& client);
+    void poll();
+    void receive();
+    void send(const std::string& msg, const asio::ip::udp::endpoint& client);
+    std::string getLastMsg();
+    asio::ip::udp::endpoint getLastSender() const;
 
   protected:
   private:
     asio::io_context context;
     asio::ip::udp::socket socket;
-    std::array<char, 1024> buff;
-    asio::ip::udp::endpoint client_;
+    std::array<char, 1024> buff{};
+    asio::ip::udp::endpoint last_sender_;
     bool isrunning;
+    std::string lastmsg;
 };
 
 #endif /* !NETWORK_HPP_ */

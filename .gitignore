@@ -32,6 +32,7 @@ conan_toolchain.cmake
 *.so
 *.dylib
 *.a
+**/a.out
 *.lib
 compile_commands.json
 
@@ -58,4 +59,3 @@ Thumbs.db
 *.tmp
 *.temp
 *.sh
-

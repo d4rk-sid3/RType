@@ -9,7 +9,7 @@ while IFS= read -r -d '' file; do
         echo "ERREUR sur : $file"
         exit 1
     fi
-done < <(find include/ src/ \( -name "*.cpp" -o -name "*.hpp" \) -print0)
+done < <(find engine/ rtype_client/ rtype_server/ utility_classes \( -name "*.cpp" -o -name "*.hpp" \) -print0)
 
 if [ $count -eq 0 ]; then
     echo "Aucun fichier trouvé"

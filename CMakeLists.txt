@@ -48,7 +48,7 @@ endif()
 # -------------------------------------------------------------
 # Client
 if(BUILD_CLIENT)
-    file(GLOB_RECURSE CLIENT_SOURCES "src/rtype_client/*.cpp")
+    file(GLOB_RECURSE CLIENT_SOURCES "src/rtype_client/*.cpp" "src/utility_classes/*.cpp")
     if(NOT CLIENT_SOURCES)
         message(FATAL_ERROR "No client source files found in src/rtype_client/")
     endif()
@@ -66,7 +66,7 @@ endif()
 # -------------------------------------------------------------
 # Serveur
 if(BUILD_SERVER)
-    file(GLOB_RECURSE SERVER_SOURCES "src/rtype_server/*.cpp")
+    file(GLOB_RECURSE SERVER_SOURCES "src/rtype_server/*.cpp" "src/utility_classes/*.cpp")
     if(NOT SERVER_SOURCES)
         message(FATAL_ERROR "No server source files found in src/rtype_server/")
     endif()
