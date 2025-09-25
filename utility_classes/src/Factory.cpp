@@ -17,6 +17,9 @@
 
 #include "Factory.hpp"
 
+#define PLAYER_MISSISLE_SPEED 10
+#define PLAYER_SPEED 5
+
 Factory::Factory(registry &_reg) : reg(_reg) {}
 
 entity Factory::make_player()
@@ -39,5 +42,10 @@ entity Factory::make_player_missile()
     missile_sprite.setTextureFromPath("leaf.png");
 
     reg.add_component<component::position>(missile_id, {0, 0});
-    reg.add_component<component::velocity>(missile_id, {5, 0});
+    reg.add_component<component::velocity>(missile_id, {PLAYER_MISSISLE_SPEED, 0});
+}
+
+entity Factory::make_enemy_missile()
+{
+    entity missile_id = reg.spawn_entity();
 }

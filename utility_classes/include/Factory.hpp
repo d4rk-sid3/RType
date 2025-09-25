@@ -31,6 +31,8 @@ class Factory {
         entity make_player();
 
         entity make_player_missile();
+
+        entity make_enemy_missile();
 };
 
 #endif
