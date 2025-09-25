@@ -74,6 +74,14 @@ void control_system(double delta, registry &reg,
 void collision_system(double delta, registry &reg, std::vector<optional<component::position>> &positions,
     std::vector<optional<component::hurtbox>> &hurtboxes,
     std::vector<optional<component::hitbox>> &hitboxes);
+
+
+/**
+ * @brief The logic system goes through each entity with a logic component and executes its logic function
+ * @param reg The reference to the registry
+ * @param logics The logic components
+ */
+void logic_system(double delta, registry &reg, std::vector<optional<component::logic>> &logics);
 #endif
 
 /* ------------------------------------------------------------------------------------ *

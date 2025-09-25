@@ -38,7 +38,6 @@
 namespace component {
     /**
      * @brief The position component, with an x and y position
-     * 
      */
     typedef struct position_s {
         double x;
@@ -134,10 +133,24 @@ namespace component {
      * 
      */
     typedef struct hurtbox_s{
+        /**
+         * @brief The health of the hurtbox. When it reaches 0, the entity is considered dead
+         */
         int health;
+
+        /**
+         * @brief The group of the hurtbox. For example, if the hurtbox group is 1 for the player and 2 for the enemies, the player's hitbox should have a targeted_group of 2 to damage enemies
+         */
         int group;
-        
+
+        /**
+         * @brief The width of the hurtbox
+         */
         int width;
+
+        /**
+         * @brief The height of the hurtbox
+         */
         int height;
     }hurtbox;
 
@@ -146,12 +159,40 @@ namespace component {
      * 
      */
     typedef struct hitbox_s{
+        /**
+         * @brief The damage that will be inflicted to the hurtbox on collision
+         */
         int damage;
+
+        /**
+         * @brief The group that this hitbox will target. For example, if the hurtbox group is 1 for the player and 2 for the enemies, the player's hitbox should have a targeted_group of 2 to damage enemies
+         */
         int targeted_group;
 
+        /**
+         * @brief The width of the hitbox
+         */
         int width;
+
+        /**
+         * @brief The height of the hitbox
+         */
         int height;
     }hitbox;
+
+    /**
+     * @brief The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user
+     */
+    typedef struct logic_s{
+        /**
+         * @brief A pointer to a function that takes a delta time, a reference to the registry and an entity as parameters and returns void
+         * @param delta The time elapsed since the last frame
+         * @param reg A reference to the registry
+         * @param entity The entity that owns this logic component
+         */
+        void (*logic_function)(double, class registry &, entity);
+    }logic;
+    
 }
 
 #endif

@@ -145,3 +145,17 @@ void collision_system(double delta, registry &reg, std::vector<optional<componen
         }
     }  
 }
+
+void logic_system(double delta, registry &reg, std::vector<optional<component::logic>> &logics)
+{
+    for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
+        try {
+            auto &logic = logics.at(i);
+
+            if (logic) {
+                logic.value().logic_function(delta, reg, entity(i));
+            }
+        } catch (...) {
+        }
+    }  
+}
