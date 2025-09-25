@@ -15,7 +15,7 @@ int main() {
     registry.add_component<component::position>(e1, {265, 265});
     registry.add_component<component::velocity>(e1, {0, 0});
     auto &sprite1 = registry.add_component<component::drawable>(e1, component::drawable());
-    sprite1.setTextureFromPath("leaf.png");
+    sprite1.setTextureFromName("leaf.png");
     registry.add_component<component::hurtbox>(e1, {500, 1, 32, 32});
     registry.add_component<component::controllable>(e1, component::controllable());
     
@@ -23,7 +23,7 @@ int main() {
     registry.add_component<component::velocity>(e2, {0, 0});
     auto &sprite2 = registry.add_component<component::drawable>(e2, component::drawable());
     registry.add_component<component::hitbox>(e2, {5, 1, 32, 32});
-    sprite2.setTextureFromPath("cloud.png");
+    sprite2.setTextureFromName("cloud.png");
     registry.add_component<component::controllable>(e2, component::controllable());
 
     win.setFramerateLimit(100);

@@ -33,6 +33,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include "TextureManager.hpp"
 
 namespace component {
     /**
@@ -63,14 +64,47 @@ namespace component {
      * 
      */
     typedef struct drawable_s {
-        sf::Texture texture;
         sf::Sprite sprite;
 
-        void setTextureFromPath(std::string path) {
-            this->texture.loadFromFile(path);
-            this->sprite.setTexture(this->texture);
+        void setTextureFromName(std::string texture_name) {
+            sf::Texture &texture = TextureManager::Instance().getTexture(texture_name);
+            this->sprite.setTexture(texture);
         }
     }drawable;
+
+    /**
+     * @brief The animated_drawable component. It is a drawable component with an animated sprite. It has a frame_rect, a frame_duration and a frame_timer to allow animation
+     * 
+     */
+    typedef struct animated_drawable_s {
+        sf::Sprite sprite;
+        sf::IntRect frame_rect;
+        double frame_duration;
+        double frame_timer;
+
+        void setTextureFromName(std::string texture_name) {
+            sf::Texture &texture = TextureManager::Instance().getTexture(texture_name);
+            this->sprite.setTexture(texture);
+        }
+
+        void setFrameRect(int width, int height) {
+            this->frame_rect = sf::IntRect(0, 0, width, height);
+            this->sprite.setTextureRect(this->frame_rect);
+        }
+
+        void animate(double delta) {
+            this->frame_timer += delta;
+
+            if (this->frame_timer >= this->frame_duration) {
+                this->frame_timer = 0;
+                this->frame_rect.left += this->frame_rect.width;
+                if (this->frame_rect.left >= this->sprite.getTexture()->getSize().x) {
+                    this->frame_rect.left = 0;
+                }
+                this->sprite.setTextureRect(this->frame_rect);
+            }
+        }
+    }animated_drawable;
 
     /**
      * @brief The controllable component, defined by a set of booleans. This component allows an entity to be controlled by the user's keyboard input
