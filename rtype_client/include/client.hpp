@@ -14,6 +14,7 @@ class Client {
     int port_;
     MoveRequest move;
     MoveResponse check;
+    NetworkManager client_;
 
   public:
     Client(int p, std::string a);
