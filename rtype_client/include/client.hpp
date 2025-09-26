@@ -12,10 +12,14 @@
 class Client {
   private:
     int port_;
+    MoveRequest move;
+    MoveResponse check;
 
   public:
     Client(int p, std::string a);
+    MoveRequest getMoveKey();
     ~Client();
 };
+
 
 #endif /* !CLIENT_HPP_ */
