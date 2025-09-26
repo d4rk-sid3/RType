@@ -5,27 +5,58 @@
 ** init_client
 */
 
-#include "../../include/client.hpp"
+#include "client.hpp"
 
-Client::Client(int p, std::string address) : port_(p) {
+Client::Client(int p, std::string address): port_(p)
+{
     NetworkManager client(8080, "client");
-    asio::ip::udp::endpoint server_endpoint(
-        asio::ip::make_address("127.0.0.1"), 8080
-    );
+    asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
 
-    client.send("Hello", server_endpoint);
+    MoveRequest req;
+    req.type = 0x01;
+    req.dir = UP;
+    client.send(reinterpret_cast<uint8_t*>(&req), sizeof(req), server_endpoint);
 
     while (1) {
         client.poll();
 
-        std::string msg = client.getLastMsg();
-        if (!msg.empty())
-            std::cout << "Serveur: " << msg << std::endl;
+        std::vector<u_int8_t> msg = client.getLastMsg();
+        if (!msg.empty()) {
+            MoveResponse *res = reinterpret_cast<MoveResponse*>(msg.data());
+            if (res->type == 0x24) {
+                std::cout << "Serveur: Player " << res->player_id
+                          << " se déplace vers " << res->direction.x << ", " << res->direction.y
+                          << std::endl;
+            }
+        }
 
-        std::string reponse;
-        if (std::getline(std::cin, reponse) && !reponse.empty())
-            client.send(reponse, server_endpoint);
+        u_int8_t reponse;
+        std::string input;
+        if (std::getline(std::cin, input)) {
+            MoveRequest resq;
+            resq.type = 0x23;
+
+            if (input == "up")
+                resq.dir = UP;
+            if (input == "down")
+                resq.dir = DOWN;
+            if (input == "left")
+                resq.dir = LEFT;
+            if (input == "RIGHT")
+                resq.dir = RIGHT; 
+
+            client.send(reinterpret_cast<uint8_t*>(&resq), sizeof(resq), server_endpoint);
+        }
+
     }
 }
 
-Client::~Client() {}
+MoveRequest Client::getMoveKey()
+{
+    return move;
+}
+
+Client::~Client()
+{
+
+}
