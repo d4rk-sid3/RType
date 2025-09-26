@@ -5,7 +5,7 @@
 ** init_server
 */
 
-#include "../../include/server.hpp"
+#include "../include/server.hpp"
 
 Server::Server(int p) : p_(p) {
     NetworkManager server(8080, "127.0.0.1");
