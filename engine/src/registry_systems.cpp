@@ -100,10 +100,11 @@ registry::registry(sf::RenderWindow &_window) : window(_window)
             this,
             &window = this->window,
             &positions = this->get_components<component::position>(),
-            &draws = this->get_components<component::drawable>()
+            &draws = this->get_components<component::drawable>(),
+            &anim_draws = this->get_components<component::animated_drawable>()
         ]
         (double delta) {
-            draw_system(delta, *this, window, positions, draws);
+            draw_system(delta, *this, window, positions, draws, anim_draws);
         }
     );
 }
