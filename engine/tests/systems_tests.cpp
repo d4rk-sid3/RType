@@ -26,8 +26,6 @@ class RegistrySystemTest : public testing::Test {
 TEST_F(RegistrySystemTest, PositionSystem) {
     auto &pos_table = reg.get_components<component::position>();
     auto &vel_table = reg.get_components<component::velocity>();
-    auto &ctrl_tables = reg.get_components<component::controllable>();
-
 
     // Running the position system
     position_system(1, reg, pos_table, vel_table);
@@ -36,8 +34,19 @@ TEST_F(RegistrySystemTest, PositionSystem) {
     ASSERT_EQ(pos_table[e1].value().x, 100);
     ASSERT_EQ(pos_table[e1].value().y, 50);
 
-    ASSERT_EQ(pos_table[e2].value().x, 101);
-    ASSERT_EQ(pos_table[e2].value().y, 101);
+    ASSERT_EQ(pos_table[e2].value().x, 100);
+    ASSERT_EQ(pos_table[e2].value().y, 100);
+
+    reg.add_component<component::velocity>(e1, {5, -5});
+    reg.add_component<component::velocity>(e2, {-6, 7});
+
+    position_system(1, reg, pos_table, vel_table);
+
+    ASSERT_EQ(pos_table[e1].value().x, 105);
+    ASSERT_EQ(pos_table[e1].value().y, 45);
+
+    ASSERT_EQ(pos_table[e2].value().x, 94);
+    ASSERT_EQ(pos_table[e2].value().y, 107);
 }
 
 TEST_F(RegistrySystemTest, CollisionSystem)
@@ -52,7 +61,7 @@ TEST_F(RegistrySystemTest, CollisionSystem)
     EXPECT_EQ(output, "");
     
     testing::internal::CaptureStdout();
-    component::velocity &veloc = reg.add_component<component::velocity>(e2, {0, -35});
+    reg.add_component<component::velocity>(e2, {0, -35});
     
     reg.run_systems(1);
     
