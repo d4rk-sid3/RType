@@ -47,7 +47,6 @@ void NetworkManager::receive()
         
         [this](std::error_code error ,std::size_t bytes_receive) {
             if (!error && bytes_receive > 0) {
-                // lastmsg.assign(buff.begin(), buff.begin() + bytes_receive);
                 messages.push({std::vector<uint8_t>(buff.begin(), buff.begin() + bytes_receive), last_sender_});
             }
 
@@ -72,16 +71,6 @@ void NetworkManager::send(const u_int8_t *msg, size_t size, const asio::ip::udp:
         }
     );
 }
-
-// std::vector<u_int8_t> NetworkManager::getLastMsg()
-// {
-//     // if (lastmsg.empty())
-//     //     return {};
-    
-//     // std::vector<u_int8_t> tmp = lastmsg;
-//     // lastmsg.clear();
-//     // return tmp;
-// }
 
 std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint> NetworkManager::getLastMsg()
 {
