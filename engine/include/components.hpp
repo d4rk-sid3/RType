@@ -36,6 +36,7 @@
 
 #include <string>
 #include "TextureManager.hpp"
+#include "registry.hpp"
 
 namespace component {
     /**
@@ -116,13 +117,55 @@ namespace component {
      *
      */
     typedef struct controllable_s {
+        /**
+         * @var bool up
+         * @brief  Check if up is pressed
+         */
         bool up;
+
+        /**
+         * @var bool down
+         * @brief  Check if down is pressed
+         */
         bool down;
+
+        /**
+         * @var bool left
+         * @brief  Check if left is pressed
+         */
         bool left;
+
+        /**
+         * @var bool right
+         * @brief  Check if right is pressed
+         */
         bool right;
+
+        /**
+         * @var bool space
+         * @brief  Check if space is pressed
+         */
         bool space;
+
+        /**
+         * @brief Default constructor
+         */
         controllable_s() : up(false), down(false), left(false), right(false), space(false) {}
 
+        /**
+         * @brief Constructor with preinitialized value
+         *
+         * @param u True if Up is Pressed False if not
+         * @param d True if Down is Pressed False if not
+         * @param l True if Left is Pressed False if not
+         * @param r True if Right is Pressed False if not
+         * @param s True if Space is Pressed False if not
+         */
+        controllable_s(bool u, bool d, bool l, bool r, bool s) : up(u), down(d), left(l), right(r), space(s) {}
+
+        /**
+         * @brief Get the key that has been pressed
+         */
         void getKeyboardInput() {
             this->up = sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
             this->down = sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
