@@ -33,6 +33,33 @@
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
+#include <SFML/Graphics.hpp>
+
+struct Vector2D {
+  int x;
+  int y;
+};
+
+struct MoveResponse {
+    uint8_t type;               // 0x24
+    int player_id;
+    Vector2D direction;
+    Vector2D position;
+    float speed;
+    std::time_t timestamp;
+};
+
+enum Direction {
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT
+};
+
+struct MoveRequest {
+    uint8_t type;               // 0x23
+    Direction dir;
+};
 
 class NetworkManager {
   public:
@@ -40,18 +67,18 @@ class NetworkManager {
     ~NetworkManager();
     void poll();
     void receive();
-    void send(const std::string& msg, const asio::ip::udp::endpoint& client);
-    std::string getLastMsg();
+    void send(const u_int8_t* msg, size_t size, const asio::ip::udp::endpoint& client);
+    std::vector<u_int8_t> getLastMsg();
     asio::ip::udp::endpoint getLastSender() const;
 
   protected:
   private:
     asio::io_context context;
     asio::ip::udp::socket socket;
-    std::array<char, 1024> buff{};
+    std::array<u_int8_t, 1024> buff{};
     asio::ip::udp::endpoint last_sender_;
     bool isrunning;
-    std::string lastmsg;
+    std::vector<u_int8_t> lastmsg;
 };
 
 #endif /* !NETWORK_HPP_ */
