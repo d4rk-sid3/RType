@@ -70,7 +70,7 @@ namespace component {
     typedef struct drawable_s {
         sf::Sprite sprite;
 
-        void setTextureFromPath(std::string texture_name) {
+        void setTextureFromMain(std::string texture_name) {
             sf::Texture &texture = TextureManager::Instance().getTexture(texture_name);
             this->sprite.setTexture(texture);
         }
@@ -86,7 +86,7 @@ namespace component {
         double frame_duration;
         double frame_timer;
 
-        void setTextureFromPath(std::string texture_name) {
+        void setTextureFromMain(std::string texture_name) {
             sf::Texture &texture = TextureManager::Instance().getTexture(texture_name);
             this->sprite.setTexture(texture);
         }
