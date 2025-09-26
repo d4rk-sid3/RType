@@ -5,29 +5,49 @@
 ** init_server
 */
 
-#include "../../include/server.hpp"
+#include "server.hpp"
 
-Server::Server(int p) : p_(p) {
+Server::Server(int p): p_(p)
+{
     NetworkManager server(8080, "127.0.0.1");
-    asio::ip::udp::endpoint client_endpoint;
-    bool client_valid = false;
+    std::vector<asio::ip::udp::endpoint> client_endpoint;
 
     while (1) {
         server.poll();
 
-        std::string msg = server.getLastMsg();
-        if (!msg.empty()) {
-            client_endpoint = server.getLastSender();
-            client_valid = true;
-            std::cout << "Client: " << msg << std::endl;
+        std::vector<uint8_t> msg = server.getLastMsg();
 
-            std::string input;
-            if (std::getline(std::cin, input) && !input.empty()) {
-                if (client_valid)
-                    server.send(input, client_endpoint);
+        if (!msg.empty()) {
+            MoveRequest *res = reinterpret_cast<MoveRequest*>(msg.data());
+            
+            if (res->type == 0x23) {
+                std::cout << "Client bouge: direction=" << res->dir << std::endl;
+            }
+
+            MoveResponse resp;
+            resp.type = 0x24;
+            resp.player_id = 1;
+            resp.direction = { (res->dir == RIGHT) - (res->dir == LEFT),
+                                (res->dir == DOWN) - (res->dir == UP) };
+
+            resp.position = { 100, 200 };
+            resp.speed = 2.5f;
+            resp.timestamp = time(nullptr);
+
+            client_endpoint.push_back(server.getLastSender());
+            for (auto& c : client_endpoint) {
+                server.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), c);
             }
         }
     }
 }
 
-Server::~Server() {}
+MoveResponse Server::getMove()
+{
+    return response;
+}
+
+Server::~Server()
+{
+
+}
