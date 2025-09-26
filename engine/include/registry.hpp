@@ -42,6 +42,8 @@
 
 #include "entity.hpp"
 #include "exceptions.hpp"
+#include "TextureManager.hpp"
+#include <SFML/Graphics.hpp>
 
 using namespace std;
 
@@ -73,9 +75,9 @@ class registry {
     entity spawn_entity();
     void kill_entity(const entity& e);
 
-    /* Systems managment */
-    void add_system(const function<void()>& system);
-    void run_systems(void);
+        /* Systems managment */
+        void add_system(const function<void(double)> &system);
+        void run_systems(double delta);
 
     /* Getters */
     /**
@@ -118,13 +120,15 @@ class registry {
     unordered_map<type_index, any> _components_arrays;
     unordered_map<type_index, function<void(const entity&)>> _erase_functions;
 
-    vector<function<void()>> _systems;
+        vector<function<void(double)>> _systems;
 
     vector<entity> dead_entities;
     size_t entity_num = 0;
 
-    sf::RenderWindow& window;
-    sf::RenderWindow tmp;
+        sf::RenderWindow &window;
+        sf::RenderWindow tmp;
+
+        sf::Clock clock;
 
     void register_all_systems();
 };
