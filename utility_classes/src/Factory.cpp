@@ -15,7 +15,7 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
-#include "Factory.hpp"
+#include "../include/Factory.hpp"
 
 #define PLAYER_MISSISLE_SPEED 10
 #define ENEMY_MISSISLE_SPEED 5

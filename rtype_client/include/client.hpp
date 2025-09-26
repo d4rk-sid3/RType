@@ -7,7 +7,7 @@
 
 #ifndef CLIENT_HPP_
 #define CLIENT_HPP_
-#include "Network.hpp"
+#include "../../utility_classes/include/Network.hpp"
 
 class Client {
   private:

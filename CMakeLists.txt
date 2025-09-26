@@ -48,35 +48,35 @@ endif()
 # -------------------------------------------------------------
 # Client
 if(BUILD_CLIENT)
-    file(GLOB_RECURSE CLIENT_SOURCES "rtype_client/src/*.cpp" "utility_classes/src/*.cpp")
+    file(GLOB_RECURSE CLIENT_SOURCES "rtype_client/src/*.cpp" "utility_classes/src/*.cpp" "engine/src/*.cpp" )
     if(NOT CLIENT_SOURCES)
         message(FATAL_ERROR "No client source files found in rtype_client/src/")
     endif()
     
     add_executable(r-type_client ${CLIENT_SOURCES})
-    target_include_directories(r-type_client PRIVATE include ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
-    target_link_libraries(r-type_client PRIVATE)
+    target_include_directories(r-type_client PRIVATE ${CMAKE_SOURCE_DIR}/rtype_client/include "utility_classes/include" "engine/include/" ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
+    target_link_libraries(r-type_client PRIVATE -lsfml-graphics -lsfml-window -lsfml-system)
     
     # Compiler flags for debug builds
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        target_compile_options(r-type_client PRIVATE -g -Wall -Wextra)
+        target_compile_options(r-type_client PRIVATE)
     endif()
 endif()
 
 # -------------------------------------------------------------
 # Serveur
 if(BUILD_SERVER)
-    file(GLOB_RECURSE SERVER_SOURCES "rtype_server/src/*.cpp" "utility_classes/src/*.cpp")
+    file(GLOB_RECURSE SERVER_SOURCES "rtype_server/src/*.cpp" "utility_classes/src/*.cpp" "engine/src/*.cpp" )
     if(NOT SERVER_SOURCES)
         message(FATAL_ERROR "No server source files found in rtype_server/src/")
     endif()
     
     add_executable(r-type_server ${SERVER_SOURCES})
-    target_include_directories(r-type_server PRIVATE include ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
-    target_link_libraries(r-type_server PRIVATE)
+    target_include_directories(r-type_server PRIVATE ${CMAKE_SOURCE_DIR}/rtype_server/include "utility_classes/include" "engine/include/" ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
+    target_link_libraries(r-type_server PRIVATE -lsfml-graphics -lsfml-window -lsfml-system)
     
     # Compiler flags for debug builds
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        target_compile_options(r-type_server PRIVATE -g -Wall -Wextra)
+        target_compile_options(r-type_server PRIVATE)
     endif()
 endif()

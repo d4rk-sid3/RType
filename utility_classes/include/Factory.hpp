@@ -19,8 +19,8 @@
     #define INCLUDED_FACTORY_HPP
 
 #include <iostream>
-#include "registry.hpp"
-#include "components.hpp"
+#include "../../engine/include/registry.hpp"
+#include "../../engine/include/components.hpp"
 
 class Factory {
     private:
