@@ -28,6 +28,8 @@ class Factory {
     public:
         Factory(registry &_reg);
 
+        entity make_entity(std::string &type);
+
         entity make_player();
 
         entity make_player_missile();

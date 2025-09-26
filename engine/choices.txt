@@ -10,3 +10,6 @@ qui feront partie de la tech comparative study:
 c'est plus rapide(autre choix sorted map)
 - Pour les tests, Google Test, on verra plus tard pourquoi
     c'est une bonne idee et quelles etaient les alternatives
+- sfml pour le rendu parce que tout le monde sait utiliser et c'est simple, rapide, facile a utiliser
+- libconfig pour le parsing, parce que simple lol, doc existe
+ 

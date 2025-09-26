@@ -51,6 +51,10 @@ class entity {
         id = new_id;
     }
 
+    entity() {
+        id = -1;
+    }
+
     /**
      * @brief Get the Id of the entity
      *

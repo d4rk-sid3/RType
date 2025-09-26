@@ -24,6 +24,20 @@
 
 Factory::Factory(registry &_reg) : reg(_reg) {}
 
+entity Factory::make_entity(std::string &type)
+{
+    if (type == "player")
+        return make_player();
+    else if (type == "red_trooper")
+        return make_red_trooper();
+    else if (type == "walker")
+        return make_walker();
+    else if (type == "player_missile")
+        return make_player_missile();
+    else if (type == "enemy_missile")
+        return make_enemy_missile();
+}
+
 entity Factory::make_player()
 {
     entity player_id = reg.spawn_entity();
