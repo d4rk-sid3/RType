@@ -36,6 +36,7 @@
 
 #include <string>
 #include "TextureManager.hpp"
+#include "entity.hpp"
 
 namespace component {
     /**
