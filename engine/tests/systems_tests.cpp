@@ -11,12 +11,6 @@ class RegistrySystemTest : public testing::Test {
 
 
     void SetUp() override {
-        reg.register_components<component::velocity>();
-        reg.register_components<component::position>();
-        reg.register_components<component::hurtbox>();
-        reg.register_components<component::hitbox>();
-        reg.register_components<component::controllable>();
-
         reg.add_component<component::position>(e1, {100, 50});
         reg.add_component<component::velocity>(e1, {0, 0});
         reg.add_component<component::hurtbox>(e1, {500, 1, 32, 32});
@@ -36,7 +30,7 @@ TEST_F(RegistrySystemTest, PositionSystem) {
 
 
     // Running the position system
-    position_system(1, reg, pos_table, vel_table, ctrl_tables);
+    position_system(1, reg, pos_table, vel_table);
 
     // Checking updated positions
     ASSERT_EQ(pos_table[e1].value().x, 100);
@@ -58,7 +52,7 @@ TEST_F(RegistrySystemTest, CollisionSystem)
     EXPECT_EQ(output, "");
     
     testing::internal::CaptureStdout();
-    reg.add_component<component::velocity>(e2, {0, -35});
+    component::velocity &veloc = reg.add_component<component::velocity>(e2, {0, -35});
     
     reg.run_systems(1);
     
