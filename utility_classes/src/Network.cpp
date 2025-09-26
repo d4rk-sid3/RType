@@ -5,7 +5,7 @@
 ** Network
 */
 
-#include "../../include/Network.hpp"
+#include "../include/Network.hpp"
 
 NetworkManager::NetworkManager(int port, std::string address)
     : socket(context), isrunning(true) {

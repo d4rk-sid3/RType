@@ -5,7 +5,7 @@
 ** init_client
 */
 
-#include "../../include/client.hpp"
+#include "../include/client.hpp"
 
 Client::Client(int p, std::string address) : port_(p) {
     NetworkManager client(8080, "client");

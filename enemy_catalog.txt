@@ -1,0 +1,7 @@
+red_trooper:
+Red triangular ship which flies in a sine wave trajectory
+and occasionnaly shoots simple projectiles
+
+walker:
+Mecha robot that walks on the ground on the bottom of the map
+He can jump over obstacles and shoot missiles
