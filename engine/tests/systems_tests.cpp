@@ -19,7 +19,7 @@ class RegistrySystemTest : public testing::Test {
         reg.add_component<component::position>(e2, {100, 100});
         reg.add_component<component::velocity>(e2, {0, 0});
         reg.add_component<component::hitbox>(e2, {5, 1, 32, 32});
-        reg.add_component<component::controllable>(e2, {false, true, false, true, false} );
+        reg.add_component<component::controllable>(e2, {false, true, false, true, true} );
     }
 };
 
