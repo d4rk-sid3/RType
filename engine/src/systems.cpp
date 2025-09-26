@@ -32,32 +32,12 @@
 #include "../include/components.hpp"
 
 void position_system(double delta, registry &reg, std::vector<optional<component::position>> &positions,
-                                std::vector<optional<component::velocity>> &velocities,
-                                std::vector<optional<component::controllable>> &controls)
+                                std::vector<optional<component::velocity>> &velocities)
 {
         for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
             try {
                 auto &pos = positions.at(i);
                 auto &vel = velocities.at(i);
-                auto &ctrl = controls.at(i);
-
-                if (vel && ctrl) {
-                    auto &control = ctrl.value();
-                    auto &velocity = vel.value();
-
-                    if (control.up)
-                        velocity.vy = -1;
-                    else if (control.down)
-                        velocity.vy = 1;
-                    else
-                        velocity.vy = 0;
-                    if (control.left)
-                        velocity.vx = -1;
-                    else if (control.right)
-                        velocity.vx = 1;
-                    else
-                        velocity.vx = 0;
-                }
 
                 if (pos && vel) {
                     pos.value().setPosition(vel.value().vx * delta,  vel.value().vy * delta);

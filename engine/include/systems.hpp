@@ -43,8 +43,7 @@
  */
 void position_system(double delta, registry &reg,
                                 std::vector<optional<component::position>> &positions,
-                                std::vector<optional<component::velocity>> &velocities,
-                                std::vector<optional<component::controllable>> &controls);
+                                std::vector<optional<component::velocity>> &velocities);
 
 /**
  * @brief

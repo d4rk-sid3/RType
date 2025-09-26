@@ -56,11 +56,10 @@ void registry::register_all_systems() {
         [
             this,
             &positions = this->get_components<component::position>(),
-            &velocities = this->get_components<component::velocity>(),
-            &controls = this->get_components<component::controllable>()
+            &velocities = this->get_components<component::velocity>()
         ]
         (double delta) {
-            position_system(delta, *this, positions, velocities, controls);
+            position_system(delta, *this, positions, velocities);
         }
     );
 
