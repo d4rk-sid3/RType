@@ -15,6 +15,9 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+#ifndef ENTITY_HPP
+    #define ENTITY_HPP
+
 /**
  * @file entity.hpp
  * @author Farouk OKANLA
@@ -62,3 +65,5 @@ class entity {
             return id;
         }
 };
+
+#endif
