@@ -5,32 +5,33 @@
 ** init_client
 */
 
-#include "client.hpp"
+#include "../include/client.hpp"
 
-Client::Client(int p, std::string address): port_(p)
+Client::Client(int p, std::string address): port_(p), client_(8080, "client")
 {
-    NetworkManager client(8080, "client");
     asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
 
     MoveRequest req;
     req.type = 0x01;
     req.dir = UP;
-    client.send(reinterpret_cast<uint8_t*>(&req), sizeof(req), server_endpoint);
+    client_.send(reinterpret_cast<uint8_t*>(&req), sizeof(req), server_endpoint);
 
     while (1) {
-        client.poll();
+        client_.poll();
 
-        std::vector<u_int8_t> msg = client.getLastMsg();
-        if (!msg.empty()) {
-            MoveResponse *res = reinterpret_cast<MoveResponse*>(msg.data());
-            if (res->type == 0x24) {
-                std::cout << "Serveur: Player " << res->player_id
-                          << " se déplace vers " << res->direction.x << ", " << res->direction.y
+        auto msg = client_.getLastMsg();
+        if (!msg.first.empty()) {
+            
+            MoveResponse res{};
+            std::memcpy(&res, msg.first.data(), sizeof(MoveResponse));
+
+            if (res.type == 0x24) {
+                std::cout << "Serveur: Player " << res.player_id
+                          << " se déplace vers " << res.direction.x << ", " << res.direction.y
                           << std::endl;
             }
         }
 
-        u_int8_t reponse;
         std::string input;
         if (std::getline(std::cin, input)) {
             MoveRequest resq;
@@ -42,10 +43,10 @@ Client::Client(int p, std::string address): port_(p)
                 resq.dir = DOWN;
             if (input == "left")
                 resq.dir = LEFT;
-            if (input == "RIGHT")
+            if (input == "right")
                 resq.dir = RIGHT; 
 
-            client.send(reinterpret_cast<uint8_t*>(&resq), sizeof(resq), server_endpoint);
+            client_.send(reinterpret_cast<uint8_t*>(&resq), sizeof(resq), server_endpoint);
         }
 
     }

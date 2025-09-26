@@ -40,10 +40,9 @@
  * @param positions The table of positions components
  * @param velocities The table of velocities components
  */
-void position_system(
-    registry& reg, std::vector<optional<component::position>>& positions,
-    std::vector<optional<component::velocity>>& velocities
-);
+void position_system(double delta, registry &reg,
+                                std::vector<optional<component::position>> &positions,
+                                std::vector<optional<component::velocity>> &velocities);
 
 /**
  * @brief
@@ -53,11 +52,10 @@ void position_system(
  * @param positions The table of positions components
  * @param draws The table of drawable components
  */
-void draw_system(
-    registry& reg, sf::RenderWindow& window,
-    std::vector<optional<component::position>>& positions,
-    std::vector<optional<component::drawable>>& draws
-);
+void draw_system(double delta, registry &reg, sf::RenderWindow &window,
+                        std::vector<optional<component::position>> &positions,
+                        std::vector<optional<component::drawable>> &draws,
+                        std::vector<optional<component::animated_drawable>> &anim_draws);
 
 /**
  * @brief The control system goes through each constrollable component and
@@ -67,10 +65,10 @@ void draw_system(
  * @param controls The controllable components
  * @param velocities The velocities components
  */
-void control_system(
-    registry& reg, std::vector<optional<component::controllable>>& controls,
-    std::vector<optional<component::velocity>>& velocities
-);
+void control_system(double delta, registry &reg,
+                        std::vector<optional<component::controllable>> &controls,
+                        std::vector<optional<component::velocity>> &velocities);
+
 
 /**
  * @brief The collision system goes through each hurtbox and hitbox component
@@ -81,11 +79,17 @@ void control_system(
  * @param hurtboxes The hurtbox components
  * @param hitboxes The hitbox components
  */
-void collision_system(
-    registry& reg, std::vector<optional<component::position>>& positions,
-    std::vector<optional<component::hurtbox>>& hurtboxes,
-    std::vector<optional<component::hitbox>>& hitboxes
-);
+void collision_system(double delta, registry &reg, std::vector<optional<component::position>> &positions,
+    std::vector<optional<component::hurtbox>> &hurtboxes,
+    std::vector<optional<component::hitbox>> &hitboxes);
+
+
+/**
+ * @brief The logic system goes through each entity with a logic component and executes its logic function
+ * @param reg The reference to the registry
+ * @param logics The logic components
+ */
+void logic_system(double delta, registry &reg, std::vector<optional<component::logic>> &logics);
 #endif
 
 /* ------------------------------------------------------------------------------------

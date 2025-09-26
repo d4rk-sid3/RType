@@ -24,7 +24,7 @@
 #ifndef INCLUDED_REGISTRY_TABLES_TPP
 #define INCLUDED_REGISTRY_TABLES_TPP
 
-#include "registry.hpp"
+#include "../include/registry.hpp"
 
 /**
  * @brief Registers a table of a new type of components

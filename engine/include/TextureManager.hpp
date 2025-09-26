@@ -1,50 +1,56 @@
 /* ------------------------------------------------------------------------------------ *
  *                                                                                      *
- * EPITECH PROJECT - Mon, Sep, 2025                                                     *
+ * EPITECH PROJECT - Fri, Sep, 2025                                                     *
  * Title           - G-CPP-500-COT-5-1-rtype-8                                          *
  * Description     -                                                                    *
- *     Factory                                                                          *
+ *     TextureManager                                                                   *
  *                                                                                      *
  * ------------------------------------------------------------------------------------ *
  *                                                                                      *
- *       _|_|_|_|  _|_|_|    _|_|_|  _|_|_|_|_|  _|_|_|_|    _|_|_|  _|    _|           *
- *       _|        _|    _|    _|        _|      _|        _|        _|    _|           *
- *       _|_|_|    _|_|_|      _|        _|      _|_|_|    _|        _|_|_|_|           *
- *       _|        _|          _|        _|      _|        _|        _|    _|           *
- *       _|_|_|_|  _|        _|_|_|      _|      _|_|_|_|    _|_|_|  _|    _|           *
+ *       ▄▀▀█▄▄▄▄  ▄▀▀▄▀▀▀▄  ▄▀▀█▀▄    ▄▀▀▀█▀▀▄  ▄▀▀█▄▄▄▄  ▄▀▄▄▄▄   ▄▀▀▄ ▄▄             *
+ *      ▐  ▄▀   ▐ █   █   █ █   █  █  █    █  ▐ ▐  ▄▀   ▐ █ █    ▌ █  █   ▄▀            *
+ *        █▄▄▄▄▄  ▐  █▀▀▀▀  ▐   █  ▐  ▐   █       █▄▄▄▄▄  ▐ █      ▐  █▄▄▄█             *
+ *        █    ▌     █          █        █        █    ▌    █         █   █             *
+ *       ▄▀▄▄▄▄    ▄▀        ▄▀▀▀▀▀▄   ▄▀        ▄▀▄▄▄▄    ▄▀▄▄▄▄▀   ▄▀  ▄▀             *
+ *       █    ▐   █         █       █ █          █    ▐   █     ▐   █   █               *
+ *       ▐        ▐         ▐       ▐ ▐          ▐        ▐         ▐   ▐               *
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
-#ifndef INCLUDED_FACTORY_HPP
-    #define INCLUDED_FACTORY_HPP
+#ifndef INCLUDED_TEXTUREMANAGER_HPP
+    #define INCLUDED_TEXTUREMANAGER_HPP
 
 #include <iostream>
-#include "../../engine/include/registry.hpp"
-#include "../../engine/include/components.hpp"
+#include <map>
+#include <SFML/Graphics.hpp>
 
-class Factory {
+class TextureManager {
     private:
-        registry &reg;
+        std::map<std::string, sf::Texture> m_textureMap;
+
+        TextureManager() {}
     public:
-        Factory(registry &_reg);
+        ~TextureManager() {}
 
-        entity make_player();
+        static TextureManager& Instance() {
+            static TextureManager instance;
+            return instance;
+        }
 
-        entity make_player_missile();
+        bool load(const std::string& fileName, const std::string& id) {
+            sf::Texture texture;
 
-        entity make_enemy_missile();
+            if (!texture.loadFromFile(fileName)) {
+                return false;
+            }
 
-        entity make_walker();
+            m_textureMap[id] = std::move(texture);
+            return true;
+        }
 
-        entity make_red_trooper();
-
-        entity make_wall();
-
-        entity make_floor();
-
-        entity make_ceiling();
-
-        entity make_background();
+        sf::Texture& getTexture(const std::string& id) {
+            return m_textureMap.at(id);
+        }
 };
 
 #endif

@@ -31,8 +31,8 @@
  *
  */
 
-#include "registry.hpp"
-#include "systems.hpp"
+#include "../include/registry.hpp"
+#include "../include/systems.hpp"
 
 void registry::register_all_systems() {
     register_components<component::position>();
@@ -42,22 +42,38 @@ void registry::register_all_systems() {
     register_components<component::hitbox>();
 
     add_system(
-        [this, &controllables = this->get_components<component::controllable>(),
-         &velocities = this->get_components<component::velocity>()]() {
-            control_system(*this, controllables, velocities);
+        [
+            this,
+            &controllables = this->get_components<component::controllable>(),
+            &velocities = this->get_components<component::velocity>()
+        ]
+        (double delta) {
+            control_system(delta, *this, controllables, velocities);
         }
     );
 
-    add_system([this, &positions = this->get_components<component::position>(),
-                &velocities = this->get_components<component::velocity>()]() {
-        position_system(*this, positions, velocities);
-    });
+    add_system(
+        [
+            this,
+            &positions = this->get_components<component::position>(),
+            &velocities = this->get_components<component::velocity>()
+        ]
+        (double delta) {
+            position_system(delta, *this, positions, velocities);
+        }
+    );
 
-    add_system([this, &positions = this->get_components<component::position>(),
-                &hurtboxes = this->get_components<component::hurtbox>(),
-                &hitboxes = this->get_components<component::hitbox>()]() {
-        collision_system(*this, positions, hurtboxes, hitboxes);
-    });
+    add_system(
+        [
+            this,
+            &positions = this->get_components<component::position>(),
+            &hurtboxes = this->get_components<component::hurtbox>(),
+            &hitboxes = this->get_components<component::hitbox>()
+        ]
+        (double delta) {
+            collision_system(delta, *this, positions, hurtboxes, hitboxes);
+        }
+    );
 }
 
 /**
@@ -80,11 +96,18 @@ registry::registry(sf::RenderWindow& _window) : window(_window) {
 
     register_components<component::drawable>();
 
-    add_system([this, &window = this->window,
-                &positions = this->get_components<component::position>(),
-                &draws = this->get_components<component::drawable>()]() {
-        draw_system(*this, window, positions, draws);
-    });
+    add_system(
+        [
+            this,
+            &window = this->window,
+            &positions = this->get_components<component::position>(),
+            &draws = this->get_components<component::drawable>(),
+            &anim_draws = this->get_components<component::animated_drawable>()
+        ]
+        (double delta) {
+            draw_system(delta, *this, window, positions, draws, anim_draws);
+        }
+    );
 }
 
 /**
@@ -93,7 +116,8 @@ registry::registry(sf::RenderWindow& _window) : window(_window) {
  *
  * @param system a lambda capturing by reference all the needed components
  */
-void registry::add_system(const function<void()>& system) {
+void registry::add_system(const function<void(double)> &system)
+{
     _systems.push_back(system);
 }
 
@@ -101,8 +125,9 @@ void registry::add_system(const function<void()>& system) {
  * @brief This function runs all the systems registered in the registry
  *
  */
-void registry::run_systems() {
+void registry::run_systems(double delta)
+{
     for (const auto& system : _systems) {
-        system();
+        system(delta);
     }
 }

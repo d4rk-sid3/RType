@@ -5,7 +5,7 @@
 ** Network
 */
 
-#include "Network.hpp"
+#include "../include/Network.hpp"
 
 NetworkManager::NetworkManager(int port, std::string address): socket(context), isrunning(true)
 {
@@ -21,12 +21,17 @@ NetworkManager::NetworkManager(int port, std::string address): socket(context), 
     }
 
     receive();
+    thread_ = std::thread([this]{ context.run(); });
 }
 
 NetworkManager::~NetworkManager()
 {
     isrunning = false;
+    context.stop();
+    if (thread_.joinable())
+        thread_.join();
     socket.close();
+
 }
 
 void NetworkManager::poll()
@@ -42,8 +47,8 @@ void NetworkManager::receive()
         
         [this](std::error_code error ,std::size_t bytes_receive) {
             if (!error && bytes_receive > 0) {
-                lastmsg.assign(buff.begin(), buff.begin() + bytes_receive);
-                std::cout << "Reçu " << bytes_receive << " bytes" << std::endl;
+                // lastmsg.assign(buff.begin(), buff.begin() + bytes_receive);
+                messages.push({std::vector<uint8_t>(buff.begin(), buff.begin() + bytes_receive), last_sender_});
             }
 
             if (isrunning) {
@@ -61,7 +66,6 @@ void NetworkManager::send(const u_int8_t *msg, size_t size, const asio::ip::udp:
         [this](std::error_code error, std::size_t byte_send) {
             
             if (!error) {
-                std::cout << "Send  " << byte_send <<  std::endl;
             } else {
                 std::cerr << error.message() << std::endl;
             }
@@ -69,11 +73,26 @@ void NetworkManager::send(const u_int8_t *msg, size_t size, const asio::ip::udp:
     );
 }
 
-std::vector<u_int8_t> NetworkManager::getLastMsg()
+// std::vector<u_int8_t> NetworkManager::getLastMsg()
+// {
+//     // if (lastmsg.empty())
+//     //     return {};
+    
+//     // std::vector<u_int8_t> tmp = lastmsg;
+//     // lastmsg.clear();
+//     // return tmp;
+// }
+
+std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint> NetworkManager::getLastMsg()
 {
-    std::vector<u_int8_t> tmp = lastmsg;
-    return tmp;
+    std::lock_guard<std::mutex> lock(mtx);
+    if (messages.empty())
+        return {};
+    auto msg = messages.front();
+    messages.pop();
+    return msg;
 }
+
 
 asio::ip::udp::endpoint NetworkManager::getLastSender() const
 {
