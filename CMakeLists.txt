@@ -18,6 +18,7 @@ endif()
 # Options pour compiler client et/ou serveur
 option(BUILD_CLIENT "Build the client executable" ON)
 option(BUILD_SERVER "Build the server executable" ON)
+option(BUILD_TESTS "Build the test executable" ON)
 
 #  -------------------------------------------------------------
 # Clang-Tidy
@@ -48,7 +49,7 @@ endif()
 # -------------------------------------------------------------
 # Client
 if(BUILD_CLIENT)
-    file(GLOB_RECURSE CLIENT_SOURCES "rtype_client/src/*.cpp" "utility_classes/src/*.cpp" "engine/src/*.cpp" )
+    file(GLOB_RECURSE CLIENT_SOURCES "rtype_client/src/*.cpp" "mains/client/main.cpp" "utility_classes/src/*.cpp" "engine/src/*.cpp" )
     if(NOT CLIENT_SOURCES)
         message(FATAL_ERROR "No client source files found in rtype_client/src/")
     endif()
@@ -66,7 +67,7 @@ endif()
 # -------------------------------------------------------------
 # Serveur
 if(BUILD_SERVER)
-    file(GLOB_RECURSE SERVER_SOURCES "rtype_server/src/*.cpp" "utility_classes/src/*.cpp" "engine/src/*.cpp" )
+    file(GLOB_RECURSE SERVER_SOURCES "rtype_server/src/*.cpp" "mains/server/main.cpp" "utility_classes/src/*.cpp" "engine/src/*.cpp" )
     if(NOT SERVER_SOURCES)
         message(FATAL_ERROR "No server source files found in rtype_server/src/")
     endif()
@@ -78,5 +79,23 @@ if(BUILD_SERVER)
     # Compiler flags for debug builds
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         target_compile_options(r-type_server PRIVATE)
+    endif()
+endif()
+
+# -------------------------------------------------------------
+# Tests
+if(BUILD_TESTS)
+    file(GLOB_RECURSE TESTS_SOURCES "rtype_server/tests/*.cpp"  "rtype_client/tests/*.cpp" "utility_classes/tests/*.cpp" "engine/tests/*.cpp" "rtype_server/src/*.cpp"  "rtype_client/src/*.cpp" "utility_classes/src/*.cpp" "engine/src/*.cpp" )
+    if(NOT TESTS_SOURCES)
+        message(FATAL_ERROR "No server source files found")
+    endif()
+
+    add_executable(r-type_tests ${TESTS_SOURCES})
+    target_include_directories(r-type_tests PRIVATE ${CMAKE_SOURCE_DIR}/rtype_server/include  ${CMAKE_SOURCE_DIR}/rtype_client/include "utility_classes/include" "engine/include" ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
+    target_link_libraries(r-type_tests PRIVATE -lgtest -lgtest_main -pthread -lsfml-graphics -lsfml-window -lsfml-system )
+
+    # Compiler flags for debug builds
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        target_compile_options(r-type_tests PRIVATE)
     endif()
 endif()

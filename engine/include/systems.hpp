@@ -39,10 +39,12 @@
  * @param reg The reference to the registry
  * @param positions The table of positions components
  * @param velocities The table of velocities components
+ * @param controls The table of control components
  */
 void position_system(double delta, registry &reg,
                                 std::vector<optional<component::position>> &positions,
-                                std::vector<optional<component::velocity>> &velocities);
+                                std::vector<optional<component::velocity>> &velocities,
+                                std::vector<optional<component::controllable>> &controls);
 
 /**
  * @brief
@@ -63,11 +65,9 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
  *
  * @param reg The reference to the registry
  * @param controls The controllable components
- * @param velocities The velocities components
  */
 void control_system(double delta, registry &reg,
-                        std::vector<optional<component::controllable>> &controls,
-                        std::vector<optional<component::velocity>> &velocities);
+                        std::vector<optional<component::controllable>> &controls);
 
 
 /**
