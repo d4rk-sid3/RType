@@ -3,6 +3,8 @@
 
 #include <cstdint>
 #include <vector>
+#include <iostream>
+#include <cstring>
 
 enum State : uint8_t {
     DEATH = 0,
@@ -50,6 +52,7 @@ struct Timestamp {
     uint64_t milliseconds;
 };
 
+//Serveur → Client
 struct PlayerStateResponse {
     uint8_t type;               // 0x28
     uint32_t player_id;
