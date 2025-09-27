@@ -155,3 +155,22 @@ std::vector<uint8_t> encodeGamePausedRequest(const GamePausedRequest& pos) {
 
     buffer.emplace_back(0x33);
 }
+
+std::vector<uint8_t> encodeGamePausedResponse(const GamePausedResponse& pos) {
+    std::vector<uint8_t> buffer;
+
+    buffer.emplace_back(0x34);
+
+    buffer.emplace_back((pos.timestamp.milliseconds >> 56) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 48) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 40) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 32) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 24) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 16) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 8) & 0xFF);
+    buffer.emplace_back(pos.timestamp.milliseconds & 0xFF);
+
+    buffer.emplace_back(pos.current_state & 0xFF);
+
+    return buffer;
+}
