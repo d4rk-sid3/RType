@@ -21,17 +21,12 @@ NetworkManager::NetworkManager(int port, std::string address): socket(context), 
     }
 
     receive();
-    thread_ = std::thread([this]{ context.run(); });
 }
 
 NetworkManager::~NetworkManager()
 {
     isrunning = false;
-    context.stop();
-    if (thread_.joinable())
-        thread_.join();
     socket.close();
-
 }
 
 void NetworkManager::poll()
@@ -47,7 +42,7 @@ void NetworkManager::receive()
         
         [this](std::error_code error ,std::size_t bytes_receive) {
             if (!error && bytes_receive > 0) {
-                messages.push({std::vector<uint8_t>(buff.begin(), buff.begin() + bytes_receive), last_sender_});
+               messages.push({ std::vector<uint8_t>(buff.begin(), buff.begin() + bytes_receive), last_sender_ });
             }
 
             if (isrunning) {
