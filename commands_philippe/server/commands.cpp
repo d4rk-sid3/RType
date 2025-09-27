@@ -150,12 +150,6 @@ std::vector<uint8_t> encodeGameStartedResponse(const GameStartedResponse& pos) {
     return buffer;   
 }
 
-std::vector<uint8_t> encodeGamePausedRequest(const GamePausedRequest& pos) {
-    std::vector<uint8_t> buffer;
-
-    buffer.emplace_back(0x33);
-}
-
 std::vector<uint8_t> encodeGamePausedResponse(const GamePausedResponse& pos) {
     std::vector<uint8_t> buffer;
 
@@ -191,3 +185,10 @@ std::vector<uint8_t> encodeGameStateResponse(const GameStateResponse& pos, const
     return buffer;
 }
 
+std::vector<uint8_t> encodeEnemySpawnedResponse(const EnemySpawnedResponse& pos) {
+    std::vector<uint8_t> buffer;
+
+    buffer.emplace_back(0x36);
+
+    buffer.emplace_back()
+}
