@@ -70,6 +70,7 @@ class NetworkManager {
     void send(const u_int8_t* msg, size_t size, const asio::ip::udp::endpoint& client);
     std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint> getLastMsg();
     asio::ip::udp::endpoint getLastSender() const;
+    asio::io_context& getContext() { return context; };
 
   protected:
   private:
@@ -79,7 +80,6 @@ class NetworkManager {
     asio::ip::udp::endpoint last_sender_;
     bool isrunning;
     std::vector<u_int8_t> lastmsg;
-    std::thread thread_;
     std::queue<std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint>> messages;
     std::mutex mtx;
 
