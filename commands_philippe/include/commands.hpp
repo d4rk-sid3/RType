@@ -52,7 +52,7 @@ struct Timestamp {
     uint64_t milliseconds;
 };
 
-//Serveur → Client
+//Serveur -> Client
 struct PlayerStateResponse {
     uint8_t type;               // 0x28
     uint32_t player_id;
@@ -62,7 +62,7 @@ struct PlayerStateResponse {
     State state;
 };
 
-//Serveur → Client
+//Serveur -> Client
 struct PlayerGameStateResponse {
     uint8_t type;               // 0x29
     uint32_t player_id;
@@ -73,7 +73,7 @@ struct PlayerGameStateResponse {
     GameState game_state;
 };
 
-//Serveur → Client
+//Serveur -> Client
 struct BeatBossResponse {
     uint8_t type;               // 0x30
     uint32_t player_id;
@@ -83,6 +83,7 @@ struct BeatBossResponse {
     BossState boss_state;
 };
 
+//Server -> Client
 struct CheckpointResponse {
     uint8_t type;               // 0x31
     uint32_t player_id;
@@ -91,6 +92,7 @@ struct CheckpointResponse {
     Timestamp timestamp;
 };
 
+// Serveur -> Client
 struct GameStartedResponse {
     uint8_t type;               // 0x32
     uint32_t player_id;
