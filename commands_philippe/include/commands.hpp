@@ -73,6 +73,7 @@ struct PlayerGameStateResponse {
     GameState game_state;
 };
 
+//Serveur → Client
 struct BeatBossResponse {
     uint8_t type;               // 0x30
     uint32_t player_id;

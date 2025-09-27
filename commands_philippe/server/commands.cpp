@@ -51,3 +51,37 @@ std::vector<uint8_t> encodePlayerGameStateResponse(const PlayerGameStateResponse
 
     return buffer;
 }
+
+std::vector<uint8_t> encodeBeatBossResponse(const BeatBossResponse& pos) {
+    std::vector<uint8_t> buffer;
+
+    buffer.emplace_back(0x30);
+
+    buffer.emplace_back((pos.player_id >> 24) & 0xFF);
+    buffer.emplace_back((pos.player_id >> 16) & 0xFF);
+    buffer.emplace_back((pos.player_id >> 8) & 0xFF);
+    buffer.emplace_back(pos.player_id & 0xFF);
+
+    buffer.emplace_back((pos.boss_id >> 24) & 0xFF);
+    buffer.emplace_back((pos.boss_id >> 16) & 0xFF);
+    buffer.emplace_back((pos.boss_id >> 8) & 0xFF);
+    buffer.emplace_back(pos.boss_id & 0xFF);
+
+    buffer.emplace_back((pos.player_position.x >> 8) & 0xFF);
+    buffer.emplace_back(pos.player_position.x & 0xFF);
+    buffer.emplace_back((pos.player_position.y >> 8) & 0xFF);
+    buffer.emplace_back(pos.player_position.y & 0xFF);
+
+    buffer.emplace_back((pos.timestamp.milliseconds >> 56) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 48) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 40) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 32) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 24) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 16) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 8) & 0xFF);
+    buffer.emplace_back(pos.timestamp.milliseconds & 0xFF);
+
+    buffer.emplace_back((pos.boss_state));
+
+    return buffer;
+}
