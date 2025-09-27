@@ -252,3 +252,37 @@ std::vector<uint8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos) {
 
     return buffer;
 }
+
+std::vector<uint8_t> encodedEnemyFiredResponse(const EnemyFiredResponse& pos) {
+    std::vector<uint8_t> buffer;
+
+    buffer.emplace_back(0x38);
+
+    buffer.emplace_back((pos.enemy_id >> 24) & 0xFF);
+    buffer.emplace_back((pos.enemy_id >> 16) & 0xFF);
+    buffer.emplace_back((pos.enemy_id >> 8) & 0xFF);
+    buffer.emplace_back(pos.enemy_id & 0xFF);
+
+    buffer.emplace_back(pos.enemy_type & 0xFF);
+
+    buffer.emplace_back((pos.position.x >> 8) & 0xFF);
+    buffer.emplace_back(pos.position.x &0xFF);
+    buffer.emplace_back((pos.position.y >> 8) & 0xFF);
+    buffer.emplace_back(pos.position.y & 0xFF);
+    
+    buffer.emplace_back((pos.direction.x >> 8) & 0xFF);
+    buffer.emplace_back(pos.direction.x & 0xFF);
+    buffer.emplace_back((pos.direction.y >> 8) & 0xFF);
+    buffer.emplace_back(pos.direction.y & 0xFF);
+
+    buffer.emplace_back((pos.timestamp.milliseconds >> 56) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 48) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 40) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 32) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 24) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 16) & 0xFF);
+    buffer.emplace_back((pos.timestamp.milliseconds >> 8) & 0xFF);
+    buffer.emplace_back(pos.timestamp.milliseconds & 0xFF);
+
+    return buffer;
+}
