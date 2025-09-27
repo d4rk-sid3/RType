@@ -106,17 +106,20 @@ struct GamePausedRequest {
     uint8_t type;               // 0x33
 };
 
+// Serveur -> Client
 struct GamePausedResponse {
     uint8_t type;               // 0x34
     Timestamp timestamp;
     PauseState current_state;
 };
 
+// Serveur -> Client
 struct GameStateResponse {
     uint8_t type;               // 0x35
     uint8_t num_disconnected;
 };
 
+// Serveur -> Client
 struct EnemySpawnedResponse {
     uint8_t type;               // 0x36
     uint32_t enemy_id;
@@ -126,6 +129,7 @@ struct EnemySpawnedResponse {
     Timestamp timestamp;
 };
 
+// Serveur -> Client
 struct EnemyMovedResponse {
     uint8_t type;               // 0x37
     uint32_t enemy_id;
