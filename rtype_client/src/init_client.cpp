@@ -11,45 +11,43 @@ Client::Client(int p, std::string address): port_(p), client_(8080, "client")
 {
     asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
 
-    MoveRequest req;
-    req.type = 0x01;
-    req.dir = UP;
-    client_.send(reinterpret_cast<uint8_t*>(&req), sizeof(req), server_endpoint);
-
-    while (1) {
-        client_.poll();
-
-        auto msg = client_.getLastMsg();
-        if (!msg.first.empty()) {
-            
-            MoveResponse res{};
-            std::memcpy(&res, msg.first.data(), sizeof(MoveResponse));
-
-            if (res.type == 0x24) {
-                std::cout << "Serveur: Player " << res.player_id
-                          << " se déplace vers " << res.direction.x << ", " << res.direction.y
-                          << std::endl;
-            }
-        }
-
+    std::thread input_thread([this, server_endpoint]() {
         std::string input;
-        if (std::getline(std::cin, input)) {
+        while (std::getline(std::cin, input)) {
             MoveRequest resq;
             resq.type = 0x23;
 
             if (input == "up")
                 resq.dir = UP;
-            if (input == "down")
+            else if (input == "down")
                 resq.dir = DOWN;
-            if (input == "left")
+            else if (input == "left")
                 resq.dir = LEFT;
-            if (input == "right")
+            else if (input == "right")
                 resq.dir = RIGHT; 
+            else
+                continue;
 
-            client_.send(reinterpret_cast<uint8_t*>(&resq), sizeof(resq), server_endpoint);
+            this->client_.send(reinterpret_cast<uint8_t*>(&resq), sizeof(resq), server_endpoint);
         }
+    });
 
+    while (1) {
+
+        client_.poll();
+
+        auto msg = client_.getLastMsg();
+        if (!msg.first.empty()) {
+            MoveResponse res{};
+            std::memcpy(&res, msg.first.data(), sizeof(MoveResponse));
+            if (res.type == 0x24) {
+                std::cout << "Serveur: Player " << res.player_id
+                        << " se déplace vers " << res.direction.x << ", " << res.direction.y
+                        << std::endl;
+            }
+        }
     }
+    input_thread.detach();
 }
 
 MoveRequest Client::getMoveKey()
