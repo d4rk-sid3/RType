@@ -101,6 +101,7 @@ struct GameStartedResponse {
     Timestamp timestamp;
 };
 
+// Client → Serveur 
 struct GamePausedRequest {
     uint8_t type;               // 0x33
 };
