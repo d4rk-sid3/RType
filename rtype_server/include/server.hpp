@@ -12,9 +12,13 @@
 class Server {
   private:
     int p_;
+    MoveResponse response;
+    MoveRequest move;
+    NetworkManager server_;
 
   public:
     Server(int p);
+    MoveResponse getMove();
     ~Server();
 };
 
