@@ -91,8 +91,6 @@ Each client hold a **session** identified by an UUID 128-bits. The possible stat
 
 ## 4. Commandes du protocole
 
--------------------------------------------BEFORE_GAME()-----------------------------------------------
-
 ### 4.1 HELLO (0x01) - Connexion initiale
 
 **Direction** : Client → Serveur  
@@ -130,7 +128,7 @@ struct AuthPayload {
     uint8_t  auth_type;            // 0=Guest, 1=Username/Pass, 2=Session Token
     char     username[32];         // Nom d'utilisateur (null terminated string)
     char     credential[64];       // Mot de passe hashé ou token
-    uint32_t client_hash;          // Hash du client pour anti-cheat
+    uint128_t client_hash;          // Hash du client pour anti-cheat
 };
 ```
 Les noms des guests vont être assignés dynamiquement. Player1, Player2, ..., Player234
@@ -398,8 +396,6 @@ struct ListUsersResponse {
 };
 ```
 
--------------------------------------------DURING_GAME()-----------------------------------------------
-
 ### 4.22 PLAYER_MOVE (0x23) — Indicate that the player moves
 
 **Direction** : Client → Serveur
@@ -420,7 +416,7 @@ struct MoveRequest {
 ```c
 struct MoveResponse {
     uint8_t type;               // 0x24
-    int player_id;
+    uint32_t player_id;
     Vector2D direction;
     Vector2D position;
     float speed;
@@ -447,7 +443,7 @@ struct ShootRequest {
 ```c
 struct ShootResponse {
     uint8_t type;               // 0x26
-    int player_id;
+    uint32_t player_id;
     Vector2D bullet_position;
     Vector2D bullet_direction;
     float bullet_speed;
@@ -463,8 +459,8 @@ struct ShootResponse {
 ```c
 struct PickupItemResponse {
     uint8_t type;               // 0x27
-    int player_id;
-    int item_id;
+    uint32_t player_id;
+    uint32_t item_id;
     Vector2D item_position;
     time timestamp;
 };
@@ -478,10 +474,10 @@ struct PickupItemResponse {
 ```c
 struct PlayerStateResponse {
     uint8_t type;               // 0x28
-    int player_id;
-    int remaining_health;
-    int score;
-    int current_level;
+    uint32_t player_id;
+    uint32_t remaining_health;
+    uint32_t score;
+    uint32_t current_level;
     enum state (DEATH|ALIVE);
 };
 ```
@@ -494,10 +490,10 @@ struct PlayerStateResponse {
 ```c
 struct PlayerStateResponse {
     uint8_t type;               // 0x29
-    int player_id;
-    int remaining_health;
-    int score;
-    int current_level;
+    uint32_t player_id;
+    uint32_t remaining_health;
+    uint32_t score;
+    uint32_t current_level;
     enum state (DEATH|ALIVE);
     enum state2 (PAUSE|IN_GAME);
 };
@@ -511,8 +507,8 @@ struct PlayerStateResponse {
 ```c
 struct BeatBossResponse {
     uint8_t type;               // 0x30
-    int player_id;
-    int boss_id;
+    uint32_t player_id;
+    uint32_t boss_id;
     Vector2D player_position;
     time timestamp;
     enum state WON;
@@ -527,8 +523,8 @@ struct BeatBossResponse {
 ```c
 struct CheckpointResponse {
     uint8_t type;               // 0x31
-    int player_id;
-    int checkpoint_id;
+    uint32_t player_id;
+    uint32_t checkpoint_id;
     Vector2D player_position;
     time timestamp;
 };
@@ -542,8 +538,8 @@ struct CheckpointResponse {
 ```c
 struct GameStartedResponse {
     uint8_t type;               // 0x32
-    int player_id;
-    int checkpoint_id;
+    uint32_t player_id;
+    uint32_t checkpoint_id;
     Vector2D player_position;
     time timestamp;
 };
@@ -581,7 +577,7 @@ struct GamePausedResponse {
 ```c
 struct GameStateResponse {
     uint8_t type;               // 0x35
-    std::vector <int> ids;      // disconnected clients ID's
+    std::vector <uint32_t> ids;      // disconnected clients ID's
 };
 ```
 
@@ -593,7 +589,7 @@ struct GameStateResponse {
 ```c
 struct EnemySpawnedResponse {
     uint8_t type;               // 0x36
-    int enemy_id;
+    uint32_t enemy_id;
     enum enemy_type(1|2|3|4);
     Vector2D position;
     Vector2D direction;
@@ -609,7 +605,7 @@ struct EnemySpawnedResponse {
 ```c
 struct EnemyMovedResponse {
     uint8_t type;               // 0x37
-    int enemy_id;
+    uint32_t enemy_id;
     enum enemy_type(1|2|3|4);
     Vector2D position;
     Vector2D direction;
@@ -625,7 +621,7 @@ struct EnemyMovedResponse {
 ```c
 struct EnemyFiredResponse {
     uint8_t type;               // 0x38
-    int enemy_id;
+    uint32_t enemy_id;
     enum enemy_type(1|2|3|4);
     Vector2D position;
     Vector2D direction;
@@ -641,7 +637,7 @@ struct EnemyFiredResponse {
 ```c
 struct EnemyDiedResponse {
     uint8_t type;               // 0x39
-    int enemy_id;
+    uint32_t enemy_id;
     enum enemy_type(1|2|3|4);
     Vector2D position;
     time timestamp;
