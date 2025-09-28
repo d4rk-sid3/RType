@@ -48,7 +48,7 @@ void registry::register_all_systems() {
             &velocities = this->get_components<component::velocity>()
         ]
         (double delta) {
-            control_system(delta, *this, controllables, velocities);
+            control_system(delta, *this, controllables);
         }
     );
 

@@ -84,32 +84,15 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
     window.display();
 }
 
-void control_system(double delta, registry &reg, std::vector<optional<component::controllable>> &controls,
-                        std::vector<optional<component::velocity>> &velocities)
+void control_system(double delta, registry &reg, std::vector<optional<component::controllable>> &controls)
 {
     for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
         try {
-            if (i >= controls.size() || i >= velocities.size() || !controls.at(i).has_value() || !velocities.at(i).has_value())
+            if (i >= controls.size() || !controls.at(i).has_value())
                 continue;
-
             auto &control = controls.at(i).value();
-            auto &velocity = velocities.at(i).value();
 
             control.getKeyboardInput();
-
-            if (control.up)
-                velocity.vy = -1;
-            else if (control.down)
-                velocity.vy = 1;
-            else
-                velocity.vy = 0;
-            if (control.left)
-                velocity.vx = -1;
-            else if (control.right)
-                velocity.vx = 1;
-            else
-                velocity.vx = 0;
-
         } catch (...) {
         }
     }
