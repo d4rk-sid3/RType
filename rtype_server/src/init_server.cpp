@@ -6,6 +6,7 @@
 */
 
 #include "../include/server.hpp"
+
 Server::Server(int p): p_(p), server_(8080, "127.0.0.1")
 {
     std::vector<asio::ip::udp::endpoint> client_endpoint;
@@ -15,38 +16,27 @@ Server::Server(int p): p_(p), server_(8080, "127.0.0.1")
 
         auto msg = server_.getLastMsg();
 
-        if (!msg.first.empty() && msg.first.size() >= sizeof(MoveRequest)) {
-            MoveRequest res{};
-            std::memcpy(&res, msg.first.data(), sizeof(MoveRequest));
-            
-            if (res.type == 0x23) {
-                std::cout << "Client bouge: direction = " << res.dir << std::endl;
-            }
-
+        if (!msg.first.empty()) {
+            u_int8_t type = msg.first[0];
             auto sender = msg.second;
 
-            MoveResponse resp;
-            resp.type = 0x24;
-            resp.player_id = 1;
-            if (res.dir == RIGHT)
-                resp.direction = {1, 0};
-            
-            if (res.dir == LEFT)
-                resp.direction = {-1, 0};
-
-            if (res.dir == UP)
-                resp.direction = {0, -1};
-
-            if (res.dir == DOWN)
-                resp.direction = {0, 1};
-
-            resp.position = { 100, 200 };
-            resp.speed = 2.5f;
-            resp.timestamp = time(nullptr);
-
-            server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
-        } else if (!msg.first.empty()) {
-            std::cerr << "Message reçu trop petit: " << msg.first.size() << " bytes" << std::endl;
+            if (type == 0x23 && msg.first.size() >= sizeof(MoveRequest)) {
+                MoveRequest res{};
+                MoveResponse resp = recupMove(msg, res);
+                server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
+            } else if (type == 0x27) {
+                PickupItemResponse resp = recupItem(msg);
+                server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
+            } else if (type == 0x28) {
+                PlayerStateResponse resp = player_r(msg);
+                server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
+            } else if (type == 0x29) {
+                PlayerStateResponse2 resp = player_r2(msg);
+                server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
+            } else {
+                std::cerr << "Message inconnue: " << (int)type
+                    << "size= " <<  msg.first.size() << " bytes" << std::endl;
+            }
         }
     }
 }

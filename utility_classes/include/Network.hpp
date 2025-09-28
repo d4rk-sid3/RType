@@ -61,6 +61,73 @@ struct MoveRequest {
     Direction dir;
 };
 
+enum Bullet_Type {
+
+};
+
+struct ShootResponse {
+    uint8_t type;               // 0x26
+    int player_id;
+    Vector2D bullet_position;
+    Vector2D bullet_direction;
+    float bullet_speed;
+    Bullet_Type bullet;
+};
+
+struct PickupItemResponse {
+    uint8_t type;               // 0x27
+    int player_id;
+    int item_id;
+    Vector2D item_position;
+    std::time_t timestamp;
+};
+
+enum State {
+  DEATH,
+  ALIVE
+};
+
+struct PlayerStateResponse {
+    uint8_t type;               // 0x28
+    int player_id;
+    int remaining_health;
+    int score;
+    int current_level;
+    State state;
+};
+
+enum State2 {
+  PAUSE,
+  IN_GAME
+};
+
+struct PlayerStateResponse2 {
+    uint8_t type;               // 0x29
+    int player_id;
+    int remaining_health;
+    int score;
+    int current_level;
+    State state;
+    State2 state2;
+};
+
+enum State_Game {
+  WON,
+  LOSE
+};
+
+struct BeatBossResponse {
+    uint8_t type;               // 0x30
+    int player_id;
+    int boss_id;
+    Vector2D player_position;
+    std::time_t timestamp;
+    State_Game s_game;
+};
+
+
+
+
 class NetworkManager {
   public:
     NetworkManager(int port, std::string address = "");
