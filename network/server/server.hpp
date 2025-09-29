@@ -64,7 +64,6 @@ class User {
         }
         void setName(const std::string &name) {
             _username = name;
-            return;
         }
 
     private:
@@ -82,18 +81,22 @@ class User {
 
 class UserManager {
     private:
-        std::map<std::string, sf::Texture*> m_textureMap;
-        static TextureManager* s_pInstance;
-        TextureManager(){};
+        std::unordered_map<size_t, User> users_;                  
+        std::unordered_map<std::string, size_t> username_index_;
+        std::unordered_map<std::string, size_t> auth_index_;
+        size_t next_id_ = 1;
+
+        static UserManager* s_pInstance;
+        UserManager(){};
     public:
-        ~TextureManager(){};
-        static TextureManager* Instance() {
+        ~UserManager(){};
+        UserManager(const UserManager&) = delete;
+        UserManager& operator=(const UserManager&) = delete;
+        static UserManager* Instance() {
             if (s_pInstance == nullptr) {
-                s_pInstance = new TextureManager();
+                s_pInstance = new UserManager();
             }
             return s_pInstance;
-        }
-        bool load(std::string fileName,std::string id);
-        sf::Texture* getTexture(const std::string& id);     
+        }     
 };
 #endif /* defined(_Game_) */
