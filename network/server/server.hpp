@@ -65,6 +65,8 @@ class User {
         void setName(const std::string &name) {
             _username = name;
         }
+        const std::string& getUsername() const {return _username;}
+        const std::string& getAuthTokenHex() const { return auth_token_hex_; }
 
     private:
         size_t _id = 0;
@@ -81,22 +83,46 @@ class User {
 
 class UserManager {
     private:
-        std::unordered_map<size_t, User> users_;                  
-        std::unordered_map<std::string, size_t> username_index_;
-        std::unordered_map<std::string, size_t> auth_index_;
-        size_t next_id_ = 1;
+        std::unordered_map<size_t, User> _users;                  
+        std::unordered_map<std::string, size_t> _username_index;
+        std::unordered_map<std::string, size_t> _auth_index;
+        size_t _next_id = 1;
 
         static UserManager* s_pInstance;
         UserManager(){};
     public:
         ~UserManager(){};
-        UserManager(const UserManager&) = delete;
-        UserManager& operator=(const UserManager&) = delete;
         static UserManager* Instance() {
             if (s_pInstance == nullptr) {
                 s_pInstance = new UserManager();
             }
             return s_pInstance;
-        }     
+        }
+        UserManager(const UserManager&) = delete;
+        UserManager& operator=(const UserManager&) = delete;
+        size_t createUser(const std::string& username, const std::string& plain_password)
+        {
+            if (_username_index.count(username) != 0)
+                throw std::runtime_error("username already exists");
+            size_t id = _next_id++;
+            User u(id, username, plain_password);
+            _users.emplace(id, u);
+            _username_index[username] = id;
+            return id;
+        }
+
+        bool removeUser(size_t id) {
+            auto it = _users.find(id);
+            if (it == _users.end())
+                return false;
+            _username_index.erase(it->second.getUsername());
+            if (!it->second.getAuthTokenHex().empty())
+                _auth_index.erase(it->second.getAuthTokenHex());
+            _users.erase(it);
+            return true;
+        }
+
+        
+        
 };
 #endif /* defined(_Game_) */
