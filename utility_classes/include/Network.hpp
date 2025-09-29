@@ -33,6 +33,100 @@
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
+#include <SFML/Graphics.hpp>
+
+struct Vector2D {
+  int x;
+  int y;
+};
+
+struct MoveResponse {
+    uint8_t type;               // 0x24
+    int player_id;
+    Vector2D direction;
+    Vector2D position;
+    float speed;
+    std::time_t timestamp;
+};
+
+enum Direction {
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT
+};
+
+struct MoveRequest {
+    uint8_t type;               // 0x23
+    Direction dir;
+};
+
+enum Bullet_Type {
+
+};
+
+struct ShootResponse {
+    uint8_t type;               // 0x26
+    int player_id;
+    Vector2D bullet_position;
+    Vector2D bullet_direction;
+    float bullet_speed;
+    Bullet_Type bullet;
+};
+
+struct PickupItemResponse {
+    uint8_t type;               // 0x27
+    int player_id;
+    int item_id;
+    Vector2D item_position;
+    std::time_t timestamp;
+};
+
+enum State {
+  DEATH,
+  ALIVE
+};
+
+struct PlayerStateResponse {
+    uint8_t type;               // 0x28
+    int player_id;
+    int remaining_health;
+    int score;
+    int current_level;
+    State state;
+};
+
+enum State2 {
+  PAUSE,
+  IN_GAME
+};
+
+struct PlayerStateResponse2 {
+    uint8_t type;               // 0x29
+    int player_id;
+    int remaining_health;
+    int score;
+    int current_level;
+    State state;
+    State2 state2;
+};
+
+enum State_Game {
+  WON,
+  LOSE
+};
+
+struct BeatBossResponse {
+    uint8_t type;               // 0x30
+    int player_id;
+    int boss_id;
+    Vector2D player_position;
+    std::time_t timestamp;
+    State_Game s_game;
+};
+
+
+
 
 class NetworkManager {
   public:
@@ -40,18 +134,22 @@ class NetworkManager {
     ~NetworkManager();
     void poll();
     void receive();
-    void send(const std::string& msg, const asio::ip::udp::endpoint& client);
-    std::string getLastMsg();
+    void send(const u_int8_t* msg, size_t size, const asio::ip::udp::endpoint& client);
+    std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint> getLastMsg();
     asio::ip::udp::endpoint getLastSender() const;
+    asio::io_context& getContext() { return context; };
 
   protected:
   private:
     asio::io_context context;
     asio::ip::udp::socket socket;
-    std::array<char, 1024> buff{};
+    std::array<u_int8_t, 1024> buff{};
     asio::ip::udp::endpoint last_sender_;
     bool isrunning;
-    std::string lastmsg;
+    std::vector<u_int8_t> lastmsg;
+    std::queue<std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint>> messages;
+    std::mutex mtx;
+
 };
 
 #endif /* !NETWORK_HPP_ */
