@@ -187,6 +187,14 @@ class UserManager {
             it->second = user;
             return true;
         }
+
+        std::vector<User> listUsers() const {
+            std::vector<User> out;
+            out.reserve(_users.size());
+            for (const auto& kv : users_)
+                out.push_back(kv.second);
+            return out;
+        }
         
 };
 #endif /* defined(_Game_) */
