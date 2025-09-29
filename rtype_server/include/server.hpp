@@ -24,7 +24,7 @@ class Server {
     registry &reg;
     Factory factory;
     double levelTimer = 0.0;
-    
+  
 
     void loadLevel(std::string &path);
     void Server::runLevel(double delta);
@@ -34,7 +34,6 @@ class Server {
     ~Server();
 
     std::vector<entity_info_t> entities;
-
 };
 
 #endif /* !SERVER_HPP_ */
