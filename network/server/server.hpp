@@ -164,7 +164,7 @@ class UserManager {
             User* u = getUserRef(id);
             if (!u)
                 throw std::runtime_error("user not found");
-            u->setSessionToken(token);
+            u->setSessionToken(token);sscsc
         }
         
 };
