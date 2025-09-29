@@ -195,6 +195,22 @@ class UserManager {
                 out.push_back(kv.second);
             return out;
         }
+
+        static Token256 generateAuthToken(size_t player_id, const uint8_t server_key[32]) {
+            Token256 token;
+            uint8_t id_bytes[sizeof(player_id)];
+            std::memcpy(id_bytes, &player_id, sizeof(player_id));
+    
+            crypto_auth_hmacsha256(token.data(), id_bytes, sizeof(player_id), server_key);
+            return token;
+        }
+
+        static Token128 generateSessionToken(size_t player_id, const uint8_t server_key[32]) {
+            Token256 full_token = generateAuthToken(player_id, server_key);
+            Token128 token;
+            std::copy(full_token.begin(), full_token.begin() + 16, token.begin());
+            return token;
+        }
         
 };
 #endif /* defined(_Game_) */
