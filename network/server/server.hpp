@@ -67,6 +67,7 @@ class User {
         }
         const std::string& getUsername() const {return _username;}
         const std::string& getAuthTokenHex() const { return auth_token_hex_; }
+        size_t getId() const { return id_; }
 
     private:
         size_t _id = 0;
@@ -164,7 +165,27 @@ class UserManager {
             User* u = getUserRef(id);
             if (!u)
                 throw std::runtime_error("user not found");
-            u->setSessionToken(token);sscsc
+            u->setSessionToken(token);
+        }
+
+        bool updateUser(const User& user) {
+            auto it = _users.find(user.getId());
+            if (it == _users.end())
+                return false;
+            if (it->second.getUsername() != user.getUsername()) {
+                _username_index.erase(it->second.getUsername());
+                if (_username_index.count(user.getUsername()))
+                    throw std::runtime_error("username already exists");
+                _username_index[user.getUsername()] = user.getId();
+            }
+            if (it->second.getAuthTokenHex() != user.getAuthTokenHex()) {
+                if (!it->second.getAuthTokenHex().empty())
+                    _auth_index.erase(it->second.getAuthTokenHex());
+                if (!user.getAuthTokenHex().empty())
+                    _auth_index[user.getAuthTokenHex()] = user.getId();
+            }
+            it->second = user;
+            return true;
         }
         
 };
