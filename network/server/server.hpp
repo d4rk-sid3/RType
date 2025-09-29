@@ -42,7 +42,7 @@ class User {
                     plain_password.c_str(),
                     plain_password.size(),
                     crypto_pwhash_OPSLIMIT_MODERATE,
-                    crypto_pwhash_MEMLIMIT_MODERATE) != 0) 
+                    crypto_pwhash_MEMLIMIT_MODERATE) != 0)
             {
                 sodium_munlock(const_cast<char*>(plain_password.data()), plain_password.size());
                 throw std::runtime_error("Failed to hash password");
@@ -142,7 +142,30 @@ class UserManager {
                 return std::nullopt;
             return getUser(it->second);
         }
+
+        std::optional<User> getUserByAuthTokenHex(const std::string& auth_hex) const {
+            auto it = _auth_index.find(auth_hex);
+            if (it == _auth_index.end())
+                return std::nullopt;
+            return getUser(it->second);
+        }
+
+        void assignAuthToken(size_t id, const User::Token256& token) {
+            User* u = getUserRef(id);
+            if (!u)
+                throw std::runtime_error("user not found");
+            if (!u->getAuthTokenHex().empty())
+                _auth_index.erase(u->getAuthTokenHex());
+            u->setAuthToken(token);
+            _auth_index[u->getAuthTokenHex()] = id;
+        }
     
+        void assignSessionToken(size_t id, const User::Token128& token) {
+            User* u = getUserRef(id);
+            if (!u)
+                throw std::runtime_error("user not found");
+            u->setSessionToken(token);
+        }
         
 };
 #endif /* defined(_Game_) */
