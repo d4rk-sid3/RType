@@ -122,7 +122,27 @@ class UserManager {
             return true;
         }
 
-        
+        std::optional<User> getUser(size_t id) const {
+            auto it = _users.find(id);
+            if (it == _users.end())
+                return std::nullopt;
+            return it->second;
+        }
+
+        User* getUserRef(size_t id) {
+            auto it = _users.find(id);
+            if (it == _users.end())
+                return nullptr;
+            return &(it->second);
+        }
+    
+        std::optional<User> getUserByUsername(const std::string& username) const {
+            auto it = _username_index.find(username);
+            if (it == _username_index.end())
+                return std::nullopt;
+            return getUser(it->second);
+        }
+    
         
 };
 #endif /* defined(_Game_) */
