@@ -16,5 +16,5 @@ var searchData=
   ['responsabilités_13',['Responsabilités',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md2',1,'Responsabilités'],['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md10',1,'Responsabilités']]],
   ['right_14',['right',['../structcomponent_1_1controllable__s.html#a99dd2125bdf6b8d98dabf6b61181fb7a',1,'component::controllable_s']]],
   ['run_5fsystems_15',['run_systems',['../classregistry.html#a957cd5c282db213979764cbe622ece89',1,'registry']]],
-  ['runlevel_16',['runLevel',['../classServer.html#af56fa596fcd58a1ea62b5a059885f467',1,'Server']]]
+  ['runlevel_16',['runLevel',['../classClient.html#a101e55e53e7f9cc0433da705e66e1f08',1,'Client::runLevel()'],['../classServer.html#af56fa596fcd58a1ea62b5a059885f467',1,'Server::runLevel()']]]
 ];

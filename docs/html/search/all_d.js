@@ -3,7 +3,7 @@ var searchData=
   ['p_20std_3a_3astring_20address_20tt_0',['&lt;tt&gt;Client(int p, std::string address)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md4',1,'']]],
   ['pickupitem_2ecpp_1',['pickupitem.cpp',['../pickupitem_8cpp.html',1,'']]],
   ['pickupitemresponse_20recupitem_20tt_2',['&lt;tt&gt;PickupItemResponse recupItem(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md13',1,'']]],
-  ['player_5fentity_5fid_3',['player_entity_id',['../server_8hpp.html#a45a5fb16434b9906d8110a57b0ca5b4d',1,'server.hpp']]],
+  ['player_5fentity_5fid_3',['player_entity_id',['../client_8hpp.html#a45a5fb16434b9906d8110a57b0ca5b4d',1,'player_entity_id:&#160;client.hpp'],['../server_8hpp.html#a45a5fb16434b9906d8110a57b0ca5b4d',1,'player_entity_id:&#160;server.hpp']]],
   ['player_5fr_4',['player_r',['../classServer.html#a0912b7e32f862555af21aab3d0249570',1,'Server']]],
   ['player_5fr_20tt_5',['&lt;tt&gt;PlayerStateResponse player_r(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md14',1,'']]],
   ['player_5fr2_6',['player_r2',['../classServer.html#a8eeb26d6c851a5a32eccac00781d678e',1,'Server']]],

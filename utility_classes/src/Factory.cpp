@@ -17,10 +17,11 @@
 
 #include "../include/Factory.hpp"
 #include "logic_functions.hpp"
+#include "../../rtype_server/include/server.hpp"
 
 #define PLAYER_MISSILE_SPEED 500.0
 #define ENEMY_MISSILE_SPEED 5
-#define SCROLL_SPEED 5
+#define BACKGROUND_SPEED 50
 #define PLAYER_SPEED 5
 #define WALKER_SPEED 300
 
@@ -76,6 +77,12 @@ entity Factory::make_player_missile()
     missile_hitbox.height = 16;
     missile_hitbox.one_shot = true;
 
+    auto &player_shoot_music = reg.add_component<component::audio>(missile_id, component::audio());
+    player_shoot_music.audio.reset(new sf::Music);
+    player_shoot_music.audio->openFromFile("assets/audio/player_shoot.wav");
+    player_shoot_music.audio->setLoop(false);
+    player_shoot_music.audio->play();
+
     return missile_id;
 }
 
@@ -96,6 +103,12 @@ entity Factory::make_enemy_missile()
     missile_hitbox.width = 16;
     missile_hitbox.height = 16;
     missile_hitbox.one_shot = true;
+
+    auto &enemy_shoot_music = reg.add_component<component::audio>(missile_id, component::audio());
+    enemy_shoot_music.audio.reset(new sf::Music);
+    enemy_shoot_music.audio->openFromFile("assets/audio/enemy_shoot.wav");
+    enemy_shoot_music.audio->setLoop(false);
+    enemy_shoot_music.audio->play();
 
     return missile_id;
 }
@@ -155,18 +168,49 @@ entity Factory::make_explosion()
     explosion_sprite.setFrameRect(96, 96);
     explosion_sprite.frame_duration = 0.1;
 
+    auto &explosion_music = reg.add_component<component::audio>(explosion_id, component::audio());
+    explosion_music.audio.reset(new sf::Music);
+    explosion_music.audio->openFromFile("assets/audio/explosion.wav");
+    explosion_music.audio->setLoop(false);
+    explosion_music.audio->play();
+
     return explosion_id;
 }
+
+entity Factory::make_hit_effect()
+{
+    entity hit_effect_id = reg.spawn_entity();
+
+    reg.add_component<component::position>(hit_effect_id, {0, 0});
+    auto &hit_effect_sprite = reg.add_component<component::animated_drawable>(hit_effect_id, component::animated_drawable());
+    hit_effect_sprite.setTextureFromName("hit_effect");
+    hit_effect_sprite.one_shot = true;
+    hit_effect_sprite.setFrameRect(33, 32);
+    hit_effect_sprite.frame_duration = 0.05;
+
+    auto &hit_effect_music = reg.add_component<component::audio>(hit_effect_id, component::audio());
+    hit_effect_music.audio.reset(new sf::Music);
+    hit_effect_music.audio->openFromFile("assets/audio/enemy_shoot.wav");
+    hit_effect_music.audio->setLoop(false);
+    hit_effect_music.audio->play();
+
+    return hit_effect_id;
+}
+
 
 entity Factory::make_ceiling()
 {
     entity ceiling_id = reg.spawn_entity();
 
     auto &ceiling_sprite = reg.add_component<component::drawable>(ceiling_id, component::drawable());
-    ceiling_sprite.setTextureFromName("assets/sprites/background/ceiling.gif");
+    ceiling_sprite.setTextureFromName("ceiling");
+    ceiling_sprite.sprite.setTextureRect(sf::IntRect(0, 0, 100000, 50));
+    ResourceManager::Instance().getTexture("ceiling").setRepeated(true);
 
     reg.add_component<component::position>(ceiling_id, {0, 0});
-    reg.add_component<component::velocity>(ceiling_id, {0, 0});
+    reg.add_component<component::velocity>(ceiling_id, {-BACKGROUND_SPEED, 0});
+
+    return ceiling_id;
 }
 
 entity Factory::make_floor()
@@ -174,10 +218,15 @@ entity Factory::make_floor()
     entity floor_id = reg.spawn_entity();
 
     auto &floor_sprite = reg.add_component<component::drawable>(floor_id, component::drawable());
-    floor_sprite.setTextureFromName("assets/sprites/background/floor.gif");
+    floor_sprite.setTextureFromName("ceiling");
+    floor_sprite.sprite.setTextureRect(sf::IntRect(0, 0, 100000, 50));
+    floor_sprite.sprite.setScale(1, -1);
+    ResourceManager::Instance().getTexture("ceiling").setRepeated(true);
 
-    reg.add_component<component::position>(floor_id, {0, 0});
-    reg.add_component<component::velocity>(floor_id, {0, 0});
+    reg.add_component<component::position>(floor_id, {0, WINDOW_HEIGHT - 50});
+    reg.add_component<component::velocity>(floor_id, {-BACKGROUND_SPEED, 0});
+
+    return floor_id;
 }
 
 entity Factory::make_wall()
@@ -189,6 +238,8 @@ entity Factory::make_wall()
 
     reg.add_component<component::position>(wall_id, {0, 0});
     reg.add_component<component::velocity>(wall_id, {0, 0});
+
+    return wall_id;
 }
 
 entity Factory::make_background()
@@ -196,8 +247,66 @@ entity Factory::make_background()
     entity background_id = reg.spawn_entity();
 
     auto &background_sprite = reg.add_component<component::drawable>(background_id, component::drawable());
-    background_sprite.setTextureFromName("assets/sprites/background/background.jpg");
+    background_sprite.setTextureFromName("background");
+    background_sprite.sprite.setTextureRect(sf::IntRect(0, 0, 100000, 500));
+    ResourceManager::Instance().getTexture("background").setRepeated(true);
 
     reg.add_component<component::position>(background_id, {0, 0});
-    reg.add_component<component::velocity>(background_id, {0, 0});
+    reg.add_component<component::velocity>(background_id, {-BACKGROUND_SPEED, 0});
+
+    return background_id;
 }
+
+entity Factory::make_title()
+{
+    entity title_id = reg.spawn_entity();
+
+    reg.add_component<component::position>(title_id, {100, 100});
+    auto &title_text = reg.add_component<component::text>(title_id, component::text());
+    title_text.setFontFromName("arcade");
+    title_text.text.setString("R TYPE");
+    title_text.text.setCharacterSize(60);
+    title_text.text.setFillColor(sf::Color::White);
+    
+    return title_id;
+}
+
+entity Factory::make_start_text()
+{
+    entity text_id = reg.spawn_entity();
+
+    reg.add_component<component::position>(text_id, {350, 150});
+    auto &title_text = reg.add_component<component::text>(text_id, component::text());
+    title_text.setFontFromName("arcade");
+    title_text.text.setString("Press Space to start");
+    title_text.text.setCharacterSize(16);
+    title_text.text.setFillColor(sf::Color::White);
+    reg.add_component<component::logic>(text_id, component::logic{start_text_logic});
+
+    return text_id;
+}
+
+entity Factory::make_menu_background_music()
+{
+    entity music_id = reg.spawn_entity();
+    auto &music = reg.add_component<component::audio>(music_id, component::audio());
+    music.audio.reset(new sf::Music);
+    music.audio->openFromFile("assets/audio/menu.mp3");
+    music.audio->setLoop(true);
+    music.audio->play();
+
+    return music_id;
+}
+
+entity Factory::make_game_background_music()
+{
+    entity music_id = reg.spawn_entity();
+    auto &music = reg.add_component<component::audio>(music_id, component::audio());
+    music.audio.reset(new sf::Music);
+    music.audio->openFromFile("assets/audio/incredible.mp3");
+    music.audio->setLoop(true);
+    music.audio->play();
+
+    return music_id;
+}
+

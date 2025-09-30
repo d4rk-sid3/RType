@@ -1,7 +1,7 @@
 #include "server.hpp"
 
 int main() {
-    sf::RenderWindow win(sf::VideoMode(800, 600), "R-Type") ;
+    sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type") ;
     registry reg(win);
     Factory fac(reg);
 

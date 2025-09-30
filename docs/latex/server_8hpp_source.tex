@@ -17,50 +17,53 @@
 \DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{registry_8hpp}{registry.hpp}}"{}}}
 \DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}Factory.hpp"{}}}
 \DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{server_8hpp_a45a5fb16434b9906d8110a57b0ca5b4d}{player\_entity\_id}}\ =\ 0;}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structentity__info__s}{entity\_info\_s}}\ \{}
-\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structentity__info__s_a353e31671fbeae1e8f621c7f4b8e9e44}{entity\_id}};}
-\DoxyCodeLine{00020\ \ \ \ \ std::string\ \mbox{\hyperlink{structentity__info__s_a880a518d54a79a31c8b4d98af8b54eb0}{type}};}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structentity__info__s_a7248fc37b5c29fad3b45fbf206303cf7}{spawn\_time}};}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structentity__info__s_a1b33fd572598d15a521a5e4b788c2e94}{spawn\_y}};}
-\DoxyCodeLine{00023\ \}\ \mbox{\hyperlink{server_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\_info\_t}};}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classServer}{Server}}\ \{}
-\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{int}\ p\_;}
-\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classregistry}{registry}}\ \&reg;}
-\DoxyCodeLine{00029\ \ \ \ \ Factory\ \&factory;}
-\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{double}\ levelTimer\ =\ 0.0;}
-\DoxyCodeLine{00031\ \ \ }
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ loadLevel(\textcolor{keyword}{const}\ std::string\ \&path);}
-\DoxyCodeLine{00033\ \ \ \ \ }
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ spawn\_player(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00035\ \ \ \ \ }
-\DoxyCodeLine{00036\ \ \ \ \ MoveResponse\ response;}
-\DoxyCodeLine{00037\ \ \ \ \ MoveRequest\ move;}
-\DoxyCodeLine{00038\ \ \ \ \ NetworkManager\ server\_;}
-\DoxyCodeLine{00039\ \ \ \ \ PickupItemResponse\ item;}
-\DoxyCodeLine{00040\ \ \ \ \ PlayerStateResponse\ p\_response;}
-\DoxyCodeLine{00041\ \ \ \ \ PlayerStateResponse2\ p\_response2;}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{runLevel}}(\textcolor{keywordtype}{double}\ delta);}
-\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classServer_a08c05f9ef25e74b4f1ec5216e557f8b2}{Server}}(\textcolor{keywordtype}{int}\ p,\ \mbox{\hyperlink{classregistry}{registry}}\ \&reg,\ Factory\ \&fac);}
-\DoxyCodeLine{00046\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classServer_a645362063e718f2c481fa4d16b6ae1d8}{getMove}}();}
-\DoxyCodeLine{00047\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classServer_a4b8332a5fc7d16e2e7ff16594a0b9534}{recupMove}}(\textcolor{keyword}{const}\ std::pair<std::vector<uint8\_t>,\ asio::ip::udp::endpoint>\ \&a,\ MoveRequest\ \&m);}
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00049\ \ \ \ \ PickupItemResponse\ \mbox{\hyperlink{classServer_afc18b97bf2296cdb874d903f6298eb9e}{recupItem}}(\textcolor{keyword}{const}\ std::pair<std::vector<uint8\_t>,\ asio::ip::udp::endpoint>\ \&a);}
-\DoxyCodeLine{00050\ \ \ \ \ PlayerStateResponse\ \mbox{\hyperlink{classServer_a0912b7e32f862555af21aab3d0249570}{player\_r}}(\textcolor{keyword}{const}\ std::pair<std::vector<uint8\_t>,\ asio::ip::udp::endpoint>\ \&a);}
-\DoxyCodeLine{00051\ \ \ \ \ PlayerStateResponse2\ \mbox{\hyperlink{classServer_a8eeb26d6c851a5a32eccac00781d678e}{player\_r2}}(\textcolor{keyword}{const}\ std::pair<std::vector<uint8\_t>,\ asio::ip::udp::endpoint>\ \&a);}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{\string~Server}}();}
-\DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \ \ \ std::vector<entity\_info\_t>\ \mbox{\hyperlink{classServer_ae4dff7b4e4736ca47c67d0a94899d22a}{entities}};}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00057\ \ \ \ \ std::vector<entity>\ \mbox{\hyperlink{classServer_af246b6ed6bb0bbd212fb593874741921}{active\_entities}};}
-\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ WINDOW\_WIDTH\ 738}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ WINDOW\_HEIGHT\ 432}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{server_8hpp_a45a5fb16434b9906d8110a57b0ca5b4d}{player\_entity\_id}}\ =\ 0;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structentity__info__s}{entity\_info\_s}}\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structentity__info__s_a353e31671fbeae1e8f621c7f4b8e9e44}{entity\_id}};}
+\DoxyCodeLine{00023\ \ \ \ \ std::string\ \mbox{\hyperlink{structentity__info__s_a880a518d54a79a31c8b4d98af8b54eb0}{type}};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structentity__info__s_a7248fc37b5c29fad3b45fbf206303cf7}{spawn\_time}};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structentity__info__s_a1b33fd572598d15a521a5e4b788c2e94}{spawn\_y}};}
+\DoxyCodeLine{00026\ \}\ \mbox{\hyperlink{server_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\_info\_t}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classServer}{Server}}\ \{}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ p\_;}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classregistry}{registry}}\ \&reg;}
+\DoxyCodeLine{00032\ \ \ \ \ Factory\ \&factory;}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{double}\ levelTimer\ =\ 0.0;}
+\DoxyCodeLine{00034\ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ loadLevel(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00036\ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ spawn\_player(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00038\ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \ \ MoveResponse\ response;}
+\DoxyCodeLine{00040\ \ \ \ \ MoveRequest\ move;}
+\DoxyCodeLine{00041\ \ \ \ \ NetworkManager\ server\_;}
+\DoxyCodeLine{00042\ \ \ \ \ PickupItemResponse\ item;}
+\DoxyCodeLine{00043\ \ \ \ \ PlayerStateResponse\ p\_response;}
+\DoxyCodeLine{00044\ \ \ \ \ PlayerStateResponse2\ p\_response2;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{runLevel}}(\textcolor{keywordtype}{double}\ delta);}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classServer_a08c05f9ef25e74b4f1ec5216e557f8b2}{Server}}(\textcolor{keywordtype}{int}\ p,\ \mbox{\hyperlink{classregistry}{registry}}\ \&reg,\ Factory\ \&fac);}
+\DoxyCodeLine{00049\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classServer_a645362063e718f2c481fa4d16b6ae1d8}{getMove}}();}
+\DoxyCodeLine{00050\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classServer_a4b8332a5fc7d16e2e7ff16594a0b9534}{recupMove}}(\textcolor{keyword}{const}\ std::pair<std::vector<uint8\_t>,\ asio::ip::udp::endpoint>\ \&a,\ MoveRequest\ \&m);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ PickupItemResponse\ \mbox{\hyperlink{classServer_afc18b97bf2296cdb874d903f6298eb9e}{recupItem}}(\textcolor{keyword}{const}\ std::pair<std::vector<uint8\_t>,\ asio::ip::udp::endpoint>\ \&a);}
+\DoxyCodeLine{00053\ \ \ \ \ PlayerStateResponse\ \mbox{\hyperlink{classServer_a0912b7e32f862555af21aab3d0249570}{player\_r}}(\textcolor{keyword}{const}\ std::pair<std::vector<uint8\_t>,\ asio::ip::udp::endpoint>\ \&a);}
+\DoxyCodeLine{00054\ \ \ \ \ PlayerStateResponse2\ \mbox{\hyperlink{classServer_a8eeb26d6c851a5a32eccac00781d678e}{player\_r2}}(\textcolor{keyword}{const}\ std::pair<std::vector<uint8\_t>,\ asio::ip::udp::endpoint>\ \&a);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{\string~Server}}();}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ std::vector<entity\_info\_t>\ \mbox{\hyperlink{classServer_ae4dff7b4e4736ca47c67d0a94899d22a}{entities}};}
 \DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !SERVER\_HPP\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00060\ \ \ \ \ std::vector<entity>\ \mbox{\hyperlink{classServer_af246b6ed6bb0bbd212fb593874741921}{active\_entities}};}
+\DoxyCodeLine{00061\ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !SERVER\_HPP\_\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

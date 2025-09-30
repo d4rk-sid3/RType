@@ -86,13 +86,22 @@ void red_trooper_logic(double delta, registry &reg, entity en)
 {
     static bool shot = false;
     static double t = 0.0;
+    hurtbox &hb = reg.get_components<hurtbox>()[en].value();
     velocity &vel = reg.get_components<velocity>()[en].value();
     
     t += delta;
     vel.vx = -TROOPER_SPEED_X;
     vel.vy = sin(t*2) * TROOPER_SPEED_Y;
-    
-    hurtbox &hb = reg.get_components<hurtbox>()[en].value();
+
+    if (hb.hurt) {
+        Factory fac(reg);
+        entity hit_effect = fac.make_hit_effect();
+        position &pos = reg.get_components<position>()[en].value();
+        position &hit_pos = reg.get_components<position>()[hit_effect].value();
+        hit_pos.x = pos.x;
+        hit_pos.y = pos.y;
+    }
+
     if (hb.health <= 0) {
         Factory fac(reg);
         entity explosion = fac.make_explosion();
@@ -115,7 +124,58 @@ void red_trooper_logic(double delta, registry &reg, entity en)
         velocity &missile_vel = reg.get_components<velocity>()[missile].value();
         missile_vel.vx = player_pos.x - pos.x;
         missile_vel.vy = player_pos.y - pos.y;
-        missile_pos.x = pos.x;
-        missile_pos.y = pos.y;
+        missile_pos.x = pos.x + 8;
+        missile_pos.y = pos.y + 8;
+    }
+}
+
+void start_text_logic(double delta, registry &reg, entity en)
+{
+    static double t = 0.0;
+
+    t += delta;
+
+    text &text_var = reg.get_components<text>()[en].value();
+    text_var.text.setFillColor(sf::Color(255, 255, 255, abs(sin(t*2) * 255)));
+}
+
+void walker_logic(double delta, registry &reg, entity en)
+{
+    static bool shot = false;
+    hurtbox &hb = reg.get_components<hurtbox>()[en].value();
+
+    if (hb.health <= 0) {
+        Factory fac(reg);
+        entity explosion = fac.make_explosion();
+        position &pos = reg.get_components<position>()[en].value();
+        position &explosion_pos = reg.get_components<position>()[explosion].value();
+        explosion_pos.x = pos.x;
+        explosion_pos.y = pos.y;
+        
+        reg.kill_entity(en);
+    }
+    
+    const auto &player_pos = reg.get_components<position>()[player_entity_id].value();
+    position &pos = reg.get_components<position>()[en].value();
+
+    if (distance(player_pos.x, player_pos.y, pos.x, pos.y) < 200 && !shot) {
+        shot = true;
+        Factory fac(reg);
+        entity missile = fac.make_enemy_missile();
+        position &missile_pos = reg.get_components<position>()[missile].value();
+        velocity &missile_vel = reg.get_components<velocity>()[missile].value();
+        missile_vel.vx = player_pos.x - pos.x;
+        missile_vel.vy = player_pos.y - pos.y;
+        missile_pos.x = pos.x + 8;
+        missile_pos.y = pos.y + 8;
+    }
+
+    if (hb.hurt) {
+        Factory fac(reg);
+        entity hit_effect = fac.make_hit_effect();
+        position &pos = reg.get_components<position>()[en].value();
+        position &hit_pos = reg.get_components<position>()[hit_effect].value();
+        hit_pos.x = pos.x;
+        hit_pos.y = pos.y;
     }
 }

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['client_0',['Client',['../classClient.html',1,'Client'],['../classClient.html#abd2afe90b560089439f249c404f9fabd',1,'Client::Client()'],['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html',1,'Client']]],
+  ['client_0',['Client',['../classClient.html',1,'Client'],['../classClient.html#a802e0a6f59303939f824d41580deb82a',1,'Client::Client()'],['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html',1,'Client']]],
   ['client_20int_20p_20std_3a_3astring_20address_20tt_1',['&lt;tt&gt;Client(int p, std::string address)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md4',1,'']]],
   ['client_2ehpp_2',['client.hpp',['../client_8hpp.html',1,'']]],
   ['client_2emd_3',['Client.md',['../Client_8md.html',1,'']]],

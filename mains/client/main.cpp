@@ -1,10 +1,26 @@
 #include "client.hpp"
 
 int main() {
-    try {
-        Client client(8080, "");
+    sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type") ;
+    registry reg(win);
 
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << '\n';
-    }
+    sf::Event event;
+    sf::Clock frameClock;
+    Client client(8080, "", reg);
+
+    while (win.isOpen()) {
+        while (win.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                win.close();
+            if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::Escape)
+                    win.close();
+        }
+
+        double dt = frameClock.restart().asSeconds();
+        client.runLevel(dt);
+        reg.run_systems(dt);
+    }   
 }
+

@@ -13,6 +13,9 @@
 #include "registry.hpp"
 #include "Factory.hpp"
 
+#define WINDOW_WIDTH 738
+#define WINDOW_HEIGHT 432
+
 inline int player_entity_id = 0;
 
 typedef struct entity_info_s {

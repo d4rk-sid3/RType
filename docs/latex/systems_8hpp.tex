@@ -2,8 +2,7 @@
 \hypertarget{systems_8hpp}{}\label{systems_8hpp}\index{/home/jaggie/epitech\_projects/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/include/systems.hpp@{/home/jaggie/epitech\_projects/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/include/systems.hpp}}
 {\ttfamily \#include "{}components.\+hpp"{}}\newline
 {\ttfamily \#include "{}registry.\+hpp"{}}\newline
-Include dependency graph for systems.\+hpp\+:
-\nopagebreak
+Include dependency graph for systems.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,7 +21,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \item 
 void \mbox{\hyperlink{systems_8hpp_a48efdd22550291cb9bacb3330d67ff48}{position\+\_\+system}} (double delta, \mbox{\hyperlink{classregistry}{registry}} \&reg, std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}{component\+::position}} $>$ $>$ \&positions, std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_a428fac7a425dfc47e9997f3e4633ad6a}{component\+::velocity}} $>$ $>$ \&velocities)
 \begin{DoxyCompactList}\small\item\em This file contains the declaration of the different systems of the registry. Systems are functions that will be executed at each frame to update the state of all the components. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{systems_8hpp_a19a496dc773e9ca2203719d1aa042744}{draw\+\_\+system}} (double delta, \mbox{\hyperlink{classregistry}{registry}} \&reg, sf\+::\+Render\+Window \&window, std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}{component\+::position}} $>$ $>$ \&positions, std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_afaa0e7d53a27314c39fd8984cd068895}{component\+::drawable}} $>$ $>$ \&draws, std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_a64d6f963266a98cf80ce10cdf18e579e}{component\+::animated\+\_\+drawable}} $>$ $>$ \&anim\+\_\+draws)
+void \mbox{\hyperlink{systems_8hpp_a169ac84227fdc8f7393eb5257c3f16b2}{draw\+\_\+system}} (double delta, \mbox{\hyperlink{classregistry}{registry}} \&reg, sf\+::\+Render\+Window \&window, std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}{component\+::position}} $>$ $>$ \&positions, std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_afaa0e7d53a27314c39fd8984cd068895}{component\+::drawable}} $>$ $>$ \&draws, std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_a64d6f963266a98cf80ce10cdf18e579e}{component\+::animated\+\_\+drawable}} $>$ $>$ \&anim\+\_\+draws, std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_af22b0841d9272d147f626b386da4d9ca}{component\+::text}} $>$ $>$ \&texts)
 \item 
 void \mbox{\hyperlink{systems_8hpp_ae1b5e1a8414fa382a36c1816db2685e7}{control\+\_\+system}} (double delta, \mbox{\hyperlink{classregistry}{registry}} \&reg, std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_ac85f4762db6e1c119b13fedc4f9c157c}{component\+::controllable}} $>$ $>$ \&controls)
 \begin{DoxyCompactList}\small\item\em The control system goes through each constrollable component and updates its state based on the player input. \end{DoxyCompactList}\item 
@@ -71,11 +70,11 @@ The control system goes through each constrollable component and updates its sta
 {\em controls} & The controllable components \\
 \hline
 \end{DoxyParams}
-\Hypertarget{systems_8hpp_a19a496dc773e9ca2203719d1aa042744}\label{systems_8hpp_a19a496dc773e9ca2203719d1aa042744} 
+\Hypertarget{systems_8hpp_a169ac84227fdc8f7393eb5257c3f16b2}\label{systems_8hpp_a169ac84227fdc8f7393eb5257c3f16b2} 
 \index{systems.hpp@{systems.hpp}!draw\_system@{draw\_system}}
 \index{draw\_system@{draw\_system}!systems.hpp@{systems.hpp}}
 \doxysubsubsection{\texorpdfstring{draw\_system()}{draw\_system()}}
-{\footnotesize\ttfamily void draw\+\_\+system (\begin{DoxyParamCaption}\item[{double}]{delta,  }\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg,  }\item[{sf\+::\+Render\+Window \&}]{window,  }\item[{std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}{component\+::position}} $>$ $>$ \&}]{positions,  }\item[{std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_afaa0e7d53a27314c39fd8984cd068895}{component\+::drawable}} $>$ $>$ \&}]{draws,  }\item[{std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_a64d6f963266a98cf80ce10cdf18e579e}{component\+::animated\+\_\+drawable}} $>$ $>$ \&}]{anim\+\_\+draws }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void draw\+\_\+system (\begin{DoxyParamCaption}\item[{double}]{delta,  }\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg,  }\item[{sf\+::\+Render\+Window \&}]{window,  }\item[{std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}{component\+::position}} $>$ $>$ \&}]{positions,  }\item[{std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_afaa0e7d53a27314c39fd8984cd068895}{component\+::drawable}} $>$ $>$ \&}]{draws,  }\item[{std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_a64d6f963266a98cf80ce10cdf18e579e}{component\+::animated\+\_\+drawable}} $>$ $>$ \&}]{anim\+\_\+draws,  }\item[{std\+::vector$<$ optional$<$ \mbox{\hyperlink{namespacecomponent_af22b0841d9272d147f626b386da4d9ca}{component\+::text}} $>$ $>$ \&}]{texts }\end{DoxyParamCaption})}
 
 
 \begin{DoxyParams}{Parameters}

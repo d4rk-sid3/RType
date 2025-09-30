@@ -49,6 +49,17 @@ class Factory {
         entity make_background();
 
         entity make_explosion();
+
+        entity make_title();
+
+        entity make_start_text();
+
+        entity make_menu_background_music();
+
+        entity make_game_background_music();
+
+        entity make_hit_effect();
+
 };
 
 #endif

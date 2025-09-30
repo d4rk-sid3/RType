@@ -23,6 +23,7 @@
 
 void player_logic(double delta, registry &reg, entity entity);
 void red_trooper_logic(double delta, registry &reg, entity entity);
+void start_text_logic(double delta, registry &reg, entity entity);
 
 #endif
 

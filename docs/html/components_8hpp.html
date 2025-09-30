@@ -86,6 +86,7 @@ $(function() {
 <p>This file defines the different types of components available to the engine.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
 <code>#include &quot;<a class="el" href="ResourceManager_8hpp_source.html">ResourceManager.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="entity_8hpp_source.html">entity.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -93,20 +94,24 @@ Include dependency graph for components.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="components_8hpp__incl.png" border="0" usemap="#a_2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2engine_2include_2components_8hpp" alt=""/></div>
 <map name="a_2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2engine_2include_2components_8hpp" id="a_2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2engine_2include_2components_8hpp">
-<area shape="rect" title="This file defines the different types of components available to the engine." alt="" coords="31,5,230,84"/>
+<area shape="rect" title="This file defines the different types of components available to the engine." alt="" coords="79,5,278,84"/>
 <area shape="rect" title=" " alt="" coords="5,132,64,160"/>
-<area shape="poly" title=" " alt="" coords="95,86,60,122,56,119,91,83"/>
-<area shape="rect" href="ResourceManager_8hpp.html" title=" " alt="" coords="197,132,363,160"/>
-<area shape="poly" title=" " alt="" coords="191,82,249,121,246,125,188,87"/>
-<area shape="rect" href="entity_8hpp.html" title="This file contains the definition of the entity class." alt="" coords="88,132,173,160"/>
-<area shape="poly" title=" " alt="" coords="133,84,133,116,128,116,128,84"/>
-<area shape="rect" title=" " alt="" coords="120,208,200,235"/>
-<area shape="poly" title=" " alt="" coords="260,162,195,202,192,197,257,158"/>
-<area shape="rect" title=" " alt="" coords="239,208,289,235"/>
-<area shape="poly" title=" " alt="" coords="280,161,273,193,267,192,274,160"/>
-<area shape="rect" title=" " alt="" coords="313,208,458,235"/>
-<area shape="poly" title=" " alt="" coords="300,158,356,197,353,201,297,162"/>
-<area shape="poly" title=" " alt="" coords="138,159,151,192,146,194,133,161"/>
+<area shape="poly" title=" " alt="" coords="124,87,68,125,65,121,120,82"/>
+<area shape="rect" title=" " alt="" coords="88,132,165,160"/>
+<area shape="poly" title=" " alt="" coords="161,86,143,119,138,117,156,83"/>
+<area shape="rect" href="ResourceManager_8hpp.html" title=" " alt="" coords="299,132,464,160"/>
+<area shape="poly" title=" " alt="" coords="259,82,342,122,339,127,257,87"/>
+<area shape="rect" href="entity_8hpp.html" title="This file contains the definition of the entity class." alt="" coords="189,132,275,160"/>
+<area shape="poly" title=" " alt="" coords="202,83,220,117,215,119,197,86"/>
+<area shape="rect" title=" " alt="" coords="192,208,272,235"/>
+<area shape="poly" title=" " alt="" coords="356,163,273,203,271,198,353,158"/>
+<area shape="rect" title=" " alt="" coords="296,208,346,235"/>
+<area shape="poly" title=" " alt="" coords="372,162,344,197,339,194,368,159"/>
+<area shape="rect" title=" " alt="" coords="370,208,515,235"/>
+<area shape="poly" title=" " alt="" coords="394,159,424,194,420,198,390,162"/>
+<area shape="rect" title=" " alt="" coords="540,208,665,235"/>
+<area shape="poly" title=" " alt="" coords="422,158,549,200,548,205,420,163"/>
+<area shape="poly" title=" " alt="" coords="235,160,235,192,229,192,229,160"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -140,6 +145,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The drawable component, defined by an sf::Sprite. This component allows an entity to be drawn on the screen.  <a href="structcomponent_1_1drawable__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcomponent_1_1text__s.html">component::text_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The text component, consisting in a simple sf::Text.  <a href="structcomponent_1_1text__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcomponent_1_1animated__drawable__s.html">component::animated_drawable_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The animated_drawable component. It is a drawable component with an animated sprite. It has a frame_rect, a frame_duration and a frame_timer to allow animation.  <a href="structcomponent_1_1animated__drawable__s.html#details">More...</a><br /></td></tr>
@@ -155,6 +161,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcomponent_1_1logic__s.html">component::logic_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user.  <a href="structcomponent_1_1logic__s.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcomponent_1_1audio__s.html">component::audio_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The audio component defined by a single sf::Music. This component is not used by the engine systems but can be directly played, stopped, paused by the user.  <a href="structcomponent_1_1audio__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -174,6 +183,7 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:afaa0e7d53a27314c39fd8984cd068895"><td class="mdescLeft">&#160;</td><td class="mdescRight">The drawable component, defined by an sf::Sprite. This component allows an entity to be drawn on the screen.  <br /></td></tr>
 <tr class="separator:afaa0e7d53a27314c39fd8984cd068895"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af22b0841d9272d147f626b386da4d9ca" id="r_af22b0841d9272d147f626b386da4d9ca"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcomponent_1_1text__s.html">component::text_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecomponent.html#af22b0841d9272d147f626b386da4d9ca">component::text</a></td></tr>
+<tr class="memdesc:af22b0841d9272d147f626b386da4d9ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">The text component, consisting in a simple sf::Text.  <br /></td></tr>
 <tr class="separator:af22b0841d9272d147f626b386da4d9ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64d6f963266a98cf80ce10cdf18e579e" id="r_a64d6f963266a98cf80ce10cdf18e579e"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcomponent_1_1animated__drawable__s.html">component::animated_drawable_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecomponent.html#a64d6f963266a98cf80ce10cdf18e579e">component::animated_drawable</a></td></tr>
 <tr class="memdesc:a64d6f963266a98cf80ce10cdf18e579e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The animated_drawable component. It is a drawable component with an animated sprite. It has a frame_rect, a frame_duration and a frame_timer to allow animation.  <br /></td></tr>
@@ -190,6 +200,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a4389e557b74c9397d726bcf56ba076d0" id="r_a4389e557b74c9397d726bcf56ba076d0"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcomponent_1_1logic__s.html">component::logic_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecomponent.html#a4389e557b74c9397d726bcf56ba076d0">component::logic</a></td></tr>
 <tr class="memdesc:a4389e557b74c9397d726bcf56ba076d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user.  <br /></td></tr>
 <tr class="separator:a4389e557b74c9397d726bcf56ba076d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0551f20926c6f673d130bfca015d8b76" id="r_a0551f20926c6f673d130bfca015d8b76"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcomponent_1_1audio__s.html">component::audio_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecomponent.html#a0551f20926c6f673d130bfca015d8b76">component::audio</a></td></tr>
+<tr class="memdesc:a0551f20926c6f673d130bfca015d8b76"><td class="mdescLeft">&#160;</td><td class="mdescRight">The audio component defined by a single sf::Music. This component is not used by the engine systems but can be directly played, stopped, paused by the user.  <br /></td></tr>
+<tr class="separator:a0551f20926c6f673d130bfca015d8b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file defines the different types of components available to the engine. </p>

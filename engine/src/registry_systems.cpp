@@ -41,6 +41,7 @@ void registry::register_all_systems() {
     register_components<component::hurtbox>();
     register_components<component::hitbox>();
     register_components<component::logic>();
+    register_components<component::audio>();
 
     add_system(
         [

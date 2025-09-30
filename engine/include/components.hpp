@@ -35,6 +35,7 @@
  */
 
 #include <string>
+#include <memory>
 #include "ResourceManager.hpp"
 #include "entity.hpp"
 
@@ -249,6 +250,12 @@ namespace component {
          * @brief The height of the hurtbox
          */
         int height;
+
+        /**
+         * @brief A bool to indicate if the hurtbox is hurt
+         * 
+         */
+        bool hurt;
     } hurtbox;
 
     /**
@@ -299,6 +306,13 @@ namespace component {
         void (*logic_function)(double, class registry &, entity);
     }logic;
 
+    /**
+     * @brief The audio component defined by a single sf::Music. This component is not used by the engine systems but can be directly played, stopped, paused by the user
+     * 
+     */
+    typedef struct audio_s {
+        std::shared_ptr<sf::Music> audio;
+    } audio;
 }
 
 #endif

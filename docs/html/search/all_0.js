@@ -6,5 +6,7 @@ var searchData=
   ['address_20tt_3',['&lt;tt&gt;Client(int p, std::string address)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md4',1,'']]],
   ['animate_4',['animate',['../structcomponent_1_1animated__drawable__s.html#a2093cb3d9c0fd92ca950e8d51ac86e9c',1,'component::animated_drawable_s']]],
   ['animated_5fdrawable_5',['animated_drawable',['../namespacecomponent.html#a64d6f963266a98cf80ce10cdf18e579e',1,'component']]],
-  ['animated_5fdrawable_5fs_6',['animated_drawable_s',['../structcomponent_1_1animated__drawable__s.html',1,'component']]]
+  ['animated_5fdrawable_5fs_6',['animated_drawable_s',['../structcomponent_1_1animated__drawable__s.html',1,'component']]],
+  ['audio_7',['audio',['../structcomponent_1_1audio__s.html#a73d8e17b7264772f17137ce198b072d6',1,'component::audio_s::audio'],['../namespacecomponent.html#a0551f20926c6f673d130bfca015d8b76',1,'component::audio']]],
+  ['audio_5fs_8',['audio_s',['../structcomponent_1_1audio__s.html',1,'component']]]
 ];

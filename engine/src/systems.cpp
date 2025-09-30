@@ -64,12 +64,6 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
                 draw.value().sprite.setPosition(pos.value().x, pos.value().y);
                 window.draw(draw.value().sprite);
             }
-
-            auto &text = texts.at(i);
-            if (text && pos) {
-                text.value().text.setPosition(pos.value().x, pos.value().y);
-                window.draw(text.value().text);
-            }
         } catch (...) {
         }
     }
@@ -87,6 +81,19 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
                 } 
                 anim_draw.value().sprite.setPosition(pos.value().x, pos.value().y);
                 window.draw(anim_draw.value().sprite);
+            }
+        } catch (...) {
+        }
+    }
+
+    for (size_t i = 0; i < reg.getEntityNum(); ++i) {
+        try {
+            auto& pos = positions.at(i);
+            auto &text = texts.at(i);
+
+            if (text && pos) {
+                text.value().text.setPosition(pos.value().x, pos.value().y);
+                window.draw(text.value().text);
             }
         } catch (...) {
         }
@@ -120,6 +127,7 @@ void collision_system(double delta, registry &reg, std::vector<optional<componen
             auto& hurtbox = hurtboxes.at(i);
 
             if (pos && hurtbox) {
+                hurtbox.value() .hurt = false;
                 for (size_t j = 0; j < reg.getEntityNum(); ++j) {
                     // Go through each hitbox and their positions
                     auto& hit_pos = positions.at(j);
@@ -133,6 +141,7 @@ void collision_system(double delta, registry &reg, std::vector<optional<componen
                         if (hurt_rect.intersects(hit_rect) &&
                             hurtbox.value().group ==
                                 hitbox.value().targeted_group) {
+                            hurtbox.value().hurt = true;
                             std::cout << "COLLISION " << i << " " << j << "\n";
                             hurtbox.value().health -= hitbox.value().damage;
 

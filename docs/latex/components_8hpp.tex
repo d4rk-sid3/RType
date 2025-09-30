@@ -6,10 +6,10 @@ This file defines the different types of components available to the engine.
 
 
 {\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
 {\ttfamily \#include "{}Resource\+Manager.\+hpp"{}}\newline
 {\ttfamily \#include "{}entity.\+hpp"{}}\newline
-Include dependency graph for components.\+hpp\+:
-\nopagebreak
+Include dependency graph for components.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -33,7 +33,7 @@ struct \mbox{\hyperlink{structcomponent_1_1velocity__s}{component\+::velocity\+\
 struct \mbox{\hyperlink{structcomponent_1_1drawable__s}{component\+::drawable\+\_\+s}}
 \begin{DoxyCompactList}\small\item\em The drawable component, defined by an sf\+::\+Sprite. This component allows an entity to be drawn on the screen. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structcomponent_1_1text__s}{component\+::text\+\_\+s}}
-\item 
+\begin{DoxyCompactList}\small\item\em The text component, consisting in a simple sf\+::\+Text. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structcomponent_1_1animated__drawable__s}{component\+::animated\+\_\+drawable\+\_\+s}}
 \begin{DoxyCompactList}\small\item\em The animated\+\_\+drawable component. It is a drawable component with an animated sprite. It has a frame\+\_\+rect, a frame\+\_\+duration and a frame\+\_\+timer to allow animation. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structcomponent_1_1controllable__s}{component\+::controllable\+\_\+s}}
@@ -43,7 +43,9 @@ struct \mbox{\hyperlink{structcomponent_1_1hurtbox__s}{component\+::hurtbox\+\_\
 struct \mbox{\hyperlink{structcomponent_1_1hitbox__s}{component\+::hitbox\+\_\+s}}
 \begin{DoxyCompactList}\small\item\em The hitbox component, defined by a size, damage and a targeted\+\_\+group (2 for the player, 1 for the enemies for example). A hitbox will detect collision with a hurtbox if its targeted group corresponds to the hurtbox group. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structcomponent_1_1logic__s}{component\+::logic\+\_\+s}}
-\begin{DoxyCompactList}\small\item\em The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structcomponent_1_1audio__s}{component\+::audio\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em The audio component defined by a single sf\+::\+Music. This component is not used by the engine systems but can be directly played, stopped, paused by the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
@@ -59,7 +61,7 @@ typedef struct \mbox{\hyperlink{structcomponent_1_1velocity__s}{component\+::vel
 typedef struct \mbox{\hyperlink{structcomponent_1_1drawable__s}{component\+::drawable\+\_\+s}} \mbox{\hyperlink{namespacecomponent_afaa0e7d53a27314c39fd8984cd068895}{component\+::drawable}}
 \begin{DoxyCompactList}\small\item\em The drawable component, defined by an sf\+::\+Sprite. This component allows an entity to be drawn on the screen. \end{DoxyCompactList}\item 
 typedef struct \mbox{\hyperlink{structcomponent_1_1text__s}{component\+::text\+\_\+s}} \mbox{\hyperlink{namespacecomponent_af22b0841d9272d147f626b386da4d9ca}{component\+::text}}
-\item 
+\begin{DoxyCompactList}\small\item\em The text component, consisting in a simple sf\+::\+Text. \end{DoxyCompactList}\item 
 typedef struct \mbox{\hyperlink{structcomponent_1_1animated__drawable__s}{component\+::animated\+\_\+drawable\+\_\+s}} \mbox{\hyperlink{namespacecomponent_a64d6f963266a98cf80ce10cdf18e579e}{component\+::animated\+\_\+drawable}}
 \begin{DoxyCompactList}\small\item\em The animated\+\_\+drawable component. It is a drawable component with an animated sprite. It has a frame\+\_\+rect, a frame\+\_\+duration and a frame\+\_\+timer to allow animation. \end{DoxyCompactList}\item 
 typedef struct \mbox{\hyperlink{structcomponent_1_1controllable__s}{component\+::controllable\+\_\+s}} \mbox{\hyperlink{namespacecomponent_ac85f4762db6e1c119b13fedc4f9c157c}{component\+::controllable}}
@@ -69,7 +71,9 @@ typedef struct \mbox{\hyperlink{structcomponent_1_1hurtbox__s}{component\+::hurt
 typedef struct \mbox{\hyperlink{structcomponent_1_1hitbox__s}{component\+::hitbox\+\_\+s}} \mbox{\hyperlink{namespacecomponent_a0ae561e88973b1d50eb3048035956866}{component\+::hitbox}}
 \begin{DoxyCompactList}\small\item\em The hitbox component, defined by a size, damage and a targeted\+\_\+group (2 for the player, 1 for the enemies for example). A hitbox will detect collision with a hurtbox if its targeted group corresponds to the hurtbox group. \end{DoxyCompactList}\item 
 typedef struct \mbox{\hyperlink{structcomponent_1_1logic__s}{component\+::logic\+\_\+s}} \mbox{\hyperlink{namespacecomponent_a4389e557b74c9397d726bcf56ba076d0}{component\+::logic}}
-\begin{DoxyCompactList}\small\item\em The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structcomponent_1_1audio__s}{component\+::audio\+\_\+s}} \mbox{\hyperlink{namespacecomponent_a0551f20926c6f673d130bfca015d8b76}{component\+::audio}}
+\begin{DoxyCompactList}\small\item\em The audio component defined by a single sf\+::\+Music. This component is not used by the engine systems but can be directly played, stopped, paused by the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
