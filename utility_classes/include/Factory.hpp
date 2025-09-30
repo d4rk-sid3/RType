@@ -28,7 +28,7 @@ class Factory {
     public:
         Factory(registry &_reg);
 
-        entity make_entity(std::string &type);
+        entity make_entity(const std::string &type);
 
         entity make_player();
 
@@ -47,6 +47,8 @@ class Factory {
         entity make_ceiling();
 
         entity make_background();
+
+        entity make_explosion();
 };
 
 #endif

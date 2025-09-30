@@ -50,7 +50,8 @@ void position_system(double delta, registry &reg, std::vector<optional<component
 void draw_system(double delta, registry &reg, sf::RenderWindow &window,
                         std::vector<optional<component::position>> &positions,
                         std::vector<optional<component::drawable>> &draws,
-                        std::vector<optional<component::animated_drawable>> &anim_draws)
+                        std::vector<optional<component::animated_drawable>> &anim_draws,
+                        std::vector<optional<component::text>> &texts)
 {
     window.clear(sf::Color::Black);
 
@@ -63,6 +64,12 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
                 draw.value().sprite.setPosition(pos.value().x, pos.value().y);
                 window.draw(draw.value().sprite);
             }
+
+            auto &text = texts.at(i);
+            if (text && pos) {
+                text.value().text.setPosition(pos.value().x, pos.value().y);
+                window.draw(text.value().text);
+            }
         } catch (...) {
         }
     }
@@ -73,7 +80,11 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
             auto &anim_draw = anim_draws.at(i);
 
             if (pos && anim_draw) {
-                anim_draw.value().animate(delta);  
+                anim_draw.value().animate(delta);
+                if (anim_draw.value().one_shot && anim_draw.value().done_once) {
+                    reg.kill_entity(entity(i));
+                    continue;
+                } 
                 anim_draw.value().sprite.setPosition(pos.value().x, pos.value().y);
                 window.draw(anim_draw.value().sprite);
             }
@@ -124,6 +135,10 @@ void collision_system(double delta, registry &reg, std::vector<optional<componen
                                 hitbox.value().targeted_group) {
                             std::cout << "COLLISION " << i << " " << j << "\n";
                             hurtbox.value().health -= hitbox.value().damage;
+
+                            if (hitbox.value().one_shot) {
+                                reg.kill_entity(entity(j));
+                            }
                         }
                     }
                 }
@@ -144,5 +159,5 @@ void logic_system(double delta, registry &reg, std::vector<optional<component::l
             }
         } catch (...) {
         }
-    }  
+    }
 }

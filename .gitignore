@@ -59,3 +59,6 @@ Thumbs.db
 *.tmp
 *.temp
 *.sh
+vgcore*
+r-type_server
+r-type_client

@@ -35,7 +35,7 @@
  */
 
 #include <string>
-#include "TextureManager.hpp"
+#include "ResourceManager.hpp"
 #include "entity.hpp"
 
 namespace component {
@@ -46,6 +46,12 @@ namespace component {
         double x;
         double y;
         double z;
+        /**
+         * @brief This function helps increment the position by an x and y offset
+         * 
+         * @param _x 
+         * @param _y 
+         */
         void setPosition( double _x, double _y) {
             this->x += _x;
             this->y += _y;
@@ -70,41 +76,81 @@ namespace component {
     typedef struct drawable_s {
         sf::Sprite sprite;
 
+        /**
+         * @brief This function uses a ResourceManager to set the texture of the sprite
+         * 
+         * @param texture_name The name under which the texture is stored in the ResourceManager
+         */
         void setTextureFromName(std::string texture_name) {
-            sf::Texture &texture = TextureManager::Instance().getTexture(texture_name);
+            sf::Texture &texture = ResourceManager::Instance().getTexture(texture_name);
             this->sprite.setTexture(texture);
         }
     }drawable;
+
+    /**
+     * @brief The text component, consisting in a simple sf::Text
+     * 
+     */
+    typedef struct text_s {
+        sf::Text text;
+
+        /**
+         * @brief This function uses a ResourceManager to set the font of the text
+         * 
+         * @param font_name The name under which the font is stored in the ResourceManager
+         */
+        void setFontFromName(std::string font_name)
+        {
+            sf::Font &font = ResourceManager::Instance().getFont(font_name);
+            this->text.setFont(font);
+        }
+    }text;
 
     /**
      * @brief The animated_drawable component. It is a drawable component with an animated sprite. It has a frame_rect, a frame_duration and a frame_timer to allow animation
      * 
      */
     typedef struct animated_drawable_s {
+        bool one_shot;
+        bool done_once;
         sf::Sprite sprite;
         sf::IntRect frame_rect;
         double frame_duration;
         double frame_timer;
 
         void setTextureFromName(std::string texture_name) {
-            sf::Texture &texture = TextureManager::Instance().getTexture(texture_name);
+            one_shot = false;
+            done_once = false;
+            sf::Texture &texture = ResourceManager::Instance().getTexture(texture_name);
             this->sprite.setTexture(texture);
         }
 
-
+        /**
+         * @brief Set the dimensions of the rect representing a frame
+         * 
+         * @param width 
+         * @param height 
+         */
         void setFrameRect(int width, int height) {
             this->frame_rect = sf::IntRect(0, 0, width, height);
             this->sprite.setTextureRect(this->frame_rect);
         }
 
+        /**
+         * @brief This function animates the sprite
+         * 
+         * @param delta the time elapsed since the last frame
+         */
         void animate(double delta) {
             this->frame_timer += delta;
 
             if (this->frame_timer >= this->frame_duration) {
                 this->frame_timer = 0;
                 this->frame_rect.left += this->frame_rect.width;
-                if (this->frame_rect.left >= this->sprite.getTexture()->getSize().x) {
+                if (this->frame_rect.left >= this->sprite.getTexture()->getSize().x - 5) {
                     this->frame_rect.left = 0;
+                    done_once = true;
+
                 }
                 this->sprite.setTextureRect(this->frame_rect);
             }
@@ -232,6 +278,12 @@ namespace component {
          * @brief The height of the hitbox
          */
         int height;
+
+        /**
+         * @brief If this bool is set to true, the hitbox will be destroyed on collision
+         * 
+         */
+        bool one_shot;
     }hitbox;
 
     /**
@@ -246,7 +298,7 @@ namespace component {
          */
         void (*logic_function)(double, class registry &, entity);
     }logic;
-    
+
 }
 
 #endif

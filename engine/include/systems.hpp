@@ -56,7 +56,8 @@ void position_system(double delta, registry &reg,
 void draw_system(double delta, registry &reg, sf::RenderWindow &window,
                         std::vector<optional<component::position>> &positions,
                         std::vector<optional<component::drawable>> &draws,
-                        std::vector<optional<component::animated_drawable>> &anim_draws);
+                        std::vector<optional<component::animated_drawable>> &anim_draws,
+                        std::vector<optional<component::text>> &texts);
 
 /**
  * @brief The control system goes through each constrollable component and

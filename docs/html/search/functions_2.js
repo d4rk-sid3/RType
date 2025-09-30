@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['draw_5fsystem_0',['draw_system',['../systems_8cpp.html#a19a496dc773e9ca2203719d1aa042744',1,'draw_system(double delta, registry &amp;reg, sf::RenderWindow &amp;window, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::drawable &gt; &gt; &amp;draws, std::vector&lt; optional&lt; component::animated_drawable &gt; &gt; &amp;anim_draws):&#160;systems.cpp'],['../systems_8hpp.html#a19a496dc773e9ca2203719d1aa042744',1,'draw_system(double delta, registry &amp;reg, sf::RenderWindow &amp;window, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::drawable &gt; &gt; &amp;draws, std::vector&lt; optional&lt; component::animated_drawable &gt; &gt; &amp;anim_draws):&#160;systems.cpp']]]
+];

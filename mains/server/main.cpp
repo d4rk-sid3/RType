@@ -1,10 +1,26 @@
 #include "server.hpp"
 
 int main() {
-    try {
-        Server server(8080);
+    sf::RenderWindow win(sf::VideoMode(800, 600), "R-Type") ;
+    registry reg(win);
+    Factory fac(reg);
 
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << '\n';
-    }
+    sf::Event event;
+    sf::Clock frameClock;
+    Server server(8080, reg, fac);
+
+    while (win.isOpen()) {
+        while (win.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                win.close();
+            if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::Escape)
+                    win.close();
+        }
+
+        double dt = frameClock.restart().asSeconds();
+        server.runLevel(dt);
+        reg.run_systems(dt);
+    }   
 }

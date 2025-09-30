@@ -9,7 +9,11 @@
 #define SERVER_HPP_
 #include "Network.hpp"
 #include <vector>
+#include <algorithm>
 #include "registry.hpp"
+#include "Factory.hpp"
+
+inline int player_entity_id = 0;
 
 typedef struct entity_info_s {
     entity entity_id;
@@ -22,22 +26,23 @@ class Server {
   private:
     int p_;
     registry &reg;
-    Factory factory;
+    Factory &factory;
     double levelTimer = 0.0;
   
-
-    void loadLevel(std::string &path);
-    void Server::runLevel(double delta);
-
+    void loadLevel(const std::string &path);
+    
+    void spawn_player(void);
+    
     MoveResponse response;
     MoveRequest move;
     NetworkManager server_;
     PickupItemResponse item;
     PlayerStateResponse p_response;
     PlayerStateResponse2 p_response2;
- 
-  public:
-    Server(int p);
+
+    public:
+    void runLevel(double delta);
+    Server(int p, registry &reg, Factory &fac);
     MoveResponse getMove();
     MoveResponse recupMove(const std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint> &a, MoveRequest &m);
 
@@ -48,6 +53,8 @@ class Server {
     ~Server();
 
     std::vector<entity_info_t> entities;
+
+    std::vector<entity> active_entities;
 };
 
 #endif /* !SERVER_HPP_ */

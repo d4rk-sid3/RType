@@ -78,7 +78,6 @@ Component &registry::add_component(entity const &to, Component &&c)
         table.resize((size_t)to + 1);
     }
     // Move the component into the entity's place
-    table[(size_t)to].reset();
     table[(size_t)to] = std::move(c);
 
     return *table[(size_t)to];

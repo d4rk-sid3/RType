@@ -7,38 +7,66 @@
 
 #include "../include/server.hpp"
 
-Server::Server(int p): p_(p), server_(8080, "127.0.0.1")
+void load_textures(void)
+{
+    ResourceManager::Instance().load("assets/sprites/player/player.gif", "player", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/player/player_up.gif", "player_up", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/player/player_down.gif", "player_down", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/player/player_missile.gif", "player_missile", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/enemies/red_trooper.gif", "red_trooper", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/enemies/walker_walk.gif", "walker", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/enemies/enemy_missile.gif", "enemy_missile", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/effects/Explosion.png", "explosion", TEXTURE);
+
+    ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.ttf", "arcade", FONT);
+}
+
+void Server::spawn_player(void)
+{
+    player_entity_id = (int)factory.make_entity("player");
+    active_entities.push_back((entity)player_entity_id);
+    
+    printf("Player init\n");
+    auto &pos = reg.get_components<component::position>()[player_entity_id].value();
+    pos.x = 50;
+    pos.y = 50;
+}
+
+Server::Server(int p, registry &regis, Factory &fac) : server_(8080, "127.0.0.1"), p_(p), reg(regis), factory(fac)
 {
     std::vector<asio::ip::udp::endpoint> client_endpoint;
 
-    while (1) {
-        server_.poll();
+    load_textures();
+    spawn_player();
+    loadLevel("assets/levels/test.txt");
+    // while (1) {
+    //     server_.poll();
 
-        auto msg = server_.getLastMsg();
+    //     auto msg = server_.getLastMsg();
 
-        if (!msg.first.empty()) {
-            u_int8_t type = msg.first[0];
-            auto sender = msg.second;
+    //     if (!msg.first.empty()) {
+    //         u_int8_t type = msg.first[0];
+    //         auto sender = msg.second;
 
-            if (type == 0x23 && msg.first.size() >= sizeof(MoveRequest)) {
-                MoveRequest res{};
-                MoveResponse resp = recupMove(msg, res);
-                server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
-            } else if (type == 0x27) {
-                PickupItemResponse resp = recupItem(msg);
-                server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
-            } else if (type == 0x28) {
-                PlayerStateResponse resp = player_r(msg);
-                server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
-            } else if (type == 0x29) {
-                PlayerStateResponse2 resp = player_r2(msg);
-                server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
-            } else {
-                std::cerr << "Message inconnue: " << (int)type
-                    << "size= " <<  msg.first.size() << " bytes" << std::endl;
-            }
-        }
-    }
+    //         if (type == 0x23 && msg.first.size() >= sizeof(MoveRequest)) {
+    //             MoveRequest res{};
+    //             MoveResponse resp = recupMove(msg, res);
+    //             server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
+    //         } else if (type == 0x27) {
+    //             PickupItemResponse resp = recupItem(msg);
+    //             server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
+    //         } else if (type == 0x28) {
+    //             PlayerStateResponse resp = player_r(msg);
+    //             server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
+    //         } else if (type == 0x29) {
+    //             PlayerStateResponse2 resp = player_r2(msg);
+    //             server_.send(reinterpret_cast<uint8_t*>(&resp), sizeof(resp), sender);
+    //         } else {
+    //             std::cerr << "Message inconnue: " << (int)type
+    //                 << "size= " <<  msg.first.size() << " bytes" << std::endl;
+    //         }
+    //     }
+    // }
 }
 
 MoveResponse Server::getMove()
