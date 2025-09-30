@@ -1,6 +1,6 @@
 #include "../include/commands.hpp"
 
-std::vector<uint8_t> decodePlayerStateResponse(const const std::vector<uint8_t>& buffer)
+PlayerStateResponse decodePlayerStateResponse(const std::vector<uint8_t>& buffer)
 {
     PlayerStateResponse pos;
 
@@ -12,6 +12,6 @@ std::vector<uint8_t> decodePlayerStateResponse(const const std::vector<uint8_t>&
     pos.remaining_health = (buffer[5] << 8) | buffer[6];
     pos.score = pos.player_id = (buffer[7] << 24) | (buffer[8] << 16) | (buffer[9] << 8) | buffer[10]; 
     pos.current_level = buffer[11];
-    pos.state = buffer[12];
+    pos.state = static_cast<State>(buffer[12]);
     return pos;
 }

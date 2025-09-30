@@ -1,3 +1,4 @@
+
 #include "../include/commands.hpp"
 
 std::vector<uint8_t> encodePlayerStateResponse(const PlayerStateResponse& pos) {
@@ -147,7 +148,7 @@ std::vector<uint8_t> encodeGameStartedResponse(const GameStartedResponse& pos) {
     buffer.emplace_back((pos.timestamp.milliseconds >> 8) & 0xFF);
     buffer.emplace_back(pos.timestamp.milliseconds & 0xFF);
 
-    return buffer;   
+    return buffer;
 }
 
 std::vector<uint8_t> encodeGamePausedResponse(const GamePausedResponse& pos) {
