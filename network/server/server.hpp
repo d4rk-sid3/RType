@@ -305,7 +305,7 @@ class User {
         const std::string getClientHash() { return _client_hash; }
         const std::shared_ptr<IToken> getAuthToken() { return _auth_token; }
         const std::shared_ptr<IToken> getSessionToken() { return _session_token; }
-        const std::string getAuthTokenHex() const { return _auth_token->getHex(); }
+        const std::string& getAuthTokenHex() const { return _auth_token->getHex(); }
         const std::string& getUsername() const { return _username; }
         const std::string& getPasswordHash() const { return _password_hash; }
         size_t getId() const { return _id; }
@@ -458,7 +458,7 @@ class UserManager {
             return;
         }
 
-        bool authenticate(const std::string &username, const std::string &plain_password)
+        bool authenticate(const std::string &username, const std::string &plain_password, const uint8_t server_key[32])
         {
             auto userOpt = getUserByUsername(username);
             if (!userOpt)
