@@ -105,3 +105,23 @@ GameStartedResponse decodeGameStartedResponse(const std::vector<uint8_t>& buffer
         return pos;
 }
 
+GamePausedResponse decodeGamePausedResponse(const std::vector<uint8_t>& buffer)
+{
+    GamePausedResponse pos;
+
+    if (buffer[0] != 0x34) {
+        throw std::runtime_error("Invalid message type !");
+    }
+    pos.timestamp.milliseconds = 
+        (static_cast<uint64_t>(buffer[1]) << 56) | 
+        (static_cast<uint64_t>(buffer[2]) << 48) | 
+        (static_cast<uint64_t>(buffer[3]) << 40) | 
+        (static_cast<uint64_t>(buffer[4]) << 32) |
+        (static_cast<uint64_t>(buffer[5]) << 24) | 
+        (static_cast<uint64_t>(buffer[6]) << 16) | 
+        (static_cast<uint64_t>(buffer[7]) << 8)  | 
+        static_cast<uint64_t>(buffer[8]);
+    pos.current_state = static_cast<PauseState>(buffer[9]);
+    return pos;
+}
+
