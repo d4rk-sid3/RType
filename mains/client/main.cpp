@@ -9,6 +9,7 @@ int main() {
     Client client(8080, "", reg);
 
     while (win.isOpen()) {
+        double dt = frameClock.restart().asSeconds();
         while (win.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -17,9 +18,13 @@ int main() {
                 if (event.key.code == sf::Keyboard::Escape)
                     win.close();
         }
+        if (client.state == MENU || client.state == TRANSITION) {
+            client.runMenu(dt);
+        }
+        if (client.state == GAME) {
+            client.runLevel(dt);
+        }
 
-        double dt = frameClock.restart().asSeconds();
-        client.runLevel(dt);
         reg.run_systems(dt);
     }   
 }

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['position_0',['position',['../namespacecomponent.html#a32921f4e807a398b6ffaea1730431bec',1,'component']]]
+  ['menu_5finfo_5ft_0',['menu_info_t',['../client_8hpp.html#a02538eb94f2146a51ffae5bc113fa7ac',1,'client.hpp']]]
 ];

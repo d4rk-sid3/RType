@@ -179,3 +179,33 @@ void walker_logic(double delta, registry &reg, entity en)
         hit_pos.y = pos.y;
     }
 }
+
+void fade_in_rect_logic(double delta, registry &reg, entity entity)
+{
+    Factory fac(reg);
+    static double t = 0.0;
+    static double instancited = false;
+    drawable &dr = reg.get_components<drawable>()[entity].value();
+    
+    t+= delta;
+    dr.sprite.setColor(sf::Color(0, 0, 0, (int)round(t * 128)));
+    if (dr.sprite.getColor().a >= 255) {
+        reg.kill_entity(entity);
+    }
+    if (dr.sprite.getColor().a >= 220 && !instancited) {
+        instancited = true;
+        fac.make_fade_out_rect();
+    }
+}
+
+void fade_out_rect_logic(double delta, registry &reg, entity entity)
+{
+    static double t = 0.0;
+    drawable &dr = reg.get_components<drawable>()[entity].value();
+    
+    t+= delta;
+    dr.sprite.setColor(sf::Color(0, 0, 0, 255 - (int)round(t * 128)));
+    if (dr.sprite.getColor().a <= 0) {
+        reg.kill_entity(entity);
+    }
+}

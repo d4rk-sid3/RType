@@ -25,26 +25,43 @@ typedef struct entity_info_s {
     double spawn_y;
 } entity_info_t;
 
+typedef enum {
+    MENU,
+    TRANSITION,
+    GAME,
+    GAME_OVER
+}state_t;
+
+typedef struct menu_info_s {
+    entity background;
+    entity title;
+    entity start_text;
+    entity menu_background_music;
+    entity menu_fade_in_rect;
+    entity menu_fade_out_rect;    
+} menu_info_t;
+
 class Client {
   private:
     registry &_reg;
     int port_;
+    double levelTimer = 0.0;
+    std::vector<entity> active_entities;
     MoveRequest move;
     MoveResponse check;
     NetworkManager client_;
-  
-    double levelTimer = 0.0;
 
-    void spawn_player(void);
-
-    std::vector<entity> active_entities;
-
-
-  public:
+    menu_info_t menu_info;
+    
+    public:
+    state_t state = MENU;
     Client(int p, std::string a, registry &reg);
     MoveRequest getMoveKey();
     ~Client();
 
+    void initMenu();
+    void runMenu(double delta);
+    void initGame();
     void runLevel(double delta);
 };
 

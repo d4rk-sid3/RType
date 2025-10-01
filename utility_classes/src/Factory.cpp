@@ -39,6 +39,7 @@ entity Factory::make_entity(const std::string &type)
         return make_player_missile();
     else if (type == "enemy_missile")
         return make_enemy_missile();
+    return entity(-1);
 }
 
 entity Factory::make_player()
@@ -261,13 +262,15 @@ entity Factory::make_title()
 {
     entity title_id = reg.spawn_entity();
 
-    reg.add_component<component::position>(title_id, {100, 100});
+    reg.add_component<component::position>(title_id, {75, 25});
     auto &title_text = reg.add_component<component::text>(title_id, component::text());
     title_text.setFontFromName("arcade");
-    title_text.text.setString("R TYPE");
-    title_text.text.setCharacterSize(60);
+    title_text.text.setString("R  TYPE");
+    title_text.text.setCharacterSize(200);
     title_text.text.setFillColor(sf::Color::White);
-    
+    title_text.text.setOutlineColor(sf::Color(10, 14, 69));
+    title_text.text.setOutlineThickness(2);    
+
     return title_id;
 }
 
@@ -275,12 +278,14 @@ entity Factory::make_start_text()
 {
     entity text_id = reg.spawn_entity();
 
-    reg.add_component<component::position>(text_id, {350, 150});
+    reg.add_component<component::position>(text_id, {(WINDOW_WIDTH / 2) - 110, WINDOW_HEIGHT - 100});
     auto &title_text = reg.add_component<component::text>(text_id, component::text());
     title_text.setFontFromName("arcade");
     title_text.text.setString("Press Space to start");
     title_text.text.setCharacterSize(16);
     title_text.text.setFillColor(sf::Color::White);
+    title_text.text.setOutlineColor(sf::Color(10, 14, 69));
+    title_text.text.setOutlineThickness(1);
     reg.add_component<component::logic>(text_id, component::logic{start_text_logic});
 
     return text_id;
@@ -310,3 +315,34 @@ entity Factory::make_game_background_music()
     return music_id;
 }
 
+entity Factory::make_fade_in_rect()
+{
+    entity fade_id = reg.spawn_entity();
+
+    reg.add_component<component::position>(fade_id, {0, 0});
+    auto &fade_sprite = reg.add_component<component::drawable>(fade_id, component::drawable());
+    ResourceManager::Instance().getTexture("black").setRepeated(true);
+    fade_sprite.setTextureFromName("black");
+    fade_sprite.sprite.setTextureRect(sf::IntRect(0, 0, 800, 500));
+    fade_sprite.sprite.setColor(sf::Color(0, 0, 0, 0));
+
+    reg.add_component<component::logic>(fade_id, component::logic{fade_in_rect_logic});
+
+    return fade_id;
+}
+
+entity Factory::make_fade_out_rect()
+{
+    entity fade_id = reg.spawn_entity();
+
+    reg.add_component<component::position>(fade_id, {0, 0});
+    auto &fade_sprite = reg.add_component<component::drawable>(fade_id, component::drawable());
+    ResourceManager::Instance().getTexture("black").setRepeated(true);
+    fade_sprite.setTextureFromName("black");
+    fade_sprite.sprite.setTextureRect(sf::IntRect(0, 0, 800, 500));
+    fade_sprite.sprite.setColor(sf::Color(0, 0, 0, 255));
+
+    reg.add_component<component::logic>(fade_id, component::logic{fade_out_rect_logic});
+
+    return fade_id;
+}

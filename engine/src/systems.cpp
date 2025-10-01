@@ -66,9 +66,6 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
             }
         } catch (...) {
         }
-    }
-
-    for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
         try {
             auto &pos = positions.at(i);
             auto &anim_draw = anim_draws.at(i);
@@ -84,9 +81,6 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
             }
         } catch (...) {
         }
-    }
-
-    for (size_t i = 0; i < reg.getEntityNum(); ++i) {
         try {
             auto& pos = positions.at(i);
             auto &text = texts.at(i);
@@ -98,7 +92,6 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
         } catch (...) {
         }
     }
-
     window.display();
 }
 

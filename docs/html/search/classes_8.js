@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['registry_0',['registry',['../classregistry.html',1,'']]],
-  ['resourcemanager_1',['ResourceManager',['../classResourceManager.html',1,'']]]
+  ['position_5fs_0',['position_s',['../structcomponent_1_1position__s.html',1,'component']]]
 ];

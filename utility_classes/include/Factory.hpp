@@ -60,6 +60,10 @@ class Factory {
 
         entity make_hit_effect();
 
+        entity make_fade_in_rect();
+    
+        entity make_fade_out_rect();
+
 };
 
 #endif

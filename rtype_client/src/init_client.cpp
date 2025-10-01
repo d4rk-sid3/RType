@@ -7,7 +7,7 @@
 
 #include "../include/client.hpp"
 
-void load_textures(void)
+void load_client_textures(void)
 {
     ResourceManager::Instance().load("assets/sprites/player/player.gif", "player", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/player/player_up.gif", "player_up", TEXTURE);
@@ -19,32 +19,17 @@ void load_textures(void)
     ResourceManager::Instance().load("assets/sprites/effects/Explosion.png", "explosion", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/effects/hit_effect.gif", "hit_effect", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/background/background.jpg", "background", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/background/black.png", "black", TEXTURE);
 
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
 
-void Client::spawn_player(void)
-{
-    Factory factory(_reg);
-
-    factory.make_background();
-    player_entity_id = (int)factory.make_entity("player");
-    active_entities.push_back((entity)player_entity_id);
-    
-    printf("Player init\n");
-    auto &pos = _reg.get_components<component::position>()[player_entity_id].value();
-    pos.x = 50;
-    pos.y = 50;
-
-    // factory.make_title();
-    // factory.make_start_text();
-    factory.make_menu_background_music();
-}
 
 Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, "client"), _reg(reg)
 {
-    load_textures();
-    spawn_player();
+    load_client_textures();
+    initMenu();
+
     // asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
 
     // std::thread input_thread([this, server_endpoint]() {
@@ -115,4 +100,53 @@ MoveRequest Client::getMoveKey()
 Client::~Client()
 {
 
+}
+
+void Client::initMenu()
+{
+    Factory fac(_reg);
+    menu_info.background = fac.make_background();
+    menu_info.title = fac.make_title();
+    menu_info.start_text = fac.make_start_text();
+    menu_info.menu_background_music = fac.make_menu_background_music();
+
+    _reg.add_component<component::controllable>(menu_info.start_text, component::controllable());
+}
+
+void Client::runMenu(double delta)
+{
+    Factory fac(_reg);
+
+    if (state == MENU) {
+        component::controllable &start_text = _reg.get_components<component::controllable>()[menu_info.start_text].value();
+
+        if (start_text.space) {
+            printf("Transition\n");
+            state = TRANSITION;
+            menu_info.menu_fade_in_rect = fac.make_fade_in_rect();
+        }
+    }
+
+    if (state == TRANSITION && std::find(_reg.dead_entities.begin(), _reg.dead_entities.end(), menu_info.menu_fade_in_rect) != _reg.dead_entities.end()) {
+        state = GAME;
+        initGame();
+    }
+}
+
+void Client::initGame()
+{
+    Factory factory(_reg);
+
+    player_entity_id = (int)factory.make_entity("player");
+    active_entities.push_back((entity)player_entity_id);
+    
+    printf("Player init\n");
+    auto &pos = _reg.get_components<component::position>()[player_entity_id].value();
+    pos.x = 50;
+    pos.y = 50;
+    factory.make_game_background_music();
+    _reg.kill_entity(menu_info.background);
+    _reg.kill_entity(menu_info.title);
+    _reg.kill_entity(menu_info.start_text);
+    _reg.kill_entity(menu_info.menu_background_music);
 }

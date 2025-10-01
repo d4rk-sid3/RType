@@ -79,6 +79,7 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">client.hpp File Reference</div></div>
 </div><!--header-->
@@ -158,6 +159,8 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structentity__info__s.html">entity_info_s</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmenu__info__s.html">menu_info_s</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClient.html">Client</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -172,6 +175,17 @@ Macros</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a3e20dfd8260e2313e3f25e0b2152d78c" id="r_a3e20dfd8260e2313e3f25e0b2152d78c"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structentity__info__s.html">entity_info_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e20dfd8260e2313e3f25e0b2152d78c">entity_info_t</a></td></tr>
 <tr class="separator:a3e20dfd8260e2313e3f25e0b2152d78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02538eb94f2146a51ffae5bc113fa7ac" id="r_a02538eb94f2146a51ffae5bc113fa7ac"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structmenu__info__s.html">menu_info_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02538eb94f2146a51ffae5bc113fa7ac">menu_info_t</a></td></tr>
+<tr class="separator:a02538eb94f2146a51ffae5bc113fa7ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:aa0aafed44fec19806d8f9ad834be1248" id="r_aa0aafed44fec19806d8f9ad834be1248"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0aafed44fec19806d8f9ad834be1248">state_t</a> { <a class="el" href="#aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721">MENU</a>
+, <a class="el" href="#aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c">TRANSITION</a>
+, <a class="el" href="#aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84">GAME</a>
+, <a class="el" href="#aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00">GAME_OVER</a>
+ }</td></tr>
+<tr class="separator:aa0aafed44fec19806d8f9ad834be1248"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -219,6 +233,41 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02538eb94f2146a51ffae5bc113fa7ac" name="a02538eb94f2146a51ffae5bc113fa7ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02538eb94f2146a51ffae5bc113fa7ac">&#9670;&#160;</a></span>menu_info_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structmenu__info__s.html">menu_info_s</a> <a class="el" href="#a02538eb94f2146a51ffae5bc113fa7ac">menu_info_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="aa0aafed44fec19806d8f9ad834be1248" name="aa0aafed44fec19806d8f9ad834be1248"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0aafed44fec19806d8f9ad834be1248">&#9670;&#160;</a></span>state_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#aa0aafed44fec19806d8f9ad834be1248">state_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721" name="aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721"></a>MENU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c" name="aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c"></a>TRANSITION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84" name="aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84"></a>GAME&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00" name="aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00"></a>GAME_OVER&#160;</td><td class="fielddoc"></td></tr>
+</table>
 
 </div>
 </div>
