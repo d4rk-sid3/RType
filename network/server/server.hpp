@@ -1,3 +1,5 @@
+#ifndef SERVER_HPP
+#define SERVER_HPP
 #include <iostream>
 #include <string>
 #include <array>
@@ -6,6 +8,12 @@
 #include <chrono>
 #include <cstdint>
 #include <iomanip>
+#include <unordered_map>
+#include <memory>
+#include <vector>
+#include <cstring>
+#include <random>
+
 
 using Clock = std::chrono::steady_clock;
 
@@ -22,6 +30,7 @@ class IToken {
         virtual void createToken(const uint8_t* key, size_t key_len,
             const void* message, size_t message_len) = 0;
         virtual const std::string& getHex() const = 0;
+        virtual uint64_t getTTL() const = 0;
         
         template <size_t N>
         static std::array<uint8_t, N> fromHex(const std::string& hex) {
@@ -35,7 +44,8 @@ class IToken {
             }
             return out;
         }
-        static std::string toHex(std::array<uint8_t, N> &token) {
+        template <size_t N>
+        static std::string toHex(const std::array<uint8_t, N> &token) {
             std::stringstream ss;
 
             for (size_t i = 0; i < N; i++) {
@@ -165,7 +175,7 @@ class Token128 : public IToken {
                 token->createToken(key, key_len, message, message_len);
         
                 _tokens[_next_id] = token;
-                _hex_tokens[token->getHex()] = id;
+                _hex_tokens[token->getHex()] = _next_id;
                 
                 _next_id++;
                 return token;
@@ -208,7 +218,7 @@ class Token128 : public IToken {
                 }
                 token->createToken(server_key, 32, message, sizeof(message));
 
-                size_t id = next_id++;
+                size_t id = _next_id++;
                 _tokens[id] = token;
                 _hex_tokens[token->getHex()] = id;
 
@@ -227,7 +237,7 @@ class Token128 : public IToken {
 
                 session_token->setData(session_data);
 
-                size_t id = next_id++;
+                size_t id = _next_id++;
                 _tokens[id] = session_token;
                 _hex_tokens[session_token->getHex()] = id;
 
@@ -235,7 +245,7 @@ class Token128 : public IToken {
             }
 };
         
-class User_Stats {
+class UserStats {
     private:
         int _games_played = 0;
         int _games_won = 0;
@@ -295,8 +305,11 @@ class User {
         const std::string getClientHash() { return _client_hash; }
         const std::shared_ptr<IToken> getAuthToken() { return _auth_token; }
         const std::shared_ptr<IToken> getSessionToken() { return _session_token; }
-        const std::string& getUsername() const {return _username;}
-        size_t getId() const { return id_; }
+        const std::string getAuthTokenHex() const { return _auth_token->getHex(); }
+        const std::string& getUsername() const { return _username; }
+        const std::string& getPasswordHash() const { return _password_hash; }
+        size_t getId() const { return _id; }
+        void setLastLogin(const std::time_t time) {_last_login_at = time;}
 
     private:
         size_t _id = 0;
@@ -306,7 +319,7 @@ class User {
         std::shared_ptr<IToken> _session_token;
         std::time_t _last_login_at = 0;
         std::string _client_hash;
-        User_Stats _stats;
+        UserStats _stats;
 
 };
 
@@ -366,11 +379,16 @@ class UserManager {
             return &(it->second);
         }
     
-        std::optional<User> getUserByUsername(const std::string& username) const {
+        std::optional<std::reference_wrapper<User>> getUserByUsername(const std::string& username)
+        {
             auto it = _username_index.find(username);
             if (it == _username_index.end())
                 return std::nullopt;
-            return getUser(it->second);
+        
+            User* u = getUserRef(it->second);
+            if (!u)
+                return std::nullopt;
+            return std::ref(*u);
         }
 
         std::optional<User> getUserByAuthTokenHex(const std::string& auth_hex) const {
@@ -423,7 +441,7 @@ class UserManager {
         std::vector<User> listUsers() const {
             std::vector<User> out;
             out.reserve(_users.size());
-            for (const auto& kv : users_)n
+            for (const auto& kv : _users)
                 out.push_back(kv.second);
             return out;
         }
@@ -439,5 +457,27 @@ class UserManager {
             assignAuthToken(id, TokenManager::Instance()->generateSessionToken(id, server_key));
             return;
         }
+
+        bool authenticate(const std::string &username, const std::string &plain_password)
+        {
+            auto userOpt = getUserByUsername(username);
+            if (!userOpt)
+                return false;
+
+            User& u = userOpt.value().get();
+
+            const std::string& stored_hash = u.getPasswordHash();
+            if (crypto_pwhash_str_verify(stored_hash.c_str(),
+                                        plain_password.c_str(),
+                                        plain_password.size()) != 0) {
+                return false;
+            }
+
+            u.setLastLogin(std::time(nullptr));
+            generateAuthTokenAssign(u.getId(), server_key);
+            return true;
+        }
+
 };
+
 #endif /* defined(_Game_) */
