@@ -21,7 +21,7 @@ class IToken {
         virtual bool isExpired() const = 0;
         virtual void createToken(const uint8_t* key, size_t key_len,
             const void* message, size_t message_len) = 0;
-        virtual bool verifyToken(const std::string &token) const = 0;
+        virtual bool verifyToken(const IToken &token) const = 0;
         template <size_t N>
         static std::array<uint8_t, N> fromHex(const std::string& hex) {
             if (hex.size() != N * 2) {
@@ -51,7 +51,7 @@ class Token256 : public IToken {
     Clock::time_point _created_at;
     std::chrono::seconds _ttl;
     Data _data;
-    std::string _token_hex
+    std::string _token_hex;
 
 public:
     Token256(TokenType type = TokenType::AUTH, uint64_t ttl_seconds = 86400)
@@ -73,15 +73,51 @@ public:
         const void* message, size_t message_len) override
     {
         crypto_auth_hmacsha256(_data.data(), static_cast<const uint8_t*>(message), message_len, key);
+        _token_hex = IToken::toHex<32>(_data);
         return;
     }
 
-    bool verifyToken(const uint8_t* key, size_t key_len, const void* message, size_t message_len) const override
-    {
-    }
-
     const Data& getData() const { return _data; }
+    const std::string& getHex() const { return _token_hex; }
 };
+
+class Token128 : public IToken {
+    public:
+        using Data = std::array<uint8_t, 16>;
+    
+    private:
+        TokenType _type;
+        Clock::time_point _created_at;
+        std::chrono::seconds _ttl;
+        Data _data;
+        std::string _token_hex;
+    
+    public:
+        Token128(TokenType type = TokenType::SESSION, uint64_t ttl_seconds = 86400)
+            : _type(type),
+              _created_at(Clock::now()),
+              _ttl(std::chrono::seconds(ttl_seconds))
+        {
+        }    
+        TokenType getType() const override { return _type; }
+    
+        bool isExpired() const override {
+            return Clock::now() - _created_at > _ttl;
+        }
+    
+        uint64_t getTTL() const override { return _ttl.count(); }
+    
+        void createToken(const uint8_t *key, size_t key_len,
+            const void* message, size_t message_len) override
+        {
+            std::array<uint8_t, 32> full_hmac;
+            crypto_auth_hmacsha256(full_hmac.data(), static_cast<const uint8_t*>(message), message_len, key);
+            std::copy(full_hmac.begin(), full_hmac.begin() + 16, _data.begin());    
+            _token_hex = IToken::toHex<16>(_data);
+        }
+        const Data& getData() const { return _data; }
+        const std::string& getHex() const { return _token_hex; }
+    };
 
 class User_Stats {
     private:
