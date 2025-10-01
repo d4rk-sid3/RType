@@ -18,17 +18,19 @@ Client::Client(int p, std::string address): port_(p), client_(8080, "client")
             resq.type = 0x23;
 
             if (input == "up")
-                resq.dir = UP;
+                resq.direction = UP;
             else if (input == "down")
-                resq.dir = DOWN;
+                resq.direction = DOWN;
             else if (input == "left")
-                resq.dir = LEFT;
+                resq.direction = LEFT;
             else if (input == "right")
-                resq.dir = RIGHT; 
+                resq.direction = RIGHT; 
             else
                 continue;
+            
+            std::vector<uint8_t> buff = encodeMoveResquest(resq);
 
-            this->client_.send(reinterpret_cast<uint8_t*>(&resq), sizeof(resq), server_endpoint);
+            this->client_.send(buff, buff.size(), server_endpoint);
         }
     });
 
@@ -38,8 +40,7 @@ Client::Client(int p, std::string address): port_(p), client_(8080, "client")
 
         auto msg = client_.getLastMsg();
         if (!msg.first.empty()) {
-            MoveResponse res{};
-            std::memcpy(&res, msg.first.data(), sizeof(MoveResponse));
+            MoveResponse res = decodeMoveResponse(msg.first);
             if (res.type == 0x24) {
                 std::cout << "Serveur: Player " << res.player_id
                         << " se déplace vers " << res.direction.x << ", " << res.direction.y
