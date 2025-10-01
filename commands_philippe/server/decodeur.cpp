@@ -237,3 +237,27 @@ EnemyDiedResponse decodeEnemyDiedResponse(const std::vector<uint8_t>& buffer)
         static_cast<uint64_t>(buffer[18]);
     return pos;
 }
+
+CollisionResponse decodeCollisionResponse(const std::vector<uint8_t>& buffer)
+{
+    CollisionResponse pos;
+
+    if (buffer[0] != 0x40) {
+        throw std::runtime_error("Invalid message type");
+    }
+    pos.entity_id_1 = (buffer[1] << 24) | (buffer[2] << 16) | (buffer[3] << 8) | buffer[4];
+    pos.entity_id_2 = (buffer[5] << 24) | (buffer[6] << 16) | (buffer[7] << 8) | buffer[8];
+    pos.position.x = (buffer[9] << 8) | buffer[10];
+    pos.position.y = (buffer[11] << 8) | buffer[12];
+    pos.collision_type = static_cast<CollisionType>(buffer[13]);
+    pos.timestamp.milliseconds = 
+        (static_cast<uint64_t>(buffer[14]) << 56) | 
+        (static_cast<uint64_t>(buffer[15]) << 48) | 
+        (static_cast<uint64_t>(buffer[16]) << 40) | 
+        (static_cast<uint64_t>(buffer[17]) << 32) |
+        (static_cast<uint64_t>(buffer[18]) << 24) | 
+        (static_cast<uint64_t>(buffer[19]) << 16) | 
+        (static_cast<uint64_t>(buffer[20]) << 8)  | 
+        static_cast<uint64_t>(buffer[21]);
+    return pos;
+}
