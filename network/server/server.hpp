@@ -21,6 +21,8 @@ class IToken {
         virtual bool isExpired() const = 0;
         virtual void createToken(const uint8_t* key, size_t key_len,
             const void* message, size_t message_len) = 0;
+        virtual const std::string& getHex() const = 0;
+        
         template <size_t N>
         static std::array<uint8_t, N> fromHex(const std::string& hex) {
             if (hex.size() != N * 2) {
@@ -77,6 +79,10 @@ public:
     }
 
     const Data& getData() const { return _data; }
+    void setData(const Data& data) {
+        _data = data;
+        _token_hex = IToken::toHex<32>(data);
+    }
     const std::string& getHex() const { return _token_hex; }
 };
 
@@ -116,6 +122,10 @@ class Token128 : public IToken {
             _token_hex = IToken::toHex<16>(_data);
         }
         const Data& getData() const { return _data; }
+        void setData(const Data& data) {
+            _data = data;
+            _token_hex = IToken::toHex<16>(data);
+        }
         const std::string& getHex() const { return _token_hex; }
     };
 
@@ -184,7 +194,46 @@ class Token128 : public IToken {
                     deleteToken(id);
                 }
             }
-        };
+
+            std::shared_ptr<Token256> generateAuthToken(size_t player_id, const uint8_t server_key[32])
+            {
+                auto token = std::make_shared<Token256>(TokenType::AUTH);
+
+                uint8_t message[sizeof(player_id) + 24];
+                std::memcpy(message, &player_id, sizeof(player_id));
+
+                std::random_device rd;
+                for (size_t i = 0; i < 24; i++) {
+                    message[sizeof(player_id) + i] = static_cast<uint8_t>(rd() & 0xFF);
+                }
+                token->createToken(server_key, 32, message, sizeof(message));
+
+                size_t id = next_id++;
+                _tokens[id] = token;
+                _hex_tokens[token->getHex()] = id;
+
+                return token;
+            }
+
+            std::shared_ptr<Token128> generateSessionToken(size_t player_id, const uint8_t server_key[32])
+            {
+                auto auth_token = generateAuthToken(player_id, server_key);
+                auto session_token = std::make_shared<Token128>(TokenType::SESSION);
+
+                Token128::Data session_data{};
+                std::copy(auth_token->getData().begin(),
+                        auth_token->getData().begin() + 16,
+                        session_data.begin());
+
+                session_token->setData(session_data);
+
+                size_t id = next_id++;
+                _tokens[id] = session_token;
+                _hex_tokens[session_token->getHex()] = id;
+
+                return session_token;
+            }
+};
         
 class User_Stats {
     private:
@@ -230,22 +279,23 @@ class User {
             sodium_memzero(const_cast<char*>(plain_password.data()), plain_password.size());
             _password_hash = hashed_password;
         }
-        void setAuthToken(const Token256& tok) {
-            _auth_token = tok;
-            _auth_token_hex = bytesToHex(_auth_token.data(), _auth_token.size());
-        }
-        void setSessionToken(const Token128& tok) {
-            _session_token = tok;
-            _session_token_hex = bytesToHex(_session_token.data(), _session_token.size());
-        }
-        void setClientHash(const Token256& ch) {
-            _client_hash = ch;
-        }
-        void setName(const std::string &name) {
+        void setName(const std::string &name)
+        {
             _username = name;
         }
+        void setAuthToken(const std::shared_ptr<IToken> token) {
+            _auth_token = token;
+        }
+        void setSessionToken(const std::shared_ptr<IToken> token) {
+            _session_token = token;
+        }
+        void setClientHash(const std::string &client_hash) {
+            _client_hash = client_hash;
+        }
+        const std::string getClientHash() { return _client_hash; }
+        const std::shared_ptr<IToken> getAuthToken() { return _auth_token; }
+        const std::shared_ptr<IToken> getSessionToken() { return _session_token; }
         const std::string& getUsername() const {return _username;}
-        const std::string& getAuthTokenHex() const { return auth_token_hex_; }
         size_t getId() const { return id_; }
 
     private:
@@ -255,7 +305,7 @@ class User {
         std::shared_ptr<IToken> _auth_token;
         std::shared_ptr<IToken> _session_token;
         std::time_t _last_login_at = 0;
-        std::shared_ptr<IToken> _client_hash;
+        std::string _client_hash;
         User_Stats _stats;
 
 };
@@ -279,6 +329,7 @@ class UserManager {
         }
         UserManager(const UserManager&) = delete;
         UserManager& operator=(const UserManager&) = delete;
+
         size_t createUser(const std::string& username, const std::string& plain_password)
         {
             if (_username_index.count(username) != 0)
@@ -329,20 +380,23 @@ class UserManager {
             return getUser(it->second);
         }
 
-        void assignAuthToken(size_t id, const User::Token256& token) {
+        void assignAuthToken(size_t id, std::shared_ptr<IToken> token)
+        {
             User* u = getUserRef(id);
             if (!u)
-                throw std::runtime_error("user not found");
-            if (!u->getAuthTokenHex().empty())
+                throw std::runtime_error("user not found");        
+            if (u->getAuthToken() && !u->getAuthTokenHex().empty()) {
                 _auth_index.erase(u->getAuthTokenHex());
-            u->setAuthToken(token);
+            }
+            u->setAuthToken(token);  
             _auth_index[u->getAuthTokenHex()] = id;
         }
-    
-        void assignSessionToken(size_t id, const User::Token128& token) {
+        
+        void assignSessionToken(size_t id, std::shared_ptr<IToken> token) {
             User* u = getUserRef(id);
             if (!u)
                 throw std::runtime_error("user not found");
+        
             u->setSessionToken(token);
         }
 
@@ -374,23 +428,16 @@ class UserManager {
             return out;
         }
 
-        static Token256 generateAuthToken(size_t player_id, const uint8_t server_key[32]) {
-            Token256 token;
-            uint8_t id_bytes[sizeof(player_id)];
-            std::memcpy(id_bytes, &player_id, sizeof(player_id));
-    
-            crypto_auth_hmacsha256(token.data(), id_bytes, sizeof(player_id), server_key);
-            return token;
+        void generateAuthTokenAssign(size_t id, const uint8_t server_key[32])
+        {
+            assignAuthToken(id, TokenManager::Instance()->generateAuthToken(id, server_key));
+            return;
         }
-
-        static Token128 generateSessionToken(size_t player_id, const uint8_t server_key[32]) {
-            Token256 full_token = generateAuthToken(player_id, server_key);
-            Token128 token;
-            std::copy(full_token.begin(), full_token.begin() + 16, token.begin());
-            return token;
-        }
-
-
         
+        void generateSessionTokenAssign(size_t id, const uint8_t server_key[32])
+        {
+            assignAuthToken(id, TokenManager::Instance()->generateSessionToken(id, server_key));
+            return;
+        }
 };
 #endif /* defined(_Game_) */
