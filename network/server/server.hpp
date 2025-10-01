@@ -51,7 +51,7 @@ class Token256 : public IToken {
     Clock::time_point _created_at;
     std::chrono::seconds _ttl;
     Data _data;
-    std::string _token_hex;
+    std::string _token_hex
 
 public:
     Token256(TokenType type = TokenType::AUTH, uint64_t ttl_seconds = 86400)
