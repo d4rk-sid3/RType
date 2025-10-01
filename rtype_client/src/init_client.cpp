@@ -20,6 +20,7 @@ void load_client_textures(void)
     ResourceManager::Instance().load("assets/sprites/effects/hit_effect.gif", "hit_effect", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/background/background.jpg", "background", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/background/black.png", "black", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/background/wall1_shadow.png", "ceiling", TEXTURE);
 
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
@@ -143,9 +144,11 @@ void Client::initGame()
     printf("Player init\n");
     auto &pos = _reg.get_components<component::position>()[player_entity_id].value();
     pos.x = 50;
-    pos.y = 50;
+    pos.y = 150;
     factory.make_game_background_music();
-    _reg.kill_entity(menu_info.background);
+    factory.make_ceiling();
+    factory.make_floor();
+    // _reg.kill_entity(menu_info.background);
     _reg.kill_entity(menu_info.title);
     _reg.kill_entity(menu_info.start_text);
     _reg.kill_entity(menu_info.menu_background_music);
