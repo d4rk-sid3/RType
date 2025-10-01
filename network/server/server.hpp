@@ -3,6 +3,85 @@
 #include <array>
 #include <ctime>
 #include <sodium.h>
+#include <chrono>
+#include <cstdint>
+#include <iomanip>
+
+using Clock = std::chrono::steady_clock;
+
+enum class TokenType {
+    AUTH,
+    SESSION
+};
+
+class IToken {
+    public:
+        virtual ~IToken() = default;
+        virtual TokenType getType() const = 0;
+        virtual bool isExpired() const = 0;
+        virtual void createToken(const uint8_t* key, size_t key_len,
+            const void* message, size_t message_len) = 0;
+        virtual bool verifyToken(const std::string &token) const = 0;
+        template <size_t N>
+        static std::array<uint8_t, N> fromHex(const std::string& hex) {
+            if (hex.size() != N * 2) {
+                throw std::runtime_error("Invalid hex string length for token");
+            }
+            std::array<uint8_t, N> out{};
+            for (size_t i = 0; i < N; i++) {
+                std::string byteString = hex.substr(i * 2, 2);
+                out[i] = static_cast<uint8_t>(std::stoul(byteString, nullptr, 16));
+            }
+            return out;
+        }
+        static std::string toHex(std::array<uint8_t, N> &token) {
+            std::stringstream ss;
+
+            for (size_t i = 0; i < N; i++) {
+                ss << std::hex << std::setfill('0') << std::setw(2) << static_cast<int>(token[i]);
+            }
+            return ss.str();
+        }
+};
+
+class Token256 : public IToken {
+    using Data = std::array<uint8_t, 32>;
+
+    TokenType _type;
+    Clock::time_point _created_at;
+    std::chrono::seconds _ttl;
+    Data _data;
+    std::string _token_hex;
+
+public:
+    Token256(TokenType type = TokenType::AUTH, uint64_t ttl_seconds = 86400)
+        : _type(type),
+          _created_at(Clock::now()),
+          _ttl(std::chrono::seconds(ttl_seconds))
+    {
+    }
+    
+    TokenType getType() const override { return _type; }
+
+    bool isExpired() const override {
+        return Clock::now() - _created_at > _ttl;
+    }
+
+    uint64_t getTTL() const override { return _ttl.count(); }
+
+    void createToken(const uint8_t *key, size_t key_len,
+        const void* message, size_t message_len) override
+    {
+        crypto_auth_hmacsha256(_data.data(), static_cast<const uint8_t*>(message), message_len, key);
+        return;
+    }
+
+    bool verifyToken(const uint8_t* key, size_t key_len, const void* message, size_t message_len) const override
+    {
+    }
+
+    const Data& getData() const { return _data; }
+};
 
 class User_Stats {
     private:
@@ -29,7 +108,7 @@ class User {
         using Token256 = std::array<uint8_t,32>;
 
         User(size_t id, std::string username, std::string plain_password)
-        : id_(id), username_(std::move(username)) 
+        : _id(id), _username(std::move(username)) 
         {
             if (sodium_init() < 0) {
                 throw std::runtime_error("Failed to initialize libsodium");
@@ -53,7 +132,7 @@ class User {
         }
         void setAuthToken(const Token256& tok) {
             _auth_token = tok;
-            _auth_token_hex = bytesToHex(auth_token.data(), auth_token.size());
+            _auth_token_hex = bytesToHex(_auth_token.data(), _auth_token.size());
         }
         void setSessionToken(const Token128& tok) {
             _session_token = tok;
@@ -73,13 +152,14 @@ class User {
         size_t _id = 0;
         std::string _username;
         std::string _password_hash;
-        Token256 _auth_token{};
-        Token128 _session_token{};
+        Token256 _auth_token;
+        Token128 _session_token;
         std::string _auth_token_hex;
         std::string _session_token_hex;
         std::time_t _last_login_at = 0;
         Token256 _client_hash;
         User_Stats _stats;
+
 };
 
 class UserManager {
@@ -191,7 +271,7 @@ class UserManager {
         std::vector<User> listUsers() const {
             std::vector<User> out;
             out.reserve(_users.size());
-            for (const auto& kv : users_)
+            for (const auto& kv : users_)n
                 out.push_back(kv.second);
             return out;
         }
@@ -211,6 +291,8 @@ class UserManager {
             std::copy(full_token.begin(), full_token.begin() + 16, token.begin());
             return token;
         }
+
+
         
 };
 #endif /* defined(_Game_) */
