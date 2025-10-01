@@ -6,14 +6,24 @@
 #include <ctime>
 #include <sodium.h> // libsodium
 #include "server.hpp"
+#include <cstdlib>
 
 TokenManager* TokenManager::s_pInstance = nullptr;
 UserManager* UserManager::s_pInstance = nullptr;
 
 int main() {
     // === 2. Création d'une clé serveur (32 bytes aléatoires) ===
-    uint8_t server_key[32];
-    randombytes_buf(server_key, sizeof(server_key));
+    uint8_t *server_key;
+
+    char *secret_key = getenv("SERVER_SECRET_KEY");
+
+    if (secret_key != nullptr) {
+        std::cout << "PATH environment variable: " << secret_key << std::endl;
+    } else {
+        std::cout << "PATH environment variable not found." << std::endl;
+        exit(84);
+    }
+    server_key = reinterpret_cast<uint8_t*>(secret_key);
 
     // === 4. Création de users ===
     UserManager::Instance()->createUser("Alice", "password123");

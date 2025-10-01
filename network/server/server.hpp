@@ -10,6 +10,7 @@
 #include <iomanip>
 #include <unordered_map>
 #include <memory>
+#include <optional>
 #include <vector>
 #include <cstring>
 #include <random>
