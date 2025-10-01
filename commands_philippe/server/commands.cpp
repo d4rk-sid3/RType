@@ -171,14 +171,14 @@ std::vector<uint8_t> encodeGamePausedResponse(const GamePausedResponse& pos) {
     return buffer;
 }
 
-std::vector<uint8_t> encodeGameStateResponse(const GameStateResponse& pos, const std::vector<uint8_t> ids) {
+std::vector<uint8_t> encodeGameStateResponse(const GameStateResponse& pos) {
     std::vector<uint8_t> buffer;
 
     buffer.emplace_back(0x35);
 
     /// 
     buffer.emplace_back(pos.num_disconnected & 0xFF);
-    for (const auto& id: ids) {
+    for (const auto& id: pos.ids) {
         buffer.emplace_back((id >> 24) & 0xFF);
         buffer.emplace_back((id >> 16) & 0xFF);
         buffer.emplace_back((id >> 8) & 0xFF);

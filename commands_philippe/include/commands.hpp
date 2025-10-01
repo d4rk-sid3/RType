@@ -117,6 +117,7 @@ struct GamePausedResponse {
 struct GameStateResponse {
     uint8_t type;               // 0x35
     uint8_t num_disconnected;
+    std::vector<uint8_t> ids;
 };
 
 // Serveur -> Client

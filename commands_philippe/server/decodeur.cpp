@@ -125,3 +125,19 @@ GamePausedResponse decodeGamePausedResponse(const std::vector<uint8_t>& buffer)
     return pos;
 }
 
+GameStateResponse decodeGameStateResponse(const std::vector<uint8_t>& buffer)
+{
+    GameStateResponse pos;
+    int k = 2;
+
+    if (buffer[0] != 0x35) {
+        throw std::runtime_error("Invalid message type !");
+    }
+    pos.num_disconnected = buffer[1];
+    for (int i = 0; i < pos.num_disconnected; i++) {
+        pos.ids.emplace_back((buffer[k] << 24) | (buffer[k+1] << 16) | (buffer[k+2] << 8) | buffer[k+3]);
+        k +=4;
+    }
+    return pos;
+}
+
