@@ -75,7 +75,7 @@ struct PlayerGameStateResponse {
 
 //Serveur -> Client
 struct BeatBossResponse {
-    uint8_t type;               // 0x30
+    uint8_t type;            // 0x30
     uint32_t player_id;
     uint32_t boss_id;
     Vector2D player_position;

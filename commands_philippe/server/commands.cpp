@@ -1,5 +1,6 @@
 #include "../include/commands.hpp"
 
+
 std::vector<uint8_t> encodePlayerStateResponse(const PlayerStateResponse& pos) {
     std::vector<uint8_t> buffer;
 
