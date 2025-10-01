@@ -21,7 +21,6 @@ class IToken {
         virtual bool isExpired() const = 0;
         virtual void createToken(const uint8_t* key, size_t key_len,
             const void* message, size_t message_len) = 0;
-        virtual bool verifyToken(const IToken &token) const = 0;
         template <size_t N>
         static std::array<uint8_t, N> fromHex(const std::string& hex) {
             if (hex.size() != N * 2) {
@@ -111,7 +110,8 @@ class Token128 : public IToken {
             const void* message, size_t message_len) override
         {
             std::array<uint8_t, 32> full_hmac;
-            crypto_auth_hmacsha256(full_hmac.data(), static_cast<const uint8_t*>(message), message_len, key);
+            crypto_auth_hmacsha256(full_hmac.data(), static_cast<const uint8_t*>(message),
+                message_len, key);
             std::copy(full_hmac.begin(), full_hmac.begin() + 16, _data.begin());    
             _token_hex = IToken::toHex<16>(_data);
         }
@@ -119,6 +119,73 @@ class Token128 : public IToken {
         const std::string& getHex() const { return _token_hex; }
     };
 
+    class TokenManager {
+        private:
+            std::unordered_map<size_t, std::shared_ptr<IToken>> _tokens;
+            std::unordered_map<std::string, size_t> _hex_tokens;
+            size_t _next_id = 1;
+        
+            static TokenManager* s_pInstance;
+            TokenManager() = default;
+        
+        public:
+            ~TokenManager() = default;
+        
+            static TokenManager* Instance() {
+                if (!s_pInstance) {
+                    s_pInstance = new TokenManager();
+                }
+                return s_pInstance;
+            }
+        
+            TokenManager(const TokenManager&) = delete;
+            TokenManager& operator=(const TokenManager&) = delete;
+        
+            std::shared_ptr<IToken> createToken(TokenType type,
+                const uint8_t* key, size_t key_len,
+                const void* message, size_t message_len)
+            {
+                std::shared_ptr<IToken> token;
+        
+                if (type == TokenType::AUTH) {
+                    token = std::make_shared<Token256>(type);
+                } else {
+                    token = std::make_shared<Token128>(type);
+                }
+                token->createToken(key, key_len, message, message_len);
+        
+                _tokens[_next_id] = token;
+                _hex_tokens[token->getHex()] = id;
+                
+                _next_id++;
+                return token;
+            }
+
+            void deleteToken(size_t id)
+            {
+                auto it = _tokens.find(id);
+                if (it != _tokens.end()) {
+                    _hex_tokens.erase(it->second->getHex());
+                    _tokens.erase(it);
+                }
+            }
+        
+            bool verifyToken(const std::string& hex) const {
+                return _hex_tokens.count(hex) > 0;
+            }
+        
+            void update() {
+                std::vector<size_t> expired_ids;
+                for (auto& [id, token] : _tokens) {
+                    if (token->isExpired())
+                        expired_ids.push_back(id);
+                }
+                for (size_t id : expired_ids) {
+                    deleteToken(id);
+                }
+            }
+        };
+        
 class User_Stats {
     private:
         int _games_played = 0;
@@ -140,9 +207,6 @@ class User_Stats {
 
 class User {
     public:
-        using Token128 = std::array<uint8_t,16>;
-        using Token256 = std::array<uint8_t,32>;
-
         User(size_t id, std::string username, std::string plain_password)
         : _id(id), _username(std::move(username)) 
         {
@@ -188,12 +252,10 @@ class User {
         size_t _id = 0;
         std::string _username;
         std::string _password_hash;
-        Token256 _auth_token;
-        Token128 _session_token;
-        std::string _auth_token_hex;
-        std::string _session_token_hex;
+        std::shared_ptr<IToken> _auth_token;
+        std::shared_ptr<IToken> _session_token;
         std::time_t _last_login_at = 0;
-        Token256 _client_hash;
+        std::shared_ptr<IToken> _client_hash;
         User_Stats _stats;
 
 };
