@@ -40,28 +40,20 @@ void registry::register_all_systems() {
     register_components<component::controllable>();
     register_components<component::hurtbox>();
     register_components<component::hitbox>();
+    register_components<component::logic>();
+    register_components<component::audio>();
 
     add_system(
-        [
-            this,
-            &controllables = this->get_components<component::controllable>(),
-            &velocities = this->get_components<component::velocity>()
-        ]
-        (double delta) {
-            control_system(delta, *this, controllables);
-        }
+        [this, &controllables = this->get_components<component::controllable>(),
+         &velocities = this->get_components<component::velocity>()](double delta
+        ) { control_system(delta, *this, controllables); }
     );
 
-    add_system(
-        [
-            this,
-            &positions = this->get_components<component::position>(),
-            &velocities = this->get_components<component::velocity>()
-        ]
-        (double delta) {
-            position_system(delta, *this, positions, velocities);
-        }
-    );
+    add_system([this, &positions = this->get_components<component::position>(),
+                &velocities =
+                    this->get_components<component::velocity>()](double delta) {
+        position_system(delta, *this, positions, velocities);
+    });
 
     add_system(
         [
@@ -72,6 +64,16 @@ void registry::register_all_systems() {
         ]
         (double delta) {
             collision_system(delta, *this, positions, hurtboxes, hitboxes);
+        }
+    );
+ 
+    add_system(
+        [
+            this,
+            &logics = this->get_components<component::logic>()
+        ]
+        (double delta) {
+            logic_system(delta, *this, logics);
         }
     );
 }
@@ -95,6 +97,8 @@ registry::registry(sf::RenderWindow& _window) : window(_window) {
     register_all_systems();
 
     register_components<component::drawable>();
+    register_components<component::animated_drawable>();
+    register_components<component::text>();
 
     add_system(
         [
@@ -102,10 +106,11 @@ registry::registry(sf::RenderWindow& _window) : window(_window) {
             &window = this->window,
             &positions = this->get_components<component::position>(),
             &draws = this->get_components<component::drawable>(),
-            &anim_draws = this->get_components<component::animated_drawable>()
+            &anim_draws = this->get_components<component::animated_drawable>(),
+            &texts = this->get_components<component::text>()
         ]
         (double delta) {
-            draw_system(delta, *this, window, positions, draws, anim_draws);
+            draw_system(delta, *this, window, positions, draws, anim_draws, texts);
         }
     );
 }
@@ -116,8 +121,7 @@ registry::registry(sf::RenderWindow& _window) : window(_window) {
  *
  * @param system a lambda capturing by reference all the needed components
  */
-void registry::add_system(const function<void(double)> &system)
-{
+void registry::add_system(const function<void(double)>& system) {
     _systems.push_back(system);
 }
 
@@ -125,8 +129,7 @@ void registry::add_system(const function<void(double)> &system)
  * @brief This function runs all the systems registered in the registry
  *
  */
-void registry::run_systems(double delta)
-{
+void registry::run_systems(double delta) {
     for (const auto& system : _systems) {
         system(delta);
     }

@@ -54,7 +54,7 @@ void NetworkManager::receive()
 
 }
 
-void NetworkManager::send(const u_int8_t *msg, size_t size, const asio::ip::udp::endpoint& client)
+void NetworkManager::send(const std::vector<u_int8_t> &msg, size_t size, const asio::ip::udp::endpoint& client)
 {
     socket.async_send_to(asio::buffer(msg, size), client, 
         [this](std::error_code error, std::size_t byte_send) {
