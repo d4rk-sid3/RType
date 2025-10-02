@@ -41,9 +41,11 @@
  * @param velocities The table of velocities components
  * @param controls The table of control components
  */
-void position_system(double delta, registry &reg,
-                                std::vector<optional<component::position>> &positions,
-                                std::vector<optional<component::velocity>> &velocities);
+void position_system(
+    double delta, registry& reg,
+    std::vector<optional<component::position>>& positions,
+    std::vector<optional<component::velocity>>& velocities
+);
 
 /**
  * @brief
@@ -66,9 +68,10 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
  * @param reg The reference to the registry
  * @param controls The controllable components
  */
-void control_system(double delta, registry &reg,
-                        std::vector<optional<component::controllable>> &controls);
-
+void control_system(
+    double delta, registry& reg,
+    std::vector<optional<component::controllable>>& controls
+);
 
 /**
  * @brief The collision system goes through each hurtbox and hitbox component
@@ -79,17 +82,22 @@ void control_system(double delta, registry &reg,
  * @param hurtboxes The hurtbox components
  * @param hitboxes The hitbox components
  */
-void collision_system(double delta, registry &reg, std::vector<optional<component::position>> &positions,
-    std::vector<optional<component::hurtbox>> &hurtboxes,
-    std::vector<optional<component::hitbox>> &hitboxes);
-
+void collision_system(
+    double delta, registry& reg,
+    std::vector<optional<component::position>>& positions,
+    std::vector<optional<component::hurtbox>>& hurtboxes,
+    std::vector<optional<component::hitbox>>& hitboxes
+);
 
 /**
- * @brief The logic system goes through each entity with a logic component and executes its logic function
+ * @brief The logic system goes through each entity with a logic component and
+ * executes its logic function
  * @param reg The reference to the registry
  * @param logics The logic components
  */
-void logic_system(double delta, registry &reg, std::vector<optional<component::logic>> &logics);
+void logic_system(
+    double delta, registry& reg, std::vector<optional<component::logic>>& logics
+);
 #endif
 
 /* ------------------------------------------------------------------------------------

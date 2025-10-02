@@ -37,9 +37,6 @@
 #include <typeindex>
 #include <unordered_map>
 #include <vector>
-
-#include <SFML/Graphics.hpp>
-
 #include "entity.hpp"
 #include "exceptions.hpp"
 #include "ResourceManager.hpp"
@@ -79,9 +76,9 @@ class registry {
     entity spawn_entity();
     void kill_entity(const entity& e);
 
-        /* Systems managment */
-        void add_system(const function<void(double)> &system);
-        void run_systems(double delta);
+    /* Systems managment */
+    void add_system(const function<void(double)>& system);
+    void run_systems(double delta);
 
     /* Getters */
     /**
@@ -124,14 +121,14 @@ class registry {
     unordered_map<type_index, any> _components_arrays;
     unordered_map<type_index, function<void(const entity&)>> _erase_functions;
 
-        vector<function<void(double)>> _systems;
+    vector<function<void(double)>> _systems;
 
     size_t entity_num = 0;
 
-        sf::RenderWindow &window;
-        sf::RenderWindow tmp;
+    sf::RenderWindow& window;
+    sf::RenderWindow tmp;
 
-        sf::Clock clock;
+    sf::Clock clock;
 
     void register_all_systems();
 };

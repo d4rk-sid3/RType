@@ -1,4 +1,23 @@
 var searchData=
 [
-  ['entity_0',['entity',['../classentity.html#a809636ddb2bc7eee38f2fb0e49c6c1e9',1,'entity::entity(size_t new_id)'],['../classentity.html#ac20edb72e9e89b902bf14b68773c1697',1,'entity::entity()']]]
+  ['encodebeatbossresponse_0',['encodeBeatBossResponse',['../classServer.html#aac781cbf92abc172c313ace7fbcc65f8',1,'Server']]],
+  ['encodecheckpointresponse_1',['encodeCheckpointResponse',['../classServer.html#afc745549a0ecacc35d463d36bbe4ba05',1,'Server']]],
+  ['encodecollisionresponse_2',['encodeCollisionResponse',['../classServer.html#a0fb2d22a0d1eb046c049b82a79c732eb',1,'Server']]],
+  ['encodedenemyfiredresponse_3',['encodedEnemyFiredResponse',['../classServer.html#aee58c642a87258c2e819f0409e1d65c4',1,'Server']]],
+  ['encodeenemydiedresponse_4',['encodeEnemyDiedResponse',['../classServer.html#a9f663d7647b941124042ed32a3006895',1,'Server']]],
+  ['encodeenemymovedresponse_5',['encodeEnemyMovedResponse',['../classServer.html#a431b4468ba1b4e2848df0cea51eb0768',1,'Server']]],
+  ['encodeenemyspawnedresponse_6',['encodeEnemySpawnedResponse',['../classServer.html#a9dffe4abf86ad6213d9f2e50286143f7',1,'Server']]],
+  ['encodegamepausedrequest_7',['encodeGamePausedRequest',['../classClient.html#aad80b7b7afcac04d7b5e604f87b53e8d',1,'Client']]],
+  ['encodegamepausedresponse_8',['encodeGamePausedResponse',['../classServer.html#a51ecc8d24764b3809702efb5b25f59ab',1,'Server']]],
+  ['encodegamestartedresponse_9',['encodeGameStartedResponse',['../classServer.html#aca81a7c13aeab7ab2485e9f120bfdf9b',1,'Server']]],
+  ['encodegamestateresponse_10',['encodeGameStateResponse',['../classServer.html#a27369b4da1993ffb92b39e25bd85d085',1,'Server']]],
+  ['encodemoveresponse_11',['encodeMoveResponse',['../classServer.html#aeee1cefc8f6f43e04e70e9593cb05955',1,'Server']]],
+  ['encodemoveresquest_12',['encodeMoveResquest',['../classClient.html#af3029761b631ea17ad55e2d749229a01',1,'Client']]],
+  ['encodepickupitemresponse_13',['encodePickupItemResponse',['../classServer.html#aa3d0d12484e40a4e3f964a58a7bc625f',1,'Server']]],
+  ['encodepickupitemresquest_14',['encodePickupItemResquest',['../classClient.html#aca12dd319cdd15c22eb169aad6b629de',1,'Client']]],
+  ['encodeplayergamestateresponse_15',['encodePlayerGameStateResponse',['../classServer.html#aa94377590f8bb2e20663483eff3d92ea',1,'Server']]],
+  ['encodeplayerstateresponse_16',['encodePlayerStateResponse',['../classServer.html#a2959bb2da8ebd56e82cb5bbf91b7d476',1,'Server']]],
+  ['encodeshootresponse_17',['encodeShootResponse',['../classServer.html#a9c221ee8a87adbc5b856eb080bebad3c',1,'Server']]],
+  ['encodeshootresquest_18',['encodeShootResquest',['../classClient.html#a20ab0436a6aa414d2c18969b0d5bea5d',1,'Client']]],
+  ['entity_19',['entity',['../classentity.html#a809636ddb2bc7eee38f2fb0e49c6c1e9',1,'entity::entity(size_t new_id)'],['../classentity.html#ac20edb72e9e89b902bf14b68773c1697',1,'entity::entity()']]]
 ];

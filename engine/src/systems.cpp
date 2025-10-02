@@ -28,23 +28,27 @@
  *
  */
 
-#include "../include/registry.hpp"
 #include "../include/components.hpp"
+#include "../include/registry.hpp"
 
-void position_system(double delta, registry &reg, std::vector<optional<component::position>> &positions,
-                                std::vector<optional<component::velocity>> &velocities)
-{
-        for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
-            try {
-                auto &pos = positions.at(i);
-                auto &vel = velocities.at(i);
+void position_system(
+    double delta, registry& reg,
+    std::vector<optional<component::position>>& positions,
+    std::vector<optional<component::velocity>>& velocities
+) {
+    for (size_t i = 0; i < reg.getEntityNum(); ++i) {
+        try {
+            auto& pos = positions.at(i);
+            auto& vel = velocities.at(i);
 
-                if (pos && vel) {
-                    pos.value().setPosition(vel.value().vx * delta,  vel.value().vy * delta);
-                }
-            } catch (...) {
+            if (pos && vel) {
+                pos.value().setPosition(
+                    vel.value().vx * delta, vel.value().vy * delta
+                );
             }
+        } catch (...) {
         }
+    }
 }
 
 void draw_system(double delta, registry &reg, sf::RenderWindow &window,
@@ -67,8 +71,8 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
         } catch (...) {
         }
         try {
-            auto &pos = positions.at(i);
-            auto &anim_draw = anim_draws.at(i);
+            auto& pos = positions.at(i);
+            auto& anim_draw = anim_draws.at(i);
 
             if (pos && anim_draw) {
                 anim_draw.value().animate(delta);
@@ -95,13 +99,15 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
     window.display();
 }
 
-void control_system(double delta, registry &reg, std::vector<optional<component::controllable>> &controls)
-{
-    for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
+void control_system(
+    double delta, registry& reg,
+    std::vector<optional<component::controllable>>& controls
+) {
+    for (size_t i = 0; i < reg.getEntityNum(); ++i) {
         try {
             if (i >= controls.size() || !controls.at(i).has_value())
                 continue;
-            auto &control = controls.at(i).value();
+            auto& control = controls.at(i).value();
 
             control.getKeyboardInput();
         } catch (...) {
@@ -109,11 +115,13 @@ void control_system(double delta, registry &reg, std::vector<optional<component:
     }
 }
 
-void collision_system(double delta, registry &reg, std::vector<optional<component::position>> &positions,
-    std::vector<optional<component::hurtbox>> &hurtboxes,
-    std::vector<optional<component::hitbox>> &hitboxes)
-{
-    for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
+void collision_system(
+    double delta, registry& reg,
+    std::vector<optional<component::position>>& positions,
+    std::vector<optional<component::hurtbox>>& hurtboxes,
+    std::vector<optional<component::hitbox>>& hitboxes
+) {
+    for (size_t i = 0; i < reg.getEntityNum(); ++i) {
         try {
             // Go through each hurtbox and their positions
             auto& pos = positions.at(i);
@@ -127,9 +135,25 @@ void collision_system(double delta, registry &reg, std::vector<optional<componen
                     auto& hitbox = hitboxes.at(j);
 
                     if (hit_pos && hitbox) {
-                        // Create the hitbox and hurtbox rects with their dimensions
-                        sf::IntRect hurt_rect = sf::IntRect(sf::Vector2i((int)(pos.value().x), (int)(pos.value().y)), sf::Vector2i(hurtbox.value().width, hurtbox.value().height));
-                        sf::IntRect hit_rect = sf::IntRect(sf::Vector2i((int)(hit_pos.value().x), (int)(hit_pos.value().y)), sf::Vector2i(hitbox.value().width, hitbox.value().height));
+                        // Create the hitbox and hurtbox rects with their
+                        // dimensions
+                        sf::IntRect hurt_rect = sf::IntRect(
+                            sf::Vector2i(
+                                (int)(pos.value().x), (int)(pos.value().y)
+                            ),
+                            sf::Vector2i(
+                                hurtbox.value().width, hurtbox.value().height
+                            )
+                        );
+                        sf::IntRect hit_rect = sf::IntRect(
+                            sf::Vector2i(
+                                (int)(hit_pos.value().x),
+                                (int)(hit_pos.value().y)
+                            ),
+                            sf::Vector2i(
+                                hitbox.value().width, hitbox.value().height
+                            )
+                        );
 
                         if (hurt_rect.intersects(hit_rect) &&
                             hurtbox.value().group ==
@@ -147,14 +171,15 @@ void collision_system(double delta, registry &reg, std::vector<optional<componen
             }
         } catch (...) {
         }
-    }  
+    }
 }
 
-void logic_system(double delta, registry &reg, std::vector<optional<component::logic>> &logics)
-{
-    for (size_t i = 0; i < reg.getEntityNum(); ++ i) {
+void logic_system(
+    double delta, registry& reg, std::vector<optional<component::logic>>& logics
+) {
+    for (size_t i = 0; i < reg.getEntityNum(); ++i) {
         try {
-            auto &logic = logics.at(i);
+            auto& logic = logics.at(i);
 
             if (logic) {
                 logic.value().logic_function(delta, reg, entity(i));

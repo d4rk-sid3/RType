@@ -25,51 +25,51 @@ void load_client_textures(void)
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
 
-
 Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, "client"), _reg(reg)
 {
     load_client_textures();
     initMenu();
 
-    // asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
+    asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
 
-    // std::thread input_thread([this, server_endpoint]() {
-    //     std::string input;
-    //     while (std::getline(std::cin, input)) {
-    //         MoveRequest resq;
-    //         resq.type = 0x23;
+    std::thread input_thread([this, server_endpoint]() {
+        std::string input;
+        while (std::getline(std::cin, input)) {
+            MoveRequest resq;
+            resq.type = 0x23;
 
-    //         if (input == "up")
-    //             resq.dir = UP;
-    //         else if (input == "down")
-    //             resq.dir = DOWN;
-    //         else if (input == "left")
-    //             resq.dir = LEFT;
-    //         else if (input == "right")
-    //             resq.dir = RIGHT; 
-    //         else
-    //             continue;
+            if (input == "up")
+                resq.direction = UP;
+            else if (input == "down")
+                resq.direction = DOWN;
+            else if (input == "left")
+                resq.direction = LEFT;
+            else if (input == "right")
+                resq.direction = RIGHT; 
+            else
+                continue;
+            
+            std::vector<uint8_t> buff = encodeMoveResquest(resq);
 
-    //         this->client_.send(reinterpret_cast<uint8_t*>(&resq), sizeof(resq), server_endpoint);
-    //     }
-    // });
+            this->client_.send(buff, buff.size(), server_endpoint);
+        }
+    });
 
-    // while (1) {
+    while (1) {
 
-    //     client_.poll();
+        client_.poll();
 
-    //     auto msg = client_.getLastMsg();
-    //     if (!msg.first.empty()) {
-    //         MoveResponse res{};
-    //         std::memcpy(&res, msg.first.data(), sizeof(MoveResponse));
-    //         if (res.type == 0x24) {
-    //             std::cout << "Serveur: Player " << res.player_id
-    //                     << " se déplace vers " << res.direction.x << ", " << res.direction.y
-    //                     << std::endl;
-    //         }
-    //     }
-    // }
-    // input_thread.detach();
+        auto msg = client_.getLastMsg();
+        if (!msg.first.empty()) {
+            MoveResponse res = decodeMoveResponse(msg.first);
+            if (res.type == 0x24) {
+                std::cout << "Serveur: Player " << res.player_id
+                        << " se déplace vers " << res.direction.x << ", " << res.direction.y
+                        << std::endl;
+            }
+        }
+    }
+    input_thread.detach();
 }
 
 void Client::runLevel(double delta)
@@ -83,7 +83,6 @@ void Client::runLevel(double delta)
         }
 
         auto &pos = _reg.get_components<component::position>()[entity].value();
-
         if (pos.x < -100 || pos.x > 1200) {
             _reg.kill_entity(entity);
             it = active_entities.erase(it);

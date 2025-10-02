@@ -7,7 +7,6 @@ var searchData=
   ['menu_5ffade_5fout_5frect_4',['menu_fade_out_rect',['../structmenu__info__s.html#a89db81451f697d52e008e95562363c19',1,'menu_info_s']]],
   ['menu_5finfo_5fs_5',['menu_info_s',['../structmenu__info__s.html',1,'']]],
   ['menu_5finfo_5ft_6',['menu_info_t',['../client_8hpp.html#a02538eb94f2146a51ffae5bc113fa7ac',1,'client.hpp']]],
-  ['movemanage_2ecpp_7',['movemanage.cpp',['../movemanage_8cpp.html',1,'']]],
-  ['moverequest_20getmovekey_20tt_8',['&lt;tt&gt;MoveRequest getMoveKey()&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md5',1,'']]],
-  ['moveresponse_20recupmove_20tt_9',['&lt;tt&gt;MoveResponse recupMove(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md12',1,'']]]
+  ['moverequest_20getmovekey_20tt_7',['&lt;tt&gt;MoveRequest getMoveKey()&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md5',1,'']]],
+  ['moveresponse_20recupmove_20tt_8',['&lt;tt&gt;MoveResponse recupMove(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md12',1,'']]]
 ];

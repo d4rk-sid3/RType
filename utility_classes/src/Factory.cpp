@@ -30,6 +30,7 @@
 
 Factory::Factory(registry& _reg) : reg(_reg) {}
 
+<<<<<<< HEAD
 entity Factory::make_entity(const std::string& type) {
     if (type == "player")
         return make_player();
@@ -44,19 +45,26 @@ entity Factory::make_entity(const std::string& type) {
     return entity(-1);
 }
 
+=======
+>>>>>>> origin/Basic_Communication
 entity Factory::make_player() {
     entity player_id = reg.spawn_entity();
 
     auto& player_sprite = reg.add_component<component::drawable>(
         player_id, component::drawable()
     );
+<<<<<<< HEAD
     player_sprite.setTextureFromName("player");
+=======
+    player_sprite.setTextureFromName("assets/sprites/player/player.gif");
+>>>>>>> origin/Basic_Communication
 
     reg.add_component<component::position>(player_id, {0, 0});
     reg.add_component<component::velocity>(player_id, {0, 0});
     reg.add_component<component::controllable>(
         player_id, component::controllable()
     );
+<<<<<<< HEAD
     reg.add_component<component::logic>(
         player_id, component::logic{player_logic}
     );
@@ -141,6 +149,47 @@ entity Factory::make_red_trooper() {
     troper_sprite.setFrameRect(33, 36);
     troper_sprite.frame_duration = 0.25;
     troper_sprite.setTextureFromName("red_trooper");
+=======
+}
+
+entity Factory::make_player_missile() {
+    entity missile_id = reg.spawn_entity();
+
+    auto& missile_sprite = reg.add_component<component::drawable>(
+        missile_id, component::drawable()
+    );
+    missile_sprite.setTextureFromName("assets/sprites/player/player_missile.gif"
+    );
+
+    reg.add_component<component::position>(missile_id, {0, 0});
+    reg.add_component<component::velocity>(
+        missile_id, {PLAYER_MISSISLE_SPEED, 0}
+    );
+}
+
+entity Factory::make_enemy_missile() {
+    entity missile_id = reg.spawn_entity();
+
+    auto& missile_sprite = reg.add_component<component::drawable>(
+        missile_id, component::drawable()
+    );
+    missile_sprite.setTextureFromName("assets/sprites/enemies/enemy_missile.gif"
+    );
+
+    reg.add_component<component::position>(missile_id, {0, 0});
+    reg.add_component<component::velocity>(
+        missile_id, {ENEMY_MISSISLE_SPEED, 0}
+    );
+}
+
+entity Factory::make_red_trooper() {
+    entity troper_id = reg.spawn_entity();
+
+    auto& troper_sprite = reg.add_component<component::drawable>(
+        troper_id, component::drawable()
+    );
+    troper_sprite.setTextureFromName("assets/sprites/enemies/red_trooper.gif");
+>>>>>>> origin/Basic_Communication
 
     reg.add_component<component::position>(troper_id, {0, 0});
     reg.add_component<component::velocity>(troper_id, {-WALKER_SPEED, 0});
@@ -168,12 +217,19 @@ entity Factory::make_red_trooper() {
 entity Factory::make_walker() {
     entity walker_id = reg.spawn_entity();
 
+<<<<<<< HEAD
     auto& walker_sprite = reg.add_component<component::animated_drawable>(
         walker_id, component::animated_drawable()
     );
     walker_sprite.setFrameRect(33, 33);
     walker_sprite.frame_duration = 0.25;
     walker_sprite.setTextureFromName("walker");
+=======
+    auto& troper_sprite = reg.add_component<component::drawable>(
+        walker_id, component::drawable()
+    );
+    troper_sprite.setTextureFromName("assets/sprites/enemies/walker.gif");
+>>>>>>> origin/Basic_Communication
 
     reg.add_component<component::position>(walker_id, {0, 0});
     reg.add_component<component::velocity>(walker_id, {-WALKER_SPEED, 0});
@@ -181,6 +237,7 @@ entity Factory::make_walker() {
     return walker_id;
 }
 
+<<<<<<< HEAD
 entity Factory::make_explosion() {
     entity explosion_id = reg.spawn_entity();
 
@@ -226,15 +283,21 @@ entity Factory::make_hit_effect() {
     return hit_effect_id;
 }
 
+=======
+>>>>>>> origin/Basic_Communication
 entity Factory::make_ceiling() {
     entity ceiling_id = reg.spawn_entity();
 
     auto& ceiling_sprite = reg.add_component<component::drawable>(
         ceiling_id, component::drawable()
     );
+<<<<<<< HEAD
     ceiling_sprite.setTextureFromName("ceiling");
     ceiling_sprite.sprite.setTextureRect(sf::IntRect(0, 0, 100000, 64));
     ResourceManager::Instance().getTexture("ceiling").setRepeated(true);
+=======
+    ceiling_sprite.setTextureFromName("assets/sprites/background/ceiling.gif");
+>>>>>>> origin/Basic_Communication
 
     auto &floor_hitbox = reg.add_component<component::hitbox>(ceiling_id, component::hitbox());
     floor_hitbox.damage = 10;
@@ -253,9 +316,13 @@ entity Factory::make_floor() {
 
     auto& floor_sprite =
         reg.add_component<component::drawable>(floor_id, component::drawable());
+<<<<<<< HEAD
     floor_sprite.setTextureFromName("ceiling");
     floor_sprite.sprite.setTextureRect(sf::IntRect(0, 0, 100000, 64));
     ResourceManager::Instance().getTexture("ceiling").setRepeated(true);
+=======
+    floor_sprite.setTextureFromName("assets/sprites/background/floor.gif");
+>>>>>>> origin/Basic_Communication
 
     auto &floor_hitbox = reg.add_component<component::hitbox>(floor_id, component::hitbox());
     floor_hitbox.damage = 10;
@@ -290,9 +357,15 @@ entity Factory::make_background() {
     auto& background_sprite = reg.add_component<component::drawable>(
         background_id, component::drawable()
     );
+<<<<<<< HEAD
     background_sprite.setTextureFromName("background");
     background_sprite.sprite.setTextureRect(sf::IntRect(0, 0, 100000, 500));
     ResourceManager::Instance().getTexture("background").setRepeated(true);
+=======
+    background_sprite.setTextureFromName(
+        "assets/sprites/background/background.jpg"
+    );
+>>>>>>> origin/Basic_Communication
 
     reg.add_component<component::position>(background_id, {0, 0});
     reg.add_component<component::velocity>(
