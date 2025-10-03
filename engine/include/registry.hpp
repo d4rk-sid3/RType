@@ -37,10 +37,12 @@
 #include <typeindex>
 #include <unordered_map>
 #include <vector>
+
+#include <SFML/Graphics.hpp>
+
+#include "ResourceManager.hpp"
 #include "entity.hpp"
 #include "exceptions.hpp"
-#include "ResourceManager.hpp"
-#include <SFML/Graphics.hpp>
 
 using namespace std;
 
@@ -50,7 +52,6 @@ using namespace std;
  */
 class registry {
   public:
-
     vector<entity> dead_entities;
 
     registry(sf::RenderWindow& window);
@@ -60,8 +61,7 @@ class registry {
     template <typename Component>
     vector<optional<Component>>& register_components();
 
-    template <typename Component>
-    vector<optional<Component>>& get_components();
+    template <typename Component> vector<optional<Component>>& get_components();
 
     template <typename Component>
     vector<optional<Component>> const& get_components() const;

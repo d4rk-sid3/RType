@@ -7,11 +7,12 @@
 
 #ifndef SERVER_HPP_
 #define SERVER_HPP_
-#include "Network.hpp"
-#include <vector>
 #include <algorithm>
-#include "registry.hpp"
+#include <vector>
+
 #include "Factory.hpp"
+#include "Network.hpp"
+#include "registry.hpp"
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -28,29 +29,22 @@ typedef struct entity_info_s {
 class Server {
   private:
     int p_;
-    registry &reg;
-    Factory &factory;
+    registry& reg;
+    Factory& factory;
     double levelTimer = 0.0;
-  
-    void loadLevel(const std::string &path);
+
+    void loadLevel(const std::string& path);
     void spawn_player(void);
-    
-    MoveResponse response;
-    MoveRequest move;
+
     NetworkManager server_;
 
     std::vector<entity_info_t> entities;
     std::vector<entity> active_entities;
 
-    public:
+  public:
     void runLevel(double delta);
-    Server(int p, registry &reg, Factory &fac);
+    Server(int p, registry& reg, Factory& fac);
     ~Server();
-    MoveResponse getMove();
-    MoveResponse recupMove(
-        const std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint>& a,
-        MoveRequest& m
-    );
 
     // update
     MoveResponse
@@ -70,6 +64,12 @@ class Server {
     );
 
     // encodeur
+    std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos);
+    std::vector<uint8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos
+    );
+
+
+
     std::vector<uint8_t> encodeMoveResponse(const MoveResponse& pos);
     std::vector<uint8_t> encodeShootResponse(const ShootResponse& pos);
     std::vector<uint8_t> encodePickupItemResponse(const PickupItemResponse& pos
@@ -88,8 +88,6 @@ class Server {
     std::vector<uint8_t> encodeGameStateResponse(const GameStateResponse& pos);
     std::vector<uint8_t>
     encodeEnemySpawnedResponse(const EnemySpawnedResponse& pos);
-    std::vector<uint8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos
-    );
     std::vector<uint8_t> encodedEnemyFiredResponse(const EnemyFiredResponse& pos
     );
     std::vector<uint8_t> encodeEnemyDiedResponse(const EnemyDiedResponse& pos);

@@ -25,59 +25,58 @@
 #include <iostream>
 #include <map>
 
-#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 
-typedef enum {
-    TEXTURE,
-    FONT
-} resource_type;
+typedef enum { TEXTURE, FONT } resource_type;
 
 class ResourceManager {
-    private:
-        std::map<std::string, sf::Texture> m_textureMap;
-        std::map<std::string, sf::Font> m_fontMap;
+  private:
+    std::map<std::string, sf::Texture> m_textureMap;
+    std::map<std::string, sf::Font> m_fontMap;
 
-        ResourceManager() {}
-    public:
-        ~ResourceManager() {}
+    ResourceManager() {}
 
-        static ResourceManager& Instance() {
-            static ResourceManager instance;
-            return instance;
-        }
+  public:
+    ~ResourceManager() {}
 
-        bool load(const std::string& fileName, const std::string& id, resource_type type) {
-            if (type == FONT) {
-                sf::Font font;
+    static ResourceManager& Instance() {
+        static ResourceManager instance;
+        return instance;
+    }
 
-                if (!font.loadFromFile(fileName)) {
-                    return false;
-                }
+    bool load(
+        const std::string& fileName, const std::string& id, resource_type type
+    ) {
+        if (type == FONT) {
+            sf::Font font;
 
-                m_fontMap[id] = std::move(font);
-                return true;
-            }
-            else if (type == TEXTURE) {
-                sf::Texture texture;
-
-                if (!texture.loadFromFile(fileName)) {
-                    return false;
-                }
-
-                m_textureMap[id] = std::move(texture);
-                return true;
-            } else {
+            if (!font.loadFromFile(fileName)) {
                 return false;
             }
-        }
 
-        sf::Texture& getTexture(const std::string& id) {
-            return m_textureMap.at(id);
+            m_fontMap[id] = std::move(font);
+            return true;
+        } else if (type == TEXTURE) {
+            sf::Texture texture;
+
+            if (!texture.loadFromFile(fileName)) {
+                return false;
+            }
+
+            m_textureMap[id] = std::move(texture);
+            return true;
+        } else {
+            return false;
         }
-        sf::Font &getFont(const std::string& id) {
-            return m_fontMap.at(id);
-        }
+    }
+
+    sf::Texture& getTexture(const std::string& id) {
+        return m_textureMap.at(id);
+    }
+    sf::Font& getFont(const std::string& id) {
+        return m_fontMap.at(id);
+    }
 };
 
 #endif

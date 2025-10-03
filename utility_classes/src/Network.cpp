@@ -36,6 +36,13 @@ void NetworkManager::poll()
     }
 }
 
+void NetworkManager::run()
+{
+    if (isrunning) {
+        context.run();
+    }
+}
+
 void NetworkManager::receive()
 {
     socket.async_receive_from(asio::buffer(buff), last_sender_, 
@@ -48,7 +55,6 @@ void NetworkManager::receive()
             if (isrunning) {
                 receive();
             }
-        
         }
     );
 
@@ -69,7 +75,6 @@ void NetworkManager::send(const std::vector<u_int8_t> &msg, size_t size, const a
 
 std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint> NetworkManager::getLastMsg()
 {
-    std::lock_guard<std::mutex> lock(mtx);
     if (messages.empty())
         return {};
     auto msg = messages.front();

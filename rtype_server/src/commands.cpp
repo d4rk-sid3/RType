@@ -38,6 +38,19 @@ std::vector<uint8_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& 
     return buffer;
 }
 
+std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
+{
+    std::vector <uint8_t> buffer;
+
+    buffer.emplace_back(0x38);
+
+    buffer.emplace_back(pos.nbr);
+    return buffer;
+}
+
+
+
+
 std::vector<uint8_t> Server::encodeMoveResponse(const MoveResponse& pos)
 {
     std::vector<uint8_t> buffer;

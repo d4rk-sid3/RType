@@ -44,9 +44,25 @@ struct Vector2D {
     uint16_t y;
 };
 
+enum EnemyType : uint8_t { TYPE_1 = 1, TYPE_2 = 2, TYPE_3 = 3, TYPE_4 = 4 };
+
 struct Timestamp {
     uint64_t milliseconds;
 };
+
+// Serveur -> Client
+struct EnemyMovedResponse {
+    uint8_t type; // 0x37
+    uint32_t enemy_id;
+    EnemyType enemy_type;
+    Vector2D position;
+};
+
+struct NbrEntity {
+    uint8_t type; // 0x38
+    uint8_t nbr;
+};
+
 
 // Client -> Serveur
 struct MoveRequest {
@@ -100,8 +116,6 @@ enum GameState : uint8_t { PAUSE = 0, IN_GAME = 1 };
 enum BossState : uint8_t { LOST = 0, WON = 1 };
 
 enum PauseState : uint8_t { PAUSED = 0, RESUMED = 1 };
-
-enum EnemyType : uint8_t { TYPE_1 = 1, TYPE_2 = 2, TYPE_3 = 3, TYPE_4 = 4 };
 
 enum CollisionType : uint8_t {
     BULLET_BULLET = 0,
@@ -189,14 +203,6 @@ struct EnemySpawnedResponse {
     Timestamp timestamp;
 };
 
-// Serveur -> Client
-struct EnemyMovedResponse {
-    uint8_t type; // 0x37
-    uint32_t enemy_id;
-    EnemyType enemy_type;
-    Vector2D position;
-};
-
 struct EnemyFiredResponse {
     uint8_t type; // 0x38
     uint32_t enemy_id;
@@ -228,6 +234,7 @@ class NetworkManager {
     NetworkManager(int port, std::string address = "");
     ~NetworkManager();
     void poll();
+    void run();
     void receive();
     void send(
         const std::vector<u_int8_t>& msg, size_t size,

@@ -33,6 +33,26 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(const std::vector<uint8_t>& 
     return pos;
 }
 
+NbrEntity Client::decodeNbrEntity(const std::vector<uint8_t>& buffer)
+{
+    NbrEntity pos;
+
+    if (buffer[0] != 0x38) {
+        throw std::runtime_error("Invalid message type !");
+    }
+
+    pos.type = buffer[0];
+    pos.nbr = buffer[1];
+    return pos;
+}
+
+
+
+
+
+
+
+
 MoveResponse Client::decodeMoveResponse(const std::vector<uint8_t>& buffer)
 {
     MoveResponse pos;

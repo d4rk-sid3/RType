@@ -7,11 +7,12 @@
 
 #ifndef CLIENT_HPP_
 #define CLIENT_HPP_
-#include "../../utility_classes/include/Network.hpp"
-#include <vector>
 #include <algorithm>
-#include "registry.hpp"
+#include <vector>
+
+#include "../../utility_classes/include/Network.hpp"
 #include "Factory.hpp"
+#include "registry.hpp"
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -25,12 +26,7 @@ typedef struct entity_info_s {
     double spawn_y;
 } entity_info_t;
 
-typedef enum {
-    MENU,
-    TRANSITION,
-    GAME,
-    GAME_OVER
-}state_t;
+typedef enum { MENU, TRANSITION, GAME, GAME_OVER } state_t;
 
 typedef struct menu_info_s {
     entity background;
@@ -38,32 +34,33 @@ typedef struct menu_info_s {
     entity start_text;
     entity menu_background_music;
     entity menu_fade_in_rect;
-    entity menu_fade_out_rect;    
+    entity menu_fade_out_rect;
 } menu_info_t;
 
 class Client {
   private:
-    registry &_reg;
+    registry& _reg;
     int port_;
     menu_info_t menu_info;
     double levelTimer = 0.0;
     std::vector<entity> active_entities;
-    MoveRequest move;
-    MoveResponse check;
     NetworkManager client_;
 
-    public:
+  public:
     state_t state = MENU;
-    Client(int p, std::string a, registry &reg);
+    Client(int p, std::string a, registry& reg);
     ~Client();
-    MoveRequest getMoveKey();
 
     void initMenu();
     void runMenu(double delta);
     void initGame();
     void runLevel(double delta);
-    
+
     // decodeur
+    NbrEntity decodeNbrEntity(const std::vector<uint8_t>& buffer);
+    EnemyMovedResponse decodeEnemyMovedResponse(const std::vector<uint8_t>& buffer);
+
+
     MoveResponse decodeMoveResponse(const std::vector<uint8_t>& buffer);
     ShootResponse decodeShootResponse(const std::vector<uint8_t>& buffer);
     PickupItemResponse
@@ -83,9 +80,7 @@ class Client {
     );
     EnemySpawnedResponse
     decodeEnemySpawnedResponse(const std::vector<uint8_t>& buffer);
-    EnemyMovedResponse
-    decodeEnemyMovedResponse(const std::vector<uint8_t>& buffer);
-    EnemyFiredResponse
+    EnemyFiredResponse 
     decodeEnemyFiredResponse(const std::vector<uint8_t>& buffer);
     EnemyDiedResponse decodeEnemyDiedResponse(const std::vector<uint8_t>& buffer
     );
