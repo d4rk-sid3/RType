@@ -41,6 +41,7 @@ entity Factory::make_entity(const std::string& type) {
         return make_player_missile();
     else if (type == "enemy_missile")
         return make_enemy_missile();
+
     return entity(-1);
 }
 
@@ -68,6 +69,8 @@ entity Factory::make_player() {
     player_hurtbox.width = 32;
     player_hurtbox.height = 16;
 
+    auto &entity_name = reg.add_component<component::name>(player_id, component::name());
+    entity_name._name = "player";
     return player_id;
 }
 
@@ -97,6 +100,8 @@ entity Factory::make_player_missile() {
     player_shoot_music.audio->setLoop(false);
     player_shoot_music.audio->play();
 
+    auto &entity_name = reg.add_component<component::name>(missile_id, component::name());
+    entity_name._name = "player_missile";
     return missile_id;
 }
 
@@ -129,6 +134,8 @@ entity Factory::make_enemy_missile() {
     enemy_shoot_music.audio->setLoop(false);
     enemy_shoot_music.audio->play();
 
+    auto &entity_name = reg.add_component<component::name>(missile_id, component::name());
+    entity_name._name = "enemy_missile";
     return missile_id;
 }
 
@@ -162,6 +169,8 @@ entity Factory::make_red_trooper() {
     troper_hitbox.height = 36;
     troper_hitbox.one_shot = false;
 
+    auto &entity_name = reg.add_component<component::name>(troper_id, component::name());
+    entity_name._name = "red_trooper";
     return troper_id;
 }
 
@@ -178,6 +187,8 @@ entity Factory::make_walker() {
     reg.add_component<component::position>(walker_id, {0, 0});
     reg.add_component<component::velocity>(walker_id, {-WALKER_SPEED, 0});
 
+    auto &entity_name = reg.add_component<component::name>(walker_id, component::name());
+    entity_name._name = "walker";
     return walker_id;
 }
 
@@ -201,6 +212,8 @@ entity Factory::make_explosion() {
     explosion_music.audio->setLoop(false);
     explosion_music.audio->play();
 
+    auto &entity_name = reg.add_component<component::name>(explosion_id, component::name());
+    entity_name._name = "explosion";
     return explosion_id;
 }
 
@@ -223,6 +236,8 @@ entity Factory::make_hit_effect() {
     hit_effect_music.audio->setLoop(false);
     hit_effect_music.audio->play();
 
+    auto &entity_name = reg.add_component<component::name>(hit_effect_id, component::name());
+    entity_name._name = "hit_effect";
     return hit_effect_id;
 }
 
@@ -245,6 +260,8 @@ entity Factory::make_ceiling() {
     reg.add_component<component::position>(ceiling_id, {0, -32});
     reg.add_component<component::velocity>(ceiling_id, {-BACKGROUND_SPEED, 0});
 
+    auto &entity_name = reg.add_component<component::name>(ceiling_id, component::name());
+    entity_name._name = "ceiling";
     return ceiling_id;
 }
 
@@ -268,6 +285,8 @@ entity Factory::make_floor() {
     );
     reg.add_component<component::velocity>(floor_id, {-BACKGROUND_SPEED, 0});
 
+    auto &entity_name = reg.add_component<component::name>(floor_id, component::name());
+    entity_name._name = "floor";
     return floor_id;
 }
 
@@ -281,6 +300,8 @@ entity Factory::make_wall() {
     reg.add_component<component::position>(wall_id, {0, 0});
     reg.add_component<component::velocity>(wall_id, {0, 0});
 
+    auto &entity_name = reg.add_component<component::name>(wall_id, component::name());
+    entity_name._name = "wall";
     return wall_id;
 }
 
@@ -299,6 +320,8 @@ entity Factory::make_background() {
         background_id, {-BACKGROUND_SPEED, 0}
     );
 
+    auto &entity_name = reg.add_component<component::name>(background_id, component::name());
+    entity_name._name = "background";
     return background_id;
 }
 
@@ -315,6 +338,8 @@ entity Factory::make_title() {
     title_text.text.setOutlineColor(sf::Color(10, 14, 69));
     title_text.text.setOutlineThickness(2);
 
+    auto &entity_name = reg.add_component<component::name>(title_id, component::name());
+    entity_name._name = "title";
     return title_id;
 }
 
@@ -336,6 +361,8 @@ entity Factory::make_start_text() {
         text_id, component::logic{start_text_logic}
     );
 
+    auto &entity_name = reg.add_component<component::name>(text_id, component::name());
+    entity_name._name = "start_text";
     return text_id;
 }
 
@@ -348,6 +375,8 @@ entity Factory::make_menu_background_music() {
     music.audio->setLoop(true);
     music.audio->play();
 
+    auto &entity_name = reg.add_component<component::name>(music_id, component::name());
+    entity_name._name = "menu_background_music";
     return music_id;
 }
 
@@ -360,6 +389,8 @@ entity Factory::make_game_background_music() {
     music.audio->setLoop(true);
     music.audio->play();
 
+    auto &entity_name = reg.add_component<component::name>(music_id, component::name());
+    entity_name._name = "game_background_music";
     return music_id;
 }
 
@@ -378,6 +409,8 @@ entity Factory::make_fade_in_rect() {
         fade_id, component::logic{fade_in_rect_logic}
     );
 
+    auto &entity_name = reg.add_component<component::name>(fade_id, component::name());
+    entity_name._name = "fade_in_rect";
     return fade_id;
 }
 
@@ -396,5 +429,7 @@ entity Factory::make_fade_out_rect() {
         fade_id, component::logic{fade_out_rect_logic}
     );
 
+    auto &entity_name = reg.add_component<component::name>(fade_id, component::name());
+    entity_name._name = "fade_out_rect";
     return fade_id;
 }

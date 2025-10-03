@@ -17,6 +17,8 @@ struct \mbox{\hyperlink{structcomponent_1_1hurtbox__s}{hurtbox\+\_\+s}}
 \begin{DoxyCompactList}\small\item\em The hurtbox component, defined by a size, health and a group (1 for the player, 2 for the enemies for example). A hitbox will detect collision with a hurtbox if its targeted group corresponds to the hurtbox group. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structcomponent_1_1logic__s}{logic\+\_\+s}}
 \begin{DoxyCompactList}\small\item\em The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structcomponent_1_1name__s}{name\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em The name component, defined by a string. It lets you give a name to each entity. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structcomponent_1_1position__s}{position\+\_\+s}}
 \begin{DoxyCompactList}\small\item\em The position component, with an x and y position. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structcomponent_1_1text__s}{text\+\_\+s}}
@@ -44,6 +46,8 @@ typedef struct \mbox{\hyperlink{structcomponent_1_1hitbox__s}{component\+::hitbo
 \begin{DoxyCompactList}\small\item\em The hitbox component, defined by a size, damage and a targeted\+\_\+group (2 for the player, 1 for the enemies for example). A hitbox will detect collision with a hurtbox if its targeted group corresponds to the hurtbox group. \end{DoxyCompactList}\item 
 typedef struct \mbox{\hyperlink{structcomponent_1_1logic__s}{component\+::logic\+\_\+s}} \mbox{\hyperlink{namespacecomponent_a4389e557b74c9397d726bcf56ba076d0}{logic}}
 \begin{DoxyCompactList}\small\item\em The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structcomponent_1_1name__s}{component\+::name\+\_\+s}} \mbox{\hyperlink{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}{name}}
+\begin{DoxyCompactList}\small\item\em The name component, defined by a string. It lets you give a name to each entity. \end{DoxyCompactList}\item 
 typedef struct \mbox{\hyperlink{structcomponent_1_1audio__s}{component\+::audio\+\_\+s}} \mbox{\hyperlink{namespacecomponent_a0551f20926c6f673d130bfca015d8b76}{audio}}
 \begin{DoxyCompactList}\small\item\em The audio component defined by a single sf\+::\+Music. This component is not used by the engine systems but can be directly played, stopped, paused by the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -118,6 +122,16 @@ The hurtbox component, defined by a size, health and a group (1 for the player, 
 
 
 The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user. 
+
+\Hypertarget{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}\label{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b} 
+\index{component@{component}!name@{name}}
+\index{name@{name}!component@{component}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structcomponent_1_1name__s}{component\+::name\+\_\+s}} \mbox{\hyperlink{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}{component\+::name}}}
+
+
+
+The name component, defined by a string. It lets you give a name to each entity. 
 
 \Hypertarget{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}\label{namespacecomponent_a32921f4e807a398b6ffaea1730431bec} 
 \index{component@{component}!position@{position}}

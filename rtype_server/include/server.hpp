@@ -29,21 +29,22 @@ typedef struct entity_info_s {
 class Server {
   private:
     int p_;
-    registry& reg;
-    Factory& factory;
+    registry &reg;
     double levelTimer = 0.0;
-
-    void loadLevel(const std::string& path);
-    void spawn_player(void);
-
+  
+    void loadLevel(const std::string &path);
+    void initializeGame(void);
+    void logGameEntities(void);
+    
+    MoveResponse response;
+    MoveRequest move;
     NetworkManager server_;
 
     std::vector<entity_info_t> entities;
-    std::vector<entity> active_entities;
 
   public:
     void runLevel(double delta);
-    Server(int p, registry& reg, Factory& fac);
+    Server(int p, registry &reg);
     ~Server();
 
     // update

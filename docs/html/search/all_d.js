@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['one_5fshot_0',['one_shot',['../structcomponent_1_1animated__drawable__s.html#a1bedfb04031a38d58df2da5fba3a2ef6',1,'component::animated_drawable_s::one_shot'],['../structcomponent_1_1hitbox__s.html#afc34eddd682b1269b749a4d848174b33',1,'component::hitbox_s::one_shot']]],
-  ['operator_20size_5ft_1',['operator size_t',['../classentity.html#aa02e13bb48fc0623b51a1515dbd943bc',1,'entity']]]
+  ['name_0',['name',['../namespacecomponent.html#af42f87bf296e95960edc1d8eb0ea059b',1,'component']]],
+  ['name_5fs_1',['name_s',['../structcomponent_1_1name__s.html',1,'component']]],
+  ['nonexistentcomponenttype_2',['NonExistentComponentType',['../classNonExistentComponentType.html',1,'']]],
+  ['nonexistententityid_3',['NonExistentEntityID',['../classNonExistentEntityID.html',1,'']]]
 ];

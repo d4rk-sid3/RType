@@ -33,73 +33,72 @@
 \DoxyCodeLine{00029\ \ \ \textcolor{keyword}{private}:}
 \DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ p\_;}
 \DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classregistry}{registry}}\ \&reg;}
-\DoxyCodeLine{00032\ \ \ \ \ Factory\ \&factory;}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{double}\ levelTimer\ =\ 0.0;}
-\DoxyCodeLine{00034\ \ \ }
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ loadLevel(\textcolor{keyword}{const}\ std::string\ \&path);}
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ spawn\_player(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{double}\ levelTimer\ =\ 0.0;}
+\DoxyCodeLine{00033\ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ loadLevel(\textcolor{keyword}{const}\ std::string\ \&path);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ initializeGame(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ logGameEntities(\textcolor{keywordtype}{void});}
 \DoxyCodeLine{00037\ \ \ \ \ }
 \DoxyCodeLine{00038\ \ \ \ \ MoveResponse\ response;}
 \DoxyCodeLine{00039\ \ \ \ \ MoveRequest\ move;}
 \DoxyCodeLine{00040\ \ \ \ \ NetworkManager\ server\_;}
 \DoxyCodeLine{00041\ }
 \DoxyCodeLine{00042\ \ \ \ \ std::vector<entity\_info\_t>\ entities;}
-\DoxyCodeLine{00043\ \ \ \ \ std::vector<entity>\ active\_entities;}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{runLevel}}(\textcolor{keywordtype}{double}\ delta);}
-\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classServer_a08c05f9ef25e74b4f1ec5216e557f8b2}{Server}}(\textcolor{keywordtype}{int}\ p,\ \mbox{\hyperlink{classregistry}{registry}}\ \&reg,\ Factory\ \&fac);}
-\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{\string~Server}}();}
-\DoxyCodeLine{00049\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classServer_a645362063e718f2c481fa4d16b6ae1d8}{getMove}}();}
-\DoxyCodeLine{00050\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classServer_a4b8332a5fc7d16e2e7ff16594a0b9534}{recupMove}}(}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::pair<std::vector<uint8\_t>,\ asio::ip::udp::endpoint>\&\ a,}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ MoveRequest\&\ m}
-\DoxyCodeLine{00053\ \ \ \ \ );}
-\DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//\ update}}
-\DoxyCodeLine{00056\ \ \ \ \ MoveResponse}
-\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classServer_aef19260488faed7947d2921b649953ed}{updateMoveResponse}}(\textcolor{keyword}{const}\ MoveResponse\&\ oldpos,\ \textcolor{keyword}{const}\ MoveResponse\&\ pos);}
-\DoxyCodeLine{00058\ \ \ \ \ ShootResponse}
-\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classServer_aaa9d3dbd54cbebab97d9bfa5932925fb}{updateShootResponse}}(\textcolor{keyword}{const}\ ShootResponse\&\ oldpos,\ \textcolor{keyword}{const}\ ShootResponse\&\ pos);}
-\DoxyCodeLine{00060\ \ \ \ \ PickupItemResponse\ \mbox{\hyperlink{classServer_a128bee5a988812db68f41898e1e4bfcc}{updatePickupItemResponse}}(}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ PickupItemResponse\&\ oldpos,\ \textcolor{keyword}{const}\ PickupItemResponse\&\ pos}
-\DoxyCodeLine{00062\ \ \ \ \ );}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//\ decodeur}}
-\DoxyCodeLine{00065\ \ \ \ \ MoveRequest\ \mbox{\hyperlink{classServer_aca567205cb986733a8dfb4272ebfff27}{decodeMoveRequest}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00066\ \ \ \ \ ShootRequest\ \mbox{\hyperlink{classServer_a19f05cf0f268559c696ef6b520e2ad3e}{decodeShootRequest}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00067\ \ \ \ \ PickupItemResquest}
-\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{classServer_ab7ccdff122366c80a823196da3cd04f6}{decodePickupItemResquest}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00069\ \ \ \ \ GamePausedRequest\ \mbox{\hyperlink{classServer_add2cc6adf90ff62ce3a46761a6eefb60}{decodeGamePausedRequest}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer}
-\DoxyCodeLine{00070\ \ \ \ \ );}
-\DoxyCodeLine{00071\ }
-\DoxyCodeLine{00072\ \ \ \ \ \textcolor{comment}{//\ encodeur}}
-\DoxyCodeLine{00073\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_aeee1cefc8f6f43e04e70e9593cb05955}{encodeMoveResponse}}(\textcolor{keyword}{const}\ MoveResponse\&\ pos);}
-\DoxyCodeLine{00074\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a9c221ee8a87adbc5b856eb080bebad3c}{encodeShootResponse}}(\textcolor{keyword}{const}\ ShootResponse\&\ pos);}
-\DoxyCodeLine{00075\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_aa3d0d12484e40a4e3f964a58a7bc625f}{encodePickupItemResponse}}(\textcolor{keyword}{const}\ PickupItemResponse\&\ pos}
-\DoxyCodeLine{00076\ \ \ \ \ );}
-\DoxyCodeLine{00077\ \ \ \ \ std::vector<uint8\_t>}
-\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{classServer_a2959bb2da8ebd56e82cb5bbf91b7d476}{encodePlayerStateResponse}}(\textcolor{keyword}{const}\ PlayerStateResponse\&\ pos);}
-\DoxyCodeLine{00079\ \ \ \ \ std::vector<uint8\_t>}
-\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{classServer_aa94377590f8bb2e20663483eff3d92ea}{encodePlayerGameStateResponse}}(\textcolor{keyword}{const}\ PlayerGameStateResponse\&\ pos);}
-\DoxyCodeLine{00081\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_aac781cbf92abc172c313ace7fbcc65f8}{encodeBeatBossResponse}}(\textcolor{keyword}{const}\ BeatBossResponse\&\ pos);}
-\DoxyCodeLine{00082\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_afc745549a0ecacc35d463d36bbe4ba05}{encodeCheckpointResponse}}(\textcolor{keyword}{const}\ CheckpointResponse\&\ pos}
-\DoxyCodeLine{00083\ \ \ \ \ );}
-\DoxyCodeLine{00084\ \ \ \ \ std::vector<uint8\_t>}
-\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classServer_aca81a7c13aeab7ab2485e9f120bfdf9b}{encodeGameStartedResponse}}(\textcolor{keyword}{const}\ GameStartedResponse\&\ pos);}
-\DoxyCodeLine{00086\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a51ecc8d24764b3809702efb5b25f59ab}{encodeGamePausedResponse}}(\textcolor{keyword}{const}\ GamePausedResponse\&\ pos}
-\DoxyCodeLine{00087\ \ \ \ \ );}
-\DoxyCodeLine{00088\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a27369b4da1993ffb92b39e25bd85d085}{encodeGameStateResponse}}(\textcolor{keyword}{const}\ GameStateResponse\&\ pos);}
-\DoxyCodeLine{00089\ \ \ \ \ std::vector<uint8\_t>}
-\DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{classServer_a9dffe4abf86ad6213d9f2e50286143f7}{encodeEnemySpawnedResponse}}(\textcolor{keyword}{const}\ EnemySpawnedResponse\&\ pos);}
-\DoxyCodeLine{00091\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a431b4468ba1b4e2848df0cea51eb0768}{encodeEnemyMovedResponse}}(\textcolor{keyword}{const}\ EnemyMovedResponse\&\ pos}
-\DoxyCodeLine{00092\ \ \ \ \ );}
-\DoxyCodeLine{00093\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_aee58c642a87258c2e819f0409e1d65c4}{encodedEnemyFiredResponse}}(\textcolor{keyword}{const}\ EnemyFiredResponse\&\ pos}
-\DoxyCodeLine{00094\ \ \ \ \ );}
-\DoxyCodeLine{00095\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a9f663d7647b941124042ed32a3006895}{encodeEnemyDiedResponse}}(\textcolor{keyword}{const}\ EnemyDiedResponse\&\ pos);}
-\DoxyCodeLine{00096\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a0fb2d22a0d1eb046c049b82a79c732eb}{encodeCollisionResponse}}(\textcolor{keyword}{const}\ CollisionResponse\&\ pos);}
-\DoxyCodeLine{00097\ \};}
-\DoxyCodeLine{00098\ }
-\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !SERVER\_HPP\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{runLevel}}(\textcolor{keywordtype}{double}\ delta);}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classServer_afc422f4323d93d0d986198d8e3967bb2}{Server}}(\textcolor{keywordtype}{int}\ p,\ \mbox{\hyperlink{classregistry}{registry}}\ \&reg);}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{\string~Server}}();}
+\DoxyCodeLine{00048\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classServer_a645362063e718f2c481fa4d16b6ae1d8}{getMove}}();}
+\DoxyCodeLine{00049\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classServer_a4b8332a5fc7d16e2e7ff16594a0b9534}{recupMove}}(}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::pair<std::vector<uint8\_t>,\ asio::ip::udp::endpoint>\&\ a,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ MoveRequest\&\ m}
+\DoxyCodeLine{00052\ \ \ \ \ );}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ update}}
+\DoxyCodeLine{00055\ \ \ \ \ MoveResponse}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classServer_aef19260488faed7947d2921b649953ed}{updateMoveResponse}}(\textcolor{keyword}{const}\ MoveResponse\&\ oldpos,\ \textcolor{keyword}{const}\ MoveResponse\&\ pos);}
+\DoxyCodeLine{00057\ \ \ \ \ ShootResponse}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classServer_aaa9d3dbd54cbebab97d9bfa5932925fb}{updateShootResponse}}(\textcolor{keyword}{const}\ ShootResponse\&\ oldpos,\ \textcolor{keyword}{const}\ ShootResponse\&\ pos);}
+\DoxyCodeLine{00059\ \ \ \ \ PickupItemResponse\ \mbox{\hyperlink{classServer_a128bee5a988812db68f41898e1e4bfcc}{updatePickupItemResponse}}(}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ PickupItemResponse\&\ oldpos,\ \textcolor{keyword}{const}\ PickupItemResponse\&\ pos}
+\DoxyCodeLine{00061\ \ \ \ \ );}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ decodeur}}
+\DoxyCodeLine{00064\ \ \ \ \ MoveRequest\ \mbox{\hyperlink{classServer_aca567205cb986733a8dfb4272ebfff27}{decodeMoveRequest}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00065\ \ \ \ \ ShootRequest\ \mbox{\hyperlink{classServer_a19f05cf0f268559c696ef6b520e2ad3e}{decodeShootRequest}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00066\ \ \ \ \ PickupItemResquest}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classServer_ab7ccdff122366c80a823196da3cd04f6}{decodePickupItemResquest}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00068\ \ \ \ \ GamePausedRequest\ \mbox{\hyperlink{classServer_add2cc6adf90ff62ce3a46761a6eefb60}{decodeGamePausedRequest}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer}
+\DoxyCodeLine{00069\ \ \ \ \ );}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//\ encodeur}}
+\DoxyCodeLine{00072\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_aeee1cefc8f6f43e04e70e9593cb05955}{encodeMoveResponse}}(\textcolor{keyword}{const}\ MoveResponse\&\ pos);}
+\DoxyCodeLine{00073\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a9c221ee8a87adbc5b856eb080bebad3c}{encodeShootResponse}}(\textcolor{keyword}{const}\ ShootResponse\&\ pos);}
+\DoxyCodeLine{00074\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_aa3d0d12484e40a4e3f964a58a7bc625f}{encodePickupItemResponse}}(\textcolor{keyword}{const}\ PickupItemResponse\&\ pos}
+\DoxyCodeLine{00075\ \ \ \ \ );}
+\DoxyCodeLine{00076\ \ \ \ \ std::vector<uint8\_t>}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classServer_a2959bb2da8ebd56e82cb5bbf91b7d476}{encodePlayerStateResponse}}(\textcolor{keyword}{const}\ PlayerStateResponse\&\ pos);}
+\DoxyCodeLine{00078\ \ \ \ \ std::vector<uint8\_t>}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classServer_aa94377590f8bb2e20663483eff3d92ea}{encodePlayerGameStateResponse}}(\textcolor{keyword}{const}\ PlayerGameStateResponse\&\ pos);}
+\DoxyCodeLine{00080\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_aac781cbf92abc172c313ace7fbcc65f8}{encodeBeatBossResponse}}(\textcolor{keyword}{const}\ BeatBossResponse\&\ pos);}
+\DoxyCodeLine{00081\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_afc745549a0ecacc35d463d36bbe4ba05}{encodeCheckpointResponse}}(\textcolor{keyword}{const}\ CheckpointResponse\&\ pos}
+\DoxyCodeLine{00082\ \ \ \ \ );}
+\DoxyCodeLine{00083\ \ \ \ \ std::vector<uint8\_t>}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classServer_aca81a7c13aeab7ab2485e9f120bfdf9b}{encodeGameStartedResponse}}(\textcolor{keyword}{const}\ GameStartedResponse\&\ pos);}
+\DoxyCodeLine{00085\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a51ecc8d24764b3809702efb5b25f59ab}{encodeGamePausedResponse}}(\textcolor{keyword}{const}\ GamePausedResponse\&\ pos}
+\DoxyCodeLine{00086\ \ \ \ \ );}
+\DoxyCodeLine{00087\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a27369b4da1993ffb92b39e25bd85d085}{encodeGameStateResponse}}(\textcolor{keyword}{const}\ GameStateResponse\&\ pos);}
+\DoxyCodeLine{00088\ \ \ \ \ std::vector<uint8\_t>}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classServer_a9dffe4abf86ad6213d9f2e50286143f7}{encodeEnemySpawnedResponse}}(\textcolor{keyword}{const}\ EnemySpawnedResponse\&\ pos);}
+\DoxyCodeLine{00090\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a431b4468ba1b4e2848df0cea51eb0768}{encodeEnemyMovedResponse}}(\textcolor{keyword}{const}\ EnemyMovedResponse\&\ pos}
+\DoxyCodeLine{00091\ \ \ \ \ );}
+\DoxyCodeLine{00092\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_aee58c642a87258c2e819f0409e1d65c4}{encodedEnemyFiredResponse}}(\textcolor{keyword}{const}\ EnemyFiredResponse\&\ pos}
+\DoxyCodeLine{00093\ \ \ \ \ );}
+\DoxyCodeLine{00094\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a9f663d7647b941124042ed32a3006895}{encodeEnemyDiedResponse}}(\textcolor{keyword}{const}\ EnemyDiedResponse\&\ pos);}
+\DoxyCodeLine{00095\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classServer_a0fb2d22a0d1eb046c049b82a79c732eb}{encodeCollisionResponse}}(\textcolor{keyword}{const}\ CollisionResponse\&\ pos);}
+\DoxyCodeLine{00096\ \};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !SERVER\_HPP\_\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

@@ -19,34 +19,30 @@ void load_textures(void)
     ResourceManager::Instance().load("assets/sprites/effects/Explosion.png", "explosion", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/effects/hit_effect.gif", "hit_effect", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/background/background.jpg", "background", TEXTURE);
-    ResourceManager::Instance().load("assets/sprites/background/wall1_shadow.jpg", "ceiling", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/background/wall1_shadow.png", "ceiling", TEXTURE);
 
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
 
-void Server::spawn_player(void)
+void Server::initializeGame(void)
 {
-    factory.make_background();
-    player_entity_id = (int)factory.make_entity("player");
-    active_entities.push_back((entity)player_entity_id);
+    Factory factory(reg);
     
-    printf("Player init\n");
+    factory.make_background();
+    player_entity_id = factory.make_entity("player");
+    
     auto &pos = reg.get_components<component::position>()[player_entity_id].value();
     pos.x = 50;
     pos.y = 50;
 
-    // factory.make_title();
-    // factory.make_start_text();
     factory.make_menu_background_music();
 }
 
-Server::Server(int p, registry &regis, Factory &fac) : server_(8080, "127.0.0.1"), p_(p), reg(regis), factory(fac)
+Server::Server(int p, registry &regis) : server_(8080, "127.0.0.1"), p_(p), reg(regis)
 {
     load_textures();
-    spawn_player();
+    initializeGame();
     loadLevel("assets/levels/test.txt");
-
-    
 }
 
 Server::~Server()

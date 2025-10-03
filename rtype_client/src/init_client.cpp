@@ -28,34 +28,60 @@ void load_client_textures(void)
 Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, "client"), _reg(reg)
 {
     load_client_textures();
-    initMenu();
+    //initMenu();
+    initGame();
 
     asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
 
     std::thread input_thread([this, server_endpoint]() {
         client_.run();
     });
+
+}
+
+// ... *isInside(std::vector<...> vec, size_t id)
+// {
+//     for (auto it = vec.begin(); it != vec.end(); it++) {
+//         if (it->entity_id.getId() == id)
+//             return true;
+//     }
+//     return false;
+// }
+
+void Client::sendPlayerInput()
+{
+
     
 }
 
 void Client::runLevel(double delta)
 {
-    for (auto it = active_entities.begin(); it != active_entities.end();) {
-        auto &entity = *it;
+    // Factory fac(_reg);
+    // getNewEntities();
 
-        if (std::find(_reg.dead_entities.begin(), _reg.dead_entities.end(), entity) != _reg.dead_entities.end()) {
-            it = active_entities.erase(it);
-            continue;
-        }
+    // for (auto it = new.begin(); it != new.end();) {
+    //     auto &entity = *it;
 
-        auto &pos = _reg.get_components<component::position>()[entity].value();
-        if (pos.x < -100 || pos.x > 1200) {
-            _reg.kill_entity(entity);
-            it = active_entities.erase(it);
-        } else {
-            ++it;
-        }
-    }
+    //     if (auto old = isInside(old, entity.entity_id.getId())) {
+    //         auto &pos = _reg.get_components<component::position>()(ids_assoc[entity.entity_id]).value(); // TODO: get p 
+    //         pos.x = entity.position.x;
+    //         pos.y = entity.position.y;
+    //     } else {
+    //         ids_assoc[entity.entity_id] = fac.make_entity(entity.type);
+    //         auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.entity_id]].value();
+    //         pos.x = entity.position.x;
+    //         pos.y = entity.position.y;
+    //     }
+    // }
+
+    // for (auto it = old.begin(); it != old.end();) {
+    //     auto &entity = *it;
+    //     if (!isInside(new, entity.entity_id.getId())) {
+    //         _reg.kill_entity(entity.entity_id.getId());
+    //     }
+    // }
+
+    // sendPlayerInput();
 }
 
 Client::~Client()
@@ -97,19 +123,18 @@ void Client::runMenu(double delta)
 void Client::initGame()
 {
     Factory factory(_reg);
+    factory.make_background();
 
     player_entity_id = (int)factory.make_entity("player");
-    active_entities.push_back((entity)player_entity_id);
     
-    printf("Player init\n");
     auto &pos = _reg.get_components<component::position>()[player_entity_id].value();
     pos.x = 50;
     pos.y = 150;
     factory.make_game_background_music();
-    factory.make_ceiling();
-    factory.make_floor();
+    // factory.make_ceiling();
+    // factory.make_floor();
     // _reg.kill_entity(menu_info.background);
-    _reg.kill_entity(menu_info.title);
-    _reg.kill_entity(menu_info.start_text);
-    _reg.kill_entity(menu_info.menu_background_music);
+    // _reg.kill_entity(menu_info.title);
+    // _reg.kill_entity(menu_info.start_text);
+    // _reg.kill_entity(menu_info.menu_background_music);
 }

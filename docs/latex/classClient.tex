@@ -21,6 +21,8 @@ void \mbox{\hyperlink{classClient_add2ae689ce735011cd1b83601470f4d3}{init\+Game}
 \item 
 void \mbox{\hyperlink{classClient_a101e55e53e7f9cc0433da705e66e1f08}{run\+Level}} (double delta)
 \item 
+void \mbox{\hyperlink{classClient_a9d0aec2907f33777ece928a1a0dee25e}{send\+Player\+Input}} ()
+\item 
 Move\+Response \mbox{\hyperlink{classClient_ad472cc4054762148a8110a5040353098}{decode\+Move\+Response}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&buffer)
 \item 
 Shoot\+Response \mbox{\hyperlink{classClient_ad8f44e3c69119e83ca831a73caca8420}{decode\+Shoot\+Response}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&buffer)
@@ -62,7 +64,7 @@ std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classClient_aad80b7b7afcac04d
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} \mbox{\hyperlink{classClient_a3a70c6088987795c92e25d7ee2e99af5}{state}} = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721}{MENU}}
+\mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} \mbox{\hyperlink{classClient_a3a70c6088987795c92e25d7ee2e99af5}{state}} = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}}
 \end{DoxyCompactItemize}
 
 
@@ -226,6 +228,12 @@ std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classClient_aad80b7b7afcac04d
 \doxysubsubsection{\texorpdfstring{runMenu()}{runMenu()}}
 {\footnotesize\ttfamily void Client\+::run\+Menu (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})}
 
+\Hypertarget{classClient_a9d0aec2907f33777ece928a1a0dee25e}\label{classClient_a9d0aec2907f33777ece928a1a0dee25e} 
+\index{Client@{Client}!sendPlayerInput@{sendPlayerInput}}
+\index{sendPlayerInput@{sendPlayerInput}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{sendPlayerInput()}{sendPlayerInput()}}
+{\footnotesize\ttfamily void Client\+::send\+Player\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 
 
 \doxysubsection{Member Data Documentation}
@@ -233,7 +241,7 @@ std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classClient_aad80b7b7afcac04d
 \index{Client@{Client}!state@{state}}
 \index{state@{state}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{state}{state}}
-{\footnotesize\ttfamily \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} Client\+::state = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721}{MENU}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} Client\+::state = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}}}
 
 
 

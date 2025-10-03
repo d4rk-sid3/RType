@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['width_0',['width',['../structcomponent_1_1hurtbox__s.html#a7731a2e82df13ecc8e0b444f83eebd07',1,'component::hurtbox_s::width'],['../structcomponent_1_1hitbox__s.html#a677c09c76f3c7d69205df16289a769f7',1,'component::hitbox_s::width']]],
-  ['window_5fheight_1',['WINDOW_HEIGHT',['../client_8hpp.html#a5473cf64fa979b48335079c99532e243',1,'WINDOW_HEIGHT:&#160;client.hpp'],['../server_8hpp.html#a5473cf64fa979b48335079c99532e243',1,'WINDOW_HEIGHT:&#160;server.hpp']]],
-  ['window_5fwidth_2',['WINDOW_WIDTH',['../client_8hpp.html#a498d9f026138406895e9a34b504ac6a6',1,'WINDOW_WIDTH:&#160;client.hpp'],['../server_8hpp.html#a498d9f026138406895e9a34b504ac6a6',1,'WINDOW_WIDTH:&#160;server.hpp']]]
+  ['velocity_0',['velocity',['../namespacecomponent.html#a428fac7a425dfc47e9997f3e4633ad6a',1,'component']]],
+  ['velocity_5fs_1',['velocity_s',['../structcomponent_1_1velocity__s.html',1,'component']]],
+  ['vx_2',['vx',['../structcomponent_1_1velocity__s.html#a9a529dc007c25ad72c6684d46a370cc4',1,'component::velocity_s']]],
+  ['vy_3',['vy',['../structcomponent_1_1velocity__s.html#ae913ada66e385c24716f89193cb6464f',1,'component::velocity_s']]]
 ];
