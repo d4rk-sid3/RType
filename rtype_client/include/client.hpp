@@ -71,7 +71,7 @@ class Client {
     EnemyMovedResponse decodeEnemyMovedResponse(const std::vector<uint8_t>& buffer);
 
 
-    MoveResponse decodeMoveResponse(const std::vector<uint8_t>& buffer);
+    /*MoveResponse decodeMoveResponse(const std::vector<uint8_t>& buffer);
     ShootResponse decodeShootResponse(const std::vector<uint8_t>& buffer);
     PickupItemResponse
     decodePickupItemResponse(const std::vector<uint8_t>& buffer);
@@ -95,14 +95,14 @@ class Client {
     EnemyDiedResponse decodeEnemyDiedResponse(const std::vector<uint8_t>& buffer
     );
     CollisionResponse decodeCollisionResponse(const std::vector<uint8_t>& buffer
-    );
+    );*/
 
     // encodeur
-    std::vector<uint8_t> encodeMoveResquest(const MoveRequest& pos);
+    /*std::vector<uint8_t> encodeMoveResquest(const MoveRequest& pos);
     std::vector<uint8_t> encodeShootResquest(const ShootRequest& pos);
     std::vector<uint8_t> encodePickupItemResquest(const PickupItemResquest& pos
     );
-    std::vector<uint8_t> encodeGamePausedRequest(const GamePausedRequest& pos);
+    std::vector<uint8_t> encodeGamePausedRequest(const GamePausedRequest& pos);*/
 };
 
 #endif /* !CLIENT_HPP_ */

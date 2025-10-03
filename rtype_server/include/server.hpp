@@ -42,6 +42,9 @@ class Server {
 
     std::vector<entity_info_t> entities;
 
+    vector<uint8_t> result;
+    int counter = 0;
+
   public:
     void runLevel(double delta);
     Server(int p, registry &reg);
@@ -57,21 +60,21 @@ class Server {
     );
 
     // decodeur
-    MoveRequest decodeMoveRequest(const std::vector<uint8_t>& buffer);
+    /*MoveRequest decodeMoveRequest(const std::vector<uint8_t>& buffer);
     ShootRequest decodeShootRequest(const std::vector<uint8_t>& buffer);
     PickupItemResquest
     decodePickupItemResquest(const std::vector<uint8_t>& buffer);
     GamePausedRequest decodeGamePausedRequest(const std::vector<uint8_t>& buffer
-    );
+    );*/
 
     // encodeur
-    std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos);
+    std::vector<uint8_t> encodeNbrEntity(const NbrEntity& pos);
     std::vector<uint8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos
     );
 
 
 
-    std::vector<uint8_t> encodeMoveResponse(const MoveResponse& pos);
+    /*std::vector<uint8_t> encodeMoveResponse(const MoveResponse& pos);
     std::vector<uint8_t> encodeShootResponse(const ShootResponse& pos);
     std::vector<uint8_t> encodePickupItemResponse(const PickupItemResponse& pos
     );
@@ -92,7 +95,7 @@ class Server {
     std::vector<uint8_t> encodedEnemyFiredResponse(const EnemyFiredResponse& pos
     );
     std::vector<uint8_t> encodeEnemyDiedResponse(const EnemyDiedResponse& pos);
-    std::vector<uint8_t> encodeCollisionResponse(const CollisionResponse& pos);
+    std::vector<uint8_t> encodeCollisionResponse(const CollisionResponse& pos);*/
 };
 
 #endif /* !SERVER_HPP_ */

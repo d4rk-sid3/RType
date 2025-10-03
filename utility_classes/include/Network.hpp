@@ -53,11 +53,12 @@ struct Timestamp {
 // Serveur -> Client
 struct EnemyMovedResponse {
     uint8_t type; // 0x37
-    uint32_t enemy_id;
+    uint16_t enemy_id;
     EnemyType enemy_type;
     Vector2D position;
 };
 
+// Serveur -> Client
 struct NbrEntity {
     uint8_t type; // 0x38
     uint8_t nbr;

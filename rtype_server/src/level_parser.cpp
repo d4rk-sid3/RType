@@ -48,6 +48,9 @@ void Server::logGameEntities()
 {
     std::string special_entities = {"background"};
 
+    counter = 0;
+    result.clear();
+
     for (size_t i = 0; i < reg.getEntityNum(); i++) {
         try {
             position &pos = reg.get_components<component::position>()[entity(i)].value();
@@ -64,12 +67,17 @@ void Server::logGameEntities()
                 continue;
             }
 
-            std::cout << "====== GAME ENTITY START ======" << "\n";
-            std::cout << name_._name << " x:" << pos.x << " y:" << pos.y << std::endl;
-            std::cout << "====== GAME ENTITY END ======" << "\n";
+            ++counter;
+
+            vector<uint8_t> tmp = encodeEnemyMovedResponse({0x32, static_cast<uint16_t>(i), TYPE_1,
+                {static_cast<uint16_t>(pos.x), static_cast<uint16_t>(pos.y)}});
+
+            result.insert(result.end(), tmp.begin(), tmp.end());
         } catch (...) {
         }
     }
+    vector<uint8_t> tmp = encodeNbrEntity({0x33, static_cast<uint8_t>(counter)});
+    result.insert(result.begin(), tmp.begin(), tmp.end());
 }
 
 void Server::runLevel(double delta)
@@ -104,6 +112,6 @@ void Server::runLevel(double delta)
     //     // Get rid of dead entities
     //     if (std::find(reg.dead_entities.begin(), reg.dead_entities.end(), entity.entity_id) != reg.dead_entities.end()) {
     //         it = entities.erase(it);
-    //         continue;
+    //         continue;-+
     //     }
 }

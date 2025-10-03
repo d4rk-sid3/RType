@@ -49,7 +49,7 @@ void NetworkManager::receive()
         
         [this](std::error_code error ,std::size_t bytes_receive) {
             if (!error && bytes_receive > 0) {
-               messages.push({ std::vector<uint8_t>(buff.begin(), buff.begin() + bytes_receive), last_sender_ });
+               messages.emplace( std::vector<uint8_t>(buff.begin(), buff.begin() + bytes_receive), last_sender_ );
             }
 
             if (isrunning) {
@@ -63,7 +63,7 @@ void NetworkManager::receive()
 void NetworkManager::send(const std::vector<u_int8_t> &msg, size_t size, const asio::ip::udp::endpoint& client)
 {
     socket.async_send_to(asio::buffer(msg, size), client, 
-        [this](std::error_code error, std::size_t byte_send) {
+        [](std::error_code error, std::size_t byte_send) {
             
             if (!error) {
             } else {

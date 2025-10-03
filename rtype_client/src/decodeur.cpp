@@ -26,10 +26,10 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(const std::vector<uint8_t>& 
     }
 
     pos.type = buffer[0];
-    pos.enemy_id = (buffer[1] << 24) | (buffer[2] << 16) | (buffer[3] << 8) | buffer[4];
-    pos.enemy_type = static_cast<EnemyType>(buffer[5]);
-    pos.position.x = (buffer[6] << 8) | buffer[7];
-    pos.position.y = (buffer[8] << 8) | buffer[9];
+    pos.enemy_id = (buffer[1] << 8) | buffer[2];
+    pos.enemy_type = static_cast<EnemyType>(buffer[3]);
+    pos.position.x = (buffer[4] << 8) | buffer[5];
+    pos.position.y = (buffer[6] << 8) | buffer[7];
     return pos;
 }
 

@@ -43,9 +43,22 @@ Server::Server(int p, registry &regis) : server_(8080, "127.0.0.1"), p_(p), reg(
     load_textures();
     initializeGame();
     loadLevel("assets/levels/test.txt");
+
+    asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
+
+    std::thread input_thread([this, server_endpoint]() {
+       server_.run();
+   });
+
+    while (true) {
+        server_.send(result, result.size(), server_endpoint);
+    }
+
 }
 
 Server::~Server()
 {
 
 }
+
+

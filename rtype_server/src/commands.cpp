@@ -23,8 +23,6 @@ std::vector<uint8_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& 
 
     buffer.emplace_back(0x37);
 
-    buffer.emplace_back((pos.enemy_id >> 24) & 0xFF);
-    buffer.emplace_back((pos.enemy_id >> 16) & 0xFF);
     buffer.emplace_back((pos.enemy_id >> 8) & 0xFF);
     buffer.emplace_back(pos.enemy_id & 0xFF);
 
