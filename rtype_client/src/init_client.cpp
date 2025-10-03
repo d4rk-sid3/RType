@@ -28,68 +28,93 @@ void load_client_textures(void)
 Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, "client"), _reg(reg)
 {
     load_client_textures();
-    initMenu();
+    //initMenu();
+    initGame();
 
-    asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
+    // asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
 
-    std::thread input_thread([this, server_endpoint]() {
-        std::string input;
-        while (std::getline(std::cin, input)) {
-            MoveRequest resq;
-            resq.type = 0x23;
+    // std::thread input_thread([this, server_endpoint]() {
+    //     std::string input;
+    //     while (std::getline(std::cin, input)) {
+    //         MoveRequest resq;
+    //         resq.type = 0x23;
 
-            if (input == "up")
-                resq.direction = UP;
-            else if (input == "down")
-                resq.direction = DOWN;
-            else if (input == "left")
-                resq.direction = LEFT;
-            else if (input == "right")
-                resq.direction = RIGHT; 
-            else
-                continue;
+    //         if (input == "up")
+    //             resq.direction = UP;
+    //         else if (input == "down")
+    //             resq.direction = DOWN;
+    //         else if (input == "left")
+    //             resq.direction = LEFT;
+    //         else if (input == "right")
+    //             resq.direction = RIGHT; 
+    //         else
+    //             continue;
             
-            std::vector<uint8_t> buff = encodeMoveResquest(resq);
+    //         std::vector<uint8_t> buff = encodeMoveResquest(resq);
 
-            this->client_.send(buff, buff.size(), server_endpoint);
-        }
-    });
+    //         this->client_.send(buff, buff.size(), server_endpoint);
+    //     }
+    // });
 
-    while (1) {
+    // while (1) {
 
-        client_.poll();
+    //     client_.poll();
 
-        auto msg = client_.getLastMsg();
-        if (!msg.first.empty()) {
-            MoveResponse res = decodeMoveResponse(msg.first);
-            if (res.type == 0x24) {
-                std::cout << "Serveur: Player " << res.player_id
-                        << " se déplace vers " << res.direction.x << ", " << res.direction.y
-                        << std::endl;
-            }
-        }
-    }
-    input_thread.detach();
+    //     auto msg = client_.getLastMsg();
+    //     if (!msg.first.empty()) {
+    //         MoveResponse res = decodeMoveResponse(msg.first);
+    //         if (res.type == 0x24) {
+    //             std::cout << "Serveur: Player " << res.player_id
+    //                     << " se déplace vers " << res.direction.x << ", " << res.direction.y
+    //                     << std::endl;
+    //         }
+    //     }
+    // }
+    // input_thread.detach();
+}
+
+// ... *isInside(std::vector<...> vec, size_t id)
+// {
+//     for (auto it = vec.begin(); it != vec.end(); it++) {
+//         if (it->entity_id.getId() == id)
+//             return true;
+//     }
+//     return false;
+// }
+
+void Client::sendPlayerInput()
+{
+
 }
 
 void Client::runLevel(double delta)
 {
-    for (auto it = active_entities.begin(); it != active_entities.end();) {
-        auto &entity = *it;
+    // Factory fac(_reg);
+    // getNewEntities();
 
-        if (std::find(_reg.dead_entities.begin(), _reg.dead_entities.end(), entity) != _reg.dead_entities.end()) {
-            it = active_entities.erase(it);
-            continue;
-        }
+    // for (auto it = new.begin(); it != new.end();) {
+    //     auto &entity = *it;
 
-        auto &pos = _reg.get_components<component::position>()[entity].value();
-        if (pos.x < -100 || pos.x > 1200) {
-            _reg.kill_entity(entity);
-            it = active_entities.erase(it);
-        } else {
-            ++it;
-        }
-    }
+    //     if (auto old = isInside(old, entity.entity_id.getId())) {
+    //         auto &pos = _reg.get_components<component::position>()(ids_assoc[entity.entity_id]).value(); // TODO: get p 
+    //         pos.x = entity.position.x;
+    //         pos.y = entity.position.y;
+    //     } else {
+    //         ids_assoc[entity.entity_id] = fac.make_entity(entity.type);
+    //         auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.entity_id]].value();
+    //         pos.x = entity.position.x;
+    //         pos.y = entity.position.y;
+    //     }
+    // }
+
+    // for (auto it = old.begin(); it != old.end();) {
+    //     auto &entity = *it;
+    //     if (!isInside(new, entity.entity_id.getId())) {
+    //         _reg.kill_entity(entity.entity_id.getId());
+    //     }
+    // }
+
+    // sendPlayerInput();
 }
 
 MoveRequest Client::getMoveKey()
@@ -136,19 +161,18 @@ void Client::runMenu(double delta)
 void Client::initGame()
 {
     Factory factory(_reg);
+    factory.make_background();
 
     player_entity_id = (int)factory.make_entity("player");
-    active_entities.push_back((entity)player_entity_id);
     
-    printf("Player init\n");
     auto &pos = _reg.get_components<component::position>()[player_entity_id].value();
     pos.x = 50;
     pos.y = 150;
     factory.make_game_background_music();
-    factory.make_ceiling();
-    factory.make_floor();
+    // factory.make_ceiling();
+    // factory.make_floor();
     // _reg.kill_entity(menu_info.background);
-    _reg.kill_entity(menu_info.title);
-    _reg.kill_entity(menu_info.start_text);
-    _reg.kill_entity(menu_info.menu_background_music);
+    // _reg.kill_entity(menu_info.title);
+    // _reg.kill_entity(menu_info.start_text);
+    // _reg.kill_entity(menu_info.menu_background_music);
 }

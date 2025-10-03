@@ -97,6 +97,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:add2ae689ce735011cd1b83601470f4d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a101e55e53e7f9cc0433da705e66e1f08" id="r_a101e55e53e7f9cc0433da705e66e1f08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a101e55e53e7f9cc0433da705e66e1f08">runLevel</a> (double delta)</td></tr>
 <tr class="separator:a101e55e53e7f9cc0433da705e66e1f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d0aec2907f33777ece928a1a0dee25e" id="r_a9d0aec2907f33777ece928a1a0dee25e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d0aec2907f33777ece928a1a0dee25e">sendPlayerInput</a> ()</td></tr>
+<tr class="separator:a9d0aec2907f33777ece928a1a0dee25e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad472cc4054762148a8110a5040353098" id="r_ad472cc4054762148a8110a5040353098"><td class="memItemLeft" align="right" valign="top">MoveResponse&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad472cc4054762148a8110a5040353098">decodeMoveResponse</a> (const std::vector&lt; uint8_t &gt; &amp;buffer)</td></tr>
 <tr class="separator:ad472cc4054762148a8110a5040353098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8f44e3c69119e83ca831a73caca8420" id="r_ad8f44e3c69119e83ca831a73caca8420"><td class="memItemLeft" align="right" valign="top">ShootResponse&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8f44e3c69119e83ca831a73caca8420">decodeShootResponse</a> (const std::vector&lt; uint8_t &gt; &amp;buffer)</td></tr>
@@ -138,7 +140,7 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a3a70c6088987795c92e25d7ee2e99af5" id="r_a3a70c6088987795c92e25d7ee2e99af5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248">state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a70c6088987795c92e25d7ee2e99af5">state</a> = <a class="el" href="client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721">MENU</a></td></tr>
+<tr class="memitem:a3a70c6088987795c92e25d7ee2e99af5" id="r_a3a70c6088987795c92e25d7ee2e99af5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248">state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a70c6088987795c92e25d7ee2e99af5">state</a> = <a class="el" href="client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84">GAME</a></td></tr>
 <tr class="separator:a3a70c6088987795c92e25d7ee2e99af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -594,6 +596,23 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a9d0aec2907f33777ece928a1a0dee25e" name="a9d0aec2907f33777ece928a1a0dee25e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d0aec2907f33777ece928a1a0dee25e">&#9670;&#160;</a></span>sendPlayerInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Client::sendPlayerInput </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a3a70c6088987795c92e25d7ee2e99af5" name="a3a70c6088987795c92e25d7ee2e99af5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3a70c6088987795c92e25d7ee2e99af5">&#9670;&#160;</a></span>state</h2>
@@ -602,7 +621,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248">state_t</a> Client::state = <a class="el" href="client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721">MENU</a></td>
+          <td class="memname"><a class="el" href="client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248">state_t</a> Client::state = <a class="el" href="client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84">GAME</a></td>
         </tr>
       </table>
 </div><div class="memdoc">

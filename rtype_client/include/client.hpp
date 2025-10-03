@@ -12,6 +12,7 @@
 #include <algorithm>
 #include "registry.hpp"
 #include "Factory.hpp"
+#include <map>
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -47,13 +48,18 @@ class Client {
     int port_;
     menu_info_t menu_info;
     double levelTimer = 0.0;
-    std::vector<entity> active_entities;
     MoveRequest move;
     MoveResponse check;
     NetworkManager client_;
 
+    // This map associates the servers_ids to the client_ids in the registry
+    std::unordered_map<size_t, size_t> ids_assoc;
+
+    // std::vector<...> old;
+    // std::vector<...> new;
+
     public:
-    state_t state = MENU;
+    state_t state = GAME;
     Client(int p, std::string a, registry &reg);
     ~Client();
     MoveRequest getMoveKey();
@@ -62,6 +68,7 @@ class Client {
     void runMenu(double delta);
     void initGame();
     void runLevel(double delta);
+    void sendPlayerInput();
     
     // decodeur
     MoveResponse decodeMoveResponse(const std::vector<uint8_t>& buffer);

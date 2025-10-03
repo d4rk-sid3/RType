@@ -16,94 +16,101 @@
 \DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <algorithm>}}
 \DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{registry_8hpp}{registry.hpp}}"{}}}
 \DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}Factory.hpp"{}}}
-\DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ WINDOW\_WIDTH\ 738}}
-\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ WINDOW\_HEIGHT\ 432}}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{client_8hpp_a45a5fb16434b9906d8110a57b0ca5b4d}{player\_entity\_id}}\ =\ 0;}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structentity__info__s}{entity\_info\_s}}\ \{}
-\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structentity__info__s_a353e31671fbeae1e8f621c7f4b8e9e44}{entity\_id}};}
-\DoxyCodeLine{00023\ \ \ \ \ std::string\ \mbox{\hyperlink{structentity__info__s_a880a518d54a79a31c8b4d98af8b54eb0}{type}};}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structentity__info__s_a7248fc37b5c29fad3b45fbf206303cf7}{spawn\_time}};}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structentity__info__s_a1b33fd572598d15a521a5e4b788c2e94}{spawn\_y}};}
-\DoxyCodeLine{00026\ \}\ \mbox{\hyperlink{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\_info\_t}};}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
-\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721}{MENU}},}
-\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c}{TRANSITION}},}
-\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}},}
-\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00}{GAME\_OVER}}}
-\DoxyCodeLine{00033\ \}\mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\_t}};}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmenu__info__s}{menu\_info\_s}}\ \{}
-\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_a65306af2ef0d0165c99b557ef5d6c3fe}{background}};}
-\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_aeadcfaed1194b576d159c0450b88462e}{title}};}
-\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_adcba8e6f82edd2665cdab0b48e8d22d4}{start\_text}};}
-\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_a99c8bfd6ed177773e21e8fbd4e0cf499}{menu\_background\_music}};}
-\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_abcf65643ff3a39ec544dd2f80991a848}{menu\_fade\_in\_rect}};}
-\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_a89db81451f697d52e008e95562363c19}{menu\_fade\_out\_rect}};\ \ \ \ }
-\DoxyCodeLine{00042\ \}\ \mbox{\hyperlink{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac}{menu\_info\_t}};}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classClient}{Client}}\ \{}
-\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classregistry}{registry}}\ \&\_reg;}
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{int}\ port\_;}
-\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{structmenu__info__s}{menu\_info\_t}}\ menu\_info;}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{double}\ levelTimer\ =\ 0.0;}
-\DoxyCodeLine{00050\ \ \ \ \ std::vector<entity>\ active\_entities;}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ WINDOW\_WIDTH\ 738}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ WINDOW\_HEIGHT\ 432}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{client_8hpp_a45a5fb16434b9906d8110a57b0ca5b4d}{player\_entity\_id}}\ =\ 0;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structentity__info__s}{entity\_info\_s}}\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structentity__info__s_a353e31671fbeae1e8f621c7f4b8e9e44}{entity\_id}};}
+\DoxyCodeLine{00024\ \ \ \ \ std::string\ \mbox{\hyperlink{structentity__info__s_a880a518d54a79a31c8b4d98af8b54eb0}{type}};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structentity__info__s_a7248fc37b5c29fad3b45fbf206303cf7}{spawn\_time}};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structentity__info__s_a1b33fd572598d15a521a5e4b788c2e94}{spawn\_y}};}
+\DoxyCodeLine{00027\ \}\ \mbox{\hyperlink{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\_info\_t}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721}{MENU}},}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c}{TRANSITION}},}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}},}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00}{GAME\_OVER}}}
+\DoxyCodeLine{00034\ \}\mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\_t}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmenu__info__s}{menu\_info\_s}}\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_a65306af2ef0d0165c99b557ef5d6c3fe}{background}};}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_aeadcfaed1194b576d159c0450b88462e}{title}};}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_adcba8e6f82edd2665cdab0b48e8d22d4}{start\_text}};}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_a99c8bfd6ed177773e21e8fbd4e0cf499}{menu\_background\_music}};}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_abcf65643ff3a39ec544dd2f80991a848}{menu\_fade\_in\_rect}};}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classentity}{entity}}\ \mbox{\hyperlink{structmenu__info__s_a89db81451f697d52e008e95562363c19}{menu\_fade\_out\_rect}};\ \ \ \ }
+\DoxyCodeLine{00043\ \}\ \mbox{\hyperlink{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac}{menu\_info\_t}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classClient}{Client}}\ \{}
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classregistry}{registry}}\ \&\_reg;}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ port\_;}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{structmenu__info__s}{menu\_info\_t}}\ menu\_info;}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{double}\ levelTimer\ =\ 0.0;}
 \DoxyCodeLine{00051\ \ \ \ \ MoveRequest\ move;}
 \DoxyCodeLine{00052\ \ \ \ \ MoveResponse\ check;}
 \DoxyCodeLine{00053\ \ \ \ \ NetworkManager\ client\_;}
 \DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\_t}}\ \mbox{\hyperlink{classClient_a3a70c6088987795c92e25d7ee2e99af5}{state}}\ =\ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721}{MENU}};}
-\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classClient_a802e0a6f59303939f824d41580deb82a}{Client}}(\textcolor{keywordtype}{int}\ p,\ std::string\ a,\ \mbox{\hyperlink{classregistry}{registry}}\ \&reg);}
-\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classClient_a840e519ca781888cbd54181572ebe3a7}{\string~Client}}();}
-\DoxyCodeLine{00059\ \ \ \ \ MoveRequest\ \mbox{\hyperlink{classClient_a44fe248f70cbfc3de9858a9064481363}{getMoveKey}}();}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//\ This\ map\ associates\ the\ servers\_ids\ to\ the\ client\_ids\ in\ the\ registry}}
+\DoxyCodeLine{00056\ \ \ \ \ std::unordered\_map<size\_t,\ size\_t>\ ids\_assoc;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{comment}{//\ std::vector<...>\ old;}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//\ std::vector<...>\ new;}}
 \DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classClient_a8e97ca84d92276123cf88091a6811cc1}{initMenu}}();}
-\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classClient_a1edfe2aa97fdb3d54c15afa0ef48496e}{runMenu}}(\textcolor{keywordtype}{double}\ delta);}
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classClient_add2ae689ce735011cd1b83601470f4d3}{initGame}}();}
-\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classClient_a101e55e53e7f9cc0433da705e66e1f08}{runLevel}}(\textcolor{keywordtype}{double}\ delta);}
-\DoxyCodeLine{00065\ \ \ \ \ }
-\DoxyCodeLine{00066\ \ \ \ \ \textcolor{comment}{//\ decodeur}}
-\DoxyCodeLine{00067\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classClient_ad472cc4054762148a8110a5040353098}{decodeMoveResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00068\ \ \ \ \ ShootResponse\ \mbox{\hyperlink{classClient_ad8f44e3c69119e83ca831a73caca8420}{decodeShootResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00069\ \ \ \ \ PickupItemResponse}
-\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{classClient_a39748a436113414b7467d716d684fd31}{decodePickupItemResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00071\ \ \ \ \ PlayerStateResponse}
-\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classClient_ac63a4622a48fe4cd7d5cfb5ef49c267e}{decodePlayerStateResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00073\ \ \ \ \ PlayerGameStateResponse}
-\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{classClient_ab49c25d951db8eb4399467a6d0ea9533}{decodePlayerGameStateResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00075\ \ \ \ \ BeatBossResponse\ \mbox{\hyperlink{classClient_affd05928d3224f8873c9fa38847b0c3c}{decodeBeatBossResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00076\ \ \ \ \ CheckpointResponse}
-\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classClient_af44c2105b0c497092c607e4d217e4ca6}{decodeCheckpointResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00078\ \ \ \ \ GameStartedResponse}
-\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classClient_aaa626c2103e085ff050fa715ecbf9655}{decodeGameStartedResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00080\ \ \ \ \ GamePausedResponse}
-\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classClient_a4d6ae25afd06f99eed99a59b25bf66d1}{decodeGamePausedResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00082\ \ \ \ \ GameStateResponse\ \mbox{\hyperlink{classClient_a760dfdba77d060def45c1bcaba6673b1}{decodeGameStateResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer}
-\DoxyCodeLine{00083\ \ \ \ \ );}
-\DoxyCodeLine{00084\ \ \ \ \ EnemySpawnedResponse}
-\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classClient_aed8f11e21e0d6b34be250a53792e0b38}{decodeEnemySpawnedResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00086\ \ \ \ \ EnemyMovedResponse}
-\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{classClient_a9b4302efa0911b7f68cd670df4ff4c43}{decodeEnemyMovedResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00088\ \ \ \ \ EnemyFiredResponse}
-\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classClient_a850b653fe6f983e1e0de7ce4372e1969}{decodeEnemyFiredResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00090\ \ \ \ \ EnemyDiedResponse\ \mbox{\hyperlink{classClient_a2d88057c0cc14efa6e32ff5c657cf5cb}{decodeEnemyDiedResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer}
-\DoxyCodeLine{00091\ \ \ \ \ );}
-\DoxyCodeLine{00092\ \ \ \ \ CollisionResponse\ \mbox{\hyperlink{classClient_a2f8ed46c27108ad459f32ee556f38596}{decodeCollisionResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer}
-\DoxyCodeLine{00093\ \ \ \ \ );}
-\DoxyCodeLine{00094\ }
-\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//\ encodeur}}
-\DoxyCodeLine{00096\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classClient_af3029761b631ea17ad55e2d749229a01}{encodeMoveResquest}}(\textcolor{keyword}{const}\ MoveRequest\&\ pos);}
-\DoxyCodeLine{00097\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classClient_a20ab0436a6aa414d2c18969b0d5bea5d}{encodeShootResquest}}(\textcolor{keyword}{const}\ ShootRequest\&\ pos);}
-\DoxyCodeLine{00098\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classClient_aca12dd319cdd15c22eb169aad6b629de}{encodePickupItemResquest}}(\textcolor{keyword}{const}\ PickupItemResquest\&\ pos}
-\DoxyCodeLine{00099\ \ \ \ \ );}
-\DoxyCodeLine{00100\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classClient_aad80b7b7afcac04d7b5e604f87b53e8d}{encodeGamePausedRequest}}(\textcolor{keyword}{const}\ GamePausedRequest\&\ pos);}
-\DoxyCodeLine{00101\ \};}
-\DoxyCodeLine{00102\ }
-\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !CLIENT\_HPP\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\_t}}\ \mbox{\hyperlink{classClient_a3a70c6088987795c92e25d7ee2e99af5}{state}}\ =\ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}};}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{classClient_a802e0a6f59303939f824d41580deb82a}{Client}}(\textcolor{keywordtype}{int}\ p,\ std::string\ a,\ \mbox{\hyperlink{classregistry}{registry}}\ \&reg);}
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classClient_a840e519ca781888cbd54181572ebe3a7}{\string~Client}}();}
+\DoxyCodeLine{00065\ \ \ \ \ MoveRequest\ \mbox{\hyperlink{classClient_a44fe248f70cbfc3de9858a9064481363}{getMoveKey}}();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classClient_a8e97ca84d92276123cf88091a6811cc1}{initMenu}}();}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classClient_a1edfe2aa97fdb3d54c15afa0ef48496e}{runMenu}}(\textcolor{keywordtype}{double}\ delta);}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classClient_add2ae689ce735011cd1b83601470f4d3}{initGame}}();}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classClient_a101e55e53e7f9cc0433da705e66e1f08}{runLevel}}(\textcolor{keywordtype}{double}\ delta);}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classClient_a9d0aec2907f33777ece928a1a0dee25e}{sendPlayerInput}}();}
+\DoxyCodeLine{00072\ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{//\ decodeur}}
+\DoxyCodeLine{00074\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classClient_ad472cc4054762148a8110a5040353098}{decodeMoveResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00075\ \ \ \ \ ShootResponse\ \mbox{\hyperlink{classClient_ad8f44e3c69119e83ca831a73caca8420}{decodeShootResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00076\ \ \ \ \ PickupItemResponse}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classClient_a39748a436113414b7467d716d684fd31}{decodePickupItemResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00078\ \ \ \ \ PlayerStateResponse}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classClient_ac63a4622a48fe4cd7d5cfb5ef49c267e}{decodePlayerStateResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00080\ \ \ \ \ PlayerGameStateResponse}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classClient_ab49c25d951db8eb4399467a6d0ea9533}{decodePlayerGameStateResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00082\ \ \ \ \ BeatBossResponse\ \mbox{\hyperlink{classClient_affd05928d3224f8873c9fa38847b0c3c}{decodeBeatBossResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00083\ \ \ \ \ CheckpointResponse}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classClient_af44c2105b0c497092c607e4d217e4ca6}{decodeCheckpointResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00085\ \ \ \ \ GameStartedResponse}
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{classClient_aaa626c2103e085ff050fa715ecbf9655}{decodeGameStartedResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00087\ \ \ \ \ GamePausedResponse}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{classClient_a4d6ae25afd06f99eed99a59b25bf66d1}{decodeGamePausedResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00089\ \ \ \ \ GameStateResponse\ \mbox{\hyperlink{classClient_a760dfdba77d060def45c1bcaba6673b1}{decodeGameStateResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer}
+\DoxyCodeLine{00090\ \ \ \ \ );}
+\DoxyCodeLine{00091\ \ \ \ \ EnemySpawnedResponse}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{classClient_aed8f11e21e0d6b34be250a53792e0b38}{decodeEnemySpawnedResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00093\ \ \ \ \ EnemyMovedResponse}
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{classClient_a9b4302efa0911b7f68cd670df4ff4c43}{decodeEnemyMovedResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00095\ \ \ \ \ EnemyFiredResponse}
+\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{classClient_a850b653fe6f983e1e0de7ce4372e1969}{decodeEnemyFiredResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00097\ \ \ \ \ EnemyDiedResponse\ \mbox{\hyperlink{classClient_a2d88057c0cc14efa6e32ff5c657cf5cb}{decodeEnemyDiedResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer}
+\DoxyCodeLine{00098\ \ \ \ \ );}
+\DoxyCodeLine{00099\ \ \ \ \ CollisionResponse\ \mbox{\hyperlink{classClient_a2f8ed46c27108ad459f32ee556f38596}{decodeCollisionResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer}
+\DoxyCodeLine{00100\ \ \ \ \ );}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ encodeur}}
+\DoxyCodeLine{00103\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classClient_af3029761b631ea17ad55e2d749229a01}{encodeMoveResquest}}(\textcolor{keyword}{const}\ MoveRequest\&\ pos);}
+\DoxyCodeLine{00104\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classClient_a20ab0436a6aa414d2c18969b0d5bea5d}{encodeShootResquest}}(\textcolor{keyword}{const}\ ShootRequest\&\ pos);}
+\DoxyCodeLine{00105\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classClient_aca12dd319cdd15c22eb169aad6b629de}{encodePickupItemResquest}}(\textcolor{keyword}{const}\ PickupItemResquest\&\ pos}
+\DoxyCodeLine{00106\ \ \ \ \ );}
+\DoxyCodeLine{00107\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classClient_aad80b7b7afcac04d7b5e604f87b53e8d}{encodeGamePausedRequest}}(\textcolor{keyword}{const}\ GamePausedRequest\&\ pos);}
+\DoxyCodeLine{00108\ \};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !CLIENT\_HPP\_\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

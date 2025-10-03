@@ -54,9 +54,9 @@ void Server::logGameEntities()
             name &name_ = reg.get_components<component::name>()[entity(i)].value();
 
             // Ignore special entities
-            if (std::find(special_entities.begin(), special_entities.end(), name_._name) != special_entities.end()) {
-                continue;
-            }
+            // if (std::find(special_entities.begin(), special_entities.end(), name_._name) != special_entities.end()) {
+            //     continue;
+            // }
 
             // Clean up out of screen entities
             if (pos.x < -200 || pos.x > 1000) {
