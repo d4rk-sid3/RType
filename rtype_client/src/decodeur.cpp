@@ -17,6 +17,22 @@
 
 #include "../include/client.hpp"
 
+EnemyMovedResponse Client::decodeEnemyMovedResponse(const std::vector<uint8_t>& buffer)
+{
+    EnemyMovedResponse pos;
+
+    if (buffer[0] != 0x37) {
+        throw std::runtime_error("Invalid message type !");
+    }
+
+    pos.type = buffer[0];
+    pos.enemy_id = (buffer[1] << 24) | (buffer[2] << 16) | (buffer[3] << 8) | buffer[4];
+    pos.enemy_type = static_cast<EnemyType>(buffer[5]);
+    pos.position.x = (buffer[6] << 8) | buffer[7];
+    pos.position.y = (buffer[8] << 8) | buffer[9];
+    return pos;
+}
+
 MoveResponse Client::decodeMoveResponse(const std::vector<uint8_t>& buffer)
 {
     MoveResponse pos;
@@ -235,33 +251,6 @@ EnemySpawnedResponse Client::decodeEnemySpawnedResponse(const std::vector<uint8_
     EnemySpawnedResponse pos;
 
     if (buffer[0] != 0x36) {
-        throw std::runtime_error("Invalid message type !");
-    }
-
-    pos.type = buffer[0];
-    pos.enemy_id = (buffer[1] << 24) | (buffer[2] << 16) | (buffer[3] << 8) | buffer[4];
-    pos.enemy_type = static_cast<EnemyType>(buffer[5]);
-    pos.position.x = (buffer[6] << 8) | buffer[7];
-    pos.position.y = (buffer[8] << 8) | buffer[9];
-    pos.direction.x = (buffer[10] << 8) | buffer[11];
-    pos.direction.y = (buffer[12] << 8) | buffer[13];
-    pos.timestamp.milliseconds = 
-        (static_cast<uint64_t>(buffer[14]) << 56) | 
-        (static_cast<uint64_t>(buffer[15]) << 48) | 
-        (static_cast<uint64_t>(buffer[16]) << 40) | 
-        (static_cast<uint64_t>(buffer[17]) << 32) |
-        (static_cast<uint64_t>(buffer[18]) << 24) | 
-        (static_cast<uint64_t>(buffer[19]) << 16) | 
-        (static_cast<uint64_t>(buffer[20]) << 8)  | 
-        static_cast<uint64_t>(buffer[21]);
-    return pos;
-}
-
-EnemyMovedResponse Client::decodeEnemyMovedResponse(const std::vector<uint8_t>& buffer)
-{
-    EnemyMovedResponse pos;
-
-    if (buffer[0] != 0x37) {
         throw std::runtime_error("Invalid message type !");
     }
 
