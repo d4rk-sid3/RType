@@ -195,8 +195,6 @@ struct EnemyMovedResponse {
     uint32_t enemy_id;
     EnemyType enemy_type;
     Vector2D position;
-    Vector2D direction;
-    Timestamp timestamp;
 };
 
 struct EnemyFiredResponse {
