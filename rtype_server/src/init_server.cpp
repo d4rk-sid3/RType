@@ -19,28 +19,26 @@ void load_textures(void)
     ResourceManager::Instance().load("assets/sprites/effects/Explosion.png", "explosion", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/effects/hit_effect.gif", "hit_effect", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/background/background.jpg", "background", TEXTURE);
-    ResourceManager::Instance().load("assets/sprites/background/wall1_shadow.jpg", "ceiling", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/background/wall1_shadow.png", "ceiling", TEXTURE);
 
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
 
-void Server::spawn_player(void)
+void Server::initializeGame(void)
 {
-    factory.make_background();
-    player_entity_id = (int)factory.make_entity("player");
-    active_entities.push_back((entity)player_entity_id);
+    Factory factory(reg);
     
-    printf("Player init\n");
+    factory.make_background();
+    player_entity_id = factory.make_entity("player");
+    
     auto &pos = reg.get_components<component::position>()[player_entity_id].value();
     pos.x = 50;
     pos.y = 50;
 
-    // factory.make_title();
-    // factory.make_start_text();
     factory.make_menu_background_music();
 }
 
-Server::Server(int p, registry &regis, Factory &fac) : server_(8080, "127.0.0.1"), p_(p), reg(regis), factory(fac)
+Server::Server(int p, registry &regis) : server_(8080, "127.0.0.1"), p_(p), reg(regis)
 {
     response = {};
     response.type = 0x24;
@@ -51,52 +49,52 @@ Server::Server(int p, registry &regis, Factory &fac) : server_(8080, "127.0.0.1"
     response.timestamp.milliseconds = 0;
 
     load_textures();
-    spawn_player();
+    initializeGame();
     loadLevel("assets/levels/test.txt");
-    while (1) {
-        server_.poll();
+    // while (1) {
+    //     server_.poll();
 
-        auto msg = server_.getLastMsg();
+    //     auto msg = server_.getLastMsg();
 
-        if (!msg.first.empty()) {
-            u_int8_t type = msg.first[0];
-            auto sender = msg.second;
+    //     if (!msg.first.empty()) {
+    //         u_int8_t type = msg.first[0];
+    //         auto sender = msg.second;
 
-            if (type == 0x23) {
-                MoveRequest req = decodeMoveRequest(msg.first);
-                std::cout << "Client direction = " << static_cast<int>(req.direction) << std::endl;
+    //         if (type == 0x23) {
+    //             MoveRequest req = decodeMoveRequest(msg.first);
+    //             std::cout << "Client direction = " << static_cast<int>(req.direction) << std::endl;
 
-                MoveResponse newResp = response;
-                newResp.type = 0x24;
-                newResp.player_id = 1;
-                newResp.speed = 2;
-                newResp.timestamp.milliseconds =
-                    std::chrono::duration_cast<std::chrono::milliseconds>(
-                        std::chrono::system_clock::now().time_since_epoch()).count();
+    //             MoveResponse newResp = response;
+    //             newResp.type = 0x24;
+    //             newResp.player_id = 1;
+    //             newResp.speed = 2;
+    //             newResp.timestamp.milliseconds =
+    //                 std::chrono::duration_cast<std::chrono::milliseconds>(
+    //                     std::chrono::system_clock::now().time_since_epoch()).count();
 
-                switch (req.direction) {
-                    case UP:
-                        newResp.direction = {0, static_cast<uint16_t>(-1)};
-                        break;
-                    case DOWN:
-                        newResp.direction = {0, 1};
-                        break;
-                    case LEFT:
-                        newResp.direction = {static_cast<uint16_t>(-1), 0};
-                        break;
-                    case RIGHT:
-                        newResp.direction = {1, 0};
-                        break;
-                }
+    //             switch (req.direction) {
+    //                 case UP:
+    //                     newResp.direction = {0, static_cast<uint16_t>(-1)};
+    //                     break;
+    //                 case DOWN:
+    //                     newResp.direction = {0, 1};
+    //                     break;
+    //                 case LEFT:
+    //                     newResp.direction = {static_cast<uint16_t>(-1), 0};
+    //                     break;
+    //                 case RIGHT:
+    //                     newResp.direction = {1, 0};
+    //                     break;
+    //             }
 
-                response = updateMoveResponse(response, newResp);
+    //             response = updateMoveResponse(response, newResp);
 
 
-                std::vector<uint8_t> buff = encodeMoveResponse(response);
-                server_.send(buff, buff.size(), sender);
-            }
-        }
-    }
+    //             std::vector<uint8_t> buff = encodeMoveResponse(response);
+    //             server_.send(buff, buff.size(), sender);
+    //         }
+    //     }
+    // }
 }
 
 MoveResponse Server::getMove()

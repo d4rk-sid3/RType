@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['audio_0',['audio',['../structcomponent_1_1audio__s.html#a73d8e17b7264772f17137ce198b072d6',1,'component::audio_s']]]
+  ['_5fname_0',['_name',['../structcomponent_1_1name__s.html#a7d824b9f299f3dc86b247d2cb3b56fde',1,'component::name_s']]]
 ];

@@ -3,11 +3,10 @@
 int main() {
     sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type") ;
     registry reg(win);
-    Factory fac(reg);
 
     sf::Event event;
     sf::Clock frameClock;
-    Server server(8080, reg, fac);
+    Server server(8080, reg);
 
     while (win.isOpen()) {
         while (win.pollEvent(event))
@@ -20,7 +19,7 @@ int main() {
         }
 
         double dt = frameClock.restart().asSeconds();
-        server.runLevel(dt);
         reg.run_systems(dt);
+        server.runLevel(dt);
     }   
 }

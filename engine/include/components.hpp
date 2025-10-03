@@ -318,6 +318,15 @@ namespace component {
     }logic;
 
     /**
+     * @brief The name component, defined by a string. It lets you give a name to each entity
+     * 
+     */
+    typedef struct name_s {
+        std::string _name;
+    }name;
+
+
+    /**
      * @brief The audio component defined by a single sf::Music. This component is not used by the engine systems but can be directly played, stopped, paused by the user
      * 
      */
