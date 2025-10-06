@@ -25,7 +25,7 @@ void load_client_textures(void)
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
 
-Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, address, std::ref(lastmsg)),  _reg(reg)
+Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, address, std::ref(lastmsg), std::ref(mtx)),  _reg(reg)
 {
     load_client_textures();
     //initMenu();
@@ -48,26 +48,38 @@ void Client::sendPlayerInput()
 
 std::vector<EnemyMovedResponse> Client::recupAllEntities()
 {
-    NbrEntity e = decodeNbrEntity(lastmsg);
+    if (!lastmsg.empty()) {    
+        std::lock_guard<std::mutex> lock(mtx);
+        NbrEntity e = decodeNbrEntity(lastmsg);
 
-    std::vector<EnemyMovedResponse> s;
+        std::cout << "E: "  << static_cast<int>(e.nbr) << std::endl;
 
-    for (int a = 0; a < e.nbr; a++) {
-        s.push_back(decodeEnemyMovedResponse(lastmsg));
+        std::vector<EnemyMovedResponse> s;
+
+        for (int a = 0; a < e.nbr; a++) {
+            s.push_back(decodeEnemyMovedResponse(lastmsg));
+        }
+
+        for (auto &a : s) {
+            std::cout << "Enemy_Type: "  << static_cast<int>(a.enemy_type);
+            std::cout << "Enemy_Pos_x: "  << static_cast<double>(a.position.x);
+            std::cout << "Enemy_Pos_y: "  << static_cast<double>(a.position.y) << std::endl;
+        }
+
+        lastmsg.clear();
+
+        return s;
+    } else {
+        std::vector<EnemyMovedResponse> tmp;
+
+        return tmp;
     }
-
-    for (auto &a : s) {
-        std::cout << "Enemy_Type: "  << a.enemy_type;
-        std::cout << "Enemy_Pos_x: "  << a.position.x;
-        std::cout << "Enemy_Pos_y: "  << a.position.y << std::endl;
-    }
-
-    return s;
 }
 
 
 void Client::runLevel(double delta)
 {
+    recupAllEntities();
     // Factory fac(_reg);
     // getNewEntities();
 

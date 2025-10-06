@@ -38,7 +38,7 @@ void Server::initializeGame(void)
     factory.make_menu_background_music();
 }
 
-Server::Server(int p, registry &regis) : server_(8080), p_(p), reg(regis)
+Server::Server(int p, registry &regis) : server_(8080, std::ref(tmp), std::ref(mtx)), p_(p), reg(regis)
 {
     load_textures();
     initializeGame();

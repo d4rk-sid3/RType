@@ -8,17 +8,19 @@
 #include "../include/Network.hpp"
 
 
-NetworkManager::NetworkManager(int port, std::string address, std::vector<uint8_t> &lastmsg_): 
+NetworkManager::NetworkManager(int port, std::string address, std::vector<uint8_t> &lastmsg_, std::mutex& mtx_): 
     socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 0)),
     server_endpoint_(asio::ip::udp::endpoint(asio::ip::make_address(address), port)),
-    isrunning(true), lastmsg(lastmsg_)
+    isrunning(true), lastmsg(lastmsg_), mtx(mtx_)
 {
     std::cout << "Client lancé " << std::endl;
 
     receive();
 }
 
-NetworkManager::NetworkManager(int port) : socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)), isrunning(true)
+NetworkManager::NetworkManager(int port, std::vector<uint8_t> &lastmsg_, std::mutex& mtx_) :
+    socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)),
+    isrunning(true), lastmsg(lastmsg_), mtx(mtx_)
 {
     std::cout << "Serveur pret à être lancé " << port << std::endl;
 
@@ -59,9 +61,12 @@ void NetworkManager::receive()
             if (!error && bytes_receive > 0) {
                 add_connection(last_sender_);
                 std::cout << "Receive :" << bytes_receive << std::endl;
-
-                for (auto &b : buff) {
-                    lastmsg.push_back(b);
+                
+                {
+                    std::lock_guard<std::mutex> lock(mtx);
+                    for (auto &b : buff) {
+                        lastmsg.push_back(b);
+                    }
                 }
             }
 

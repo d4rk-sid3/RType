@@ -44,6 +44,7 @@ class Server {
     std::vector<entity_info_t> entities;
 
     vector<uint8_t> result;
+    vector<uint8_t> tmp;
     int counter = 0;
 
   public:
