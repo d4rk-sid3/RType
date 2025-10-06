@@ -45,8 +45,8 @@ class Client {
     int port_;
     menu_info_t menu_info;
     double levelTimer = 0.0;
-    MoveRequest move;
-    MoveResponse check;
+    // MoveRequest move;
+    // MoveResponse check;
     NetworkManager client_;
 
     // This map associates the servers_ids to the client_ids in the registry

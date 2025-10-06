@@ -18,39 +18,39 @@
 
 #include "../include/client.hpp"
 
-std::vector<uint8_t> Client::encodeMoveResquest(const MoveRequest& pos)
-{
-    std::vector<uint8_t> buffer;
+// std::vector<uint8_t> Client::encodeMoveResquest(const MoveRequest& pos)
+// {
+//     std::vector<uint8_t> buffer;
 
-    buffer.emplace_back(0x23);
+//     buffer.emplace_back(0x23);
 
-    buffer.emplace_back(pos.direction & 0xFF);
+//     buffer.emplace_back(pos.direction & 0xFF);
 
-    return buffer;
-}
+//     return buffer;
+// }
 
-std::vector<uint8_t> Client::encodeShootResquest(const ShootRequest& pos)
-{
-    std::vector<uint8_t> buffer;
+// std::vector<uint8_t> Client::encodeShootResquest(const ShootRequest& pos)
+// {
+//     std::vector<uint8_t> buffer;
 
-    buffer.emplace_back(0x25);
+//     buffer.emplace_back(0x25);
 
-    return buffer;
-}
+//     return buffer;
+// }
 
-std::vector<uint8_t> Client::encodePickupItemResquest(const PickupItemResquest& pos)
-{
-    std::vector<uint8_t> buffer;
+// std::vector<uint8_t> Client::encodePickupItemResquest(const PickupItemResquest& pos)
+// {
+//     std::vector<uint8_t> buffer;
 
-    buffer.emplace_back(0x40);
+//     buffer.emplace_back(0x40);
 
-    return buffer;
-}
+//     return buffer;
+// }
 
-std::vector<uint8_t> Client::encodeGamePausedRequest(const GamePausedRequest& pos)
-{
-    std::vector<uint8_t> buffer;
+// std::vector<uint8_t> Client::encodeGamePausedRequest(const GamePausedRequest& pos)
+// {
+//     std::vector<uint8_t> buffer;
 
-    buffer.emplace_back(0x33);
-    return buffer;
-}
+//     buffer.emplace_back(0x33);
+//     return buffer;
+// }

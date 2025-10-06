@@ -36,7 +36,6 @@ Client::Client(int p, std::string address, registry& reg): port_(p), client_(808
     std::thread input_thread([this, server_endpoint]() {
         client_.run();
     });
-
 }
 
 // ... *isInside(std::vector<...> vec, size_t id)

@@ -10,9 +10,6 @@ var searchData=
   ['getfont_7',['getFont',['../classResourceManager.html#ad7fe4904d2a5ae24bbc60360fc012c56',1,'ResourceManager']]],
   ['getid_8',['getId',['../classentity.html#a49afbb4a974ddc6a5393d7f0c30ab63b',1,'entity']]],
   ['getkeyboardinput_9',['getKeyboardInput',['../structcomponent_1_1controllable__s.html#a50d82bffaf22ef937e0c2d18f4e05c22',1,'component::controllable_s']]],
-  ['getmove_10',['getMove',['../classServer.html#a645362063e718f2c481fa4d16b6ae1d8',1,'Server']]],
-  ['getmovekey_11',['getMoveKey',['../classClient.html#a44fe248f70cbfc3de9858a9064481363',1,'Client']]],
-  ['getmovekey_20tt_12',['&lt;tt&gt;MoveRequest getMoveKey()&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md5',1,'']]],
-  ['gettexture_13',['getTexture',['../classResourceManager.html#a78632647a9a86d0b477de5055a5a2fcc',1,'ResourceManager']]],
-  ['group_14',['group',['../structcomponent_1_1hurtbox__s.html#a2ae83e5eea64fb8925d67190392dc804',1,'component::hurtbox_s']]]
+  ['gettexture_10',['getTexture',['../classResourceManager.html#a78632647a9a86d0b477de5055a5a2fcc',1,'ResourceManager']]],
+  ['group_11',['group',['../structcomponent_1_1hurtbox__s.html#a2ae83e5eea64fb8925d67190392dc804',1,'component::hurtbox_s']]]
 ];

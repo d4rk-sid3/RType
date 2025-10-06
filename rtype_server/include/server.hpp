@@ -36,8 +36,8 @@ class Server {
     void initializeGame(void);
     void logGameEntities(void);
     
-    MoveResponse response;
-    MoveRequest move;
+    // MoveResponse response;
+    // MoveRequest move;
     NetworkManager server_;
 
     std::vector<entity_info_t> entities;
@@ -51,13 +51,13 @@ class Server {
     ~Server();
 
     // update
-    MoveResponse
-    updateMoveResponse(const MoveResponse& oldpos, const MoveResponse& pos);
-    ShootResponse
-    updateShootResponse(const ShootResponse& oldpos, const ShootResponse& pos);
-    PickupItemResponse updatePickupItemResponse(
-        const PickupItemResponse& oldpos, const PickupItemResponse& pos
-    );
+    // MoveResponse
+    // updateMoveResponse(const MoveResponse& oldpos, const MoveResponse& pos);
+    // ShootResponse
+    // updateShootResponse(const ShootResponse& oldpos, const ShootResponse& pos);
+    // PickupItemResponse updatePickupItemResponse(
+    //     const PickupItemResponse& oldpos, const PickupItemResponse& pos
+    // );
 
     // decodeur
     /*MoveRequest decodeMoveRequest(const std::vector<uint8_t>& buffer);

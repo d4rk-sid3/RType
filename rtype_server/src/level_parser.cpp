@@ -69,14 +69,14 @@ void Server::logGameEntities()
 
             ++counter;
 
-            vector<uint8_t> tmp = encodeEnemyMovedResponse({0x32, static_cast<uint16_t>(i), TYPE_1,
+            vector<uint8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<uint16_t>(i), TYPE_1,
                 {static_cast<uint16_t>(pos.x), static_cast<uint16_t>(pos.y)}});
 
             result.insert(result.end(), tmp.begin(), tmp.end());
         } catch (...) {
         }
     }
-    vector<uint8_t> tmp = encodeNbrEntity({0x33, static_cast<uint8_t>(counter)});
+    vector<uint8_t> tmp = encodeNbrEntity({0x38, static_cast<uint8_t>(counter)});
     result.insert(result.begin(), tmp.begin(), tmp.end());
 }
 

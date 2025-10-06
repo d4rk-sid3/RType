@@ -51,7 +51,8 @@ Server::Server(int p, registry &regis) : server_(8080, "127.0.0.1"), p_(p), reg(
    });
 
     while (true) {
-        server_.send(result, result.size(), server_endpoint);
+
+            server_.send(result, result.size(), server_endpoint);
     }
 
 }

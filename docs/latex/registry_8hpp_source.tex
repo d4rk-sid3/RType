@@ -1,5 +1,5 @@
 \doxysection{registry.\+hpp}
-\hypertarget{registry_8hpp_source}{}\label{registry_8hpp_source}\index{/home/jaggie/epitech\_projects/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/include/registry.hpp@{/home/jaggie/epitech\_projects/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/include/registry.hpp}}
+\hypertarget{registry_8hpp_source}{}\label{registry_8hpp_source}\index{/home/amour/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/include/registry.hpp@{/home/amour/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/include/registry.hpp}}
 \mbox{\hyperlink{registry_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -32,27 +32,27 @@
 \DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ <typeindex>}}
 \DoxyCodeLine{00038\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
 \DoxyCodeLine{00039\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{entity_8hpp}{entity.hpp}}"{}}}
-\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{exceptions_8hpp}{exceptions.hpp}}"{}}}
-\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ResourceManager_8hpp}{ResourceManager.hpp}}"{}}}
-\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ResourceManager_8hpp}{ResourceManager.hpp}}"{}}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{entity_8hpp}{entity.hpp}}"{}}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{exceptions_8hpp}{exceptions.hpp}}"{}}}
 \DoxyCodeLine{00046\ }
-\DoxyCodeLine{00051\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classregistry}{registry}}\ \{}
-\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \ \ \ \ vector<entity>\ \mbox{\hyperlink{classregistry_ab2381c1b1b227a150443be6932f7c434}{dead\_entities}};}
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classregistry_a757883d504ab1bb5a06e0faa8e28664d}{registry}}(sf::RenderWindow\&\ window);}
-\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classregistry_a757883d504ab1bb5a06e0faa8e28664d}{registry}}();}
-\DoxyCodeLine{00058\ }
-\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{/*\ Tables\ management\ */}}
-\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Component>}
-\DoxyCodeLine{00061\ \ \ \ \ vector<optional<Component>>\&\ \mbox{\hyperlink{classregistry_afe3919f4a56bbbeda89af4a6e5171f8b}{register\_components}}();}
-\DoxyCodeLine{00062\ }
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Component>}
-\DoxyCodeLine{00064\ \ \ \ \ vector<optional<Component>>\&\ \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{get\_components}}();}
+\DoxyCodeLine{00047\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classregistry}{registry}}\ \{}
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00055\ \ \ \ \ vector<entity>\ \mbox{\hyperlink{classregistry_ab2381c1b1b227a150443be6932f7c434}{dead\_entities}};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classregistry_a757883d504ab1bb5a06e0faa8e28664d}{registry}}(sf::RenderWindow\&\ window);}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classregistry_a757883d504ab1bb5a06e0faa8e28664d}{registry}}();}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{/*\ Tables\ management\ */}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Component>}
+\DoxyCodeLine{00062\ \ \ \ \ vector<optional<Component>>\&\ \mbox{\hyperlink{classregistry_afe3919f4a56bbbeda89af4a6e5171f8b}{register\_components}}();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Component>\ vector<optional<Component>>\&\ \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{get\_components}}();}
 \DoxyCodeLine{00065\ }
 \DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Component>}
 \DoxyCodeLine{00067\ \ \ \ \ vector<optional<Component>>\ \textcolor{keyword}{const}\&\ \mbox{\hyperlink{classregistry_a40b0f07dfe9c916d667732c73ef9272a}{get\_components}}()\ \textcolor{keyword}{const};}

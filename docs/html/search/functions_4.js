@@ -8,7 +8,5 @@ var searchData=
   ['getfont_5',['getFont',['../classResourceManager.html#ad7fe4904d2a5ae24bbc60360fc012c56',1,'ResourceManager']]],
   ['getid_6',['getId',['../classentity.html#a49afbb4a974ddc6a5393d7f0c30ab63b',1,'entity']]],
   ['getkeyboardinput_7',['getKeyboardInput',['../structcomponent_1_1controllable__s.html#a50d82bffaf22ef937e0c2d18f4e05c22',1,'component::controllable_s']]],
-  ['getmove_8',['getMove',['../classServer.html#a645362063e718f2c481fa4d16b6ae1d8',1,'Server']]],
-  ['getmovekey_9',['getMoveKey',['../classClient.html#a44fe248f70cbfc3de9858a9064481363',1,'Client']]],
-  ['gettexture_10',['getTexture',['../classResourceManager.html#a78632647a9a86d0b477de5055a5a2fcc',1,'ResourceManager']]]
+  ['gettexture_8',['getTexture',['../classResourceManager.html#a78632647a9a86d0b477de5055a5a2fcc',1,'ResourceManager']]]
 ];
