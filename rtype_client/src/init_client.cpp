@@ -125,7 +125,7 @@ void Client::initGame()
     factory.make_background();
 
     player_entity_id = (int)factory.make_entity("player");
-    
+
     auto &pos = _reg.get_components<component::position>()[player_entity_id].value();
     pos.x = 50;
     pos.y = 150;

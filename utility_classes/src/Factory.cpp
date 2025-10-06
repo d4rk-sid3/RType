@@ -371,7 +371,7 @@ entity Factory::make_menu_background_music() {
     auto& music =
         reg.add_component<component::audio>(music_id, component::audio());
     music.audio.reset(new sf::Music);
-    music.audio->openFromFile("assets/audio/menu.mp3");
+    music.audio->openFromFile("assets/audio/menu.ogg");
     music.audio->setLoop(true);
     music.audio->play();
 
@@ -385,7 +385,7 @@ entity Factory::make_game_background_music() {
     auto& music =
         reg.add_component<component::audio>(music_id, component::audio());
     music.audio.reset(new sf::Music);
-    music.audio->openFromFile("assets/audio/incredible.mp3");
+    music.audio->openFromFile("assets/audio/incredible.ogg");
     music.audio->setLoop(true);
     music.audio->play();
 
