@@ -8,10 +8,10 @@
 #include "../include/Network.hpp"
 
 
-NetworkManager::NetworkManager(int port, std::string address): 
+NetworkManager::NetworkManager(int port, std::string address, std::vector<uint8_t> &lastmsg_): 
     socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 0)),
     server_endpoint_(asio::ip::udp::endpoint(asio::ip::make_address(address), port)),
-    isrunning(true)
+    isrunning(true), lastmsg(lastmsg_)
 {
     std::cout << "Client lancé " << std::endl;
 
@@ -46,13 +46,23 @@ void NetworkManager::run()
     }
 }
 
+void NetworkManager::add_connection(const asio::ip::udp::endpoint& ep) {
+    if (std::find(clients.begin(), clients.end(), ep) == clients.end())
+        clients.push_back(ep);
+}
+
 void NetworkManager::receive()
 {
     socket.async_receive_from(asio::buffer(buff), last_sender_, 
         
         [this](std::error_code error ,std::size_t bytes_receive) {
             if (!error && bytes_receive > 0) {
-               messages.emplace( std::vector<uint8_t>(buff.begin(), buff.begin() + bytes_receive), last_sender_ );
+                add_connection(last_sender_);
+                std::cout << "Receive :" << bytes_receive << std::endl;
+
+                for (auto &b : buff) {
+                    lastmsg.push_back(b);
+                }
             }
 
             if (isrunning) {
@@ -60,14 +70,14 @@ void NetworkManager::receive()
             }
         }
     );
-
 }
 
-void NetworkManager::send(const std::vector<u_int8_t> &msg, size_t size, const asio::ip::udp::endpoint& client)
+void NetworkManager::send(const std::vector<u_int8_t> &msg, size_t size, const asio::ip::udp::endpoint& to_receiver)
 {
-    socket.async_send_to(asio::buffer(msg, size), client, 
+    socket.async_send_to(asio::buffer(msg, size), to_receiver, 
         [](std::error_code error, std::size_t byte_send) {
-            
+            std::cout << "Send :" << byte_send << std::endl;
+        
             if (!error) {
             } else {
                 std::cerr << error.message() << std::endl;
@@ -75,16 +85,6 @@ void NetworkManager::send(const std::vector<u_int8_t> &msg, size_t size, const a
         }
     );
 }
-
-std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint> NetworkManager::getLastMsg()
-{
-    if (messages.empty())
-        return {};
-    auto msg = messages.front();
-    messages.pop();
-    return msg;
-}
-
 
 asio::ip::udp::endpoint NetworkManager::getLastSender() const
 {

@@ -25,15 +25,11 @@ void load_client_textures(void)
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
 
-Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, address), _reg(reg)
+Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, address, std::ref(lastmsg)),  _reg(reg)
 {
     load_client_textures();
     //initMenu();
     initGame();
-
-    // std::thread input_thread([this]() {
-        client_.poll();
-    // });
 }
 
 // ... *isInside(std::vector<...> vec, size_t id)
@@ -48,8 +44,27 @@ Client::Client(int p, std::string address, registry& reg): port_(p), client_(808
 void Client::sendPlayerInput()
 {
 
-    
 }
+
+std::vector<EnemyMovedResponse> Client::recupAllEntities()
+{
+    NbrEntity e = decodeNbrEntity(lastmsg);
+
+    std::vector<EnemyMovedResponse> s;
+
+    for (int a = 0; a < e.nbr; a++) {
+        s.push_back(decodeEnemyMovedResponse(lastmsg));
+    }
+
+    for (auto &a : s) {
+        std::cout << "Enemy_Type: "  << a.enemy_type;
+        std::cout << "Enemy_Pos_x: "  << a.position.x;
+        std::cout << "Enemy_Pos_y: "  << a.position.y << std::endl;
+    }
+
+    return s;
+}
+
 
 void Client::runLevel(double delta)
 {

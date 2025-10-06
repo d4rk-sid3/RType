@@ -8,6 +8,11 @@ int main() {
     sf::Clock frameClock;
     Server server(8080, reg);
 
+    NetworkManager &c = server.getManager();
+
+    std::thread t([&c]() { c.run(); });
+
+
     while (win.isOpen()) {
         while (win.pollEvent(event))
         {
@@ -22,4 +27,7 @@ int main() {
         reg.run_systems(dt);
         server.runLevel(dt);
     }   
+
+    c.getContext().stop();
+    t.join();
 }

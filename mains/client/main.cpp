@@ -8,6 +8,14 @@ int main() {
     sf::Clock frameClock;
     Client client(8080, "127.0.0.1", reg);
 
+    NetworkManager &c = client.getManager();
+
+    std::vector<u_int8_t> msg(10, 0x5);
+
+    c.send(msg, msg.size(), c.getServerendpoint());
+
+    std::thread t([&c]() { c.run(); });
+
     while (win.isOpen()) {
         double dt = frameClock.restart().asSeconds();
         while (win.pollEvent(event))
@@ -27,4 +35,7 @@ int main() {
 
         reg.run_systems(dt);
     }   
+
+    c.getContext().stop();
+    t.join();
 }

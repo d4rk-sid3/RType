@@ -8,5 +8,6 @@ var searchData=
   ['getfont_5',['getFont',['../classResourceManager.html#ad7fe4904d2a5ae24bbc60360fc012c56',1,'ResourceManager']]],
   ['getid_6',['getId',['../classentity.html#a49afbb4a974ddc6a5393d7f0c30ab63b',1,'entity']]],
   ['getkeyboardinput_7',['getKeyboardInput',['../structcomponent_1_1controllable__s.html#a50d82bffaf22ef937e0c2d18f4e05c22',1,'component::controllable_s']]],
-  ['gettexture_8',['getTexture',['../classResourceManager.html#a78632647a9a86d0b477de5055a5a2fcc',1,'ResourceManager']]]
+  ['getmanager_8',['getManager',['../classClient.html#af6829864546ed7e423fc1875be9864a9',1,'Client']]],
+  ['gettexture_9',['getTexture',['../classResourceManager.html#a78632647a9a86d0b477de5055a5a2fcc',1,'ResourceManager']]]
 ];

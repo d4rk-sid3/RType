@@ -232,7 +232,7 @@ struct NbrEntity {
 
 class NetworkManager {
   public:
-    NetworkManager(int port, std::string address);
+    NetworkManager(int port, std::string address, std::vector<uint8_t> &lastmsg_);
 
     NetworkManager(int port);
 
@@ -245,11 +245,16 @@ class NetworkManager {
         const std::vector<u_int8_t>& msg, size_t size,
         const asio::ip::udp::endpoint& client
     );
-    std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint> getLastMsg();
     asio::ip::udp::endpoint getLastSender() const;
     asio::io_context& getContext() {
         return context;
     };
+
+    asio::ip::udp::endpoint& getServerendpoint() {
+        return server_endpoint_;
+    };
+
+    void add_connection(const asio::ip::udp::endpoint& ep);
 
   protected:
   private:
@@ -260,8 +265,7 @@ class NetworkManager {
     asio::ip::udp::endpoint server_endpoint_;
     bool isrunning;
     std::vector<u_int8_t> lastmsg;
-    std::queue<std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint>>
-        messages;
+    std::vector<asio::ip::udp::endpoint> clients;
 };
 
 #endif /* !NETWORK_HPP_ */

@@ -51,6 +51,8 @@ class Server {
     Server(int p, registry &reg);
     ~Server();
 
+    NetworkManager &getManager() { return server_; }
+
     // update
     // MoveResponse
     // updateMoveResponse(const MoveResponse& oldpos, const MoveResponse& pos);

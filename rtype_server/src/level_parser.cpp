@@ -74,6 +74,7 @@ void Server::logGameEntities()
 
             result.insert(result.end(), tmp.begin(), tmp.end());
         } catch (...) {
+
         }
     }
     vector<uint8_t> tmp = encodeNbrEntity({0x38, static_cast<uint8_t>(counter)});
@@ -100,6 +101,11 @@ void Server::runLevel(double delta)
     logGameEntities();
 
 
+    if (!result.empty()) {
+        // std::cout << "[SERVER] sending " << result.size() << " bytes" << std::endl;
+        server_.send(result, result.size(), server_.getLastSender());
+    }
+    
     // for (auto it = entities.begin(); it != entities.end();) {
     //     auto &entity = *it;
 
