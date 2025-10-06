@@ -25,17 +25,15 @@ void load_client_textures(void)
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
 
-Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, "client"), _reg(reg)
+Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, address), _reg(reg)
 {
     load_client_textures();
     //initMenu();
     initGame();
 
-    asio::ip::udp::endpoint server_endpoint(asio::ip::make_address("127.0.0.1"), 8080);
-
-    std::thread input_thread([this, server_endpoint]() {
+    // std::thread input_thread([this, server_endpoint]() {
         client_.run();
-    });
+    // });
 }
 
 // ... *isInside(std::vector<...> vec, size_t id)

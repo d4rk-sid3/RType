@@ -232,8 +232,12 @@ struct NbrEntity {
 
 class NetworkManager {
   public:
-    NetworkManager(int port, std::string address = "");
+    NetworkManager(int port, std::string address);
+
+    NetworkManager(int port);
+
     ~NetworkManager();
+
     void poll();
     void run();
     void receive();
@@ -253,6 +257,7 @@ class NetworkManager {
     asio::ip::udp::socket socket;
     std::array<u_int8_t, 1024> buff{};
     asio::ip::udp::endpoint last_sender_;
+    asio::ip::udp::endpoint server_endpoint_;
     bool isrunning;
     std::vector<u_int8_t> lastmsg;
     std::queue<std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint>>

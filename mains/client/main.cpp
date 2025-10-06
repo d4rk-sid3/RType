@@ -6,7 +6,7 @@ int main() {
 
     sf::Event event;
     sf::Clock frameClock;
-    Client client(8080, "", reg);
+    Client client(8080, "127.0.0.1", reg);
 
     while (win.isOpen()) {
         double dt = frameClock.restart().asSeconds();

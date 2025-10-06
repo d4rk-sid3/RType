@@ -7,21 +7,24 @@
 
 #include "../include/Network.hpp"
 
-NetworkManager::NetworkManager(int port, std::string address): socket(context), isrunning(true)
+
+NetworkManager::NetworkManager(int port, std::string address): 
+    socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 0)),
+    server_endpoint_(asio::ip::udp::endpoint(asio::ip::make_address(address), port)),
+    isrunning(true)
 {
-    socket.open(asio::ip::udp::v4());
-    
-    if (address == "127.0.0.1") {
-        socket.set_option(asio::socket_base::reuse_address(true));
-        socket.bind(asio::ip::udp::endpoint(asio::ip::make_address("127.0.0.1"), port));
-        std::cout << "Serveur pret à être lancé " << port << std::endl;
-    } else {
-        socket.bind(asio::ip::udp::endpoint(asio::ip::udp::v4(), 0));
-        std::cout << "Client lancé " << std::endl;
-    }
+    std::cout << "Client lancé " << std::endl;
 
     receive();
 }
+
+NetworkManager::NetworkManager(int port) : socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)), isrunning(true)
+{
+    std::cout << "Serveur pret à être lancé " << port << std::endl;
+
+    receive();
+}
+
 
 NetworkManager::~NetworkManager()
 {

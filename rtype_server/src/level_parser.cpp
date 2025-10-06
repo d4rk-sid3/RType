@@ -28,7 +28,7 @@ using namespace libconfig;
 void Server::loadLevel(const std::string &path)
 {
     Config conf;
-    conf.readFile(path);
+    conf.readFile(path.c_str());
     Setting &root = conf.getRoot();
     
     Setting &level_entities = root.lookup("entities");
