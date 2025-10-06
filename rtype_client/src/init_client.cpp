@@ -31,8 +31,8 @@ Client::Client(int p, std::string address, registry& reg): port_(p), client_(808
     //initMenu();
     initGame();
 
-    // std::thread input_thread([this, server_endpoint]() {
-        client_.run();
+    // std::thread input_thread([this]() {
+        client_.poll();
     // });
 }
 

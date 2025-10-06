@@ -31,6 +31,7 @@ class Server {
     int p_;
     registry &reg;
     double levelTimer = 0.0;
+    std::mutex mtx;
   
     void loadLevel(const std::string &path);
     void initializeGame(void);

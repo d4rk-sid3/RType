@@ -262,7 +262,6 @@ class NetworkManager {
     std::vector<u_int8_t> lastmsg;
     std::queue<std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint>>
         messages;
-    std::mutex mtx;
 };
 
 #endif /* !NETWORK_HPP_ */

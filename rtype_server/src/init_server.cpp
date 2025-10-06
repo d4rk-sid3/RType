@@ -44,14 +44,23 @@ Server::Server(int p, registry &regis) : server_(8080), p_(p), reg(regis)
     initializeGame();
     loadLevel("assets/levels/test.txt");
 
-    // std::thread input_thread([this]() {
-       server_.run();
+    // std::thread input_thread([this, ]() {
+       server_.poll();
     // });
 
-    while (true) {
-        server_.send(result, result.size(), server_.getLastSender());
-    }
+    std::thread send_thread([this]() {
+        while (true) {
+            std::lock_guard<std::mutex> lock(mtx);
 
+            if (result.size() == 0){
+                std:: cout << "No data to send" << std::endl;
+                continue;
+            }
+            server_.send(result, result.size(), server_.getLastSender());
+        }
+    });
+
+    send_thread.detach();
 }
 
 Server::~Server()
