@@ -17,9 +17,9 @@
 
 #include "../include/server.hpp"
 
-std::vector<uint8_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& pos)
+std::vector<int8_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& pos)
 {
-    std::vector <uint8_t> buffer;
+    std::vector <int8_t> buffer;
 
     buffer.emplace_back(0x37);
 
@@ -36,9 +36,9 @@ std::vector<uint8_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& 
     return buffer;
 }
 
-std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
+std::vector<int8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 {
-    std::vector <uint8_t> buffer;
+    std::vector <int8_t> buffer;
 
     buffer.emplace_back(0x38);
 
@@ -49,9 +49,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 
 
 
-// std::vector<uint8_t> Server::encodeMoveResponse(const MoveResponse& pos)
+// std::vector<int8_t> Server::encodeMoveResponse(const MoveResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x24);
 
@@ -84,9 +84,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodeShootResponse(const ShootResponse& pos)
+// std::vector<int8_t> Server::encodeShootResponse(const ShootResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x26);
 
@@ -113,9 +113,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodePickupItemResponse(const PickupItemResponse& pos)
+// std::vector<int8_t> Server::encodePickupItemResponse(const PickupItemResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x26);
 
@@ -146,9 +146,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodePlayerStateResponse(const PlayerStateResponse& pos)
+// std::vector<int8_t> Server::encodePlayerStateResponse(const PlayerStateResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x28);
 
@@ -172,9 +172,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodePlayerGameStateResponse(const PlayerGameStateResponse& pos)
+// std::vector<int8_t> Server::encodePlayerGameStateResponse(const PlayerGameStateResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x29);
 
@@ -200,9 +200,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodeBeatBossResponse(const BeatBossResponse& pos)
+// std::vector<int8_t> Server::encodeBeatBossResponse(const BeatBossResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x30);
 
@@ -235,9 +235,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodeCheckpointResponse(const CheckpointResponse& pos)
+// std::vector<int8_t> Server::encodeCheckpointResponse(const CheckpointResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x31);
 
@@ -268,9 +268,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodeGameStartedResponse(const GameStartedResponse& pos)
+// std::vector<int8_t> Server::encodeGameStartedResponse(const GameStartedResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x32);
 
@@ -301,9 +301,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodeGamePausedResponse(const GamePausedResponse& pos)
+// std::vector<int8_t> Server::encodeGamePausedResponse(const GamePausedResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x34);
 
@@ -321,9 +321,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodeGameStateResponse(const GameStateResponse& pos)
+// std::vector<int8_t> Server::encodeGameStateResponse(const GameStateResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x35);
 
@@ -338,9 +338,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodeEnemySpawnedResponse(const EnemySpawnedResponse& pos)
+// std::vector<int8_t> Server::encodeEnemySpawnedResponse(const EnemySpawnedResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x36);
 
@@ -373,9 +373,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodedEnemyFiredResponse(const EnemyFiredResponse& pos)
+// std::vector<int8_t> Server::encodedEnemyFiredResponse(const EnemyFiredResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x38);
 
@@ -408,9 +408,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodeEnemyDiedResponse(const EnemyDiedResponse& pos)
+// std::vector<int8_t> Server::encodeEnemyDiedResponse(const EnemyDiedResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x39);
 
@@ -438,9 +438,9 @@ std::vector<uint8_t> Server::encodeNbrEntity(const NbrEntity& pos)
 //     return buffer;
 // }
 
-// std::vector<uint8_t> Server::encodeCollisionResponse(const CollisionResponse& pos)
+// std::vector<int8_t> Server::encodeCollisionResponse(const CollisionResponse& pos)
 // {
-//     std::vector<uint8_t> buffer;
+//     std::vector<int8_t> buffer;
 
 //     buffer.emplace_back(0x40);
 

@@ -35,16 +35,16 @@
 #include <sys/socket.h>
 #include <sys/stat.h>
 
-enum Direction : uint8_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
+enum Direction : int8_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
-enum BULLET_TYPE : uint8_t { SOLIDE = 0, NONE = 1 };
+enum BULLET_TYPE : int8_t { SOLIDE = 0, NONE = 1 };
 
 struct Vector2D {
-    uint16_t x;
-    uint16_t y;
+    int16_t x;
+    int16_t y;
 };
 
-enum EnemyType : uint8_t { TYPE_1 = 1, TYPE_2 = 2, TYPE_3 = 3, TYPE_4 = 4 };
+enum EnemyType : int8_t { TYPE_1 = 1, TYPE_2 = 2, TYPE_3 = 3, TYPE_4 = 4 };
 
 struct Timestamp {
     uint64_t milliseconds;
@@ -52,24 +52,24 @@ struct Timestamp {
 
 // Serveur -> Client
 struct EnemyMovedResponse {
-    uint8_t type; // 0x37
-    uint16_t enemy_id;
+    int8_t type; // 0x37
+    int16_t enemy_id;
     EnemyType enemy_type;
     Vector2D position;
 };
 
 // Serveur -> Client
 struct NbrEntity {
-    uint8_t type; // 0x38
-    uint8_t nbr;
+    int8_t type; // 0x38
+    int8_t nbr;
 };
 
 
 class NetworkManager {
   public:
-    NetworkManager(int port, std::string address, std::vector<uint8_t> &lastmsg_, std::mutex& mtx_);
+    NetworkManager(int port, std::string address, std::vector<int8_t> &lastmsg_, std::mutex& mtx_);
 
-    NetworkManager(int port, std::vector<uint8_t> &lastmsg_, std::mutex& mtx_);
+    NetworkManager(int port, std::vector<int8_t> &lastmsg_, std::mutex& mtx_);
 
     ~NetworkManager();
 
@@ -77,7 +77,7 @@ class NetworkManager {
     void run();
     void receive();
     void send(
-        const std::vector<u_int8_t>& msg, size_t size,
+        const std::vector<int8_t>& msg, size_t size,
         const asio::ip::udp::endpoint& client
     );
     asio::ip::udp::endpoint getLastSender() const;
@@ -95,11 +95,11 @@ class NetworkManager {
   private:
     asio::io_context context;
     asio::ip::udp::socket socket;
-    std::array<u_int8_t, 1024> buff{};
+    std::array<int8_t, 1024> buff{};
     asio::ip::udp::endpoint last_sender_;
     asio::ip::udp::endpoint server_endpoint_;
     bool isrunning;
-    std::vector<u_int8_t>& lastmsg;
+    std::vector<int8_t>& lastmsg;
     std::vector<asio::ip::udp::endpoint> clients;
     std::mutex& mtx;
 };

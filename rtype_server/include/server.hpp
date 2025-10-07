@@ -43,8 +43,8 @@ class Server {
 
     std::vector<entity_info_t> entities;
 
-    vector<uint8_t> result;
-    vector<uint8_t> tmp;
+    vector<int8_t> result;
+    vector<int8_t> tmp;
     int counter = 0;
 
   public:
@@ -64,42 +64,42 @@ class Server {
     // );
 
     // decodeur
-    /*MoveRequest decodeMoveRequest(const std::vector<uint8_t>& buffer);
-    ShootRequest decodeShootRequest(const std::vector<uint8_t>& buffer);
+    /*MoveRequest decodeMoveRequest(const std::vector<int8_t>& buffer);
+    ShootRequest decodeShootRequest(const std::vector<int8_t>& buffer);
     PickupItemResquest
-    decodePickupItemResquest(const std::vector<uint8_t>& buffer);
-    GamePausedRequest decodeGamePausedRequest(const std::vector<uint8_t>& buffer
+    decodePickupItemResquest(const std::vector<int8_t>& buffer);
+    GamePausedRequest decodeGamePausedRequest(const std::vector<int8_t>& buffer
     );*/
 
     // encodeur
-    std::vector<uint8_t> encodeNbrEntity(const NbrEntity& pos);
-    std::vector<uint8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos
+    std::vector<int8_t> encodeNbrEntity(const NbrEntity& pos);
+    std::vector<int8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos
     );
 
 
 
-    /*std::vector<uint8_t> encodeMoveResponse(const MoveResponse& pos);
-    std::vector<uint8_t> encodeShootResponse(const ShootResponse& pos);
-    std::vector<uint8_t> encodePickupItemResponse(const PickupItemResponse& pos
+    /*std::vector<int8_t> encodeMoveResponse(const MoveResponse& pos);
+    std::vector<int8_t> encodeShootResponse(const ShootResponse& pos);
+    std::vector<int8_t> encodePickupItemResponse(const PickupItemResponse& pos
     );
-    std::vector<uint8_t>
+    std::vector<int8_t>
     encodePlayerStateResponse(const PlayerStateResponse& pos);
-    std::vector<uint8_t>
+    std::vector<int8_t>
     encodePlayerGameStateResponse(const PlayerGameStateResponse& pos);
-    std::vector<uint8_t> encodeBeatBossResponse(const BeatBossResponse& pos);
-    std::vector<uint8_t> encodeCheckpointResponse(const CheckpointResponse& pos
+    std::vector<int8_t> encodeBeatBossResponse(const BeatBossResponse& pos);
+    std::vector<int8_t> encodeCheckpointResponse(const CheckpointResponse& pos
     );
-    std::vector<uint8_t>
+    std::vector<int8_t>
     encodeGameStartedResponse(const GameStartedResponse& pos);
-    std::vector<uint8_t> encodeGamePausedResponse(const GamePausedResponse& pos
+    std::vector<int8_t> encodeGamePausedResponse(const GamePausedResponse& pos
     );
-    std::vector<uint8_t> encodeGameStateResponse(const GameStateResponse& pos);
-    std::vector<uint8_t>
+    std::vector<int8_t> encodeGameStateResponse(const GameStateResponse& pos);
+    std::vector<int8_t>
     encodeEnemySpawnedResponse(const EnemySpawnedResponse& pos);
-    std::vector<uint8_t> encodedEnemyFiredResponse(const EnemyFiredResponse& pos
+    std::vector<int8_t> encodedEnemyFiredResponse(const EnemyFiredResponse& pos
     );
-    std::vector<uint8_t> encodeEnemyDiedResponse(const EnemyDiedResponse& pos);
-    std::vector<uint8_t> encodeCollisionResponse(const CollisionResponse& pos);*/
+    std::vector<int8_t> encodeEnemyDiedResponse(const EnemyDiedResponse& pos);
+    std::vector<int8_t> encodeCollisionResponse(const CollisionResponse& pos);*/
 };
 
 #endif /* !SERVER_HPP_ */

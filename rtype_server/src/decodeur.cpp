@@ -17,7 +17,7 @@
 
 #include "../include/server.hpp"
 
-// MoveRequest Server::decodeMoveRequest(const std::vector<uint8_t>& buffer)
+// MoveRequest Server::decodeMoveRequest(const std::vector<int8_t>& buffer)
 // {
 //     MoveRequest pos;
 
@@ -31,7 +31,7 @@
 //     return pos;
 // }
 
-// ShootRequest Server::decodeShootRequest(const std::vector<uint8_t>& buffer)
+// ShootRequest Server::decodeShootRequest(const std::vector<int8_t>& buffer)
 // {
 
 //     ShootRequest pos;
@@ -45,7 +45,7 @@
 //     return pos;
 // }
 
-// PickupItemResquest Server::decodePickupItemResquest(const std::vector<uint8_t>& buffer)
+// PickupItemResquest Server::decodePickupItemResquest(const std::vector<int8_t>& buffer)
 // {
 
 //     PickupItemResquest pos;
@@ -59,7 +59,7 @@
 //     return pos;
 // }
 
-// GamePausedRequest Server::decodeGamePausedRequest(const std::vector<uint8_t>& buffer)
+// GamePausedRequest Server::decodeGamePausedRequest(const std::vector<int8_t>& buffer)
 // {
 //     GamePausedRequest pos;
 
