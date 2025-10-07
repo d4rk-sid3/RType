@@ -23,9 +23,11 @@ void \mbox{\hyperlink{classClient_a9d0aec2907f33777ece928a1a0dee25e}{send\+Playe
 \item 
 Network\+Manager \& \mbox{\hyperlink{classClient_af6829864546ed7e423fc1875be9864a9}{get\+Manager}} ()
 \item 
-Nbr\+Entity \mbox{\hyperlink{classClient_a54b89028c08e7f2c01f3c65f7b2bb10f}{decode\+Nbr\+Entity}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&buffer)
+std\+::vector$<$ Enemy\+Moved\+Response $>$ \mbox{\hyperlink{classClient_a4c9eefab245ca66e80ceb13fa67287e8}{recup\+All\+Entities}} ()
 \item 
-Enemy\+Moved\+Response \mbox{\hyperlink{classClient_a9b4302efa0911b7f68cd670df4ff4c43}{decode\+Enemy\+Moved\+Response}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&buffer)
+Nbr\+Entity \mbox{\hyperlink{classClient_a702dcd08cc1500ee497faf7c9438533f}{decode\+Nbr\+Entity}} (std\+::vector$<$ uint8\+\_\+t $>$ \&buffer)
+\item 
+Enemy\+Moved\+Response \mbox{\hyperlink{classClient_acffeb83b8de1ac566d06df0acc8bd398}{decode\+Enemy\+Moved\+Response}} (std\+::vector$<$ uint8\+\_\+t $>$ \&buffer)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -50,17 +52,17 @@ Enemy\+Moved\+Response \mbox{\hyperlink{classClient_a9b4302efa0911b7f68cd670df4f
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classClient_a9b4302efa0911b7f68cd670df4ff4c43}\label{classClient_a9b4302efa0911b7f68cd670df4ff4c43} 
+\Hypertarget{classClient_acffeb83b8de1ac566d06df0acc8bd398}\label{classClient_acffeb83b8de1ac566d06df0acc8bd398} 
 \index{Client@{Client}!decodeEnemyMovedResponse@{decodeEnemyMovedResponse}}
 \index{decodeEnemyMovedResponse@{decodeEnemyMovedResponse}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{decodeEnemyMovedResponse()}{decodeEnemyMovedResponse()}}
-{\footnotesize\ttfamily Enemy\+Moved\+Response Client\+::decode\+Enemy\+Moved\+Response (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Enemy\+Moved\+Response Client\+::decode\+Enemy\+Moved\+Response (\begin{DoxyParamCaption}\item[{std\+::vector$<$ uint8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
 
-\Hypertarget{classClient_a54b89028c08e7f2c01f3c65f7b2bb10f}\label{classClient_a54b89028c08e7f2c01f3c65f7b2bb10f} 
+\Hypertarget{classClient_a702dcd08cc1500ee497faf7c9438533f}\label{classClient_a702dcd08cc1500ee497faf7c9438533f} 
 \index{Client@{Client}!decodeNbrEntity@{decodeNbrEntity}}
 \index{decodeNbrEntity@{decodeNbrEntity}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{decodeNbrEntity()}{decodeNbrEntity()}}
-{\footnotesize\ttfamily Nbr\+Entity Client\+::decode\+Nbr\+Entity (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Nbr\+Entity Client\+::decode\+Nbr\+Entity (\begin{DoxyParamCaption}\item[{std\+::vector$<$ uint8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
 
 \Hypertarget{classClient_af6829864546ed7e423fc1875be9864a9}\label{classClient_af6829864546ed7e423fc1875be9864a9} 
 \index{Client@{Client}!getManager@{getManager}}
@@ -79,6 +81,12 @@ Enemy\+Moved\+Response \mbox{\hyperlink{classClient_a9b4302efa0911b7f68cd670df4f
 \index{initMenu@{initMenu}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{initMenu()}{initMenu()}}
 {\footnotesize\ttfamily void Client\+::init\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classClient_a4c9eefab245ca66e80ceb13fa67287e8}\label{classClient_a4c9eefab245ca66e80ceb13fa67287e8} 
+\index{Client@{Client}!recupAllEntities@{recupAllEntities}}
+\index{recupAllEntities@{recupAllEntities}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{recupAllEntities()}{recupAllEntities()}}
+{\footnotesize\ttfamily std\+::vector$<$ Enemy\+Moved\+Response $>$ Client\+::recup\+All\+Entities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \Hypertarget{classClient_a101e55e53e7f9cc0433da705e66e1f08}\label{classClient_a101e55e53e7f9cc0433da705e66e1f08} 
 \index{Client@{Client}!runLevel@{runLevel}}
@@ -111,6 +119,6 @@ Enemy\+Moved\+Response \mbox{\hyperlink{classClient_a9b4302efa0911b7f68cd670df4f
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/amour/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+client/include/\mbox{\hyperlink{client_8hpp}{client.\+hpp}}\item 
-/home/amour/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+client/src/\mbox{\hyperlink{rtype__client_2src_2decodeur_8cpp}{decodeur.\+cpp}}\item 
-/home/amour/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+client/src/\mbox{\hyperlink{init__client_8cpp}{init\+\_\+client.\+cpp}}\end{DoxyCompactItemize}
+/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+client/include/\mbox{\hyperlink{client_8hpp}{client.\+hpp}}\item 
+/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+client/src/\mbox{\hyperlink{rtype__client_2src_2decodeur_8cpp}{decodeur.\+cpp}}\item 
+/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+client/src/\mbox{\hyperlink{init__client_8cpp}{init\+\_\+client.\+cpp}}\end{DoxyCompactItemize}

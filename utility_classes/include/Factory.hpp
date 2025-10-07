@@ -34,7 +34,9 @@ class Factory {
 
     entity make_entity(const std::string& type);
 
-    entity make_player();
+    entity make_player1();
+
+    entity make_player2();
 
     entity make_player_missile();
 

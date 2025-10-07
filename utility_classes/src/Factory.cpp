@@ -26,13 +26,15 @@
 #define ENEMY_MISSILE_SPEED 5
 #define BACKGROUND_SPEED 50
 #define PLAYER_SPEED 5
-#define WALKER_SPEED 300
+#define WALKER_SPEED 120
 
 Factory::Factory(registry& _reg) : reg(_reg) {}
 
 entity Factory::make_entity(const std::string& type) {
-    if (type == "player")
-        return make_player();
+    if (type == "player1")
+        return make_player1();
+    else if (type == "player2")
+        return make_player2();
     else if (type == "red_trooper")
         return make_red_trooper();
     else if (type == "walker")
@@ -45,13 +47,13 @@ entity Factory::make_entity(const std::string& type) {
     return entity(-1);
 }
 
-entity Factory::make_player() {
+entity Factory::make_player1() {
     entity player_id = reg.spawn_entity();
 
     auto& player_sprite = reg.add_component<component::drawable>(
         player_id, component::drawable()
     );
-    player_sprite.setTextureFromName("player");
+    player_sprite.setTextureFromName("player1");
 
     reg.add_component<component::position>(player_id, {0, 0});
     reg.add_component<component::velocity>(player_id, {0, 0});
@@ -70,7 +72,36 @@ entity Factory::make_player() {
     player_hurtbox.height = 16;
 
     auto &entity_name = reg.add_component<component::name>(player_id, component::name());
-    entity_name._name = "player";
+    entity_name._name = "player1";
+    return player_id;
+}
+
+entity Factory::make_player2() {
+    entity player_id = reg.spawn_entity();
+
+    auto& player_sprite = reg.add_component<component::drawable>(
+        player_id, component::drawable()
+    );
+    player_sprite.setTextureFromName("player2");
+
+    reg.add_component<component::position>(player_id, {0, 0});
+    reg.add_component<component::velocity>(player_id, {0, 0});
+    reg.add_component<component::controllable>(
+        player_id, component::controllable()
+    );
+    reg.add_component<component::logic>(
+        player_id, component::logic{player_logic}
+    );
+
+    auto& player_hurtbox =
+        reg.add_component<component::hurtbox>(player_id, component::hurtbox());
+    player_hurtbox.group = 1;
+    player_hurtbox.health = 1;
+    player_hurtbox.width = 32;
+    player_hurtbox.height = 16;
+
+    auto &entity_name = reg.add_component<component::name>(player_id, component::name());
+    entity_name._name = "player2";
     return player_id;
 }
 

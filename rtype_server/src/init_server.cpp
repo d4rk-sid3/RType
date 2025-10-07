@@ -9,7 +9,8 @@
 
 void load_textures(void)
 {
-    ResourceManager::Instance().load("assets/sprites/player/player.gif", "player", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/player/player1.gif", "player1", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/player/player2.gif", "player2", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/player/player_up.gif", "player_up", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/player/player_down.gif", "player_down", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/player/player_missile.gif", "player_missile", TEXTURE);
@@ -27,14 +28,17 @@ void load_textures(void)
 void Server::initializeGame(void)
 {
     Factory factory(reg);
-    
     factory.make_background();
-    player_entity_id = factory.make_entity("player");
+    player1_entity_id = factory.make_entity("player1");
+    player2_entity_id = factory.make_entity("player2");
     
-    auto &pos = reg.get_components<component::position>()[player_entity_id].value();
-    pos.x = 50;
-    pos.y = 50;
+    auto &pos1 = reg.get_components<component::position>()[player1_entity_id].value();
+    auto &pos2 = reg.get_components<component::position>()[player1_entity_id].value();
+    pos1.x = 50;
+    pos1.y = 50;
 
+    pos2.x = 50;
+    pos2.y = 150;
     factory.make_menu_background_music();
 }
 

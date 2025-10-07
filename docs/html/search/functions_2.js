@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['decodeenemymovedresponse_0',['decodeEnemyMovedResponse',['../classClient.html#a9b4302efa0911b7f68cd670df4ff4c43',1,'Client']]],
-  ['decodenbrentity_1',['decodeNbrEntity',['../classClient.html#a54b89028c08e7f2c01f3c65f7b2bb10f',1,'Client']]],
+  ['decodeenemymovedresponse_0',['decodeEnemyMovedResponse',['../classClient.html#acffeb83b8de1ac566d06df0acc8bd398',1,'Client']]],
+  ['decodenbrentity_1',['decodeNbrEntity',['../classClient.html#a702dcd08cc1500ee497faf7c9438533f',1,'Client']]],
   ['draw_5fsystem_2',['draw_system',['../systems_8cpp.html#a169ac84227fdc8f7393eb5257c3f16b2',1,'draw_system(double delta, registry &amp;reg, sf::RenderWindow &amp;window, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::drawable &gt; &gt; &amp;draws, std::vector&lt; optional&lt; component::animated_drawable &gt; &gt; &amp;anim_draws, std::vector&lt; optional&lt; component::text &gt; &gt; &amp;texts):&#160;systems.cpp'],['../systems_8hpp.html#a169ac84227fdc8f7393eb5257c3f16b2',1,'draw_system(double delta, registry &amp;reg, sf::RenderWindow &amp;window, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::drawable &gt; &gt; &amp;draws, std::vector&lt; optional&lt; component::animated_drawable &gt; &gt; &amp;anim_draws, std::vector&lt; optional&lt; component::text &gt; &gt; &amp;texts):&#160;systems.cpp']]]
 ];

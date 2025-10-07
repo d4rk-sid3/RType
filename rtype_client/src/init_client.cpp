@@ -9,7 +9,8 @@
 
 void load_client_textures(void)
 {
-    ResourceManager::Instance().load("assets/sprites/player/player.gif", "player", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/player/player1.gif", "player1", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/player/player2.gif", "player2", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/player/player_up.gif", "player_up", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/player/player_down.gif", "player_down", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/player/player_missile.gif", "player_missile", TEXTURE);
@@ -27,6 +28,8 @@ void load_client_textures(void)
 
 Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, address, std::ref(lastmsg), std::ref(mtx)),  _reg(reg)
 {
+    reg.collisions_active = false;
+    reg.logic_active = false;
     load_client_textures();
     //initMenu();
     initGame();

@@ -27,6 +27,7 @@
 #define TROOPER_SPEED_X 150
 #define TROOPER_SPEED_Y 60
 #define PLAYER_SHOOT_COOLDOWN 0.25
+#define ENEMY_SHOOT_COOLDOWN 2
 
 using namespace component;
 
@@ -79,16 +80,84 @@ void player_logic(double delta, registry &reg, entity en)
         explosion_pos.y = pos.y;
 
         reg.kill_entity(en);
+        name &name_ = reg.get_components<name>()[en].value();
+        if (name_._name == "player1") {
+            player1_entity_id = -1;
+        } else if (name_._name == "player2") {
+            player2_entity_id = -1;
+        }
     }
+}
+
+bool shoot_at_player(registry &reg, position enemy_pos, double attack_range)
+{
+    position target_pos;
+
+    double distance1 = 1000000;
+    double distance2 = 1000000;
+    if (player1_entity_id != -1) {
+        position player1_pos = reg.get_components<position>()[player1_entity_id].value();
+        distance1 = distance(player1_pos.x, player1_pos.y, enemy_pos.x, enemy_pos.y);
+        if (distance1 > attack_range) {
+            distance1 = 1000000;
+        }
+    }
+    if (player2_entity_id != -1) {
+        position player2_pos = reg.get_components<position>()[player2_entity_id].value();
+        distance2 = distance(player2_pos.x, player2_pos.y, enemy_pos.x, enemy_pos.y);
+        if (distance2 > attack_range) {
+            distance2 = 1000000;
+        }
+    }
+
+    if (distance1 < distance2) {
+        if (distance1 < attack_range)
+            target_pos = reg.get_components<position>()[player1_entity_id].value();
+        else
+            return false;
+    } else if (distance2 < distance1) {
+        if (distance2 < attack_range)
+            target_pos = reg.get_components<position>()[player2_entity_id].value();
+        else
+            return false;
+    } else {
+        if (distance1 < attack_range) {
+            target_pos = reg.get_components<position>()[player1_entity_id].value();
+        } else {
+            return false;
+        }
+    }
+    
+    Factory fac(reg);
+    entity missile = fac.make_enemy_missile();
+    position &missile_pos = reg.get_components<position>()[missile].value();
+    missile_pos.x = enemy_pos.x + 8;
+    missile_pos.y = enemy_pos.y + 8;
+
+    velocity &vel = reg.get_components<velocity>()[missile].value();
+    vel.vx = target_pos.x - enemy_pos.x;
+    vel.vy = target_pos.y - enemy_pos.y;
+    return true;
 }
 
 void red_trooper_logic(double delta, registry &reg, entity en)
 {
     static bool shot = false;
+    static double shoot_timer = 0;
     static double t = 0.0;
     hurtbox &hb = reg.get_components<hurtbox>()[en].value();
     velocity &vel = reg.get_components<velocity>()[en].value();
-    
+
+    if (shot) {
+        shoot_timer += delta;
+        if (shoot_timer > ENEMY_SHOOT_COOLDOWN) {
+            shoot_timer = 0;
+            shot = false;
+        }
+    } else {
+        shoot_timer = 0;
+    }
+
     t += delta;
     vel.vx = -TROOPER_SPEED_X;
     vel.vy = sin(t*2) * TROOPER_SPEED_Y;
@@ -113,20 +182,11 @@ void red_trooper_logic(double delta, registry &reg, entity en)
         reg.kill_entity(en);
     }
     
-    const auto &player_pos = reg.get_components<position>()[player_entity_id].value();
+    
     position &pos = reg.get_components<position>()[en].value();
-
-    if (distance(player_pos.x, player_pos.y, pos.x, pos.y) < 200 && !shot) {
-        shot = true;
-        Factory fac(reg);
-        entity missile = fac.make_enemy_missile();
-        position &missile_pos = reg.get_components<position>()[missile].value();
-        velocity &missile_vel = reg.get_components<velocity>()[missile].value();
-        missile_vel.vx = player_pos.x - pos.x;
-        missile_vel.vy = player_pos.y - pos.y;
-        missile_pos.x = pos.x + 8;
-        missile_pos.y = pos.y + 8;
-    }
+    if (!shot)
+        if (shoot_at_player(reg, pos, 200))
+            shot = true;
 }
 
 void start_text_logic(double delta, registry &reg, entity en)
@@ -141,7 +201,8 @@ void start_text_logic(double delta, registry &reg, entity en)
 
 void walker_logic(double delta, registry &reg, entity en)
 {
-    static bool shot = false;
+    static bool walker_shot = false;
+    static double walker_shoot_timer = 0;
     hurtbox &hb = reg.get_components<hurtbox>()[en].value();
 
     if (hb.health <= 0) {
@@ -154,21 +215,21 @@ void walker_logic(double delta, registry &reg, entity en)
         
         reg.kill_entity(en);
     }
-    
-    const auto &player_pos = reg.get_components<position>()[player_entity_id].value();
-    position &pos = reg.get_components<position>()[en].value();
 
-    if (distance(player_pos.x, player_pos.y, pos.x, pos.y) < 200 && !shot) {
-        shot = true;
-        Factory fac(reg);
-        entity missile = fac.make_enemy_missile();
-        position &missile_pos = reg.get_components<position>()[missile].value();
-        velocity &missile_vel = reg.get_components<velocity>()[missile].value();
-        missile_vel.vx = player_pos.x - pos.x;
-        missile_vel.vy = player_pos.y - pos.y;
-        missile_pos.x = pos.x + 8;
-        missile_pos.y = pos.y + 8;
+    if (walker_shot) {
+        walker_shoot_timer += delta;
+        if (walker_shoot_timer > ENEMY_SHOOT_COOLDOWN) {
+            walker_shoot_timer = 0;
+            walker_shot = false;
+        }
+    } else {
+        walker_shoot_timer = 0;
     }
+
+    position &pos = reg.get_components<position>()[en].value();
+    if (!walker_shot)
+        if (shoot_at_player(reg, pos, 200))
+            walker_shot = true;
 
     if (hb.hurt) {
         Factory fac(reg);
@@ -187,7 +248,7 @@ void fade_in_rect_logic(double delta, registry &reg, entity entity)
     static double instancited = false;
     drawable &dr = reg.get_components<drawable>()[entity].value();
     
-    t+= delta;
+    t += delta;
     dr.sprite.setColor(sf::Color(0, 0, 0, (int)round(t * 128)));
     if (dr.sprite.getColor().a >= 255) {
         reg.kill_entity(entity);
@@ -203,7 +264,7 @@ void fade_out_rect_logic(double delta, registry &reg, entity entity)
     static double t = 0.0;
     drawable &dr = reg.get_components<drawable>()[entity].value();
     
-    t+= delta;
+    t += delta;
     dr.sprite.setColor(sf::Color(0, 0, 0, 255 - (int)round(t * 128)));
     if (dr.sprite.getColor().a <= 0) {
         reg.kill_entity(entity);

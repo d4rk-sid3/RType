@@ -51,7 +51,12 @@ using namespace std;
  *
  */
 class registry {
-  public:
+    public:
+    bool collisions_active = true;
+    bool render_active = true;
+    bool logic_active = true;
+    bool control_active = true;
+
     vector<entity> dead_entities;
 
     registry(sf::RenderWindow& window);
@@ -131,6 +136,7 @@ class registry {
     sf::Clock clock;
 
     void register_all_systems();
+
 };
 
 #include "../src/registry_single_comp.tpp"

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['vx_0',['vx',['../structcomponent_1_1velocity__s.html#a9a529dc007c25ad72c6684d46a370cc4',1,'component::velocity_s']]],
-  ['vy_1',['vy',['../structcomponent_1_1velocity__s.html#ae913ada66e385c24716f89193cb6464f',1,'component::velocity_s']]]
+  ['up_0',['up',['../structcomponent_1_1controllable__s.html#a6a8e40517a5c416126fc3d94ffb24b9e',1,'component::controllable_s']]]
 ];

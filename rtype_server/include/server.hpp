@@ -17,7 +17,8 @@
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
 
-inline int player_entity_id = 0;
+inline int player1_entity_id = -1;
+inline int player2_entity_id = -1;
 
 typedef struct entity_info_s {
     entity entity_id;

@@ -1,5 +1,5 @@
 \doxysection{client.\+hpp}
-\hypertarget{client_8hpp_source}{}\label{client_8hpp_source}\index{/home/amour/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/rtype\_client/include/client.hpp@{/home/amour/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/rtype\_client/include/client.hpp}}
+\hypertarget{client_8hpp_source}{}\label{client_8hpp_source}\index{/home/jaggie/epitech\_projects/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/rtype\_client/include/client.hpp@{/home/jaggie/epitech\_projects/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/rtype\_client/include/client.hpp}}
 \mbox{\hyperlink{client_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{comment}{/*}}
@@ -49,19 +49,19 @@
 \DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{int}\ port\_;}
 \DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{structmenu__info__s}{menu\_info\_t}}\ menu\_info;}
 \DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{double}\ levelTimer\ =\ 0.0;}
-\DoxyCodeLine{00048\ \ \ \ \ \textcolor{comment}{//\ MoveRequest\ move;}}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{comment}{//\ MoveResponse\ check;}}
-\DoxyCodeLine{00050\ \ \ \ \ NetworkManager\ client\_;}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ This\ map\ associates\ the\ servers\_ids\ to\ the\ client\_ids\ in\ the\ registry}}
-\DoxyCodeLine{00053\ \ \ \ \ std::unordered\_map<size\_t,\ size\_t>\ ids\_assoc;}
+\DoxyCodeLine{00048\ \ \ \ \ NetworkManager\ client\_;}
+\DoxyCodeLine{00049\ \ \ \ \ std::mutex\ mtx;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{//\ This\ map\ associates\ the\ servers\_ids\ to\ the\ client\_ids\ in\ the\ registry}}
+\DoxyCodeLine{00052\ \ \ \ \ std::unordered\_map<size\_t,\ size\_t>\ ids\_assoc;}
+\DoxyCodeLine{00053\ \ \ \ \ std::vector<uint8\_t>\ lastmsg;}
 \DoxyCodeLine{00054\ }
 \DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//\ std::vector<...>\ old;}}
 \DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ std::vector<...>\ new;}}
 \DoxyCodeLine{00057\ }
 \DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\_t}}\ \mbox{\hyperlink{classClient_a3a70c6088987795c92e25d7ee2e99af5}{state}}\ =\ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}};}
-\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classClient}{Client}}(\textcolor{keywordtype}{int}\ p,\ std::string\ a,\ \mbox{\hyperlink{classregistry}{registry}}\ \&reg);}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classClient_a802e0a6f59303939f824d41580deb82a}{Client}}(\textcolor{keywordtype}{int}\ p,\ std::string\ a,\ \mbox{\hyperlink{classregistry}{registry}}\ \&reg);}
 \DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{classClient_a840e519ca781888cbd54181572ebe3a7}{\string~Client}}();}
 \DoxyCodeLine{00062\ }
 \DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classClient_a8e97ca84d92276123cf88091a6811cc1}{initMenu}}();}
@@ -71,46 +71,14 @@
 \DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classClient_a9d0aec2907f33777ece928a1a0dee25e}{sendPlayerInput}}();}
 \DoxyCodeLine{00068\ }
 \DoxyCodeLine{00069\ \ \ \ \ NetworkManager\ \&\mbox{\hyperlink{classClient_af6829864546ed7e423fc1875be9864a9}{getManager}}()\ \{\ \textcolor{keywordflow}{return}\ client\_;\ \}}
-\DoxyCodeLine{00070\ \ \ \ \ }
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//\ decodeur}}
-\DoxyCodeLine{00072\ \ \ \ \ NbrEntity\ \mbox{\hyperlink{classClient_a54b89028c08e7f2c01f3c65f7b2bb10f}{decodeNbrEntity}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00073\ \ \ \ \ EnemyMovedResponse\ \mbox{\hyperlink{classClient_a9b4302efa0911b7f68cd670df4ff4c43}{decodeEnemyMovedResponse}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00074\ }
-\DoxyCodeLine{00075\ }
-\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{/*MoveResponse\ decodeMoveResponse(const\ std::vector<uint8\_t>\&\ buffer);}}
-\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ \ ShootResponse\ decodeShootResponse(const\ std::vector<uint8\_t>\&\ buffer);}}
-\DoxyCodeLine{00078\ \textcolor{comment}{\ \ \ \ PickupItemResponse}}
-\DoxyCodeLine{00079\ \textcolor{comment}{\ \ \ \ decodePickupItemResponse(const\ std::vector<uint8\_t>\&\ buffer);}}
-\DoxyCodeLine{00080\ \textcolor{comment}{\ \ \ \ PlayerStateResponse}}
-\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ \ decodePlayerStateResponse(const\ std::vector<uint8\_t>\&\ buffer);}}
-\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ \ PlayerGameStateResponse}}
-\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ decodePlayerGameStateResponse(const\ std::vector<uint8\_t>\&\ buffer);}}
-\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ BeatBossResponse\ decodeBeatBossResponse(const\ std::vector<uint8\_t>\&\ buffer);}}
-\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ \ CheckpointResponse}}
-\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ \ decodeCheckpointResponse(const\ std::vector<uint8\_t>\&\ buffer);}}
-\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ \ GameStartedResponse}}
-\DoxyCodeLine{00088\ \textcolor{comment}{\ \ \ \ decodeGameStartedResponse(const\ std::vector<uint8\_t>\&\ buffer);}}
-\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ \ GamePausedResponse}}
-\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ decodeGamePausedResponse(const\ std::vector<uint8\_t>\&\ buffer);}}
-\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ GameStateResponse\ decodeGameStateResponse(const\ std::vector<uint8\_t>\&\ buffer}}
-\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ \ );}}
-\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ EnemySpawnedResponse}}
-\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ decodeEnemySpawnedResponse(const\ std::vector<uint8\_t>\&\ buffer);}}
-\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ EnemyFiredResponse\ }}
-\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ decodeEnemyFiredResponse(const\ std::vector<uint8\_t>\&\ buffer);}}
-\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ \ EnemyDiedResponse\ decodeEnemyDiedResponse(const\ std::vector<uint8\_t>\&\ buffer}}
-\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ \ );}}
-\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ \ CollisionResponse\ decodeCollisionResponse(const\ std::vector<uint8\_t>\&\ buffer}}
-\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ \ );*/}}
-\DoxyCodeLine{00101\ }
-\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ encodeur}}
-\DoxyCodeLine{00103\ \ \ \ \ \textcolor{comment}{/*std::vector<uint8\_t>\ encodeMoveResquest(const\ MoveRequest\&\ pos);}}
-\DoxyCodeLine{00104\ \textcolor{comment}{\ \ \ \ std::vector<uint8\_t>\ encodeShootResquest(const\ ShootRequest\&\ pos);}}
-\DoxyCodeLine{00105\ \textcolor{comment}{\ \ \ \ std::vector<uint8\_t>\ encodePickupItemResquest(const\ PickupItemResquest\&\ pos}}
-\DoxyCodeLine{00106\ \textcolor{comment}{\ \ \ \ );}}
-\DoxyCodeLine{00107\ \textcolor{comment}{\ \ \ \ std::vector<uint8\_t>\ encodeGamePausedRequest(const\ GamePausedRequest\&\ pos);*/}}
-\DoxyCodeLine{00108\ \};}
-\DoxyCodeLine{00109\ }
-\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !CLIENT\_HPP\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ std::vector<EnemyMovedResponse>\ \mbox{\hyperlink{classClient_a4c9eefab245ca66e80ceb13fa67287e8}{recupAllEntities}}();}
+\DoxyCodeLine{00072\ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{//\ decodeur}}
+\DoxyCodeLine{00074\ \ \ \ \ NbrEntity\ \mbox{\hyperlink{classClient_a702dcd08cc1500ee497faf7c9438533f}{decodeNbrEntity}}(std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00075\ \ \ \ \ EnemyMovedResponse\ \mbox{\hyperlink{classClient_acffeb83b8de1ac566d06df0acc8bd398}{decodeEnemyMovedResponse}}(std::vector<uint8\_t>\&\ buffer);}
+\DoxyCodeLine{00076\ \};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !CLIENT\_HPP\_\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

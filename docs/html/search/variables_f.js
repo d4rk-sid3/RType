@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['up_0',['up',['../structcomponent_1_1controllable__s.html#a6a8e40517a5c416126fc3d94ffb24b9e',1,'component::controllable_s']]]
+  ['targeted_5fgroup_0',['targeted_group',['../structcomponent_1_1hitbox__s.html#aaf505d165aeaf898b7fb6305faa3f928',1,'component::hitbox_s']]],
+  ['text_1',['text',['../structcomponent_1_1text__s.html#a4de4fddc82bc89744614a15f9ac5e0b7',1,'component::text_s']]],
+  ['title_2',['title',['../structmenu__info__s.html#aeadcfaed1194b576d159c0450b88462e',1,'menu_info_s']]],
+  ['type_3',['type',['../structentity__info__s.html#a880a518d54a79a31c8b4d98af8b54eb0',1,'entity_info_s']]]
 ];
