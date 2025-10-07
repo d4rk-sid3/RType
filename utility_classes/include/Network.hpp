@@ -46,10 +46,6 @@ struct Vector2D {
 
 enum EnemyType : int8_t { TYPE_1 = 1, TYPE_2 = 2, TYPE_3 = 3, TYPE_4 = 4 };
 
-struct Timestamp {
-    uint64_t milliseconds;
-};
-
 // Serveur -> Client
 struct EnemyMovedResponse {
     int8_t type; // 0x37
