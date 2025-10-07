@@ -6,6 +6,7 @@
 */
 
 #include "../include/client.hpp"
+#include "components.hpp"
 
 void load_client_textures(void)
 {
@@ -79,10 +80,32 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities()
     }
 }
 
+void Client::sendPlayerInput()
+{
+    component::controllable &con = _reg.get_components<component::controllable>()[player_entity_id].value();
+
+    if (con.left) {
+        // Send to server
+        return;
+    }
+    if (con.right) {
+        // Send to server
+        return;
+    }
+    if (con.up) {
+        // Send to server
+        return;
+    }
+    if (con.down) {
+        // Send to server
+        return;
+    }
+}
 
 void Client::runLevel(double delta)
 {
     recupAllEntities();
+    sendPlayerInput();
     // Factory fac(_reg);
     // getNewEntities();
 
