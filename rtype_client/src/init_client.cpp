@@ -83,23 +83,20 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities()
 void Client::sendPlayerInput()
 {
     component::controllable &con = _reg.get_components<component::controllable>()[player_entity_id].value();
+    MoveResponse pos;
 
     if (con.left) {
-        // Send to server
-        return;
+        pos.direction = LEFT;
+    } else if (con.right) {
+        pos.direction = RIGHT;
+    } else if (con.up) {
+        pos.direction = UP;
+    } else if (con.down) {
+        pos.direction = DOWN;
     }
-    if (con.right) {
-        // Send to server
-        return;
-    }
-    if (con.up) {
-        // Send to server
-        return;
-    }
-    if (con.down) {
-        // Send to server
-        return;
-    }
+    std::vector<int16_t> buff = encodeMoveResponse(pos);
+    
+    client_.send(buff, buff.size(), client_.getServerendpoint());
 }
 
 void Client::runLevel(double delta)

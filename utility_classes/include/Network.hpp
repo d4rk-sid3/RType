@@ -35,7 +35,7 @@
 #include <sys/socket.h>
 #include <sys/stat.h>
 
-enum Direction : int8_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
+enum Direction : int16_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
 enum BULLET_TYPE : int8_t { SOLIDE = 0, NONE = 1 };
 
@@ -58,6 +58,12 @@ struct EnemyMovedResponse {
 struct NbrEntity {
     int8_t type; // 0x38
     int8_t nbr;
+};
+
+struct MoveResponse {
+    int16_t type; // 0x24
+    int16_t player_id;
+    Direction direction;
 };
 
 

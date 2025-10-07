@@ -73,6 +73,7 @@ class Client {
     // decodeur
     NbrEntity decodeNbrEntity(std::vector<int8_t>& buffer);
     EnemyMovedResponse decodeEnemyMovedResponse(std::vector<int8_t>& buffer);
+    std::vector<int16_t> encodeMoveResponse(const MoveResponse& pos);
 };
 
 #endif /* !CLIENT_HPP_ */
