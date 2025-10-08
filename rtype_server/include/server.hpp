@@ -37,7 +37,8 @@ class Server {
     void loadLevel(const std::string &path);
     void initializeGame(void);
     void logGameEntities(void);
-    
+    void receivePlayerInput(void);
+
     NetworkManager server_;
 
     std::vector<entity_info_t> entities;

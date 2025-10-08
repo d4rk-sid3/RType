@@ -23,8 +23,24 @@
 #include "components.hpp"
 #include "registry.hpp"
 
+#define PLAYER_MISSISLE_SPEED 10
+#define ENEMY_MISSISLE_SPEED 5
+#define SCROLL_SPEED 5
+#define PLAYER_SPEED 250
+#define TROOPER_SPEED_X 150
+#define TROOPER_SPEED_Y 60
+#define PLAYER_SHOOT_COOLDOWN 0.25
+#define ENEMY_SHOOT_COOLDOWN 2
+#define BOSS_SHOOT_COOLDOWN 2
+#define BOSS_MISSILE_SPEED 7
+#define BOSS_SPEED 100
+
+extern bool boss_dead;
+
 void player_logic(double delta, registry& reg, entity entity);
 void red_trooper_logic(double delta, registry& reg, entity entity);
+void walker_logic(double delta, registry& reg, entity entity);
+void boss_logic(double delta, registry& reg, entity entity);
 void start_text_logic(double delta, registry& reg, entity entity);
 void fade_in_rect_logic(double delta, registry& reg, entity entity);
 void fade_out_rect_logic(double delta, registry& reg, entity entity);

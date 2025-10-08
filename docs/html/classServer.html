@@ -90,10 +90,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfd2d06240a094a14b1a9d507e342508" id="r_acfd2d06240a094a14b1a9d507e342508"><td class="memItemLeft" align="right" valign="top">NetworkManager &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfd2d06240a094a14b1a9d507e342508">getManager</a> ()</td></tr>
 <tr class="separator:acfd2d06240a094a14b1a9d507e342508"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff902990e75fd9b26397cd49bbed2bd9" id="r_aff902990e75fd9b26397cd49bbed2bd9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff902990e75fd9b26397cd49bbed2bd9">encodeNbrEntity</a> (const NbrEntity &amp;pos)</td></tr>
-<tr class="separator:aff902990e75fd9b26397cd49bbed2bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a431b4468ba1b4e2848df0cea51eb0768" id="r_a431b4468ba1b4e2848df0cea51eb0768"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a431b4468ba1b4e2848df0cea51eb0768">encodeEnemyMovedResponse</a> (const EnemyMovedResponse &amp;pos)</td></tr>
-<tr class="separator:a431b4468ba1b4e2848df0cea51eb0768"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9faf4f513fe1778449fd516c276fbfb3" id="r_a9faf4f513fe1778449fd516c276fbfb3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9faf4f513fe1778449fd516c276fbfb3">encodeNbrEntity</a> (const NbrEntity &amp;pos)</td></tr>
+<tr class="separator:a9faf4f513fe1778449fd516c276fbfb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad40e271976ea21bed6c0c38d9c312d80" id="r_ad40e271976ea21bed6c0c38d9c312d80"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad40e271976ea21bed6c0c38d9c312d80">encodeEnemyMovedResponse</a> (const EnemyMovedResponse &amp;pos)</td></tr>
+<tr class="separator:ad40e271976ea21bed6c0c38d9c312d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34ea7f94e1fabcbd08696b8bc89a021d" id="r_a34ea7f94e1fabcbd08696b8bc89a021d"><td class="memItemLeft" align="right" valign="top">MoveResponse&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34ea7f94e1fabcbd08696b8bc89a021d">decodeMoveResponse</a> (const std::vector&lt; int16_t &gt; &amp;buffer)</td></tr>
+<tr class="separator:a34ea7f94e1fabcbd08696b8bc89a021d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afc422f4323d93d0d986198d8e3967bb2" name="afc422f4323d93d0d986198d8e3967bb2"></a>
@@ -135,14 +137,31 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a431b4468ba1b4e2848df0cea51eb0768" name="a431b4468ba1b4e2848df0cea51eb0768"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a431b4468ba1b4e2848df0cea51eb0768">&#9670;&#160;</a></span>encodeEnemyMovedResponse()</h2>
+<a id="a34ea7f94e1fabcbd08696b8bc89a021d" name="a34ea7f94e1fabcbd08696b8bc89a021d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34ea7f94e1fabcbd08696b8bc89a021d">&#9670;&#160;</a></span>decodeMoveResponse()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; uint8_t &gt; Server::encodeEnemyMovedResponse </td>
+          <td class="memname">MoveResponse Server::decodeMoveResponse </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; int16_t &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad40e271976ea21bed6c0c38d9c312d80" name="ad40e271976ea21bed6c0c38d9c312d80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad40e271976ea21bed6c0c38d9c312d80">&#9670;&#160;</a></span>encodeEnemyMovedResponse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; int16_t &gt; Server::encodeEnemyMovedResponse </td>
           <td>(</td>
           <td class="paramtype">const EnemyMovedResponse &amp;</td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
           <td></td>
@@ -152,14 +171,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aff902990e75fd9b26397cd49bbed2bd9" name="aff902990e75fd9b26397cd49bbed2bd9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff902990e75fd9b26397cd49bbed2bd9">&#9670;&#160;</a></span>encodeNbrEntity()</h2>
+<a id="a9faf4f513fe1778449fd516c276fbfb3" name="a9faf4f513fe1778449fd516c276fbfb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9faf4f513fe1778449fd516c276fbfb3">&#9670;&#160;</a></span>encodeNbrEntity()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; uint8_t &gt; Server::encodeNbrEntity </td>
+          <td class="memname">std::vector&lt; int16_t &gt; Server::encodeNbrEntity </td>
           <td>(</td>
           <td class="paramtype">const NbrEntity &amp;</td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
           <td></td>
@@ -214,8 +233,9 @@ Public Member Functions</h2></td></tr>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/jaggie/epitech_projects/G-CPP-500-COT-5-1-rtype-8/rtype_server/include/<a class="el" href="server_8hpp_source.html">server.hpp</a></li>
 <li>/home/jaggie/epitech_projects/G-CPP-500-COT-5-1-rtype-8/rtype_server/src/<a class="el" href="rtype__server_2src_2commands_8cpp.html">commands.cpp</a></li>
+<li>/home/jaggie/epitech_projects/G-CPP-500-COT-5-1-rtype-8/rtype_server/src/<a class="el" href="rtype__server_2src_2decodeur_8cpp.html">decodeur.cpp</a></li>
 <li>/home/jaggie/epitech_projects/G-CPP-500-COT-5-1-rtype-8/rtype_server/src/<a class="el" href="init__server_8cpp.html">init_server.cpp</a></li>
-<li>/home/jaggie/epitech_projects/G-CPP-500-COT-5-1-rtype-8/rtype_server/src/<a class="el" href="level__parser_8cpp.html">level_parser.cpp</a></li>
+<li>/home/jaggie/epitech_projects/G-CPP-500-COT-5-1-rtype-8/rtype_server/src/<a class="el" href="level__handling_8cpp.html">level_handling.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -25,7 +25,6 @@
 #define PLAYER_MISSILE_SPEED 500.0
 #define ENEMY_MISSILE_SPEED 5
 #define BACKGROUND_SPEED 50
-#define PLAYER_SPEED 5
 #define WALKER_SPEED 120
 
 Factory::Factory(registry& _reg) : reg(_reg) {}
@@ -211,12 +210,29 @@ entity Factory::make_walker() {
     auto& walker_sprite = reg.add_component<component::animated_drawable>(
         walker_id, component::animated_drawable()
     );
+    walker_sprite.sprite.setScale(-1, 1);
     walker_sprite.setFrameRect(33, 33);
     walker_sprite.frame_duration = 0.25;
     walker_sprite.setTextureFromName("walker");
 
     reg.add_component<component::position>(walker_id, {0, 0});
     reg.add_component<component::velocity>(walker_id, {-WALKER_SPEED, 0});
+    reg.add_component<component::logic>(walker_id, component::logic{walker_logic});
+
+    auto& walker_hurtbox =
+        reg.add_component<component::hurtbox>(walker_id, component::hurtbox());
+    walker_hurtbox.group = 2;
+    walker_hurtbox.health = 40;
+    walker_hurtbox.width = 33;
+    walker_hurtbox.height = 33;
+
+    auto& walker_hitbox =
+        reg.add_component<component::hitbox>(walker_id, component::hitbox());
+    walker_hitbox.targeted_group = 1;
+    walker_hitbox.damage = 20;
+    walker_hitbox.width = 33;
+    walker_hitbox.height = 33;
+    walker_hitbox.one_shot = false;
 
     auto &entity_name = reg.add_component<component::name>(walker_id, component::name());
     entity_name._name = "walker";
@@ -463,4 +479,28 @@ entity Factory::make_fade_out_rect() {
     auto &entity_name = reg.add_component<component::name>(fade_id, component::name());
     entity_name._name = "fade_out_rect";
     return fade_id;
+}
+
+entity Factory::make_boss()
+{
+    entity boss_id = reg.spawn_entity();
+
+    auto& boss_sprite =
+        reg.add_component<component::drawable>(boss_id, component::drawable());
+    boss_sprite.setTextureFromName("boss");
+
+    reg.add_component<component::position>(boss_id, {0, 0});
+    reg.add_component<component::velocity>(boss_id, {0, 0});
+
+    reg.add_component<component::hurtbox>(boss_id, {500, 2, 130, 50});
+    reg.add_component<component::hitbox>(boss_id, {10, 1, 130, 50, false});
+
+    auto &entity_name = reg.add_component<component::name>(boss_id, component::name());
+    entity_name._name = "boss";
+
+    reg.add_component<component::logic>(
+        boss_id, component::logic{boss_logic}
+    );
+
+    return boss_id;
 }

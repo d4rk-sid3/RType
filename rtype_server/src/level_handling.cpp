@@ -20,6 +20,7 @@
 #include <libconfig.h++>
 #include "server.hpp"
 #include "Factory.hpp"
+#include "logic_functions.hpp"
 
 using namespace component;
 
@@ -55,6 +56,7 @@ void Server::logGameEntities()
         try {
             position &pos = reg.get_components<component::position>()[entity(i)].value();
             name &name_ = reg.get_components<component::name>()[entity(i)].value();
+            EnemyType type = type_map[name_._name];
 
             // Ignore special entities
             // if (std::find(special_entities.begin(), special_entities.end(), name_._name) != special_entities.end()) {
@@ -69,10 +71,10 @@ void Server::logGameEntities()
 
             ++counter;
 
-            vector<int8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(i), TYPE_1,
+            vector<int8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(i), type,
                 {static_cast<int16_t>(pos.x), static_cast<int16_t>(pos.y)}});
 
-            std::cout << "Enemy_Type: "  << (TYPE_1) << " ";
+            std::cout << "Enemy_Type: "  << (type) << " ";
             std::cout << "Enemy_Pos_x: "  << static_cast<int>(pos.x) << " ";
             std::cout << "Enemy_Pos_y: "  << static_cast<int>(pos.y) << std::endl;
 
@@ -83,6 +85,25 @@ void Server::logGameEntities()
     }
     vector<int8_t> tmp = encodeNbrEntity({0x38, static_cast<int16_t>(counter)});
     result.insert(result.begin(), tmp.begin(), tmp.end());
+}
+
+void Server::receivePlayerInput()
+{
+    velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
+    // MoveResponse move_info = server_.receive();
+
+    // if (move_info.move == "left") {
+    //     vel.x = -PLAYER_SPEED;
+    // }
+    // if (move_info.move == "right") {
+    //     vel.x = PLAYER_SPEED;
+    // }
+    // if (move_info.move == "up") {
+    //     vel.y = -PLAYER_SPEED;
+    // }
+    // if (move_info.move == "down") {
+    //     vel.y = PLAYER_SPEED;
+    // }
 }
 
 void Server::runLevel(double delta)
@@ -103,7 +124,7 @@ void Server::runLevel(double delta)
     }
 
     logGameEntities();
-
+    receivePlayerInput();
 
     if (!result.empty()) {
         // std::cout << "[SERVER] sending " << result.size() << " bytes" << std::endl;
