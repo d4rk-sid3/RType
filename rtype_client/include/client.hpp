@@ -50,7 +50,7 @@ class Client {
 
     // This map associates the servers_ids to the client_ids in the registry
     std::unordered_map<size_t, size_t> ids_assoc;
-    std::vector<int8_t> lastmsg;
+    std::vector<int16_t> lastmsg;
 
     // std::vector<...> old;
     // std::vector<...> new;
@@ -71,8 +71,8 @@ class Client {
     std::vector<EnemyMovedResponse> recupAllEntities();
     
     // decodeur
-    NbrEntity decodeNbrEntity(std::vector<int8_t>& buffer);
-    EnemyMovedResponse decodeEnemyMovedResponse(std::vector<int8_t>& buffer);
+    NbrEntity decodeNbrEntity(std::vector<int16_t>& buffer);
+    EnemyMovedResponse decodeEnemyMovedResponse(std::vector<int16_t>& buffer);
     std::vector<int16_t> encodeMoveResponse(const MoveResponse& pos);
 };
 

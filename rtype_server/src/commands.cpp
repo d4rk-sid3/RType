@@ -17,9 +17,9 @@
 
 #include "../include/server.hpp"
 
-std::vector<int8_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& pos)
+std::vector<int16_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& pos)
 {
-    std::vector <int8_t> buffer;
+    std::vector <int16_t> buffer;
 
     buffer.emplace_back(0x37);
 
@@ -36,9 +36,9 @@ std::vector<int8_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& p
     return buffer;
 }
 
-std::vector<int8_t> Server::encodeNbrEntity(const NbrEntity& pos)
+std::vector<int16_t> Server::encodeNbrEntity(const NbrEntity& pos)
 {
-    std::vector <int8_t> buffer;
+    std::vector <int16_t> buffer;
 
     buffer.emplace_back(0x38);
 

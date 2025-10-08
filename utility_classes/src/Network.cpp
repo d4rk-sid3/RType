@@ -8,7 +8,7 @@
 #include "../include/Network.hpp"
 
 
-NetworkManager::NetworkManager(int port, std::string address, std::vector<int8_t> &lastmsg_, std::mutex& mtx_): 
+NetworkManager::NetworkManager(int port, std::string address, std::vector<int16_t> &lastmsg_, std::mutex& mtx_): 
     socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 0)),
     server_endpoint_(asio::ip::udp::endpoint(asio::ip::make_address(address), port)),
     isrunning(true), lastmsg(lastmsg_), mtx(mtx_)
@@ -18,7 +18,7 @@ NetworkManager::NetworkManager(int port, std::string address, std::vector<int8_t
     receive();
 }
 
-NetworkManager::NetworkManager(int port, std::vector<int8_t> &lastmsg_, std::mutex& mtx_) :
+NetworkManager::NetworkManager(int port, std::vector<int16_t> &lastmsg_, std::mutex& mtx_) :
     socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)),
     isrunning(true), lastmsg(lastmsg_), mtx(mtx_)
 {
@@ -77,7 +77,7 @@ void NetworkManager::receive()
     );
 }
 
-void NetworkManager::send(const std::vector<int8_t> &msg, size_t size, const asio::ip::udp::endpoint& to_receiver)
+void NetworkManager::send(const std::vector<int16_t> &msg, size_t size, const asio::ip::udp::endpoint& to_receiver)
 {
     socket.async_send_to(asio::buffer(msg, size), to_receiver, 
         [](std::error_code error, std::size_t byte_send) {

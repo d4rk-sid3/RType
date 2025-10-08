@@ -17,7 +17,7 @@
 
 #include "../include/server.hpp"
 
-MoveResponse Server::decodeMoveResponse(const std::vector<uint8_t>& buffer)
+MoveResponse Server::decodeMoveResponse(const std::vector<uint16_t>& buffer)
 {
     MoveResponse pos;
 

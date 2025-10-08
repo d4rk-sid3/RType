@@ -37,18 +37,18 @@
 
 enum Direction : int16_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
-enum BULLET_TYPE : int8_t { SOLIDE = 0, NONE = 1 };
+enum BULLET_TYPE : int16_t { SOLIDE = 0, NONE = 1 };
 
 struct Vector2D {
     int16_t x;
     int16_t y;
 };
 
-enum EnemyType : int8_t { TYPE_1 = 1, TYPE_2 = 2, TYPE_3 = 3, TYPE_4 = 4 };
+enum EnemyType : int16_t { TYPE_1 = 1, TYPE_2 = 2, TYPE_3 = 3, TYPE_4 = 4 };
 
 // Serveur -> Client
 struct EnemyMovedResponse {
-    int8_t type; // 0x37
+    int16_t type; // 0x37
     int16_t enemy_id;
     EnemyType enemy_type;
     Vector2D position;
@@ -56,8 +56,8 @@ struct EnemyMovedResponse {
 
 // Serveur -> Client
 struct NbrEntity {
-    int8_t type; // 0x38
-    int8_t nbr;
+    int16_t type; // 0x38
+    int16_t nbr;
 };
 
 struct MoveResponse {
@@ -69,9 +69,9 @@ struct MoveResponse {
 
 class NetworkManager {
   public:
-    NetworkManager(int port, std::string address, std::vector<int8_t> &lastmsg_, std::mutex& mtx_);
+    NetworkManager(int port, std::string address, std::vector<int16_t> &lastmsg_, std::mutex& mtx_);
 
-    NetworkManager(int port, std::vector<int8_t> &lastmsg_, std::mutex& mtx_);
+    NetworkManager(int port, std::vector<int16_t> &lastmsg_, std::mutex& mtx_);
 
     ~NetworkManager();
 
@@ -79,7 +79,7 @@ class NetworkManager {
     void run();
     void receive();
     void send(
-        const std::vector<int8_t>& msg, size_t size,
+        const std::vector<int16_t>& msg, size_t size,
         const asio::ip::udp::endpoint& client
     );
     asio::ip::udp::endpoint getLastSender() const;
@@ -97,11 +97,11 @@ class NetworkManager {
   private:
     asio::io_context context;
     asio::ip::udp::socket socket;
-    std::array<int8_t, 1024> buff{};
+    std::array<int16_t, 1024> buff{};
     asio::ip::udp::endpoint last_sender_;
     asio::ip::udp::endpoint server_endpoint_;
     bool isrunning;
-    std::vector<int8_t>& lastmsg;
+    std::vector<int16_t>& lastmsg;
     std::vector<asio::ip::udp::endpoint> clients;
     std::mutex& mtx;
 };

@@ -45,11 +45,6 @@ Client::Client(int p, std::string address, registry& reg): port_(p), client_(808
 //     return false;
 // }
 
-void Client::sendPlayerInput()
-{
-
-}
-
 std::vector<EnemyMovedResponse> Client::recupAllEntities()
 {
     if (!lastmsg.empty()) {    
@@ -172,7 +167,7 @@ void Client::initGame()
     Factory factory(_reg);
     factory.make_background();
 
-    player_entity_id = (int)factory.make_entity("player");
+    player_entity_id = (int)factory.make_entity("player1");
 
     auto &pos = _reg.get_components<component::position>()[player_entity_id].value();
     pos.x = 50;

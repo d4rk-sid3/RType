@@ -17,7 +17,7 @@
 
 #include "../include/client.hpp"
 
-EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
+EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int16_t>& buffer)
 {
     EnemyMovedResponse pos;
 
@@ -40,7 +40,7 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
     return pos;
 }
 
-NbrEntity Client::decodeNbrEntity(std::vector<int8_t>& buffer)
+NbrEntity Client::decodeNbrEntity(std::vector<int16_t>& buffer)
 {
     NbrEntity pos;
 
