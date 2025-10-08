@@ -220,9 +220,12 @@ void walker_logic(double delta, registry &reg, entity en)
     }
 
     position &pos = reg.get_components<position>()[en].value();
-    if (!walker_shot)
+    printf("SHOT: %d\n", walker_shot);
+    if (!walker_shot) {
+        printf("WALKER WILL SHOOOOOT\n");
         if (shoot_at_player(reg, pos, 200))
             walker_shot = true;
+    }
 
     if (hb.hurt) {
         Factory fac(reg);

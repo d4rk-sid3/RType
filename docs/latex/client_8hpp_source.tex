@@ -54,7 +54,7 @@
 \DoxyCodeLine{00050\ }
 \DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{//\ This\ map\ associates\ the\ servers\_ids\ to\ the\ client\_ids\ in\ the\ registry}}
 \DoxyCodeLine{00052\ \ \ \ \ std::unordered\_map<size\_t,\ size\_t>\ ids\_assoc;}
-\DoxyCodeLine{00053\ \ \ \ \ std::vector<uint8\_t>\ lastmsg;}
+\DoxyCodeLine{00053\ \ \ \ \ std::vector<int16\_t>\ lastmsg;}
 \DoxyCodeLine{00054\ }
 \DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//\ std::vector<...>\ old;}}
 \DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ std::vector<...>\ new;}}
@@ -75,10 +75,11 @@
 \DoxyCodeLine{00071\ \ \ \ \ std::vector<EnemyMovedResponse>\ \mbox{\hyperlink{classClient_a4c9eefab245ca66e80ceb13fa67287e8}{recupAllEntities}}();}
 \DoxyCodeLine{00072\ \ \ \ \ }
 \DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{//\ decodeur}}
-\DoxyCodeLine{00074\ \ \ \ \ NbrEntity\ \mbox{\hyperlink{classClient_a702dcd08cc1500ee497faf7c9438533f}{decodeNbrEntity}}(std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00075\ \ \ \ \ EnemyMovedResponse\ \mbox{\hyperlink{classClient_acffeb83b8de1ac566d06df0acc8bd398}{decodeEnemyMovedResponse}}(std::vector<uint8\_t>\&\ buffer);}
-\DoxyCodeLine{00076\ \};}
-\DoxyCodeLine{00077\ }
-\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !CLIENT\_HPP\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00074\ \ \ \ \ NbrEntity\ \mbox{\hyperlink{classClient_ad6e8708518335080bbd2d7a7b76c3820}{decodeNbrEntity}}(std::vector<int16\_t>\&\ buffer);}
+\DoxyCodeLine{00075\ \ \ \ \ EnemyMovedResponse\ \mbox{\hyperlink{classClient_a66a0129bbd0b03a9a63a717b87947c1b}{decodeEnemyMovedResponse}}(std::vector<int16\_t>\&\ buffer);}
+\DoxyCodeLine{00076\ \ \ \ \ std::vector<int16\_t>\ \mbox{\hyperlink{classClient_aa839764de1bb8004c99e7ab374dbdc10}{encodeMoveResponse}}(\textcolor{keyword}{const}\ MoveResponse\&\ pos);}
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !CLIENT\_HPP\_\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

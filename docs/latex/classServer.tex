@@ -15,9 +15,11 @@ void \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{run\+Level}
 \item 
 Network\+Manager \& \mbox{\hyperlink{classServer_acfd2d06240a094a14b1a9d507e342508}{get\+Manager}} ()
 \item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_aff902990e75fd9b26397cd49bbed2bd9}{encode\+Nbr\+Entity}} (const Nbr\+Entity \&pos)
+std\+::vector$<$ int16\+\_\+t $>$ \mbox{\hyperlink{classServer_a9faf4f513fe1778449fd516c276fbfb3}{encode\+Nbr\+Entity}} (const Nbr\+Entity \&pos)
 \item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a431b4468ba1b4e2848df0cea51eb0768}{encode\+Enemy\+Moved\+Response}} (const Enemy\+Moved\+Response \&pos)
+std\+::vector$<$ int16\+\_\+t $>$ \mbox{\hyperlink{classServer_ad40e271976ea21bed6c0c38d9c312d80}{encode\+Enemy\+Moved\+Response}} (const Enemy\+Moved\+Response \&pos)
+\item 
+Move\+Response \mbox{\hyperlink{classServer_a34ea7f94e1fabcbd08696b8bc89a021d}{decode\+Move\+Response}} (const std\+::vector$<$ int16\+\_\+t $>$ \&buffer)
 \end{DoxyCompactItemize}
 
 
@@ -37,17 +39,23 @@ std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a431b4468ba1b4e28
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classServer_a431b4468ba1b4e2848df0cea51eb0768}\label{classServer_a431b4468ba1b4e2848df0cea51eb0768} 
+\Hypertarget{classServer_a34ea7f94e1fabcbd08696b8bc89a021d}\label{classServer_a34ea7f94e1fabcbd08696b8bc89a021d} 
+\index{Server@{Server}!decodeMoveResponse@{decodeMoveResponse}}
+\index{decodeMoveResponse@{decodeMoveResponse}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{decodeMoveResponse()}{decodeMoveResponse()}}
+{\footnotesize\ttfamily Move\+Response Server\+::decode\+Move\+Response (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int16\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
+
+\Hypertarget{classServer_ad40e271976ea21bed6c0c38d9c312d80}\label{classServer_ad40e271976ea21bed6c0c38d9c312d80} 
 \index{Server@{Server}!encodeEnemyMovedResponse@{encodeEnemyMovedResponse}}
 \index{encodeEnemyMovedResponse@{encodeEnemyMovedResponse}!Server@{Server}}
 \doxysubsubsection{\texorpdfstring{encodeEnemyMovedResponse()}{encodeEnemyMovedResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Enemy\+Moved\+Response (\begin{DoxyParamCaption}\item[{const Enemy\+Moved\+Response \&}]{pos }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::vector$<$ int16\+\_\+t $>$ Server\+::encode\+Enemy\+Moved\+Response (\begin{DoxyParamCaption}\item[{const Enemy\+Moved\+Response \&}]{pos }\end{DoxyParamCaption})}
 
-\Hypertarget{classServer_aff902990e75fd9b26397cd49bbed2bd9}\label{classServer_aff902990e75fd9b26397cd49bbed2bd9} 
+\Hypertarget{classServer_a9faf4f513fe1778449fd516c276fbfb3}\label{classServer_a9faf4f513fe1778449fd516c276fbfb3} 
 \index{Server@{Server}!encodeNbrEntity@{encodeNbrEntity}}
 \index{encodeNbrEntity@{encodeNbrEntity}!Server@{Server}}
 \doxysubsubsection{\texorpdfstring{encodeNbrEntity()}{encodeNbrEntity()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Nbr\+Entity (\begin{DoxyParamCaption}\item[{const Nbr\+Entity \&}]{pos }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::vector$<$ int16\+\_\+t $>$ Server\+::encode\+Nbr\+Entity (\begin{DoxyParamCaption}\item[{const Nbr\+Entity \&}]{pos }\end{DoxyParamCaption})}
 
 \Hypertarget{classServer_acfd2d06240a094a14b1a9d507e342508}\label{classServer_acfd2d06240a094a14b1a9d507e342508} 
 \index{Server@{Server}!getManager@{getManager}}
@@ -67,5 +75,6 @@ The documentation for this class was generated from the following files\+:\begin
 \item 
 /home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/include/\mbox{\hyperlink{server_8hpp}{server.\+hpp}}\item 
 /home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{rtype__server_2src_2commands_8cpp}{commands.\+cpp}}\item 
+/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{rtype__server_2src_2decodeur_8cpp}{decodeur.\+cpp}}\item 
 /home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{init__server_8cpp}{init\+\_\+server.\+cpp}}\item 
-/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{level__parser_8cpp}{level\+\_\+parser.\+cpp}}\end{DoxyCompactItemize}
+/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{level__handling_8cpp}{level\+\_\+handling.\+cpp}}\end{DoxyCompactItemize}
