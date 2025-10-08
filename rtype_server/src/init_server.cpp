@@ -47,7 +47,7 @@ Server::Server(int p, registry &regis) : server_(8080, std::ref(tmp), std::ref(m
 {
     load_textures();
     initializeGame();
-    loadLevel("assets/levels/test.txt");
+    // loadLevel("assets/levels/test.txt");
 }
 
 Server::~Server()

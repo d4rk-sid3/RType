@@ -1,12 +1,12 @@
 #include "server.hpp"
 
-int main() {
+int main(int ac, char **av) {
     sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type") ;
     registry reg(win);
 
     sf::Event event;
     sf::Clock frameClock;
-    Server server(8080, reg);
+    Server server(std::stoi(av[0]), reg);
 
     NetworkManager &c = server.getManager();
 

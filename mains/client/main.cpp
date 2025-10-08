@@ -1,12 +1,12 @@
 #include "client.hpp"
 
-int main() {
+int main(int ac, char **av) {
     sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type") ;
     registry reg(win);
 
     sf::Event event;
     sf::Clock frameClock;
-    Client client(8080, "127.0.0.1", reg);
+    Client client(std::stoi(av[0]), av[1], reg);
 
     NetworkManager &c = client.getManager();
 
