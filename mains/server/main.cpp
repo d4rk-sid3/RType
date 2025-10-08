@@ -6,7 +6,7 @@ int main(int ac, char **av) {
 
     sf::Event event;
     sf::Clock frameClock;
-    Server server(std::stoi(av[0]), reg);
+    Server server(std::stoi(av[1]), reg);
 
     NetworkManager &c = server.getManager();
 

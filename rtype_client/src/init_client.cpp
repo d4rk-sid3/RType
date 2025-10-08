@@ -51,7 +51,7 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities()
         std::lock_guard<std::mutex> lock(mtx);  
         NbrEntity e = decodeNbrEntity(lastmsg);
 
-        std::cout << "E: "  << static_cast<int>(e.nbr) << std::endl;
+        // std::cout << "E: "  << static_cast<int>(e.nbr) << std::endl;
 
         std::vector<EnemyMovedResponse> s;
 
@@ -59,11 +59,11 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities()
             s.push_back(decodeEnemyMovedResponse(lastmsg));
         }
 
-        for (auto &a : s) {
-            std::cout << "Enemy_Type: "  << static_cast<int>(a.enemy_type) << " ";
-            std::cout << "Enemy_Pos_x: "  << static_cast<double>(a.position.x) << " ";
-            std::cout << "Enemy_Pos_y: "  << static_cast<double>(a.position.y) << std::endl;
-        }
+        // for (auto &a : s) {
+        //     std::cout << "Enemy_Type: "  << static_cast<int>(a.enemy_type) << " ";
+        //     std::cout << "Enemy_Pos_x: "  << static_cast<double>(a.position.x) << " ";
+        //     std::cout << "Enemy_Pos_y: "  << static_cast<double>(a.position.y) << std::endl;
+        // }
 
         lastmsg.clear();
 
@@ -80,6 +80,9 @@ void Client::sendPlayerInput()
     component::controllable &con = _reg.get_components<component::controllable>()[player_entity_id].value();
     MoveResponse pos;
 
+    pos.type = 0x24;
+    pos.player_id = static_cast<int16_t>(player_entity_id);
+
     if (con.left) {
         pos.direction = LEFT;
     } else if (con.right) {
@@ -90,14 +93,21 @@ void Client::sendPlayerInput()
         pos.direction = DOWN;
     }
     std::vector<int8_t> buff = encodeMoveResponse(pos);
-    
+
+    std::cout << "BUFF:" << " ";
+
+    for (auto &a : buff) {
+        std::cout << static_cast<int>(a) << " " ;
+
+    }
     client_.send(buff, buff.size(), client_.getServerendpoint());
+    
 }
 
 void Client::runLevel(double delta)
 {
     recupAllEntities();
-    // sendPlayerInput();
+    sendPlayerInput();
     // Factory fac(_reg);
     // getNewEntities();
 

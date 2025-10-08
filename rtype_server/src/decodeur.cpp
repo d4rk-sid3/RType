@@ -21,15 +21,13 @@ MoveResponse Server::decodeMoveResponse(const std::vector<int8_t>& buffer)
 {
     MoveResponse pos;
 
-    int16_t type = (buffer[0] << 8) | buffer[1];
-
-    if (type != 0x24) {
+    if (buffer[0] != 0x24) {
         throw std::runtime_error("Type de message invalide !");
     }
 
-    pos.type = (buffer[0] << 8) | buffer[1];
-    pos.player_id = (buffer[2] << 8) | buffer[3];
-    pos.direction = static_cast<Direction>((buffer[4] << 8) | buffer[5]);
+    pos.type = buffer[0];
+    pos.player_id = (buffer[1] << 8) | buffer[2];
+    pos.direction = static_cast<Direction>((buffer[3] << 8) | buffer[4]);
 
     return pos;
 }

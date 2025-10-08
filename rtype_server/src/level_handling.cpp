@@ -74,9 +74,9 @@ void Server::logGameEntities()
             vector<int8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(i), type,
                 {static_cast<int16_t>(pos.x), static_cast<int16_t>(pos.y)}});
 
-            std::cout << "Enemy_Type: "  << (type) << " ";
-            std::cout << "Enemy_Pos_x: "  << static_cast<int>(pos.x) << " ";
-            std::cout << "Enemy_Pos_y: "  << static_cast<int>(pos.y) << std::endl;
+            // std::cout << "Enemy_Type: "  << (type) << " ";
+            // std::cout << "Enemy_Pos_x: "  << static_cast<int>(pos.x) << " ";
+            // std::cout << "Enemy_Pos_y: "  << static_cast<int>(pos.y) << std::endl;
 
             result.insert(result.end(), tmp.begin(), tmp.end());
         } catch (...) {
@@ -89,7 +89,19 @@ void Server::logGameEntities()
 
 void Server::receivePlayerInput()
 {
+
     if (!tmp.empty()) {
+
+        if (tmp[0] == 0x5) {
+            tmp.clear();
+            return;
+        }
+
+        std::cout << "TMP: ";
+        for (auto &a: tmp) {
+            std::cout << static_cast<int>(a) << " ";
+        }
+        std::cout << std::endl;
         std::lock_guard<std::mutex> lock(mtx);
         velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
         MoveResponse move_info = decodeMoveResponse(tmp);

@@ -50,7 +50,7 @@ extern std::map<std::string, EnemyType> type_map;
 
 // Serveur -> Client
 struct EnemyMovedResponse {
-    int16_t type; // 0x37
+    int8_t type; // 0x37
     int16_t enemy_id;
     EnemyType enemy_type;
     Vector2D position;

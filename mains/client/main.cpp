@@ -6,11 +6,11 @@ int main(int ac, char **av) {
 
     sf::Event event;
     sf::Clock frameClock;
-    Client client(std::stoi(av[0]), av[1], reg);
+    Client client(std::stoi(av[1]), av[2], reg);
 
     NetworkManager &c = client.getManager();
 
-    std::vector<int8_t> msg(10, 0x5);
+    std::vector<int8_t> msg(1, 0x5);   
 
     c.send(msg, msg.size(), c.getServerendpoint());
 
