@@ -48,7 +48,7 @@ Client::Client(int p, std::string address, registry& reg): port_(p), client_(808
 std::vector<EnemyMovedResponse> Client::recupAllEntities()
 {
     if (!lastmsg.empty()) {    
-        std::lock_guard<std::mutex> lock(mtx);
+        std::lock_guard<std::mutex> lock(mtx);  
         NbrEntity e = decodeNbrEntity(lastmsg);
 
         std::cout << "E: "  << static_cast<int>(e.nbr) << std::endl;

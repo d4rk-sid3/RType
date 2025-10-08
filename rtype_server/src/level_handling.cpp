@@ -89,21 +89,26 @@ void Server::logGameEntities()
 
 void Server::receivePlayerInput()
 {
-    velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
-    // MoveResponse move_info = server_.receive();
+    if (!tmp.empty()) {
+        std::lock_guard<std::mutex> lock(mtx);
+        velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
+        MoveResponse move_info = decodeMoveResponse(tmp);
 
-    // if (move_info.move == "left") {
-    //     vel.x = -PLAYER_SPEED;
-    // }
-    // if (move_info.move == "right") {
-    //     vel.x = PLAYER_SPEED;
-    // }
-    // if (move_info.move == "up") {
-    //     vel.y = -PLAYER_SPEED;
-    // }
-    // if (move_info.move == "down") {
-    //     vel.y = PLAYER_SPEED;
-    // }
+        if (move_info.direction == LEFT) {
+            vel.vx = -PLAYER_SPEED;
+        }
+        if (move_info.direction == RIGHT) {
+            vel.vx = PLAYER_SPEED;
+        }
+        if (move_info.direction == UP) {
+            vel.vy = -PLAYER_SPEED;
+        }
+        if (move_info.direction == DOWN) {
+            vel.vy = PLAYER_SPEED;
+        }
+
+        tmp.clear();
+    }
 }
 
 void Server::runLevel(double delta)
