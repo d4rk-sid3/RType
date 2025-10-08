@@ -6,13 +6,59 @@ project(RType VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# IMPORTANT : Définir CMAKE_BUILD_TYPE avant tout
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+
 if(UNIX AND NOT APPLE)
     message(STATUS "Linux detected: make sure X11 libs are installed")
-elseif(WIN32)
-    message(STATUS "Windows detected: no system packages needed")
-elseif(APPLE)
-    message(STATUS "macOS detected: install SFML via Homebrew or conan")
+    find_library(UDEV_LIB udev)
+    if(NOT UDEV_LIB)
+        message(FATAL_ERROR
+        "libudev non trouvée ! \n"
+        "Installez-le d'abord sur votre système : \n"
+        " Ubuntu/Debian: sudo apt-get install libudev-dev\n"
+        " Fedora: sudo dnf install systemd-devel\n"
+        " Arch: sudo pacman -S systemd"
+        )
+    endif()
 endif()
+
+#----------------------------------------------------------------
+if (NOT EXISTS "$ENV{HOME}/.conan2/profiles/default")
+    message(STATUS "Détection du profil Conan...")
+    execute_process(
+        COMMAND conan profile detect --force
+        RESULT_VARIABLE result 
+    )
+    if(result)
+        message(FATAL_ERROR "Impossible de détecter le profil Conan !")
+    endif()
+endif()
+
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.lock")
+    message(STATUS "Installation des dépendances conan...")
+    execute_process(
+        COMMAND conan install ${CMAKE_SOURCE_DIR} --output-folder=${CMAKE_BINARY_DIR} --build=missing -s build_type=${CMAKE_BUILD_TYPE}
+        RESULT_VARIABLE result
+    )
+    if(result)
+        message(FATAL_ERROR "Conan install a échoué !")
+    endif()
+    file(TOUCH "${CMAKE_BINARY_DIR}/conan.lock")
+endif()
+
+# Inclure le toolchain Conan UNE SEULE FOIS
+include(${CMAKE_BINARY_DIR}/conan_toolchain.cmake)
+
+# Chercher les packages Conan
+find_package(SFML REQUIRED)
+find_package(asio REQUIRED)
+find_package(GTest REQUIRED)
 
 #----------------------------------------------------------------
 # Génération de la documentation avec Doxygen
@@ -31,6 +77,7 @@ if(DOXYGEN_FOUND)
 else()
     message(STATUS "Doxygen not found, documentation will not be generated")
 endif()
+
 # -------------------------------------------------------------
 # Options pour compiler client et/ou serveur
 option(BUILD_CLIENT "Build the client executable" ON)
@@ -72,12 +119,21 @@ if(BUILD_CLIENT)
     endif()
     
     add_executable(r-type_client ${CLIENT_SOURCES})
-    target_include_directories(r-type_client PRIVATE ${CMAKE_SOURCE_DIR}/rtype_client/include "utility_classes/include" "engine/include/" ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
-    target_link_libraries(r-type_client PRIVATE -lsfml-graphics -lsfml-window -lsfml-system -lconfig++ -lsfml-audio)
+    target_include_directories(r-type_client PRIVATE 
+        ${CMAKE_SOURCE_DIR}/rtype_client/include 
+        "utility_classes/include" 
+        "engine/include/" 
+        ${CMAKE_SOURCE_DIR}/asio-1.36.0/include
+    )
     
-    # Compiler flags for debug builds
+    target_link_libraries(r-type_client PRIVATE 
+        sfml::sfml
+        asio::asio
+        config++
+    )
+    
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        target_compile_options(r-type_client PRIVATE)
+        target_compile_options(r-type_client PRIVATE -g -Wall)
     endif()
 endif()
 
@@ -90,12 +146,21 @@ if(BUILD_SERVER)
     endif()
     
     add_executable(r-type_server ${SERVER_SOURCES})
-    target_include_directories(r-type_server PRIVATE ${CMAKE_SOURCE_DIR}/rtype_server/include "utility_classes/include" "engine/include/" ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
-    target_link_libraries(r-type_server PRIVATE -lsfml-graphics -lsfml-window -lsfml-system -lconfig++ -lsfml-audio)
+    target_include_directories(r-type_server PRIVATE 
+        ${CMAKE_SOURCE_DIR}/rtype_server/include 
+        "utility_classes/include" 
+        "engine/include/" 
+        ${CMAKE_SOURCE_DIR}/asio-1.36.0/include
+    )
     
-    # Compiler flags for debug builds
+    target_link_libraries(r-type_server PRIVATE 
+        sfml::sfml
+        asio::asio
+        config++
+    )
+    
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        target_compile_options(r-type_server PRIVATE)
+        target_compile_options(r-type_server PRIVATE -g -Wall)
     endif()
 endif()
 
@@ -108,11 +173,23 @@ if(BUILD_TESTS)
     endif()
 
     add_executable(r-type_tests ${TESTS_SOURCES})
-    target_include_directories(r-type_tests PRIVATE ${CMAKE_SOURCE_DIR}/rtype_server/include  ${CMAKE_SOURCE_DIR}/rtype_client/include "utility_classes/include" "engine/include" ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
-    target_link_libraries(r-type_tests PRIVATE -lgtest -lgtest_main -pthread -lsfml-graphics -lsfml-window -lsfml-system -lconfig++ -lsfml-audio)
+    target_include_directories(r-type_tests PRIVATE 
+        ${CMAKE_SOURCE_DIR}/rtype_server/include  
+        ${CMAKE_SOURCE_DIR}/rtype_client/include 
+        "utility_classes/include" 
+        "engine/include" 
+        ${CMAKE_SOURCE_DIR}/asio-1.36.0/include
+    )
+    
+    target_link_libraries(r-type_tests PRIVATE 
+        GTest::gtest 
+        GTest::gtest_main
+        sfml::sfml
+        asio::asio
+        config++
+    )
 
-    # Compiler flags for debug builds
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        target_compile_options(r-type_tests PRIVATE)
+        target_compile_options(r-type_tests PRIVATE -g -Wall)
     endif()
 endif()
