@@ -57,7 +57,7 @@ class Server {
     std::vector<int16_t> encodeNbrEntity(const NbrEntity& pos);
     std::vector<int16_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos
     );
-    MoveResponse decodeMoveResponse(const std::vector<uint16_t>& buffer);
+    MoveResponse decodeMoveResponse(const std::vector<int16_t>& buffer);
 
 };
 

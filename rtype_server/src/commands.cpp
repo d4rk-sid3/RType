@@ -22,17 +22,10 @@ std::vector<int16_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& 
     std::vector <int16_t> buffer;
 
     buffer.emplace_back(0x37);
-
-    buffer.emplace_back((pos.enemy_id >> 8) & 0xFF);
-    buffer.emplace_back(pos.enemy_id & 0xFF);
-
-    buffer.emplace_back(pos.enemy_type & 0xFF);
-
-    buffer.emplace_back((pos.position.x >> 8) & 0xFF);
-    buffer.emplace_back(pos.position.x &0xFF);
-    buffer.emplace_back((pos.position.y >> 8) & 0xFF);
-    buffer.emplace_back(pos.position.y & 0xFF);
-    
+    buffer.emplace_back(pos.enemy_id);
+    buffer.emplace_back(pos.enemy_type);
+    buffer.emplace_back(pos.position.x);
+    buffer.emplace_back(pos.position.y);
     return buffer;
 }
 

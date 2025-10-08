@@ -79,8 +79,8 @@ void NetworkManager::receive()
 
 void NetworkManager::send(const std::vector<int16_t> &msg, size_t size, const asio::ip::udp::endpoint& to_receiver)
 {
-    socket.async_send_to(asio::buffer(msg, size), to_receiver, 
-        [](std::error_code error, std::size_t byte_send) {
+    socket.async_send_to(asio::buffer(msg, size * sizeof(int16_t)), to_receiver, 
+        [msg](std::error_code error, std::size_t byte_send) {
             std::cout << "Send :" << byte_send << std::endl;
         
             if (!error) {

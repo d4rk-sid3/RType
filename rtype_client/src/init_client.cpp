@@ -97,7 +97,7 @@ void Client::sendPlayerInput()
 void Client::runLevel(double delta)
 {
     recupAllEntities();
-    sendPlayerInput();
+    // sendPlayerInput();
     // Factory fac(_reg);
     // getNewEntities();
 
