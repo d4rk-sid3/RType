@@ -20,15 +20,6 @@
 #include "../../rtype_server/include/server.hpp"
 #include <cmath>
 
-#define PLAYER_MISSISLE_SPEED 10
-#define ENEMY_MISSISLE_SPEED 5
-#define SCROLL_SPEED 5
-#define PLAYER_SPEED 250
-#define TROOPER_SPEED_X 150
-#define TROOPER_SPEED_Y 60
-#define PLAYER_SHOOT_COOLDOWN 0.25
-#define ENEMY_SHOOT_COOLDOWN 2
-
 using namespace component;
 
 double distance(double x1, double y1, double x2, double y2) { return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2)); }

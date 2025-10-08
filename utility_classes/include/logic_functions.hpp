@@ -23,6 +23,15 @@
 #include "components.hpp"
 #include "registry.hpp"
 
+#define PLAYER_MISSISLE_SPEED 10
+#define ENEMY_MISSISLE_SPEED 5
+#define SCROLL_SPEED 5
+#define PLAYER_SPEED 250
+#define TROOPER_SPEED_X 150
+#define TROOPER_SPEED_Y 60
+#define PLAYER_SHOOT_COOLDOWN 0.25
+#define ENEMY_SHOOT_COOLDOWN 2
+
 void player_logic(double delta, registry& reg, entity entity);
 void red_trooper_logic(double delta, registry& reg, entity entity);
 void start_text_logic(double delta, registry& reg, entity entity);

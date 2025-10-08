@@ -7,6 +7,18 @@
 
 #include "../include/Network.hpp"
 
+std::map<std::string, EnemyType> type_map = {
+    {"player1", TYPE_1},
+    {"player2", TYPE_2},
+    {"red_trooper", TYPE_3},
+    {"walker", TYPE_4},
+    {"player_missile", TYPE_4},
+    {"enemy_missile", TYPE_4},
+    {"explosion", TYPE_4},
+    {"hit_effect", TYPE_4},
+    {"floor", TYPE_4},
+    {"ceiling", TYPE_4}
+};
 
 NetworkManager::NetworkManager(int port, std::string address, std::vector<int16_t> &lastmsg_, std::mutex& mtx_): 
     socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 0)),
