@@ -56,12 +56,12 @@ struct EnemyMovedResponse {
 
 // Serveur -> Client
 struct NbrEntity {
-    int16_t type; // 0x38
+    int8_t type; // 0x38
     int16_t nbr;
 };
 
 struct MoveResponse {
-    int16_t type; // 0x24
+    int8_t type; // 0x24
     int16_t player_id;
     Direction direction;
 };
@@ -69,9 +69,9 @@ struct MoveResponse {
 
 class NetworkManager {
   public:
-    NetworkManager(int port, std::string address, std::vector<int16_t> &lastmsg_, std::mutex& mtx_);
+    NetworkManager(int port, std::string address, std::vector<int8_t> &lastmsg_, std::mutex& mtx_);
 
-    NetworkManager(int port, std::vector<int16_t> &lastmsg_, std::mutex& mtx_);
+    NetworkManager(int port, std::vector<int8_t> &lastmsg_, std::mutex& mtx_);
 
     ~NetworkManager();
 
@@ -79,7 +79,7 @@ class NetworkManager {
     void run();
     void receive();
     void send(
-        const std::vector<int16_t>& msg, size_t size,
+        const std::vector<int8_t>& msg, size_t size,
         const asio::ip::udp::endpoint& client
     );
     asio::ip::udp::endpoint getLastSender() const;
@@ -97,11 +97,11 @@ class NetworkManager {
   private:
     asio::io_context context;
     asio::ip::udp::socket socket;
-    std::array<int16_t, 1024> buff{};
+    std::array<int8_t, 1024> buff{};
     asio::ip::udp::endpoint last_sender_;
     asio::ip::udp::endpoint server_endpoint_;
     bool isrunning;
-    std::vector<int16_t>& lastmsg;
+    std::vector<int8_t>& lastmsg;
     std::vector<asio::ip::udp::endpoint> clients;
     std::mutex& mtx;
 };

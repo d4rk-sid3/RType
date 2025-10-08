@@ -18,15 +18,17 @@
 
 #include "../include/client.hpp"
 
-std::vector<int16_t> Client::encodeMoveResponse(const MoveResponse& pos)
+std::vector<int8_t> Client::encodeMoveResponse(const MoveResponse& pos)
 {
-    std::vector<int16_t> buffer;
+    std::vector<int8_t> buffer;
 
     buffer.emplace_back(pos.type);
 
-    buffer.emplace_back(pos.player_id);
+    buffer.emplace_back((pos.player_id >> 8) & 0xFF);
+    buffer.emplace_back(pos.player_id & 0xFF);
 
-    buffer.emplace_back(pos.direction);
+    buffer.emplace_back((pos.direction >> 8) & 0xFF);
+    buffer.emplace_back(pos.direction & 0xFF);
 
     return buffer;
 }

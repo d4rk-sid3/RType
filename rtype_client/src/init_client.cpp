@@ -89,7 +89,7 @@ void Client::sendPlayerInput()
     } else if (con.down) {
         pos.direction = DOWN;
     }
-    std::vector<int16_t> buff = encodeMoveResponse(pos);
+    std::vector<int8_t> buff = encodeMoveResponse(pos);
     
     client_.send(buff, buff.size(), client_.getServerendpoint());
 }

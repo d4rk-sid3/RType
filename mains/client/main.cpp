@@ -10,7 +10,7 @@ int main() {
 
     NetworkManager &c = client.getManager();
 
-    std::vector<int16_t> msg(10, 0x5);
+    std::vector<int8_t> msg(10, 0x5);
 
     c.send(msg, msg.size(), c.getServerendpoint());
 

@@ -42,8 +42,8 @@ class Server {
 
     std::vector<entity_info_t> entities;
 
-    vector<int16_t> result;
-    vector<int16_t> tmp;
+    vector<int8_t> result;
+    vector<int8_t> tmp;
     int counter = 0;
 
   public:
@@ -54,10 +54,9 @@ class Server {
     NetworkManager &getManager() { return server_; }
 
     // encodeur
-    std::vector<int16_t> encodeNbrEntity(const NbrEntity& pos);
-    std::vector<int16_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos
-    );
-    MoveResponse decodeMoveResponse(const std::vector<int16_t>& buffer);
+    std::vector<int8_t> encodeNbrEntity(const NbrEntity& pos);
+    std::vector<int8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos);
+    MoveResponse decodeMoveResponse(const std::vector<int8_t>& buffer);
 
 };
 

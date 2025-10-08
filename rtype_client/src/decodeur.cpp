@@ -17,7 +17,7 @@
 
 #include "../include/client.hpp"
 
-EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int16_t>& buffer)
+EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
 {
     EnemyMovedResponse pos;
 
@@ -30,20 +30,20 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int16_t>& buffer
     }
 
     pos.type = buffer[0];
-    pos.enemy_id = buffer[1];
-    pos.enemy_type = static_cast<EnemyType>(buffer[2]);
-    pos.position.x = buffer[3];
-    pos.position.y = buffer[4];
+    pos.enemy_id = (buffer[1] << 8) | buffer[2];
+    pos.enemy_type = static_cast<EnemyType>((buffer[3] << 8) | buffer[4]);
+    pos.position.x = (buffer[5] << 8) | buffer[6];
+    pos.position.y = (buffer[7] << 8) | buffer[8];
 
     std::cout << "Enemy_Type: "  << static_cast<int>(pos.enemy_type) << " ";
     std::cout << "Enemy_Pos_x: "  << static_cast<double>(pos.position.x) << " ";
     std::cout << "Enemy_Pos_y: "  << static_cast<double>(pos.position.y) << std::endl;
 
-    buffer.erase(buffer.begin(), buffer.begin() + 5);
+    buffer.erase(buffer.begin(), buffer.begin() + 9);
     return pos;
 }
 
-NbrEntity Client::decodeNbrEntity(std::vector<int16_t>& buffer)
+NbrEntity Client::decodeNbrEntity(std::vector<int8_t>& buffer)
 {
     NbrEntity pos;
 
@@ -52,8 +52,8 @@ NbrEntity Client::decodeNbrEntity(std::vector<int16_t>& buffer)
     }
 
     pos.type = buffer[0];
-    pos.nbr = buffer[1];
+    pos.nbr = (buffer[1] << 8) | buffer[2];
 
-    buffer.erase(buffer.begin(), buffer.begin() + 2);
+    buffer.erase(buffer.begin(), buffer.begin() + 3);
     return pos;
 }

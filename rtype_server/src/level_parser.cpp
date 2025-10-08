@@ -69,7 +69,7 @@ void Server::logGameEntities()
 
             ++counter;
 
-            vector<int16_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(i), TYPE_1,
+            vector<int8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(i), TYPE_1,
                 {static_cast<int16_t>(pos.x), static_cast<int16_t>(pos.y)}});
 
             std::cout << "Enemy_Type: "  << (TYPE_1) << " ";
@@ -81,7 +81,7 @@ void Server::logGameEntities()
 
         }
     }
-    vector<int16_t> tmp = encodeNbrEntity({0x38, static_cast<int16_t>(counter)});
+    vector<int8_t> tmp = encodeNbrEntity({0x38, static_cast<int16_t>(counter)});
     result.insert(result.begin(), tmp.begin(), tmp.end());
 }
 
