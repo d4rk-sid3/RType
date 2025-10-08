@@ -22,6 +22,8 @@
 
 using namespace component;
 
+bool boss_dead = false;
+
 double distance(double x1, double y1, double x2, double y2) { return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2)); }
 
 void player_logic(double delta, registry &reg, entity en)
@@ -259,5 +261,68 @@ void fade_out_rect_logic(double delta, registry &reg, entity entity)
     dr.sprite.setColor(sf::Color(0, 0, 0, 255 - (int)round(t * 128)));
     if (dr.sprite.getColor().a <= 0) {
         reg.kill_entity(entity);
+    }
+}
+
+void boss_logic(double delta, registry &reg, entity en) {
+    static double t = 0.0;
+    static double t1 = 0.0;
+    hurtbox &hb = reg.get_components<hurtbox>()[en].value();
+    velocity &vel = reg.get_components<velocity>()[en].value();
+
+    vel.vy = sin(t1 * 2) * BOSS_SPEED;
+
+    if (t < BOSS_SHOOT_COOLDOWN) {
+        t += delta;
+    } else {
+        t = 0;
+        Factory fac(reg);
+        entity missile1 = fac.make_enemy_missile();
+        entity missile2 = fac.make_enemy_missile();
+        entity missile3 = fac.make_enemy_missile();
+    
+        position &pos = reg.get_components<position>()[en].value();
+        position &pos1 = reg.get_components<position>()[missile1].value();
+        position &pos2 = reg.get_components<position>()[missile2].value();
+        position &pos3 = reg.get_components<position>()[missile3].value();
+    
+        velocity &vel1 = reg.get_components<velocity>()[missile1].value();
+        velocity &vel2 = reg.get_components<velocity>()[missile2].value();
+        velocity &vel3 = reg.get_components<velocity>()[missile3].value();
+
+        pos1.x = pos.x;
+        pos2.x = pos.x;
+        pos3.x = pos.x;
+        pos1.y = pos.y;
+        pos2.y = pos.y;
+        pos3.y = pos.y;
+
+        vel1.vx = 0;
+        vel1.vy = -BOSS_MISSILE_SPEED;
+        vel2.vx = 0;
+        vel2.vy = BOSS_MISSILE_SPEED;
+        vel3.vx = -BOSS_MISSILE_SPEED;
+        vel3.vy = -0;
+    }
+
+    if (hb.hurt) {
+        Factory fac(reg);
+        entity hit_effect = fac.make_hit_effect();
+        position &pos = reg.get_components<position>()[en].value();
+        position &hit_pos = reg.get_components<position>()[hit_effect].value();
+        hit_pos.x = pos.x;
+        hit_pos.y = pos.y;
+    }
+
+    if (hb.health <= 0) {
+        Factory fac(reg);
+        entity explosion = fac.make_explosion();
+        position &pos = reg.get_components<position>()[en].value();
+        position &explosion_pos = reg.get_components<position>()[explosion].value();
+        explosion_pos.x = pos.x;
+        explosion_pos.y = pos.y;
+        
+        boss_dead = true;
+        reg.kill_entity(en);
     }
 }

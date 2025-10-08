@@ -69,6 +69,8 @@ class Factory {
     entity make_fade_in_rect();
 
     entity make_fade_out_rect();
+
+    entity make_boss();
 };
 
 #endif

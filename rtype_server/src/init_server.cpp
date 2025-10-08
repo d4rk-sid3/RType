@@ -21,6 +21,7 @@ void load_textures(void)
     ResourceManager::Instance().load("assets/sprites/effects/hit_effect.gif", "hit_effect", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/background/background.jpg", "background", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/background/wall1_shadow.png", "ceiling", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/enemies/boss.gif", "boss", TEXTURE);
 
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
@@ -53,5 +54,3 @@ Server::~Server()
 {
 
 }
-
-
