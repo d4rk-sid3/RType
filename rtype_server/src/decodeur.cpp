@@ -17,7 +17,7 @@
 
 #include "../include/server.hpp"
 
-MoveResponse Server::decodeMoveResponse(const std::vector<int8_t>& buffer)
+MoveResponse Server::decodeMoveResponse(std::vector<int8_t>& buffer)
 {
     MoveResponse pos;
 
@@ -29,5 +29,6 @@ MoveResponse Server::decodeMoveResponse(const std::vector<int8_t>& buffer)
     pos.player_id = (buffer[1] << 8) | buffer[2];
     pos.direction = static_cast<Direction>((buffer[3] << 8) | buffer[4]);
 
+    buffer.clear();
     return pos;
 }

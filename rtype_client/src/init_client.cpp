@@ -27,7 +27,7 @@ void load_client_textures(void)
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
 
-Client::Client(int p, std::string address, registry& reg): port_(p), client_(8080, address, std::ref(lastmsg), std::ref(mtx)),  _reg(reg)
+Client::Client(int p, std::string address, registry& reg): port_(p), client_(p, address, std::ref(lastmsg), std::ref(mtx)),  _reg(reg)
 {
     reg.collisions_active = false;
     reg.logic_active = false;
@@ -78,6 +78,10 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities()
 void Client::sendPlayerInput()
 {
     component::controllable &con = _reg.get_components<component::controllable>()[player_entity_id].value();
+
+    if (!con.left && !con.right && !con.up && !con.down)
+        return;
+
     MoveResponse pos;
 
     pos.type = 0x24;
