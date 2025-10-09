@@ -43,6 +43,7 @@ void registry::register_all_systems() {
     register_components<component::logic>();
     register_components<component::audio>();
     register_components<component::name>();
+    register_components<component::unique_id>();
 
     add_system(
         [this, &controllables = this->get_components<component::controllable>(),

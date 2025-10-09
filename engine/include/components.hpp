@@ -41,6 +41,8 @@
 #include "entity.hpp"
 #include "registry.hpp"
 
+extern int unique_ids;
+
 namespace component {
     /**
      * @brief The position component, with an x and y position
@@ -343,6 +345,12 @@ namespace component {
     typedef struct audio_s {
         std::shared_ptr<sf::Music> audio;
     } audio;
+
+    /**
+     * @brief The unique_id component, defined by an int. It lets you give a unique id to each entity
+     * 
+     */
+    typedef int unique_id;
 } // namespace component
 
 #endif
