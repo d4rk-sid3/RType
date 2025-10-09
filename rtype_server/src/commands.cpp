@@ -30,7 +30,7 @@ std::vector<int8_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& p
     buffer.emplace_back(pos.enemy_type & 0xFF);
 
     buffer.emplace_back((pos.position.x >> 8) & 0xFF);
-    buffer.emplace_back(pos.position.x &0xFF);
+    buffer.emplace_back(pos.position.x & 0xFF);
 
     buffer.emplace_back((pos.position.y >> 8) & 0xFF);
     buffer.emplace_back(pos.position.y & 0xFF);

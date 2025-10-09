@@ -25,19 +25,25 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
         throw std::runtime_error("Invalid message type !");
     }
 
-    if (buffer.size() < 8) {
+    if (buffer.size() < 9) {
         throw std::runtime_error("Not enough data in buffer to decode EnemyMovedResponse");
     }
 
+    auto toInt16 = [](int8_t high, int8_t low) -> int16_t {
+        return static_cast<int16_t>(
+            (static_cast<uint8_t>(high) << 8) | static_cast<uint8_t>(low)
+        );
+    };
+    
     pos.type = buffer[0];
-    pos.enemy_id = (buffer[1] << 8) | buffer[2];
-    pos.enemy_type = static_cast<EnemyType>((buffer[3] << 8) | buffer[4]);
-    pos.position.x = (buffer[5] << 8) | buffer[6];
-    pos.position.y = (buffer[7] << 8) | buffer[8];
+    pos.enemy_id = toInt16(buffer[1], buffer[2]);
+    pos.enemy_type = static_cast<EnemyType>(toInt16(buffer[3], buffer[4]));
+    pos.position.x = toInt16(buffer[5], buffer[6]);
+    pos.position.y = toInt16(buffer[7], buffer[8]);
 
-    std::cout << "Enemy_Type: "  << static_cast<int>(pos.enemy_type) << " ";
-    std::cout << "Enemy_Pos_x: "  << static_cast<double>(pos.position.x) << " ";
-    std::cout << "Enemy_Pos_y: "  << static_cast<double>(pos.position.y) << std::endl;
+    std::cout << "Enemy_Type: " << static_cast<int>(pos.enemy_type) << " ";
+    std::cout << "Enemy_Pos_x: " << pos.position.x << " ";
+    std::cout << "Enemy_Pos_y: " << pos.position.y << std::endl;
 
     buffer.erase(buffer.begin(), buffer.begin() + 9);
     return pos;
