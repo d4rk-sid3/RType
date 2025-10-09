@@ -10,57 +10,61 @@
 
 TokenManager* TokenManager::s_pInstance = nullptr;
 UserManager* UserManager::s_pInstance = nullptr;
+DatabaseManager* DatabaseManager::s_pInstance = nullptr;
 
 int main() {
-    // === 2. Création d'une clé serveur (32 bytes aléatoires) ===
-    uint8_t *server_key;
+    try {
+        DatabaseManager::Instance()->open("game.db");
+        DatabaseManager::Instance()->initialize();
+        DatabaseManager::Instance()->generateServerKey();
 
-    char *secret_key = getenv("SERVER_SECRET_KEY");
+        // === 4. Création de quelques utilisateurs ===
+        std::cout << "\n=== Création d'utilisateurs ===" << std::endl;
+        // UserManager::Instance()->createUser("Alice", "password123", DatabaseManager::Instance()->getDB());
+        // UserManager::Instance()->createUser("Bob", "secret456", DatabaseManager::Instance()->getDB());
+        UserManager::Instance()->loadAllUsers(DatabaseManager::Instance()->getDB());
+        UserManager::Instance()->displayUsers();
+        // === 5. Test d’authentification ===
+        std::cout << "\n=== Test d'authentification ===" << std::endl;
 
-    if (secret_key != nullptr) {
-        std::cout << "PATH environment variable: " << secret_key << std::endl;
-    } else {
-        std::cout << "PATH environment variable not found." << std::endl;
-        exit(84);
-    }
-    server_key = reinterpret_cast<uint8_t*>(secret_key);
+        // ✅ Authentification réussie
+        if (UserManager::Instance()->authenticate("Alice", "password123", DatabaseManager::Instance()->getServerKey())) {
+            std::cout << "✅ Alice authentifiée avec succès !" << std::endl;
 
-    // === 4. Création de users ===
-    UserManager::Instance()->createUser("Alice", "password123");
-    UserManager::Instance()->createUser("Bob", "secret456");
-
-    std::cout << "=== Test authentification ===" << std::endl;
-
-    // === 5. Authentification avec mot de passe correct ===
-    if (UserManager::Instance()->authenticate("Alice", "password123", server_key)) {
-        std::cout << "Alice authenticated successfully!" << std::endl;
-
-        // Affichage tokens
-        auto aliceOpt = UserManager::Instance()->getUserByUsername("Alice");
-        if (aliceOpt) {
-            User& alice = aliceOpt.value().get();   // récupère la référence réelle
-            std::cout << "Auth token (hex): " << alice.getAuthTokenHex() << std::endl;
+            auto aliceOpt = UserManager::Instance()->getUserByUsername("Alice");
+            if (aliceOpt) {
+                User& alice = aliceOpt.value().get();
+                std::cout << "Auth token (hex): " << alice.getAuthTokenHex() << std::endl;
+            }
+        } else {
+            std::cout << "❌ Échec d'authentification pour Alice !" << std::endl;
         }
-    } else {
-        std::cout << "Alice failed authentication!" << std::endl;
-    }
 
-    // === 6. Authentification avec mot de passe incorrect ===
-    if (UserManager::Instance()->authenticate("Bob", "wrongpass", server_key)) {
-        std::cout << "Bob authenticated successfully!" << std::endl;
-    } else {
-        std::cout << "Bob failed authentication!" << std::endl;
-    }
-
-    // === 7. Authentification avec mot de passe correct ===
-    if (UserManager::Instance()->authenticate("Bob", "secret456", server_key)) {
-        std::cout << "Bob authenticated successfully!" << std::endl;
-        auto bobOpt = UserManager::Instance()->getUserByUsername("Bob");
-        if (bobOpt) {
-            User& bob = bobOpt.value().get();
-            std::cout << "Auth token (hex): " << bob.getAuthTokenHex() << std::endl;
-            //std::cout << "Session token (hex): " << bob->getSessionTokenHex() << std::endl;
+        // ❌ Mauvais mot de passe
+        if (UserManager::Instance()->authenticate("Bob", "wrongpass", DatabaseManager::Instance()->getServerKey())) {
+            std::cout << "✅ Bob authentifié (erreur attendue !)" << std::endl;
+        } else {
+            std::cout << "❌ Bob échec d'authentification (comme prévu)" << std::endl;
         }
+
+        // ✅ Authentification correcte pour Bob
+        if (UserManager::Instance()->authenticate("Bob", "secret456", DatabaseManager::Instance()->getServerKey())) {
+            std::cout << "✅ Bob authentifié avec succès !" << std::endl;
+
+            auto bobOpt = UserManager::Instance()->getUserByUsername("Bob");
+            if (bobOpt) {
+                User& bob = bobOpt.value().get();
+                std::cout << "Auth token (hex): " << bob.getAuthTokenHex() << std::endl;
+            }
+        }
+
+        // // === 6. Fermeture propre ===
+        DatabaseManager::Instance()->close();
+        std::cout << "\n🧹 Fin du test — base fermée proprement." << std::endl;
+
+    } catch (const std::exception& e) {
+        std::cerr << "Erreur critique : " << e.what() << std::endl;
+        return 84;
     }
 
     return 0;

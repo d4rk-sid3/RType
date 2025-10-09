@@ -371,7 +371,7 @@ class User {
         std::shared_ptr<IToken> _auth_token;
         std::shared_ptr<IToken> _session_token;
         std::time_t _last_login_at = 0;
-        std::string _client_hash;
+        std::string _client_hash = "";
         UserStats _stats;
 };
 
@@ -401,7 +401,7 @@ class UserManager {
                 throw std::runtime_error("username already exists");
             size_t id = _next_id++;
             User u(id, username, plain_password);
-            _users.emplace(id, std::move(u));
+            _users.emplace(id, u);
             _username_index[username] = id;
             u.save(db);
             return id;
@@ -497,6 +497,15 @@ class UserManager {
             for (const auto& kv : _users)
                 out.push_back(kv.second);
             return out;
+        }
+
+        void displayUsers() {
+            for (const auto& kv : _users) {
+                std::cout << "----------------------------------" << std::endl;
+                std::cout << "User n° " << kv.second.getId() << std::endl;
+                std::cout << "Username : " << kv.second.getUsername() << std::endl;
+                std::cout << "Password : " << kv.second.getPasswordHash() << std::endl;
+            }
         }
 
         void generateAuthTokenAssign(size_t id, const uint8_t server_key[32])
@@ -598,8 +607,8 @@ class UserManager {
                 user.setNbGamesPlayed(nb_games_played);
                 user.setNbGamesWon(nb_games_won);
 
-                _users.emplace(user.getId(), std::move(user));
                 _username_index[user.getUsername()] = user.getId();
+                _users.emplace(user.getId(), std::move(user));
             }
             sqlite3_finalize(stmt);
             return;
@@ -608,9 +617,11 @@ class UserManager {
 
 class DatabaseManager {
     public:
-        static DatabaseManager& getInstance() {
-            static DatabaseManager instance;
-            return instance;
+        static DatabaseManager* Instance() {
+            if (s_pInstance == nullptr) {
+                s_pInstance = new DatabaseManager();
+            }
+            return s_pInstance;
         }
         DatabaseManager(const DatabaseManager&) = delete;
         DatabaseManager& operator=(const DatabaseManager&) = delete;
@@ -684,8 +695,9 @@ class DatabaseManager {
         sqlite3* _db = nullptr;
         bool _isOpen = false;
         uint8_t *_serverKey;
+        static DatabaseManager* s_pInstance;
 
-        DatabaseManager() = default;    
+        DatabaseManager(){};    
         ~DatabaseManager() {
             close();
         }
