@@ -32,11 +32,13 @@ void Server::initializeGame(void)
     factory.make_background();
     player1_entity_id = factory.make_entity("player1");
     player2_entity_id = factory.make_entity("player2");
+    factory.make_ceiling();
+    factory.make_floor();
     
     auto &pos1 = reg.get_components<component::position>()[player1_entity_id].value();
-    auto &pos2 = reg.get_components<component::position>()[player1_entity_id].value();
+    auto &pos2 = reg.get_components<component::position>()[player2_entity_id].value();
     pos1.x = 50;
-    pos1.y = 50;
+    pos1.y = 250;
 
     pos2.x = 50;
     pos2.y = 150;

@@ -42,6 +42,14 @@ entity Factory::make_entity(const std::string& type) {
         return make_player_missile();
     else if (type == "enemy_missile")
         return make_enemy_missile();
+    else if (type == "floor")
+        return make_floor();
+    else if (type == "ceiling")
+        return make_ceiling();
+    else if (type == "hit_effect")
+        return make_hit_effect();
+    else if (type == "explosion")
+        return make_explosion();
 
     return entity(-1);
 }

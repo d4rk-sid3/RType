@@ -29,8 +29,6 @@ void load_client_textures(void)
 
 Client::Client(int p, std::string address, registry& reg): port_(p), client_(p, address, std::ref(lastmsg), std::ref(mtx)),  _reg(reg)
 {
-    reg.collisions_active = false;
-    reg.logic_active = false;
     load_client_textures();
     //initMenu();
     initGame();
@@ -77,6 +75,8 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities()
 
 void Client::sendPlayerInput()
 {
+    if (player_entity_id == -1)
+        return;
     component::controllable &con = _reg.get_components<component::controllable>()[player_entity_id].value();
 
     if (!con.left && !con.right && !con.up && !con.down && !con.space)
@@ -125,32 +125,55 @@ std::string getKey(int value)
 
 void Client::runLevel(double delta)
 {
-    // Factory fac(_reg);
-
-    // new_vec = recupAllEntities();
-
-    // for (auto it = new_vec.begin(); it != new_vec.end();) {
-    //     auto &entity = *it;
-    //     if (isInside(old, entity.enemy_id)) {
-    //         auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value(); // TODO: get p 
-    //         pos.x = entity.position.x;
-    //         pos.y = entity.position.y;
-    //     } else {
-    //         ids_assoc[entity.enemy_id] = fac.make_entity(getKey(entity.enemy_type));
-    //         auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
-    //         pos.x = entity.position.x;
-    //         pos.y = entity.position.y;
-    //     }
-    // }
-
-    // for (auto it = old.begin(); it != old.end();) {
-    //     auto &entity = *it;
-    //     if (!isInside(new_vec, entity.enemy_id)) {
-    //         _reg.kill_entity((class entity)(ids_assoc[entity.enemy_id]));
-    //     }
-    // }
-
+    static bool first_call = true;
+    Factory fac(_reg);
     sendPlayerInput();
+
+    new_vec = recupAllEntities();
+    printf("Entities received: %d\n", new_vec.size());
+    if (new_vec.size() == 0) {
+        return;
+    }
+
+    for (auto it = new_vec.begin(); it != new_vec.end(); it++) {
+        auto &entity = *it;
+        printf("Current entity real id: %d\n", ids_assoc[entity.enemy_id]);
+        if (first_call) {
+            if (getKey(entity.enemy_type) == "player1") {
+                old.push_back(entity);
+                ids_assoc[entity.enemy_id] = fac.make_entity(getKey(entity.enemy_type));
+                player_entity_id = ids_assoc[entity.enemy_id];
+                printf("Player received and created\n");
+            }
+        }
+        if (isInside(old, entity.enemy_id)) {
+            printf("Entity %d already exists. Updating\n", entity.enemy_id);
+            auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
+            printf("Update successful\n");
+            pos.x = entity.position.x;
+            pos.y = entity.position.y;
+        } else {
+            printf("Entity %d does not exist. Creating\n", entity.enemy_id);
+            ids_assoc[entity.enemy_id] = fac.make_entity(getKey(entity.enemy_type));
+            auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
+            pos.x = entity.position.x;
+            pos.y = entity.position.y;
+        }
+    }
+    
+    for (auto it = old.begin(); it != old.end(); it++) {
+        auto &entity = *it;
+        printf("Current entity real id: %d\n", ids_assoc[entity.enemy_id]);
+        if (!isInside(new_vec, entity.enemy_id)) {
+            printf("Entity %d does not exist anymore. Killing\n", entity.enemy_id);
+            _reg.kill_entity((class entity)(ids_assoc[entity.enemy_id]));
+            printf("Entity %d killed\n", entity.enemy_id);
+        }
+    }
+
+
+    old = new_vec;
+    first_call = false;
 }
 
 Client::~Client()
@@ -194,11 +217,11 @@ void Client::initGame()
     Factory factory(_reg);
     factory.make_background();
 
-    player_entity_id = (int)factory.make_entity("player1");
+    //player_entity_id = (int)factory.make_entity("player1");
 
-    auto &pos = _reg.get_components<component::position>()[player_entity_id].value();
-    pos.x = 50;
-    pos.y = 150;
+    // auto &pos = _reg.get_components<component::position>()[player_entity_id].value();
+    // pos.x = 50;
+    // pos.y = 150;
     factory.make_game_background_music();
     // factory.make_ceiling();
     // factory.make_floor();

@@ -12,12 +12,12 @@ std::map<std::string, EnemyType> type_map = {
     {"player2", TYPE_2},
     {"red_trooper", TYPE_3},
     {"walker", TYPE_4},
-    {"player_missile", TYPE_4},
-    {"enemy_missile", TYPE_4},
-    {"explosion", TYPE_4},
-    {"hit_effect", TYPE_4},
-    {"floor", TYPE_4},
-    {"ceiling", TYPE_4}
+    {"player_missile", TYPE_5},
+    {"enemy_missile", TYPE_6},
+    {"explosion", TYPE_7},
+    {"hit_effect", TYPE_8},
+    {"floor", TYPE_9},
+    {"ceiling", TYPE_10}
 };
 
 NetworkManager::NetworkManager(int port, std::string address, std::vector<int8_t> &lastmsg_, std::mutex& mtx_): 

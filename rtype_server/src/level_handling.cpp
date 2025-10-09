@@ -47,7 +47,7 @@ void Server::loadLevel(const std::string &path)
 
 void Server::logGameEntities()
 {
-    std::vector<std::string> special_entities = {"background"};
+    std::vector<std::string> special_entities = {"background", "menu_background_music"};
 
     counter = 0;
     result.clear();
@@ -65,8 +65,10 @@ void Server::logGameEntities()
 
             // Clean up out of screen entities
             if (pos.x < -200 || pos.x > 1000) {
-                reg.kill_entity(entity(i));
-                continue;
+                if (name_._name != "ceiling" && name_._name != "floor") {
+                    reg.kill_entity(entity(i));
+                    continue;
+                }
             }
 
             ++counter;
@@ -74,9 +76,10 @@ void Server::logGameEntities()
             vector<int8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(i), type,
                 {static_cast<int16_t>(pos.x), static_cast<int16_t>(pos.y)}});
 
-            // std::cout << "Enemy_Type: "  << (type) << " ";
-            // std::cout << "Enemy_Pos_x: "  << static_cast<int>(pos.x) << " ";
-            // std::cout << "Enemy_Pos_y: "  << static_cast<int>(pos.y) << std::endl;
+            std::cout << "Enemy_Type: "  << (type) << " ";
+            std::cout << "Enemy_Name: "  << (name_._name) << " ";
+            std::cout << "Enemy_Pos_x: "  << static_cast<int>(pos.x) << " ";
+            std::cout << "Enemy_Pos_y: "  << static_cast<int>(pos.y) << std::endl;
 
             result.insert(result.end(), tmp.begin(), tmp.end());
         } catch (...) {

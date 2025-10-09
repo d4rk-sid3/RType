@@ -4,6 +4,9 @@ int main(int ac, char **av) {
     sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type") ;
     registry reg(win);
 
+    reg.logic_active = false;
+    reg.collisions_active = false;
+
     sf::Event event;
     sf::Clock frameClock;
     Client client(std::stoi(av[1]), av[2], reg);
