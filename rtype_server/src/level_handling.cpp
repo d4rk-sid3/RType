@@ -160,7 +160,7 @@ void Server::runLevel(double delta)
 
     if (!result.empty()) {
         // std::cout << "[SERVER] sending " << result.size() << " bytes" << std::endl;
-        server_.send(result, result.size(), server_.getLastSender());
+        server_.send_to_client(result, result.size(), server_.getLastSender());
     }
     
     // for (auto it = entities.begin(); it != entities.end();) {

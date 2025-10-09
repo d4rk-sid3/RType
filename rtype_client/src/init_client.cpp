@@ -110,7 +110,7 @@ void Client::sendPlayerInput()
         std::cout << static_cast<int>(a) << " " ;
 
     }
-    client_.send(buff, buff.size(), client_.getServerendpoint());
+    client_.send_to_server(buff, buff.size());
     
 }
 

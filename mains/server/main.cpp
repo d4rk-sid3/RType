@@ -1,7 +1,7 @@
 #include "server.hpp"
 
 int main(int ac, char **av) {
-    sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type") ;
+    sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server");
     registry reg(win);
 
     reg.control_active = false;

@@ -15,7 +15,7 @@ int main(int ac, char **av) {
 
     std::vector<int8_t> msg(1, 0x5);   
 
-    c.send(msg, msg.size(), c.getServerendpoint());
+    c.send_to_server(msg, msg.size());
 
     std::thread t([&c]() { c.run(); });
 
