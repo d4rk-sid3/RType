@@ -14,6 +14,7 @@
 #include "Factory.hpp"
 #include "registry.hpp"
 #include "Factory.hpp"
+#include "entity.hpp"
 #include <map>
 
 #define WINDOW_WIDTH 738
@@ -52,8 +53,8 @@ class Client {
     std::unordered_map<size_t, size_t> ids_assoc;
     std::vector<int8_t> lastmsg;
 
-    // std::vector<...> old;
-    // std::vector<...> new;
+    std::vector<EnemyMovedResponse> old;
+    std::vector<EnemyMovedResponse> new_vec;
 
     public:
     state_t state = GAME;

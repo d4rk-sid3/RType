@@ -4,6 +4,8 @@ int main(int ac, char **av) {
     sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type") ;
     registry reg(win);
 
+    reg.control_active = false;
+
     sf::Event event;
     sf::Clock frameClock;
     Server server(std::stoi(av[1]), reg);

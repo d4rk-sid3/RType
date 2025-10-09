@@ -36,14 +36,14 @@ Client::Client(int p, std::string address, registry& reg): port_(p), client_(p, 
     initGame();
 }
 
-// ... *isInside(std::vector<...> vec, size_t id)
-// {
-//     for (auto it = vec.begin(); it != vec.end(); it++) {
-//         if (it->entity_id.getId() == id)
-//             return true;
-//     }
-//     return false;
-// }
+bool isInside(std::vector<EnemyMovedResponse> vec, size_t id)
+{
+    for (auto it = vec.begin(); it != vec.end(); it++) {
+        if (it->enemy_id == id)
+            return true;
+    }
+    return false;
+}
 
 std::vector<EnemyMovedResponse> Client::recupAllEntities()
 {
@@ -79,7 +79,7 @@ void Client::sendPlayerInput()
 {
     component::controllable &con = _reg.get_components<component::controllable>()[player_entity_id].value();
 
-    if (!con.left && !con.right && !con.up && !con.down)
+    if (!con.left && !con.right && !con.up && !con.down && !con.space)
         return;
 
     MoveResponse pos;
@@ -92,10 +92,16 @@ void Client::sendPlayerInput()
     } else if (con.right) {
         pos.direction = RIGHT;
     } else if (con.up) {
+        printf("UP\n");
         pos.direction = UP;
     } else if (con.down) {
+        printf("DOWN\n");
         pos.direction = DOWN;
+    } else if (con.space) {
+        printf("SHOOTING\n");
+        pos.direction = SPACE;
     }
+
     std::vector<int8_t> buff = encodeMoveResponse(pos);
 
     std::cout << "BUFF:" << " ";
@@ -108,23 +114,30 @@ void Client::sendPlayerInput()
     
 }
 
+std::string getKey(int value)
+{
+    for (const auto& pair : type_map) {
+        if (pair.second == value)
+            return pair.first;
+    }
+    return "";
+}
+
 void Client::runLevel(double delta)
 {
-    recupAllEntities();
-    sendPlayerInput();
     // Factory fac(_reg);
-    // getNewEntities();
 
-    // for (auto it = new.begin(); it != new.end();) {
+    // new_vec = recupAllEntities();
+
+    // for (auto it = new_vec.begin(); it != new_vec.end();) {
     //     auto &entity = *it;
-
-    //     if (auto old = isInside(old, entity.entity_id.getId())) {
-    //         auto &pos = _reg.get_components<component::position>()(ids_assoc[entity.entity_id]).value(); // TODO: get p 
+    //     if (isInside(old, entity.enemy_id)) {
+    //         auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value(); // TODO: get p 
     //         pos.x = entity.position.x;
     //         pos.y = entity.position.y;
     //     } else {
-    //         ids_assoc[entity.entity_id] = fac.make_entity(entity.type);
-    //         auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.entity_id]].value();
+    //         ids_assoc[entity.enemy_id] = fac.make_entity(getKey(entity.enemy_type));
+    //         auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
     //         pos.x = entity.position.x;
     //         pos.y = entity.position.y;
     //     }
@@ -132,12 +145,12 @@ void Client::runLevel(double delta)
 
     // for (auto it = old.begin(); it != old.end();) {
     //     auto &entity = *it;
-    //     if (!isInside(new, entity.entity_id.getId())) {
-    //         _reg.kill_entity(entity.entity_id.getId());
+    //     if (!isInside(new_vec, entity.enemy_id)) {
+    //         _reg.kill_entity((class entity)(ids_assoc[entity.enemy_id]));
     //     }
     // }
 
-    // sendPlayerInput();
+    sendPlayerInput();
 }
 
 Client::~Client()
