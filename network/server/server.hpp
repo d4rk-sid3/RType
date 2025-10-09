@@ -602,7 +602,7 @@ class UserManager {
                 _username_index[user.getUsername()] = user.getId();
             }
             sqlite3_finalize(stmt);
-            return;
+            return;s
         }
 
 };
