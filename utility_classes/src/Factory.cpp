@@ -22,6 +22,8 @@
 #include "../../rtype_server/include/server.hpp"
 #include "logic_functions.hpp"
 
+int unique_ids = 0;
+
 #define PLAYER_MISSILE_SPEED 500.0
 #define ENEMY_MISSILE_SPEED 5
 #define BACKGROUND_SPEED 50
@@ -80,6 +82,9 @@ entity Factory::make_player1() {
 
     auto &entity_name = reg.add_component<component::name>(player_id, component::name());
     entity_name._name = "player1";
+    
+    reg.add_component<component::unique_id>(player_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return player_id;
 }
 
@@ -109,6 +114,9 @@ entity Factory::make_player2() {
 
     auto &entity_name = reg.add_component<component::name>(player_id, component::name());
     entity_name._name = "player2";
+    
+    reg.add_component<component::unique_id>(player_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return player_id;
 }
 
@@ -140,6 +148,9 @@ entity Factory::make_player_missile() {
 
     auto &entity_name = reg.add_component<component::name>(missile_id, component::name());
     entity_name._name = "player_missile";
+    
+    reg.add_component<component::unique_id>(missile_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return missile_id;
 }
 
@@ -174,6 +185,9 @@ entity Factory::make_enemy_missile() {
 
     auto &entity_name = reg.add_component<component::name>(missile_id, component::name());
     entity_name._name = "enemy_missile";
+    
+    reg.add_component<component::unique_id>(missile_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return missile_id;
 }
 
@@ -209,6 +223,9 @@ entity Factory::make_red_trooper() {
 
     auto &entity_name = reg.add_component<component::name>(troper_id, component::name());
     entity_name._name = "red_trooper";
+    
+    reg.add_component<component::unique_id>(troper_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return troper_id;
 }
 
@@ -244,6 +261,9 @@ entity Factory::make_walker() {
 
     auto &entity_name = reg.add_component<component::name>(walker_id, component::name());
     entity_name._name = "walker";
+    
+    reg.add_component<component::unique_id>(walker_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return walker_id;
 }
 
@@ -269,6 +289,9 @@ entity Factory::make_explosion() {
 
     auto &entity_name = reg.add_component<component::name>(explosion_id, component::name());
     entity_name._name = "explosion";
+    
+    reg.add_component<component::unique_id>(explosion_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return explosion_id;
 }
 
@@ -293,6 +316,9 @@ entity Factory::make_hit_effect() {
 
     auto &entity_name = reg.add_component<component::name>(hit_effect_id, component::name());
     entity_name._name = "hit_effect";
+    
+    reg.add_component<component::unique_id>(hit_effect_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return hit_effect_id;
 }
 
@@ -317,6 +343,9 @@ entity Factory::make_ceiling() {
 
     auto &entity_name = reg.add_component<component::name>(ceiling_id, component::name());
     entity_name._name = "ceiling";
+    
+    reg.add_component<component::unique_id>(ceiling_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return ceiling_id;
 }
 
@@ -342,6 +371,9 @@ entity Factory::make_floor() {
 
     auto &entity_name = reg.add_component<component::name>(floor_id, component::name());
     entity_name._name = "floor";
+    
+    reg.add_component<component::unique_id>(floor_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return floor_id;
 }
 
@@ -357,6 +389,9 @@ entity Factory::make_wall() {
 
     auto &entity_name = reg.add_component<component::name>(wall_id, component::name());
     entity_name._name = "wall";
+    
+    reg.add_component<component::unique_id>(wall_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return wall_id;
 }
 
@@ -377,6 +412,9 @@ entity Factory::make_background() {
 
     auto &entity_name = reg.add_component<component::name>(background_id, component::name());
     entity_name._name = "background";
+    
+    reg.add_component<component::unique_id>(background_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return background_id;
 }
 
@@ -395,6 +433,9 @@ entity Factory::make_title() {
 
     auto &entity_name = reg.add_component<component::name>(title_id, component::name());
     entity_name._name = "title";
+    
+    reg.add_component<component::unique_id>(title_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return title_id;
 }
 
@@ -418,6 +459,9 @@ entity Factory::make_start_text() {
 
     auto &entity_name = reg.add_component<component::name>(text_id, component::name());
     entity_name._name = "start_text";
+    
+    reg.add_component<component::unique_id>(text_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return text_id;
 }
 
@@ -432,6 +476,9 @@ entity Factory::make_menu_background_music() {
 
     auto &entity_name = reg.add_component<component::name>(music_id, component::name());
     entity_name._name = "menu_background_music";
+    
+    reg.add_component<component::unique_id>(music_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return music_id;
 }
 
@@ -446,6 +493,9 @@ entity Factory::make_game_background_music() {
 
     auto &entity_name = reg.add_component<component::name>(music_id, component::name());
     entity_name._name = "game_background_music";
+    
+    reg.add_component<component::unique_id>(music_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return music_id;
 }
 
@@ -466,6 +516,9 @@ entity Factory::make_fade_in_rect() {
 
     auto &entity_name = reg.add_component<component::name>(fade_id, component::name());
     entity_name._name = "fade_in_rect";
+    
+    reg.add_component<component::unique_id>(fade_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return fade_id;
 }
 
@@ -486,6 +539,9 @@ entity Factory::make_fade_out_rect() {
 
     auto &entity_name = reg.add_component<component::name>(fade_id, component::name());
     entity_name._name = "fade_out_rect";
+    
+    reg.add_component<component::unique_id>(fade_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return fade_id;
 }
 
@@ -510,5 +566,7 @@ entity Factory::make_boss()
         boss_id, component::logic{boss_logic}
     );
 
+    reg.add_component<component::unique_id>(boss_id, (component::unique_id)unique_ids);
+    unique_ids++;
     return boss_id;
 }

@@ -57,6 +57,7 @@ void Server::logGameEntities()
             position &pos = reg.get_components<component::position>()[entity(i)].value();
             name &name_ = reg.get_components<component::name>()[entity(i)].value();
             EnemyType type = type_map[name_._name];
+            unique_id &uid = reg.get_components<component::unique_id>()[entity(i)].value();
 
             // Ignore special entities
             if (std::find(special_entities.begin(), special_entities.end(), name_._name) != special_entities.end()) {
@@ -73,7 +74,7 @@ void Server::logGameEntities()
 
             ++counter;
 
-            vector<int8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(i), type,
+            vector<int8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(uid), type,
                 {static_cast<int16_t>(pos.x), static_cast<int16_t>(pos.y)}});
 
             std::cout << "Enemy_Type: "  << (type) << " ";
