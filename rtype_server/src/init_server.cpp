@@ -49,7 +49,7 @@ Server::Server(int p, registry &regis) : server_(p, std::ref(tmp), std::ref(mtx)
 {
     load_textures();
     initializeGame();
-    // loadLevel("assets/levels/test.txt");
+    loadLevel("assets/levels/test.txt");
 }
 
 Server::~Server()

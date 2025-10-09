@@ -20,6 +20,7 @@ std::map<std::string, EnemyType> type_map = {
     {"ceiling", TYPE_10}
 };
 
+
 NetworkManager::NetworkManager(int port, std::string address, std::vector<int8_t> &lastmsg_, std::mutex& mtx_): 
     socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 0)),
     server_endpoint_(asio::ip::udp::endpoint(asio::ip::make_address(address), port)),
@@ -29,6 +30,7 @@ NetworkManager::NetworkManager(int port, std::string address, std::vector<int8_t
 
     receive();
 }
+
 
 NetworkManager::NetworkManager(int port, std::vector<int8_t> &lastmsg_, std::mutex& mtx_) :
     socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)),
@@ -102,6 +104,7 @@ void NetworkManager::send(const std::vector<int8_t> &msg, size_t size, const asi
         }
     );
 }
+
 
 asio::ip::udp::endpoint NetworkManager::getLastSender() const
 {

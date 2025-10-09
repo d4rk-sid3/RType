@@ -21,8 +21,8 @@ void load_client_textures(void)
     ResourceManager::Instance().load("assets/sprites/effects/Explosion.png", "explosion", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/effects/hit_effect.gif", "hit_effect", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/background/background.jpg", "background", TEXTURE);
-    ResourceManager::Instance().load("assets/sprites/background/black.png", "black", TEXTURE);
     ResourceManager::Instance().load("assets/sprites/background/wall1_shadow.png", "ceiling", TEXTURE);
+    ResourceManager::Instance().load("assets/sprites/enemies/boss.gif", "boss", TEXTURE);
 
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
@@ -137,7 +137,6 @@ void Client::runLevel(double delta)
 
     for (auto it = new_vec.begin(); it != new_vec.end(); it++) {
         auto &entity = *it;
-        printf("Current entity real id: %d\n", ids_assoc[entity.enemy_id]);
         if (first_call) {
             if (getKey(entity.enemy_type) == "player1") {
                 old.push_back(entity);
@@ -154,6 +153,7 @@ void Client::runLevel(double delta)
             pos.y = entity.position.y;
         } else {
             printf("Entity %d does not exist. Creating\n", entity.enemy_id);
+            printf("Creating a : %s of type: %d\n", (getKey(entity.enemy_type)).c_str(), entity.enemy_type);
             ids_assoc[entity.enemy_id] = fac.make_entity(getKey(entity.enemy_type));
             auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
             pos.x = entity.position.x;
