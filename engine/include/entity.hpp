@@ -18,7 +18,7 @@
  */
 
 #ifndef ENTITY_HPP
-    #define ENTITY_HPP
+#define ENTITY_HPP
 
 /**
  * @file entity.hpp
@@ -49,6 +49,10 @@ class entity {
      */
     explicit entity(size_t new_id) {
         id = new_id;
+    }
+
+    entity() {
+        id = -1;
     }
 
     /**

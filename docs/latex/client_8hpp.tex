@@ -1,0 +1,124 @@
+\doxysection{/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+client/include/client.hpp File Reference}
+\hypertarget{client_8hpp}{}\label{client_8hpp}\index{/home/jaggie/epitech\_projects/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/rtype\_client/include/client.hpp@{/home/jaggie/epitech\_projects/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/rtype\_client/include/client.hpp}}
+{\ttfamily \#include "{}../../utility\+\_\+classes/include/\+Network.\+hpp"{}}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include "{}registry.\+hpp"{}}\newline
+{\ttfamily \#include "{}Factory.\+hpp"{}}\newline
+Include dependency graph for client.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}}
+\item 
+struct \mbox{\hyperlink{structmenu__info__s}{menu\+\_\+info\+\_\+s}}
+\item 
+class \mbox{\hyperlink{classClient}{Client}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{client_8hpp_a498d9f026138406895e9a34b504ac6a6}{WINDOW\+\_\+\+WIDTH}}~738
+\item 
+\#define \mbox{\hyperlink{client_8hpp_a5473cf64fa979b48335079c99532e243}{WINDOW\+\_\+\+HEIGHT}}~432
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\+\_\+info\+\_\+t}}
+\item 
+typedef struct \mbox{\hyperlink{structmenu__info__s}{menu\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac}{menu\+\_\+info\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} \{ \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721}{MENU}}
+, \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c}{TRANSITION}}
+, \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}}
+, \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00}{GAME\+\_\+\+OVER}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{client_8hpp_a45a5fb16434b9906d8110a57b0ca5b4d}{player\+\_\+entity\+\_\+id}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{client_8hpp_a5473cf64fa979b48335079c99532e243}\label{client_8hpp_a5473cf64fa979b48335079c99532e243} 
+\index{client.hpp@{client.hpp}!WINDOW\_HEIGHT@{WINDOW\_HEIGHT}}
+\index{WINDOW\_HEIGHT@{WINDOW\_HEIGHT}!client.hpp@{client.hpp}}
+\doxysubsubsection{\texorpdfstring{WINDOW\_HEIGHT}{WINDOW\_HEIGHT}}
+{\footnotesize\ttfamily \#define WINDOW\+\_\+\+HEIGHT~432}
+
+\Hypertarget{client_8hpp_a498d9f026138406895e9a34b504ac6a6}\label{client_8hpp_a498d9f026138406895e9a34b504ac6a6} 
+\index{client.hpp@{client.hpp}!WINDOW\_WIDTH@{WINDOW\_WIDTH}}
+\index{WINDOW\_WIDTH@{WINDOW\_WIDTH}!client.hpp@{client.hpp}}
+\doxysubsubsection{\texorpdfstring{WINDOW\_WIDTH}{WINDOW\_WIDTH}}
+{\footnotesize\ttfamily \#define WINDOW\+\_\+\+WIDTH~738}
+
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}\label{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c} 
+\index{client.hpp@{client.hpp}!entity\_info\_t@{entity\_info\_t}}
+\index{entity\_info\_t@{entity\_info\_t}!client.hpp@{client.hpp}}
+\doxysubsubsection{\texorpdfstring{entity\_info\_t}{entity\_info\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\+\_\+info\+\_\+t}}}
+
+\Hypertarget{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac}\label{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac} 
+\index{client.hpp@{client.hpp}!menu\_info\_t@{menu\_info\_t}}
+\index{menu\_info\_t@{menu\_info\_t}!client.hpp@{client.hpp}}
+\doxysubsubsection{\texorpdfstring{menu\_info\_t}{menu\_info\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structmenu__info__s}{menu\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac}{menu\+\_\+info\+\_\+t}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}\label{client_8hpp_aa0aafed44fec19806d8f9ad834be1248} 
+\index{client.hpp@{client.hpp}!state\_t@{state\_t}}
+\index{state\_t@{state\_t}!client.hpp@{client.hpp}}
+\doxysubsubsection{\texorpdfstring{state\_t}{state\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MENU@{MENU}!client.hpp@{client.hpp}}\index{client.hpp@{client.hpp}!MENU@{MENU}}}\Hypertarget{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721}\label{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721} 
+MENU&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TRANSITION@{TRANSITION}!client.hpp@{client.hpp}}\index{client.hpp@{client.hpp}!TRANSITION@{TRANSITION}}}\Hypertarget{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c}\label{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c} 
+TRANSITION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GAME@{GAME}!client.hpp@{client.hpp}}\index{client.hpp@{client.hpp}!GAME@{GAME}}}\Hypertarget{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}\label{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84} 
+GAME&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GAME\_OVER@{GAME\_OVER}!client.hpp@{client.hpp}}\index{client.hpp@{client.hpp}!GAME\_OVER@{GAME\_OVER}}}\Hypertarget{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00}\label{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00} 
+GAME\+\_\+\+OVER&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{client_8hpp_a45a5fb16434b9906d8110a57b0ca5b4d}\label{client_8hpp_a45a5fb16434b9906d8110a57b0ca5b4d} 
+\index{client.hpp@{client.hpp}!player\_entity\_id@{player\_entity\_id}}
+\index{player\_entity\_id@{player\_entity\_id}!client.hpp@{client.hpp}}
+\doxysubsubsection{\texorpdfstring{player\_entity\_id}{player\_entity\_id}}
+{\footnotesize\ttfamily int player\+\_\+entity\+\_\+id = 0\hspace{0.3cm}{\ttfamily [inline]}}
+

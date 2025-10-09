@@ -14,7 +14,8 @@
 #include <vector>
 #include <cstring>
 #include <random>
-
+#include <fstream>
+#include <sqlite3.h>
 
 using Clock = std::chrono::steady_clock;
 
@@ -267,6 +268,7 @@ class UserStats {
 
 class User {
     public:
+        User() = default;
         User(size_t id, std::string username, std::string plain_password)
         : _id(id), _username(std::move(username)) 
         {
@@ -303,6 +305,14 @@ class User {
         void setClientHash(const std::string &client_hash) {
             _client_hash = client_hash;
         }
+        void setId(const size_t &id) {
+            _id = id;
+        }
+        void setPasswordHash(const std::string &password_hash) {
+            _password_hash = password_hash;
+        }
+        void setNbGamesPlayed(const int games_played) { _stats.setNbGamesPlayed(games_played);}
+        void setNbGamesWon(const int games_won) { _stats.setNbGamesWon(games_won); }
         const std::string getClientHash() { return _client_hash; }
         const std::shared_ptr<IToken> getAuthToken() { return _auth_token; }
         const std::shared_ptr<IToken> getSessionToken() { return _session_token; }
@@ -311,6 +321,48 @@ class User {
         const std::string& getPasswordHash() const { return _password_hash; }
         size_t getId() const { return _id; }
         void setLastLogin(const std::time_t time) {_last_login_at = time;}
+        void save(sqlite3* db) const {
+            const char* sql = R"(
+                INSERT INTO users (
+                    id, username, password_hash, auth_token, session_token,
+                    last_login, client_hash, nb_games_played, nb_games_won
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(id) DO UPDATE SET
+                    username = excluded.username,
+                    password_hash = excluded.password_hash,
+                    auth_token = excluded.auth_token,
+                    session_token = excluded.session_token,
+                    last_login = excluded.last_login,
+                    client_hash = excluded.client_hash,
+                    nb_games_played = excluded.nb_games_played,
+                    nb_games_won = excluded.nb_games_won;
+            )";
+        
+            sqlite3_stmt* stmt = nullptr;
+        
+            if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK)
+                throw std::runtime_error("Failed to prepare statement: " + std::string(sqlite3_errmsg(db)));
+        
+            int nb_games_played = _stats.getNbGamesPlayed();
+            int nb_games_won = _stats.getNbGamesWon();
+        
+            sqlite3_bind_int(stmt, 1, static_cast<int>(_id));
+            sqlite3_bind_text(stmt, 2, _username.c_str(), -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(stmt, 3, _password_hash.c_str(), -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(stmt, 4, _auth_token ? _auth_token->getHex().c_str() : "", -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(stmt, 5, _session_token ? _session_token->getHex().c_str() : "", -1, SQLITE_TRANSIENT);
+            sqlite3_bind_int64(stmt, 6, static_cast<sqlite3_int64>(_last_login_at));
+            sqlite3_bind_text(stmt, 7, _client_hash.c_str(), -1, SQLITE_TRANSIENT);
+            sqlite3_bind_int(stmt, 8, nb_games_played);
+            sqlite3_bind_int(stmt, 9, nb_games_won);
+        
+            if (sqlite3_step(stmt) != SQLITE_DONE) {
+                sqlite3_finalize(stmt);
+                throw std::runtime_error("Failed to execute statement: " + std::string(sqlite3_errmsg(db)));
+            }
+            sqlite3_finalize(stmt);
+        }
 
     private:
         size_t _id = 0;
@@ -321,7 +373,6 @@ class User {
         std::time_t _last_login_at = 0;
         std::string _client_hash;
         UserStats _stats;
-
 };
 
 class UserManager {
@@ -344,14 +395,15 @@ class UserManager {
         UserManager(const UserManager&) = delete;
         UserManager& operator=(const UserManager&) = delete;
 
-        size_t createUser(const std::string& username, const std::string& plain_password)
+        size_t createUser(const std::string& username, const std::string& plain_password, sqlite3 *db)
         {
             if (_username_index.count(username) != 0)
                 throw std::runtime_error("username already exists");
             size_t id = _next_id++;
             User u(id, username, plain_password);
-            _users.emplace(id, u);
+            _users.emplace(id, std::move(u));
             _username_index[username] = id;
+            u.save(db);
             return id;
         }
 
@@ -477,6 +529,80 @@ class UserManager {
             u.setLastLogin(std::time(nullptr));
             generateAuthTokenAssign(u.getId(), server_key);
             return true;
+        }
+
+        User load(sqlite3* db, size_t id) {
+            const char* sql = R"(
+                SELECT id, username, password_hash, auth_token, session_token,
+                       last_login, client_hash, nb_games_played, nb_games_won
+                FROM users
+                WHERE id = ?;
+            )";
+        
+            sqlite3_stmt* stmt = nullptr;
+        
+            if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK)
+                throw std::runtime_error("Failed to prepare statement: " + std::string(sqlite3_errmsg(db)));
+        
+            sqlite3_bind_int(stmt, 1, static_cast<int>(id));
+        
+            User user;
+
+            int rc = sqlite3_step(stmt);
+            if (rc == SQLITE_ROW) {
+                user.setId(static_cast<size_t>(sqlite3_column_int(stmt, 0)));
+                user.setName(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1)));
+                user.setPasswordHash(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2)));
+                user.setLastLogin(static_cast<std::time_t>(sqlite3_column_int64(stmt, 5)));
+                user.setClientHash(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 6)));
+        
+                int nb_games_played = sqlite3_column_int(stmt, 7);
+                int nb_games_won = sqlite3_column_int(stmt, 8);
+        
+                user.setNbGamesPlayed(nb_games_played);
+                user.setNbGamesWon(nb_games_won);
+            } else if (rc == SQLITE_DONE) {
+                sqlite3_finalize(stmt);
+                throw std::runtime_error("User not found in database.");
+            } else {
+                sqlite3_finalize(stmt);
+                throw std::runtime_error("Error executing query: " + std::string(sqlite3_errmsg(db)));
+            }
+            sqlite3_finalize(stmt);
+            return user;
+        }
+
+        void loadAllUsers(sqlite3 *db) {
+            const char* sql = R"(
+                SELECT id, username, password_hash, auth_token, session_token,
+                       last_login, client_hash, nb_games_played, nb_games_won
+                FROM users;
+            )";
+        
+            sqlite3_stmt* stmt = nullptr;
+        
+            if (sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr) != SQLITE_OK)
+                throw std::runtime_error("Failed to prepare statement: " + std::string(sqlite3_errmsg(db)));
+            while (sqlite3_step(stmt) == SQLITE_ROW) {
+                User user;
+
+                user.setId(static_cast<size_t>(sqlite3_column_int(stmt, 0)));
+                user.setName(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1)));
+                user.setPasswordHash(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2)));
+                user.setLastLogin(static_cast<std::time_t>(sqlite3_column_int64(stmt, 5)));
+                user.setClientHash(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 6)));
+        
+                int nb_games_played = sqlite3_column_int(stmt, 7);
+                int nb_games_won = sqlite3_column_int(stmt, 8);
+        
+                user.setNbGamesPlayed(nb_games_played);
+                user.setNbGamesWon(nb_games_won);
+
+                _users.emplace(user.getId(), std::move(user));
+                _username_index[user.getUsername()] = user.getId();
+            }
+            sqlite3_finalize(stmt);
+            return;
         }
 
 };

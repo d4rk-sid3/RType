@@ -73,7 +73,7 @@ if(BUILD_CLIENT)
     
     add_executable(r-type_client ${CLIENT_SOURCES})
     target_include_directories(r-type_client PRIVATE ${CMAKE_SOURCE_DIR}/rtype_client/include "utility_classes/include" "engine/include/" ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
-    target_link_libraries(r-type_client PRIVATE -lsfml-graphics -lsfml-window -lsfml-system)
+    target_link_libraries(r-type_client PRIVATE -lsfml-graphics -lsfml-window -lsfml-system -lconfig++ -lsfml-audio)
     
     # Compiler flags for debug builds
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -91,7 +91,7 @@ if(BUILD_SERVER)
     
     add_executable(r-type_server ${SERVER_SOURCES})
     target_include_directories(r-type_server PRIVATE ${CMAKE_SOURCE_DIR}/rtype_server/include "utility_classes/include" "engine/include/" ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
-    target_link_libraries(r-type_server PRIVATE -lsfml-graphics -lsfml-window -lsfml-system)
+    target_link_libraries(r-type_server PRIVATE -lsfml-graphics -lsfml-window -lsfml-system -lconfig++ -lsfml-audio)
     
     # Compiler flags for debug builds
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -109,7 +109,7 @@ if(BUILD_TESTS)
 
     add_executable(r-type_tests ${TESTS_SOURCES})
     target_include_directories(r-type_tests PRIVATE ${CMAKE_SOURCE_DIR}/rtype_server/include  ${CMAKE_SOURCE_DIR}/rtype_client/include "utility_classes/include" "engine/include" ${CMAKE_SOURCE_DIR}/asio-1.36.0/include)
-    target_link_libraries(r-type_tests PRIVATE -lgtest -lgtest_main -pthread -lsfml-graphics -lsfml-window -lsfml-system )
+    target_link_libraries(r-type_tests PRIVATE -lgtest -lgtest_main -pthread -lsfml-graphics -lsfml-window -lsfml-system -lconfig++ -lsfml-audio)
 
     # Compiler flags for debug builds
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")

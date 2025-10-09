@@ -37,12 +37,9 @@
 #include <typeindex>
 #include <unordered_map>
 #include <vector>
-
-#include <SFML/Graphics.hpp>
-
 #include "entity.hpp"
 #include "exceptions.hpp"
-#include "TextureManager.hpp"
+#include "ResourceManager.hpp"
 #include <SFML/Graphics.hpp>
 
 using namespace std;
@@ -53,6 +50,9 @@ using namespace std;
  */
 class registry {
   public:
+
+    vector<entity> dead_entities;
+
     registry(sf::RenderWindow& window);
     registry();
 
@@ -60,7 +60,8 @@ class registry {
     template <typename Component>
     vector<optional<Component>>& register_components();
 
-    template <typename Component> vector<optional<Component>>& get_components();
+    template <typename Component>
+    vector<optional<Component>>& get_components();
 
     template <typename Component>
     vector<optional<Component>> const& get_components() const;
@@ -75,9 +76,9 @@ class registry {
     entity spawn_entity();
     void kill_entity(const entity& e);
 
-        /* Systems managment */
-        void add_system(const function<void(double)> &system);
-        void run_systems(double delta);
+    /* Systems managment */
+    void add_system(const function<void(double)>& system);
+    void run_systems(double delta);
 
     /* Getters */
     /**
@@ -120,15 +121,14 @@ class registry {
     unordered_map<type_index, any> _components_arrays;
     unordered_map<type_index, function<void(const entity&)>> _erase_functions;
 
-        vector<function<void(double)>> _systems;
+    vector<function<void(double)>> _systems;
 
-    vector<entity> dead_entities;
     size_t entity_num = 0;
 
-        sf::RenderWindow &window;
-        sf::RenderWindow tmp;
+    sf::RenderWindow& window;
+    sf::RenderWindow tmp;
 
-        sf::Clock clock;
+    sf::Clock clock;
 
     void register_all_systems();
 };

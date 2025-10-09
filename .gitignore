@@ -2,6 +2,10 @@
 build/
 cmake-build-*/
 out/
+protocoles/
+docs/
+.vscode
+asio-1.36.0/
 
 # Conan generated files
 conandata.yml
@@ -58,3 +62,7 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+*.sh
+vgcore*
+r-type_server
+r-type_client
