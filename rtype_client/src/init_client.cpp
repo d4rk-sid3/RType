@@ -57,11 +57,11 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities()
             s.push_back(decodeEnemyMovedResponse(lastmsg));
         }
 
-        // for (auto &a : s) {
-        //     std::cout << "Enemy_Type: "  << static_cast<int>(a.enemy_type) << " ";
-        //     std::cout << "Enemy_Pos_x: "  << static_cast<double>(a.position.x) << " ";
-        //     std::cout << "Enemy_Pos_y: "  << static_cast<double>(a.position.y) << std::endl;
-        // }
+        for (auto &a : s) {
+            std::cout << "Enemy_Type: "  << static_cast<EnemyType>(a.enemy_type) << " ";
+            std::cout << "Enemy_Pos_x: "  << static_cast<int16_t>(a.position.x) << " ";
+            std::cout << "Enemy_Pos_y: "  << static_cast<int16_t>(a.position.y) << std::endl;
+        }
 
         lastmsg.clear();
 
