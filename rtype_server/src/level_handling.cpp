@@ -134,27 +134,42 @@ void Server::receivePlayerInput(double delta)
         velocity &vel = reg.get_components<component::velocity>()[all_clients[msg.first]].value();
         MoveResponse move_info = decodeMoveResponse(tmp);
         
-        if (move_info.direction == LEFT) {
-            vel.vx = -PLAYER_SPEED;
+        std::lock_guard<std::mutex> lock(mtx);
+        
+        if (type == 0x24) {
+            std::cerr << "INPUT" << std::endl;
+            
+            velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
+            MoveResponse move_info = decodeMoveResponse(tmp);
+            
+            if (move_info.direction == LEFT) {
+                vel.vx = -PLAYER_SPEED;
+            }
+            if (move_info.direction == RIGHT) {
+                vel.vx = PLAYER_SPEED;
+            }
+            if (move_info.direction == UP) {
+                vel.vy = -PLAYER_SPEED;
+            }
+            if (move_info.direction == DOWN) {
+                vel.vy = PLAYER_SPEED;
+            }
+        
         }
-        if (move_info.direction == RIGHT) {
-            vel.vx = PLAYER_SPEED;
-        }
-        if (move_info.direction == UP) {
-            vel.vy = -PLAYER_SPEED;
-        }
-        if (move_info.direction == DOWN) {
-            vel.vy = PLAYER_SPEED;
-        }
-        if (move_info.direction == SPACE && shoot_timer > PLAYER_SHOOT_COOLDOWN) {
-            Factory fac(reg);
-            shoot_timer = 0;
-            entity missile = fac.make_player_missile();
-            position &pos = reg.get_components<component::position>()[player1_entity_id].value();
-            position &missile_pos = reg.get_components<component::position>()[missile].value();
-            missile_pos.x = pos.x + 8;
-            missile_pos.y = pos.y + 8;
-            vel.vy = PLAYER_SPEED;
+        if (type == 0x25) {
+            
+            std::cerr << "ACTION" << std::endl;
+            ActionResponse action_info = decodeActionResponse(tmp);
+
+            if (action_info.input == SPACE && shoot_timer > PLAYER_SHOOT_COOLDOWN) {
+                Factory fac(reg);
+                shoot_timer = 0;
+                entity missile = fac.make_player_missile();
+                position &pos = reg.get_components<component::position>()[player1_entity_id].value();
+                position &missile_pos = reg.get_components<component::position>()[missile].value();
+                missile_pos.x = pos.x + 8;
+                missile_pos.y = pos.y + 6;
+            }
         }
 
     }

@@ -66,6 +66,7 @@ class Client {
     void initGame();
     void runLevel(double delta);
     void sendPlayerInput();
+    void sendPlayerAction();
 
     NetworkManager &getManager() { return client_; }
 
@@ -75,6 +76,7 @@ class Client {
     NbrEntity decodeNbrEntity(std::vector<int8_t>& buffer);
     EnemyMovedResponse decodeEnemyMovedResponse(std::vector<int8_t>& buffer);
     std::vector<int8_t> encodeMoveResponse(const MoveResponse& pos);
+    std::vector<int8_t> encodeActionResponse(const ActionResponse& pos);
 };
 
 #endif /* !CLIENT_HPP_ */

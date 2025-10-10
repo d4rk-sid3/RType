@@ -21,6 +21,8 @@ void \mbox{\hyperlink{classClient_a101e55e53e7f9cc0433da705e66e1f08}{run\+Level}
 \item 
 void \mbox{\hyperlink{classClient_a9d0aec2907f33777ece928a1a0dee25e}{send\+Player\+Input}} ()
 \item 
+void \mbox{\hyperlink{classClient_ae075a5f69a51c05b60cc8469c2308bd6}{send\+Player\+Action}} ()
+\item 
 Network\+Manager \& \mbox{\hyperlink{classClient_af6829864546ed7e423fc1875be9864a9}{get\+Manager}} ()
 \item 
 std\+::vector$<$ Enemy\+Moved\+Response $>$ \mbox{\hyperlink{classClient_a4c9eefab245ca66e80ceb13fa67287e8}{recup\+All\+Entities}} ()
@@ -30,6 +32,8 @@ Nbr\+Entity \mbox{\hyperlink{classClient_ad88aa07459555b36bd038b91505b51cf}{deco
 Enemy\+Moved\+Response \mbox{\hyperlink{classClient_ad57127e6e1ade439817b5d339ddfbec1}{decode\+Enemy\+Moved\+Response}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
 \item 
 std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_a1a07e2ea5336182977e9b5a4dd42c9fc}{encode\+Move\+Response}} (const Move\+Response \&pos)
+\item 
+std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_aa317720a1d7ca0d8be350e164e327811}{encode\+Action\+Response}} (const Action\+Response \&pos)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -65,6 +69,12 @@ std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_a1a07e2ea533618297
 \index{decodeNbrEntity@{decodeNbrEntity}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{decodeNbrEntity()}{decodeNbrEntity()}}
 {\footnotesize\ttfamily Nbr\+Entity Client\+::decode\+Nbr\+Entity (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
+
+\Hypertarget{classClient_aa317720a1d7ca0d8be350e164e327811}\label{classClient_aa317720a1d7ca0d8be350e164e327811} 
+\index{Client@{Client}!encodeActionResponse@{encodeActionResponse}}
+\index{encodeActionResponse@{encodeActionResponse}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{encodeActionResponse()}{encodeActionResponse()}}
+{\footnotesize\ttfamily std\+::vector$<$ int8\+\_\+t $>$ Client\+::encode\+Action\+Response (\begin{DoxyParamCaption}\item[{const Action\+Response \&}]{pos }\end{DoxyParamCaption})}
 
 \Hypertarget{classClient_a1a07e2ea5336182977e9b5a4dd42c9fc}\label{classClient_a1a07e2ea5336182977e9b5a4dd42c9fc} 
 \index{Client@{Client}!encodeMoveResponse@{encodeMoveResponse}}
@@ -107,6 +117,12 @@ std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_a1a07e2ea533618297
 \index{runMenu@{runMenu}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{runMenu()}{runMenu()}}
 {\footnotesize\ttfamily void Client\+::run\+Menu (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})}
+
+\Hypertarget{classClient_ae075a5f69a51c05b60cc8469c2308bd6}\label{classClient_ae075a5f69a51c05b60cc8469c2308bd6} 
+\index{Client@{Client}!sendPlayerAction@{sendPlayerAction}}
+\index{sendPlayerAction@{sendPlayerAction}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{sendPlayerAction()}{sendPlayerAction()}}
+{\footnotesize\ttfamily void Client\+::send\+Player\+Action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 \Hypertarget{classClient_a9d0aec2907f33777ece928a1a0dee25e}\label{classClient_a9d0aec2907f33777ece928a1a0dee25e} 
 \index{Client@{Client}!sendPlayerInput@{sendPlayerInput}}

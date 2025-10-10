@@ -32,3 +32,18 @@ std::vector<int8_t> Client::encodeMoveResponse(const MoveResponse& pos)
 
     return buffer;
 }
+
+std::vector<int8_t> Client::encodeActionResponse(const ActionResponse& pos)
+{
+    std::vector<int8_t> buffer;
+
+    buffer.emplace_back(pos.type);
+
+    buffer.emplace_back((pos.player_id >> 8) & 0xFF);
+    buffer.emplace_back(pos.player_id & 0xFF);
+
+    buffer.emplace_back((pos.input >> 8) & 0xFF);
+    buffer.emplace_back(pos.input & 0xFF);
+
+    return buffer;
+}

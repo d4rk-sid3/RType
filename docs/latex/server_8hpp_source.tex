@@ -52,19 +52,22 @@
 \DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ counter\ =\ 0;}
 \DoxyCodeLine{00049\ }
 \DoxyCodeLine{00050\ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{runLevel}}(\textcolor{keywordtype}{double}\ delta);}
-\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classServer_afc422f4323d93d0d986198d8e3967bb2}{Server}}(\textcolor{keywordtype}{int}\ p,\ \mbox{\hyperlink{classregistry}{registry}}\ \&reg);}
-\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{\string~Server}}();}
-\DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \ \ \ NetworkManager\ \&\mbox{\hyperlink{classServer_acfd2d06240a094a14b1a9d507e342508}{getManager}}()\ \{\ \textcolor{keywordflow}{return}\ server\_;\ \}}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{//\ encodeur}}
-\DoxyCodeLine{00058\ \ \ \ \ std::vector<int8\_t>\ \mbox{\hyperlink{classServer_a4f1fd5b9e8cdac6f505d6a6a03434fab}{encodeNbrEntity}}(\textcolor{keyword}{const}\ NbrEntity\&\ pos);}
-\DoxyCodeLine{00059\ \ \ \ \ std::vector<int8\_t>\ \mbox{\hyperlink{classServer_a0a21ae22cb0560a554fec4e186583eaa}{encodeEnemyMovedResponse}}(\textcolor{keyword}{const}\ EnemyMovedResponse\&\ pos);}
-\DoxyCodeLine{00060\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classServer_ac5a491fec7ae16a63d195b4b192f9d48}{decodeMoveResponse}}(std::vector<int8\_t>\&\ buffer);}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ \};}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classServer_afc422f4323d93d0d986198d8e3967bb2}{Server}}(\textcolor{keywordtype}{int}\ p,\ \mbox{\hyperlink{classregistry}{registry}}\ \&reg);}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{\string~Server}}();}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ NetworkManager\ \&\mbox{\hyperlink{classServer_acfd2d06240a094a14b1a9d507e342508}{getManager}}()\ \{\ \textcolor{keywordflow}{return}\ server\_;\ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ encodeur}}
+\DoxyCodeLine{00057\ \ \ \ \ std::vector<int8\_t>\ \mbox{\hyperlink{classServer_a4f1fd5b9e8cdac6f505d6a6a03434fab}{encodeNbrEntity}}(\textcolor{keyword}{const}\ NbrEntity\&\ pos);}
+\DoxyCodeLine{00058\ \ \ \ \ std::vector<int8\_t>\ \mbox{\hyperlink{classServer_a0a21ae22cb0560a554fec4e186583eaa}{encodeEnemyMovedResponse}}(\textcolor{keyword}{const}\ EnemyMovedResponse\&\ pos);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ decodeur}}
+\DoxyCodeLine{00061\ \ \ \ \ MoveResponse\ \mbox{\hyperlink{classServer_ac5a491fec7ae16a63d195b4b192f9d48}{decodeMoveResponse}}(std::vector<int8\_t>\&\ buffer);}
+\DoxyCodeLine{00062\ \ \ \ \ ActionResponse\ \mbox{\hyperlink{classServer_a268043e1a600716d031d621139d9d3a6}{decodeActionResponse}}(std::vector<int8\_t>\&\ buffer);}
 \DoxyCodeLine{00063\ }
-\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !SERVER\_HPP\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{runLevel}}(\textcolor{keywordtype}{double}\ delta);}
+\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !SERVER\_HPP\_\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

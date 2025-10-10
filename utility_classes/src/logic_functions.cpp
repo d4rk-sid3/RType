@@ -72,13 +72,13 @@ void player_logic(double delta, registry &reg, entity en)
         explosion_pos.x = pos.x;
         explosion_pos.y = pos.y;
 
-        reg.kill_entity(en);
         name &name_ = reg.get_components<name>()[en].value();
         if (name_._name == "player1") {
             player1_entity_id = -1;
         } else if (name_._name == "player2") {
             player2_entity_id = -1;
         }
+        reg.kill_entity(en);
     }
 }
 
@@ -220,9 +220,7 @@ void walker_logic(double delta, registry &reg, entity en)
     }
 
     position &pos = reg.get_components<position>()[en].value();
-    printf("SHOT: %d\n", walker_shot);
     if (!walker_shot) {
-        printf("WALKER WILL SHOOOOOT\n");
         if (shoot_at_player(reg, pos, 200))
             walker_shot = true;
     }
