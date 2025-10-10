@@ -43,9 +43,13 @@ class Server {
 
     std::vector<entity_info_t> entities;
 
-    vector<int8_t> result;
-    vector<int8_t> tmp;
+    std::vector<int8_t> result;
+  
+    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> messages;
+
     int counter = 0;
+
+    std::map<asio::ip::udp::endpoint, int> all_clients;
 
   public:
     Server(int p, registry &reg);

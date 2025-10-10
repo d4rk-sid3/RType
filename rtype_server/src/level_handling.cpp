@@ -96,20 +96,42 @@ void Server::receivePlayerInput(double delta)
     static double shoot_timer = 0;
 
     shoot_timer += delta;
-    if (!tmp.empty()) {
 
-        if (tmp[0] == 0x5) {
-            tmp.clear();
+    size_t len = 0;
+
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        len = messages.size();
+    }
+
+    while (len != 0) {
+
+        std::pair<asio::ip::udp::endpoint, std::vector<int8_t>> msg;
+
+        {
+            std::lock_guard<std::mutex> lock(mtx);
+            msg = messages.front();
+            messages.erase(messages.begin());
+            len = messages.size();
+        }
+
+        if (std::find_if(all_clients.begin(), all_clients.end(),
+                            [msg] (auto& tmp)
+                            {
+                                return tmp.first == msg.first;
+                            }
+                        ) == all_clients.end())
+        {
+            if (all_clients.empty())
+                all_clients[msg.first] = player1_entity_id;
+            else    
+                all_clients[msg.first] = player2_entity_id;
             return;
         }
 
-        std::cout << "TMP: ";
-        for (auto &a: tmp) {
-            std::cout << static_cast<int>(a) << " ";
-        }
-        std::cout << std::endl;
-        std::lock_guard<std::mutex> lock(mtx);
-        velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
+        std::vector<int8_t> tmp = msg.second;
+
+        velocity &vel = reg.get_components<component::velocity>()[all_clients[msg.first]].value();
         MoveResponse move_info = decodeMoveResponse(tmp);
         
         if (move_info.direction == LEFT) {
@@ -135,8 +157,8 @@ void Server::receivePlayerInput(double delta)
             vel.vy = PLAYER_SPEED;
         }
 
-        tmp.clear();
     }
+
 }
 
 void Server::runLevel(double delta)

@@ -44,3 +44,9 @@ struct MoveResponse {
     int16_t player_id;
     Direction direction;
 };
+
+typedef struct client_info {
+  asio::ip::udp::endpoint endpoint;
+  int player_id;
+  std::vector<int8_t> lastmsg;
+} client_info_t;

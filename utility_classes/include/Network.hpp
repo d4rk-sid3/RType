@@ -42,7 +42,7 @@ class NetworkManager {
 
     // Constructeurs and destructeurs
     NetworkManager(int port, std::string address, std::vector<int8_t> &lastmsg_, std::mutex& mtx_);
-    NetworkManager(int port, std::vector<int8_t> &lastmsg_, std::mutex& mtx_);
+    NetworkManager(int port, std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> &clients_lastmsg_, std::mutex& mtx_);
     ~NetworkManager();
 
     // Methodes for running the network io_context
@@ -70,8 +70,15 @@ class NetworkManager {
     asio::ip::udp::endpoint last_sender_;
     asio::ip::udp::endpoint server_endpoint_;
     bool isrunning;
-    std::vector<int8_t>& lastmsg;
-    std::vector<asio::ip::udp::endpoint> clients;
+
+
+    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> tmp_clients;
+    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> &clients_lastmsg;
+
+    std::vector<int8_t> tmp_server;
+    std::vector<int8_t> &lastmsg;
+  
+    std::vector<client_info_t> clients;
     std::mutex& mtx;
 };
 

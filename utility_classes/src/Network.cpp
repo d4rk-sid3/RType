@@ -24,7 +24,7 @@ std::map<std::string, EnemyType> type_map = {
 NetworkManager::NetworkManager(int port, std::string address, std::vector<int8_t> &lastmsg_, std::mutex& mtx_): 
     socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 0)),
     server_endpoint_(asio::ip::udp::endpoint(asio::ip::make_address(address), port)),
-    isrunning(true), lastmsg(lastmsg_), mtx(mtx_)
+    isrunning(true), lastmsg(lastmsg_), mtx(mtx_), clients_lastmsg(tmp_clients)
 {
     std::cout << "Client lancé " << std::endl;
 
@@ -32,9 +32,9 @@ NetworkManager::NetworkManager(int port, std::string address, std::vector<int8_t
 }
 
 
-NetworkManager::NetworkManager(int port, std::vector<int8_t> &lastmsg_, std::mutex& mtx_) :
+NetworkManager::NetworkManager(int port, std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> &clients_lastmsg_, std::mutex& mtx_) :
     socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)),
-    isrunning(true), lastmsg(lastmsg_), mtx(mtx_)
+    isrunning(true), clients_lastmsg(clients_lastmsg_), mtx(mtx_), lastmsg(tmp_server)
 {
     std::cout << "Serveur pret à être lancé " << port << std::endl;
 
@@ -56,8 +56,15 @@ void NetworkManager::run()
 }
 
 void NetworkManager::add_connection(const asio::ip::udp::endpoint& ep) {
-    if (std::find(clients.begin(), clients.end(), ep) == clients.end())
-        clients.push_back(ep);
+    static int id = 0;
+
+    if (std::find_if(clients.begin(), clients.end(),
+                        [&](const client_info_t& client) {
+                            return client.endpoint == ep;
+                        }
+            ) == clients.end()
+        )
+            clients.push_back({ep, id++});
 }
 
 void NetworkManager::receive_from_clients()
@@ -66,17 +73,13 @@ void NetworkManager::receive_from_clients()
         
         [this](std::error_code error ,std::size_t bytes_receive) {
             if (!error && bytes_receive > 0) {
-                add_connection(last_sender_);
                 std::cout << "Receive :" << bytes_receive << std::endl;
                 
                 {
                     std::lock_guard<std::mutex> lock(mtx);
-                    for (auto &b : buff) {
-                        lastmsg.push_back(b);
-                    }
+                    clients_lastmsg.push_back({last_sender_, std::vector<int8_t>(buff.begin(), buff.begin() + bytes_receive)});
                 }
             }
-
             if (isrunning) {
                 receive_from_clients();
             }
@@ -108,9 +111,7 @@ void NetworkManager::receive_from_server()
                 
                 {
                     std::lock_guard<std::mutex> lock(mtx);
-                    for (auto &b : buff) {
-                        lastmsg.push_back(b);
-                    }
+                    lastmsg.insert(lastmsg.end(), buff.begin(), buff.begin() + bytes_receive);
                 }
             }
 
