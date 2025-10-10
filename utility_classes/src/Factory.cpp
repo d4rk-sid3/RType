@@ -235,7 +235,6 @@ entity Factory::make_walker() {
     auto& walker_sprite = reg.add_component<component::animated_drawable>(
         walker_id, component::animated_drawable()
     );
-    walker_sprite.sprite.setScale(-1, 1);
     walker_sprite.setFrameRect(33, 33);
     walker_sprite.frame_duration = 0.25;
     walker_sprite.setTextureFromName("walker");

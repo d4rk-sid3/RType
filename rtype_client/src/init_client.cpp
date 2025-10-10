@@ -166,7 +166,11 @@ void Client::runLevel(double delta)
         printf("Current entity real id: %d\n", ids_assoc[entity.enemy_id]);
         if (!isInside(new_vec, entity.enemy_id)) {
             printf("Entity %d does not exist anymore. Killing\n", entity.enemy_id);
+            try {
             _reg.kill_entity((class entity)(ids_assoc[entity.enemy_id]));
+            } catch (std::exception &e) {
+
+            }
             printf("Entity %d killed\n", entity.enemy_id);
         }
     }
