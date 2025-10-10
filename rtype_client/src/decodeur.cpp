@@ -22,7 +22,7 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
     EnemyMovedResponse pos;
 
     {
-        std::lock_guard<std::mutex> lock(mtx);
+        // std::lock_guard<std::mutex> lock(mtx);
 
         if (buffer[0] != 0x37) {
             throw std::runtime_error("Invalid message type !");
@@ -59,7 +59,8 @@ NbrEntity Client::decodeNbrEntity(std::vector<int8_t>& buffer)
     NbrEntity pos;
 
     {
-        std::lock_guard<std::mutex> lock(mtx);
+        // std::lock_guard<std::mutex> lock(mtx);
+
         if (buffer[0] != 0x38) {
             throw std::runtime_error("Invalid message type 0x38 !");
         }
