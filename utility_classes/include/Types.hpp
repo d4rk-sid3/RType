@@ -12,7 +12,9 @@
 #include <string>
 #include <vector>
 
-enum Direction : int16_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3, SPACE = 4 };
+enum Direction : int16_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
+
+enum Action : int16_t { SPACE = 0 };
 
 enum BULLET_TYPE : int16_t { SOLIDE = 0, NONE = 1 };
 
@@ -43,4 +45,10 @@ struct MoveResponse {
     int8_t type; // 0x24
     int16_t player_id;
     Direction direction;
+};
+
+struct ActionResponse {
+    int8_t type; // 0x25
+    int16_t player_id;
+    Action input;
 };

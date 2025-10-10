@@ -59,6 +59,7 @@ class Server {
 
     // decodeur
     MoveResponse decodeMoveResponse(std::vector<int8_t>& buffer);
+    ActionResponse decodeActionResponse(std::vector<int8_t>& buffer);
 
     void runLevel(double delta);
 };
