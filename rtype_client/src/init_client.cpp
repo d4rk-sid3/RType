@@ -97,9 +97,6 @@ void Client::sendPlayerInput()
     } else if (con.down) {
         printf("DOWN\n");
         pos.direction = DOWN;
-    } else if (con.space) {
-        printf("SHOOTING\n");
-        pos.direction = SPACE;
     }
 
     std::vector<int8_t> buff = encodeMoveResponse(pos);
@@ -110,9 +107,37 @@ void Client::sendPlayerInput()
         std::cout << static_cast<int>(a) << " " ;
 
     }
-    client_.send(buff, buff.size(), client_.getServerendpoint());
+    client_.send_to_server(buff, buff.size());
     
 }
+
+void Client::sendPlayerAction()
+{
+    if (player_entity_id == -1)
+        return;
+
+    component::controllable &con = _reg.get_components<component::controllable>()[player_entity_id].value();
+
+    if (!con.space)
+        return;
+
+    ActionResponse pos;
+
+    pos.type = 0x25;
+    pos.player_id = static_cast<int16_t>(player_entity_id);
+
+    if (con.space) {
+        printf("SHOOTING\n");
+        pos.input = SPACE;
+    }
+
+    std::vector<int8_t> buff = encodeActionResponse(pos);
+
+    std::cout << "BUFF:" << " ";
+
+    client_.send_to_server(buff, buff.size());    
+}
+
 
 std::string getKey(int value)
 {
@@ -128,6 +153,7 @@ void Client::runLevel(double delta)
     static bool first_call = true;
     Factory fac(_reg);
     sendPlayerInput();
+    sendPlayerAction();
 
     new_vec = recupAllEntities();
     printf("Entities received: %d\n", new_vec.size());

@@ -28,7 +28,7 @@ NetworkManager::NetworkManager(int port, std::string address, std::vector<int8_t
 {
     std::cout << "Client lancé " << std::endl;
 
-    receive();
+    receive_from_server();
 }
 
 
@@ -38,7 +38,7 @@ NetworkManager::NetworkManager(int port, std::vector<int8_t> &lastmsg_, std::mut
 {
     std::cout << "Serveur pret à être lancé " << port << std::endl;
 
-    receive();
+    receive_from_clients();
 }
 
 
@@ -46,13 +46,6 @@ NetworkManager::~NetworkManager()
 {
     isrunning = false;
     socket.close();
-}
-
-void NetworkManager::poll()
-{
-    if (isrunning) {
-        context.poll();
-    }
 }
 
 void NetworkManager::run()
@@ -67,7 +60,7 @@ void NetworkManager::add_connection(const asio::ip::udp::endpoint& ep) {
         clients.push_back(ep);
 }
 
-void NetworkManager::receive()
+void NetworkManager::receive_from_clients()
 {
     socket.async_receive_from(asio::buffer(buff), last_sender_, 
         
@@ -85,15 +78,52 @@ void NetworkManager::receive()
             }
 
             if (isrunning) {
-                receive();
+                receive_from_clients();
             }
         }
     );
 }
 
-void NetworkManager::send(const std::vector<int8_t> &msg, size_t size, const asio::ip::udp::endpoint& to_receiver)
+void NetworkManager::send_to_client(const std::vector<int8_t> &msg, size_t size, const asio::ip::udp::endpoint& to_client)
 {
-    socket.async_send_to(asio::buffer(msg, size * sizeof(int8_t)), to_receiver,
+    socket.async_send_to(asio::buffer(msg, size * sizeof(int8_t)), to_client,
+        [msg](std::error_code error, std::size_t byte_send) {
+            std::cout << "Send :" << byte_send << std::endl;
+
+            if (!error) {
+            } else {
+                std::cerr << error.message() << std::endl;
+            }
+        }
+    );
+}
+
+void NetworkManager::receive_from_server()
+{
+    socket.async_receive_from(asio::buffer(buff), last_sender_, 
+        
+        [this](std::error_code error ,std::size_t bytes_receive) {
+            if (!error && bytes_receive > 0) {
+                std::cout << "Receive :" << bytes_receive << std::endl;
+                
+                {
+                    std::lock_guard<std::mutex> lock(mtx);
+                    for (auto &b : buff) {
+                        lastmsg.push_back(b);
+                    }
+                }
+            }
+
+            if (isrunning) {
+                receive_from_server();
+            }
+        }
+    );
+}
+
+void NetworkManager::send_to_server(const std::vector<int8_t> &msg, size_t size)
+{
+    socket.async_send_to(asio::buffer(msg, size * sizeof(int8_t)), server_endpoint_,
         [msg](std::error_code error, std::size_t byte_send) {
             std::cout << "Send :" << byte_send << std::endl;
 
@@ -109,4 +139,14 @@ void NetworkManager::send(const std::vector<int8_t> &msg, size_t size, const asi
 asio::ip::udp::endpoint NetworkManager::getLastSender() const
 {
     return last_sender_;
+}
+
+asio::ip::udp::endpoint& NetworkManager::getServerendpoint()
+{
+    return server_endpoint_;
+}
+
+asio::io_context& NetworkManager::getContext()
+{
+    return context;
 }

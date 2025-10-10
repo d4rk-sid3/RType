@@ -48,7 +48,6 @@ class Server {
     int counter = 0;
 
   public:
-    void runLevel(double delta);
     Server(int p, registry &reg);
     ~Server();
 
@@ -57,8 +56,12 @@ class Server {
     // encodeur
     std::vector<int8_t> encodeNbrEntity(const NbrEntity& pos);
     std::vector<int8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos);
-    MoveResponse decodeMoveResponse(std::vector<int8_t>& buffer);
 
+    // decodeur
+    MoveResponse decodeMoveResponse(std::vector<int8_t>& buffer);
+    ActionResponse decodeActionResponse(std::vector<int8_t>& buffer);
+
+    void runLevel(double delta);
 };
 
 #endif /* !SERVER_HPP_ */

@@ -97,42 +97,56 @@ void Server::receivePlayerInput(double delta)
 
     shoot_timer += delta;
     if (!tmp.empty()) {
-
-        if (tmp[0] == 0x5) {
+        int8_t type = tmp[0];
+        
+        if (type == 0x5) {
             tmp.clear();
             return;
         }
+
 
         std::cout << "TMP: ";
         for (auto &a: tmp) {
             std::cout << static_cast<int>(a) << " ";
         }
         std::cout << std::endl;
-        std::lock_guard<std::mutex> lock(mtx);
-        velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
-        MoveResponse move_info = decodeMoveResponse(tmp);
         
-        if (move_info.direction == LEFT) {
-            vel.vx = -PLAYER_SPEED;
-        }
-        if (move_info.direction == RIGHT) {
-            vel.vx = PLAYER_SPEED;
-        }
-        if (move_info.direction == UP) {
-            vel.vy = -PLAYER_SPEED;
-        }
-        if (move_info.direction == DOWN) {
-            vel.vy = PLAYER_SPEED;
-        }
-        if (move_info.direction == SPACE && shoot_timer > PLAYER_SHOOT_COOLDOWN) {
-            Factory fac(reg);
-            shoot_timer = 0;
-            entity missile = fac.make_player_missile();
-            position &pos = reg.get_components<component::position>()[player1_entity_id].value();
-            position &missile_pos = reg.get_components<component::position>()[missile].value();
-            missile_pos.x = pos.x + 8;
-            missile_pos.y = pos.y + 8;
-            vel.vy = PLAYER_SPEED;
+        std::lock_guard<std::mutex> lock(mtx);
+        
+        if (type == 0x24) {
+            
+            velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
+            MoveResponse move_info = decodeMoveResponse(tmp);
+            
+            if (move_info.direction == LEFT) {
+                vel.vx = -PLAYER_SPEED;
+            }
+            if (move_info.direction == RIGHT) {
+                vel.vx = PLAYER_SPEED;
+            }
+            if (move_info.direction == UP) {
+                vel.vy = -PLAYER_SPEED;
+            }
+            if (move_info.direction == DOWN) {
+                vel.vy = PLAYER_SPEED;
+            }
+        
+        } else if (type == 0x25) {
+            
+            velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
+            ActionResponse action_info = decodeActionResponse(tmp);
+
+            if (action_info.input == SPACE && shoot_timer > PLAYER_SHOOT_COOLDOWN) {
+                Factory fac(reg);
+                shoot_timer = 0;
+                entity missile = fac.make_player_missile();
+                position &pos = reg.get_components<component::position>()[player1_entity_id].value();
+                position &missile_pos = reg.get_components<component::position>()[missile].value();
+                missile_pos.x = pos.x + 8;
+                missile_pos.y = pos.y + 8;
+                vel.vy = PLAYER_SPEED;
+            }
+
         }
 
         tmp.clear();
@@ -161,7 +175,7 @@ void Server::runLevel(double delta)
 
     if (!result.empty()) {
         // std::cout << "[SERVER] sending " << result.size() << " bytes" << std::endl;
-        server_.send(result, result.size(), server_.getLastSender());
+        server_.send_to_client(result, result.size(), server_.getLastSender());
     }
     
     // for (auto it = entities.begin(); it != entities.end();) {
