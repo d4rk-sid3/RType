@@ -7,8 +7,6 @@
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{run\+Level}} (double delta)
-\item 
 \mbox{\hyperlink{classServer_afc422f4323d93d0d986198d8e3967bb2}{Server}} (int p, \mbox{\hyperlink{classregistry}{registry}} \&reg)
 \item 
 \mbox{\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{\texorpdfstring{$\sim$}{\string~}\+Server}} ()
@@ -20,6 +18,10 @@ std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classServer_a4f1fd5b9e8cdac6f5
 std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classServer_a0a21ae22cb0560a554fec4e186583eaa}{encode\+Enemy\+Moved\+Response}} (const Enemy\+Moved\+Response \&pos)
 \item 
 Move\+Response \mbox{\hyperlink{classServer_ac5a491fec7ae16a63d195b4b192f9d48}{decode\+Move\+Response}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
+\item 
+Action\+Response \mbox{\hyperlink{classServer_a268043e1a600716d031d621139d9d3a6}{decode\+Action\+Response}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
+\item 
+void \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{run\+Level}} (double delta)
 \end{DoxyCompactItemize}
 
 
@@ -39,6 +41,12 @@ Move\+Response \mbox{\hyperlink{classServer_ac5a491fec7ae16a63d195b4b192f9d48}{d
 
 
 \doxysubsection{Member Function Documentation}
+\Hypertarget{classServer_a268043e1a600716d031d621139d9d3a6}\label{classServer_a268043e1a600716d031d621139d9d3a6} 
+\index{Server@{Server}!decodeActionResponse@{decodeActionResponse}}
+\index{decodeActionResponse@{decodeActionResponse}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{decodeActionResponse()}{decodeActionResponse()}}
+{\footnotesize\ttfamily Action\+Response Server\+::decode\+Action\+Response (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
+
 \Hypertarget{classServer_ac5a491fec7ae16a63d195b4b192f9d48}\label{classServer_ac5a491fec7ae16a63d195b4b192f9d48} 
 \index{Server@{Server}!decodeMoveResponse@{decodeMoveResponse}}
 \index{decodeMoveResponse@{decodeMoveResponse}!Server@{Server}}

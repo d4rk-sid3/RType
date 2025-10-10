@@ -114,6 +114,7 @@ void Server::receivePlayerInput(double delta)
         std::lock_guard<std::mutex> lock(mtx);
         
         if (type == 0x24) {
+            std::cerr << "INPUT" << std::endl;
             
             velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
             MoveResponse move_info = decodeMoveResponse(tmp);
@@ -131,9 +132,10 @@ void Server::receivePlayerInput(double delta)
                 vel.vy = PLAYER_SPEED;
             }
         
-        } else if (type == 0x25) {
+        }
+        if (type == 0x25) {
             
-            velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
+            std::cerr << "ACTION" << std::endl;
             ActionResponse action_info = decodeActionResponse(tmp);
 
             if (action_info.input == SPACE && shoot_timer > PLAYER_SHOOT_COOLDOWN) {
@@ -143,10 +145,8 @@ void Server::receivePlayerInput(double delta)
                 position &pos = reg.get_components<component::position>()[player1_entity_id].value();
                 position &missile_pos = reg.get_components<component::position>()[missile].value();
                 missile_pos.x = pos.x + 8;
-                missile_pos.y = pos.y + 8;
-                vel.vy = PLAYER_SPEED;
+                missile_pos.y = pos.y + 6;
             }
-
         }
 
         tmp.clear();

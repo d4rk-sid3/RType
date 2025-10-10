@@ -14,7 +14,7 @@
 
 enum Direction : int16_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
-enum Action : int16_t { SPACE = 0 };
+enum Action : int16_t { SPACE = 4 };
 
 enum BULLET_TYPE : int16_t { SOLIDE = 0, NONE = 1 };
 

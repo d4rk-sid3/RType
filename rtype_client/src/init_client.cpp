@@ -79,7 +79,7 @@ void Client::sendPlayerInput()
         return;
     component::controllable &con = _reg.get_components<component::controllable>()[player_entity_id].value();
 
-    if (!con.left && !con.right && !con.up && !con.down && !con.space)
+    if (!con.left && !con.right && !con.up && !con.down)
         return;
 
     MoveResponse pos;

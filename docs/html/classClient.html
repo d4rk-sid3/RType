@@ -97,6 +97,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a101e55e53e7f9cc0433da705e66e1f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d0aec2907f33777ece928a1a0dee25e" id="r_a9d0aec2907f33777ece928a1a0dee25e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d0aec2907f33777ece928a1a0dee25e">sendPlayerInput</a> ()</td></tr>
 <tr class="separator:a9d0aec2907f33777ece928a1a0dee25e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae075a5f69a51c05b60cc8469c2308bd6" id="r_ae075a5f69a51c05b60cc8469c2308bd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae075a5f69a51c05b60cc8469c2308bd6">sendPlayerAction</a> ()</td></tr>
+<tr class="separator:ae075a5f69a51c05b60cc8469c2308bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6829864546ed7e423fc1875be9864a9" id="r_af6829864546ed7e423fc1875be9864a9"><td class="memItemLeft" align="right" valign="top">NetworkManager &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6829864546ed7e423fc1875be9864a9">getManager</a> ()</td></tr>
 <tr class="separator:af6829864546ed7e423fc1875be9864a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c9eefab245ca66e80ceb13fa67287e8" id="r_a4c9eefab245ca66e80ceb13fa67287e8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; EnemyMovedResponse &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c9eefab245ca66e80ceb13fa67287e8">recupAllEntities</a> ()</td></tr>
@@ -107,6 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad57127e6e1ade439817b5d339ddfbec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a07e2ea5336182977e9b5a4dd42c9fc" id="r_a1a07e2ea5336182977e9b5a4dd42c9fc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a07e2ea5336182977e9b5a4dd42c9fc">encodeMoveResponse</a> (const MoveResponse &amp;pos)</td></tr>
 <tr class="separator:a1a07e2ea5336182977e9b5a4dd42c9fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa317720a1d7ca0d8be350e164e327811" id="r_aa317720a1d7ca0d8be350e164e327811"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa317720a1d7ca0d8be350e164e327811">encodeActionResponse</a> (const ActionResponse &amp;pos)</td></tr>
+<tr class="separator:aa317720a1d7ca0d8be350e164e327811"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -185,6 +189,23 @@ Public Attributes</h2></td></tr>
           <td class="memname">NbrEntity Client::decodeNbrEntity </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; int8_t &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa317720a1d7ca0d8be350e164e327811" name="aa317720a1d7ca0d8be350e164e327811"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa317720a1d7ca0d8be350e164e327811">&#9670;&#160;</a></span>encodeActionResponse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; int8_t &gt; Client::encodeActionResponse </td>
+          <td>(</td>
+          <td class="paramtype">const ActionResponse &amp;</td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -312,6 +333,23 @@ Public Attributes</h2></td></tr>
           <td class="memname">void Client::runMenu </td>
           <td>(</td>
           <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>delta</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae075a5f69a51c05b60cc8469c2308bd6" name="ae075a5f69a51c05b60cc8469c2308bd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae075a5f69a51c05b60cc8469c2308bd6">&#9670;&#160;</a></span>sendPlayerAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Client::sendPlayerAction </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
