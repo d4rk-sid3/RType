@@ -54,7 +54,7 @@ NbrEntity Client::decodeNbrEntity(std::vector<int8_t>& buffer)
     NbrEntity pos;
 
     if (buffer[0] != 0x38) {
-        throw std::runtime_error("Invalid message type !");
+        throw std::runtime_error("Invalid message type 0x38 !");
     }
 
     pos.type = buffer[0];
