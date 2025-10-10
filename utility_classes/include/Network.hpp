@@ -7,6 +7,7 @@
 
 #ifndef NETWORK_HPP_
 #define NETWORK_HPP_
+
 #include <asio.hpp>
 #include <cstdlib>
 #include <ctype.h>
@@ -14,7 +15,6 @@
 #include <filesystem>
 #include <iostream>
 #include <limits.h>
-#include <poll.h>
 #include <sstream>
 #include <stdbool.h>
 #include <stdio.h>
@@ -25,15 +25,25 @@
 #include <time.h>
 #include <unistd.h>
 #include <vector>
+#include <queue>
 
+#ifdef _WIN32
+    #include <winsock2.h>
+    #include <ws2tcpip.h>
+    // Alias pour compatibilité
+    typedef uint8_t u_int8_t;
+    typedef uint16_t u_int16_t;
+    typedef uint32_t u_int32_t;
+    typedef uint64_t u_int64_t;
+#else
+    #include <poll.h>
+    #include <arpa/inet.h>
+    #include <netinet/ip.h>
+    #include <sys/ioctl.h>
+    #include <sys/socket.h>
+    #include <unistd.h>
+#endif
 #include <SFML/Graphics.hpp>
-#include <arpa/inet.h>
-#include <bits/stdc++.h>
-#include <netinet/in.h>
-#include <netinet/ip.h>
-#include <sys/ioctl.h>
-#include <sys/socket.h>
-#include <sys/stat.h>
 
 enum Direction : uint8_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
