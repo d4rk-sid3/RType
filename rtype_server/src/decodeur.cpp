@@ -19,42 +19,60 @@
 
 MoveResponse Server::decodeMoveResponse(std::vector<int8_t>& buffer)
 {
-    MoveResponse pos;
+
+    std::vector<int8_t> tmp;
 
     {
         std::lock_guard<std::mutex> lock(mtx);
 
-        if (buffer[0] != 0x24) {
-            throw std::runtime_error("Type de message invalide !");
-        }
-    
-        pos.type = buffer[0];
-        pos.player_id = (buffer[1] << 8) | buffer[2];
-        pos.direction = static_cast<Direction>((buffer[3] << 8) | buffer[4]);
-    
+        tmp.insert(tmp.begin(), buffer.begin(), buffer.begin() + 5);
+    }
+
+    if (tmp[0] !=  0x24) {
+        throw std::runtime_error("Type de message invalide !");
+    }
+
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+
         buffer.clear();
     }
+
+    MoveResponse pos;
+
+    pos.type = tmp[0];
+    pos.player_id = (tmp[1] << 8) | tmp[2];
+    pos.direction = static_cast<Direction>((tmp[3] << 8) | tmp[4]);
 
     return pos;
 }
 
 ActionResponse Server::decodeActionResponse(std::vector<int8_t>& buffer)
 {
-    ActionResponse pos;
+
+    std::vector<int8_t> tmp;
 
     {
         std::lock_guard<std::mutex> lock(mtx);
 
-        if (buffer[0] != 0x25) {
-            throw std::runtime_error("Type de message invalide !");
-        }
-    
-        pos.type = buffer[0];
-        pos.player_id = (buffer[1] << 8) | buffer[2];
-        pos.input = static_cast<Action>((buffer[3] << 8) | buffer[4]);
-    
+        tmp.insert(tmp.begin(), buffer.begin(), buffer.begin() + 5);
+    }
+
+    if (tmp[0] !=  0x25) {
+        throw std::runtime_error("Type de message invalide !");
+    }
+
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+
         buffer.clear();
     }
+
+    ActionResponse pos;
+    
+    pos.type = tmp[0];
+    pos.player_id = (tmp[1] << 8) | tmp[2];
+    pos.input = static_cast<Action>((tmp[3] << 8) | tmp[4]);
 
     return pos;
 }

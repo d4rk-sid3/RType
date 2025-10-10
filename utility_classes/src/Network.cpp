@@ -56,18 +56,6 @@ void NetworkManager::run()
     }
 }
 
-void NetworkManager::add_connection(const asio::ip::udp::endpoint& ep) {
-    static int id = 0;
-
-    if (std::find_if(clients.begin(), clients.end(),
-                        [&](const client_info_t& client) {
-                            return client.endpoint == ep;
-                        }
-            ) == clients.end()
-        )
-            clients.push_back({ep, id++});
-}
-
 void NetworkManager::receive_from_clients()
 {
     socket.async_receive_from(asio::buffer(buff), last_sender_, 

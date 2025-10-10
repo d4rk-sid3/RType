@@ -60,9 +60,6 @@ class NetworkManager {
     asio::io_context& getContext();
     asio::ip::udp::endpoint& getServerendpoint();
 
-    // Utility methods
-    void add_connection(const asio::ip::udp::endpoint& ep);
-
   private:
     asio::io_context context;
     asio::ip::udp::socket socket;

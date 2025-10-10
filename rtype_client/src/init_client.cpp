@@ -45,8 +45,15 @@ bool isInside(std::vector<EnemyMovedResponse> vec, size_t id)
 
 std::vector<EnemyMovedResponse> Client::recupAllEntities()
 {
-    if (!lastmsg.empty()) {    
-        std::lock_guard<std::mutex> lock(mtx);  
+    bool isempty;
+
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+
+        isempty = lastmsg.empty();
+    }
+
+    if (!isempty) {
         NbrEntity e = decodeNbrEntity(lastmsg);
 
         // std::cout << "E: "  << static_cast<int>(e.nbr) << std::endl;
@@ -62,10 +69,8 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities()
             std::cout << "Enemy_Pos_x: "  << static_cast<int16_t>(a.position.x) << " ";
             std::cout << "Enemy_Pos_y: "  << static_cast<int16_t>(a.position.y) << std::endl;
         }
-
-        lastmsg.clear();
-
         return s;
+
     } else {
         std::vector<EnemyMovedResponse> tmp;
 
