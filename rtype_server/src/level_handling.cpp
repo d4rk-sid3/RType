@@ -131,15 +131,10 @@ void Server::receivePlayerInput(double delta)
 
         std::vector<int8_t> tmp = msg.second;
 
-        velocity &vel = reg.get_components<component::velocity>()[all_clients[msg.first]].value();
-        MoveResponse move_info = decodeMoveResponse(tmp);
-        
-        std::lock_guard<std::mutex> lock(mtx);
-        
-        if (type == 0x24) {
+        if (tmp[0] == 0x24) {
             std::cerr << "INPUT" << std::endl;
             
-            velocity &vel = reg.get_components<component::velocity>()[player1_entity_id].value();
+            velocity &vel = reg.get_components<component::velocity>()[all_clients[msg.first]].value();
             MoveResponse move_info = decodeMoveResponse(tmp);
             
             if (move_info.direction == LEFT) {
@@ -156,7 +151,7 @@ void Server::receivePlayerInput(double delta)
             }
         
         }
-        if (type == 0x25) {
+        if (tmp[0] == 0x25) {
             
             std::cerr << "ACTION" << std::endl;
             ActionResponse action_info = decodeActionResponse(tmp);
@@ -165,7 +160,7 @@ void Server::receivePlayerInput(double delta)
                 Factory fac(reg);
                 shoot_timer = 0;
                 entity missile = fac.make_player_missile();
-                position &pos = reg.get_components<component::position>()[player1_entity_id].value();
+                position &pos = reg.get_components<component::position>()[all_clients[msg.first]].value();
                 position &missile_pos = reg.get_components<component::position>()[missile].value();
                 missile_pos.x = pos.x + 8;
                 missile_pos.y = pos.y + 6;
