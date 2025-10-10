@@ -1,41 +1,41 @@
-<map id="/home/jaggie/epitech_projects/G&#45;CPP&#45;500&#45;COT&#45;5&#45;1&#45;rtype&#45;8/engine/include/ResourceManager.hpp" name="/home/jaggie/epitech_projects/G&#45;CPP&#45;500&#45;COT&#45;5&#45;1&#45;rtype&#45;8/engine/include/ResourceManager.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="399,5,597,84"/>
-<area shape="rect" id="Node000002" href="$components_8hpp.html" title="This file defines the different types of components available to the engine." alt="" coords="266,259,464,337"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="473,99,388,259,383,257,468,97"/>
-<area shape="rect" id="Node000008" href="$registry_8hpp.html" title=" " alt="" coords="532,132,731,211"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="552,93,592,130,588,133,549,97"/>
-<area shape="rect" id="Node000003" href="$systems_8hpp.html" title=" " alt="" coords="424,385,623,464"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="428,345,476,383,472,387,424,349"/>
-<area shape="rect" id="Node000005" href="$main_8cpp.html" title=" " alt="" coords="5,385,191,464"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="269,347,182,387,180,382,267,342"/>
-<area shape="rect" id="Node000006" href="$systems_8cpp.html" title=" " alt="" coords="215,385,400,464"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="343,353,328,386,323,384,338,351"/>
-<area shape="rect" id="Node000007" href="$init__client_8cpp.html" title=" " alt="" coords="647,385,832,464"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="480,332,635,383,647,387,645,392,633,388,478,337"/>
-<area shape="rect" id="Node000004" href="$registry__systems_8cpp.html" title="This file contains the definition of the registry functions that handle the systems." alt="" coords="604,512,789,591"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="591,471,644,509,641,514,588,475"/>
-<area shape="poly" id="edge8_Node000008_Node000002" title=" " alt="" coords="536,220,449,261,446,256,534,215"/>
-<area shape="poly" id="edge9_Node000008_Node000003" title=" " alt="" coords="709,219,725,237,738,257,747,279,751,299,748,318,737,339,723,349,697,362,624,391,622,386,695,357,721,345,733,336,743,316,746,299,742,281,733,260,721,240,705,223"/>
-<area shape="poly" id="edge12_Node000008_Node000004" title=" " alt="" coords="715,218,762,257,793,288,815,314,831,344,846,385,856,426,855,444,846,465,822,495,791,517,788,513,818,491,841,463,849,443,851,426,841,386,827,346,810,317,789,291,759,261,711,222"/>
-<area shape="poly" id="edge10_Node000008_Node000005" title=" " alt="" coords="517,184,455,194,387,209,319,231,255,261,216,288,181,321,126,386,122,383,177,317,213,284,253,256,317,226,386,204,454,188,517,179"/>
-<area shape="poly" id="edge13_Node000008_Node000006" title=" " alt="" coords="568,223,528,260,513,281,504,300,495,319,477,339,441,367,402,389,399,384,438,362,474,335,490,316,499,298,508,279,524,257,564,219"/>
-<area shape="rect" id="Node000009" href="$registry__entities_8cpp.html" title="This file contains the definition of the registry functions that handle the entities." alt="" coords="539,259,724,337"/>
-<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="634,226,634,258,629,258,629,226"/>
-<area shape="rect" id="Node000010" href="$client_8hpp.html" title=" " alt="" coords="908,259,1093,337"/>
-<area shape="poly" id="edge14_Node000008_Node000010" title=" " alt="" coords="746,208,890,256,909,263,907,268,888,261,744,213"/>
-<area shape="rect" id="Node000013" href="$server_8hpp.html" title=" " alt="" coords="1536,259,1721,337"/>
-<area shape="poly" id="edge18_Node000008_Node000013" title=" " alt="" coords="747,184,1536,282,1535,288,746,190"/>
-<area shape="poly" id="edge17_Node000010_Node000007" title=" " alt="" coords="907,347,822,387,819,382,905,342"/>
-<area shape="rect" id="Node000011" href="$rtype__client_2src_2commands_8cpp.html" title=" " alt="" coords="908,385,1093,464"/>
-<area shape="poly" id="edge15_Node000010_Node000011" title=" " alt="" coords="1003,353,1003,385,998,385,998,353"/>
-<area shape="rect" id="Node000012" href="$rtype__client_2src_2decodeur_8cpp.html" title=" " alt="" coords="1117,385,1303,464"/>
-<area shape="poly" id="edge16_Node000010_Node000012" title=" " alt="" coords="1080,343,1146,383,1144,387,1077,348"/>
-<area shape="rect" id="Node000014" href="$rtype__server_2src_2commands_8cpp.html" title=" " alt="" coords="1745,385,1931,464"/>
-<area shape="poly" id="edge19_Node000013_Node000014" title=" " alt="" coords="1708,343,1774,383,1772,387,1705,348"/>
-<area shape="rect" id="Node000015" href="$rtype__server_2src_2decodeur_8cpp.html" title=" " alt="" coords="1955,385,2140,464"/>
-<area shape="poly" id="edge20_Node000013_Node000015" title=" " alt="" coords="1737,324,1944,383,1955,386,1954,392,1943,388,1736,329"/>
-<area shape="rect" id="Node000016" href="$init__server_8cpp.html" title=" " alt="" coords="1327,385,1512,464"/>
-<area shape="poly" id="edge21_Node000013_Node000016" title=" " alt="" coords="1552,348,1486,387,1483,383,1550,343"/>
-<area shape="rect" id="Node000017" href="$level__handling_8cpp.html" title=" " alt="" coords="1536,385,1721,464"/>
-<area shape="poly" id="edge22_Node000013_Node000017" title=" " alt="" coords="1631,353,1631,385,1626,385,1626,353"/>
+<map id="/home/jaggie/epitech_projects/neo&#45;r&#45;type/G&#45;CPP&#45;500&#45;COT&#45;5&#45;1&#45;rtype&#45;8/engine/include/ResourceManager.hpp" name="/home/jaggie/epitech_projects/neo&#45;r&#45;type/G&#45;CPP&#45;500&#45;COT&#45;5&#45;1&#45;rtype&#45;8/engine/include/ResourceManager.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="365,5,647,84"/>
+<area shape="rect" id="Node000002" href="$components_8hpp.html" title="This file defines the different types of components available to the engine." alt="" coords="223,267,469,346"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="477,98,372,268,367,265,472,96"/>
+<area shape="rect" id="Node000008" href="$registry_8hpp.html" title=" " alt="" coords="558,132,771,211"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="569,92,617,129,614,134,565,96"/>
+<area shape="rect" id="Node000003" href="$systems_8hpp.html" title=" " alt="" coords="434,411,655,490"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="414,353,492,408,489,413,411,357"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html" title=" " alt="" coords="5,411,196,490"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="267,356,169,413,166,408,264,352"/>
+<area shape="rect" id="Node000006" href="$systems_8cpp.html" title=" " alt="" coords="220,411,411,490"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="337,362,326,411,321,410,332,360"/>
+<area shape="rect" id="Node000007" href="$init__client_8cpp.html" title=" " alt="" coords="679,402,869,498"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="485,342,668,400,679,404,677,409,666,405,483,347"/>
+<area shape="rect" id="Node000004" href="$registry__systems_8cpp.html" title="This file contains the definition of the registry functions that handle the systems." alt="" coords="600,546,849,625"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="610,497,674,544,671,548,607,501"/>
+<area shape="poly" id="edge8_Node000008_Node000002" title=" " alt="" coords="559,219,440,269,438,264,557,215"/>
+<area shape="poly" id="edge9_Node000008_Node000003" title=" " alt="" coords="766,218,785,236,800,257,812,284,817,307,813,331,800,356,786,372,772,383,741,392,708,395,668,405,647,413,645,408,666,400,707,390,740,387,769,378,783,368,796,353,808,329,812,307,807,285,796,260,781,240,762,222"/>
+<area shape="poly" id="edge12_Node000008_Node000004" title=" " alt="" coords="779,217,805,235,828,257,854,292,868,324,883,402,894,452,893,474,883,499,861,527,832,548,829,543,857,523,878,497,888,473,889,452,878,403,863,325,849,295,824,260,801,239,775,221"/>
+<area shape="poly" id="edge10_Node000008_Node000005" title=" " alt="" coords="543,187,450,199,354,215,270,236,237,248,213,261,178,294,150,333,129,374,115,411,110,409,124,372,145,331,174,290,210,257,235,243,268,231,353,210,449,194,542,182"/>
+<area shape="poly" id="edge13_Node000008_Node000006" title=" " alt="" coords="579,222,533,260,517,285,509,308,500,331,482,356,446,387,405,413,402,408,442,383,479,353,496,329,504,306,512,283,529,257,576,218"/>
+<area shape="rect" id="Node000009" href="$registry__entities_8cpp.html" title="This file contains the definition of the registry functions that handle the entities." alt="" coords="543,267,786,346"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="667,226,667,267,662,267,662,226"/>
+<area shape="rect" id="Node000010" href="$client_8hpp.html" title=" " alt="" coords="956,259,1146,354"/>
+<area shape="poly" id="edge14_Node000008_Node000010" title=" " alt="" coords="787,210,925,256,956,267,955,272,924,261,785,215"/>
+<area shape="rect" id="Node000013" href="$server_8hpp.html" title=" " alt="" coords="1676,259,1866,354"/>
+<area shape="poly" id="edge18_Node000008_Node000013" title=" " alt="" coords="787,185,1676,291,1675,296,786,190"/>
+<area shape="poly" id="edge17_Node000010_Node000007" title=" " alt="" coords="946,364,868,404,865,399,944,359"/>
+<area shape="rect" id="Node000011" href="$rtype__client_2src_2commands_8cpp.html" title=" " alt="" coords="944,411,1185,490"/>
+<area shape="poly" id="edge15_Node000010_Node000011" title=" " alt="" coords="1060,370,1064,410,1058,411,1054,370"/>
+<area shape="rect" id="Node000012" href="$rtype__client_2src_2decodeur_8cpp.html" title=" " alt="" coords="1209,411,1437,490"/>
+<area shape="poly" id="edge16_Node000010_Node000012" title=" " alt="" coords="1157,360,1250,408,1247,413,1154,364"/>
+<area shape="rect" id="Node000014" href="$rtype__server_2src_2commands_8cpp.html" title=" " alt="" coords="1891,411,2137,490"/>
+<area shape="poly" id="edge19_Node000013_Node000014" title=" " alt="" coords="1867,360,1949,408,1946,412,1864,365"/>
+<area shape="rect" id="Node000015" href="$rtype__server_2src_2decodeur_8cpp.html" title=" " alt="" coords="2161,411,2395,490"/>
+<area shape="poly" id="edge20_Node000013_Node000015" title=" " alt="" coords="1882,330,2011,361,2149,400,2174,408,2172,413,2148,405,2009,366,1881,335"/>
+<area shape="rect" id="Node000016" href="$init__server_8cpp.html" title=" " alt="" coords="1461,402,1652,498"/>
+<area shape="poly" id="edge21_Node000013_Node000016" title=" " alt="" coords="1689,365,1629,404,1627,400,1686,361"/>
+<area shape="rect" id="Node000017" href="$level__handling_8cpp.html" title=" " alt="" coords="1676,402,1866,498"/>
+<area shape="poly" id="edge22_Node000013_Node000017" title=" " alt="" coords="1774,370,1774,402,1769,402,1769,370"/>
 </map>

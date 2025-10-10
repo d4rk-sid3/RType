@@ -1,11 +1,11 @@
-<map id="/home/jaggie/epitech_projects/G&#45;CPP&#45;500&#45;COT&#45;5&#45;1&#45;rtype&#45;8/engine/include/components.hpp" name="/home/jaggie/epitech_projects/G&#45;CPP&#45;500&#45;COT&#45;5&#45;1&#45;rtype&#45;8/engine/include/components.hpp">
-<area shape="rect" id="Node000001" title="This file defines the different types of components available to the engine." alt="" coords="561,5,759,84"/>
+<map id="/home/jaggie/epitech_projects/neo&#45;r&#45;type/G&#45;CPP&#45;500&#45;COT&#45;5&#45;1&#45;rtype&#45;8/engine/include/components.hpp" name="/home/jaggie/epitech_projects/neo&#45;r&#45;type/G&#45;CPP&#45;500&#45;COT&#45;5&#45;1&#45;rtype&#45;8/engine/include/components.hpp">
+<area shape="rect" id="Node000001" title="This file defines the different types of components available to the engine." alt="" coords="537,5,783,84"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="463,132,540,160"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="599,87,537,126,534,121,596,82"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="564,132,623,160"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="636,86,613,120,608,117,632,83"/>
 <area shape="rect" id="Node000004" href="$ResourceManager_8hpp.html" title=" " alt="" coords="1471,216,1636,244"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="760,63,1459,205,1481,210,1479,215,1458,210,759,68"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="784,68,1459,205,1481,210,1479,215,1458,210,783,73"/>
 <area shape="rect" id="Node000009" href="$entity_8hpp.html" title="This file contains the definition of the entity class." alt="" coords="5,216,91,244"/>
 <area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="665,85,659,125,650,145,636,162,617,175,592,186,531,199,458,205,379,206,222,203,155,204,103,210,93,213,91,208,102,205,155,198,222,197,379,200,458,200,530,194,590,181,614,170,633,158,645,142,653,124,660,84"/>
 <area shape="rect" id="Node000010" href="$registry_8hpp.html" title=" " alt="" coords="698,132,795,160"/>

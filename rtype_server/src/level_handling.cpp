@@ -124,13 +124,14 @@ void Server::receivePlayerInput(double delta)
         {
             if (all_clients.empty())
                 all_clients[msg.first] = player1_entity_id;
-            else    
+            else
                 all_clients[msg.first] = player2_entity_id;
             return;
         }
 
         std::vector<int8_t> tmp = msg.second;
 
+        try {
         if (tmp[0] == 0x24) {
             std::cerr << "INPUT" << std::endl;
             
@@ -166,6 +167,7 @@ void Server::receivePlayerInput(double delta)
                 missile_pos.y = pos.y + 6;
             }
         }
+        } catch (...) {}
 
     }
 

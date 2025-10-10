@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['client_0',['Client',['../classClient.html',1,'Client'],['../classClient.html#a802e0a6f59303939f824d41580deb82a',1,'Client::Client()'],['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html',1,'Client']]],
-  ['client_20int_20p_20std_3a_3astring_20address_20tt_1',['&lt;tt&gt;Client(int p, std::string address)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md4',1,'']]],
+  ['client_0',['Client',['../classClient.html',1,'Client'],['../classClient.html#a802e0a6f59303939f824d41580deb82a',1,'Client::Client()'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html',1,'Client']]],
+  ['client_20int_20p_20std_3a_3astring_20address_20tt_1',['&lt;tt&gt;Client(int p, std::string address)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md4',1,'']]],
   ['client_2ehpp_2',['client.hpp',['../client_8hpp.html',1,'']]],
   ['client_2emd_3',['Client.md',['../Client_8md.html',1,'']]],
   ['collision_5fsystem_4',['collision_system',['../systems_8cpp.html#a7b2843e480d89d8d75a7765a1b1d9d33',1,'collision_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::hurtbox &gt; &gt; &amp;hurtboxes, std::vector&lt; optional&lt; component::hitbox &gt; &gt; &amp;hitboxes):&#160;systems.cpp'],['../systems_8hpp.html#a7b2843e480d89d8d75a7765a1b1d9d33',1,'collision_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::hurtbox &gt; &gt; &amp;hurtboxes, std::vector&lt; optional&lt; component::hitbox &gt; &gt; &amp;hitboxes):&#160;systems.cpp']]],

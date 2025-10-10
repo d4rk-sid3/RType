@@ -103,6 +103,10 @@ bool shoot_at_player(registry &reg, position enemy_pos, double attack_range)
         }
     }
 
+    if (distance1 == distance2) {
+        return false;
+    }
+
     if (distance1 < distance2) {
         if (distance1 < attack_range)
             target_pos = reg.get_components<position>()[player1_entity_id].value();
@@ -113,12 +117,6 @@ bool shoot_at_player(registry &reg, position enemy_pos, double attack_range)
             target_pos = reg.get_components<position>()[player2_entity_id].value();
         else
             return false;
-    } else {
-        if (distance1 < attack_range) {
-            target_pos = reg.get_components<position>()[player1_entity_id].value();
-        } else {
-            return false;
-        }
     }
     
     Factory fac(reg);
@@ -270,8 +268,18 @@ void boss_logic(double delta, registry &reg, entity en) {
     static double t1 = 0.0;
     hurtbox &hb = reg.get_components<hurtbox>()[en].value();
     velocity &vel = reg.get_components<velocity>()[en].value();
+    position &pos = reg.get_components<position>()[en].value();
+
+    t1 += delta;
 
     vel.vy = sin(t1 * 2) * BOSS_SPEED;
+
+    if (pos.x > 500) {
+        vel.vx = -BOSS_SPEED;
+    } else {
+        vel.vx = 0;
+    }
+
 
     if (t < BOSS_SHOOT_COOLDOWN) {
         t += delta;
@@ -291,25 +299,24 @@ void boss_logic(double delta, registry &reg, entity en) {
         velocity &vel2 = reg.get_components<velocity>()[missile2].value();
         velocity &vel3 = reg.get_components<velocity>()[missile3].value();
 
-        pos1.x = pos.x;
-        pos2.x = pos.x;
-        pos3.x = pos.x;
-        pos1.y = pos.y;
-        pos2.y = pos.y;
-        pos3.y = pos.y;
+        pos1.x = pos.x + 30;
+        pos2.x = pos.x + 30;
+        pos3.x = pos.x + 30;
+        pos1.y = pos.y + 15;
+        pos2.y = pos.y + 15;
+        pos3.y = pos.y + 15;
 
-        vel1.vx = 0;
+        vel1.vx = -BOSS_MISSILE_SPEED / 2;
         vel1.vy = -BOSS_MISSILE_SPEED;
-        vel2.vx = 0;
+        vel2.vx = -BOSS_MISSILE_SPEED / 2;
         vel2.vy = BOSS_MISSILE_SPEED;
         vel3.vx = -BOSS_MISSILE_SPEED;
-        vel3.vy = -0;
+        vel3.vy = 0;
     }
 
     if (hb.hurt) {
         Factory fac(reg);
         entity hit_effect = fac.make_hit_effect();
-        position &pos = reg.get_components<position>()[en].value();
         position &hit_pos = reg.get_components<position>()[hit_effect].value();
         hit_pos.x = pos.x;
         hit_pos.y = pos.y;
@@ -318,7 +325,6 @@ void boss_logic(double delta, registry &reg, entity en) {
     if (hb.health <= 0) {
         Factory fac(reg);
         entity explosion = fac.make_explosion();
-        position &pos = reg.get_components<position>()[en].value();
         position &explosion_pos = reg.get_components<position>()[explosion].value();
         explosion_pos.x = pos.x;
         explosion_pos.y = pos.y;

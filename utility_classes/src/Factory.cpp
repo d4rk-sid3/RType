@@ -52,6 +52,8 @@ entity Factory::make_entity(const std::string& type) {
         return make_hit_effect();
     else if (type == "explosion")
         return make_explosion();
+    else if (type == "boss")
+        return make_boss();
 
     return entity(-1);
 }

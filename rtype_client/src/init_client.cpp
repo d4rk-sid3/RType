@@ -163,6 +163,7 @@ void Client::runLevel(double delta)
 
     for (auto it = new_vec.begin(); it != new_vec.end(); it++) {
         auto &entity = *it;
+        try {
         if (first_call) {
             if (getKey(entity.enemy_type) == "player1") {
                 old.push_back(entity);
@@ -185,12 +186,17 @@ void Client::runLevel(double delta)
             pos.x = entity.position.x;
             pos.y = entity.position.y;
         }
+        } catch (std::exception &e) {    
+        }
     }
     
     for (auto it = old.begin(); it != old.end(); it++) {
         auto &entity = *it;
         printf("Current entity real id: %d\n", ids_assoc[entity.enemy_id]);
         if (!isInside(new_vec, entity.enemy_id)) {
+            if (getKey(entity.enemy_type) == "player1") {
+                player_entity_id = -1;
+            }
             printf("Entity %d does not exist anymore. Killing\n", entity.enemy_id);
             try {
             _reg.kill_entity((class entity)(ids_assoc[entity.enemy_id]));
@@ -200,7 +206,6 @@ void Client::runLevel(double delta)
             printf("Entity %d killed\n", entity.enemy_id);
         }
     }
-
 
     old = new_vec;
     first_call = false;

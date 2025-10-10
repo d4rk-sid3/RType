@@ -17,7 +17,8 @@ std::map<std::string, EnemyType> type_map = {
     {"explosion", TYPE_7},
     {"hit_effect", TYPE_8},
     {"floor", TYPE_9},
-    {"ceiling", TYPE_10}
+    {"ceiling", TYPE_10},
+    {"boss", TYPE_11}
 };
 
 
