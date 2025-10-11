@@ -1,0 +1,13 @@
+/*Installer vcpkg
+apt-get install libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev
+export VCPKG_ROOT=/home/vrmelo/vcpkg
+Vérifier : echo $VCPKG_ROOT
+Vérifier que toolchain existe : ls -la $VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+///
+VCPKG est-il à jour ?
+cd /home/vrmelo/vcpkg
+git fetch --all
+git pull
+////
+sudo apt-get install autoconf automake libtool
+*/
