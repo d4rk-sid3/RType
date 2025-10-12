@@ -23,7 +23,7 @@
   - [Build the Program](#build-the-program)
   - [Testing Program](#testing-program)
   - [Documentation](#documentation)
-- [Technology Choices](#technology-choices)
+- [Technology Choices](#technologies-choices)
 - [Thank for Reading](#thank-for-reading)
 - [Authors](#authors)
 
