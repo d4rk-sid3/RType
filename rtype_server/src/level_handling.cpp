@@ -22,10 +22,22 @@
 #include "Factory.hpp"
 #include "logic_functions.hpp"
 
+/**
+ * @brief This file contains the definition of the level handling functions
+ * 
+ */
+
 using namespace component;
 
 using namespace libconfig;
 
+/**
+ * @brief This function loads a level from a configuration file
+ * It stores all the entities of the level in a vector with their spawn time
+ * and spawn y position
+ * 
+ * @param path 
+ */
 void Server::loadLevel(const std::string &path)
 {
     Config conf;
@@ -45,6 +57,10 @@ void Server::loadLevel(const std::string &path)
     }
 }
 
+/**
+ * @brief This functions send to the clients information about each game entity alive
+ * 
+ */
 void Server::logGameEntities()
 {
     std::vector<std::string> special_entities = {"background", "menu_background_music"};
@@ -91,6 +107,11 @@ void Server::logGameEntities()
     result.insert(result.begin(), tmp.begin(), tmp.end());
 }
 
+/**
+ * @brief This function handles the received players' inputs
+ * 
+ * @param delta 
+ */
 void Server::receivePlayerInput(double delta)
 {
     static double shoot_timer = 0;
@@ -173,6 +194,12 @@ void Server::receivePlayerInput(double delta)
 
 }
 
+/**
+ * @brief This function runs the current level
+ * It makes sure to spawn new entities if their spawn time has come
+ * And calls the receivePlayerInput function as well as the logGameEntities function
+ * @param delta The amount of time elapsed since the last frame
+ */
 void Server::runLevel(double delta)
 {
     Factory factory(reg);
@@ -201,19 +228,4 @@ void Server::runLevel(double delta)
             server_.send_to_client(result, result.size(), tmp.first);
         }
     }
-    
-    // for (auto it = entities.begin(); it != entities.end();) {
-    //     auto &entity = *it;
-
-    //     // Continue if the entity is not spawned yet
-    //     if (it->entity_id == -1) {
-    //         ++it;
-    //         continue;
-    //     }
-
-    //     // Get rid of dead entities
-    //     if (std::find(reg.dead_entities.begin(), reg.dead_entities.end(), entity.entity_id) != reg.dead_entities.end()) {
-    //         it = entities.erase(it);
-    //         continue;-+
-    //     }
 }

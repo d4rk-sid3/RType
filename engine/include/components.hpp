@@ -130,6 +130,12 @@ namespace component {
         double frame_duration;
         double frame_timer;
 
+        /**
+         * @brief Set the Texture of the sprite to the texture associated with the
+         * name parameter in the ResourceManager
+         * 
+         * @param texture_name the name of the texture in the resource manager
+         */
         void setTextureFromName(std::string texture_name) {
             one_shot = false;
             done_once = false;

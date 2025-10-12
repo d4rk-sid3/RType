@@ -5,8 +5,23 @@
 ** init_server
 */
 
+/**
+ * @file init_server.cpp
+ * @author Farouk OKANLA
+ * @brief This file contains the definition of the server initializing funcions
+ * @version 0.1
+ * @date 2025-10-12
+ * 
+ * @copyright Copyright (c)
+ * 
+ */
+
 #include "../include/server.hpp"
 
+/**
+ * @brief This function uses the ResourceManager to pre-load textures and fonts that will be used in the game
+ * 
+ */
 void load_textures(void)
 {
     ResourceManager::Instance().load("assets/sprites/player/player1.gif", "player1", TEXTURE);
@@ -26,6 +41,10 @@ void load_textures(void)
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
 
+/**
+ * @brief This function initializes the game
+ * 
+ */
 void Server::initializeGame(void)
 {
     Factory factory(reg);
@@ -45,6 +64,12 @@ void Server::initializeGame(void)
     factory.make_menu_background_music();
 }
 
+/**
+ * @brief Construct a new Server:: Server object
+ * 
+ * @param p The port
+ * @param regis A reference to a registry
+ */
 Server::Server(int p, registry &regis) : server_(p, std::ref(messages), std::ref(mtx)), p_(p), reg(regis)
 {
     load_textures();
@@ -52,6 +77,10 @@ Server::Server(int p, registry &regis) : server_(p, std::ref(messages), std::ref
     loadLevel("assets/levels/test.txt");
 }
 
+/**
+ * @brief Destroy the Server:: Server object
+ * 
+ */
 Server::~Server()
 {
 

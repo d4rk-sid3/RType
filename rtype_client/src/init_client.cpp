@@ -5,9 +5,24 @@
 ** init_client
 */
 
+/**
+ * @file init_client.cpp
+ * @author Farouk OKANLA
+ * @brief This file contains the definition of the client functions
+ * @version 0.1
+ * @date 2025-10-12
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include "../include/client.hpp"
 #include "components.hpp"
 
+/**
+ * @brief This function uses the ResourceManager to pre-load textures
+ * and fonts that will be used in the game
+ */
 void load_client_textures(void)
 {
     ResourceManager::Instance().load("assets/sprites/player/player1.gif", "player1", TEXTURE);
@@ -27,13 +42,27 @@ void load_client_textures(void)
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
 
+/**
+ * @brief Construct a new Client:: Client object
+ * 
+ * @param p The port to connect to
+ * @param address The server address
+ * @param reg A reference to the registry which will let the game take place
+ */
 Client::Client(int p, std::string address, registry& reg): port_(p), client_(p, address, std::ref(lastmsg), std::ref(mtx)),  _reg(reg)
 {
     load_client_textures();
     //initMenu();
     initGame();
 }
-
+/**
+ * @brief A utility function to check in an entity of a certain id is inside a vector
+ * 
+ * @param vec A vector of entities informations
+ * @param id The id of the entity to search
+ * @return true if the entity is in the vector
+ * @return false if the entity is not in the vector
+ */
 bool isInside(std::vector<EnemyMovedResponse> vec, size_t id)
 {
     for (auto it = vec.begin(); it != vec.end(); it++) {
@@ -43,6 +72,12 @@ bool isInside(std::vector<EnemyMovedResponse> vec, size_t id)
     return false;
 }
 
+/**
+ * @brief This functions gets all the entities informations sent by the server
+ * and puts them in a vector
+ * 
+ * @return std::vector<EnemyMovedResponse> 
+ */
 std::vector<EnemyMovedResponse> Client::recupAllEntities()
 {
     bool isempty;
@@ -78,6 +113,10 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities()
     }
 }
 
+/**
+ * @brief This function checks if the player is entering inputs and sends info to the server
+ * accordingly
+ */
 void Client::sendPlayerInput()
 {
     if (player_entity_id == -1)
@@ -116,6 +155,10 @@ void Client::sendPlayerInput()
     
 }
 
+/**
+ * @brief This function checks if the player is shooting and sends info to the server accordingly
+ * 
+ */
 void Client::sendPlayerAction()
 {
     if (player_entity_id == -1)
@@ -143,7 +186,12 @@ void Client::sendPlayerAction()
     client_.send_to_server(buff, buff.size());    
 }
 
-
+/**
+ * @brief This function returns the name of an entity type
+ * 
+ * @param value the entity type
+ * @return std::string 
+ */
 std::string getKey(int value)
 {
     for (const auto& pair : type_map) {
@@ -153,6 +201,13 @@ std::string getKey(int value)
     return "";
 }
 
+/**
+ * @brief This function updates the game state. It gets all the entities sent by the server and checks for changes.
+ * If an entity is new, it creates a new entity in the registry. If an entity is updated, it updates the entity in the registry.
+ * If an entity is removed, it removes the entity from the registry.
+ * 
+ * @param delta the time since the last update
+ */
 void Client::runLevel(double delta)
 {
     static bool first_call = true;
@@ -216,11 +271,19 @@ void Client::runLevel(double delta)
     first_call = false;
 }
 
+/**
+ * @brief Destroy the Client:: Client object
+ * 
+ */
 Client::~Client()
 {
 
 }
 
+/**
+ * @brief This function initializes the menu
+ * 
+ */
 void Client::initMenu()
 {
     Factory fac(_reg);
@@ -232,6 +295,11 @@ void Client::initMenu()
     _reg.add_component<component::controllable>(menu_info.start_text, component::controllable());
 }
 
+/**
+ * @brief This function runs the menu
+ * 
+ * @param delta The amount of time elapsed since the last frame
+ */
 void Client::runMenu(double delta)
 {
     Factory fac(_reg);
@@ -252,6 +320,10 @@ void Client::runMenu(double delta)
     }
 }
 
+/**
+ * @brief This function initializes the game
+ * 
+ */
 void Client::initGame()
 {
     Factory factory(_reg);

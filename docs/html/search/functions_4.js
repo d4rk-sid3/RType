@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['get_5fcomponents_0',['get_components',['../classregistry.html#ad397b1104bc8510105b4e4d6b90f87cc',1,'registry::get_components()'],['../classregistry.html#a40b0f07dfe9c916d667732c73ef9272a',1,'registry::get_components() const']]],
+  ['get_5fcomponents_0',['get_components',['../classregistry.html#ad397b1104bc8510105b4e4d6b90f87cc',1,'registry::get_components()'],['../classregistry.html#a40b0f07dfe9c916d667732c73ef9272a',1,'registry::get_components() const'],['../classregistry.html#a40b0f07dfe9c916d667732c73ef9272a',1,'registry::get_components() const']]],
   ['get_5fwindow_1',['get_window',['../classregistry.html#a202893edec86ab9275b46be5ea71e78e',1,'registry']]],
   ['getcomponentnum_2',['getComponentNum',['../classregistry.html#a2203e584cc8b5829c26094e21bab2d21',1,'registry']]],
   ['getentitynum_3',['getEntityNum',['../classregistry.html#a05b69b2f3a790c425e0d1df40e7fb322',1,'registry']]],

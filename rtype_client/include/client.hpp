@@ -5,6 +5,11 @@
 ** client
 */
 
+/**
+ * @brief The client class definition file
+ * 
+ */
+
 #ifndef CLIENT_HPP_
 #define CLIENT_HPP_
 #include <algorithm>
@@ -20,8 +25,17 @@
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
 
+/**
+ * @brief A global variable to store the id of the player in the registry
+ * This variable is useful to access infos on the player all accross the program
+ * 
+ */
 inline int player_entity_id = -1;
 
+/**
+ * @brief A struct to store infos on an entity to be spawned in the level
+ * 
+ */
 typedef struct entity_info_s {
     entity entity_id;
     std::string type;
@@ -29,6 +43,10 @@ typedef struct entity_info_s {
     double spawn_y;
 } entity_info_t;
 
+/**
+ * @brief An enum to define the different states of the game
+ * 
+ */
 typedef enum { MENU, TRANSITION, GAME, GAME_OVER } state_t;
 
 typedef struct menu_info_s {
@@ -40,6 +58,12 @@ typedef struct menu_info_s {
     entity menu_fade_out_rect;
 } menu_info_t;
 
+/**
+ * @brief The client class. Handles the client side of the game.
+ * All the client does is send messages to the server if the player tries to move,
+ * and also receive the game state from the server in order to update the game
+ * 
+ */
 class Client {
   private:
     registry& _reg;
@@ -57,7 +81,12 @@ class Client {
     std::vector<EnemyMovedResponse> new_vec;
 
     public:
+    /**
+     * @brief The current state of the game
+     * 
+     */
     state_t state = GAME;
+
     Client(int p, std::string a, registry &reg);
     ~Client();
 

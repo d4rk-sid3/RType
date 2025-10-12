@@ -31,6 +31,14 @@
 #include "../include/components.hpp"
 #include "../include/registry.hpp"
 
+/**
+ * @brief The position system. This system updates the position of each entity
+ *  based on its velocity
+ * @param delta The amount of time elapsed since the last frame
+ * @param reg A reference to the registry
+ * @param positions The table of position components
+ * @param velocities The table of velocity components
+ */
 void position_system(
     double delta, registry& reg,
     std::vector<optional<component::position>>& positions,
@@ -51,6 +59,18 @@ void position_system(
     }
 }
 
+/**
+ * @brief The draw system. This system draws to screen all the entities that have a drawable, animated drawable or text component AND
+ * a position component.
+ * 
+ * @param delta The amount of time elapsed since the last frame
+ * @param reg A reference to the registry
+ * @param window A reference to render window
+ * @param positions The table of position components
+ * @param draws The table of drawable components
+ * @param anim_draws The table of animated drawable components
+ * @param texts The table of text components
+ */
 void draw_system(double delta, registry &reg, sf::RenderWindow &window,
                         std::vector<optional<component::position>> &positions,
                         std::vector<optional<component::drawable>> &draws,
@@ -103,6 +123,14 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
     window.display();
 }
 
+/**
+ * @brief The control system. This system updates the controllable components by listening for inputs and
+ * setting the corresponding booleans in the component to true if the key is pressed and false otherwise
+ * 
+ * @param delta The amount of time elapsed since the last frame
+ * @param reg A reference to the registry
+ * @param controls The table of controllable components
+ */
 void control_system(
     double delta, registry& reg,
     std::vector<optional<component::controllable>>& controls
@@ -123,6 +151,16 @@ void control_system(
     }
 }
 
+/**
+ * @brief The collision system. This system goes through each hurtbox and hitbox component
+ * and checks if they are colliding
+ * 
+ * @param delta The amount of time elapsed since the last frame
+ * @param reg A reference to the registry
+ * @param positions The table of position components
+ * @param hurtboxes The table of hurtbox components
+ * @param hitboxes The table of hitbox components
+ */
 void collision_system(
     double delta, registry& reg,
     std::vector<optional<component::position>>& positions,
@@ -187,6 +225,13 @@ void collision_system(
     }
 }
 
+/**
+ * @brief The logic system goes through each entity with a logic component and
+ * executes its logic function
+ * @param delta The amount of time elapsed since the last frame
+ * @param reg A reference to the registry
+ * @param logics The table of logic components
+ */
 void logic_system(
     double delta, registry& reg, std::vector<optional<component::logic>>& logics
 )
