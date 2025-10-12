@@ -42,51 +42,154 @@ typedef struct menu_info_s {
 
 class Client {
   private:
+    /**
+     * @brief The registry that holds all entities and components
+     */
     registry reg;
+
+    /**
+     * @brief The factory that creates entities and components
+     */
     Factory factory;
+
+    /**
+     * @brief The port to connect to the server
+     */
     int port_;
+
+    /**
+     * @brief The menu information
+     */
     menu_info_t menu_info;
+
+    /**
+     * @brief The timer for the level
+     */
     double levelTimer = 0.0;
+
+    /**
+     * @brief The network manager that handles communication with the server
+     */
     NetworkManager client_;
+
+    /**
+     * @brief Mutex for thread safety
+     */
     std::mutex mtx;
 
     // This map associates the servers_ids to the client_ids in the registry
+    /**
+     * @brief Map that associates server entity IDs to client entity IDs
+     */
     std::unordered_map<size_t, size_t> ids_assoc;
+
+    /**
+     * @brief The last message received from the server
+     */
     std::vector<int8_t> lastmsg;
 
+    /**
+     * @brief Vectors to hold old and new entity states for comparison
+     */
     std::vector<EnemyMovedResponse> old;
     std::vector<EnemyMovedResponse> new_vec;
 
+    /**
+     * @brief Window for rendering
+     */
     sf::RenderWindow win;
 
+    /**
+     * @brief Event for handling window events
+     */
     sf::Event event;
+
+    /**
+     * @brief Clock for managing frame time
+     */
     sf::Clock frameClock;
 
+    /**
+     * @brief Thread for running the network manager
+     */
     std::thread networkThread;
 
+    /**
+     * @brief Initialize all menu related elements
+     */
     void initMenu();
+
+    /**
+     * @brief Run the menu logic
+     */
     void runMenu(double delta);
+
+    /**
+     * @brief Initialize all game related elements
+     */
     void initGame();
+
+    /**
+     * @brief Run the game logic
+     */
     void runLevel(double delta);
+
+    /**
+     * @brief Send the player's input to the server
+     */
     void sendPlayerInput();
+
+    /**
+     * @brief Send the player's action (e.g., shooting) to the server
+     */
     void sendPlayerAction();
 
+    /**
+     * @brief The current state of the game (menu, transition, game, game over)
+     */
     state_t state;
 
   public:
+    /**
+     * @brief Construct a new Client object
+     */
     Client(int p, std::string addr);
+
+    /**
+     * @brief Destroy the Client object
+     */
     ~Client();
 
+    /**
+     * @brief Get all entities from the last server message
+     */
     std::vector<EnemyMovedResponse> recupAllEntities();
     
     // decodeur
+    /**
+     * @brief Decode a NbrEntity structure from a byte buffer
+     */
     NbrEntity decodeNbrEntity(std::vector<int8_t>& buffer);
+
+    /**
+     * @brief Decode an EnemyMovedResponse structure from a byte buffer
+     */
     EnemyMovedResponse decodeEnemyMovedResponse(std::vector<int8_t>& buffer);
 
     // encodeur
+    /**
+     * @brief Encode a MoveResponse structure into a byte buffer
+     */
     std::vector<int8_t> encodeMoveResponse(const MoveResponse& pos);
+
+    /**
+     * @brief Encode an ActionResponse structure into a byte buffer
+     */
     std::vector<int8_t> encodeActionResponse(const ActionResponse& pos);
 
+    /**
+     * @brief Run the client application
+     */
     void run();
 };
 

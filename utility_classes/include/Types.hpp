@@ -12,6 +12,9 @@
 #include <string>
 #include <vector>
 
+#ifndef TYPES_HPP_
+#define TYPES_HPP_
+
 enum Direction : int16_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
 enum Action : int16_t { SPACE = 4 };
@@ -59,3 +62,4 @@ typedef struct client_info {
   std::vector<int8_t> lastmsg;
 } client_info_t;
 
+#endif /* !TYPES_HPP_ */
