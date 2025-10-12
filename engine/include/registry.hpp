@@ -37,20 +37,49 @@
 #include <typeindex>
 #include <unordered_map>
 #include <vector>
+
+#include <SFML/Graphics.hpp>
+
+#include "ResourceManager.hpp"
 #include "entity.hpp"
 #include "exceptions.hpp"
-#include "ResourceManager.hpp"
-#include <SFML/Graphics.hpp>
 
 using namespace std;
 
 /**
- * @brief The registry class
+ * @brief The registry class. The registry is a container for all the entities and
+ * components of the game. It is home to the ECS engine. It stores the entities
+ * and the components and provides ways to interact with them. It also provides
+ * the systems that will be executed at each frame to update the state of the
+ * entities and their components.
  *
  */
 class registry {
-  public:
-
+    public:
+    /**
+     * @brief A boolean that indicates if the collisions system is active
+     * 
+     */
+    bool collisions_active = true;
+    /**
+     * @brief A boolean that indicates if the render system is active
+     * 
+     */
+    bool render_active = true;
+    /**
+     * @brief A boolean that indicates if the logic system is active
+     * 
+     */
+    bool logic_active = true;
+    /**
+     * @brief A boolean that indicates if the control system is active
+     * 
+     */
+    bool control_active = true;
+    /**
+     * @brief A vector of entities id that are dead and can be reused
+     * 
+     */
     vector<entity> dead_entities;
 
     registry(sf::RenderWindow& window);
@@ -60,14 +89,14 @@ class registry {
     template <typename Component>
     vector<optional<Component>>& register_components();
 
-    template <typename Component>
-    vector<optional<Component>>& get_components();
+    template <typename Component> vector<optional<Component>>& get_components();
 
     template <typename Component>
     vector<optional<Component>> const& get_components() const;
 
     /* Single component management */
     template <typename Component> void remove_component(entity const& from);
+
 
     template <typename Component>
     Component& add_component(entity const& to, Component&& c);
@@ -131,6 +160,7 @@ class registry {
     sf::Clock clock;
 
     void register_all_systems();
+
 };
 
 #include "../src/registry_single_comp.tpp"

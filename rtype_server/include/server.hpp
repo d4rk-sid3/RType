@@ -5,19 +5,38 @@
 ** server
 */
 
+/**
+ * @brief The file contains the definition of the server class
+ * 
+ */
+
 #ifndef SERVER_HPP_
 #define SERVER_HPP_
-#include "Network.hpp"
-#include <vector>
 #include <algorithm>
-#include "registry.hpp"
+#include <vector>
+
 #include "Factory.hpp"
+#include "Network.hpp"
+#include "registry.hpp"
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
 
-inline int player_entity_id = 0;
+/**
+ * @brief A global variable to store the id of the first player in the registry
+ * 
+ */
+inline int player1_entity_id = -1;
+/**
+ * @brief A global variable to store the id of the second player in the registry
+ * 
+ */
+inline int player2_entity_id = -1;
 
+/**
+ * @brief A struct to store the information of an entity to be spawned on the level
+ * 
+ */
 typedef struct entity_info_s {
     entity entity_id;
     std::string type;
@@ -25,75 +44,51 @@ typedef struct entity_info_s {
     double spawn_y;
 } entity_info_t;
 
+/**
+ * @brief The server class. Handles the server side of the game.
+ * At the start of the game, the server loads the level entities from a configuration file
+ * The server holds the simulation of the game with all these entities and teh players.
+ * It listens from inputs from the clients and sends the game state to the them on each frame
+ */
 class Server {
   private:
     int p_;
     registry &reg;
-    Factory &factory;
     double levelTimer = 0.0;
+    std::mutex mtx;
   
     void loadLevel(const std::string &path);
-    void spawn_player(void);
-    
-    MoveResponse response;
-    MoveRequest move;
+    void initializeGame(void);
+    void logGameEntities(void);
+    void receivePlayerInput(double delta);
+
     NetworkManager server_;
 
     std::vector<entity_info_t> entities;
-    std::vector<entity> active_entities;
 
-    public:
-    void runLevel(double delta);
-    Server(int p, registry &reg, Factory &fac);
+    std::vector<int8_t> result;
+  
+    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> messages;
+
+    int counter = 0;
+
+    std::map<asio::ip::udp::endpoint, int> all_clients;
+
+  public:
+    Server(int p, registry &reg);
     ~Server();
-    MoveResponse getMove();
-    MoveResponse recupMove(
-        const std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint>& a,
-        MoveRequest& m
-    );
 
-    // update
-    MoveResponse
-    updateMoveResponse(const MoveResponse& oldpos, const MoveResponse& pos);
-    ShootResponse
-    updateShootResponse(const ShootResponse& oldpos, const ShootResponse& pos);
-    PickupItemResponse updatePickupItemResponse(
-        const PickupItemResponse& oldpos, const PickupItemResponse& pos
-    );
-
-    // decodeur
-    MoveRequest decodeMoveRequest(const std::vector<uint8_t>& buffer);
-    ShootRequest decodeShootRequest(const std::vector<uint8_t>& buffer);
-    PickupItemResquest
-    decodePickupItemResquest(const std::vector<uint8_t>& buffer);
-    GamePausedRequest decodeGamePausedRequest(const std::vector<uint8_t>& buffer
-    );
+    NetworkManager &getManager() { return server_; }
 
     // encodeur
-    std::vector<uint8_t> encodeMoveResponse(const MoveResponse& pos);
-    std::vector<uint8_t> encodeShootResponse(const ShootResponse& pos);
-    std::vector<uint8_t> encodePickupItemResponse(const PickupItemResponse& pos
-    );
-    std::vector<uint8_t>
-    encodePlayerStateResponse(const PlayerStateResponse& pos);
-    std::vector<uint8_t>
-    encodePlayerGameStateResponse(const PlayerGameStateResponse& pos);
-    std::vector<uint8_t> encodeBeatBossResponse(const BeatBossResponse& pos);
-    std::vector<uint8_t> encodeCheckpointResponse(const CheckpointResponse& pos
-    );
-    std::vector<uint8_t>
-    encodeGameStartedResponse(const GameStartedResponse& pos);
-    std::vector<uint8_t> encodeGamePausedResponse(const GamePausedResponse& pos
-    );
-    std::vector<uint8_t> encodeGameStateResponse(const GameStateResponse& pos);
-    std::vector<uint8_t>
-    encodeEnemySpawnedResponse(const EnemySpawnedResponse& pos);
-    std::vector<uint8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos
-    );
-    std::vector<uint8_t> encodedEnemyFiredResponse(const EnemyFiredResponse& pos
-    );
-    std::vector<uint8_t> encodeEnemyDiedResponse(const EnemyDiedResponse& pos);
-    std::vector<uint8_t> encodeCollisionResponse(const CollisionResponse& pos);
+    std::vector<int8_t> encodeNbrEntity(const NbrEntity& pos);
+    std::vector<int8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos);
+
+    // decodeur
+    MoveResponse decodeMoveResponse(std::vector<int8_t>& buffer);
+    ActionResponse decodeActionResponse(std::vector<int8_t>& buffer);
+
+    void runLevel(double delta);
 };
 
 #endif /* !SERVER_HPP_ */

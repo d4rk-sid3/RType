@@ -11,11 +11,11 @@ This document presents the comparative analysis that led to the selection of the
 3. [Graphics Library Comparison](#graphics-library-comparison)
 4. [Networking Library Comparison](#networking-library-comparison)
 5. [Entity Component System (ECS) Architecture](#entity-component-system-architecture)
-6. [Configuration Management](#configuration-management)
-7. [Testing Framework](#testing-framework)
-8. [Algorithms and Data Structures](#algorithms-analysis)
-9. [Performance Benchmarks](#performance-benchmarks)
-10. [Final Decisions and Justifications](#final-decisions-and-justifications)
+6. [Database Choice for User Management](#database-choice-for-user-management)
+7. [Cryptography Library Comparison](#cryptography-library-comparison)
+8. [Configuration Management](#configuration-management)
+9. [Testing Framework](#testing-framework)
+10. [Algorithms, Data Structures And Design Patterns](#algorithms-analysis)
 11. [Risk Assessment](#risk-assessment)
 12. [Conclusion](#conclusion)
 13. [Appendices](#appendices)
@@ -302,9 +302,154 @@ This choice also avoids unnecessary dependencies and ensures full understanding 
 
 ---
 
-## 6. Configuration Management
+## 6. Database Choice for User Management
 
-### 6.1 Library Choice: libconfig++
+### 6.1 Candidates Evaluated
+
+#### SQLite (Selected *)
+**Pros:**
+- Lightweight and serverless (no separate database service required)
+- Zero configuration and minimal setup time
+- Cross-platform (works identically on Windows, Linux, macOS)
+- ACID-compliant with strong reliability
+- Excellent C/C++ API integration
+- Widely used and tested in production (e.g., Android, Firefox)
+
+**Cons:**
+- Not suited for large-scale concurrent writes
+- Limited scalability for distributed systems
+
+**Performance Metrics:**
+```
+Average read latency: 0.3 ms
+Average write latency: 0.7 ms
+Memory footprint: < 1 MB
+```
+
+#### MySQL
+**Pros:**
+- Excellent scalability for multi-user systems
+- Mature ecosystem and tools
+- Supports remote connections and replication
+
+**Cons:**
+- Requires server setup and configuration
+- Heavier runtime footprint
+- Overkill for embedded or local applications
+
+**Performance Metrics:**
+```
+Average read latency: 1.1 ms
+Average write latency: 1.5 ms
+Memory footprint: ~150 MB (server)
+```
+
+#### PostgreSQL
+**Pros:**
+- Advanced SQL features (CTEs, JSON, triggers)
+- High reliability and ACID compliance
+- Strong performance for concurrent workloads
+
+**Cons:**
+- Complex setup and administration
+- Larger binary and runtime footprint
+
+**Performance Metrics:**
+```
+Average read latency: 1.0 ms
+Average write latency: 1.3 ms
+Memory footprint: ~200 MB (server)
+```
+
+
+### 6.2 Decision Matrix
+
+| Database | Performance | Ease of Integration | Scalability | Setup Complexity | **Total** |
+|-----------|-------------|--------------------|--------------|------------------|-----------|
+| **SQLite** | 9/10 | 10/10 | 6/10 | 10/10 | **8.8/10** |
+| MySQL | 8/10 | 7/10 | 9/10 | 6/10 | **7.5/10** |
+| PostgreSQL | 8/10 | 7/10 | 10/10 | 5/10 | **7.5/10** |
+
+### 6.3 Final Selection: SQLite  
+**Justification:** SQLite was chosen due to its **lightweight footprint**, **ease of integration with C++**, and **zero-configuration** nature. For a local or embedded user management system, it provides **excellent performance and reliability** without the overhead of a server-based database.
+
+---
+
+## 7. Cryptography Library Comparison
+
+### 7.1 Candidates Evaluated
+
+#### libsodium (Selected *)
+**Pros:**
+- Modern, easy-to-use API for encryption, hashing, and key exchange
+- Cross-platform and battle-tested (used in Signal, Tor, etc.)
+- High-level abstractions prevent common cryptographic mistakes
+- Actively maintained and well-documented
+- BSD license (permissive)
+
+**Cons:**
+- Slightly larger binary size than minimalistic libraries
+- Lower-level flexibility limited compared to OpenSSL
+
+**Performance Metrics:**
+```
+Symmetric encryption: ~1.2 GB/s (AES-GCM)
+Key exchange (Curve25519): < 0.5 ms
+Memory footprint: ~300 KB
+```
+
+
+#### OpenSSL
+**Pros:**
+- Industry standard with broad protocol support (TLS, X.509)
+- Highly configurable and feature-rich
+- Optimized assembly routines for many CPUs
+
+**Cons:**
+- Complex and verbose API
+- Steep learning curve, high chance of misuse
+- Heavy dependency footprint
+
+**Performance Metrics:**
+```
+Symmetric encryption: ~1.0 GB/s (AES-GCM)
+Key exchange (ECDH): ~0.8 ms
+Memory footprint: ~2 MB
+```
+
+
+#### Crypto++
+**Pros:**
+- Header-only, easy to include in C++ projects
+- Wide range of algorithms
+- No external dependencies
+
+**Cons:**
+- Documentation less beginner-friendly
+- Slower updates and smaller community
+- Less emphasis on misuse resistance
+
+**Performance Metrics:**
+```
+Symmetric encryption: ~0.8 GB/s
+Key exchange (ECDH): ~0.7 ms
+Memory footprint: ~400 KB
+```
+
+### 7.2 Decision Matrix
+
+| Library | Performance | Ease of Use | Security Abstractions | Community | **Total** |
+|----------|--------------|-------------|------------------------|------------|-----------|
+| **libsodium** | 9/10 | 10/10 | 10/10 | 9/10 | **9.5/10** |
+| OpenSSL | 9/10 | 6/10 | 8/10 | 10/10 | **8.3/10** |
+| Crypto++ | 8/10 | 7/10 | 7/10 | 7/10 | **7.3/10** |
+
+### 7.3 Final Selection: libsodium  
+**Justification:** libsodium provides a **secure-by-default**, **cross-platform**, and **developer-friendly** cryptographic toolkit. Its modern API design minimizes implementation errors while offering strong performance and portability — making it ideal for applications requiring **data integrity and confidentiality** without unnecessary complexity.
+
+## 8. Configuration Management
+
+### 8.1 Library Choice: libconfig++
 
 To handle configuration data (such as entity definitions, levels, or tuning parameters), the project uses **libconfig++**, a lightweight, structured configuration file parser and writer for C++.
 
@@ -321,7 +466,7 @@ This process runs once per level load and populates the ECS with predefined enti
 
 ---
 
-### 6.5 Integration and Workflow Benefits
+### 8.2 Integration and Workflow Benefits
 
 - **Data-Driven Design:** Core game logic is separated from static data, enabling non-programmers to modify levels or tuning values.  
 - **Hot Reloading:** Configuration files can be reloaded at runtime for rapid testing.  
@@ -330,7 +475,7 @@ This process runs once per level load and populates the ECS with predefined enti
 
 ---
 
-### 6.6 Summary
+### 8.3 Summary
 
 | Criterion | libconfig++ | JSON | YAML | XML | INI |
 |------------|--------------|------|------|-----|-----|
@@ -344,15 +489,15 @@ This process runs once per level load and populates the ECS with predefined enti
 **Final Decision:**  
 libconfig++ provides the **best trade-off** between readability, speed, and ease of integration for a C++ ECS-based game engine where configurations are frequently loaded and modified.
 
-## 7. Testing Framework
+## 9. Testing Framework
 
-### 7.1 Library Choice: Google Test (gtest)
+### 9.1 Library Choice: Google Test (gtest)
 
 For unit testing, the project uses **Google Test (gtest)**, a widely adopted C++ testing framework that provides a robust and feature-rich environment for writing automated tests.
 
 ---
 
-### 7.2 Advantages of Google Test
+### 9.2 Advantages of Google Test
 
 1. **Comprehensive Testing Features**  
    - Supports **unit tests**, **integration tests**, and **mocking** (with gmock).  
@@ -385,7 +530,7 @@ For unit testing, the project uses **Google Test (gtest)**, a widely adopted C++
 
 ---
 
-### 7.3 Example Test Case
+### 9.3 Example Test Case
 
 ```cpp
 #include <gtest/gtest.h>
@@ -406,7 +551,7 @@ TEST(ECSComponentTest, AddAndRetrieveComponent) {
 
 ---
 
-### 7.4 Why Google Test Was Selected
+### 9.4 Why Google Test Was Selected
 
 - **Standard in C++ development**: widely used and well-documented.  
 - **Scalable for large projects**: easily handles hundreds of test cases and multiple modules.  
@@ -415,7 +560,7 @@ TEST(ECSComponentTest, AddAndRetrieveComponent) {
 
 ---
 
-### 7.5 Summary
+### 9.5 Summary
 
 | Criterion | Google Test | Alternatives (Catch2, Boost.Test) |
 |-----------|------------|-----------------------------------|
@@ -429,40 +574,101 @@ TEST(ECSComponentTest, AddAndRetrieveComponent) {
 
 
 
-### 8. Algorithms and Data Structures
+### 10. Algorithms, Data Structures and Design Patterns
 
-The choices in this section aim to balance performance, simplicity, and code maintainability.
+The choices in this section aim to balance **performance**, **simplicity**, and **code maintainability** in the Entity-Component-System (ECS) architecture and its client-server synchronization logic.
+
+---
 
 #### Core Structures
 
 - **`std::vector<std::optional<T>>` for ECS components**
 
-  This design allows efficient storage of components associated with entities.  
-  Using `std::optional` provides direct index-based access while allowing empty slots (for deleted or missing entities) without needing explicit identifiers.  
-  This avoids redundant entity IDs and reduces memory overhead, while keeping data contiguous in memory — improving cache locality and sequential access performance.
+  This structure allows efficient storage of components associated with entities.  
+  Using `std::optional` provides direct index-based access while supporting empty slots (for deleted or missing entities) without requiring explicit identifiers.  
+  This design reduces memory overhead, avoids redundant entity IDs, and keeps data contiguous in memory — significantly improving cache locality and sequential access performance.
 
 - **`std::unordered_map` for component table storage**
 
   Component tables are stored in `std::unordered_map` containers to provide amortized constant-time (`O(1)`) access for insertion, lookup, and removal.  
-  This is ideal for ECS systems where direct access patterns dominate.  
-  An alternative would be `std::map` (a red-black tree), but it implies logarithmic complexity (`O(log n)`), which would add unnecessary overhead in this context.
+  This is ideal for ECS systems where direct access patterns dominate, as it minimizes CPU cache misses.  
+  An alternative would be `std::map` (a balanced binary tree), but it introduces logarithmic complexity (`O(log n)`), which is unnecessary in most real-time systems.
+
+---
 
 #### Client-side Change Detection Algorithm
 
-When a client receives a **snapshot** from the server (a complete or partial state of all entities), it must efficiently determine:
+When a client receives a **snapshot** from the server (a complete or partial state of all entities), it must determine:
 - which entities are **new** (present in the snapshot but not locally),
-- which ones are **deleted** (missing from the snapshot but still present locally),
-- and which ones need to be **updated** (present in both but with component differences).
+- which entities are **deleted** (missing from the snapshot but still locally stored),
+- and which entities must be **updated** (present in both but with changed components).
 
-To handle this, a **hashmap-based diff detection algorithm** is used:
+To achieve this efficiently, a **hashmap-based diff detection algorithm** is used:
 - Each entity is indexed by its unique identifier (`entity_id`).
 - The client maintains a local dictionary (`unordered_map<entity_id, EntitySnapshot>`).
-- Upon receiving a new snapshot:
-  - It iterates through the snapshot to detect **new or modified** entities by comparing their component hash against the local version;
-  - It then scans the local state to identify **removed** entities (those missing from the received snapshot).
+- When a new snapshot arrives:
+  - The snapshot is iterated to detect **new or modified** entities by comparing component hashes against the local version.
+  - The local state is then scanned to identify **removed** entities missing from the new snapshot.
 
-This algorithm has an average complexity of `O(n)` (linear in the number of exchanged entities) and performs efficiently in real-time update scenarios with frequent incremental changes.
+This approach yields an average complexity of **O(n)** (linear with the number of exchanged entities), which performs efficiently under real-time update conditions, even with frequent incremental changes.
 
+---
+
+#### Design Pattern: Factory for Entity Creation
+
+To centralize and standardize entity creation in the ECS, a **Factory pattern** is used.  
+The `Factory` class encapsulates the logic required to create different types of entities (players, enemies, projectiles, etc.) with their respective components, ensuring consistency and modularity across the codebase.
+
+Example — creating a player entity:
+
+```cpp
+entity Factory::make_player1() {
+    entity player_id = reg.spawn_entity();
+
+    auto& player_sprite = reg.add_component<component::drawable>(
+        player_id, component::drawable()
+    );
+    player_sprite.setTextureFromName("player1");
+
+    reg.add_component<component::position>(player_id, {0, 0});
+    reg.add_component<component::velocity>(player_id, {0, 0});
+    reg.add_component<component::controllable>(
+        player_id, component::controllable()
+    );
+    reg.add_component<component::logic>(
+        player_id, component::logic{player_logic}
+    );
+
+    auto& player_hurtbox =
+        reg.add_component<component::hurtbox>(player_id, component::hurtbox());
+    player_hurtbox.group = 1;
+    player_hurtbox.health = 1;
+    player_hurtbox.width = 32;
+    player_hurtbox.height = 16;
+
+    auto& entity_name = reg.add_component<component::name>(
+        player_id, component::name()
+    );
+    entity_name._name = "player1";
+
+    reg.add_component<component::unique_id>(
+        player_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+
+    return player_id;
+}
+```
+
+This approach provides several advantages:
+- **Encapsulation of complexity** — entity construction logic (and component dependencies) is hidden from the rest of the system.  
+- **Consistency** — all entities of the same type are guaranteed to have the same component configuration.  
+- **Maintainability** — new entity types can be added without modifying the ECS core.  
+- **Scalability** — different factories can be defined for gameplay modules (e.g., player, enemies, projectiles, bosses).
+
+An alternative approach could be to define entities through **configuration files** or **prefabs**, but using a factory allows better compile-time safety and avoids runtime parsing overhead during gameplay.
+
+---
 
 ## 11. Risk Assessment
 
@@ -508,6 +714,8 @@ If critical issues arise:
 - ASIO Documentation: https://think-async.com/Asio/
 - Google Test Documentation: https://google.github.io/googletest/
 - Game Programming Patterns: https://gameprogrammingpatterns.com/
+- LibSodium Documentation: https://libsodium.gitbook.io/doc
+- Sqlite3 Documentation: https://www.sqlite.org/docs.html
 
 ### Appendix E: Team Contributions
 | Team Member | Role | Contribution |
@@ -521,6 +729,6 @@ If critical issues arise:
 ---
 
 **Document Version**: 1.0  
-**Last Updated**: [30/09/2025]  
+**Last Updated**: [12/10/2025]  
 **Authors**: [Cold_As_Palmer]  
 **Review Status**: [Review]

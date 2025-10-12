@@ -1,4 +1,4 @@
-Qqs#!/bin/bash
+#!/bin/bash
 echo -e "\nCe programme permet de commit nos travaux.\n"
 
 echo -e "On commence par le formatage\nFormatage en cours...\n"

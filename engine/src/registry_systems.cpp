@@ -34,6 +34,10 @@
 #include "../include/registry.hpp"
 #include "../include/systems.hpp"
 
+/**
+ * @brief This function registers all the systems in the registry. Systems are functions
+ *  that will be stored in the registry, and then executed at each frame to update the game state.
+ */
 void registry::register_all_systems() {
     register_components<component::position>();
     register_components<component::velocity>();
@@ -42,6 +46,8 @@ void registry::register_all_systems() {
     register_components<component::hitbox>();
     register_components<component::logic>();
     register_components<component::audio>();
+    register_components<component::name>();
+    register_components<component::unique_id>();
 
     add_system(
         [this, &controllables = this->get_components<component::controllable>(),

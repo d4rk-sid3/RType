@@ -34,11 +34,14 @@
  *
  */
 
-#include <string>
 #include <memory>
+#include <string>
+
 #include "ResourceManager.hpp"
 #include "entity.hpp"
 #include "registry.hpp"
+
+extern int unique_ids;
 
 namespace component {
     /**
@@ -49,12 +52,13 @@ namespace component {
         double y;
         double z;
         /**
-         * @brief This function helps increment the position by an x and y offset
-         * 
-         * @param _x 
-         * @param _y 
+         * @brief This function helps increment the position by an x and y
+         * offset
+         *
+         * @param _x
+         * @param _y
          */
-        void setPosition( double _x, double _y) {
+        void setPosition(double _x, double _y) {
             this->x += _x;
             this->y += _y;
         }
@@ -79,34 +83,38 @@ namespace component {
         sf::Sprite sprite;
 
         /**
-         * @brief This function uses a ResourceManager to set the texture of the sprite
-         * 
-         * @param texture_name The name under which the texture is stored in the ResourceManager
+         * @brief This function uses a ResourceManager to set the texture of the
+         * sprite
+         *
+         * @param texture_name The name under which the texture is stored in the
+         * ResourceManager
          */
         void setTextureFromName(std::string texture_name) {
-            sf::Texture &texture = ResourceManager::Instance().getTexture(texture_name);
+            sf::Texture& texture =
+                ResourceManager::Instance().getTexture(texture_name);
             this->sprite.setTexture(texture);
         }
-    }drawable;
+    } drawable;
 
     /**
      * @brief The text component, consisting in a simple sf::Text
-     * 
+     *
      */
     typedef struct text_s {
         sf::Text text;
 
         /**
-         * @brief This function uses a ResourceManager to set the font of the text
-         * 
-         * @param font_name The name under which the font is stored in the ResourceManager
+         * @brief This function uses a ResourceManager to set the font of the
+         * text
+         *
+         * @param font_name The name under which the font is stored in the
+         * ResourceManager
          */
-        void setFontFromName(std::string font_name)
-        {
-            sf::Font &font = ResourceManager::Instance().getFont(font_name);
+        void setFontFromName(std::string font_name) {
+            sf::Font& font = ResourceManager::Instance().getFont(font_name);
             this->text.setFont(font);
         }
-    }text;
+    } text;
 
     /**
      * @brief The animated_drawable component. It is a drawable component with
@@ -122,18 +130,25 @@ namespace component {
         double frame_duration;
         double frame_timer;
 
+        /**
+         * @brief Set the Texture of the sprite to the texture associated with the
+         * name parameter in the ResourceManager
+         * 
+         * @param texture_name the name of the texture in the resource manager
+         */
         void setTextureFromName(std::string texture_name) {
             one_shot = false;
             done_once = false;
-            sf::Texture &texture = ResourceManager::Instance().getTexture(texture_name);
+            sf::Texture& texture =
+                ResourceManager::Instance().getTexture(texture_name);
             this->sprite.setTexture(texture);
         }
 
         /**
          * @brief Set the dimensions of the rect representing a frame
-         * 
-         * @param width 
-         * @param height 
+         *
+         * @param width
+         * @param height
          */
         void setFrameRect(int width, int height) {
             this->frame_rect = sf::IntRect(0, 0, width, height);
@@ -142,7 +157,7 @@ namespace component {
 
         /**
          * @brief This function animates the sprite
-         * 
+         *
          * @param delta the time elapsed since the last frame
          */
         void animate(double delta) {
@@ -151,10 +166,10 @@ namespace component {
             if (this->frame_timer >= this->frame_duration) {
                 this->frame_timer = 0;
                 this->frame_rect.left += this->frame_rect.width;
-                if (this->frame_rect.left >= this->sprite.getTexture()->getSize().x - 5) {
+                if (this->frame_rect.left >=
+                    this->sprite.getTexture()->getSize().x - 5) {
                     this->frame_rect.left = 0;
                     done_once = true;
-
                 }
                 this->sprite.setTextureRect(this->frame_rect);
             }
@@ -260,7 +275,7 @@ namespace component {
 
         /**
          * @brief A bool to indicate if the hurtbox is hurt
-         * 
+         *
          */
         bool hurt;
     } hurtbox;
@@ -296,11 +311,12 @@ namespace component {
         int height;
 
         /**
-         * @brief If this bool is set to true, the hitbox will be destroyed on collision
-         * 
+         * @brief If this bool is set to true, the hitbox will be destroyed on
+         * collision
+         *
          */
         bool one_shot;
-    }hitbox;
+    } hitbox;
 
     /**
      * @brief The logic component, defined by a function pointer. This component
@@ -318,13 +334,30 @@ namespace component {
     }logic;
 
     /**
-     * @brief The audio component defined by a single sf::Music. This component is not used by the engine systems but can be directly played, stopped, paused by the user
+     * @brief The name component, defined by a string. It lets you give a name to each entity
      * 
+     */
+    typedef struct name_s {
+        std::string _name;
+    }name;
+
+
+    /**
+     * @brief The audio component defined by a single sf::Music. This component
+     * is not used by the engine systems but can be directly played, stopped,
+     * paused by the user
+     *
      */
     typedef struct audio_s {
         std::shared_ptr<sf::Music> audio;
     } audio;
-}
+
+    /**
+     * @brief The unique_id component, defined by an int. It lets you give a unique id to each entity
+     * 
+     */
+    typedef int unique_id;
+} // namespace component
 
 #endif
 

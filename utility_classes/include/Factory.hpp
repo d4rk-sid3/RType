@@ -17,6 +17,11 @@
  * ------------------------------------------------------------------------------------
  */
 
+
+/**
+ * @brief The Factory file. Contains the declaration of the Factory class.
+ * 
+ */
 #ifndef INCLUDED_FACTORY_HPP
 #define INCLUDED_FACTORY_HPP
 
@@ -25,15 +30,33 @@
 #include "../../engine/include/components.hpp"
 #include "../../engine/include/registry.hpp"
 
+/**
+ * @brief The Factory class. Handles the creation of entities.
+ *  Since the entities of the ECS are defined by components, the Factory class
+ *  is used to create predefined entities with the correct components configuration
+ *  in a simple and reusable way. The factory then holds various functions, each one
+ *  creating an entity with the correct components configuration. The factory also holds
+ *  a reference to the registry, which is used to add the entities to the registry.
+ */
 class Factory {
-    private:
-        registry &reg;
-    public:
-        Factory(registry &_reg);
+  private:
+    registry& reg;
 
-        entity make_entity(const std::string &type);
+  public:
+    Factory(registry& _reg);
 
-    entity make_player();
+    /**
+     * @brief Creates an entity with the correct components configuration
+     * corresponding to the given type. If the type is not found, it returns -1
+     * 
+     * @param type The type of the entity to be created
+     * @return entity The id of the newly created entity
+     */
+    entity make_entity(const std::string& type);
+
+    entity make_player1();
+
+    entity make_player2();
 
     entity make_player_missile();
 
@@ -49,24 +72,25 @@ class Factory {
 
     entity make_ceiling();
 
-        entity make_background();
+    entity make_background();
 
-        entity make_explosion();
+    entity make_explosion();
 
-        entity make_title();
+    entity make_title();
 
-        entity make_start_text();
+    entity make_start_text();
 
-        entity make_menu_background_music();
+    entity make_menu_background_music();
 
-        entity make_game_background_music();
+    entity make_game_background_music();
 
-        entity make_hit_effect();
+    entity make_hit_effect();
 
-        entity make_fade_in_rect();
-    
-        entity make_fade_out_rect();
+    entity make_fade_in_rect();
 
+    entity make_fade_out_rect();
+
+    entity make_boss();
 };
 
 #endif

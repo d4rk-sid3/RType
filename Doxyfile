@@ -988,6 +988,7 @@ INPUT_FILE_ENCODING    =
 # *.php4, *.php5, *.phtml, *.inc, *.m, *.markdown, *.md, *.mm, *.dox (to be
 # provided as doxygen C comment), *.py, *.pyw, *.f90, *.f95, *.f03, *.f08,
 # *.f18, *.f, *.for, *.vhd, *.vhdl, *.ucf, *.qsf and *.ice.
+EXTENSION_MAPPING = tpp=C++
 
 FILE_PATTERNS          = *.c \
                          *.cc \
@@ -1010,6 +1011,7 @@ FILE_PATTERNS          = *.c \
                          *.hh \
                          *.hxx \
                          *.hpp \
+                         *.tpp \
                          *.h++ \
                          *.ixx \
                          *.l \

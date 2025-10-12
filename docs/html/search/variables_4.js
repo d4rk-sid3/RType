@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['frame_5fduration_0',['frame_duration',['../structcomponent_1_1animated__drawable__s.html#a9d413e2ed4cb1c7c6c190f851e6b457e',1,'component::animated_drawable_s']]],
-  ['frame_5frect_1',['frame_rect',['../structcomponent_1_1animated__drawable__s.html#af4c3d8a67784f0d561df90e54ee57a9f',1,'component::animated_drawable_s']]],
-  ['frame_5ftimer_2',['frame_timer',['../structcomponent_1_1animated__drawable__s.html#a1724bb73c3190e4ad4f5456959d0c2c6',1,'component::animated_drawable_s']]]
+  ['damage_0',['damage',['../structcomponent_1_1hitbox__s.html#aa328fa75249dba8908792c70b978c6ea',1,'component::hitbox_s']]],
+  ['dead_5fentities_1',['dead_entities',['../classregistry.html#ab2381c1b1b227a150443be6932f7c434',1,'registry']]],
+  ['done_5fonce_2',['done_once',['../structcomponent_1_1animated__drawable__s.html#a585aba3d5ee3a63eed8d7e466f5a2137',1,'component::animated_drawable_s']]],
+  ['down_3',['down',['../structcomponent_1_1controllable__s.html#a81b8202fa9c13eaeee2bf8e23a4f33ad',1,'component::controllable_s']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['health_0',['health',['../structcomponent_1_1hurtbox__s.html#aba96c6a60940bf664b287bdb06901f0d',1,'component::hurtbox_s']]],
-  ['height_1',['height',['../structcomponent_1_1hurtbox__s.html#aefdfca717ae4f367dfff11ddb045c895',1,'component::hurtbox_s::height'],['../structcomponent_1_1hitbox__s.html#a3c8ca6e680cd44c45e76dfc561fd54f6',1,'component::hitbox_s::height']]],
-  ['hurt_2',['hurt',['../structcomponent_1_1hurtbox__s.html#a2c6fe8d0fd1d64fcc76e6af210480fa3',1,'component::hurtbox_s']]]
+  ['frame_5fduration_0',['frame_duration',['../structcomponent_1_1animated__drawable__s.html#a9d413e2ed4cb1c7c6c190f851e6b457e',1,'component::animated_drawable_s']]],
+  ['frame_5frect_1',['frame_rect',['../structcomponent_1_1animated__drawable__s.html#af4c3d8a67784f0d561df90e54ee57a9f',1,'component::animated_drawable_s']]],
+  ['frame_5ftimer_2',['frame_timer',['../structcomponent_1_1animated__drawable__s.html#a1724bb73c3190e4ad4f5456959d0c2c6',1,'component::animated_drawable_s']]]
 ];

@@ -26,13 +26,13 @@
 
 #include "../include/registry.hpp"
 
+template<typename Component>
 /**
  * @brief Registers a table of a new type of components
  * 
  * @tparam Component The new type of component
  * @return vector<optional<Component>>& a reference to the newly added table
  */
-template<typename Component>
 vector<optional<Component>> &registry::register_components()
 {
     // get the component type
@@ -64,13 +64,13 @@ vector<optional<Component>> &registry::register_components()
     return table;
 }
 
+template<typename Component>
 /**
  * @brief Get the table of a specific type of component
  * 
  * @tparam Component The type of the component table
  * @return vector<optional<Component>>& a reference to the table
  */
-template<typename Component>
 vector<optional<Component>> &registry::get_components()
 {
     // Check if the type is registered
