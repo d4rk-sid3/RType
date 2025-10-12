@@ -24,8 +24,6 @@
   - [Testing Program](#testing-program)
   - [Documentation](#documentation)
 - [Technology Choices](#technology-choices)
-  - [Database Choice for User Management](#database-choice-for-user-management)
-  - [Cryptography Library Comparison](#cryptography-library-comparison)
 - [Thank for Reading](#thank-for-reading)
 - [Authors](#authors)
 
@@ -126,6 +124,9 @@ The tests are available on Linux. You may can test the code executing the script
 📜 **Communication Protocol:** [docs/protocol.md](./docs/protocol.md)  
 💾 **Database Schema:** [docs/database.md](./docs/database.md)
 
+### **Technologies choice**
+
+Please consult the comparative study document [docs/comparatives_case_study.md](./docs/comparatives_case_study.md)
 ## **Thank for reading**
 
 Feel free to read the CONTRIBUTING.md. Do not hesitate to contact any member for any questions or remarks. You can click on each following name.
