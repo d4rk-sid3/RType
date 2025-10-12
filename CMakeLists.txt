@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-# IMPORTANT: Intégrer vcpkg AVANT le project()
+# Intégrer vcpkg AVANT le project()
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
         CACHE STRING "Vcpkg toolchain file")
@@ -41,7 +41,36 @@ endif()
 find_package(SFML COMPONENTS system window graphics network REQUIRED)
 find_package(asio CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
-find_package(libconfig CONFIG REQUIRED)
+
+# Chercher libconfig avec gestion cross-platform
+find_package(libconfig CONFIG QUIET)
+if(NOT libconfig_FOUND)
+    find_package(libconfig++ CONFIG QUIET)
+endif()
+
+# Debug: afficher les targets disponibles
+message(STATUS "libconfig_FOUND: ${libconfig_FOUND}")
+message(STATUS "libconfig++_FOUND: ${libconfig++_FOUND}")
+get_property(imported_targets DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY IMPORTED_TARGETS)
+message(STATUS "All imported targets: ${imported_targets}")
+
+# Détecter automatiquement le bon target libconfig selon la plateforme
+if(TARGET libconfig::config++)
+    set(LIBCONFIG_TARGET libconfig::config++)
+    message(STATUS "Using libconfig target: libconfig::config++")
+elseif(TARGET libconfig++::libconfig++)
+    set(LIBCONFIG_TARGET libconfig++::libconfig++)
+    message(STATUS "Using libconfig target: libconfig++::libconfig++")
+elseif(TARGET libconfig::libconfig++)
+    set(LIBCONFIG_TARGET libconfig::libconfig++)
+    message(STATUS "Using libconfig target: libconfig::libconfig++")
+elseif(TARGET libconfig)
+    set(LIBCONFIG_TARGET libconfig)
+    message(STATUS "Using libconfig target: libconfig")
+else()
+    message(FATAL_ERROR "libconfig target not found. Available targets: ${imported_targets}")
+endif()
+
 find_package(OpenAL CONFIG REQUIRED)
 find_package(Vorbis CONFIG REQUIRED)
 find_package(Ogg CONFIG REQUIRED)
@@ -125,7 +154,7 @@ if(BUILD_CLIENT)
     target_link_libraries(r-type_client PRIVATE 
         sfml-system sfml-window sfml-graphics sfml-network sfml-audio
         asio::asio
-        libconfig::config++
+        ${LIBCONFIG_TARGET}
         OpenAL::OpenAL
         Vorbis::vorbisenc Vorbis::vorbisfile Vorbis::vorbis
         Ogg::ogg
@@ -165,7 +194,7 @@ if(BUILD_SERVER)
     target_link_libraries(r-type_server PRIVATE 
         sfml-system sfml-window sfml-graphics sfml-network sfml-audio
         asio::asio
-        libconfig::config++
+        ${LIBCONFIG_TARGET}
         OpenAL::OpenAL
         Vorbis::vorbisenc Vorbis::vorbisfile Vorbis::vorbis
         Ogg::ogg
@@ -212,7 +241,7 @@ if(BUILD_TESTS)
         GTest::gtest_main
         sfml-system sfml-window sfml-graphics sfml-network sfml-audio
         asio::asio
-        libconfig::config++
+        ${LIBCONFIG_TARGET}
         OpenAL::OpenAL
         Vorbis::vorbisenc Vorbis::vorbisfile Vorbis::vorbis
         Ogg::ogg

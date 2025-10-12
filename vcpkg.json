@@ -10,10 +10,14 @@
     "gtest",
     "libsodium",
     "sqlite3",
-    "libconfig"
+    "libconfig",
+    "openal-soft",
+    "libogg",
+    "libvorbis",
+    "libflac"
   ],
   "builtin-baseline": "50c0cb48a0cf2f6fc5c7b2c0d2bafbe26d0a7ca2",
-    "overrides": [
+  "overrides": [
     {
       "name": "sfml",
       "version": "2.6.1"
