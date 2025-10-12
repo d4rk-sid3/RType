@@ -110,9 +110,19 @@ class Server {
      */
     std::atomic<bool> isRunning;
 
+    /**
+     * @brief Thread for running the network manager
+     */
+    std::thread networkThread;
+
+    /**
+     * @brief Thread for managing information sending cooldowns to clients
+     */
+    std::thread cooldownThread;
 
     /**
      * @brief Load all information about the level from a file
+     * @param path The path to the level file
      */
     void loadLevel(const std::string &path);
 
@@ -128,28 +138,21 @@ class Server {
 
     /**
      * @brief Receive and process player input from clients
+     * @param delta The time elapsed since the last frame
      */
     void receivePlayerInput(double delta);
 
     /**
      * @brief Manage the game level, including spawning entities and processing game logic
+     * @param delta The time elapsed since the last frame
      */
     void runLevel(double delta);
-
-    /**
-     * @brief Thread for running the network manager
-     */
-    std::thread networkThread;
-
-    /**
-     * @brief Thread for managing information sending cooldowns to clients
-     */
-    std::thread cooldownThread;
 
   public:
 
     /**
      * @brief Construct a new Server object
+     * @param p The port to listen on
      */
     Server(int p);
 
@@ -158,27 +161,31 @@ class Server {
      */
     ~Server();
 
-    NetworkManager &getManager() { return server_; }
-
-    // encodeur
     /**
      * @brief Encode the number of entities into a byte buffer
+     * @param pos The NbrEntity structure to encode
+     * @return A vector of int8_t representing the encoded data
      */
     std::vector<int8_t> encodeNbrEntity(const NbrEntity& pos);
 
     /**
      * @brief Encode an EnemyMovedResponse structure into a byte buffer
+     * @param pos The EnemyMovedResponse structure to encode
+     * @return A vector of int8_t representing the encoded data
      */
     std::vector<int8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos);
 
-    // decodeur
     /**
      * @brief Decode a MoveResponse structure from a byte buffer
+     * @param buffer The byte buffer containing the encoded data
+     * @return The decoded MoveResponse structure
      */
     MoveResponse decodeMoveResponse(std::vector<int8_t>& buffer);
 
     /**
      * @brief Decode an ActionResponse structure from a byte buffer
+     * @param buffer The byte buffer containing the encoded data
+     * @return The decoded ActionResponse structure
      */
     ActionResponse decodeActionResponse(std::vector<int8_t>& buffer);
 

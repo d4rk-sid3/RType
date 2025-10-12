@@ -132,7 +132,6 @@ class NetworkManager {
      */
     bool isrunning;
 
-
     /**
      * @brief List of pairs of clients and their last messages (used for server)
      */
@@ -144,8 +143,6 @@ class NetworkManager {
      */
     std::vector<int8_t> tmp_server;
     std::vector<int8_t> &lastmsg;
-  
-    std::vector<client_info_t> clients;
 
     /**
      * @brief Mutex for thread safety

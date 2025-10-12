@@ -77,7 +77,6 @@ class Client {
      */
     std::mutex mtx;
 
-    // This map associates the servers_ids to the client_ids in the registry
     /**
      * @brief Map that associates server entity IDs to client entity IDs
      */
@@ -105,6 +104,11 @@ class Client {
     sf::Event event;
 
     /**
+     * @brief The current state of the game (menu, transition, game, game over)
+     */
+    state_t state;
+
+    /**
      * @brief Clock for managing frame time
      */
     sf::Clock frameClock;
@@ -121,6 +125,7 @@ class Client {
 
     /**
      * @brief Run the menu logic
+     * @param delta The time elapsed since the last frame
      */
     void runMenu(double delta);
 
@@ -131,6 +136,7 @@ class Client {
 
     /**
      * @brief Run the game logic
+     * @param delta The time elapsed since the last frame
      */
     void runLevel(double delta);
 
@@ -144,14 +150,11 @@ class Client {
      */
     void sendPlayerAction();
 
-    /**
-     * @brief The current state of the game (menu, transition, game, game over)
-     */
-    state_t state;
-
   public:
     /**
      * @brief Construct a new Client object
+     * @param p The port to connect to the server
+     * @param addr The address of the server
      */
     Client(int p, std::string addr);
 
@@ -162,28 +165,35 @@ class Client {
 
     /**
      * @brief Get all entities from the last server message
+     * @return A vector of EnemyMovedResponse structures representing the entities
      */
     std::vector<EnemyMovedResponse> recupAllEntities();
-    
-    // decodeur
+
     /**
      * @brief Decode a NbrEntity structure from a byte buffer
+     * @param buffer The byte buffer containing the encoded data
+     * @return The decoded NbrEntity structure
      */
     NbrEntity decodeNbrEntity(std::vector<int8_t>& buffer);
 
     /**
      * @brief Decode an EnemyMovedResponse structure from a byte buffer
+     * @param buffer The byte buffer containing the encoded data
+     * @return The decoded EnemyMovedResponse structure
      */
     EnemyMovedResponse decodeEnemyMovedResponse(std::vector<int8_t>& buffer);
 
-    // encodeur
     /**
      * @brief Encode a MoveResponse structure into a byte buffer
+     * @param pos The MoveResponse structure to encode
+     * @return A vector of int8_t representing the encoded data
      */
     std::vector<int8_t> encodeMoveResponse(const MoveResponse& pos);
 
     /**
      * @brief Encode an ActionResponse structure into a byte buffer
+     * @param pos The ActionResponse structure to encode
+     * @return A vector of int8_t representing the encoded data
      */
     std::vector<int8_t> encodeActionResponse(const ActionResponse& pos);
 
