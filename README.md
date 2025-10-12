@@ -80,20 +80,22 @@ After building (see below), simply run:
 ```bash
 ./r-type_server [port:int] &
 ./r-type_client [port:int] [adress:string]
+```
 
 ## **For developers**
 
 ### **Build the program** 
 
 On Linux : - You may execute the following commands :
-```
+```bash
     mkdir build
     cd build
     cmake ..
     make
 ```
+
 On Windows : - You may execute the following commands :
-```
+```bash
     mkdir build
     cd build
     conan install .. --build=missing  -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
@@ -107,8 +109,9 @@ On Windows : - You may execute the following commands :
 ```
 
 ### **Testing program** 
+
 The tests are available on Linux. You may can test the code executing the script build_tests.sh or using with the following commands.
-```
+```bash
     rm -rf ./build
     cmake -B ./build -DCMAKE_BUILD_TYPE=Debug -DTESTING=ON
     cmake --build ./build
@@ -123,8 +126,10 @@ The tests are available on Linux. You may can test the code executing the script
 📜 **Communication Protocol:** [docs/protocol.md](./docs/protocol.md)  
 💾 **Database Schema:** [docs/database.md](./docs/database.md)
 
-## **Thank for reading** 
+## **Thank for reading**
+
 Feel free to read the CONTRIBUTING.md. Do not hesitate to contact any member for any questions or remarks. You can click on each following name.
 
 ## **Authors** 
+
 <table> <tbody> <tr> <td align="center"><a href="https://github.com/FaroukJGRNT"><img src="https://avatars.githubusercontent.com/u/72017980?v=4" width="100px;" alt="FaroukJGRNT"/><br/><sub><b>FaroukJGRNT</b></sub></a><br/></td> <td align="center"><a href="https://github.com/amourguidi"><img src="https://avatars.githubusercontent.com/u/56249749?s=96&v=4" width="100px;" alt="amourguidi"/><br/><sub><b>Amour Guidi</b></sub></a><br/></td> <td align="center"><a href="https://github.com/Akanphi"><img src="https://avatars.githubusercontent.com/u/72011124?v=4" width="100px;" alt="Akanphi"/><br/><sub><b>Akanphi</b></sub></a><br/></td> <td align="center"><a href="https://github.com/racso27th"><img src="https://avatars.githubusercontent.com/u/72010794?v=4" width="100px;" alt="racso27th"/><br/><sub><b>Oscar Gbenou</b></sub></a><br/></td> <td align="center"><a href="https://github.com/Aimane01"><img src="https://avatars.githubusercontent.com/u/72015360?v=4" width="100px;" alt="Aimane01"/><br/><sub><b>Aïmane ALASSANE</b></sub></a><br/></td> </tr> </tbody> </table>
