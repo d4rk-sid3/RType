@@ -306,10 +306,10 @@ void boss_logic(double delta, registry &reg, entity en) {
         pos2.y = pos.y + 15;
         pos3.y = pos.y + 15;
 
-        vel1.vx = -BOSS_MISSILE_SPEED / 2;
-        vel1.vy = -BOSS_MISSILE_SPEED;
-        vel2.vx = -BOSS_MISSILE_SPEED / 2;
-        vel2.vy = BOSS_MISSILE_SPEED;
+        vel1.vx = -BOSS_MISSILE_SPEED;
+        vel1.vy = -BOSS_MISSILE_SPEED / 2;
+        vel2.vx = -BOSS_MISSILE_SPEED;
+        vel2.vy = BOSS_MISSILE_SPEED / 2;
         vel3.vx = -BOSS_MISSILE_SPEED;
         vel3.vy = 0;
     }

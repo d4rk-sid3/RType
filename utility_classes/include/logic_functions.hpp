@@ -32,7 +32,7 @@
 #define PLAYER_SHOOT_COOLDOWN 0.25
 #define ENEMY_SHOOT_COOLDOWN 2
 #define BOSS_SHOOT_COOLDOWN 2
-#define BOSS_MISSILE_SPEED 7
+#define BOSS_MISSILE_SPEED 200
 #define BOSS_SPEED 100
 
 extern bool boss_dead;
