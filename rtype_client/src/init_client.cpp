@@ -27,8 +27,18 @@ void load_client_textures(void)
     ResourceManager::Instance().load("assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT);
 }
 
-Client::Client(int p, std::string address, registry& reg): port_(p), client_(p, address, std::ref(lastmsg), std::ref(mtx)),  _reg(reg)
+Client::Client(int p, std::string address):
+    port_(p), client_(p, address, std::ref(lastmsg), std::ref(mtx)),
+    win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), reg(win), factory(reg)
 {
+    state = GAME;
+
+    reg.logic_active = false;
+    reg.collisions_active = false;
+
+    std::vector<int8_t> msg(1, 0x5);
+    client_.send_to_server(msg, msg.size());
+
     load_client_textures();
     //initMenu();
     initGame();
@@ -56,8 +66,6 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities()
     if (!isempty) {
         NbrEntity e = decodeNbrEntity(lastmsg);
 
-        // std::cout << "E: "  << static_cast<int>(e.nbr) << std::endl;
-
         std::vector<EnemyMovedResponse> s;
 
         for (int a = 0; a < e.nbr; a++) {
@@ -82,7 +90,7 @@ void Client::sendPlayerInput()
 {
     if (player_entity_id == -1)
         return;
-    component::controllable &con = _reg.get_components<component::controllable>()[player_entity_id].value();
+    component::controllable &con = reg.get_components<component::controllable>()[player_entity_id].value();
 
     if (!con.left && !con.right && !con.up && !con.down)
         return;
@@ -97,21 +105,13 @@ void Client::sendPlayerInput()
     } else if (con.right) {
         pos.direction = RIGHT;
     } else if (con.up) {
-        printf("UP\n");
         pos.direction = UP;
     } else if (con.down) {
-        printf("DOWN\n");
         pos.direction = DOWN;
     }
 
     std::vector<int8_t> buff = encodeMoveResponse(pos);
 
-    std::cout << "BUFF:" << " ";
-
-    for (auto &a : buff) {
-        std::cout << static_cast<int>(a) << " " ;
-
-    }
     client_.send_to_server(buff, buff.size());
     
 }
@@ -121,7 +121,7 @@ void Client::sendPlayerAction()
     if (player_entity_id == -1)
         return;
 
-    component::controllable &con = _reg.get_components<component::controllable>()[player_entity_id].value();
+    component::controllable &con = reg.get_components<component::controllable>()[player_entity_id].value();
 
     if (!con.space)
         return;
@@ -138,11 +138,8 @@ void Client::sendPlayerAction()
 
     std::vector<int8_t> buff = encodeActionResponse(pos);
 
-    std::cout << "BUFF:" << " ";
-
     client_.send_to_server(buff, buff.size());    
 }
-
 
 std::string getKey(int value)
 {
@@ -156,7 +153,6 @@ std::string getKey(int value)
 void Client::runLevel(double delta)
 {
     static bool first_call = true;
-    Factory fac(_reg);
     sendPlayerInput();
     sendPlayerAction();
 
@@ -172,22 +168,22 @@ void Client::runLevel(double delta)
         if (first_call) {
             if (getKey(entity.enemy_type) == "player1") {
                 old.push_back(entity);
-                ids_assoc[entity.enemy_id] = fac.make_entity(getKey(entity.enemy_type));
+                ids_assoc[entity.enemy_id] = factory.make_entity(getKey(entity.enemy_type));
                 player_entity_id = ids_assoc[entity.enemy_id];
                 printf("Player received and created\n");
             }
         }
         if (isInside(old, entity.enemy_id)) {
             printf("Entity %d already exists. Updating\n", entity.enemy_id);
-            auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
+            auto &pos = reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
             printf("Update successful\n");
             pos.x = entity.position.x;
             pos.y = entity.position.y;
         } else {
             printf("Entity %d does not exist. Creating\n", entity.enemy_id);
             printf("Creating a : %s of type: %d\n", (getKey(entity.enemy_type)).c_str(), entity.enemy_type);
-            ids_assoc[entity.enemy_id] = fac.make_entity(getKey(entity.enemy_type));
-            auto &pos = _reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
+            ids_assoc[entity.enemy_id] = factory.make_entity(getKey(entity.enemy_type));
+            auto &pos = reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
             pos.x = entity.position.x;
             pos.y = entity.position.y;
         }
@@ -204,7 +200,7 @@ void Client::runLevel(double delta)
             }
             printf("Entity %d does not exist anymore. Killing\n", entity.enemy_id);
             try {
-            _reg.kill_entity((class entity)(ids_assoc[entity.enemy_id]));
+            reg.kill_entity((class entity)(ids_assoc[entity.enemy_id]));
             } catch (std::exception &e) {
 
             }
@@ -223,30 +219,27 @@ Client::~Client()
 
 void Client::initMenu()
 {
-    Factory fac(_reg);
-    menu_info.background = fac.make_background();
-    menu_info.title = fac.make_title();
-    menu_info.start_text = fac.make_start_text();
-    menu_info.menu_background_music = fac.make_menu_background_music();
+    menu_info.background = factory.make_background();
+    menu_info.title = factory.make_title();
+    menu_info.start_text = factory.make_start_text();
+    menu_info.menu_background_music = factory.make_menu_background_music();
 
-    _reg.add_component<component::controllable>(menu_info.start_text, component::controllable());
+    reg.add_component<component::controllable>(menu_info.start_text, component::controllable());
 }
 
 void Client::runMenu(double delta)
 {
-    Factory fac(_reg);
-
     if (state == MENU) {
-        component::controllable &start_text = _reg.get_components<component::controllable>()[menu_info.start_text].value();
+        component::controllable &start_text = reg.get_components<component::controllable>()[menu_info.start_text].value();
 
         if (start_text.space) {
             printf("Transition\n");
             state = TRANSITION;
-            menu_info.menu_fade_in_rect = fac.make_fade_in_rect();
+            menu_info.menu_fade_in_rect = factory.make_fade_in_rect();
         }
     }
 
-    if (state == TRANSITION && std::find(_reg.dead_entities.begin(), _reg.dead_entities.end(), menu_info.menu_fade_in_rect) != _reg.dead_entities.end()) {
+    if (state == TRANSITION && std::find(reg.dead_entities.begin(), reg.dead_entities.end(), menu_info.menu_fade_in_rect) != reg.dead_entities.end()) {
         state = GAME;
         initGame();
     }
@@ -254,19 +247,46 @@ void Client::runMenu(double delta)
 
 void Client::initGame()
 {
-    Factory factory(_reg);
     factory.make_background();
 
     //player_entity_id = (int)factory.make_entity("player1");
 
-    // auto &pos = _reg.get_components<component::position>()[player_entity_id].value();
+    // auto &pos = reg.get_components<component::position>()[player_entity_id].value();
     // pos.x = 50;
     // pos.y = 150;
     factory.make_game_background_music();
     // factory.make_ceiling();
     // factory.make_floor();
-    // _reg.kill_entity(menu_info.background);
-    // _reg.kill_entity(menu_info.title);
-    // _reg.kill_entity(menu_info.start_text);
-    // _reg.kill_entity(menu_info.menu_background_music);
+    // reg.kill_entity(menu_info.background);
+    // reg.kill_entity(menu_info.title);
+    // reg.kill_entity(menu_info.start_text);
+    // reg.kill_entity(menu_info.menu_background_music);
+}
+
+void Client::run()
+{
+    networkThread =  std::thread([this]() { client_.run(); });
+
+    while (win.isOpen()) {
+        double dt = frameClock.restart().asSeconds();
+        while (win.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                win.close();
+            if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::Escape)
+                    win.close();
+        }
+        if (state == MENU || state == TRANSITION) {
+            runMenu(dt);
+        }
+        if (state == GAME) {
+            runLevel(dt);
+        }
+
+        reg.run_systems(dt);
+    }   
+
+    client_.stop();
+    networkThread.join();
 }

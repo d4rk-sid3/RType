@@ -47,15 +47,15 @@ struct MoveResponse {
     Direction direction;
 };
 
+struct ActionResponse {
+    int8_t type; // 0x25
+    int16_t player_id;
+    Action input;
+};
+
 typedef struct client_info {
   asio::ip::udp::endpoint endpoint;
   int player_id;
   std::vector<int8_t> lastmsg;
 } client_info_t;
 
-
-struct ActionResponse {
-    int8_t type; // 0x25
-    int16_t player_id;
-    Action input;
-};

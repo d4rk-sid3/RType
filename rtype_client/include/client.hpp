@@ -42,7 +42,8 @@ typedef struct menu_info_s {
 
 class Client {
   private:
-    registry& _reg;
+    registry reg;
+    Factory factory;
     int port_;
     menu_info_t menu_info;
     double levelTimer = 0.0;
@@ -56,10 +57,12 @@ class Client {
     std::vector<EnemyMovedResponse> old;
     std::vector<EnemyMovedResponse> new_vec;
 
-    public:
-    state_t state = GAME;
-    Client(int p, std::string a, registry &reg);
-    ~Client();
+    sf::RenderWindow win;
+
+    sf::Event event;
+    sf::Clock frameClock;
+
+    std::thread networkThread;
 
     void initMenu();
     void runMenu(double delta);
@@ -68,15 +71,23 @@ class Client {
     void sendPlayerInput();
     void sendPlayerAction();
 
-    NetworkManager &getManager() { return client_; }
+    state_t state;
+
+  public:
+    Client(int p, std::string addr);
+    ~Client();
 
     std::vector<EnemyMovedResponse> recupAllEntities();
     
     // decodeur
     NbrEntity decodeNbrEntity(std::vector<int8_t>& buffer);
     EnemyMovedResponse decodeEnemyMovedResponse(std::vector<int8_t>& buffer);
+
+    // encodeur
     std::vector<int8_t> encodeMoveResponse(const MoveResponse& pos);
     std::vector<int8_t> encodeActionResponse(const ActionResponse& pos);
+
+    void run();
 };
 
 #endif /* !CLIENT_HPP_ */
