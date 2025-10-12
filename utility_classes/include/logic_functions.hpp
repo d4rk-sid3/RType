@@ -17,6 +17,13 @@
  * ------------------------------------------------------------------------------------
  */
 
+/**
+ * @brief This file contains the logic functions declarations
+ * Logic functions are update functions that can be attached to an entity
+ * in order to give it a behavior. They are executed at each frame
+ * 
+ */
+
 #ifndef INCLUDED_LOGICS_FUNCTIONS_HPP
 #define INCLUDED_LOGICS_FUNCTIONS_HPP
 

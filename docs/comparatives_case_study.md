@@ -13,7 +13,7 @@ This document presents the comparative analysis that led to the selection of the
 5. [Entity Component System (ECS) Architecture](#entity-component-system-architecture)
 6. [Configuration Management](#configuration-management)
 7. [Testing Framework](#testing-framework)
-8. [Algorithms and Data Structures](#algorithms-analysis)
+8. [Algorithms, Data Structures And Design Patterns](#algorithms-analysis)
 9. [Performance Benchmarks](#performance-benchmarks)
 10. [Final Decisions and Justifications](#final-decisions-and-justifications)
 11. [Risk Assessment](#risk-assessment)
@@ -429,40 +429,101 @@ TEST(ECSComponentTest, AddAndRetrieveComponent) {
 
 
 
-### 8. Algorithms and Data Structures
+### 8. Algorithms, Data Structures and Design Patterns
 
-The choices in this section aim to balance performance, simplicity, and code maintainability.
+The choices in this section aim to balance **performance**, **simplicity**, and **code maintainability** in the Entity-Component-System (ECS) architecture and its client-server synchronization logic.
+
+---
 
 #### Core Structures
 
 - **`std::vector<std::optional<T>>` for ECS components**
 
-  This design allows efficient storage of components associated with entities.  
-  Using `std::optional` provides direct index-based access while allowing empty slots (for deleted or missing entities) without needing explicit identifiers.  
-  This avoids redundant entity IDs and reduces memory overhead, while keeping data contiguous in memory — improving cache locality and sequential access performance.
+  This structure allows efficient storage of components associated with entities.  
+  Using `std::optional` provides direct index-based access while supporting empty slots (for deleted or missing entities) without requiring explicit identifiers.  
+  This design reduces memory overhead, avoids redundant entity IDs, and keeps data contiguous in memory — significantly improving cache locality and sequential access performance.
 
 - **`std::unordered_map` for component table storage**
 
   Component tables are stored in `std::unordered_map` containers to provide amortized constant-time (`O(1)`) access for insertion, lookup, and removal.  
-  This is ideal for ECS systems where direct access patterns dominate.  
-  An alternative would be `std::map` (a red-black tree), but it implies logarithmic complexity (`O(log n)`), which would add unnecessary overhead in this context.
+  This is ideal for ECS systems where direct access patterns dominate, as it minimizes CPU cache misses.  
+  An alternative would be `std::map` (a balanced binary tree), but it introduces logarithmic complexity (`O(log n)`), which is unnecessary in most real-time systems.
+
+---
 
 #### Client-side Change Detection Algorithm
 
-When a client receives a **snapshot** from the server (a complete or partial state of all entities), it must efficiently determine:
+When a client receives a **snapshot** from the server (a complete or partial state of all entities), it must determine:
 - which entities are **new** (present in the snapshot but not locally),
-- which ones are **deleted** (missing from the snapshot but still present locally),
-- and which ones need to be **updated** (present in both but with component differences).
+- which entities are **deleted** (missing from the snapshot but still locally stored),
+- and which entities must be **updated** (present in both but with changed components).
 
-To handle this, a **hashmap-based diff detection algorithm** is used:
+To achieve this efficiently, a **hashmap-based diff detection algorithm** is used:
 - Each entity is indexed by its unique identifier (`entity_id`).
 - The client maintains a local dictionary (`unordered_map<entity_id, EntitySnapshot>`).
-- Upon receiving a new snapshot:
-  - It iterates through the snapshot to detect **new or modified** entities by comparing their component hash against the local version;
-  - It then scans the local state to identify **removed** entities (those missing from the received snapshot).
+- When a new snapshot arrives:
+  - The snapshot is iterated to detect **new or modified** entities by comparing component hashes against the local version.
+  - The local state is then scanned to identify **removed** entities missing from the new snapshot.
 
-This algorithm has an average complexity of `O(n)` (linear in the number of exchanged entities) and performs efficiently in real-time update scenarios with frequent incremental changes.
+This approach yields an average complexity of **O(n)** (linear with the number of exchanged entities), which performs efficiently under real-time update conditions, even with frequent incremental changes.
 
+---
+
+#### Design Pattern: Factory for Entity Creation
+
+To centralize and standardize entity creation in the ECS, a **Factory pattern** is used.  
+The `Factory` class encapsulates the logic required to create different types of entities (players, enemies, projectiles, etc.) with their respective components, ensuring consistency and modularity across the codebase.
+
+Example — creating a player entity:
+
+```cpp
+entity Factory::make_player1() {
+    entity player_id = reg.spawn_entity();
+
+    auto& player_sprite = reg.add_component<component::drawable>(
+        player_id, component::drawable()
+    );
+    player_sprite.setTextureFromName("player1");
+
+    reg.add_component<component::position>(player_id, {0, 0});
+    reg.add_component<component::velocity>(player_id, {0, 0});
+    reg.add_component<component::controllable>(
+        player_id, component::controllable()
+    );
+    reg.add_component<component::logic>(
+        player_id, component::logic{player_logic}
+    );
+
+    auto& player_hurtbox =
+        reg.add_component<component::hurtbox>(player_id, component::hurtbox());
+    player_hurtbox.group = 1;
+    player_hurtbox.health = 1;
+    player_hurtbox.width = 32;
+    player_hurtbox.height = 16;
+
+    auto& entity_name = reg.add_component<component::name>(
+        player_id, component::name()
+    );
+    entity_name._name = "player1";
+
+    reg.add_component<component::unique_id>(
+        player_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+
+    return player_id;
+}
+```
+
+This approach provides several advantages:
+- **Encapsulation of complexity** — entity construction logic (and component dependencies) is hidden from the rest of the system.  
+- **Consistency** — all entities of the same type are guaranteed to have the same component configuration.  
+- **Maintainability** — new entity types can be added without modifying the ECS core.  
+- **Scalability** — different factories can be defined for gameplay modules (e.g., player, enemies, projectiles, bosses).
+
+An alternative approach could be to define entities through **configuration files** or **prefabs**, but using a factory allows better compile-time safety and avoids runtime parsing overhead during gameplay.
+
+---
 
 ## 11. Risk Assessment
 

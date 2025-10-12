@@ -2,7 +2,7 @@
 \hypertarget{classregistry}{}\label{classregistry}\index{registry@{registry}}
 
 
-The registry class.  
+The registry class. The registry is a container for all the entities and components of the game. It is home to the ECS engine. It stores the entities and the components and provides ways to interact with them. It also provides the systems that will be executed at each frame to update the state of the entities and their components.  
 
 
 
@@ -16,49 +16,51 @@ The registry class.
 \begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classregistry_a15c27c6d008fb260402f20d8619e43f7}{registry\+::registry} object. This version takes a renderwindow as parameter and registers the drawable system. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classregistry_a757883d504ab1bb5a06e0faa8e28664d}{registry}} ()
 \begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classregistry_a15c27c6d008fb260402f20d8619e43f7}{registry\+::registry} object. This version doesn\textquotesingle{}t use a window and doesn\textquotesingle{}t register the drawable system. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Component $>$ }\\vector$<$ optional$<$ Component $>$ $>$ \& \mbox{\hyperlink{classregistry_afe3919f4a56bbbeda89af4a6e5171f8b}{register\+\_\+components}} ()
-\item 
+{\footnotesize template$<$\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{typename}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} $>$ }\\\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{vector}}$<$ \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{optional}}$<$ \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} $>$ $>$ \& \mbox{\hyperlink{classregistry_afe3919f4a56bbbeda89af4a6e5171f8b}{register\+\_\+components}} ()
+\begin{DoxyCompactList}\small\item\em Registers a table of a new type of components. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Component $>$ }\\vector$<$ optional$<$ Component $>$ $>$ \& \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{get\+\_\+components}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the table of a specific type of component. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Component $>$ }\\vector$<$ optional$<$ Component $>$ $>$ const \& \mbox{\hyperlink{classregistry_a40b0f07dfe9c916d667732c73ef9272a}{get\+\_\+components}} () const
 \item 
-{\footnotesize template$<$typename Component $>$ }\\void \mbox{\hyperlink{classregistry_a967f47ebfc3b74c85f483aae74bfd927}{remove\+\_\+component}} (\mbox{\hyperlink{classentity}{entity}} const \&from)
-\item 
-{\footnotesize template$<$typename Component $>$ }\\Component \& \mbox{\hyperlink{classregistry_a850c78be83ce8c06a29b74aeec391170}{add\+\_\+component}} (\mbox{\hyperlink{classentity}{entity}} const \&to, Component \&\&c)
-\item 
+{\footnotesize template$<$\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{typename}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} $>$ }\\\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} \mbox{\hyperlink{classregistry_a967f47ebfc3b74c85f483aae74bfd927}{remove\+\_\+component}} (\mbox{\hyperlink{classentity}{entity}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{const}} \&\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{from}})
+\begin{DoxyCompactList}\small\item\em This function removes a component from an entity. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{typename}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} $>$ }\\\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} \& \mbox{\hyperlink{classregistry_a850c78be83ce8c06a29b74aeec391170}{add\+\_\+component}} (\mbox{\hyperlink{classentity}{entity}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{const}} \&\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{to}}, \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} \&\&\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{c}})
+\begin{DoxyCompactList}\small\item\em This function adds a component to an entity. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classentity}{entity}} \mbox{\hyperlink{classregistry_a582fb369da9636c38840ce731bb8a200}{spawn\+\_\+entity}} ()
 \begin{DoxyCompactList}\small\item\em This function creates a new entity. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classregistry_a488b346a5739fcfe1245bbda1536538e}{kill\+\_\+entity}} (const \mbox{\hyperlink{classentity}{entity}} \&e)
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} \mbox{\hyperlink{classregistry_a488b346a5739fcfe1245bbda1536538e}{kill\+\_\+entity}} (\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{const}} \mbox{\hyperlink{classentity}{entity}} \&\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{e}})
 \begin{DoxyCompactList}\small\item\em This function deletes an entity and all the components associated with itbased on its id. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classregistry_aee8db3684f102fc8b2b0a8ff01014b24}{add\+\_\+system}} (const function$<$ void(double)$>$ \&system)
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} \mbox{\hyperlink{classregistry_aee8db3684f102fc8b2b0a8ff01014b24}{add\+\_\+system}} (\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{const}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{function}}$<$ \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}}(\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{double}})$>$ \&\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{system}})
 \begin{DoxyCompactList}\small\item\em Add a system to the registry. The best way to add a system is by passing a lambda capturing by reference all the needed components. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classregistry_a957cd5c282db213979764cbe622ece89}{run\+\_\+systems}} (double delta)
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} \mbox{\hyperlink{classregistry_a957cd5c282db213979764cbe622ece89}{run\+\_\+systems}} (\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{double}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{delta}})
 \begin{DoxyCompactList}\small\item\em This function runs all the systems registered in the registry. \end{DoxyCompactList}\item 
-size\+\_\+t \mbox{\hyperlink{classregistry_a05b69b2f3a790c425e0d1df40e7fb322}{get\+Entity\+Num}} (void) const
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{size\+\_\+t}} \mbox{\hyperlink{classregistry_a05b69b2f3a790c425e0d1df40e7fb322}{get\+Entity\+Num}} (\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}}) \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{const}}
 \begin{DoxyCompactList}\small\item\em Get the highest entity id. \end{DoxyCompactList}\item 
-size\+\_\+t \mbox{\hyperlink{classregistry_a2203e584cc8b5829c26094e21bab2d21}{get\+Component\+Num}} (void) const
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{size\+\_\+t}} \mbox{\hyperlink{classregistry_a2203e584cc8b5829c26094e21bab2d21}{get\+Component\+Num}} (\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}}) \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{const}}
 \begin{DoxyCompactList}\small\item\em Get the number of registered types of components. \end{DoxyCompactList}\item 
-size\+\_\+t \mbox{\hyperlink{classregistry_a6492780080f9630f136627d42800880a}{get\+Erase\+Function\+Num}} (void) const
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{size\+\_\+t}} \mbox{\hyperlink{classregistry_a6492780080f9630f136627d42800880a}{get\+Erase\+Function\+Num}} (\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}}) \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{const}}
 \begin{DoxyCompactList}\small\item\em Get the number of registered erase functions. \end{DoxyCompactList}\item 
 sf\+::\+Render\+Window \& \mbox{\hyperlink{classregistry_a202893edec86ab9275b46be5ea71e78e}{get\+\_\+window}} ()
-\begin{DoxyCompactList}\small\item\em Get the window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get the window. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Component $>$ }\\vector$<$ optional$<$ Component $>$ $>$ const \& \mbox{\hyperlink{classregistry_a40b0f07dfe9c916d667732c73ef9272a}{get\+\_\+components}} () const
+\begin{DoxyCompactList}\small\item\em Get the table of a specific type of component (Const version) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classregistry_aee17149de7f585a04c59e916b03110f5}{collisions\+\_\+active}} = true
-\item 
-bool \mbox{\hyperlink{classregistry_a0531fe6d4810e9a50289b9f866ad25cf}{render\+\_\+active}} = true
-\item 
-bool \mbox{\hyperlink{classregistry_a772d03d9734330401886ab2d380d52d1}{logic\+\_\+active}} = true
-\item 
-bool \mbox{\hyperlink{classregistry_aa007145268e3b27a52137b978cf7f887}{control\+\_\+active}} = true
-\item 
-vector$<$ \mbox{\hyperlink{classentity}{entity}} $>$ \mbox{\hyperlink{classregistry_ab2381c1b1b227a150443be6932f7c434}{dead\+\_\+entities}}
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_aee17149de7f585a04c59e916b03110f5}{collisions\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}
+\begin{DoxyCompactList}\small\item\em A boolean that indicates if the collisions system is active. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_a0531fe6d4810e9a50289b9f866ad25cf}{render\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}
+\begin{DoxyCompactList}\small\item\em A boolean that indicates if the render system is active. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_a772d03d9734330401886ab2d380d52d1}{logic\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}
+\begin{DoxyCompactList}\small\item\em A boolean that indicates if the logic system is active. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_aa007145268e3b27a52137b978cf7f887}{control\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}
+\begin{DoxyCompactList}\small\item\em A boolean that indicates if the control system is active. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{vector}}$<$ \mbox{\hyperlink{classentity}{entity}} $>$ \mbox{\hyperlink{classregistry_ab2381c1b1b227a150443be6932f7c434}{dead\+\_\+entities}}
+\begin{DoxyCompactList}\small\item\em A vector of entities id that are dead and can be reused. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-The registry class. 
+The registry class. The registry is a container for all the entities and components of the game. It is home to the ECS engine. It stores the entities and the components and provides ways to interact with them. It also provides the systems that will be executed at each frame to update the state of the entities and their components. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classregistry_a15c27c6d008fb260402f20d8619e43f7}\label{classregistry_a15c27c6d008fb260402f20d8619e43f7} 
@@ -93,14 +95,33 @@ Construct a new \doxylink{classregistry_a15c27c6d008fb260402f20d8619e43f7}{regis
 \index{registry@{registry}!add\_component@{add\_component}}
 \index{add\_component@{add\_component}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{add\_component()}{add\_component()}}
-{\footnotesize\ttfamily template$<$typename Component $>$ \\
-Component \& registry\+::add\+\_\+component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentity}{entity}} const \&}]{to,  }\item[{Component \&\&}]{c }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{typename}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} $>$ \\
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} \& registry\+::add\+\_\+component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentity}{entity}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{const}} \&}]{to,  }\item[{\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} \&\&}]{c }\end{DoxyParamCaption})}
 
+
+
+This function adds a component to an entity. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Component} & the type of the component \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em to} & The id of the entity the component will be associated with \\
+\hline
+{\em c} & The component value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Component\& A reference to the newly created component 
+\end{DoxyReturn}
 \Hypertarget{classregistry_aee8db3684f102fc8b2b0a8ff01014b24}\label{classregistry_aee8db3684f102fc8b2b0a8ff01014b24} 
 \index{registry@{registry}!add\_system@{add\_system}}
 \index{add\_system@{add\_system}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{add\_system()}{add\_system()}}
-{\footnotesize\ttfamily void registry\+::add\+\_\+system (\begin{DoxyParamCaption}\item[{const function$<$ void(double)$>$ \&}]{system }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} registry\+::add\+\_\+system (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{const}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{function}}$<$ \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}}(\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{double}})$>$ \&}]{system }\end{DoxyParamCaption})}
 
 
 
@@ -114,17 +135,48 @@ Add a system to the registry. The best way to add a system is by passing a lambd
 \Hypertarget{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}\label{classregistry_ad397b1104bc8510105b4e4d6b90f87cc} 
 \index{registry@{registry}!get\_components@{get\_components}}
 \index{get\_components@{get\_components}!registry@{registry}}
-\doxysubsubsection{\texorpdfstring{get\_components()}{get\_components()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{get\_components()}{get\_components()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$typename Component $>$ \\
 vector$<$ optional$<$ Component $>$ $>$ \& registry\+::get\+\_\+components (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the table of a specific type of component. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Component} & The type of the component table \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+vector$<$optional$<$\+Component$>$$>$\& a reference to the table 
+\end{DoxyReturn}
+\Hypertarget{classregistry_a40b0f07dfe9c916d667732c73ef9272a}\label{classregistry_a40b0f07dfe9c916d667732c73ef9272a} 
+\index{registry@{registry}!get\_components@{get\_components}}
+\index{get\_components@{get\_components}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{get\_components()}{get\_components()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Component $>$ \\
+vector$<$ optional$<$ Component $>$ $>$ const  \& registry\+::get\+\_\+components (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 \Hypertarget{classregistry_a40b0f07dfe9c916d667732c73ef9272a}\label{classregistry_a40b0f07dfe9c916d667732c73ef9272a} 
 \index{registry@{registry}!get\_components@{get\_components}}
 \index{get\_components@{get\_components}!registry@{registry}}
-\doxysubsubsection{\texorpdfstring{get\_components()}{get\_components()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{get\_components()}{get\_components()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$typename Component $>$ \\
 vector$<$ optional$<$ Component $>$ $>$ const  \& registry\+::get\+\_\+components (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
+
+
+Get the table of a specific type of component (Const version) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Component} & The type of the component table \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+vector$<$optional$<$\+Component$>$$>$\& a reference to the table 
+\end{DoxyReturn}
 \Hypertarget{classregistry_a202893edec86ab9275b46be5ea71e78e}\label{classregistry_a202893edec86ab9275b46be5ea71e78e} 
 \index{registry@{registry}!get\_window@{get\_window}}
 \index{get\_window@{get\_window}!registry@{registry}}
@@ -142,7 +194,7 @@ sf\+::\+Render\+Window\&
 \index{registry@{registry}!getComponentNum@{getComponentNum}}
 \index{getComponentNum@{getComponentNum}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{getComponentNum()}{getComponentNum()}}
-{\footnotesize\ttfamily size\+\_\+t registry\+::get\+Component\+Num (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{size\+\_\+t}} registry\+::get\+Component\+Num (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}}}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -155,7 +207,7 @@ size\+\_\+t
 \index{registry@{registry}!getEntityNum@{getEntityNum}}
 \index{getEntityNum@{getEntityNum}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{getEntityNum()}{getEntityNum()}}
-{\footnotesize\ttfamily size\+\_\+t registry\+::get\+Entity\+Num (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{size\+\_\+t}} registry\+::get\+Entity\+Num (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}}}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -168,7 +220,7 @@ size\+\_\+t
 \index{registry@{registry}!getEraseFunctionNum@{getEraseFunctionNum}}
 \index{getEraseFunctionNum@{getEraseFunctionNum}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{getEraseFunctionNum()}{getEraseFunctionNum()}}
-{\footnotesize\ttfamily size\+\_\+t registry\+::get\+Erase\+Function\+Num (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{size\+\_\+t}} registry\+::get\+Erase\+Function\+Num (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}}}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -181,7 +233,7 @@ size\+\_\+t
 \index{registry@{registry}!kill\_entity@{kill\_entity}}
 \index{kill\_entity@{kill\_entity}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{kill\_entity()}{kill\_entity()}}
-{\footnotesize\ttfamily void registry\+::kill\+\_\+entity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classentity}{entity}} \&}]{e }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} registry\+::kill\+\_\+entity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{const}} \mbox{\hyperlink{classentity}{entity}} \&}]{e }\end{DoxyParamCaption})}
 
 
 
@@ -196,21 +248,47 @@ This function deletes an entity and all the components associated with itbased o
 \index{registry@{registry}!register\_components@{register\_components}}
 \index{register\_components@{register\_components}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{register\_components()}{register\_components()}}
-{\footnotesize\ttfamily template$<$typename Component $>$ \\
-vector$<$ optional$<$ Component $>$ $>$ \& registry\+::register\+\_\+components (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{typename}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} $>$ \\
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{vector}}$<$ \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{optional}}$<$ \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} $>$ $>$ \& registry\+::register\+\_\+components (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Registers a table of a new type of components. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Component} & The new type of component \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+vector$<$optional$<$\+Component$>$$>$\& a reference to the newly added table 
+\end{DoxyReturn}
 \Hypertarget{classregistry_a967f47ebfc3b74c85f483aae74bfd927}\label{classregistry_a967f47ebfc3b74c85f483aae74bfd927} 
 \index{registry@{registry}!remove\_component@{remove\_component}}
 \index{remove\_component@{remove\_component}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{remove\_component()}{remove\_component()}}
-{\footnotesize\ttfamily template$<$typename Component $>$ \\
-void registry\+::remove\+\_\+component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentity}{entity}} const \&}]{from }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{typename}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{Component}} $>$ \\
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} registry\+::remove\+\_\+component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classentity}{entity}} \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{const}} \&}]{from }\end{DoxyParamCaption})}
 
+
+
+This function removes a component from an entity. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Component} & the type of the component to be removed \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em from} & The entity from which the component will be removed \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classregistry_a957cd5c282db213979764cbe622ece89}\label{classregistry_a957cd5c282db213979764cbe622ece89} 
 \index{registry@{registry}!run\_systems@{run\_systems}}
 \index{run\_systems@{run\_systems}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{run\_systems()}{run\_systems()}}
-{\footnotesize\ttfamily void registry\+::run\+\_\+systems (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} registry\+::run\+\_\+systems (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{double}}}]{delta }\end{DoxyParamCaption})}
 
 
 
@@ -236,31 +314,51 @@ entity The id of the newly created entity
 \index{registry@{registry}!collisions\_active@{collisions\_active}}
 \index{collisions\_active@{collisions\_active}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{collisions\_active}{collisions\_active}}
-{\footnotesize\ttfamily bool registry\+::collisions\+\_\+active = true}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::collisions\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}}
+
+
+
+A boolean that indicates if the collisions system is active. 
 
 \Hypertarget{classregistry_aa007145268e3b27a52137b978cf7f887}\label{classregistry_aa007145268e3b27a52137b978cf7f887} 
 \index{registry@{registry}!control\_active@{control\_active}}
 \index{control\_active@{control\_active}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{control\_active}{control\_active}}
-{\footnotesize\ttfamily bool registry\+::control\+\_\+active = true}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::control\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}}
+
+
+
+A boolean that indicates if the control system is active. 
 
 \Hypertarget{classregistry_ab2381c1b1b227a150443be6932f7c434}\label{classregistry_ab2381c1b1b227a150443be6932f7c434} 
 \index{registry@{registry}!dead\_entities@{dead\_entities}}
 \index{dead\_entities@{dead\_entities}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{dead\_entities}{dead\_entities}}
-{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{classentity}{entity}}$>$ registry\+::dead\+\_\+entities}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{vector}}$<$\mbox{\hyperlink{classentity}{entity}}$>$ registry\+::dead\+\_\+entities}
+
+
+
+A vector of entities id that are dead and can be reused. 
 
 \Hypertarget{classregistry_a772d03d9734330401886ab2d380d52d1}\label{classregistry_a772d03d9734330401886ab2d380d52d1} 
 \index{registry@{registry}!logic\_active@{logic\_active}}
 \index{logic\_active@{logic\_active}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{logic\_active}{logic\_active}}
-{\footnotesize\ttfamily bool registry\+::logic\+\_\+active = true}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::logic\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}}
+
+
+
+A boolean that indicates if the logic system is active. 
 
 \Hypertarget{classregistry_a0531fe6d4810e9a50289b9f866ad25cf}\label{classregistry_a0531fe6d4810e9a50289b9f866ad25cf} 
 \index{registry@{registry}!render\_active@{render\_active}}
 \index{render\_active@{render\_active}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{render\_active}{render\_active}}
-{\footnotesize\ttfamily bool registry\+::render\+\_\+active = true}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::render\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}}
+
+
+
+A boolean that indicates if the render system is active. 
 
 
 
@@ -268,4 +366,6 @@ The documentation for this class was generated from the following files\+:\begin
 \item 
 /home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/engine/include/\mbox{\hyperlink{registry_8hpp}{registry.\+hpp}}\item 
 /home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/engine/src/\mbox{\hyperlink{registry__entities_8cpp}{registry\+\_\+entities.\+cpp}}\item 
-/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/engine/src/\mbox{\hyperlink{registry__systems_8cpp}{registry\+\_\+systems.\+cpp}}\end{DoxyCompactItemize}
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/engine/src/\mbox{\hyperlink{registry__single__comp_8tpp}{registry\+\_\+single\+\_\+comp.\+tpp}}\item 
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/engine/src/\mbox{\hyperlink{registry__systems_8cpp}{registry\+\_\+systems.\+cpp}}\item 
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/engine/src/\mbox{\hyperlink{registry__tables_8tpp}{registry\+\_\+tables.\+tpp}}\end{DoxyCompactItemize}

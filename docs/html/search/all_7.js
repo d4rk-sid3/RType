@@ -2,7 +2,7 @@ var searchData=
 [
   ['game_0',['GAME',['../client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84',1,'client.hpp']]],
   ['game_5fover_1',['GAME_OVER',['../client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00',1,'client.hpp']]],
-  ['get_5fcomponents_2',['get_components',['../classregistry.html#ad397b1104bc8510105b4e4d6b90f87cc',1,'registry::get_components()'],['../classregistry.html#a40b0f07dfe9c916d667732c73ef9272a',1,'registry::get_components() const']]],
+  ['get_5fcomponents_2',['get_components',['../classregistry.html#ad397b1104bc8510105b4e4d6b90f87cc',1,'registry::get_components()'],['../classregistry.html#a40b0f07dfe9c916d667732c73ef9272a',1,'registry::get_components() const'],['../classregistry.html#a40b0f07dfe9c916d667732c73ef9272a',1,'registry::get_components() const']]],
   ['get_5fwindow_3',['get_window',['../classregistry.html#a202893edec86ab9275b46be5ea71e78e',1,'registry']]],
   ['getcomponentnum_4',['getComponentNum',['../classregistry.html#a2203e584cc8b5829c26094e21bab2d21',1,'registry']]],
   ['getentitynum_5',['getEntityNum',['../classregistry.html#a05b69b2f3a790c425e0d1df40e7fb322',1,'registry']]],

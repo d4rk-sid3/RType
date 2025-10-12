@@ -19,6 +19,11 @@
  * ------------------------------------------------------------------------------------
  */
 
+/**
+ * @brief The ResourceManager file. Contains the declaration of the ResourceManager class
+ * 
+ */
+
 #ifndef INCLUDED_TEXTUREMANAGER_HPP
 #define INCLUDED_TEXTUREMANAGER_HPP
 
@@ -28,8 +33,18 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
+/**
+ * @brief The resource_type enum. Contains the possible types of resources
+ * stored by the ResourceManager. TEXTURE for textures and FONT for fonts
+ */
 typedef enum { TEXTURE, FONT } resource_type;
 
+/**
+ * @brief The ResourceManager singleton class. Manages textures and fonts.
+ * It contains a map of textures and a map of fonts that associates unique names
+ * to each texture or font. It provides methods to load textures and fonts from files
+ * and to get the corresponding sf::Texture or sf::Font.
+ */
 class ResourceManager {
   private:
     std::map<std::string, sf::Texture> m_textureMap;
@@ -40,11 +55,25 @@ class ResourceManager {
   public:
     ~ResourceManager() {}
 
+    /**
+     * @brief Returns the singleton instance of the ResourceManager
+     * 
+     * @return ResourceManager&
+     */
     static ResourceManager& Instance() {
         static ResourceManager instance;
         return instance;
     }
 
+    /**
+     * @brief Loads a texture or font from a file
+     * 
+     * @param fileName the path to the file
+     * @param id the unique name to be associated with the resource
+     * @param type the type of the resource (TEXTURE or FONT)
+     * @return true if the resource was loaded successfully
+     * @return false if there was an error
+     */
     bool load(
         const std::string& fileName, const std::string& id, resource_type type
     ) {
@@ -71,9 +100,22 @@ class ResourceManager {
         }
     }
 
+    /**
+     * @brief Get the Texture associated with the id
+     * 
+     * @param id the unique name associated with the texture
+     * @return sf::Texture& 
+     */
     sf::Texture& getTexture(const std::string& id) {
         return m_textureMap.at(id);
     }
+
+    /**
+     * @brief Get the Font associated with the id
+     * 
+     * @param id the unique name associated with the font
+     * @return sf::Font& 
+     */
     sf::Font& getFont(const std::string& id) {
         return m_fontMap.at(id);
     }

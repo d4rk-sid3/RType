@@ -23,8 +23,18 @@ struct Vector2D {
     int16_t y;
 };
 
+/**
+ * @brief The different types of enemies and game entities
+ * Each type has a unique value. For example, the first player has an value of 1 (TYPE_1)
+ * 
+ */
 enum EnemyType : int16_t { TYPE_1 = 1, TYPE_2 = 2, TYPE_3 = 3, TYPE_4 = 4, TYPE_5 = 5, TYPE_6 = 6,
     TYPE_7 = 7, TYPE_8 = 8, TYPE_9 = 9, TYPE_10 = 10, TYPE_11 = 11 };
+
+/**
+ * @brief The type map. Maps the names of the enemies or game entities to their types
+ * For example, the name of the first player is "player1" and its type is TYPE_1 
+ */
 extern std::map<std::string, EnemyType> type_map;
 
 // Serveur -> Client
