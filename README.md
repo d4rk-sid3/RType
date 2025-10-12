@@ -108,13 +108,16 @@ On Windows : - You may execute the following commands :
 
 ### **Testing program** 
 
-The tests are available on Linux. You may can test the code executing the script build_tests.sh or using with the following commands.
-```bash
-    rm -rf ./build
-    cmake -B ./build -DCMAKE_BUILD_TYPE=Debug -DTESTING=ON
-    cmake --build ./build
-    cd ./build
-    ctest --ouput-on-failure
+The project uses Google Tests for testing. They first need to be compiled to be executed.
+You can launch the tests by launching the compiled test binaries.
+
+Lauch the regular compilation with CMake
+``` bash
+rm -rf build && mkdir build && cd build && cmake .. & make
+```
+The test binaries will be in the build directory. Just lanch them. For example:
+``` bash
+./registry_tests
 ```
 
 ### **Documentation**
