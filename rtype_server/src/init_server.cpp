@@ -28,7 +28,6 @@ void load_textures(void)
 
 void Server::initializeGame(void)
 {
-    Factory factory(reg);
     factory.make_background();
     player1_entity_id = factory.make_entity("player1");
     player2_entity_id = factory.make_entity("player2");
@@ -47,7 +46,7 @@ void Server::initializeGame(void)
 
 Server::Server(int p) :
     win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server"),
-    reg(win), server_(p, std::ref(messages), std::ref(mtx)), p_(p)
+    reg(win), factory(reg), server_(p, std::ref(messages), std::ref(mtx)), p_(p)
 {
     reg.control_active = false;
     counter = 0;
@@ -55,8 +54,6 @@ Server::Server(int p) :
     load_textures();
     initializeGame();
     loadLevel("assets/levels/test.txt");
-
-    networkThread = std::thread([this]() { server_.run(); });
 }
 
 Server::~Server()
@@ -68,13 +65,15 @@ void Server::run()
 {
     isRunning = true;
 
-    networkThread = std::thread(
+    networkThread = std::thread([this]() { server_.run(); });
+
+    cooldownThread = std::thread(
         [this]()
         {
             while (isRunning)
             {
                 logGameEntities();
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                std::this_thread::sleep_for(std::chrono::milliseconds(20));
             }
             
         }
@@ -91,7 +90,12 @@ void Server::run()
         }
 
         double dt = frameClock.restart().asSeconds();
-        reg.run_systems(dt);
+
+        {
+            std::lock_guard<std::mutex> lock(regMtx);
+            reg.run_systems(dt);
+        }
+
         runLevel(dt);
 
         if (player1_entity_id == -1 && player2_entity_id == -1) {
@@ -104,7 +108,8 @@ void Server::run()
         }
     }
 
-    server_.getContext().stop();
-    networkThread.join();
     isRunning = false;
+    server_.stop();
+    networkThread.join();
+    cooldownThread.join();
 }

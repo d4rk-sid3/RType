@@ -45,7 +45,6 @@ NetworkManager::NetworkManager(int port, std::vector<std::pair<asio::ip::udp::en
 
 NetworkManager::~NetworkManager()
 {
-    isrunning = false;
     socket.close();
 }
 
@@ -54,6 +53,12 @@ void NetworkManager::run()
     if (isrunning) {
         context.run();
     }
+}
+
+void NetworkManager::stop()
+{
+    isrunning = false;
+    context.stop();
 }
 
 void NetworkManager::receive_from_clients()
@@ -123,20 +128,4 @@ void NetworkManager::send_to_server(const std::vector<int8_t> &msg, size_t size)
             }
         }
     );
-}
-
-
-asio::ip::udp::endpoint NetworkManager::getLastSender() const
-{
-    return last_sender_;
-}
-
-asio::ip::udp::endpoint& NetworkManager::getServerendpoint()
-{
-    return server_endpoint_;
-}
-
-asio::io_context& NetworkManager::getContext()
-{
-    return context;
 }

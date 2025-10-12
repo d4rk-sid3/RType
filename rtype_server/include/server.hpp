@@ -32,8 +32,10 @@ class Server {
   private:
     int p_;
     registry reg;
+    Factory factory;
     double levelTimer = 0.0;
     std::mutex mtx;
+    std::mutex regMtx;
     NetworkManager server_;
     std::vector<entity_info_t> entities;
     std::vector<int8_t> result;
@@ -43,7 +45,7 @@ class Server {
     sf::Event event;
     sf::Clock frameClock;
     int counter;
-    bool isRunning;
+    std::atomic<bool> isRunning;
 
 
     void loadLevel(const std::string &path);

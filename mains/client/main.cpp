@@ -2,7 +2,6 @@
 
 int main(int ac, char **av) {
     sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type");
-    win.setFramerateLimit(240);
     registry reg(win);
 
     reg.logic_active = false;
@@ -40,6 +39,6 @@ int main(int ac, char **av) {
         reg.run_systems(dt);
     }   
 
-    c.getContext().stop();
+    c.stop();
     t.join();
 }

@@ -52,35 +52,53 @@ void Server::logGameEntities()
     counter = 0;
     result.clear();
 
-    for (size_t i = 0; i < reg.getEntityNum(); i++) {
+    std::vector<std::optional<component::position>> pos;
+    std::vector<std::optional<component::name>> name_;
+    std::vector<std::optional<component::unique_id>> uid;
+    size_t entity_num;
+
+    {
+        std::lock_guard<std::mutex> lock(regMtx);
+
+        pos = reg.get_components<component::position>();
+        name_ = reg.get_components<component::name>();
+        uid = reg.get_components<component::unique_id>();
+        entity_num = reg.getEntityNum();
+    }
+
+    for (size_t i = 0; i < entity_num; i++) {
         try {
-            position &pos = reg.get_components<component::position>()[entity(i)].value();
-            name &name_ = reg.get_components<component::name>()[entity(i)].value();
-            EnemyType type = type_map[name_._name];
-            unique_id &uid = reg.get_components<component::unique_id>()[entity(i)].value();
+            position pos_elem = pos[entity(i)].value();
+            name name_elem = name_[entity(i)].value();
+            EnemyType type = type_map[name_elem._name];
+            unique_id uid_elem = uid[entity(i)].value();
 
             // Ignore special entities
-            if (std::find(special_entities.begin(), special_entities.end(), name_._name) != special_entities.end()) {
+            if (std::find(special_entities.begin(), special_entities.end(), name_elem._name) != special_entities.end()) {
                 continue;
             }
 
             // Clean up out of screen entities
-            if (pos.x < -200 || pos.x > 1000) {
-                if (name_._name != "ceiling" && name_._name != "floor") {
-                    reg.kill_entity(entity(i));
+            if (pos_elem.x < -200 || pos_elem.x > 1000) {
+                if (name_elem._name != "ceiling" && name_elem._name != "floor") {
+                    {
+                        std::lock_guard<std::mutex> lock(regMtx);
+
+                        reg.kill_entity(entity(i));
+                    }
                     continue;
                 }
             }
 
             ++counter;
 
-            vector<int8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(uid), type,
-                {static_cast<int16_t>(pos.x), static_cast<int16_t>(pos.y)}});
+            vector<int8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(uid_elem), type,
+                {static_cast<int16_t>(pos_elem.x), static_cast<int16_t>(pos_elem.y)}});
 
             std::cout << "Enemy_Type: "  << (type) << " ";
-            std::cout << "Enemy_Name: "  << (name_._name) << " ";
-            std::cout << "Enemy_Pos_x: "  << static_cast<int>(pos.x) << " ";
-            std::cout << "Enemy_Pos_y: "  << static_cast<int>(pos.y) << std::endl;
+            std::cout << "Enemy_Name: "  << (name_elem._name) << " ";
+            std::cout << "Enemy_Pos_x: "  << static_cast<int>(pos_elem.x) << " ";
+            std::cout << "Enemy_Pos_y: "  << static_cast<int>(pos_elem.y) << std::endl;
 
             result.insert(result.end(), tmp.begin(), tmp.end());
         } catch (...) {
@@ -91,9 +109,6 @@ void Server::logGameEntities()
     result.insert(result.begin(), tmp.begin(), tmp.end());
 
     if (!result.empty()) {
-        // std::cout << "[SERVER] sending " << result.size() << " bytes" << std::endl;
-        // server_.send_to_client(result, result.size(), server_.getLastSender());
-
         for (auto & tmp : all_clients) {
             server_.send_to_client(result, result.size(), tmp.first);
         }
@@ -143,21 +158,25 @@ void Server::receivePlayerInput(double delta)
         try {
             if (tmp[0] == 0x24) {
                 std::cerr << "INPUT" << std::endl;
-
-                velocity &vel = reg.get_components<component::velocity>()[all_clients[msg.first]].value();
                 MoveResponse move_info = decodeMoveResponse(tmp);
 
-                if (move_info.direction == LEFT) {
-                    vel.vx = -PLAYER_SPEED;
-                }
-                if (move_info.direction == RIGHT) {
-                    vel.vx = PLAYER_SPEED;
-                }
-                if (move_info.direction == UP) {
-                    vel.vy = -PLAYER_SPEED;
-                }
-                if (move_info.direction == DOWN) {
-                    vel.vy = PLAYER_SPEED;
+                {
+                    std::lock_guard<std::mutex> lock(regMtx);
+
+                    velocity &vel = reg.get_components<component::velocity>()[all_clients[msg.first]].value();
+
+                    if (move_info.direction == LEFT) {
+                        vel.vx = -PLAYER_SPEED;
+                    }
+                    if (move_info.direction == RIGHT) {
+                        vel.vx = PLAYER_SPEED;
+                    }
+                    if (move_info.direction == UP) {
+                        vel.vy = -PLAYER_SPEED;
+                    }
+                    if (move_info.direction == DOWN) {
+                        vel.vy = PLAYER_SPEED;
+                    }
                 }
             }
 
@@ -166,13 +185,16 @@ void Server::receivePlayerInput(double delta)
                 ActionResponse action_info = decodeActionResponse(tmp);
 
                 if (action_info.input == SPACE && shoot_timer > PLAYER_SHOOT_COOLDOWN) {
-                    Factory fac(reg);
                     shoot_timer = 0;
-                    entity missile = fac.make_player_missile();
-                    position &pos = reg.get_components<component::position>()[all_clients[msg.first]].value();
-                    position &missile_pos = reg.get_components<component::position>()[missile].value();
-                    missile_pos.x = pos.x + 8;
-                    missile_pos.y = pos.y + 6;
+                    {
+                        std::lock_guard<std::mutex> lock(regMtx);
+
+                        entity missile = factory.make_player_missile();
+                        position &pos = reg.get_components<component::position>()[all_clients[msg.first]].value();
+                        position &missile_pos = reg.get_components<component::position>()[missile].value();
+                        missile_pos.x = pos.x + 8;
+                        missile_pos.y = pos.y + 6;
+                    }
                 }
             }
 
@@ -184,7 +206,6 @@ void Server::receivePlayerInput(double delta)
 
 void Server::runLevel(double delta)
 {
-    Factory factory(reg);
     levelTimer += delta;
 
     // Spawn new ready entities
@@ -193,9 +214,13 @@ void Server::runLevel(double delta)
         
         if (en.spawn_time <= levelTimer && en.entity_id.getId() == -1) {
             en.entity_id = factory.make_entity(en.type);
-            auto &pos = reg.get_components<component::position>()[en.entity_id].value();
-            pos.y = en.spawn_y;
-            pos.x = 1000;
+            {
+                std::lock_guard<std::mutex> lock(regMtx);
+
+                auto &pos = reg.get_components<component::position>()[en.entity_id].value();
+                pos.y = en.spawn_y;
+                pos.x = 1000;
+            }
         }
     }
 

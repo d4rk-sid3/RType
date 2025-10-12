@@ -47,6 +47,7 @@ class NetworkManager {
 
     // Methodes for running the network io_context
     void run();
+    void stop();
 
     void receive_from_clients();
     void send_to_client( const std::vector<int8_t>& msg, size_t size,
@@ -54,11 +55,6 @@ class NetworkManager {
 
     void receive_from_server();
     void send_to_server( const std::vector<int8_t>& msg, size_t size );
-
-    // Getters
-    asio::ip::udp::endpoint getLastSender() const;
-    asio::io_context& getContext();
-    asio::ip::udp::endpoint& getServerendpoint();
 
   private:
     asio::io_context context;
