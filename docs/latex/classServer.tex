@@ -7,68 +7,30 @@
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{run\+Level}} (double delta)
-\item 
-\mbox{\hyperlink{classServer_a08c05f9ef25e74b4f1ec5216e557f8b2}{Server}} (int p, \mbox{\hyperlink{classregistry}{registry}} \&reg, Factory \&fac)
+\mbox{\hyperlink{classServer_afc422f4323d93d0d986198d8e3967bb2}{Server}} (int p, \mbox{\hyperlink{classregistry}{registry}} \&reg)
 \item 
 \mbox{\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{\texorpdfstring{$\sim$}{\string~}\+Server}} ()
 \item 
-Move\+Response \mbox{\hyperlink{classServer_a645362063e718f2c481fa4d16b6ae1d8}{get\+Move}} ()
+Network\+Manager \& \mbox{\hyperlink{classServer_acfd2d06240a094a14b1a9d507e342508}{get\+Manager}} ()
 \item 
-Move\+Response \mbox{\hyperlink{classServer_a4b8332a5fc7d16e2e7ff16594a0b9534}{recup\+Move}} (const std\+::pair$<$ std\+::vector$<$ uint8\+\_\+t $>$, asio\+::ip\+::udp\+::endpoint $>$ \&a, Move\+Request \&m)
+std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classServer_a4f1fd5b9e8cdac6f505d6a6a03434fab}{encode\+Nbr\+Entity}} (const Nbr\+Entity \&pos)
 \item 
-Move\+Response \mbox{\hyperlink{classServer_aef19260488faed7947d2921b649953ed}{update\+Move\+Response}} (const Move\+Response \&oldpos, const Move\+Response \&pos)
+std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classServer_a0a21ae22cb0560a554fec4e186583eaa}{encode\+Enemy\+Moved\+Response}} (const Enemy\+Moved\+Response \&pos)
 \item 
-Shoot\+Response \mbox{\hyperlink{classServer_aaa9d3dbd54cbebab97d9bfa5932925fb}{update\+Shoot\+Response}} (const Shoot\+Response \&oldpos, const Shoot\+Response \&pos)
+Move\+Response \mbox{\hyperlink{classServer_ac5a491fec7ae16a63d195b4b192f9d48}{decode\+Move\+Response}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
 \item 
-Pickup\+Item\+Response \mbox{\hyperlink{classServer_a128bee5a988812db68f41898e1e4bfcc}{update\+Pickup\+Item\+Response}} (const Pickup\+Item\+Response \&oldpos, const Pickup\+Item\+Response \&pos)
+Action\+Response \mbox{\hyperlink{classServer_a268043e1a600716d031d621139d9d3a6}{decode\+Action\+Response}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
 \item 
-Move\+Request \mbox{\hyperlink{classServer_aca567205cb986733a8dfb4272ebfff27}{decode\+Move\+Request}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&buffer)
-\item 
-Shoot\+Request \mbox{\hyperlink{classServer_a19f05cf0f268559c696ef6b520e2ad3e}{decode\+Shoot\+Request}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&buffer)
-\item 
-Pickup\+Item\+Resquest \mbox{\hyperlink{classServer_ab7ccdff122366c80a823196da3cd04f6}{decode\+Pickup\+Item\+Resquest}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&buffer)
-\item 
-Game\+Paused\+Request \mbox{\hyperlink{classServer_add2cc6adf90ff62ce3a46761a6eefb60}{decode\+Game\+Paused\+Request}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&buffer)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_aeee1cefc8f6f43e04e70e9593cb05955}{encode\+Move\+Response}} (const Move\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a9c221ee8a87adbc5b856eb080bebad3c}{encode\+Shoot\+Response}} (const Shoot\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_aa3d0d12484e40a4e3f964a58a7bc625f}{encode\+Pickup\+Item\+Response}} (const Pickup\+Item\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a2959bb2da8ebd56e82cb5bbf91b7d476}{encode\+Player\+State\+Response}} (const Player\+State\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_aa94377590f8bb2e20663483eff3d92ea}{encode\+Player\+Game\+State\+Response}} (const Player\+Game\+State\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_aac781cbf92abc172c313ace7fbcc65f8}{encode\+Beat\+Boss\+Response}} (const Beat\+Boss\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_afc745549a0ecacc35d463d36bbe4ba05}{encode\+Checkpoint\+Response}} (const Checkpoint\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_aca81a7c13aeab7ab2485e9f120bfdf9b}{encode\+Game\+Started\+Response}} (const Game\+Started\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a51ecc8d24764b3809702efb5b25f59ab}{encode\+Game\+Paused\+Response}} (const Game\+Paused\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a27369b4da1993ffb92b39e25bd85d085}{encode\+Game\+State\+Response}} (const Game\+State\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a9dffe4abf86ad6213d9f2e50286143f7}{encode\+Enemy\+Spawned\+Response}} (const Enemy\+Spawned\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a431b4468ba1b4e2848df0cea51eb0768}{encode\+Enemy\+Moved\+Response}} (const Enemy\+Moved\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_aee58c642a87258c2e819f0409e1d65c4}{encoded\+Enemy\+Fired\+Response}} (const Enemy\+Fired\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a9f663d7647b941124042ed32a3006895}{encode\+Enemy\+Died\+Response}} (const Enemy\+Died\+Response \&pos)
-\item 
-std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a0fb2d22a0d1eb046c049b82a79c732eb}{encode\+Collision\+Response}} (const Collision\+Response \&pos)
+void \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{run\+Level}} (double delta)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classServer_a08c05f9ef25e74b4f1ec5216e557f8b2}\label{classServer_a08c05f9ef25e74b4f1ec5216e557f8b2} 
+\Hypertarget{classServer_afc422f4323d93d0d986198d8e3967bb2}\label{classServer_afc422f4323d93d0d986198d8e3967bb2} 
 \index{Server@{Server}!Server@{Server}}
 \index{Server@{Server}!Server@{Server}}
 \doxysubsubsection{\texorpdfstring{Server()}{Server()}}
-{\footnotesize\ttfamily Server\+::\+Server (\begin{DoxyParamCaption}\item[{int}]{p,  }\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg,  }\item[{Factory \&}]{fac }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Server\+::\+Server (\begin{DoxyParamCaption}\item[{int}]{p,  }\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg }\end{DoxyParamCaption})}
 
 \Hypertarget{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}\label{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6} 
 \index{Server@{Server}!````~Server@{\texorpdfstring{$\sim$}{\string~}Server}}
@@ -79,131 +41,35 @@ std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a0fb2d22a0d1eb046
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classServer_add2cc6adf90ff62ce3a46761a6eefb60}\label{classServer_add2cc6adf90ff62ce3a46761a6eefb60} 
-\index{Server@{Server}!decodeGamePausedRequest@{decodeGamePausedRequest}}
-\index{decodeGamePausedRequest@{decodeGamePausedRequest}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{decodeGamePausedRequest()}{decodeGamePausedRequest()}}
-{\footnotesize\ttfamily Game\+Paused\+Request Server\+::decode\+Game\+Paused\+Request (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
+\Hypertarget{classServer_a268043e1a600716d031d621139d9d3a6}\label{classServer_a268043e1a600716d031d621139d9d3a6} 
+\index{Server@{Server}!decodeActionResponse@{decodeActionResponse}}
+\index{decodeActionResponse@{decodeActionResponse}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{decodeActionResponse()}{decodeActionResponse()}}
+{\footnotesize\ttfamily Action\+Response Server\+::decode\+Action\+Response (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
 
-\Hypertarget{classServer_aca567205cb986733a8dfb4272ebfff27}\label{classServer_aca567205cb986733a8dfb4272ebfff27} 
-\index{Server@{Server}!decodeMoveRequest@{decodeMoveRequest}}
-\index{decodeMoveRequest@{decodeMoveRequest}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{decodeMoveRequest()}{decodeMoveRequest()}}
-{\footnotesize\ttfamily Move\+Request Server\+::decode\+Move\+Request (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
+\Hypertarget{classServer_ac5a491fec7ae16a63d195b4b192f9d48}\label{classServer_ac5a491fec7ae16a63d195b4b192f9d48} 
+\index{Server@{Server}!decodeMoveResponse@{decodeMoveResponse}}
+\index{decodeMoveResponse@{decodeMoveResponse}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{decodeMoveResponse()}{decodeMoveResponse()}}
+{\footnotesize\ttfamily Move\+Response Server\+::decode\+Move\+Response (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
 
-\Hypertarget{classServer_ab7ccdff122366c80a823196da3cd04f6}\label{classServer_ab7ccdff122366c80a823196da3cd04f6} 
-\index{Server@{Server}!decodePickupItemResquest@{decodePickupItemResquest}}
-\index{decodePickupItemResquest@{decodePickupItemResquest}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{decodePickupItemResquest()}{decodePickupItemResquest()}}
-{\footnotesize\ttfamily Pickup\+Item\+Resquest Server\+::decode\+Pickup\+Item\+Resquest (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_a19f05cf0f268559c696ef6b520e2ad3e}\label{classServer_a19f05cf0f268559c696ef6b520e2ad3e} 
-\index{Server@{Server}!decodeShootRequest@{decodeShootRequest}}
-\index{decodeShootRequest@{decodeShootRequest}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{decodeShootRequest()}{decodeShootRequest()}}
-{\footnotesize\ttfamily Shoot\+Request Server\+::decode\+Shoot\+Request (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_aac781cbf92abc172c313ace7fbcc65f8}\label{classServer_aac781cbf92abc172c313ace7fbcc65f8} 
-\index{Server@{Server}!encodeBeatBossResponse@{encodeBeatBossResponse}}
-\index{encodeBeatBossResponse@{encodeBeatBossResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodeBeatBossResponse()}{encodeBeatBossResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Beat\+Boss\+Response (\begin{DoxyParamCaption}\item[{const Beat\+Boss\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_afc745549a0ecacc35d463d36bbe4ba05}\label{classServer_afc745549a0ecacc35d463d36bbe4ba05} 
-\index{Server@{Server}!encodeCheckpointResponse@{encodeCheckpointResponse}}
-\index{encodeCheckpointResponse@{encodeCheckpointResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodeCheckpointResponse()}{encodeCheckpointResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Checkpoint\+Response (\begin{DoxyParamCaption}\item[{const Checkpoint\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_a0fb2d22a0d1eb046c049b82a79c732eb}\label{classServer_a0fb2d22a0d1eb046c049b82a79c732eb} 
-\index{Server@{Server}!encodeCollisionResponse@{encodeCollisionResponse}}
-\index{encodeCollisionResponse@{encodeCollisionResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodeCollisionResponse()}{encodeCollisionResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Collision\+Response (\begin{DoxyParamCaption}\item[{const Collision\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_aee58c642a87258c2e819f0409e1d65c4}\label{classServer_aee58c642a87258c2e819f0409e1d65c4} 
-\index{Server@{Server}!encodedEnemyFiredResponse@{encodedEnemyFiredResponse}}
-\index{encodedEnemyFiredResponse@{encodedEnemyFiredResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodedEnemyFiredResponse()}{encodedEnemyFiredResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encoded\+Enemy\+Fired\+Response (\begin{DoxyParamCaption}\item[{const Enemy\+Fired\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_a9f663d7647b941124042ed32a3006895}\label{classServer_a9f663d7647b941124042ed32a3006895} 
-\index{Server@{Server}!encodeEnemyDiedResponse@{encodeEnemyDiedResponse}}
-\index{encodeEnemyDiedResponse@{encodeEnemyDiedResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodeEnemyDiedResponse()}{encodeEnemyDiedResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Enemy\+Died\+Response (\begin{DoxyParamCaption}\item[{const Enemy\+Died\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_a431b4468ba1b4e2848df0cea51eb0768}\label{classServer_a431b4468ba1b4e2848df0cea51eb0768} 
+\Hypertarget{classServer_a0a21ae22cb0560a554fec4e186583eaa}\label{classServer_a0a21ae22cb0560a554fec4e186583eaa} 
 \index{Server@{Server}!encodeEnemyMovedResponse@{encodeEnemyMovedResponse}}
 \index{encodeEnemyMovedResponse@{encodeEnemyMovedResponse}!Server@{Server}}
 \doxysubsubsection{\texorpdfstring{encodeEnemyMovedResponse()}{encodeEnemyMovedResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Enemy\+Moved\+Response (\begin{DoxyParamCaption}\item[{const Enemy\+Moved\+Response \&}]{pos }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::vector$<$ int8\+\_\+t $>$ Server\+::encode\+Enemy\+Moved\+Response (\begin{DoxyParamCaption}\item[{const Enemy\+Moved\+Response \&}]{pos }\end{DoxyParamCaption})}
 
-\Hypertarget{classServer_a9dffe4abf86ad6213d9f2e50286143f7}\label{classServer_a9dffe4abf86ad6213d9f2e50286143f7} 
-\index{Server@{Server}!encodeEnemySpawnedResponse@{encodeEnemySpawnedResponse}}
-\index{encodeEnemySpawnedResponse@{encodeEnemySpawnedResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodeEnemySpawnedResponse()}{encodeEnemySpawnedResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Enemy\+Spawned\+Response (\begin{DoxyParamCaption}\item[{const Enemy\+Spawned\+Response \&}]{pos }\end{DoxyParamCaption})}
+\Hypertarget{classServer_a4f1fd5b9e8cdac6f505d6a6a03434fab}\label{classServer_a4f1fd5b9e8cdac6f505d6a6a03434fab} 
+\index{Server@{Server}!encodeNbrEntity@{encodeNbrEntity}}
+\index{encodeNbrEntity@{encodeNbrEntity}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{encodeNbrEntity()}{encodeNbrEntity()}}
+{\footnotesize\ttfamily std\+::vector$<$ int8\+\_\+t $>$ Server\+::encode\+Nbr\+Entity (\begin{DoxyParamCaption}\item[{const Nbr\+Entity \&}]{pos }\end{DoxyParamCaption})}
 
-\Hypertarget{classServer_a51ecc8d24764b3809702efb5b25f59ab}\label{classServer_a51ecc8d24764b3809702efb5b25f59ab} 
-\index{Server@{Server}!encodeGamePausedResponse@{encodeGamePausedResponse}}
-\index{encodeGamePausedResponse@{encodeGamePausedResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodeGamePausedResponse()}{encodeGamePausedResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Game\+Paused\+Response (\begin{DoxyParamCaption}\item[{const Game\+Paused\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_aca81a7c13aeab7ab2485e9f120bfdf9b}\label{classServer_aca81a7c13aeab7ab2485e9f120bfdf9b} 
-\index{Server@{Server}!encodeGameStartedResponse@{encodeGameStartedResponse}}
-\index{encodeGameStartedResponse@{encodeGameStartedResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodeGameStartedResponse()}{encodeGameStartedResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Game\+Started\+Response (\begin{DoxyParamCaption}\item[{const Game\+Started\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_a27369b4da1993ffb92b39e25bd85d085}\label{classServer_a27369b4da1993ffb92b39e25bd85d085} 
-\index{Server@{Server}!encodeGameStateResponse@{encodeGameStateResponse}}
-\index{encodeGameStateResponse@{encodeGameStateResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodeGameStateResponse()}{encodeGameStateResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Game\+State\+Response (\begin{DoxyParamCaption}\item[{const Game\+State\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_aeee1cefc8f6f43e04e70e9593cb05955}\label{classServer_aeee1cefc8f6f43e04e70e9593cb05955} 
-\index{Server@{Server}!encodeMoveResponse@{encodeMoveResponse}}
-\index{encodeMoveResponse@{encodeMoveResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodeMoveResponse()}{encodeMoveResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Move\+Response (\begin{DoxyParamCaption}\item[{const Move\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_aa3d0d12484e40a4e3f964a58a7bc625f}\label{classServer_aa3d0d12484e40a4e3f964a58a7bc625f} 
-\index{Server@{Server}!encodePickupItemResponse@{encodePickupItemResponse}}
-\index{encodePickupItemResponse@{encodePickupItemResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodePickupItemResponse()}{encodePickupItemResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Pickup\+Item\+Response (\begin{DoxyParamCaption}\item[{const Pickup\+Item\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_aa94377590f8bb2e20663483eff3d92ea}\label{classServer_aa94377590f8bb2e20663483eff3d92ea} 
-\index{Server@{Server}!encodePlayerGameStateResponse@{encodePlayerGameStateResponse}}
-\index{encodePlayerGameStateResponse@{encodePlayerGameStateResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodePlayerGameStateResponse()}{encodePlayerGameStateResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Player\+Game\+State\+Response (\begin{DoxyParamCaption}\item[{const Player\+Game\+State\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_a2959bb2da8ebd56e82cb5bbf91b7d476}\label{classServer_a2959bb2da8ebd56e82cb5bbf91b7d476} 
-\index{Server@{Server}!encodePlayerStateResponse@{encodePlayerStateResponse}}
-\index{encodePlayerStateResponse@{encodePlayerStateResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodePlayerStateResponse()}{encodePlayerStateResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Player\+State\+Response (\begin{DoxyParamCaption}\item[{const Player\+State\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_a9c221ee8a87adbc5b856eb080bebad3c}\label{classServer_a9c221ee8a87adbc5b856eb080bebad3c} 
-\index{Server@{Server}!encodeShootResponse@{encodeShootResponse}}
-\index{encodeShootResponse@{encodeShootResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{encodeShootResponse()}{encodeShootResponse()}}
-{\footnotesize\ttfamily std\+::vector$<$ uint8\+\_\+t $>$ Server\+::encode\+Shoot\+Response (\begin{DoxyParamCaption}\item[{const Shoot\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_a645362063e718f2c481fa4d16b6ae1d8}\label{classServer_a645362063e718f2c481fa4d16b6ae1d8} 
-\index{Server@{Server}!getMove@{getMove}}
-\index{getMove@{getMove}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{getMove()}{getMove()}}
-{\footnotesize\ttfamily Move\+Response Server\+::get\+Move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_a4b8332a5fc7d16e2e7ff16594a0b9534}\label{classServer_a4b8332a5fc7d16e2e7ff16594a0b9534} 
-\index{Server@{Server}!recupMove@{recupMove}}
-\index{recupMove@{recupMove}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{recupMove()}{recupMove()}}
-{\footnotesize\ttfamily Move\+Response Server\+::recup\+Move (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ std\+::vector$<$ uint8\+\_\+t $>$, asio\+::ip\+::udp\+::endpoint $>$ \&}]{a,  }\item[{Move\+Request \&}]{m }\end{DoxyParamCaption})}
+\Hypertarget{classServer_acfd2d06240a094a14b1a9d507e342508}\label{classServer_acfd2d06240a094a14b1a9d507e342508} 
+\index{Server@{Server}!getManager@{getManager}}
+\index{getManager@{getManager}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{getManager()}{getManager()}}
+{\footnotesize\ttfamily Network\+Manager \& Server\+::get\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \Hypertarget{classServer_af56fa596fcd58a1ea62b5a059885f467}\label{classServer_af56fa596fcd58a1ea62b5a059885f467} 
 \index{Server@{Server}!runLevel@{runLevel}}
@@ -211,30 +77,12 @@ std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classServer_a0fb2d22a0d1eb046
 \doxysubsubsection{\texorpdfstring{runLevel()}{runLevel()}}
 {\footnotesize\ttfamily void Server\+::run\+Level (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})}
 
-\Hypertarget{classServer_aef19260488faed7947d2921b649953ed}\label{classServer_aef19260488faed7947d2921b649953ed} 
-\index{Server@{Server}!updateMoveResponse@{updateMoveResponse}}
-\index{updateMoveResponse@{updateMoveResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{updateMoveResponse()}{updateMoveResponse()}}
-{\footnotesize\ttfamily Move\+Response Server\+::update\+Move\+Response (\begin{DoxyParamCaption}\item[{const Move\+Response \&}]{oldpos,  }\item[{const Move\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_a128bee5a988812db68f41898e1e4bfcc}\label{classServer_a128bee5a988812db68f41898e1e4bfcc} 
-\index{Server@{Server}!updatePickupItemResponse@{updatePickupItemResponse}}
-\index{updatePickupItemResponse@{updatePickupItemResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{updatePickupItemResponse()}{updatePickupItemResponse()}}
-{\footnotesize\ttfamily Pickup\+Item\+Response Server\+::update\+Pickup\+Item\+Response (\begin{DoxyParamCaption}\item[{const Pickup\+Item\+Response \&}]{oldpos,  }\item[{const Pickup\+Item\+Response \&}]{pos }\end{DoxyParamCaption})}
-
-\Hypertarget{classServer_aaa9d3dbd54cbebab97d9bfa5932925fb}\label{classServer_aaa9d3dbd54cbebab97d9bfa5932925fb} 
-\index{Server@{Server}!updateShootResponse@{updateShootResponse}}
-\index{updateShootResponse@{updateShootResponse}!Server@{Server}}
-\doxysubsubsection{\texorpdfstring{updateShootResponse()}{updateShootResponse()}}
-{\footnotesize\ttfamily Shoot\+Response Server\+::update\+Shoot\+Response (\begin{DoxyParamCaption}\item[{const Shoot\+Response \&}]{oldpos,  }\item[{const Shoot\+Response \&}]{pos }\end{DoxyParamCaption})}
-
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/include/\mbox{\hyperlink{server_8hpp}{server.\+hpp}}\item 
-/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{rtype__server_2src_2commands_8cpp}{commands.\+cpp}}\item 
-/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{rtype__server_2src_2decodeur_8cpp}{decodeur.\+cpp}}\item 
-/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{init__server_8cpp}{init\+\_\+server.\+cpp}}\item 
-/home/jaggie/epitech\+\_\+projects/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{level__parser_8cpp}{level\+\_\+parser.\+cpp}}\end{DoxyCompactItemize}
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/include/\mbox{\hyperlink{server_8hpp}{server.\+hpp}}\item 
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{rtype__server_2src_2commands_8cpp}{commands.\+cpp}}\item 
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{rtype__server_2src_2decodeur_8cpp}{decodeur.\+cpp}}\item 
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{init__server_8cpp}{init\+\_\+server.\+cpp}}\item 
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/src/\mbox{\hyperlink{level__handling_8cpp}{level\+\_\+handling.\+cpp}}\end{DoxyCompactItemize}

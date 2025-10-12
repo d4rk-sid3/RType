@@ -7,8 +7,8 @@ var searchData=
   ['geterasefunctionnum_4',['getEraseFunctionNum',['../classregistry.html#a6492780080f9630f136627d42800880a',1,'registry']]],
   ['getfont_5',['getFont',['../classResourceManager.html#ad7fe4904d2a5ae24bbc60360fc012c56',1,'ResourceManager']]],
   ['getid_6',['getId',['../classentity.html#a49afbb4a974ddc6a5393d7f0c30ab63b',1,'entity']]],
-  ['getkeyboardinput_7',['getKeyboardInput',['../structcomponent_1_1controllable__s.html#a50d82bffaf22ef937e0c2d18f4e05c22',1,'component::controllable_s']]],
-  ['getmove_8',['getMove',['../classServer.html#a645362063e718f2c481fa4d16b6ae1d8',1,'Server']]],
-  ['getmovekey_9',['getMoveKey',['../classClient.html#a44fe248f70cbfc3de9858a9064481363',1,'Client']]],
+  ['getkey_7',['getKey',['../init__client_8cpp.html#a566bdf948a52a4fe98e76eb50b18ac5b',1,'init_client.cpp']]],
+  ['getkeyboardinput_8',['getKeyboardInput',['../structcomponent_1_1controllable__s.html#a50d82bffaf22ef937e0c2d18f4e05c22',1,'component::controllable_s']]],
+  ['getmanager_9',['getManager',['../classClient.html#af6829864546ed7e423fc1875be9864a9',1,'Client::getManager()'],['../classServer.html#acfd2d06240a094a14b1a9d507e342508',1,'Server::getManager()']]],
   ['gettexture_10',['getTexture',['../classResourceManager.html#a78632647a9a86d0b477de5055a5a2fcc',1,'ResourceManager']]]
 ];

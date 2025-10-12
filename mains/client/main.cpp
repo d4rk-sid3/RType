@@ -1,12 +1,24 @@
 #include "client.hpp"
 
-int main() {
-    sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type") ;
+int main(int ac, char **av) {
+    sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type");
+    win.setFramerateLimit(240);
     registry reg(win);
+
+    reg.logic_active = false;
+    reg.collisions_active = false;
 
     sf::Event event;
     sf::Clock frameClock;
-    Client client(8080, "", reg);
+    Client client(std::stoi(av[1]), av[2], reg);
+
+    NetworkManager &c = client.getManager();
+
+    std::vector<int8_t> msg(1, 0x5);   
+
+    c.send_to_server(msg, msg.size());
+
+    std::thread t([&c]() { c.run(); });
 
     while (win.isOpen()) {
         double dt = frameClock.restart().asSeconds();
@@ -27,5 +39,7 @@ int main() {
 
         reg.run_systems(dt);
     }   
-}
 
+    c.getContext().stop();
+    t.join();
+}

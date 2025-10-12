@@ -26,14 +26,17 @@
 #include "../../engine/include/registry.hpp"
 
 class Factory {
-    private:
-        registry &reg;
-    public:
-        Factory(registry &_reg);
+  private:
+    registry& reg;
 
-        entity make_entity(const std::string &type);
+  public:
+    Factory(registry& _reg);
 
-    entity make_player();
+    entity make_entity(const std::string& type);
+
+    entity make_player1();
+
+    entity make_player2();
 
     entity make_player_missile();
 
@@ -49,24 +52,25 @@ class Factory {
 
     entity make_ceiling();
 
-        entity make_background();
+    entity make_background();
 
-        entity make_explosion();
+    entity make_explosion();
 
-        entity make_title();
+    entity make_title();
 
-        entity make_start_text();
+    entity make_start_text();
 
-        entity make_menu_background_music();
+    entity make_menu_background_music();
 
-        entity make_game_background_music();
+    entity make_game_background_music();
 
-        entity make_hit_effect();
+    entity make_hit_effect();
 
-        entity make_fade_in_rect();
-    
-        entity make_fade_out_rect();
+    entity make_fade_in_rect();
 
+    entity make_fade_out_rect();
+
+    entity make_boss();
 };
 
 #endif

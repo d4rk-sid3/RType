@@ -1,13 +1,22 @@
 #include "server.hpp"
+#include "logic_functions.hpp"
 
-int main() {
-    sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type") ;
+int main(int ac, char **av) {
+    sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server");
+    win.setFramerateLimit(60);
     registry reg(win);
-    Factory fac(reg);
+
+
+    reg.control_active = false;
 
     sf::Event event;
     sf::Clock frameClock;
-    Server server(8080, reg, fac);
+    Server server(std::stoi(av[1]), reg);
+
+    NetworkManager &c = server.getManager();
+
+    std::thread t([&c]() { c.run(); });
+
 
     while (win.isOpen()) {
         while (win.pollEvent(event))
@@ -20,7 +29,19 @@ int main() {
         }
 
         double dt = frameClock.restart().asSeconds();
-        server.runLevel(dt);
         reg.run_systems(dt);
-    }   
+        server.runLevel(dt);
+
+        if (player1_entity_id == -1 && player2_entity_id == -1) {
+            printf("GAME OVER\n");
+            break;
+        }
+        if (boss_dead) {
+            printf("BOSS DEAD\n");
+            break;
+        }
+    }
+
+    c.getContext().stop();
+    t.join();
 }

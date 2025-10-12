@@ -101,6 +101,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcomponent_1_1logic__s.html">logic_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user.  <a href="structcomponent_1_1logic__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcomponent_1_1name__s.html">name_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name component, defined by a string. It lets you give a name to each entity.  <a href="structcomponent_1_1name__s.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcomponent_1_1position__s.html">position_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position component, with an x and y position.  <a href="structcomponent_1_1position__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,9 +143,15 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a4389e557b74c9397d726bcf56ba076d0" id="r_a4389e557b74c9397d726bcf56ba076d0"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcomponent_1_1logic__s.html">component::logic_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4389e557b74c9397d726bcf56ba076d0">logic</a></td></tr>
 <tr class="memdesc:a4389e557b74c9397d726bcf56ba076d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The logic component, defined by a function pointer. This component allows an entity to have a logic defined by the user.  <br /></td></tr>
 <tr class="separator:a4389e557b74c9397d726bcf56ba076d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af42f87bf296e95960edc1d8eb0ea059b" id="r_af42f87bf296e95960edc1d8eb0ea059b"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcomponent_1_1name__s.html">component::name_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af42f87bf296e95960edc1d8eb0ea059b">name</a></td></tr>
+<tr class="memdesc:af42f87bf296e95960edc1d8eb0ea059b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name component, defined by a string. It lets you give a name to each entity.  <br /></td></tr>
+<tr class="separator:af42f87bf296e95960edc1d8eb0ea059b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0551f20926c6f673d130bfca015d8b76" id="r_a0551f20926c6f673d130bfca015d8b76"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcomponent_1_1audio__s.html">component::audio_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0551f20926c6f673d130bfca015d8b76">audio</a></td></tr>
 <tr class="memdesc:a0551f20926c6f673d130bfca015d8b76"><td class="mdescLeft">&#160;</td><td class="mdescRight">The audio component defined by a single sf::Music. This component is not used by the engine systems but can be directly played, stopped, paused by the user.  <br /></td></tr>
 <tr class="separator:a0551f20926c6f673d130bfca015d8b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d008508800cc3ed05b1794c9569a86e" id="r_a9d008508800cc3ed05b1794c9569a86e"><td class="memItemLeft" align="right" valign="top">typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d008508800cc3ed05b1794c9569a86e">unique_id</a></td></tr>
+<tr class="memdesc:a9d008508800cc3ed05b1794c9569a86e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique_id component, defined by an int. It lets you give a unique id to each entity.  <br /></td></tr>
+<tr class="separator:a9d008508800cc3ed05b1794c9569a86e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a64d6f963266a98cf80ce10cdf18e579e" name="a64d6f963266a98cf80ce10cdf18e579e"></a>
@@ -257,6 +266,22 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
+<a id="af42f87bf296e95960edc1d8eb0ea059b" name="af42f87bf296e95960edc1d8eb0ea059b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af42f87bf296e95960edc1d8eb0ea059b">&#9670;&#160;</a></span>name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structcomponent_1_1name__s.html">component::name_s</a> <a class="el" href="#af42f87bf296e95960edc1d8eb0ea059b">component::name</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The name component, defined by a string. It lets you give a name to each entity. </p>
+
+</div>
+</div>
 <a id="a32921f4e807a398b6ffaea1730431bec" name="a32921f4e807a398b6ffaea1730431bec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a32921f4e807a398b6ffaea1730431bec">&#9670;&#160;</a></span>position</h2>
 
@@ -286,6 +311,22 @@ Typedefs</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The text component, consisting in a simple sf::Text. </p>
+
+</div>
+</div>
+<a id="a9d008508800cc3ed05b1794c9569a86e" name="a9d008508800cc3ed05b1794c9569a86e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d008508800cc3ed05b1794c9569a86e">&#9670;&#160;</a></span>unique_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int <a class="el" href="#a9d008508800cc3ed05b1794c9569a86e">component::unique_id</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The unique_id component, defined by an int. It lets you give a unique id to each entity. </p>
 
 </div>
 </div>

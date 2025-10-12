@@ -57,6 +57,10 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
                         std::vector<optional<component::animated_drawable>> &anim_draws,
                         std::vector<optional<component::text>> &texts)
 {
+    if (reg.render_active == false) {
+        return;
+    }
+
     window.clear(sf::Color::Black);
 
     for (size_t i = 0; i < reg.getEntityNum(); ++i) {
@@ -103,6 +107,10 @@ void control_system(
     double delta, registry& reg,
     std::vector<optional<component::controllable>>& controls
 ) {
+    if (reg.control_active == false) {
+        return;
+    }
+
     for (size_t i = 0; i < reg.getEntityNum(); ++i) {
         try {
             if (i >= controls.size() || !controls.at(i).has_value())
@@ -120,7 +128,12 @@ void collision_system(
     std::vector<optional<component::position>>& positions,
     std::vector<optional<component::hurtbox>>& hurtboxes,
     std::vector<optional<component::hitbox>>& hitboxes
-) {
+)
+{
+    if (reg.collisions_active == false) {
+        return;
+    }
+
     for (size_t i = 0; i < reg.getEntityNum(); ++i) {
         try {
             // Go through each hurtbox and their positions
@@ -176,7 +189,12 @@ void collision_system(
 
 void logic_system(
     double delta, registry& reg, std::vector<optional<component::logic>>& logics
-) {
+)
+{
+    if (reg.logic_active == false) {
+        return;
+    }
+
     for (size_t i = 0; i < reg.getEntityNum(); ++i) {
         try {
             auto& logic = logics.at(i);

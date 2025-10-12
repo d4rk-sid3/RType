@@ -98,8 +98,8 @@ Each client hold a **session** identified by an UUID 128-bits. The possible stat
 
 ```c
 struct HelloPayload {
-    uint8_t  version;     // Version du protocole client
-    uint8_t  mode;            // 0=Normal, 1=Debug
+    int16_t  version;     // Version du protocole client
+    int16_t  mode;            // 0=Normal, 1=Debug
     char     client_name[32];      // Nom du client (null-terminated)
 };
 ```
@@ -112,8 +112,8 @@ struct HelloPayload {
 ```c
 struct WelcomePayload {
     uint128_t session_id;          // ID de session assigné
-    uint8_t   server_version;      // Version du serveur
-    uint16_t  max_sessions;         // Nombre max de sessions
+    int16_t   server_version;      // Version du serveur
+    int16_t  max_sessions;         // Nombre max de sessions
     char      server_name[64];     // Nom du serveur
 };
 ``` 
@@ -125,7 +125,7 @@ struct WelcomePayload {
 
 ```c
 struct AuthPayload {
-    uint8_t  auth_type;            // 0=Guest, 1=Username/Pass, 2=Session Token
+    int16_t  auth_type;            // 0=Guest, 1=Username/Pass, 2=Session Token
     char     username[32];         // Nom d'utilisateur (null terminated string)
     char     credential[64];       // Mot de passe hashé ou token
     uint128_t client_hash;          // Hash du client pour anti-cheat
@@ -147,7 +147,7 @@ fournir son token de session pour qu'on lui restaure sa partie si son token est 
 
 ```c
 struct AuthResultPayload {
-    uint8_t  status_code;       // 0 = Success, 1 = Invalid credentials, 2 = Token expired, 3 = Error
+    int16_t  status_code;       // 0 = Success, 1 = Invalid credentials, 2 = Token expired, 3 = Error
     uint128_t session_token;    // Unique token for session resumption (only valid if status_code == 0)
     char auth_token[64];        // Authentication token for secured requests 
     uint32_t player_id;         // Unique ID assigned to the player by the server
@@ -164,7 +164,7 @@ uint128_t : UUID
 
 ```c
 struct HelpRequest {
-    uint8_t type = 0x05;   // HELP command
+    int16_t type = 0x05;   // HELP command
 };
 ```
 
@@ -175,7 +175,7 @@ struct HelpRequest {
 
 ```c
 struct HelpResponse {
-    uint8_t type = 0x10;
+    int16_t type = 0x10;
     char available_commands[512];  
 };
 ```
@@ -197,7 +197,7 @@ Available commands:
 
 ```c
 struct NameRequest {
-    uint8_t type;               // 0x07
+    int16_t type;               // 0x07
     char auth_token[64];        // Authentication token
     char new_name[32];          // Desired new username
 };
@@ -210,8 +210,8 @@ struct NameRequest {
 
 ```c
 struct NameResponse {
-    uint8_t type;               // 0x08
-    uint8_t status_code;        // 0=Success, 1=Invalid auth_token, 2=Name Taken
+    int16_t type;               // 0x08
+    int16_t status_code;        // 0=Success, 1=Invalid auth_token, 2=Name Taken
 };
 ```
 
@@ -222,7 +222,7 @@ struct NameResponse {
 
 ```c
 struct CreateSessionRequest {
-    uint8_t type;               // 0x09
+    int16_t type;               // 0x09
     char auth_token[64];        // Auth token
     char session_name[32];      // Optional session name
 };
@@ -235,8 +235,8 @@ struct CreateSessionRequest {
 
 ```c
 struct CreateSessionResponse {
-    uint8_t type;               // 0x10
-    uint8_t status_code;        // 0=Success, 1=Invalid auth_token
+    int16_t type;               // 0x10
+    int16_t status_code;        // 0=Success, 1=Invalid auth_token
     uint32_t session_id;        // Unique ID assigned to the session (for creator only)
     char join_code[8];          // Code to share with other players
 };
@@ -249,7 +249,7 @@ struct CreateSessionResponse {
 
 ```c
 struct LaunchSessionRequest {
-    uint8_t type;               // 0x11
+    int16_t type;               // 0x11
     char auth_token[64];        // Auth token of session creator
     uint32_t session_id;        // ID of the session (creator only)
 };
@@ -262,8 +262,8 @@ struct LaunchSessionRequest {
 
 ```c
 struct LaunchSessionResponse {
-    uint8_t type;               // 0x12
-    uint8_t status_code;        // 0=Success, 1=Invalid auth_token, 2=Not session owner, 3=Not enough players
+    int16_t type;               // 0x12
+    int16_t status_code;        // 0=Success, 1=Invalid auth_token, 2=Not session owner, 3=Not enough players
 };
 ```
 
@@ -274,7 +274,7 @@ struct LaunchSessionResponse {
 
 ```c
 struct JoinSessionRequest {
-    uint8_t type;               // 0x13
+    int16_t type;               // 0x13
     char auth_token[64];        // Auth token
     char join_code[8];          // Code provided by session creator
 };
@@ -287,8 +287,8 @@ struct JoinSessionRequest {
 
 ```c
 struct JoinSessionResponse {
-    uint8_t type;               // 0x14
-    uint8_t status_code;        // 0=Success, 1=Invalid auth_token, 2=Invalid join_code, 3=Session Full
+    int16_t type;               // 0x14
+    int16_t status_code;        // 0=Success, 1=Invalid auth_token, 2=Invalid join_code, 3=Session Full
     uint32_t session_id;        // Assigned session ID for the client
 };
 ```
@@ -300,7 +300,7 @@ struct JoinSessionResponse {
 
 ```c
 struct RegisterRequest {
-    uint8_t type;               // 0x15
+    int16_t type;               // 0x15
     char username[32];
     char password_hash[64];     // SHA256 hashed password
 };
@@ -313,8 +313,8 @@ struct RegisterRequest {
 
 ```c
 struct RegisterResponse {
-    uint8_t type;               // 0x16
-    uint8_t status_code;        // 0=Success, 1=Username Taken, 2=Invalid Data
+    int16_t type;               // 0x16
+    int16_t status_code;        // 0=Success, 1=Username Taken, 2=Invalid Data
     char auth_token[64];        // Provided for immediate use
 };
 ```
@@ -326,7 +326,7 @@ struct RegisterResponse {
 
 ```c
 struct DisconnectRequest {
-    uint8_t type;               // 0x17
+    int16_t type;               // 0x17
     char auth_token[64];
 };
 ```
@@ -338,8 +338,8 @@ struct DisconnectRequest {
 
 ```c
 struct DisconnectResponse {
-    uint8_t type;               // 0x18
-    uint8_t status_code;        // 0=Success, 1=Invalid auth_token
+    int16_t type;               // 0x18
+    int16_t status_code;        // 0=Success, 1=Invalid auth_token
 };
 ```
 
@@ -350,7 +350,7 @@ struct DisconnectResponse {
 
 ```c
 struct ProfileRequest {
-    uint8_t type;               // 0x19
+    int16_t type;               // 0x19
     char auth_token[64];
 };
 ```
@@ -362,8 +362,8 @@ struct ProfileRequest {
 
 ```c
 struct ProfileResponse {
-    uint8_t type;               // 0x20
-    uint8_t status_code;        // 0=Success, 1=Invalid auth_token
+    int16_t type;               // 0x20
+    int16_t status_code;        // 0=Success, 1=Invalid auth_token
     char username[32];
     uint32_t player_id;
     uint32_t games_played;
@@ -378,7 +378,7 @@ struct ProfileResponse {
 
 ```c
 struct ListUsersRequest {
-    uint8_t type;               // 0x21
+    int16_t type;               // 0x21
     char auth_token[64];
 };
 ```
@@ -390,7 +390,7 @@ struct ListUsersRequest {
 
 ```c
 struct ListUsersResponse {
-    uint8_t type;               // 0x22
+    int16_t type;               // 0x22
     uint32_t user_count;
     char usernames[32][32];     // Max 32 users
 };
@@ -403,7 +403,7 @@ struct ListUsersResponse {
 
 ```c
 struct MoveRequest {
-    uint8_t type;               // 0x23
+    int16_t type;               // 0x23
     enum direction (UP|DOWN|LEFT|RIGHT);
 };
 ```
@@ -416,7 +416,7 @@ struct MoveRequest {
 ```c
 struct MoveResponse {
     uint8_t type;               // 0x24
-    uint32_t player_id;
+    int player_id;
     Vector2D direction;
     Vector2D position;
     float speed;
@@ -431,7 +431,7 @@ struct MoveResponse {
 
 ```c
 struct ShootRequest {
-    uint8_t type;               // 0x25
+    int16_t type;               // 0x25
 };
 ```
 
@@ -443,7 +443,7 @@ struct ShootRequest {
 ```c
 struct ShootResponse {
     uint8_t type;               // 0x26
-    uint32_t player_id;
+    int player_id;
     Vector2D bullet_position;
     Vector2D bullet_direction;
     float bullet_speed;
@@ -459,8 +459,8 @@ struct ShootResponse {
 ```c
 struct PickupItemResponse {
     uint8_t type;               // 0x27
-    uint32_t player_id;
-    uint32_t item_id;
+    int player_id;
+    int item_id;
     Vector2D item_position;
     time timestamp;
 };
@@ -474,10 +474,10 @@ struct PickupItemResponse {
 ```c
 struct PlayerStateResponse {
     uint8_t type;               // 0x28
-    uint32_t player_id;
-    uint32_t remaining_health;
-    uint32_t score;
-    uint32_t current_level;
+    int player_id;
+    int remaining_health;
+    int score;
+    int current_level;
     enum state (DEATH|ALIVE);
 };
 ```
@@ -490,10 +490,10 @@ struct PlayerStateResponse {
 ```c
 struct PlayerStateResponse {
     uint8_t type;               // 0x29
-    uint32_t player_id;
-    uint32_t remaining_health;
-    uint32_t score;
-    uint32_t current_level;
+    int player_id;
+    int remaining_health;
+    int score;
+    int current_level;
     enum state (DEATH|ALIVE);
     enum state2 (PAUSE|IN_GAME);
 };
@@ -507,8 +507,8 @@ struct PlayerStateResponse {
 ```c
 struct BeatBossResponse {
     uint8_t type;               // 0x30
-    uint32_t player_id;
-    uint32_t boss_id;
+    int player_id;
+    int boss_id;
     Vector2D player_position;
     time timestamp;
     enum state WON;
@@ -523,8 +523,8 @@ struct BeatBossResponse {
 ```c
 struct CheckpointResponse {
     uint8_t type;               // 0x31
-    uint32_t player_id;
-    uint32_t checkpoint_id;
+    int player_id;
+    int checkpoint_id;
     Vector2D player_position;
     time timestamp;
 };
@@ -538,8 +538,8 @@ struct CheckpointResponse {
 ```c
 struct GameStartedResponse {
     uint8_t type;               // 0x32
-    uint32_t player_id;
-    uint32_t checkpoint_id;
+    int player_id;
+    int checkpoint_id;
     Vector2D player_position;
     time timestamp;
 };
@@ -552,7 +552,7 @@ struct GameStartedResponse {
 
 ```c
 struct GamePausedRequest {
-    uint8_t type;               // 0x33
+    int16_t type;               // 0x33
 };
 ```
 
@@ -563,7 +563,7 @@ struct GamePausedRequest {
 
 ```c
 struct GamePausedResponse {
-    uint8_t type;               // 0x34
+    int16_t type;               // 0x34
     time timestamp;
     enum current_state(PAUSED|RESUMED)
 };
@@ -577,7 +577,7 @@ struct GamePausedResponse {
 ```c
 struct GameStateResponse {
     uint8_t type;               // 0x35
-    std::vector <uint32_t> ids;      // disconnected clients ID's
+    std::vector <int> ids;      // disconnected clients ID's
 };
 ```
 
@@ -589,7 +589,7 @@ struct GameStateResponse {
 ```c
 struct EnemySpawnedResponse {
     uint8_t type;               // 0x36
-    uint32_t enemy_id;
+    int enemy_id;
     enum enemy_type(1|2|3|4);
     Vector2D position;
     Vector2D direction;
@@ -605,7 +605,7 @@ struct EnemySpawnedResponse {
 ```c
 struct EnemyMovedResponse {
     uint8_t type;               // 0x37
-    uint32_t enemy_id;
+    int enemy_id;
     enum enemy_type(1|2|3|4);
     Vector2D position;
     Vector2D direction;
@@ -621,7 +621,7 @@ struct EnemyMovedResponse {
 ```c
 struct EnemyFiredResponse {
     uint8_t type;               // 0x38
-    uint32_t enemy_id;
+    int enemy_id;
     enum enemy_type(1|2|3|4);
     Vector2D position;
     Vector2D direction;
@@ -637,7 +637,7 @@ struct EnemyFiredResponse {
 ```c
 struct EnemyDiedResponse {
     uint8_t type;               // 0x39
-    uint32_t enemy_id;
+    int enemy_id;
     enum enemy_type(1|2|3|4);
     Vector2D position;
     time timestamp;
@@ -651,7 +651,7 @@ struct EnemyDiedResponse {
 
 ```c
 struct CollisionResponse {
-    uint8_t type;               // 0x40
+    int16_t type;               // 0x40
     Vector2D ids;              // ids of the two entities
     Vector2D position;          // endroit du choc
     enum collision_type(BULLET-BULLET|BULLET-OBSTACLE|BULLET-PLAYER|BULLET-ENEMY|PLAYER-ENEMY);
