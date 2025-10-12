@@ -13,6 +13,7 @@
 #include "Factory.hpp"
 #include "Network.hpp"
 #include "registry.hpp"
+#include "logic_functions.hpp"
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -30,29 +31,33 @@ typedef struct entity_info_s {
 class Server {
   private:
     int p_;
-    registry &reg;
+    registry reg;
     double levelTimer = 0.0;
     std::mutex mtx;
-  
+    NetworkManager server_;
+    std::vector<entity_info_t> entities;
+    std::vector<int8_t> result;
+    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> messages;
+    std::map<asio::ip::udp::endpoint, int> all_clients;
+    sf::RenderWindow win;
+    sf::Event event;
+    sf::Clock frameClock;
+    int counter;
+    bool isRunning;
+
+
     void loadLevel(const std::string &path);
     void initializeGame(void);
     void logGameEntities(void);
     void receivePlayerInput(double delta);
+    void runLevel(double delta);
 
-    NetworkManager server_;
-
-    std::vector<entity_info_t> entities;
-
-    std::vector<int8_t> result;
-  
-    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> messages;
-
-    int counter = 0;
-
-    std::map<asio::ip::udp::endpoint, int> all_clients;
+    std::thread networkThread;
+    std::thread cooldownThread;
 
   public:
-    Server(int p, registry &reg);
+
+    Server(int p);
     ~Server();
 
     NetworkManager &getManager() { return server_; }
@@ -65,7 +70,7 @@ class Server {
     MoveResponse decodeMoveResponse(std::vector<int8_t>& buffer);
     ActionResponse decodeActionResponse(std::vector<int8_t>& buffer);
 
-    void runLevel(double delta);
+    void run();
 };
 
 #endif /* !SERVER_HPP_ */

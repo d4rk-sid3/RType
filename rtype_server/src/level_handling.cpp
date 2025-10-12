@@ -89,6 +89,15 @@ void Server::logGameEntities()
     }
     vector<int8_t> tmp = encodeNbrEntity({0x38, static_cast<int16_t>(counter)});
     result.insert(result.begin(), tmp.begin(), tmp.end());
+
+    if (!result.empty()) {
+        // std::cout << "[SERVER] sending " << result.size() << " bytes" << std::endl;
+        // server_.send_to_client(result, result.size(), server_.getLastSender());
+
+        for (auto & tmp : all_clients) {
+            server_.send_to_client(result, result.size(), tmp.first);
+        }
+    }
 }
 
 void Server::receivePlayerInput(double delta)
@@ -132,41 +141,41 @@ void Server::receivePlayerInput(double delta)
         std::vector<int8_t> tmp = msg.second;
 
         try {
-        if (tmp[0] == 0x24) {
-            std::cerr << "INPUT" << std::endl;
-            
-            velocity &vel = reg.get_components<component::velocity>()[all_clients[msg.first]].value();
-            MoveResponse move_info = decodeMoveResponse(tmp);
-            
-            if (move_info.direction == LEFT) {
-                vel.vx = -PLAYER_SPEED;
-            }
-            if (move_info.direction == RIGHT) {
-                vel.vx = PLAYER_SPEED;
-            }
-            if (move_info.direction == UP) {
-                vel.vy = -PLAYER_SPEED;
-            }
-            if (move_info.direction == DOWN) {
-                vel.vy = PLAYER_SPEED;
-            }
-        
-        }
-        if (tmp[0] == 0x25) {
-            
-            std::cerr << "ACTION" << std::endl;
-            ActionResponse action_info = decodeActionResponse(tmp);
+            if (tmp[0] == 0x24) {
+                std::cerr << "INPUT" << std::endl;
 
-            if (action_info.input == SPACE && shoot_timer > PLAYER_SHOOT_COOLDOWN) {
-                Factory fac(reg);
-                shoot_timer = 0;
-                entity missile = fac.make_player_missile();
-                position &pos = reg.get_components<component::position>()[all_clients[msg.first]].value();
-                position &missile_pos = reg.get_components<component::position>()[missile].value();
-                missile_pos.x = pos.x + 8;
-                missile_pos.y = pos.y + 6;
+                velocity &vel = reg.get_components<component::velocity>()[all_clients[msg.first]].value();
+                MoveResponse move_info = decodeMoveResponse(tmp);
+
+                if (move_info.direction == LEFT) {
+                    vel.vx = -PLAYER_SPEED;
+                }
+                if (move_info.direction == RIGHT) {
+                    vel.vx = PLAYER_SPEED;
+                }
+                if (move_info.direction == UP) {
+                    vel.vy = -PLAYER_SPEED;
+                }
+                if (move_info.direction == DOWN) {
+                    vel.vy = PLAYER_SPEED;
+                }
             }
-        }
+
+            if (tmp[0] == 0x25) {
+                std::cerr << "ACTION" << std::endl;
+                ActionResponse action_info = decodeActionResponse(tmp);
+
+                if (action_info.input == SPACE && shoot_timer > PLAYER_SHOOT_COOLDOWN) {
+                    Factory fac(reg);
+                    shoot_timer = 0;
+                    entity missile = fac.make_player_missile();
+                    position &pos = reg.get_components<component::position>()[all_clients[msg.first]].value();
+                    position &missile_pos = reg.get_components<component::position>()[missile].value();
+                    missile_pos.x = pos.x + 8;
+                    missile_pos.y = pos.y + 6;
+                }
+            }
+
         } catch (...) {}
 
     }
@@ -190,17 +199,7 @@ void Server::runLevel(double delta)
         }
     }
 
-    logGameEntities();
     receivePlayerInput(delta);
-
-    if (!result.empty()) {
-        // std::cout << "[SERVER] sending " << result.size() << " bytes" << std::endl;
-        // server_.send_to_client(result, result.size(), server_.getLastSender());
-
-        for (auto & tmp : all_clients) {
-            server_.send_to_client(result, result.size(), tmp.first);
-        }
-    }
     
     // for (auto it = entities.begin(); it != entities.end();) {
     //     auto &entity = *it;

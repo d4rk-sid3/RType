@@ -45,14 +45,66 @@ void Server::initializeGame(void)
     factory.make_menu_background_music();
 }
 
-Server::Server(int p, registry &regis) : server_(p, std::ref(messages), std::ref(mtx)), p_(p), reg(regis)
+Server::Server(int p) :
+    win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server"),
+    reg(win), server_(p, std::ref(messages), std::ref(mtx)), p_(p)
 {
+    reg.control_active = false;
+    counter = 0;
+
     load_textures();
     initializeGame();
     loadLevel("assets/levels/test.txt");
+
+    networkThread = std::thread([this]() { server_.run(); });
 }
 
 Server::~Server()
 {
 
+}
+
+void Server::run()
+{
+    isRunning = true;
+
+    networkThread = std::thread(
+        [this]()
+        {
+            while (isRunning)
+            {
+                logGameEntities();
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            }
+            
+        }
+    );
+
+    while (win.isOpen()) {
+        while (win.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                win.close();
+            if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::Escape)
+                    win.close();
+        }
+
+        double dt = frameClock.restart().asSeconds();
+        reg.run_systems(dt);
+        runLevel(dt);
+
+        if (player1_entity_id == -1 && player2_entity_id == -1) {
+            printf("GAME OVER\n");
+            break;
+        }
+        if (boss_dead) {
+            printf("BOSS DEAD\n");
+            break;
+        }
+    }
+
+    server_.getContext().stop();
+    networkThread.join();
+    isRunning = false;
 }
