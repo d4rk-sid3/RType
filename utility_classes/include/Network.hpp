@@ -44,223 +44,48 @@
 #endif
 #include <SFML/Graphics.hpp>
 
-enum Direction : uint8_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
-
-enum BULLET_TYPE : uint8_t { SOLIDE = 0, NONE = 1 };
-
-struct Vector2D {
-    uint16_t x;
-    uint16_t y;
-};
-
-struct Timestamp {
-    uint64_t milliseconds;
-};
-
-// Client -> Serveur
-struct MoveRequest {
-    uint8_t type; // 0x23
-    Direction direction;
-};
-
-// Serveur -> Client
-struct MoveResponse {
-    uint8_t type; // 0x24
-    uint32_t player_id;
-    Vector2D direction;
-    Vector2D position;
-    u_int8_t speed;
-    Timestamp timestamp;
-};
-
-// Client -> Serveur
-struct ShootRequest {
-    uint8_t type; // 0x25
-};
-
-// Serveur -> Client
-struct ShootResponse {
-    uint8_t type; // 0x26
-    u_int32_t player_id;
-    Vector2D bullet_position;
-    Vector2D bullet_direction;
-    u_int8_t bullet_speed;
-    BULLET_TYPE bullet;
-};
-
-// Client -> Serveur
-struct PickupItemResquest {
-    uint8_t type; // ??
-};
-
-// Serveur -> Client
-struct PickupItemResponse {
-    uint8_t type; // 0x27
-    uint32_t player_id;
-    uint32_t item_id;
-    Vector2D item_position;
-    Timestamp timestamp;
-};
-
-enum State : uint8_t { DEATH = 0, ALIVE = 1 };
-
-enum GameState : uint8_t { PAUSE = 0, IN_GAME = 1 };
-
-enum BossState : uint8_t { LOST = 0, WON = 1 };
-
-enum PauseState : uint8_t { PAUSED = 0, RESUMED = 1 };
-
-enum EnemyType : uint8_t { TYPE_1 = 1, TYPE_2 = 2, TYPE_3 = 3, TYPE_4 = 4 };
-
-enum CollisionType : uint8_t {
-    BULLET_BULLET = 0,
-    BULLET_OBSTACLE = 1,
-    BULLET_PLAYER = 2,
-    BULLET_ENEMY = 3,
-    PLAYER_ENEMY = 4
-};
-
-// Serveur -> Client
-struct PlayerStateResponse {
-    uint8_t type; // 0x28
-    uint32_t player_id;
-    uint16_t remaining_health;
-    uint32_t score;
-    uint8_t current_level;
-    State state;
-};
-
-// Serveur -> Client
-struct PlayerGameStateResponse {
-    uint8_t type; // 0x29
-    uint32_t player_id;
-    uint16_t remaining_health;
-    uint32_t score;
-    uint8_t current_level;
-    State state;
-    GameState game_state;
-};
-
-// Serveur -> Client
-struct BeatBossResponse {
-    uint8_t type; // 0x30
-    uint32_t player_id;
-    uint32_t boss_id;
-    Vector2D player_position;
-    Timestamp timestamp;
-    BossState boss_state;
-};
-
-// Server -> Client
-struct CheckpointResponse {
-    uint8_t type; // 0x31
-    uint32_t player_id;
-    uint32_t checkpoint_id;
-    Vector2D player_position;
-    Timestamp timestamp;
-};
-
-// Serveur -> Client
-struct GameStartedResponse {
-    uint8_t type; // 0x32
-    uint32_t player_id;
-    uint32_t checkpoint_id;
-    Vector2D player_position;
-    Timestamp timestamp;
-};
-
-// Client → Serveur
-struct GamePausedRequest {
-    uint8_t type; // 0x33
-};
-
-// Serveur -> Client
-struct GamePausedResponse {
-    uint8_t type; // 0x34
-    Timestamp timestamp;
-    PauseState current_state;
-};
-
-// Serveur -> Client
-struct GameStateResponse {
-    uint8_t type; // 0x35
-    uint8_t num_disconnected;
-    std::vector<uint8_t> ids;
-};
-
-// Serveur -> Client
-struct EnemySpawnedResponse {
-    uint8_t type; // 0x36
-    uint32_t enemy_id;
-    EnemyType enemy_type;
-    Vector2D position;
-    Vector2D direction;
-    Timestamp timestamp;
-};
-
-// Serveur -> Client
-struct EnemyMovedResponse {
-    uint8_t type; // 0x37
-    uint32_t enemy_id;
-    EnemyType enemy_type;
-    Vector2D position;
-    Vector2D direction;
-    Timestamp timestamp;
-};
-
-struct EnemyFiredResponse {
-    uint8_t type; // 0x38
-    uint32_t enemy_id;
-    EnemyType enemy_type;
-    Vector2D position;
-    Vector2D direction;
-    Timestamp timestamp;
-};
-
-struct EnemyDiedResponse {
-    uint8_t type; // 0x39
-    uint32_t enemy_id;
-    EnemyType enemy_type;
-    Vector2D position;
-    Timestamp timestamp;
-};
-
-struct CollisionResponse {
-    uint8_t type;         // 0x40
-    uint32_t entity_id_1; // Premier ID d'entité
-    uint32_t entity_id_2; // Deuxième ID d'entité
-    Vector2D position;    // Position du choc
-    CollisionType collision_type;
-    Timestamp timestamp;
-};
+#include "Types.hpp"
 
 class NetworkManager {
   public:
-    NetworkManager(int port, std::string address = "");
-    ~NetworkManager();
-    void poll();
-    void receive();
-    void send(
-        const std::vector<u_int8_t>& msg, size_t size,
-        const asio::ip::udp::endpoint& client
-    );
-    std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint> getLastMsg();
-    asio::ip::udp::endpoint getLastSender() const;
-    asio::io_context& getContext() {
-        return context;
-    };
 
-  protected:
+    // Constructeurs and destructeurs
+    NetworkManager(int port, std::string address, std::vector<int8_t> &lastmsg_, std::mutex& mtx_);
+    NetworkManager(int port, std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> &clients_lastmsg_, std::mutex& mtx_);
+    ~NetworkManager();
+
+    // Methodes for running the network io_context
+    void run();
+
+    void receive_from_clients();
+    void send_to_client( const std::vector<int8_t>& msg, size_t size,
+        const asio::ip::udp::endpoint& client );
+
+    void receive_from_server();
+    void send_to_server( const std::vector<int8_t>& msg, size_t size );
+
+    // Getters
+    asio::ip::udp::endpoint getLastSender() const;
+    asio::io_context& getContext();
+    asio::ip::udp::endpoint& getServerendpoint();
+
   private:
     asio::io_context context;
     asio::ip::udp::socket socket;
-    std::array<u_int8_t, 1024> buff{};
+    std::array<int8_t, 1024> buff{};
     asio::ip::udp::endpoint last_sender_;
+    asio::ip::udp::endpoint server_endpoint_;
     bool isrunning;
-    std::vector<u_int8_t> lastmsg;
-    std::queue<std::pair<std::vector<uint8_t>, asio::ip::udp::endpoint>>
-        messages;
-    std::mutex mtx;
+
+
+    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> tmp_clients;
+    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> &clients_lastmsg;
+
+    std::vector<int8_t> tmp_server;
+    std::vector<int8_t> &lastmsg;
+  
+    std::vector<client_info_t> clients;
+    std::mutex& mtx;
 };
 
 #endif /* !NETWORK_HPP_ */

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['updatemoveresponse_0',['updateMoveResponse',['../classServer.html#aef19260488faed7947d2921b649953ed',1,'Server']]],
-  ['updatepickupitemresponse_1',['updatePickupItemResponse',['../classServer.html#a128bee5a988812db68f41898e1e4bfcc',1,'Server']]],
-  ['updateshootresponse_2',['updateShootResponse',['../classServer.html#aaa9d3dbd54cbebab97d9bfa5932925fb',1,'Server']]]
+  ['_7eclient_0',['~Client',['../classClient.html#a840e519ca781888cbd54181572ebe3a7',1,'Client']]],
+  ['_7eresourcemanager_1',['~ResourceManager',['../classResourceManager.html#a671c186e4630599e7e36d000c53eaf80',1,'ResourceManager']]],
+  ['_7eserver_2',['~Server',['../classServer.html#a4b3aa2579cb1c8cd1d069582c14d0fa6',1,'Server']]]
 ];

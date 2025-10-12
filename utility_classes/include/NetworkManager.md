@@ -21,10 +21,10 @@ Exécute les évènements réseau en attente (lecture/écriture).
 ### `void receive()`
 Lance un `async_receive_from`, récupère les messages contenue dans un buffer.
 
-### `void send (const u_int8_t* msg, size_t size, const asio::ip::udp::endpoint& client)`
+### `void send (const int16_t* msg, size_t size, const asio::ip::udp::endpoint& client)`
 Envoie un buffer de données à un destinataire.
 
-### `std::pair <std::vector<uint8_t>, asio::ip::udp::endpoint> getLastMsg()`
+### `std::pair <std::vector<int16_t>, asio::ip::udp::endpoint> getLastMsg()`
 Retourne le dernier message reçu avec celui qui l'a envoyé.
 
 ### `asio::ip::udp::endpoint getLastSender()`

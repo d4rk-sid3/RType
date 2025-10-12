@@ -37,10 +37,12 @@
 #include <typeindex>
 #include <unordered_map>
 #include <vector>
+
+#include <SFML/Graphics.hpp>
+
+#include "ResourceManager.hpp"
 #include "entity.hpp"
 #include "exceptions.hpp"
-#include "ResourceManager.hpp"
-#include <SFML/Graphics.hpp>
 
 using namespace std;
 
@@ -49,7 +51,11 @@ using namespace std;
  *
  */
 class registry {
-  public:
+    public:
+    bool collisions_active = true;
+    bool render_active = true;
+    bool logic_active = true;
+    bool control_active = true;
 
     vector<entity> dead_entities;
 
@@ -60,8 +66,7 @@ class registry {
     template <typename Component>
     vector<optional<Component>>& register_components();
 
-    template <typename Component>
-    vector<optional<Component>>& get_components();
+    template <typename Component> vector<optional<Component>>& get_components();
 
     template <typename Component>
     vector<optional<Component>> const& get_components() const;
@@ -131,6 +136,7 @@ class registry {
     sf::Clock clock;
 
     void register_all_systems();
+
 };
 
 #include "../src/registry_single_comp.tpp"
