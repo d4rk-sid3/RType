@@ -116,16 +116,15 @@ To compile your tests, the corresponding CMakeLists.txt should look like this:
 
 And the file with all the unit tests will look like this:
 ```bash
-    #include <criterion/criterion.h>
+    #include <gtest/gtest.h>
 
     /// @brief Very Basic Test
-    Test(Basic, some_basics_tests)
-    {
-        cr_assert_eq(42, 42);
+    TEST_F(SomeFixtureClass, very_basic_test) {
+        ASSERT_EQ(42, 42);
     }
 ```
 
-For more details, you can go from the project's root to tests/unit_tests directory.
+For more details, you can go from the project's root to engine/tests or rtype_server/tests ... directory.
 
 If you're in functionnal tests, please add a bash/bat script to execute them.
 
