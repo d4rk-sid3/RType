@@ -75,7 +75,6 @@ void Server::run()
                 logGameEntities();
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
-            
         }
     );
 
