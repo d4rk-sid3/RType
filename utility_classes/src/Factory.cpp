@@ -17,6 +17,17 @@
  * ------------------------------------------------------------------------------------
  */
 
+/**
+ * @file Factory.cpp
+ * @author Farouk OKANLA
+ * @brief This file contains the definition of the Factory class
+ * @version 0.1
+ * @date 2025-10-13
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include "../include/Factory.hpp"
 
 #include "../../rtype_server/include/server.hpp"

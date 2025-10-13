@@ -17,15 +17,20 @@
  * ------------------------------------------------------------------------------------
  */
 
-/**
- * @brief This file contains the definition of the exceptions thrown by the
- * engine
- *
- */
 
 #ifndef INCLUDED_EXCEPTIONS_HPP
 #define INCLUDED_EXCEPTIONS_HPP
 
+/**
+ * @file exceptions.hpp
+ * @author Farouk OKANLA
+ * @brief  This file contains definition of the exceptions thrown by the engine
+ * @version 0.1
+ * @date 2025-10-13
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 #include <exception>
 
 /**

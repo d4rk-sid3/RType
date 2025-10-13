@@ -38,10 +38,10 @@
  *
  * The project uses various components, from simple position components
  * to logic components (equivalent to scripts). You can see their details
- * in **** COMPONENT.HPP ****
+ * in @ref components.hpp
  * 
  * It also uses pretty straightforward systems to update these components,
- * as you can see in ***** SYSTEMS.HPP *****
+ * as you can see in @ref systems.hpp
  *
  * Now let's see how we can create a simple program using the registry
  * to simulate a simple game.
@@ -53,5 +53,5 @@
  *
  *
  *
- * ... (content) ...
+ * 
  */

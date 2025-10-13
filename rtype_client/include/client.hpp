@@ -5,13 +5,20 @@
 ** client
 */
 
+#ifndef CLIENT_HPP_
+#define CLIENT_HPP_
+
 /**
+ * @file client.hpp
+ * @author your name (you@domain.com)
  * @brief The client class definition file
+ * @version 0.1
+ * @date 2025-10-13
+ * 
+ * @copyright Copyright (c) 2025
  * 
  */
 
-#ifndef CLIENT_HPP_
-#define CLIENT_HPP_
 #include <algorithm>
 #include <vector>
 

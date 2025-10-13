@@ -20,7 +20,8 @@
 /**
  * @file systems.cpp
  * @author Farouk OKANLA
- * @brief
+ * @brief This file contains the definition of the different systems of the 
+ * registry
  * @version 0.1
  * @date 2025-09-23
  *

@@ -17,15 +17,21 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+/**
+ * @file level_handling.cpp
+ * @author Farouk OKANLA
+ * @brief This file contains the definition of the level handling functions
+ * @version 0.1
+ * @date 2025-10-13
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include <libconfig.h++>
 #include "server.hpp"
 #include "Factory.hpp"
 #include "logic_functions.hpp"
-
-/**
- * @brief This file contains the definition of the level handling functions
- * 
- */
 
 using namespace component;
 

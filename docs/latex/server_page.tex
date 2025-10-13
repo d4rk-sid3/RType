@@ -1,0 +1,25 @@
+\chapter{R-\/\+TYPE Server}
+\hypertarget{server_page}{}\label{server_page}\index{R-\/TYPE Server@{R-\/TYPE Server}}
+This page details how the server works.\hypertarget{server_page_global_infos}{}\doxysection{\texorpdfstring{Global Explanation}{Global Explanation}}\label{server_page_global_infos}
+The server is responsible of holding the actual state of the game and transferring it to the clients. The game scene, with the players, the ennemies or their projectiles takes place in the registry inside the server.\hypertarget{server_page_game_logic}{}\doxysection{\texorpdfstring{Game Logic}{Game Logic}}\label{server_page_game_logic}
+The server handles all the game logic. It starts by loading a configuration file containing all infos about the level \+: What ennemies will spawn ? Where ? When ?
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{*entities\ =\ (}
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}{name}}\ =\ \textcolor{stringliteral}{"{}red\_trooper"{}};\ spawn\_time\ =\ 3.4;\ y\ =\ 50.0;\},}
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}{name}}\ =\ \textcolor{stringliteral}{"{}red\_trooper"{}};\ spawn\_time\ =\ 3.8;\ y\ =\ 50.0;\},}
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}{name}}\ =\ \textcolor{stringliteral}{"{}red\_trooper"{}};\ spawn\_time\ =\ 4.2;\ y\ =\ 50.0;\},}
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}{name}}\ =\ \textcolor{stringliteral}{"{}red\_trooper"{}};\ spawn\_time\ =\ 4.6;\ y\ =\ 50.0;\},}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}{name}}\ =\ \textcolor{stringliteral}{"{}walker"{}};\ spawn\_time\ =\ 5.0;\ y\ =\ 367.0;\},}
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}{name}}\ =\ \textcolor{stringliteral}{"{}red\_trooper"{}};\ spawn\_time\ =\ 7.0;\ y\ =\ 50.0;\},}
+\DoxyCodeLine{\ \ \ \ \{\mbox{\hyperlink{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}{name}}\ =\ \textcolor{stringliteral}{"{}boss"{}};\ spawn\_time\ =\ 10.0;\ y\ =\ 150.0;\}}
+\DoxyCodeLine{\ );}
+
+\end{DoxyCode}
+
+
+During the game, it then spawns the entities at the correct moment. Thanks to the logic components and the logic system as well as all the other ones. The entities evolve in the scene. All the server has to do now is to go through each game entity (and skip special ones like the background, the music) and send its infos (type and position) to each client. See more in \doxylink{level__handling_8cpp}{level\+\_\+handling.\+cpp}.
+
+Simultaneously, the server listens to inputs from the clients If an input is received, the server then applies velocity to the corresponding player entity.\hypertarget{server_page_network_details}{}\doxysection{\texorpdfstring{Network Details}{Network Details}}\label{server_page_network_details}

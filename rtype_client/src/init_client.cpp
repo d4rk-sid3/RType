@@ -55,6 +55,7 @@ Client::Client(int p, std::string address, registry& reg): port_(p), client_(p, 
     //initMenu();
     initGame();
 }
+
 /**
  * @brief A utility function to check in an entity of a certain id is inside a vector
  * 
