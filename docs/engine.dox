@@ -1,0 +1,57 @@
+/**
+ * \page engine R-TYPE's Game Engine
+ *
+ * This page details how the game engine of this project works.
+ *
+ * @section details_infos Details
+ * The R-TYPE game engine is a sparse ECS (Entity Component System).
+ * It avoids inheritance, and focuses on composition.
+ * Entities are represented as only ids, to which components will be
+ * attached. This is done by only storing the components in tables, where
+ * the index of a row corresponds to the id of an enntity.
+ * For example, let's consider 2 entities, E1 and E2 of id respectively of id 1 and 2,
+ * and let's say E1 has a position component, but E2 does not.
+ * This means that in the position components' table, at the row 
+ * 1 (index 1), there will be the component position associated with E1.
+ * On the other hand, at the row 2 (index 2), there will be nothing. This
+ * is how our sparce ECS works.
+ * 
+ * Now what is a component ? A component is just a piece of information.
+ * For example the position component can just be a x and y. Or a drawable
+ * component can be a sprite.
+ *
+ * The presence or absence of a component determines how their entities will evolve.
+ * This is where the systems get in the story. The systems are just functions
+ * that will run every frame to update the state of the components.
+ * For example the movement system will go through each entity id (row indexes)
+ * And check if the current index has a position component AND a velocity component
+ * If both exist, it adds the velocity to the position, making the entity move.
+ * Otherwise, it does nothing.
+ * 
+ * You now have an idea of how the engine works. to make a game, all you have to do
+ * is create entities, and attach components to them.
+ * Then you let the systems update them in the simulation.
+ *
+ * @section engine_tutorial A simple tutorial on the engine
+ * The engine is contained in the registry class. It stores the components,
+ * the entities, the systems and provides methods to manage them.
+ *
+ * The project uses various components, from simple position components
+ * to logic components (equivalent to scripts). You can see their details
+ * in **** COMPONENT.HPP ****
+ * 
+ * It also uses pretty straightforward systems to update these components,
+ * as you can see in ***** SYSTEMS.HPP *****
+ *
+ * Now let's see how we can create a simple program using the registry
+ * to simulate a simple game.
+ *
+ * 
+ *
+ *
+ *
+ *
+ *
+ *
+ * ... (content) ...
+ */
