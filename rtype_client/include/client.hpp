@@ -93,6 +93,8 @@ class Client {
     std::vector<EnemyMovedResponse> old;
     std::vector<EnemyMovedResponse> new_vec;
 
+    std::vector<std::vector<EnemyMovedResponse>> entity_states;
+
     /**
      * @brief Window for rendering
      */
@@ -139,6 +141,12 @@ class Client {
      * @param delta The time elapsed since the last frame
      */
     void runLevel(double delta);
+
+    /**
+     * @brief Run another version of the game logic
+     * @param delta The time elapsed since the last frame
+     */
+    void runLevelSecond(double delta);
 
     /**
      * @brief Send the player's input to the server

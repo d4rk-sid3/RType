@@ -41,7 +41,7 @@ void Server::initializeGame(void)
 
     pos2.x = 50;
     pos2.y = 150;
-    factory.make_menu_background_music();
+    // factory.make_menu_background_music();
 }
 
 Server::Server(int p) :
@@ -73,7 +73,7 @@ void Server::run()
             while (isRunning)
             {
                 logGameEntities();
-                std::this_thread::sleep_for(std::chrono::milliseconds(20));
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
             
         }

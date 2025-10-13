@@ -213,10 +213,10 @@ void Server::runLevel(double delta)
         auto &en = *it;
         
         if (en.spawn_time <= levelTimer && en.entity_id.getId() == -1) {
-            en.entity_id = factory.make_entity(en.type);
             {
                 std::lock_guard<std::mutex> lock(regMtx);
-
+                
+                en.entity_id = factory.make_entity(en.type);
                 auto &pos = reg.get_components<component::position>()[en.entity_id].value();
                 pos.y = en.spawn_y;
                 pos.x = 1000;

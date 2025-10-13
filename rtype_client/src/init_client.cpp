@@ -212,6 +212,42 @@ void Client::runLevel(double delta)
     first_call = false;
 }
 
+void Client::runLevelSecond(double delta)
+{
+    levelTimer += delta;
+
+    sendPlayerInput();
+    sendPlayerAction();
+
+    new_vec = recupAllEntities();
+
+    if (!new_vec.empty()) {
+        entity_states.push_back(new_vec);
+    }
+
+    if (entity_states.size() == 1) {
+        return;
+    }
+
+    if (entity_states.size() == 2) {
+        auto &fst = entity_states.front();
+        auto &snd = entity_states.at(1);
+
+        for (auto & elem : fst) {
+            if (!isInside(snd, elem.enemy_id))
+                continue;
+            ids_assoc[elem.enemy_id] = factory.make_entity(getKey(elem.enemy_type));
+            auto &pos = reg.get_components<component::position>()[ids_assoc[elem.enemy_id]].value();
+            pos.x = elem.position.x;
+            pos.y = elem.position.y;
+        }
+    }
+
+    for (auto& elem : new_vec) {
+
+    }
+}
+
 Client::~Client()
 {
 
@@ -254,7 +290,7 @@ void Client::initGame()
     // auto &pos = reg.get_components<component::position>()[player_entity_id].value();
     // pos.x = 50;
     // pos.y = 150;
-    factory.make_game_background_music();
+    // factory.make_game_background_music();
     // factory.make_ceiling();
     // factory.make_floor();
     // reg.kill_entity(menu_info.background);
