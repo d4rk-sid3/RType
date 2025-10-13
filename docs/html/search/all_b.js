@@ -1,13 +1,8 @@
 var searchData=
 [
-  ['left_0',['left',['../structcomponent_1_1controllable__s.html#a0c50867c275bc34cb3ef415c4ca2ddd8',1,'component::controllable_s']]],
-  ['level_5fhandling_2ecpp_1',['level_handling.cpp',['../level__handling_8cpp.html',1,'']]],
-  ['load_2',['load',['../classResourceManager.html#ad2c4fb1c59333ccc9bcff5306cf7ebf8',1,'ResourceManager']]],
-  ['load_5fclient_5ftextures_3',['load_client_textures',['../init__client_8cpp.html#a1957e9ebc2a88bc8e6c87fa64239c299',1,'init_client.cpp']]],
-  ['load_5ftextures_4',['load_textures',['../init__server_8cpp.html#a0c588e2ccf2ed315e2710776feac9eff',1,'init_server.cpp']]],
-  ['logic_5',['logic',['../namespacecomponent.html#a4389e557b74c9397d726bcf56ba076d0',1,'component']]],
-  ['logic_5factive_6',['logic_active',['../classregistry.html#a772d03d9734330401886ab2d380d52d1',1,'registry']]],
-  ['logic_5ffunction_7',['logic_function',['../structcomponent_1_1logic__s.html#a1362230c1aba4f3a2e565c0747898284',1,'component::logic_s']]],
-  ['logic_5fs_8',['logic_s',['../structcomponent_1_1logic__s.html',1,'component']]],
-  ['logic_5fsystem_9',['logic_system',['../systems_8cpp.html#a22759635a24090e7b56c0368ba19ad42',1,'logic_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::logic &gt; &gt; &amp;logics):&#160;systems.cpp'],['../systems_8hpp.html#a22759635a24090e7b56c0368ba19ad42',1,'logic_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::logic &gt; &gt; &amp;logics):&#160;systems.cpp']]]
+  ['_5fcomponents_5farrays_0',['_components_arrays',['../classregistry.html#ac9d2e22f135941fc0a42e42a83061a2b',1,'registry']]],
+  ['_5ferase_5ffunctions_1',['_erase_functions',['../classregistry.html#afacfe5d75adf2f59ebc41cc3e0fb641e',1,'registry']]],
+  ['_5fname_2',['_name',['../structcomponent_1_1name__s.html#a7d824b9f299f3dc86b247d2cb3b56fde',1,'component::name_s']]],
+  ['_5freg_3',['_reg',['../classClient.html#ab2eb81a19237ea563d9d8702c450f8ae',1,'Client']]],
+  ['_5fsystems_4',['_systems',['../classregistry.html#ad7db97a86dca87aae412fec6d1768fdd',1,'registry']]]
 ];

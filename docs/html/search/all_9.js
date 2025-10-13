@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['included_5fregistry_5fsingle_5fcomp_5ftpp_0',['INCLUDED_REGISTRY_SINGLE_COMP_TPP',['../registry__single__comp_8tpp.html#a09489f5e2097f52082070aa14df2aaa5',1,'registry_single_comp.tpp']]],
-  ['included_5fregistry_5ftables_5ftpp_1',['INCLUDED_REGISTRY_TABLES_TPP',['../registry__tables_8tpp.html#a37b867be6bb08ea747d3b7dc5380834b',1,'registry_tables.tpp']]],
-  ['init_5fclient_2ecpp_2',['init_client.cpp',['../init__client_8cpp.html',1,'']]],
-  ['init_5fserver_2ecpp_3',['init_server.cpp',['../init__server_8cpp.html',1,'']]],
-  ['initgame_4',['initGame',['../classClient.html#add2ae689ce735011cd1b83601470f4d3',1,'Client']]],
-  ['initmenu_5',['initMenu',['../classClient.html#a8e97ca84d92276123cf88091a6811cc1',1,'Client']]],
-  ['instance_6',['Instance',['../classResourceManager.html#a48cd1c56c64af260a6ddb5fbd4daae54',1,'ResourceManager']]],
-  ['isinside_7',['isInside',['../init__client_8cpp.html#aad0535b912db09140627976f8862b896',1,'init_client.cpp']]]
+  ['9_201_20library_20choice_3a_20google_20test_20gtest_0',['9.1 Library Choice: Google Test (gtest)',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md84',1,'']]],
+  ['9_202_20advantages_20of_20google_20test_1',['9.2 Advantages of Google Test',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md86',1,'']]],
+  ['9_203_20example_20test_20case_2',['9.3 Example Test Case',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md88',1,'']]],
+  ['9_204_20why_20google_20test_20was_20selected_3',['9.4 Why Google Test Was Selected',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md90',1,'']]],
+  ['9_205_20summary_4',['9.5 Summary',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md92',1,'']]],
+  ['9_20session_5fresponse_200x10_20—_20game_20session_5',['4.9 SESSION_RESPONSE (0x10) — Game Session',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md173',1,'']]],
+  ['9_20testing_20framework_6',['9. Testing Framework',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md83',1,'']]]
 ];

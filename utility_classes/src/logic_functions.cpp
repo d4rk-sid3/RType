@@ -15,6 +15,17 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
+/**
+ * @file logic_functions.cpp
+ * @author Farouk OKANLA
+ * @brief This file contains definitions of the logic functions
+ * @version 0.1
+ * @date 2025-10-13
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include "logic_functions.hpp"
 #include "Factory.hpp"
 #include "../../rtype_server/include/server.hpp"

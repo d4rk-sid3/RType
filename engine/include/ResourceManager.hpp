@@ -19,13 +19,19 @@
  * ------------------------------------------------------------------------------------
  */
 
-/**
- * @brief The ResourceManager file. Contains the declaration of the ResourceManager class
- * 
- */
-
 #ifndef INCLUDED_TEXTUREMANAGER_HPP
 #define INCLUDED_TEXTUREMANAGER_HPP
+
+/**
+ * @file ResourceManager.hpp
+ * @author Farouk OKANLA
+ * @brief The ResourceManager file. Contains the declaration of the ResourceManager class
+ * @version 0.1
+ * @date 2025-10-13
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #include <iostream>
 #include <map>

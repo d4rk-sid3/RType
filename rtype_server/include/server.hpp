@@ -5,19 +5,25 @@
 ** server
 */
 
-/**
- * @brief The file contains the definition of the server class
- * 
- */
-
 #ifndef SERVER_HPP_
 #define SERVER_HPP_
-#include <algorithm>
-#include <vector>
+
+/**
+ * @file server.hpp
+ * @author Farouk OKANLA
+ * @brief The file contains the definition of the server class
+ * @version 0.1
+ * @date 2025-10-13
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #include "Factory.hpp"
 #include "Network.hpp"
 #include "registry.hpp"
+#include <algorithm>
+#include <vector>
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432

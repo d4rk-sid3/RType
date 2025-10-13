@@ -1,0 +1,66 @@
+/**
+ * \page server_page R-TYPE Server
+ *
+ * This page details how the server works.
+ *
+ * @section global_infos Global explanation
+ * The server is responsible of holding the actual state of the game
+ * and transferring it to the clients.
+ * The game scene, with the players, the ennemies or their projectiles
+ * takes place in the registry inside the server.
+ * 
+ * @section game_logic Game Logic
+ * The server handles all the game logic.
+ * It starts by loading a configuration file containing all infos
+ * about the level : What ennemies will spawn ? Where ? When ?
+ *
+ * @code
+ *
+ *entities = (
+ *   {name = "red_trooper"; spawn_time = 3.4; y = 50.0;},
+ *   {name = "red_trooper"; spawn_time = 3.8; y = 50.0;},
+ *   {name = "red_trooper"; spawn_time = 4.2; y = 50.0;},
+ *   {name = "red_trooper"; spawn_time = 4.6; y = 50.0;},
+ *
+ *   {name = "walker"; spawn_time = 5.0; y = 367.0;},
+ *   {name = "red_trooper"; spawn_time = 7.0; y = 50.0;},
+ *   {name = "boss"; spawn_time = 10.0; y = 150.0;}
+ *);
+ *
+ * @endcode
+ *
+ * During the game, it then spawns the entities at the correct moment.
+ * Thanks to the logic components and the logic system as well as all
+ * the other ones. The entities evolve in the scene.
+ * All the server has to do now is to go through each 
+ * game entity (and skip special ones like the background, the music)
+ * and send its infos (type and position) to each client.
+ * See more in @ref level_handling.cpp.
+ *
+ * Simultaneously, the server listens to inputs from the clients
+ * If an input is received, the server then applies velocity to
+ * the corresponding player entity.
+ *
+ * @section network_details Network Details
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */

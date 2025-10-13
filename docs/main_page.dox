@@ -17,10 +17,11 @@
  * @subsection parts_sub Parts of the project
  *
  * Key parts of R-TYPE include:
- * - Part 1: The game engine.
- * - Part 2: The server.
- * - Part 3: The client.
- *
+ * - Part 1: \ref engine "The game engine".
+ * - Part 2: \ref server_page "The server".
+ * - Part 3: \ref client_page "The client".
+ * For more information about each part, see the dedicated page.
+ * 
  *
  * @section contact_sec Contact Information
  *

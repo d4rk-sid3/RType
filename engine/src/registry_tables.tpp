@@ -16,13 +16,19 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
-/**
- * @brief This file contains the implementation of the registry methods that handle the component tables
- * 
- */
-
 #ifndef INCLUDED_REGISTRY_TABLES_TPP
 #define INCLUDED_REGISTRY_TABLES_TPP
+
+/**
+ * @file registry_tables.tpp
+ * @author Farouk OKANLA
+ * @brief This file contains the implementation of the registry functions to handle components tables
+ * @version 0.1
+ * @date 2025-10-13
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #include "../include/registry.hpp"
 

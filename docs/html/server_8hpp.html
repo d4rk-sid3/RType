@@ -81,89 +81,92 @@ $(function() {
   <div class="headertitle"><div class="title">server.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;Factory.hpp&quot;</code><br />
+
+<p>The file contains the definition of the server class.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;Factory.hpp&quot;</code><br />
 <code>#include &quot;Network.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="registry_8hpp_source.html">registry.hpp</a>&quot;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for server.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="server_8hpp__incl.png" border="0" usemap="#a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hpp" alt=""/></div>
-<map name="a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hpp" id="a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hpp">
-<area shape="rect" title=" " alt="" coords="127,5,302,64"/>
-<area shape="rect" title=" " alt="" coords="5,195,80,221"/>
-<area shape="poly" title=" " alt="" coords="188,66,67,186,63,182,184,63"/>
-<area shape="rect" title=" " alt="" coords="103,195,161,221"/>
-<area shape="poly" title=" " alt="" coords="191,66,160,113,147,148,139,181,134,179,142,146,155,111,187,63"/>
-<area shape="rect" title=" " alt="" coords="170,112,259,139"/>
-<area shape="poly" title=" " alt="" coords="217,64,217,97,212,97,212,64"/>
-<area shape="rect" title=" " alt="" coords="283,112,378,139"/>
-<area shape="poly" title=" " alt="" coords="253,62,304,101,301,105,250,66"/>
-<area shape="rect" href="registry_8hpp.html" title=" " alt="" coords="558,112,647,139"/>
-<area shape="poly" title=" " alt="" coords="303,53,544,108,543,113,301,58"/>
-<area shape="poly" title=" " alt="" coords="558,133,317,156,186,172,91,189,83,192,82,186,90,184,185,167,317,151,558,128"/>
-<area shape="poly" title=" " alt="" coords="558,132,391,149,285,165,181,189,173,192,171,187,179,184,284,160,390,143,558,127"/>
-<area shape="rect" title=" " alt="" coords="871,195,913,221"/>
-<area shape="poly" title=" " alt="" coords="648,130,746,149,804,165,859,184,861,185,859,190,858,189,802,170,745,155,647,135"/>
-<area shape="rect" title=" " alt="" coords="937,195,1015,221"/>
-<area shape="poly" title=" " alt="" coords="647,130,774,149,850,165,926,184,934,187,932,192,924,189,849,170,773,155,647,135"/>
-<area shape="rect" title=" " alt="" coords="239,427,310,453"/>
-<area shape="poly" title=" " alt="" coords="558,132,489,139,408,150,335,167,307,177,287,189,244,231,230,252,220,274,214,297,213,321,217,348,226,378,237,397,251,414,247,418,232,400,221,380,212,349,208,321,209,296,215,272,225,249,240,228,284,185,304,172,333,162,408,145,488,134,558,127"/>
-<area shape="rect" title=" " alt="" coords="1089,195,1156,221"/>
-<area shape="poly" title=" " alt="" coords="647,126,833,142,952,159,1071,184,1081,187,1079,192,1070,189,951,165,833,148,647,131"/>
-<area shape="rect" title=" " alt="" coords="1180,195,1257,221"/>
-<area shape="poly" title=" " alt="" coords="647,125,743,128,873,138,1020,155,1168,184,1177,187,1176,192,1167,189,1020,161,872,143,742,134,647,130"/>
-<area shape="rect" title=" " alt="" coords="1281,195,1391,221"/>
-<area shape="poly" title=" " alt="" coords="647,125,757,129,912,139,1090,156,1270,184,1285,187,1284,193,1269,189,1089,162,912,144,757,134,647,130"/>
-<area shape="rect" title=" " alt="" coords="779,427,917,453"/>
-<area shape="poly" title=" " alt="" coords="647,123,741,125,856,132,911,140,961,151,1001,166,1028,185,1040,201,1046,217,1046,251,1032,285,1008,318,978,349,944,377,883,421,880,416,941,373,974,345,1004,315,1027,282,1040,250,1041,218,1035,203,1025,189,999,170,960,156,911,145,855,138,741,130,647,129"/>
-<area shape="rect" href="ResourceManager_8hpp.html" title=" " alt="" coords="337,352,489,379"/>
-<area shape="poly" title=" " alt="" coords="558,132,496,139,426,150,365,166,342,176,327,188,324,198,323,212,327,249,342,303,359,324,380,341,377,346,356,328,337,305,322,250,317,212,318,196,323,185,339,172,363,161,425,144,496,133,558,127"/>
-<area shape="rect" href="entity_8hpp.html" title="This file contains the definition of the entity class." alt="" coords="236,352,313,379"/>
-<area shape="poly" title=" " alt="" coords="558,133,495,140,423,151,359,167,334,177,318,189,304,204,294,223,281,263,276,303,275,337,270,337,270,303,276,262,289,220,300,201,314,185,332,173,357,162,422,146,494,135,558,128"/>
-<area shape="rect" href="exceptions_8hpp.html" title=" " alt="" coords="337,195,447,221"/>
-<area shape="poly" title=" " alt="" coords="571,142,439,192,437,187,569,137"/>
-<area shape="rect" href="registry__single__comp_8tpp.html" title=" " alt="" coords="708,187,847,229"/>
-<area shape="poly" title=" " alt="" coords="624,137,712,178,710,183,622,142"/>
-<area shape="rect" href="registry__tables_8tpp.html" title=" " alt="" coords="521,195,684,221"/>
-<area shape="poly" title=" " alt="" coords="598,139,597,180,591,180,593,139"/>
-<area shape="poly" title=" " alt="" coords="390,382,313,422,310,417,388,377"/>
-<area shape="poly" title=" " alt="" coords="490,377,765,422,764,427,489,382"/>
-<area shape="rect" title=" " alt="" coords="362,427,408,453"/>
-<area shape="poly" title=" " alt="" coords="411,380,398,414,393,412,406,378"/>
-<area shape="rect" title=" " alt="" coords="433,427,551,453"/>
-<area shape="poly" title=" " alt="" coords="429,377,470,415,466,419,425,381"/>
-<area shape="poly" title=" " alt="" coords="277,379,277,412,272,412,272,379"/>
-<area shape="rect" title=" " alt="" coords="352,277,429,304"/>
-<area shape="poly" title=" " alt="" coords="394,222,394,263,388,263,389,222"/>
-<area shape="poly" title=" " alt="" coords="739,189,649,147,651,142,741,184"/>
-<area shape="rect" href="components_8hpp.html" title="This file defines the different types of components available to the engine." alt="" coords="453,277,627,304"/>
-<area shape="poly" title=" " alt="" coords="717,232,592,275,590,269,715,227"/>
-<area shape="poly" title=" " alt="" coords="528,278,516,260,506,236,501,211,507,185,527,161,553,143,556,148,531,165,512,188,506,211,511,235,521,257,532,275"/>
-<area shape="poly" title=" " alt="" coords="519,307,449,347,446,342,516,302"/>
-<area shape="poly" title=" " alt="" coords="494,307,328,352,327,347,493,302"/>
-<area shape="rect" title=" " alt="" coords="591,352,659,379"/>
-<area shape="poly" title=" " alt="" coords="556,303,601,340,598,344,553,307"/>
-<area shape="rect" title=" " alt="" coords="513,352,567,379"/>
-<area shape="poly" title=" " alt="" coords="543,305,543,337,537,337,537,305"/>
-<area shape="poly" title=" " alt="" coords="607,194,608,153,614,154,612,195"/>
+<div class="center"><img src="server_8hpp__incl.png" border="0" usemap="#a_2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hpp" alt=""/></div>
+<map name="a_2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hpp" id="a_2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hpp">
+<area shape="rect" title="The file contains the definition of the server class." alt="" coords="531,5,721,101"/>
+<area shape="rect" title=" " alt="" coords="366,149,460,177"/>
+<area shape="poly" title=" " alt="" coords="534,104,453,144,451,140,531,99"/>
+<area shape="rect" title=" " alt="" coords="485,149,589,177"/>
+<area shape="poly" title=" " alt="" coords="589,103,559,139,555,135,585,99"/>
+<area shape="rect" href="registry_8hpp.html" title="This file defines the registry class. The registry is a container for all the entities and components..." alt="" coords="664,149,762,177"/>
+<area shape="poly" title=" " alt="" coords="666,99,695,135,691,139,662,103"/>
+<area shape="rect" title=" " alt="" coords="5,233,90,261"/>
+<area shape="poly" title=" " alt="" coords="632,102,625,142,616,162,603,179,584,191,561,201,505,214,438,221,364,222,220,220,158,222,109,227,96,231,95,226,108,222,157,216,219,215,364,217,437,215,504,209,560,196,582,187,599,175,612,159,620,141,626,101"/>
+<area shape="rect" title=" " alt="" coords="1424,233,1487,261"/>
+<area shape="poly" title=" " alt="" coords="722,67,858,91,1030,125,1219,169,1407,222,1414,225,1413,230,1405,227,1218,174,1029,130,857,96,721,72"/>
+<area shape="poly" title=" " alt="" coords="664,176,645,179,494,193,376,197,258,203,190,212,109,227,96,231,95,226,108,222,189,207,258,198,376,191,494,188,645,174,663,171"/>
+<area shape="rect" title=" " alt="" coords="1145,233,1190,261"/>
+<area shape="poly" title=" " alt="" coords="762,162,835,166,929,176,1032,194,1134,222,1137,223,1135,228,1132,227,1031,199,929,181,835,172,761,168"/>
+<area shape="rect" title=" " alt="" coords="1214,233,1300,261"/>
+<area shape="poly" title=" " alt="" coords="762,164,956,180,1080,197,1203,222,1213,225,1211,230,1202,227,1079,202,956,185,762,169"/>
+<area shape="rect" title=" " alt="" coords="904,469,983,496"/>
+<area shape="poly" title=" " alt="" coords="762,163,906,167,1089,178,1253,195,1310,207,1329,215,1341,223,1358,246,1365,269,1364,291,1355,312,1339,332,1318,351,1262,384,1196,414,1125,438,999,472,998,467,1123,433,1194,409,1260,380,1315,346,1335,328,1350,310,1359,290,1360,270,1353,249,1338,227,1327,219,1309,213,1252,201,1089,183,906,173,762,168"/>
+<area shape="rect" title=" " alt="" coords="442,233,517,261"/>
+<area shape="poly" title=" " alt="" coords="670,180,530,227,524,230,522,225,528,222,668,175"/>
+<area shape="rect" title=" " alt="" coords="540,233,627,261"/>
+<area shape="poly" title=" " alt="" coords="693,180,619,227,616,222,691,175"/>
+<area shape="rect" title=" " alt="" coords="651,233,775,261"/>
+<area shape="poly" title=" " alt="" coords="716,177,716,218,710,218,710,177"/>
+<area shape="poly" title=" " alt="" coords="762,161,878,161,1039,169,1222,187,1316,202,1407,222,1416,225,1414,230,1406,227,1315,208,1222,193,1038,174,878,167,762,166"/>
+<area shape="rect" title=" " alt="" coords="127,469,272,496"/>
+<area shape="poly" title=" " alt="" coords="664,174,628,179,384,191,235,204,182,214,155,227,137,250,127,272,122,294,123,316,135,364,155,420,165,439,177,455,173,459,160,441,150,422,130,365,118,316,117,293,122,270,133,247,151,223,180,209,234,199,384,186,627,174,663,169"/>
+<area shape="rect" href="ResourceManager_8hpp.html" title="The ResourceManager file. Contains the declaration of the ResourceManager class." alt="" coords="349,393,514,421"/>
+<area shape="poly" title=" " alt="" coords="664,174,524,198,463,213,432,227,422,243,415,262,411,303,416,344,424,378,419,379,410,345,405,303,410,261,417,241,428,223,461,208,523,193,663,169"/>
+<area shape="rect" href="entity_8hpp.html" title="This file contains the definition of the entity class." alt="" coords="901,393,986,421"/>
+<area shape="poly" title=" " alt="" coords="762,163,900,168,1074,179,1230,196,1284,208,1313,223,1328,243,1333,262,1332,279,1323,296,1309,310,1290,324,1241,347,1181,366,1117,382,1002,401,1001,396,1116,376,1180,361,1239,342,1287,319,1306,306,1319,293,1327,278,1328,262,1323,245,1310,227,1282,213,1229,202,1074,184,900,173,762,168"/>
+<area shape="rect" href="exceptions_8hpp.html" title="This file contains definition of the exceptions thrown by the engine." alt="" coords="798,233,918,261"/>
+<area shape="poly" title=" " alt="" coords="737,175,823,223,820,228,735,180"/>
+<area shape="rect" href="registry__single__comp_8tpp.html" title="This file contains the implementation of the registry functions to handle single components operation..." alt="" coords="165,225,317,269"/>
+<area shape="poly" title=" " alt="" coords="664,174,633,179,482,202,333,226,332,220,482,197,632,174,663,169"/>
+<area shape="rect" href="registry__tables_8tpp.html" title="This file contains the implementation of the registry functions to handle components tables." alt="" coords="942,233,1121,261"/>
+<area shape="poly" title=" " alt="" coords="758,175,959,226,958,232,757,180"/>
+<area shape="poly" title=" " alt="" coords="515,417,889,471,888,476,514,423"/>
+<area shape="poly" title=" " alt="" coords="391,424,256,466,255,461,389,419"/>
+<area shape="rect" title=" " alt="" coords="462,469,513,496"/>
+<area shape="poly" title=" " alt="" coords="444,420,471,455,466,458,439,423"/>
+<area shape="rect" title=" " alt="" coords="313,469,438,496"/>
+<area shape="poly" title=" " alt="" coords="424,423,397,458,392,455,419,420"/>
+<area shape="poly" title=" " alt="" coords="946,421,946,453,941,453,941,421"/>
+<area shape="rect" title=" " alt="" coords="816,317,901,345"/>
+<area shape="poly" title=" " alt="" coords="861,261,861,302,856,302,856,261"/>
+<area shape="poly" title=" " alt="" coords="317,228,347,222,498,198,648,175,649,181,499,203,348,227,318,233"/>
+<area shape="rect" href="components_8hpp.html" title="This file defines the different types of components available to the engine." alt="" coords="175,317,368,345"/>
+<area shape="poly" title=" " alt="" coords="251,269,264,302,259,303,246,271"/>
+<area shape="poly" title=" " alt="" coords="282,315,334,264,362,238,385,222,649,173,650,179,387,227,365,243,337,268,286,319"/>
+<area shape="poly" title=" " alt="" coords="301,343,390,384,388,389,299,348"/>
+<area shape="poly" title=" " alt="" coords="368,340,886,397,885,402,368,346"/>
+<area shape="rect" title=" " alt="" coords="165,393,242,421"/>
+<area shape="poly" title=" " alt="" coords="261,347,228,383,224,380,257,344"/>
+<area shape="rect" title=" " alt="" coords="266,393,325,421"/>
+<area shape="poly" title=" " alt="" coords="278,345,289,377,284,379,273,346"/>
+<area shape="poly" title=" " alt="" coords="986,235,776,181,777,176,988,230"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="server_8hpp__dep__incl.png" border="0" usemap="#a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hppdep" alt=""/></div>
-<map name="a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hppdep" id="a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hppdep">
-<area shape="rect" title=" " alt="" coords="303,5,477,64"/>
-<area shape="rect" href="rtype__server_2src_2commands_8cpp.html" title=" " alt="" coords="5,112,185,171"/>
-<area shape="poly" title=" " alt="" coords="296,72,177,114,175,109,294,67"/>
-<area shape="rect" href="rtype__server_2src_2decodeur_8cpp.html" title=" " alt="" coords="208,112,377,171"/>
-<area shape="poly" title=" " alt="" coords="355,77,321,113,317,110,351,73"/>
-<area shape="rect" href="init__server_8cpp.html" title="This file contains the definition of the server initializing funcions." alt="" coords="401,112,576,171"/>
-<area shape="poly" title=" " alt="" coords="428,73,463,110,459,113,425,77"/>
-<area shape="rect" href="level__handling_8cpp.html" title=" " alt="" coords="600,112,798,171"/>
-<area shape="poly" title=" " alt="" coords="489,67,615,109,613,114,487,72"/>
+<div class="center"><img src="server_8hpp__dep__incl.png" border="0" usemap="#a_2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hppdep" alt=""/></div>
+<map name="a_2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hppdep" id="a_2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hppdep">
+<area shape="rect" title="The file contains the definition of the server class." alt="" coords="415,5,605,101"/>
+<area shape="rect" href="rtype__server_2src_2commands_8cpp.html" title=" " alt="" coords="5,158,252,236"/>
+<area shape="poly" title=" " alt="" coords="401,98,234,159,232,154,399,93"/>
+<area shape="rect" href="rtype__server_2src_2decodeur_8cpp.html" title=" " alt="" coords="276,158,509,236"/>
+<area shape="poly" title=" " alt="" coords="463,115,426,159,422,155,459,111"/>
+<area shape="rect" href="init__server_8cpp.html" title="This file contains the definition of the server initializing funcions." alt="" coords="533,149,724,245"/>
+<area shape="poly" title=" " alt="" coords="561,111,591,147,587,150,557,115"/>
+<area shape="rect" href="level__handling_8cpp.html" title="This file contains the definition of the level handling functions." alt="" coords="748,149,938,245"/>
+<area shape="poly" title=" " alt="" coords="620,98,736,147,749,152,747,157,734,151,618,103"/>
 </map>
 </div>
 </div>
@@ -180,8 +183,7 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a498d9f026138406895e9a34b504ac6a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8hpp.html#a498d9f026138406895e9a34b504ac6a6">WINDOW_WIDTH</a>&#160;&#160;&#160;738</td></tr>
-<tr class="memdesc:a498d9f026138406895e9a34b504ac6a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The file contains the definition of the server class.  <br /></td></tr>
+<tr class="memitem:a498d9f026138406895e9a34b504ac6a6" id="r_a498d9f026138406895e9a34b504ac6a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a498d9f026138406895e9a34b504ac6a6">WINDOW_WIDTH</a>&#160;&#160;&#160;738</td></tr>
 <tr class="separator:a498d9f026138406895e9a34b504ac6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5473cf64fa979b48335079c99532e243"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8hpp.html#a5473cf64fa979b48335079c99532e243">WINDOW_HEIGHT</a>&#160;&#160;&#160;432</td></tr>
 <tr class="separator:a5473cf64fa979b48335079c99532e243"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,7 +203,13 @@ Variables</h2></td></tr>
 <tr class="memdesc:ae70b2136c6af0a96d5e51407e69d3c8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A global variable to store the id of the second player in the registry.  <br /></td></tr>
 <tr class="separator:ae70b2136c6af0a96d5e51407e69d3c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The file contains the definition of the server class. </p>
+<dl class="section author"><dt>Author</dt><dd>Farouk OKANLA </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-10-13</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 </dd></dl>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a5473cf64fa979b48335079c99532e243" name="a5473cf64fa979b48335079c99532e243"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5473cf64fa979b48335079c99532e243">&#9670;&#160;</a></span>WINDOW_HEIGHT</h2>
 
@@ -227,8 +235,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>The file contains the definition of the server class. </p>
 
 </div>
 </div>
