@@ -50,7 +50,7 @@ void Server::loadLevel(const std::string &path)
 
     for (auto &entity : level_entities) {
         entity_info_t info;
-        info.type = (std::string)entity["name"];
+        info.type = entity["name"].c_str();
         info.spawn_time = entity["spawn_time"];
         info.spawn_y = entity["y"];
         entities.push_back(info);

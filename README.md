@@ -86,7 +86,7 @@ You need:
 - You may have to update VCPK :
     - Enter his repository and git fetch --all && git pull
     - On Windows, you may also have to execute (.\vcpkg integrate install)
-- After all that, you can run the Game
+- After all that, set (set VCPKG_ROOT=C:\vcpkg) and you can run the Game
 
 ### **Launch the Game**
 
