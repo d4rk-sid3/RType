@@ -12,20 +12,24 @@
 
 ## **Table of Contents**
 
-- [Introduction](#introduction)
-  - [Supported Platforms](#supported-platforms)
-- [The Game](#the-game)
-  - [Story](#story)
-- [How to Play ?](#how-to-play-)
-  - [Prerequisites](#prerequisites)
-  - [Launch the Game](#launch-the-game)
-- [For Developers](#for-developers)
-  - [Build the Program](#build-the-program)
-  - [Testing Program](#testing-program)
-  - [Documentation](#documentation)
-- [Technology Choices](#technologies-choices)
-- [Thank for Reading](#thank-for-reading)
-- [Authors](#authors)
+- [**R-Type**](#r-type)
+  - [**Table of Contents**](#table-of-contents)
+  - [**Introduction**](#introduction)
+    - [**Main Libraries**](#main-libraries)
+    - [**Supported Platforms**](#supported-platforms)
+  - [**The Game**](#the-game)
+    - [**Story**](#story)
+  - [**How to Play ?**](#how-to-play-)
+    - [**Prerequisites**](#prerequisites)
+    - [**How to install and use VCPKG**](#how-to-install-and-use-vcpkg)
+    - [**Launch the Game**](#launch-the-game)
+  - [**For developers**](#for-developers)
+    - [**Build the program**](#build-the-program)
+    - [**Testing program**](#testing-program)
+    - [**Documentation**](#documentation)
+    - [**Technologies choices**](#technologies-choices)
+  - [**Thank for reading**](#thank-for-reading)
+  - [**Authors**](#authors)
 
 ---
 
@@ -71,6 +75,18 @@ You need:
 - **CMake ≥ 3.17**
 - **C++20 compatible compiler**
 - **vcpkg** (for dependency management)
+- On Linux, make sure you have Libx11 and his relatives installed. It's a library on Linux that provides a client-side interface to the X Window System, also known as the Xlib. On ubuntu, you can install it (apt-get install libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev)
+
+### **How to install and use VCPKG**
+
+- On home, git clone https://github.com/microsoft/vcpkg.git 
+- Enter the Add vcpkg to your PATH
+    - On linux (export VCPKG_ROOT=/home/route/to/vcpkg)
+    - On Windows (setx PATH "$env:PATH;C:\vcpkg")
+- You may have to update VCPK :
+    - Enter his repository and git fetch --all && git pull
+    - On Windows, you may also have to execute (.\vcpkg integrate install)
+- After all that, you can run the Game
 
 ### **Launch the Game**
 
@@ -96,7 +112,7 @@ On Windows : - You may execute the following commands :
 ```bash
     mkdir build
     cd build
-    conan install .. --build=missing  -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
+    vcpkg install .. --build=missing  -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
     cd ..
     cmake -B ./build -DCMAKE_BUILD_TYPE=Release
     cmake --build ./build
