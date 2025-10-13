@@ -2,15 +2,20 @@
 \hypertarget{classServer}{}\label{classServer}\index{Server@{Server}}
 
 
+The server class. Handles the server side of the game. At the start of the game, the server loads the level entities from a configuration file The server holds the simulation of the game with all these entities and teh players. It listens from inputs from the clients and sends the game state to the them on each frame.  
+
+
+
+
 {\ttfamily \#include $<$server.\+hpp$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classServer_afc422f4323d93d0d986198d8e3967bb2}{Server}} (int p, \mbox{\hyperlink{classregistry}{registry}} \&reg)
-\item 
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classServer}{Server}\+:\+: \doxylink{classServer}{Server} object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}{\texorpdfstring{$\sim$}{\string~}\+Server}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Destroy the \doxylink{classServer}{Server}\+:\+: \doxylink{classServer}{Server} object. \end{DoxyCompactList}\item 
 Network\+Manager \& \mbox{\hyperlink{classServer_acfd2d06240a094a14b1a9d507e342508}{get\+Manager}} ()
 \item 
 std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classServer_a4f1fd5b9e8cdac6f505d6a6a03434fab}{encode\+Nbr\+Entity}} (const Nbr\+Entity \&pos)
@@ -22,21 +27,39 @@ Move\+Response \mbox{\hyperlink{classServer_ac5a491fec7ae16a63d195b4b192f9d48}{d
 Action\+Response \mbox{\hyperlink{classServer_a268043e1a600716d031d621139d9d3a6}{decode\+Action\+Response}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
 \item 
 void \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{run\+Level}} (double delta)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This function runs the current level It makes sure to spawn new entities if their spawn time has come And calls the receive\+Player\+Input function as well as the log\+Game\+Entities function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+The server class. Handles the server side of the game. At the start of the game, the server loads the level entities from a configuration file The server holds the simulation of the game with all these entities and teh players. It listens from inputs from the clients and sends the game state to the them on each frame. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classServer_afc422f4323d93d0d986198d8e3967bb2}\label{classServer_afc422f4323d93d0d986198d8e3967bb2} 
 \index{Server@{Server}!Server@{Server}}
 \index{Server@{Server}!Server@{Server}}
 \doxysubsubsection{\texorpdfstring{Server()}{Server()}}
-{\footnotesize\ttfamily Server\+::\+Server (\begin{DoxyParamCaption}\item[{int}]{p,  }\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Server\+::\+Server (\begin{DoxyParamCaption}\item[{int}]{p,  }\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{regis }\end{DoxyParamCaption})}
 
+
+
+Construct a new \doxylink{classServer}{Server}\+:\+: \doxylink{classServer}{Server} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & The port \\
+\hline
+{\em regis} & A reference to a registry \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6}\label{classServer_a4b3aa2579cb1c8cd1d069582c14d0fa6} 
 \index{Server@{Server}!````~Server@{\texorpdfstring{$\sim$}{\string~}Server}}
 \index{````~Server@{\texorpdfstring{$\sim$}{\string~}Server}!Server@{Server}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Server()}{\string~Server()}}
 {\footnotesize\ttfamily Server\+::\texorpdfstring{$\sim$}{\string~}\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroy the \doxylink{classServer}{Server}\+:\+: \doxylink{classServer}{Server} object. 
 
 
 
@@ -77,6 +100,15 @@ void \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{run\+Level}
 \doxysubsubsection{\texorpdfstring{runLevel()}{runLevel()}}
 {\footnotesize\ttfamily void Server\+::run\+Level (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})}
 
+
+
+This function runs the current level It makes sure to spawn new entities if their spawn time has come And calls the receive\+Player\+Input function as well as the log\+Game\+Entities function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & The amount of time elapsed since the last frame \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

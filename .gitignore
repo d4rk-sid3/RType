@@ -3,7 +3,6 @@ build/
 cmake-build-*/
 out/
 protocoles/
-docs/
 .vscode
 asio-1.36.0/
 

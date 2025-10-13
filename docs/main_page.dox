@@ -1,0 +1,30 @@
+/**
+ * @mainpage R-TYPE Documentation
+ *
+ * @section intro_sec Introduction
+ *
+ * Welcome to the documentation for R-TYPE. This document provides an
+ * overview of the project, its architecture, and how to use its various
+ * components.
+ *
+ * @subsection infos_sub What is our R-TYPE
+ *
+ * R-TYPE is an arcade multiplayer game. The gameplay is a one of a space
+ * shooter, with at least two players going through waves of ennemies.
+ * The game runs on an ECS game engine, and the server-client communication
+ * is made possible by a binary UDP protocol.
+ *
+ * @subsection parts_sub Parts of the project
+ *
+ * Key parts of R-TYPE include:
+ * - Part 1: The game engine.
+ * - Part 2: The server.
+ * - Part 3: The client.
+ *
+ *
+ * @section contact_sec Contact Information
+ *
+ * For questions or support, please contact Farouk OKANLA, farouk@epitech.eu.
+ *
+ * @note This documentation is continuously updated.
+ */

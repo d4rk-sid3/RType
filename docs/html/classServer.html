@@ -78,13 +78,18 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>The server class. Handles the server side of the game. At the start of the game, the server loads the level entities from a configuration file The server holds the simulation of the game with all these entities and teh players. It listens from inputs from the clients and sends the game state to the them on each frame.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="server_8hpp_source.html">server.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afc422f4323d93d0d986198d8e3967bb2" id="r_afc422f4323d93d0d986198d8e3967bb2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc422f4323d93d0d986198d8e3967bb2">Server</a> (int p, <a class="el" href="classregistry.html">registry</a> &amp;reg)</td></tr>
+<tr class="memdesc:afc422f4323d93d0d986198d8e3967bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classServer.html" title="The server class. Handles the server side of the game. At the start of the game, the server loads the...">Server</a>:: <a class="el" href="classServer.html" title="The server class. Handles the server side of the game. At the start of the game, the server loads the...">Server</a> object.  <br /></td></tr>
 <tr class="separator:afc422f4323d93d0d986198d8e3967bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b3aa2579cb1c8cd1d069582c14d0fa6" id="r_a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b3aa2579cb1c8cd1d069582c14d0fa6">~Server</a> ()</td></tr>
+<tr class="memdesc:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="classServer.html" title="The server class. Handles the server side of the game. At the start of the game, the server loads the...">Server</a>:: <a class="el" href="classServer.html" title="The server class. Handles the server side of the game. At the start of the game, the server loads the...">Server</a> object.  <br /></td></tr>
 <tr class="separator:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfd2d06240a094a14b1a9d507e342508" id="r_acfd2d06240a094a14b1a9d507e342508"><td class="memItemLeft" align="right" valign="top">NetworkManager &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfd2d06240a094a14b1a9d507e342508">getManager</a> ()</td></tr>
 <tr class="separator:acfd2d06240a094a14b1a9d507e342508"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,9 +102,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a268043e1a600716d031d621139d9d3a6" id="r_a268043e1a600716d031d621139d9d3a6"><td class="memItemLeft" align="right" valign="top">ActionResponse&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a268043e1a600716d031d621139d9d3a6">decodeActionResponse</a> (std::vector&lt; int8_t &gt; &amp;buffer)</td></tr>
 <tr class="separator:a268043e1a600716d031d621139d9d3a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af56fa596fcd58a1ea62b5a059885f467" id="r_af56fa596fcd58a1ea62b5a059885f467"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af56fa596fcd58a1ea62b5a059885f467">runLevel</a> (double delta)</td></tr>
+<tr class="memdesc:af56fa596fcd58a1ea62b5a059885f467"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function runs the current level It makes sure to spawn new entities if their spawn time has come And calls the receivePlayerInput function as well as the logGameEntities function.  <br /></td></tr>
 <tr class="separator:af56fa596fcd58a1ea62b5a059885f467"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The server class. Handles the server side of the game. At the start of the game, the server loads the level entities from a configuration file The server holds the simulation of the game with all these entities and teh players. It listens from inputs from the clients and sends the game state to the them on each frame. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afc422f4323d93d0d986198d8e3967bb2" name="afc422f4323d93d0d986198d8e3967bb2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afc422f4323d93d0d986198d8e3967bb2">&#9670;&#160;</a></span>Server()</h2>
 
@@ -114,10 +122,19 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classregistry.html">registry</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>reg</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="classregistry.html">registry</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>regis</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classServer.html" title="The server class. Handles the server side of the game. At the start of the game, the server loads the...">Server</a>:: <a class="el" href="classServer.html" title="The server class. Handles the server side of the game. At the start of the game, the server loads the...">Server</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The port </td></tr>
+    <tr><td class="paramname">regis</td><td>A reference to a registry </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -135,6 +152,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Destroy the <a class="el" href="classServer.html" title="The server class. Handles the server side of the game. At the start of the game, the server loads the...">Server</a>:: <a class="el" href="classServer.html" title="The server class. Handles the server side of the game. At the start of the game, the server loads the...">Server</a> object. </p>
 
 </div>
 </div>
@@ -246,6 +265,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This function runs the current level It makes sure to spawn new entities if their spawn time has come And calls the receivePlayerInput function as well as the logGameEntities function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delta</td><td>The amount of time elapsed since the last frame </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

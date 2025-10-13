@@ -2,31 +2,36 @@
 \hypertarget{classClient}{}\label{classClient}\index{Client@{Client}}
 
 
+The client class. Handles the client side of the game. All the client does is send messages to the server if the player tries to move, and also receive the game state from the server in order to update the game.  
+
+
+
+
 {\ttfamily \#include $<$client.\+hpp$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classClient_a802e0a6f59303939f824d41580deb82a}{Client}} (int p, std\+::string a, \mbox{\hyperlink{classregistry}{registry}} \&reg)
-\item 
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classClient}{Client}\+:\+: \doxylink{classClient}{Client} object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classClient_a840e519ca781888cbd54181572ebe3a7}{\texorpdfstring{$\sim$}{\string~}\+Client}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Destroy the \doxylink{classClient}{Client}\+:\+: \doxylink{classClient}{Client} object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classClient_a8e97ca84d92276123cf88091a6811cc1}{init\+Menu}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em This function initializes the menu. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classClient_a1edfe2aa97fdb3d54c15afa0ef48496e}{run\+Menu}} (double delta)
-\item 
+\begin{DoxyCompactList}\small\item\em This function runs the menu. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classClient_add2ae689ce735011cd1b83601470f4d3}{init\+Game}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em This function initializes the game. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classClient_a101e55e53e7f9cc0433da705e66e1f08}{run\+Level}} (double delta)
-\item 
+\begin{DoxyCompactList}\small\item\em This function updates the game state. It gets all the entities sent by the server and checks for changes. If an entity is new, it creates a new entity in the registry. If an entity is updated, it updates the entity in the registry. If an entity is removed, it removes the entity from the registry. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classClient_a9d0aec2907f33777ece928a1a0dee25e}{send\+Player\+Input}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em This function checks if the player is entering inputs and sends info to the server accordingly. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classClient_ae075a5f69a51c05b60cc8469c2308bd6}{send\+Player\+Action}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em This function checks if the player is shooting and sends info to the server accordingly. \end{DoxyCompactList}\item 
 Network\+Manager \& \mbox{\hyperlink{classClient_af6829864546ed7e423fc1875be9864a9}{get\+Manager}} ()
 \item 
 std\+::vector$<$ Enemy\+Moved\+Response $>$ \mbox{\hyperlink{classClient_a4c9eefab245ca66e80ceb13fa67287e8}{recup\+All\+Entities}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em This functions gets all the entities informations sent by the server and puts them in a vector. \end{DoxyCompactList}\item 
 Nbr\+Entity \mbox{\hyperlink{classClient_ad88aa07459555b36bd038b91505b51cf}{decode\+Nbr\+Entity}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
 \item 
 Enemy\+Moved\+Response \mbox{\hyperlink{classClient_ad57127e6e1ade439817b5d339ddfbec1}{decode\+Enemy\+Moved\+Response}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
@@ -39,21 +44,41 @@ std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_aa317720a1d7ca0d8b
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} \mbox{\hyperlink{classClient_a3a70c6088987795c92e25d7ee2e99af5}{state}} = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The current state of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+The client class. Handles the client side of the game. All the client does is send messages to the server if the player tries to move, and also receive the game state from the server in order to update the game. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classClient_a802e0a6f59303939f824d41580deb82a}\label{classClient_a802e0a6f59303939f824d41580deb82a} 
 \index{Client@{Client}!Client@{Client}}
 \index{Client@{Client}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{Client()}{Client()}}
-{\footnotesize\ttfamily Client\+::\+Client (\begin{DoxyParamCaption}\item[{int}]{p,  }\item[{std\+::string}]{a,  }\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Client\+::\+Client (\begin{DoxyParamCaption}\item[{int}]{p,  }\item[{std\+::string}]{address,  }\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg }\end{DoxyParamCaption})}
 
+
+
+Construct a new \doxylink{classClient}{Client}\+:\+: \doxylink{classClient}{Client} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & The port to connect to \\
+\hline
+{\em address} & The server address \\
+\hline
+{\em reg} & A reference to the registry which will let the game take place \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classClient_a840e519ca781888cbd54181572ebe3a7}\label{classClient_a840e519ca781888cbd54181572ebe3a7} 
 \index{Client@{Client}!````~Client@{\texorpdfstring{$\sim$}{\string~}Client}}
 \index{````~Client@{\texorpdfstring{$\sim$}{\string~}Client}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Client()}{\string~Client()}}
 {\footnotesize\ttfamily Client\+::\texorpdfstring{$\sim$}{\string~}\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroy the \doxylink{classClient}{Client}\+:\+: \doxylink{classClient}{Client} object. 
 
 
 
@@ -94,11 +119,19 @@ std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_aa317720a1d7ca0d8b
 \doxysubsubsection{\texorpdfstring{initGame()}{initGame()}}
 {\footnotesize\ttfamily void Client\+::init\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+This function initializes the game. 
+
 \Hypertarget{classClient_a8e97ca84d92276123cf88091a6811cc1}\label{classClient_a8e97ca84d92276123cf88091a6811cc1} 
 \index{Client@{Client}!initMenu@{initMenu}}
 \index{initMenu@{initMenu}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{initMenu()}{initMenu()}}
 {\footnotesize\ttfamily void Client\+::init\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function initializes the menu. 
 
 \Hypertarget{classClient_a4c9eefab245ca66e80ceb13fa67287e8}\label{classClient_a4c9eefab245ca66e80ceb13fa67287e8} 
 \index{Client@{Client}!recupAllEntities@{recupAllEntities}}
@@ -106,23 +139,52 @@ std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_aa317720a1d7ca0d8b
 \doxysubsubsection{\texorpdfstring{recupAllEntities()}{recupAllEntities()}}
 {\footnotesize\ttfamily std\+::vector$<$ Enemy\+Moved\+Response $>$ Client\+::recup\+All\+Entities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+This functions gets all the entities informations sent by the server and puts them in a vector. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$\+Enemy\+Moved\+Response$>$ 
+\end{DoxyReturn}
 \Hypertarget{classClient_a101e55e53e7f9cc0433da705e66e1f08}\label{classClient_a101e55e53e7f9cc0433da705e66e1f08} 
 \index{Client@{Client}!runLevel@{runLevel}}
 \index{runLevel@{runLevel}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{runLevel()}{runLevel()}}
 {\footnotesize\ttfamily void Client\+::run\+Level (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})}
 
+
+
+This function updates the game state. It gets all the entities sent by the server and checks for changes. If an entity is new, it creates a new entity in the registry. If an entity is updated, it updates the entity in the registry. If an entity is removed, it removes the entity from the registry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & the time since the last update \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classClient_a1edfe2aa97fdb3d54c15afa0ef48496e}\label{classClient_a1edfe2aa97fdb3d54c15afa0ef48496e} 
 \index{Client@{Client}!runMenu@{runMenu}}
 \index{runMenu@{runMenu}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{runMenu()}{runMenu()}}
 {\footnotesize\ttfamily void Client\+::run\+Menu (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})}
 
+
+
+This function runs the menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & The amount of time elapsed since the last frame \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classClient_ae075a5f69a51c05b60cc8469c2308bd6}\label{classClient_ae075a5f69a51c05b60cc8469c2308bd6} 
 \index{Client@{Client}!sendPlayerAction@{sendPlayerAction}}
 \index{sendPlayerAction@{sendPlayerAction}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{sendPlayerAction()}{sendPlayerAction()}}
 {\footnotesize\ttfamily void Client\+::send\+Player\+Action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function checks if the player is shooting and sends info to the server accordingly. 
 
 \Hypertarget{classClient_a9d0aec2907f33777ece928a1a0dee25e}\label{classClient_a9d0aec2907f33777ece928a1a0dee25e} 
 \index{Client@{Client}!sendPlayerInput@{sendPlayerInput}}
@@ -132,12 +194,20 @@ std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_aa317720a1d7ca0d8b
 
 
 
+This function checks if the player is entering inputs and sends info to the server accordingly. 
+
+
+
 \doxysubsection{Member Data Documentation}
 \Hypertarget{classClient_a3a70c6088987795c92e25d7ee2e99af5}\label{classClient_a3a70c6088987795c92e25d7ee2e99af5} 
 \index{Client@{Client}!state@{state}}
 \index{state@{state}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{state}{state}}
 {\footnotesize\ttfamily \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} Client\+::state = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}}}
+
+
+
+The current state of the game. 
 
 
 

@@ -7,8 +7,7 @@
 {\ttfamily \#include "{}registry.\+hpp"{}}\newline
 {\ttfamily \#include "{}entity.\+hpp"{}}\newline
 {\ttfamily \#include $<$map$>$}\newline
-Include dependency graph for client.\+hpp\+:
-\nopagebreak
+Include dependency graph for client.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -26,23 +25,23 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}}
-\item 
+\begin{DoxyCompactList}\small\item\em A struct to store infos on an entity to be spawned in the level. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structmenu__info__s}{menu\+\_\+info\+\_\+s}}
 \item 
 class \mbox{\hyperlink{classClient}{Client}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The client class. Handles the client side of the game. All the client does is send messages to the server if the player tries to move, and also receive the game state from the server in order to update the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{client_8hpp_a498d9f026138406895e9a34b504ac6a6}{WINDOW\+\_\+\+WIDTH}}~738
-\item 
+\begin{DoxyCompactList}\small\item\em The client class definition file. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{client_8hpp_a5473cf64fa979b48335079c99532e243}{WINDOW\+\_\+\+HEIGHT}}~432
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
 typedef struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\+\_\+info\+\_\+t}}
-\item 
+\begin{DoxyCompactList}\small\item\em A struct to store infos on an entity to be spawned in the level. \end{DoxyCompactList}\item 
 typedef struct \mbox{\hyperlink{structmenu__info__s}{menu\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac}{menu\+\_\+info\+\_\+t}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
@@ -53,12 +52,12 @@ enum \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+
 , \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}}
 , \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00}{GAME\+\_\+\+OVER}}
  \}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em An enum to define the different states of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{client_8hpp_a45a5fb16434b9906d8110a57b0ca5b4d}{player\+\_\+entity\+\_\+id}} = -\/1
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A global variable to store the id of the player in the registry This variable is useful to access infos on the player all accross the program. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -76,12 +75,20 @@ int \mbox{\hyperlink{client_8hpp_a45a5fb16434b9906d8110a57b0ca5b4d}{player\+\_\+
 
 
 
+The client class definition file. 
+
+
+
 \doxysubsection{Typedef Documentation}
 \Hypertarget{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}\label{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c} 
 \index{client.hpp@{client.hpp}!entity\_info\_t@{entity\_info\_t}}
 \index{entity\_info\_t@{entity\_info\_t}!client.hpp@{client.hpp}}
 \doxysubsubsection{\texorpdfstring{entity\_info\_t}{entity\_info\_t}}
 {\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\+\_\+info\+\_\+t}}}
+
+
+
+A struct to store infos on an entity to be spawned in the level. 
 
 \Hypertarget{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac}\label{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac} 
 \index{client.hpp@{client.hpp}!menu\_info\_t@{menu\_info\_t}}
@@ -97,6 +104,10 @@ int \mbox{\hyperlink{client_8hpp_a45a5fb16434b9906d8110a57b0ca5b4d}{player\+\_\+
 \index{state\_t@{state\_t}!client.hpp@{client.hpp}}
 \doxysubsubsection{\texorpdfstring{state\_t}{state\_t}}
 {\footnotesize\ttfamily enum \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}}}
+
+
+
+An enum to define the different states of the game. 
 
 \begin{DoxyEnumFields}{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{MENU@{MENU}!client.hpp@{client.hpp}}\index{client.hpp@{client.hpp}!MENU@{MENU}}}\Hypertarget{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721}\label{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721} 
@@ -124,4 +135,8 @@ GAME\+\_\+\+OVER&\\
 \index{player\_entity\_id@{player\_entity\_id}!client.hpp@{client.hpp}}
 \doxysubsubsection{\texorpdfstring{player\_entity\_id}{player\_entity\_id}}
 {\footnotesize\ttfamily int player\+\_\+entity\+\_\+id = -\/1\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+A global variable to store the id of the player in the registry This variable is useful to access infos on the player all accross the program. 
 

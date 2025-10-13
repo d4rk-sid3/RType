@@ -167,7 +167,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <area shape="poly" title=" " alt="" coords="286,111,198,159,196,155,284,107"/>
 <area shape="rect" href="rtype__client_2src_2decodeur_8cpp.html" title=" " alt="" coords="271,158,499,236"/>
 <area shape="poly" title=" " alt="" coords="387,117,387,157,382,157,382,117"/>
-<area shape="rect" href="init__client_8cpp.html" title=" " alt="" coords="523,149,713,245"/>
+<area shape="rect" href="init__client_8cpp.html" title="This file contains the definition of the client functions." alt="" coords="523,149,713,245"/>
 <area shape="poly" title=" " alt="" coords="477,107,542,146,539,151,474,112"/>
 </map>
 </div>
@@ -177,15 +177,18 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structentity__info__s.html">entity_info_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct to store infos on an entity to be spawned in the level.  <a href="structentity__info__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmenu__info__s.html">menu_info_s</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClient.html">Client</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The client class. Handles the client side of the game. All the client does is send messages to the server if the player tries to move, and also receive the game state from the server in order to update the game.  <a href="classClient.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a498d9f026138406895e9a34b504ac6a6" id="r_a498d9f026138406895e9a34b504ac6a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a498d9f026138406895e9a34b504ac6a6">WINDOW_WIDTH</a>&#160;&#160;&#160;738</td></tr>
+<tr class="memdesc:a498d9f026138406895e9a34b504ac6a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The client class definition file.  <br /></td></tr>
 <tr class="separator:a498d9f026138406895e9a34b504ac6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5473cf64fa979b48335079c99532e243" id="r_a5473cf64fa979b48335079c99532e243"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5473cf64fa979b48335079c99532e243">WINDOW_HEIGHT</a>&#160;&#160;&#160;432</td></tr>
 <tr class="separator:a5473cf64fa979b48335079c99532e243"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,6 +196,7 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a3e20dfd8260e2313e3f25e0b2152d78c" id="r_a3e20dfd8260e2313e3f25e0b2152d78c"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structentity__info__s.html">entity_info_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e20dfd8260e2313e3f25e0b2152d78c">entity_info_t</a></td></tr>
+<tr class="memdesc:a3e20dfd8260e2313e3f25e0b2152d78c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct to store infos on an entity to be spawned in the level.  <br /></td></tr>
 <tr class="separator:a3e20dfd8260e2313e3f25e0b2152d78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02538eb94f2146a51ffae5bc113fa7ac" id="r_a02538eb94f2146a51ffae5bc113fa7ac"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structmenu__info__s.html">menu_info_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02538eb94f2146a51ffae5bc113fa7ac">menu_info_t</a></td></tr>
 <tr class="separator:a02538eb94f2146a51ffae5bc113fa7ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -204,11 +208,13 @@ Enumerations</h2></td></tr>
 , <a class="el" href="#aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84">GAME</a>
 , <a class="el" href="#aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00">GAME_OVER</a>
  }</td></tr>
+<tr class="memdesc:aa0aafed44fec19806d8f9ad834be1248"><td class="mdescLeft">&#160;</td><td class="mdescRight">An enum to define the different states of the game.  <a href="#aa0aafed44fec19806d8f9ad834be1248">More...</a><br /></td></tr>
 <tr class="separator:aa0aafed44fec19806d8f9ad834be1248"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a45a5fb16434b9906d8110a57b0ca5b4d" id="r_a45a5fb16434b9906d8110a57b0ca5b4d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45a5fb16434b9906d8110a57b0ca5b4d">player_entity_id</a> = -1</td></tr>
+<tr class="memdesc:a45a5fb16434b9906d8110a57b0ca5b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A global variable to store the id of the player in the registry This variable is useful to access infos on the player all accross the program.  <br /></td></tr>
 <tr class="separator:a45a5fb16434b9906d8110a57b0ca5b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -238,6 +244,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The client class definition file. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>
@@ -252,6 +260,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>A struct to store infos on an entity to be spawned in the level. </p>
 
 </div>
 </div>
@@ -281,6 +291,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>An enum to define the different states of the game. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721" name="aa0aafed44fec19806d8f9ad834be1248a4c40e60bc71a32b924ce1f08d57f9721"></a>MENU&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c" name="aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c"></a>TRANSITION&#160;</td><td class="fielddoc"></td></tr>
@@ -310,6 +322,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>A global variable to store the id of the player in the registry This variable is useful to access infos on the player all accross the program. </p>
 
 </div>
 </div>

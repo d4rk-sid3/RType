@@ -99,9 +99,9 @@ TEST_F(registryTest, componentHandling) {
     ASSERT_EQ(e2_pos.has_value(), false);
 
     // Error cases
-    EXPECT_THROW(reg.get_components<int>(), NonExistentComponentType);
-    EXPECT_THROW(reg.add_component<int>(e2, 522), NonExistentComponentType);
-    EXPECT_THROW(reg.remove_component<int>(e2), NonExistentComponentType);
+    EXPECT_THROW(reg.get_components<unsigned long int>(), NonExistentComponentType);
+    EXPECT_THROW(reg.add_component<unsigned long int>(e2, 522), NonExistentComponentType);
+    EXPECT_THROW(reg.remove_component<unsigned long int>(e2), NonExistentComponentType);
 
     EXPECT_THROW(
         reg.add_component<component::position>((entity)10, {0, 0}),

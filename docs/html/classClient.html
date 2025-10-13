@@ -79,29 +79,41 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>The client class. Handles the client side of the game. All the client does is send messages to the server if the player tries to move, and also receive the game state from the server in order to update the game.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="client_8hpp_source.html">client.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a802e0a6f59303939f824d41580deb82a" id="r_a802e0a6f59303939f824d41580deb82a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a802e0a6f59303939f824d41580deb82a">Client</a> (int p, std::string a, <a class="el" href="classregistry.html">registry</a> &amp;reg)</td></tr>
+<tr class="memdesc:a802e0a6f59303939f824d41580deb82a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a>:: <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> object.  <br /></td></tr>
 <tr class="separator:a802e0a6f59303939f824d41580deb82a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a840e519ca781888cbd54181572ebe3a7" id="r_a840e519ca781888cbd54181572ebe3a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a840e519ca781888cbd54181572ebe3a7">~Client</a> ()</td></tr>
+<tr class="memdesc:a840e519ca781888cbd54181572ebe3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a>:: <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> object.  <br /></td></tr>
 <tr class="separator:a840e519ca781888cbd54181572ebe3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e97ca84d92276123cf88091a6811cc1" id="r_a8e97ca84d92276123cf88091a6811cc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e97ca84d92276123cf88091a6811cc1">initMenu</a> ()</td></tr>
+<tr class="memdesc:a8e97ca84d92276123cf88091a6811cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initializes the menu.  <br /></td></tr>
 <tr class="separator:a8e97ca84d92276123cf88091a6811cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1edfe2aa97fdb3d54c15afa0ef48496e" id="r_a1edfe2aa97fdb3d54c15afa0ef48496e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1edfe2aa97fdb3d54c15afa0ef48496e">runMenu</a> (double delta)</td></tr>
+<tr class="memdesc:a1edfe2aa97fdb3d54c15afa0ef48496e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function runs the menu.  <br /></td></tr>
 <tr class="separator:a1edfe2aa97fdb3d54c15afa0ef48496e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add2ae689ce735011cd1b83601470f4d3" id="r_add2ae689ce735011cd1b83601470f4d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add2ae689ce735011cd1b83601470f4d3">initGame</a> ()</td></tr>
+<tr class="memdesc:add2ae689ce735011cd1b83601470f4d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initializes the game.  <br /></td></tr>
 <tr class="separator:add2ae689ce735011cd1b83601470f4d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a101e55e53e7f9cc0433da705e66e1f08" id="r_a101e55e53e7f9cc0433da705e66e1f08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a101e55e53e7f9cc0433da705e66e1f08">runLevel</a> (double delta)</td></tr>
+<tr class="memdesc:a101e55e53e7f9cc0433da705e66e1f08"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function updates the game state. It gets all the entities sent by the server and checks for changes. If an entity is new, it creates a new entity in the registry. If an entity is updated, it updates the entity in the registry. If an entity is removed, it removes the entity from the registry.  <br /></td></tr>
 <tr class="separator:a101e55e53e7f9cc0433da705e66e1f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d0aec2907f33777ece928a1a0dee25e" id="r_a9d0aec2907f33777ece928a1a0dee25e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d0aec2907f33777ece928a1a0dee25e">sendPlayerInput</a> ()</td></tr>
+<tr class="memdesc:a9d0aec2907f33777ece928a1a0dee25e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function checks if the player is entering inputs and sends info to the server accordingly.  <br /></td></tr>
 <tr class="separator:a9d0aec2907f33777ece928a1a0dee25e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae075a5f69a51c05b60cc8469c2308bd6" id="r_ae075a5f69a51c05b60cc8469c2308bd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae075a5f69a51c05b60cc8469c2308bd6">sendPlayerAction</a> ()</td></tr>
+<tr class="memdesc:ae075a5f69a51c05b60cc8469c2308bd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function checks if the player is shooting and sends info to the server accordingly.  <br /></td></tr>
 <tr class="separator:ae075a5f69a51c05b60cc8469c2308bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6829864546ed7e423fc1875be9864a9" id="r_af6829864546ed7e423fc1875be9864a9"><td class="memItemLeft" align="right" valign="top">NetworkManager &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6829864546ed7e423fc1875be9864a9">getManager</a> ()</td></tr>
 <tr class="separator:af6829864546ed7e423fc1875be9864a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c9eefab245ca66e80ceb13fa67287e8" id="r_a4c9eefab245ca66e80ceb13fa67287e8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; EnemyMovedResponse &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c9eefab245ca66e80ceb13fa67287e8">recupAllEntities</a> ()</td></tr>
+<tr class="memdesc:a4c9eefab245ca66e80ceb13fa67287e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This functions gets all the entities informations sent by the server and puts them in a vector.  <br /></td></tr>
 <tr class="separator:a4c9eefab245ca66e80ceb13fa67287e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad88aa07459555b36bd038b91505b51cf" id="r_ad88aa07459555b36bd038b91505b51cf"><td class="memItemLeft" align="right" valign="top">NbrEntity&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad88aa07459555b36bd038b91505b51cf">decodeNbrEntity</a> (std::vector&lt; int8_t &gt; &amp;buffer)</td></tr>
 <tr class="separator:ad88aa07459555b36bd038b91505b51cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,9 +127,12 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a3a70c6088987795c92e25d7ee2e99af5" id="r_a3a70c6088987795c92e25d7ee2e99af5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248">state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a70c6088987795c92e25d7ee2e99af5">state</a> = <a class="el" href="client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84">GAME</a></td></tr>
+<tr class="memdesc:a3a70c6088987795c92e25d7ee2e99af5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current state of the game.  <br /></td></tr>
 <tr class="separator:a3a70c6088987795c92e25d7ee2e99af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The client class. Handles the client side of the game. All the client does is send messages to the server if the player tries to move, and also receive the game state from the server in order to update the game. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a802e0a6f59303939f824d41580deb82a" name="a802e0a6f59303939f824d41580deb82a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a802e0a6f59303939f824d41580deb82a">&#9670;&#160;</a></span>Client()</h2>
 
@@ -132,7 +147,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>a</em>, </span></td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>address</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -141,6 +156,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a>:: <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The port to connect to </td></tr>
+    <tr><td class="paramname">address</td><td>The server address </td></tr>
+    <tr><td class="paramname">reg</td><td>A reference to the registry which will let the game take place </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -158,6 +183,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Destroy the <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a>:: <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> object. </p>
 
 </div>
 </div>
@@ -270,6 +297,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>This function initializes the game. </p>
+
 </div>
 </div>
 <a id="a8e97ca84d92276123cf88091a6811cc1" name="a8e97ca84d92276123cf88091a6811cc1"></a>
@@ -286,6 +315,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This function initializes the menu. </p>
 
 </div>
 </div>
@@ -304,6 +335,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>This functions gets all the entities informations sent by the server and puts them in a vector. </p>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;EnemyMovedResponse&gt; </dd></dl>
+
 </div>
 </div>
 <a id="a101e55e53e7f9cc0433da705e66e1f08" name="a101e55e53e7f9cc0433da705e66e1f08"></a>
@@ -320,6 +354,14 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This function updates the game state. It gets all the entities sent by the server and checks for changes. If an entity is new, it creates a new entity in the registry. If an entity is updated, it updates the entity in the registry. If an entity is removed, it removes the entity from the registry. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delta</td><td>the time since the last update </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -338,6 +380,14 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>This function runs the menu. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delta</td><td>The amount of time elapsed since the last frame </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ae075a5f69a51c05b60cc8469c2308bd6" name="ae075a5f69a51c05b60cc8469c2308bd6"></a>
@@ -354,6 +404,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This function checks if the player is shooting and sends info to the server accordingly. </p>
 
 </div>
 </div>
@@ -372,6 +424,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>This function checks if the player is entering inputs and sends info to the server accordingly. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -386,6 +440,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The current state of the game. </p>
 
 </div>
 </div>

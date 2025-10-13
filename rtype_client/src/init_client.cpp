@@ -136,10 +136,8 @@ void Client::sendPlayerInput()
     } else if (con.right) {
         pos.direction = RIGHT;
     } else if (con.up) {
-        printf("UP\n");
         pos.direction = UP;
     } else if (con.down) {
-        printf("DOWN\n");
         pos.direction = DOWN;
     }
 
@@ -175,7 +173,6 @@ void Client::sendPlayerAction()
     pos.player_id = static_cast<int16_t>(player_entity_id);
 
     if (con.space) {
-        printf("SHOOTING\n");
         pos.input = SPACE;
     }
 
@@ -308,7 +305,6 @@ void Client::runMenu(double delta)
         component::controllable &start_text = _reg.get_components<component::controllable>()[menu_info.start_text].value();
 
         if (start_text.space) {
-            printf("Transition\n");
             state = TRANSITION;
             menu_info.menu_fade_in_rect = fac.make_fade_in_rect();
         }
