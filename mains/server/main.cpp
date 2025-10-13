@@ -3,7 +3,7 @@
 
 int main(int ac, char **av) {
     sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server");
-    win.setFramerateLimit(60);
+    win.setFramerateLimit(100);
     registry reg(win);
 
 
