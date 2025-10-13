@@ -86,7 +86,150 @@ A simple tutorial on the engine</h1>
 <p>The engine is contained in the registry class. It stores the components, the entities, the systems and provides methods to manage them.</p>
 <p>The project uses various components, from simple position components to logic components (equivalent to scripts). You can see their details in <a class="el" href="components_8hpp.html">components.hpp</a></p>
 <p>It also uses pretty straightforward systems to update these components, as you can see in <a class="el" href="systems_8hpp.html">systems.hpp</a></p>
-<p>Now let's see how we can create a simple program using the registry to simulate a simple game. </p>
+<h2><a class="anchor" id="autotoc_md135"></a>
+</h2>
+<p>Let's create a simple program that:</p><ul>
+<li>Opens a window</li>
+<li>Spawns a player entity</li>
+<li>Displays its sprite</li>
+<li>Lets us move it using the keyboard</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md136"></a>
+1. Initialize the Engine</h3>
+<p>Include the required headers: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="registry_8hpp.html">registry.hpp</a>&quot;</span></div>
+<div class="ttc" id="aregistry_8hpp_html"><div class="ttname"><a href="registry_8hpp.html">registry.hpp</a></div><div class="ttdoc">This file defines the registry class. The registry is a container for all the entities and components...</div></div>
+</div><!-- fragment --><p>Then create a registry instance and a rendering window (for example using SFML): </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">    sf::RenderWindow window(sf::VideoMode(800, 600), <span class="stringliteral">&quot;R-TYPE ECS Demo&quot;</span>);</div>
+<div class="line">    Registry reg(window);</div>
+</div><!-- fragment --><p> You just created a registry with a window. The engine then knows it needs to activate the rendering systems and its affiliate components. Don't worry, basic components and systems are allready registered by default. Now, you can start creating an entity:</p>
+<div class="fragment"><div class="line"><span class="comment">// Create an entity</span></div>
+<div class="line"><a class="code hl_class" href="classentity.html">entity</a> player = reg.spawn_entity();</div>
+<div class="ttc" id="aclassentity_html"><div class="ttname"><a href="classentity.html">entity</a></div><div class="ttdoc">The entity class, defined by an id to which components will be associated.</div><div class="ttdef"><b>Definition</b> entity.hpp:40</div></div>
+</div><!-- fragment --><p>You just created an entity — a simple ID that will hold various components. Now let's attach these components one by one to make it an actual <b>player</b>.</p>
+<hr  />
+ <h3><a class="anchor" id="autotoc_md138"></a>
+2. Add the Components</h3>
+<p>First, let's add a <b>position</b> component, which determines where the player is on screen.</p>
+<div class="fragment"><div class="line">reg.add_component&lt;<a class="code hl_struct" href="structcomponent_1_1position__s.html">component::position</a>&gt;(player, {100.f, 300.f});</div>
+<div class="ttc" id="astructcomponent_1_1position__s_html"><div class="ttname"><a href="structcomponent_1_1position__s.html">component::position_s</a></div><div class="ttdoc">The position component, with an x and y position.</div><div class="ttdef"><b>Definition</b> components.hpp:50</div></div>
+</div><!-- fragment --><p>This sets the initial position of the player at coordinates <code>(100, 300)</code>.</p>
+<hr  />
+<p>Next, we add a <b>velocity</b> component, which defines how fast the entity moves each frame:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> &amp;vel = reg.add_component&lt;<a class="code hl_struct" href="structcomponent_1_1velocity__s.html">component::velocity</a>&gt;(player, {0.f, 0.f});</div>
+<div class="ttc" id="astructcomponent_1_1velocity__s_html"><div class="ttname"><a href="structcomponent_1_1velocity__s.html">component::velocity_s</a></div><div class="ttdoc">The velocity component, with an x and y velocity. This component allows an entity to move.</div><div class="ttdef"><b>Definition</b> components.hpp:72</div></div>
+</div><!-- fragment --><p>At first, its velocity is zero — it will only move once we apply input through the control system. We keep a reference to this newly created component because we might need to make changes on it on the future, to handle some events.</p>
+<hr  />
+<p>Now we add a <b>controllable</b> component. <br  />
+ This is a simple <em>marker component</em> that just tells the engine: </p><blockquote class="doxtable">
+<p>&zwj;“This entity can be controlled by the player.” When the engine will detect input, the comtrollable component will be updated. That’s why we keep a reference to this newly created component. We will later need to check its value to make the player move </p>
+</blockquote>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> &amp;con = reg.add_component&lt;<a class="code hl_struct" href="structcomponent_1_1controllable__s.html">component::controllable</a>&gt;(player, <a class="code hl_typedef" href="namespacecomponent.html#ac85f4762db6e1c119b13fedc4f9c157c">component::controllable</a>());</div>
+<div class="ttc" id="anamespacecomponent_html_ac85f4762db6e1c119b13fedc4f9c157c"><div class="ttname"><a href="namespacecomponent.html#ac85f4762db6e1c119b13fedc4f9c157c">component::controllable</a></div><div class="ttdeci">struct component::controllable_s controllable</div><div class="ttdoc">The controllable component, defined by a set of booleans. This component allows an entity to be contr...</div></div>
+<div class="ttc" id="astructcomponent_1_1controllable__s_html"><div class="ttname"><a href="structcomponent_1_1controllable__s.html">component::controllable_s</a></div><div class="ttdoc">The controllable component, defined by a set of booleans. This component allows an entity to be contr...</div><div class="ttdef"><b>Definition</b> components.hpp:184</div></div>
+</div><!-- fragment --><hr  />
+<p>Finally, let's give the entity a <b>drawable</b> component, so it can actually be rendered. The drawable typically holds an <code>sf::Sprite</code> and a texture reference:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> &amp;player_sprite = reg.add_component&lt;<a class="code hl_struct" href="structcomponent_1_1drawable__s.html">component::drawable</a>&gt;(player);</div>
+<div class="line">ResourceManager::instance().load(<span class="stringliteral">&quot;path/to/your/texture.png&quot;</span>, <span class="stringliteral">&quot;player1&quot;</span>, <a class="code hl_enumvalue" href="ResourceManager_8hpp.html#a509a729cba5db28cddc3c2ec18d0d83aa3f07a311da6e3003d3922d665098da2d">TEXTURE</a>);</div>
+<div class="line">player_sprite.<a class="code hl_function" href="structcomponent_1_1drawable__s.html#a7ee88f7aa48fd311461240b86f0db87a">setTextureFromName</a>(<span class="stringliteral">&quot;player1&quot;</span>);</div>
+<div class="ttc" id="aResourceManager_8hpp_html_a509a729cba5db28cddc3c2ec18d0d83aa3f07a311da6e3003d3922d665098da2d"><div class="ttname"><a href="ResourceManager_8hpp.html#a509a729cba5db28cddc3c2ec18d0d83aa3f07a311da6e3003d3922d665098da2d">TEXTURE</a></div><div class="ttdeci">@ TEXTURE</div><div class="ttdef"><b>Definition</b> ResourceManager.hpp:46</div></div>
+<div class="ttc" id="astructcomponent_1_1drawable__s_html"><div class="ttname"><a href="structcomponent_1_1drawable__s.html">component::drawable_s</a></div><div class="ttdoc">The drawable component, defined by an sf::Sprite. This component allows an entity to be drawn on the ...</div><div class="ttdef"><b>Definition</b> components.hpp:82</div></div>
+<div class="ttc" id="astructcomponent_1_1drawable__s_html_a7ee88f7aa48fd311461240b86f0db87a"><div class="ttname"><a href="structcomponent_1_1drawable__s.html#a7ee88f7aa48fd311461240b86f0db87a">component::drawable_s::setTextureFromName</a></div><div class="ttdeci">void setTextureFromName(std::string texture_name)</div><div class="ttdoc">This function uses a ResourceManager to set the texture of the sprite.</div><div class="ttdef"><b>Definition</b> components.hpp:92</div></div>
+</div><!-- fragment --><p>The <code>setTextureFromName("player1")</code> is a custom helper that loads a texture previously registered in your asset manager. To register a texture in the resource manager, see <a class="el" href="ResourceManager_8hpp.html">ResourceManager.hpp</a>. <code>ResourceManager::instance().load("path/to/your/texture.png", TEXTURE);</code> </p>
+<h2><a class="anchor" id="autotoc_md142"></a>
+does just that.</h2>
+<p>After these steps, you have a complete entity: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classentity.html">entity</a> player = reg.spawn_entity();</div>
+<div class="line">reg.add_component&lt;<a class="code hl_struct" href="structcomponent_1_1position__s.html">component::position</a>&gt;(player, {100.f, 300.f});</div>
+<div class="line"><span class="keyword">auto</span> &amp;vel = reg.add_component&lt;<a class="code hl_struct" href="structcomponent_1_1velocity__s.html">component::velocity</a>&gt;(player, {0.f, 0.f});</div>
+<div class="line"><span class="keyword">auto</span> &amp;con = reg.add_component&lt;<a class="code hl_struct" href="structcomponent_1_1controllable__s.html">component::controllable</a>&gt;(player, <a class="code hl_typedef" href="namespacecomponent.html#ac85f4762db6e1c119b13fedc4f9c157c">component::controllable</a>());</div>
+<div class="line"><span class="keyword">auto</span> &amp;sprite = reg.add_component&lt;<a class="code hl_struct" href="structcomponent_1_1drawable__s.html">component::drawable</a>&gt;(player);</div>
+<div class="line">ResourceManager::instance().load(<span class="stringliteral">&quot;path/to/your/texture.png&quot;</span>, <a class="code hl_enumvalue" href="ResourceManager_8hpp.html#a509a729cba5db28cddc3c2ec18d0d83aa3f07a311da6e3003d3922d665098da2d">TEXTURE</a>);</div>
+<div class="line">sprite.setTextureFromName(<span class="stringliteral">&quot;player1&quot;</span>);</div>
+</div><!-- fragment --><hr  />
+<h3><a class="anchor" id="autotoc_md144"></a>
+3. Running the Game Loop</h3>
+<p>Now we can add the main loop, which updates all the systems every frame. The registry automatically keeps track of all systems related to the components you added (movement, control, draw, etc.).</p>
+<div class="fragment"><div class="line">    <span class="comment">// Main loop</span></div>
+<div class="line">    <span class="keywordflow">while</span> (window.isOpen()) {</div>
+<div class="line">        sf::Event event;</div>
+<div class="line">        <span class="keywordflow">while</span> (window.pollEvent(event)) {</div>
+<div class="line">            <span class="keywordflow">if</span> (event.type == sf::Event::Closed)</div>
+<div class="line">                window.close();</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Run all active systems (movement, control, render, etc.)</span></div>
+<div class="line">        reg.run_systems();</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>That’s it! 🚀 <br  />
+ When you run this code, player sprite appears at position <code>(100, 300)</code>. But you can't move your player.</p>
+<p>This is because the controllable component is updated but you did not specify how to handle the inputs. There are two ways to do that.</p>
+<p>First, you can write code directly in the game loop to check the controllable values and act accordingly:</p>
+<div class="fragment"><div class="line"><span class="comment">// Main loop</span></div>
+<div class="line"><span class="keywordflow">while</span> (window.isOpen()) {</div>
+<div class="line">    sf::Event event;</div>
+<div class="line">    <span class="keywordflow">while</span> (window.pollEvent(event)) {</div>
+<div class="line">        <span class="keywordflow">if</span> (event.type == sf::Event::Closed)</div>
+<div class="line">            window.close();</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Run all active systems (movement, control, render, etc.)</span></div>
+<div class="line">    reg.run_systems();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Update the velocity based on the pressed inputs</span></div>
+<div class="line">    <span class="keywordflow">if</span> (con.left) {</div>
+<div class="line">         vel.vx = -100;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">if</span> (con.right) {</div>
+<div class="line">         vel.vx = 100;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">if</span> (con.up) {</div>
+<div class="line">         vel.vy = -100;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">if</span> (con.down) {</div>
+<div class="line">         vel.vy = 100;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> The code you just added checks the pressed input to update the velocity of the player accordingly. This is why you will sometimes need to keep a reference to the components you create.</p>
+<p>Run the game again and your player should be moving smoothly.</p>
+<p>The other way of writing such logic behaviour is to use the logic component. A logic component is just a function considered as a component, attached to an entity to tell it what to do, like we just did. It is run on each frame and acts as an update function.</p>
+<p>More infos on that in <a class="el" href="components_8hpp.html">components.hpp</a></p>
+<hr  />
+ <h3><a class="anchor" id="autotoc_md146"></a>
+4. Behind the Scenes</h3>
+<p>Here’s what happens internally:</p>
+<ul>
+<li>The <b>control system</b> detects pressed keys.</li>
+<li>Your code updates the velocity based on the controllable infos.</li>
+<li>The <b>movement system</b> reads the velocity and updates the position accordingly.</li>
+<li>The <b>render system</b> reads the drawable and position components to draw the sprite in the correct location.</li>
+</ul>
+<p>Each system only cares about the data it needs — that’s the power of ECS.</p>
+<hr  />
+ <h3><a class="anchor" id="autotoc_md148"></a>
+5. Next Steps</h3>
+<p>From here, you can extend your engine by adding:</p><ul>
+<li>A <b>hurtbox</b> component for collision and health management</li>
+<li>A <b>projectile</b> component for shooting</li>
+<li>A <b>logic</b> component to attach scripted behaviors</li>
+<li>A <b>network_id</b> component for multiplayer synchronization</li>
+</ul>
+<p>Example of adding health and hitbox: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> &amp;hurtbox = reg.add_component&lt;<a class="code hl_struct" href="structcomponent_1_1hurtbox__s.html">component::hurtbox</a>&gt;(player);</div>
+<div class="line">hurtbox.<a class="code hl_variable" href="structcomponent_1_1hurtbox__s.html#aba96c6a60940bf664b287bdb06901f0d">health</a> = 3;</div>
+<div class="line">hurtbox.<a class="code hl_variable" href="structcomponent_1_1hurtbox__s.html#a7731a2e82df13ecc8e0b444f83eebd07">width</a> = 32;</div>
+<div class="line">hurtbox.<a class="code hl_variable" href="structcomponent_1_1hurtbox__s.html#aefdfca717ae4f367dfff11ddb045c895">height</a> = 16;</div>
+<div class="ttc" id="astructcomponent_1_1hurtbox__s_html"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html">component::hurtbox_s</a></div><div class="ttdoc">The hurtbox component, defined by a size, health and a group (1 for the player, 2 for the enemies for...</div><div class="ttdef"><b>Definition</b> components.hpp:252</div></div>
+<div class="ttc" id="astructcomponent_1_1hurtbox__s_html_a7731a2e82df13ecc8e0b444f83eebd07"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html#a7731a2e82df13ecc8e0b444f83eebd07">component::hurtbox_s::width</a></div><div class="ttdeci">int width</div><div class="ttdoc">The width of the hurtbox.</div><div class="ttdef"><b>Definition</b> components.hpp:269</div></div>
+<div class="ttc" id="astructcomponent_1_1hurtbox__s_html_aba96c6a60940bf664b287bdb06901f0d"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html#aba96c6a60940bf664b287bdb06901f0d">component::hurtbox_s::health</a></div><div class="ttdeci">int health</div><div class="ttdoc">The health of the hurtbox. When it reaches 0, the entity is considered dead.</div><div class="ttdef"><b>Definition</b> components.hpp:257</div></div>
+<div class="ttc" id="astructcomponent_1_1hurtbox__s_html_aefdfca717ae4f367dfff11ddb045c895"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html#aefdfca717ae4f367dfff11ddb045c895">component::hurtbox_s::height</a></div><div class="ttdeci">int height</div><div class="ttdoc">The height of the hurtbox.</div><div class="ttdef"><b>Definition</b> components.hpp:274</div></div>
+</div><!-- fragment --><p>With these, you can start building enemies, bullets, pickups, and much more — all using the same simple ECS principles.</p>
+<hr  />
+<p> 🧩 <b>Summary</b></p><ul>
+<li>Entities are just IDs.</li>
+<li>Components store data.</li>
+<li>Systems apply logic to entities that have certain components.</li>
+</ul>
+<p>Using this engine, you can describe <em>anything</em> in your game world by just composing the right set of components. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

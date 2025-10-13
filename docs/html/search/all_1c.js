@@ -1,7 +1,7 @@
 var searchData=
 [
   ['règles_20d’équipe_0',['🔹 Règles d’équipe',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2development__workflow.html#autotoc_md133',1,'']]],
-  ['réponse_20serveur_1',['4.2 WELCOME (0x02) - Réponse serveur',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md150',1,'']]],
+  ['réponse_20serveur_1',['4.2 WELCOME (0x02) - Réponse serveur',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md165',1,'']]],
   ['r_20type_2',['R TYPE',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html',1,'Case Study Comparative : Selection of Libraries and Algorithms for R-TYPE'],['../index.html#infos_sub',1,'What is our R-TYPE']]],
   ['r_20type_20client_3',['R-TYPE Client',['../client_page.html',1,'']]],
   ['r_20type_20database_20documentation_4',['💾 R-Type Database Documentation',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2database.html',1,'']]],
@@ -15,8 +15,8 @@ var searchData=
   ['recupitem_20tt_12',['&lt;tt&gt;PickupItemResponse recupItem(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md13',1,'']]],
   ['recupmove_20tt_13',['&lt;tt&gt;MoveResponse recupMove(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md12',1,'']]],
   ['reg_14',['reg',['../classServer.html#a0d9a247b90088cc4093fa47dbc7b2b6f',1,'Server']]],
-  ['register_200x15_20—_20create_20account_15',['4.14 REGISTER (0x15) — Create Account',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md163',1,'']]],
-  ['register_200x16_20—_20create_20account_16',['4.15 REGISTER (0x16) — Create Account',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md164',1,'']]],
+  ['register_200x15_20—_20create_20account_15',['4.14 REGISTER (0x15) — Create Account',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md178',1,'']]],
+  ['register_200x16_20—_20create_20account_16',['4.15 REGISTER (0x16) — Create Account',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md179',1,'']]],
   ['register_5fall_5fsystems_17',['register_all_systems',['../classregistry.html#abb95393f9205c5615c365ffb249f49bb',1,'registry']]],
   ['register_5fcomponents_18',['register_components',['../classregistry.html#afe3919f4a56bbbeda89af4a6e5171f8b',1,'registry']]],
   ['registry_19',['registry',['../classregistry.html',1,'registry'],['../classregistry.html#a15c27c6d008fb260402f20d8619e43f7',1,'registry::registry(sf::RenderWindow &amp;window)'],['../classregistry.html#a757883d504ab1bb5a06e0faa8e28664d',1,'registry::registry()']]],
@@ -32,9 +32,9 @@ var searchData=
   ['resourcemanager_29',['ResourceManager',['../classResourceManager.html',1,'ResourceManager'],['../classResourceManager.html#a3b32babd2e81909bbd90d7f2d566fadb',1,'ResourceManager::ResourceManager()']]],
   ['resourcemanager_2ehpp_30',['ResourceManager.hpp',['../ResourceManager_8hpp.html',1,'']]],
   ['responsabilités_31',['Responsabilités',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md2',1,'Responsabilités'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md10',1,'Responsabilités']]],
-  ['response_32',['4.11 LAUNCH_SESSION (0x12) — Server Response',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md160',1,'']]],
-  ['response_200x06_20get_20commands_20available_33',['4.6 HELP RESPONSE (0x06) - Get commands available',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md154',1,'']]],
-  ['result_34',['Result',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md152',1,'4.4 AUTH_RESULT (0x04) - Authentication Result'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md156',1,'4.7 NAME (0x08) - Name result']]],
+  ['response_32',['4.11 LAUNCH_SESSION (0x12) — Server Response',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md175',1,'']]],
+  ['response_200x06_20get_20commands_20available_33',['4.6 HELP RESPONSE (0x06) - Get commands available',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md169',1,'']]],
+  ['result_34',['Result',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md167',1,'4.4 AUTH_RESULT (0x04) - Authentication Result'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md171',1,'4.7 NAME (0x08) - Name result']]],
   ['result_35',['result',['../classServer.html#a379417d6e9d241dc4e8d5792dc927e3d',1,'Server']]],
   ['review_36',['5. Intégration / Review',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2development__workflow.html#autotoc_md128',1,'']]],
   ['rfc_20rt001_3a_20r_20type_20protocol_20v2_201_37',['RFC-RT001: R-TYPE Protocol v2.1',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html',1,'']]],
@@ -45,5 +45,6 @@ var searchData=
   ['rt001_3a_20r_20type_20protocol_20v2_201_42',['RFC-RT001: R-TYPE Protocol v2.1',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html',1,'']]],
   ['run_5fsystems_43',['run_systems',['../classregistry.html#a957cd5c282db213979764cbe622ece89',1,'registry']]],
   ['runlevel_44',['runLevel',['../classClient.html#a101e55e53e7f9cc0433da705e66e1f08',1,'Client::runLevel()'],['../classServer.html#af56fa596fcd58a1ea62b5a059885f467',1,'Server::runLevel()']]],
-  ['runmenu_45',['runMenu',['../classClient.html#a1edfe2aa97fdb3d54c15afa0ef48496e',1,'Client']]]
+  ['runmenu_45',['runMenu',['../classClient.html#a1edfe2aa97fdb3d54c15afa0ef48496e',1,'Client']]],
+  ['running_20the_20game_20loop_46',['3. Running the Game Loop',['../engine.html#autotoc_md144',1,'']]]
 ];

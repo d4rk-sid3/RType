@@ -74,14 +74,14 @@ $(function() {
   <div class="headertitle"><div class="title">RFC-RT001: R-TYPE Protocol v2.1</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md135"></a> <b>Status</b>: Standard <br  />
+<div class="textblock"><p><a class="anchor" id="autotoc_md150"></a> <b>Status</b>: Standard <br  />
  <b>Date</b>: 2025-09-23 <br  />
  <b>Authors</b>: Akandé Philippe, Aïmane Alassane <br  />
  <b>Category</b>: Network Protocol</p>
-<h1><a class="anchor" id="autotoc_md136"></a>
+<h1><a class="anchor" id="autotoc_md151"></a>
 Abstract</h1>
 <p>This document specifies the network communication protocol for R-Type, a a horizontally scrolling shooter arcade video game. The protocole use TCP for reliability and UDP for real time data transmission, with a binary serialization system.</p>
-<h1><a class="anchor" id="autotoc_md137"></a>
+<h1><a class="anchor" id="autotoc_md152"></a>
 Table of contents</h1>
 <ol type="1">
 <li>Introduction</li>
@@ -94,16 +94,16 @@ Table of contents</h1>
 <li>Security</li>
 <li>Versioning</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md138"></a>
+<h1><a class="anchor" id="autotoc_md153"></a>
 1. Introduction</h1>
-<h2><a class="anchor" id="autotoc_md139"></a>
+<h2><a class="anchor" id="autotoc_md154"></a>
 1.1. Objectives</h2>
 <p>R-Type protocol enables communication between a central server and multiple clients to synchronize the player's state, objects and environments.</p>
-<h2><a class="anchor" id="autotoc_md140"></a>
+<h2><a class="anchor" id="autotoc_md155"></a>
 1.2. Convention</h2>
 <p>The keywords "MUST", "SHOULD", "MAY" in this document are interpreted according to RFC 2119.</p>
 <hr  />
- <h1><a class="anchor" id="autotoc_md142"></a>
+ <h1><a class="anchor" id="autotoc_md157"></a>
 2. General architecture</h1>
 <p>The protocol uses a hybrid approach:</p>
 <ul>
@@ -111,7 +111,7 @@ Table of contents</h1>
 <li><b>UDP (Port 7891)</b>: Real-time position updates, quantum physics</li>
 <li><b>WebSocket (Port 7892)</b>: Web client support (optional)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md143"></a>
+<h2><a class="anchor" id="autotoc_md158"></a>
 2.2 Modèle de communication</h2>
 <div class="fragment"><div class="line">Client                          Server</div>
 <div class="line">  |                               |</div>
@@ -126,7 +126,7 @@ Table of contents</h1>
 <div class="line">  |&lt;== Game State Updates ======&gt;| (UDP Stream)</div>
 <div class="line">  |-- Game on Actions -----------&gt;|</div>
 <div class="line">  |&lt;-- Action Results ------------|</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md144"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md159"></a>
 2.3 Sessions et états</h2>
 <p>Each client hold a <b>session</b> identified by an UUID 128-bits. The possible state are :</p>
 <ul>
@@ -138,9 +138,9 @@ Table of contents</h1>
 <li><code>SPECTATING</code>: Observing a game</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md146"></a>
+<h1><a class="anchor" id="autotoc_md161"></a>
 3. Message Format</h1>
-<h2><a class="anchor" id="autotoc_md147"></a>
+<h2><a class="anchor" id="autotoc_md162"></a>
 3.1 General Structure (TCP)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -168,9 +168,9 @@ Table of contents</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">ERROR   </td><td class="markdownTableBodyNone">0x0F   </td><td class="markdownTableBodyNone">Message d'erreur   </td><td class="markdownTableBodyNone">S → C   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md148"></a>
+<h1><a class="anchor" id="autotoc_md163"></a>
 4. Commandes du protocole</h1>
-<h2><a class="anchor" id="autotoc_md149"></a>
+<h2><a class="anchor" id="autotoc_md164"></a>
 4.1 HELLO (0x01) - Connexion initiale</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <br  />
  <b>Payload</b> :</p>
@@ -179,7 +179,7 @@ Table of contents</h1>
 <div class="line">    int16_t  mode;            <span class="comment">// 0=Normal, 1=Debug</span></div>
 <div class="line">    <span class="keywordtype">char</span>     client_name[32];      <span class="comment">// Nom du client (null-terminated)</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md150"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md165"></a>
 4.2 WELCOME (0x02) - Réponse serveur</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <br  />
  <b>Payload</b> :</p>
@@ -189,7 +189,7 @@ Table of contents</h1>
 <div class="line">    int16_t  max_sessions;         <span class="comment">// Nombre max de sessions</span></div>
 <div class="line">    <span class="keywordtype">char</span>      server_name[64];     <span class="comment">// Nom du serveur</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md151"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md166"></a>
 4.3 AUTH (0x03) - Authentification</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <br  />
  <b>Payload</b> :</p>
@@ -205,7 +205,7 @@ Table of contents</h1>
 <li><code>1</code> (UserPass) : Username + mot de passe SHA256</li>
 <li><code>2</code> (Token) : Token JWT ou OAuth2 Dans le cas où le client est déconnecté en pleine partie (crash du serveur/autre), il peut tout simplement fournir son token de session pour qu'on lui restaure sa partie si son token est toujours valide</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md152"></a>
+<h2><a class="anchor" id="autotoc_md167"></a>
 4.4 AUTH_RESULT (0x04) - Authentication Result</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>AuthResultPayload {</div>
@@ -216,13 +216,13 @@ Table of contents</h1>
 <div class="line">    <span class="keywordtype">char</span>     welcome_msg[64];   <span class="comment">// Optional message (&quot;Welcome player!&quot;, &quot;Auth failed&quot;, etc.)</span></div>
 <div class="line">};</div>
 </div><!-- fragment --><p> uint128_t : UUID</p>
-<h2><a class="anchor" id="autotoc_md153"></a>
+<h2><a class="anchor" id="autotoc_md168"></a>
 4.5 HELP COMMAND (0x05) - Get commands available</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>HelpRequest {</div>
 <div class="line">    int16_t type = 0x05;   <span class="comment">// HELP command</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md154"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md169"></a>
 4.6 HELP RESPONSE (0x06) - Get commands available</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>HelpResponse {</div>
@@ -240,7 +240,7 @@ Table of contents</h1>
 <li>PROFILE [username]</li>
 <li>LIST_USERS</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md155"></a>
+<h2><a class="anchor" id="autotoc_md170"></a>
 4.7 NAME (0x07) - Change username</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>NameRequest {</div>
@@ -248,14 +248,14 @@ Table of contents</h1>
 <div class="line">    <span class="keywordtype">char</span> auth_token[64];        <span class="comment">// Authentication token</span></div>
 <div class="line">    <span class="keywordtype">char</span> new_name[32];          <span class="comment">// Desired new username</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md156"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md171"></a>
 4.7 NAME (0x08) - Name result</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>NameResponse {</div>
 <div class="line">    int16_t type;               <span class="comment">// 0x08</span></div>
 <div class="line">    int16_t status_code;        <span class="comment">// 0=Success, 1=Invalid auth_token, 2=Name Taken</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md157"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md172"></a>
 4.8 CREATE_SESSION (0x09) — Create a Game Session</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>CreateSessionRequest {</div>
@@ -263,7 +263,7 @@ Table of contents</h1>
 <div class="line">    <span class="keywordtype">char</span> auth_token[64];        <span class="comment">// Auth token</span></div>
 <div class="line">    <span class="keywordtype">char</span> session_name[32];      <span class="comment">// Optional session name</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md158"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md173"></a>
 4.9 SESSION_RESPONSE (0x10) — Game Session</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>CreateSessionResponse {</div>
@@ -272,7 +272,7 @@ Table of contents</h1>
 <div class="line">    uint32_t session_id;        <span class="comment">// Unique ID assigned to the session (for creator only)</span></div>
 <div class="line">    <span class="keywordtype">char</span> join_code[8];          <span class="comment">// Code to share with other players</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md159"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md174"></a>
 4.10 LAUNCH_SESSION (0x11) — Launch a Game Session</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>LaunchSessionRequest {</div>
@@ -280,14 +280,14 @@ Table of contents</h1>
 <div class="line">    <span class="keywordtype">char</span> auth_token[64];        <span class="comment">// Auth token of session creator</span></div>
 <div class="line">    uint32_t session_id;        <span class="comment">// ID of the session (creator only)</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md160"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md175"></a>
 4.11 LAUNCH_SESSION (0x12) — Server Response</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>LaunchSessionResponse {</div>
 <div class="line">    int16_t type;               <span class="comment">// 0x12</span></div>
 <div class="line">    int16_t status_code;        <span class="comment">// 0=Success, 1=Invalid auth_token, 2=Not session owner, 3=Not enough players</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md161"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md176"></a>
 4.12 JOIN_SESSION (0x13) — Join an Existing Session</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>JoinSessionRequest {</div>
@@ -295,7 +295,7 @@ Table of contents</h1>
 <div class="line">    <span class="keywordtype">char</span> auth_token[64];        <span class="comment">// Auth token</span></div>
 <div class="line">    <span class="keywordtype">char</span> join_code[8];          <span class="comment">// Code provided by session creator</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md162"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md177"></a>
 4.13 JOIN_SESSION (0x14) — Join an Existing Session</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>JoinSessionResponse {</div>
@@ -303,7 +303,7 @@ Table of contents</h1>
 <div class="line">    int16_t status_code;        <span class="comment">// 0=Success, 1=Invalid auth_token, 2=Invalid join_code, 3=Session Full</span></div>
 <div class="line">    uint32_t session_id;        <span class="comment">// Assigned session ID for the client</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md163"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md178"></a>
 4.14 REGISTER (0x15) — Create Account</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>RegisterRequest {</div>
@@ -311,7 +311,7 @@ Table of contents</h1>
 <div class="line">    <span class="keywordtype">char</span> username[32];</div>
 <div class="line">    <span class="keywordtype">char</span> password_hash[64];     <span class="comment">// SHA256 hashed password</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md164"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md179"></a>
 4.15 REGISTER (0x16) — Create Account</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>RegisterResponse {</div>
@@ -319,28 +319,28 @@ Table of contents</h1>
 <div class="line">    int16_t status_code;        <span class="comment">// 0=Success, 1=Username Taken, 2=Invalid Data</span></div>
 <div class="line">    <span class="keywordtype">char</span> auth_token[64];        <span class="comment">// Provided for immediate use</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md165"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md180"></a>
 4.16 DISCONNECT (0x17) — Disconnect</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>DisconnectRequest {</div>
 <div class="line">    int16_t type;               <span class="comment">// 0x17</span></div>
 <div class="line">    <span class="keywordtype">char</span> auth_token[64];</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md166"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md181"></a>
 4.17 DISCONNECT (0x18) — Disconnect</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>DisconnectResponse {</div>
 <div class="line">    int16_t type;               <span class="comment">// 0x18</span></div>
 <div class="line">    int16_t status_code;        <span class="comment">// 0=Success, 1=Invalid auth_token</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md167"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md182"></a>
 4.18 PROFILE (0x19) — Check Profile</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>ProfileRequest {</div>
 <div class="line">    int16_t type;               <span class="comment">// 0x19</span></div>
 <div class="line">    <span class="keywordtype">char</span> auth_token[64];</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md168"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md183"></a>
 4.19 PROFILE (0x20) — Check Profile</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>ProfileResponse {</div>
@@ -351,14 +351,14 @@ Table of contents</h1>
 <div class="line">    uint32_t games_played;</div>
 <div class="line">    uint32_t games_won;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md169"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md184"></a>
 4.20 LIST_USERS (0x21) — List Active Users</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>ListUsersRequest {</div>
 <div class="line">    int16_t type;               <span class="comment">// 0x21</span></div>
 <div class="line">    <span class="keywordtype">char</span> auth_token[64];</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md170"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md185"></a>
 4.21 LIST_USERS (0x22) — List Active Users</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>ListUsersResponse {</div>
@@ -366,14 +366,14 @@ Table of contents</h1>
 <div class="line">    uint32_t user_count;</div>
 <div class="line">    <span class="keywordtype">char</span> usernames[32][32];     <span class="comment">// Max 32 users</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md171"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md186"></a>
 4.22 PLAYER_MOVE (0x23) — Indicate that the player moves</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>MoveRequest {</div>
 <div class="line">    int16_t type;               <span class="comment">// 0x23</span></div>
 <div class="line">    <span class="keyword">enum</span> direction (UP|DOWN|LEFT|RIGHT);</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md172"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md187"></a>
 4.23 PLAYER_MOVE (0x24) — Indicate that the player moves --&gt; Broadcast to all team members</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>MoveResponse {</div>
@@ -384,13 +384,13 @@ Table of contents</h1>
 <div class="line">    <span class="keywordtype">float</span> speed;</div>
 <div class="line">    time timestamp;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md173"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md188"></a>
 4.24 PLAYER_SHOOT (0x25) — Indicate that the player shoots</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>ShootRequest {</div>
 <div class="line">    int16_t type;               <span class="comment">// 0x25</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md174"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md189"></a>
 4.25 PLAYER_SHOOT (0x26) — Indicate that the player shoots --&gt; Broadcast to all team members</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>ShootResponse {</div>
@@ -401,7 +401,7 @@ Table of contents</h1>
 <div class="line">    <span class="keywordtype">float</span> bullet_speed;</div>
 <div class="line">    <span class="keyword">enum</span> bullet_type;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md175"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md190"></a>
 4.26 PICKUP_ITEM (0x27) — Indicate that the player took an item --&gt; Broadcast to all team members</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>PickupItemResponse {</div>
@@ -411,7 +411,7 @@ Table of contents</h1>
 <div class="line">    Vector2D item_position;</div>
 <div class="line">    time timestamp;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md176"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md191"></a>
 4.27 PLAYER_STATE (0x28) — Player state --&gt; Broadcast to all team members</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>PlayerStateResponse {</div>
@@ -422,7 +422,7 @@ Table of contents</h1>
 <div class="line">    <span class="keywordtype">int</span> current_level;</div>
 <div class="line">    <span class="keyword">enum</span> state (DEATH|ALIVE);</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md177"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md192"></a>
 4.28 PLAYER_STATE (0x29) — Player state --&gt; Broadcast to all team members</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>PlayerStateResponse {</div>
@@ -434,7 +434,7 @@ Table of contents</h1>
 <div class="line">    <span class="keyword">enum</span> state (DEATH|ALIVE);</div>
 <div class="line">    <span class="keyword">enum</span> state2 (PAUSE|IN_GAME);</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md178"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md193"></a>
 4.29 BEAT_BOSS (0x30) — Indicate if the player beats the level boss --&gt; Broadcast to all team members</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>BeatBossResponse {</div>
@@ -445,7 +445,7 @@ Table of contents</h1>
 <div class="line">    time timestamp;</div>
 <div class="line">    <span class="keyword">enum</span> state WON;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md179"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md194"></a>
 4.30 CHECKPOINT (0x31) — Indicate if the player passes a level checkpoint --&gt; Broadcast to all team members</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>CheckpointResponse {</div>
@@ -455,7 +455,7 @@ Table of contents</h1>
 <div class="line">    Vector2D player_position;</div>
 <div class="line">    time timestamp;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md180"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md195"></a>
 4.31 GAME_STARTED (0x32) — Indicate to all client the game started --&gt; Broadcast to all team members</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>GameStartedResponse {</div>
@@ -465,13 +465,13 @@ Table of contents</h1>
 <div class="line">    Vector2D player_position;</div>
 <div class="line">    time timestamp;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md181"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md196"></a>
 4.32 GAME_PAUSED (0x33) — Indicate to server the game is paused</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>GamePausedRequest {</div>
 <div class="line">    int16_t type;               <span class="comment">// 0x33</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md182"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md197"></a>
 4.33 GAME_PAUSED (0x34) — Indicate to all clients the game is paused --&gt; Broadcast to all clients</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>GamePausedResponse {</div>
@@ -479,14 +479,14 @@ Table of contents</h1>
 <div class="line">    time timestamp;</div>
 <div class="line">    <span class="keyword">enum</span> current_state(PAUSED|RESUMED)</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md183"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md198"></a>
 4.34 GAME_STATE (0x35) — Indicate to all team members disconnected clients</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>GameStateResponse {</div>
 <div class="line">    uint8_t type;               <span class="comment">// 0x35</span></div>
 <div class="line">    std::vector &lt;int&gt; ids;      <span class="comment">// disconnected clients ID&#39;s</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md184"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md199"></a>
 4.35 ENEMY_SPAWNED (0x36) — Indicate to all team members that an enemy spawned</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>EnemySpawnedResponse {</div>
@@ -497,7 +497,7 @@ Table of contents</h1>
 <div class="line">    Vector2D direction;</div>
 <div class="line">    time timestamp;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md185"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md200"></a>
 4.36 ENEMY_MOVED (0x37) — Indicate to all team members that an enemy moved</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>EnemyMovedResponse {</div>
@@ -508,7 +508,7 @@ Table of contents</h1>
 <div class="line">    Vector2D direction;</div>
 <div class="line">    time timestamp;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md186"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md201"></a>
 4.37 ENEMY_MOVED (0x38) — Indicate to all team members that an enemy fired</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>EnemyFiredResponse {</div>
@@ -519,7 +519,7 @@ Table of contents</h1>
 <div class="line">    Vector2D direction;</div>
 <div class="line">    time timestamp;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md187"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md202"></a>
 4.38 ENEMY_DIED (0x39) — Indicate to all team members that an enemy died</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>EnemyDiedResponse {</div>
@@ -529,7 +529,7 @@ Table of contents</h1>
 <div class="line">    Vector2D position;</div>
 <div class="line">    time timestamp;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md188"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md203"></a>
 4.39 COllision (0x40) — Indicate to all team members that an collision happens</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>CollisionResponse {</div>

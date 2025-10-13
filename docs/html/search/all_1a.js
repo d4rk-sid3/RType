@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['objectives_0',['1.1. Objectives',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md139',1,'']]],
+  ['objectives_0',['1.1. Objectives',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md154',1,'']]],
   ['of_20contents_1',['Table of Contents',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md21',1,'']]],
-  ['of_20contents_2',['Table of contents',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md137',1,'']]],
+  ['of_20contents_2',['Table of contents',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md152',1,'']]],
   ['of_20google_20test_3',['9.2 Advantages of Google Test',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md86',1,'']]],
   ['of_20libraries_20and_20algorithms_20for_20r_20type_4',['Case Study Comparative : Selection of Libraries and Algorithms for R-TYPE',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html',1,'']]],
   ['of_20the_20project_5',['Parts of the project',['../index.html#parts_sub',1,'']]],
