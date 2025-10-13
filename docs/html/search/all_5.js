@@ -9,6 +9,5 @@ var searchData=
   ['entity_5fid_6',['entity_id',['../structentity__info__s.html#a353e31671fbeae1e8f621c7f4b8e9e44',1,'entity_info_s']]],
   ['entity_5finfo_5fs_7',['entity_info_s',['../structentity__info__s.html',1,'']]],
   ['entity_5finfo_5ft_8',['entity_info_t',['../client_8hpp.html#a3e20dfd8260e2313e3f25e0b2152d78c',1,'entity_info_t:&#160;client.hpp'],['../server_8hpp.html#a3e20dfd8260e2313e3f25e0b2152d78c',1,'entity_info_t:&#160;server.hpp']]],
-  ['exceptions_2ehpp_9',['exceptions.hpp',['../exceptions_8hpp.html',1,'']]],
-  ['exemple_20d’utilisation_10',['Exemple d’utilisation',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md7',1,'Exemple d’utilisation'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md17',1,'Exemple d’utilisation']]]
+  ['exceptions_2ehpp_9',['exceptions.hpp',['../exceptions_8hpp.html',1,'']]]
 ];

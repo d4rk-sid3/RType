@@ -2,7 +2,7 @@ var searchData=
 [
   ['sendplayeraction_0',['sendPlayerAction',['../classClient.html#ae075a5f69a51c05b60cc8469c2308bd6',1,'Client']]],
   ['sendplayerinput_1',['sendPlayerInput',['../classClient.html#a9d0aec2907f33777ece928a1a0dee25e',1,'Client']]],
-  ['server_2',['Server',['../classServer.html',1,'Server'],['../classServer.html#afc422f4323d93d0d986198d8e3967bb2',1,'Server::Server()'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html',1,'Server']]],
+  ['server_2',['Server',['../md__2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html',1,'(Global Namespace)'],['../classServer.html#afc422f4323d93d0d986198d8e3967bb2',1,'Server::Server()'],['../classServer.html',1,'Server']]],
   ['server_2ehpp_3',['server.hpp',['../server_8hpp.html',1,'']]],
   ['server_2emd_4',['Server.md',['../Server_8md.html',1,'']]],
   ['setfontfromname_5',['setFontFromName',['../structcomponent_1_1text__s.html#a19afaebcafa561f6cf076139f54775b2',1,'component::text_s']]],
@@ -17,7 +17,6 @@ var searchData=
   ['start_5ftext_14',['start_text',['../structmenu__info__s.html#adcba8e6f82edd2665cdab0b48e8d22d4',1,'menu_info_s']]],
   ['state_15',['state',['../classClient.html#a3a70c6088987795c92e25d7ee2e99af5',1,'Client']]],
   ['state_5ft_16',['state_t',['../client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248',1,'client.hpp']]],
-  ['std_3a_3astring_20address_20tt_17',['&lt;tt&gt;Client(int p, std::string address)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md4',1,'']]],
-  ['systems_2ecpp_18',['systems.cpp',['../systems_8cpp.html',1,'']]],
-  ['systems_2ehpp_19',['systems.hpp',['../systems_8hpp.html',1,'']]]
+  ['systems_2ecpp_17',['systems.cpp',['../systems_8cpp.html',1,'']]],
+  ['systems_2ehpp_18',['systems.hpp',['../systems_8hpp.html',1,'']]]
 ];
