@@ -314,9 +314,14 @@ class User {
         void setNbGamesPlayed(const int games_played) { _stats.setNbGamesPlayed(games_played);}
         void setNbGamesWon(const int games_won) { _stats.setNbGamesWon(games_won); }
         const std::string getClientHash() { return _client_hash; }
-        const std::shared_ptr<IToken> getAuthToken() { return _auth_token; }
-        const std::shared_ptr<IToken> getSessionToken() { return _session_token; }
-        const std::string& getAuthTokenHex() const { return _auth_token->getHex(); }
+        const std::weak_ptr<IToken> getAuthToken() { return _auth_token; }
+        const std::weak_ptr<IToken> getSessionToken() { return _session_token; }
+        const std::string& getAuthTokenHex() const {
+            if (auto token = _auth_token.lock())
+                return token->getHex();
+            else
+                return "";
+        };
         const std::string& getUsername() const { return _username; }
         const std::string& getPasswordHash() const { return _password_hash; }
         size_t getId() const { return _id; }
@@ -350,8 +355,20 @@ class User {
             sqlite3_bind_int(stmt, 1, static_cast<int>(_id));
             sqlite3_bind_text(stmt, 2, _username.c_str(), -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(stmt, 3, _password_hash.c_str(), -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(stmt, 4, _auth_token ? _auth_token->getHex().c_str() : "", -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(stmt, 5, _session_token ? _session_token->getHex().c_str() : "", -1, SQLITE_TRANSIENT);
+            std::string authHex;
+            if (auto auth = _auth_token.lock()) {
+                authHex = auth->getHex();
+            } else {
+                authHex = "";
+            }
+            sqlite3_bind_text(stmt, 4, authHex.c_str(), -1, SQLITE_TRANSIENT);
+            std::string sessionHex;
+            if (auto session = _session_token.lock()) {
+                sessionHex = session->getHex();
+            } else {
+                sessionHex = "";
+            }
+            sqlite3_bind_text(stmt, 5, sessionHex.c_str(), -1, SQLITE_TRANSIENT);
             sqlite3_bind_int64(stmt, 6, static_cast<sqlite3_int64>(_last_login_at));
             sqlite3_bind_text(stmt, 7, _client_hash.c_str(), -1, SQLITE_TRANSIENT);
             sqlite3_bind_int(stmt, 8, nb_games_played);
@@ -368,8 +385,8 @@ class User {
         size_t _id = 0;
         std::string _username;
         std::string _password_hash;
-        std::shared_ptr<IToken> _auth_token;
-        std::shared_ptr<IToken> _session_token;
+        std::weak_ptr<IToken> _auth_token;
+        std::weak_ptr<IToken> _session_token;
         std::time_t _last_login_at = 0;
         std::string _client_hash = "";
         UserStats _stats;
@@ -455,8 +472,8 @@ class UserManager {
         {
             User* u = getUserRef(id);
             if (!u)
-                throw std::runtime_error("user not found");        
-            if (u->getAuthToken() && !u->getAuthTokenHex().empty()) {
+                throw std::runtime_error("user not found");      
+            if (u->getAuthToken().lock() && !u->getAuthTokenHex().empty()) {
                 _auth_index.erase(u->getAuthTokenHex());
             }
             u->setAuthToken(token);  
