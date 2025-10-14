@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['8_201_20library_20choice_3a_20libconfig_0',['8.1 Library Choice: libconfig++',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md77',1,'']]],
-  ['8_202_20integration_20and_20workflow_20benefits_1',['8.2 Integration and Workflow Benefits',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md80',1,'']]],
-  ['8_203_20summary_2',['8.3 Summary',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md82',1,'']]],
-  ['8_20configuration_20management_3',['8. Configuration Management',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md76',1,'']]],
-  ['8_20create_5fsession_200x09_20—_20create_20a_20game_20session_4',['4.8 CREATE_SESSION (0x09) — Create a Game Session',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md172',1,'']]]
+  ['hard_0',['HARD',['../server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f',1,'server.hpp']]],
+  ['health_1',['health',['../structcomponent_1_1hurtbox__s.html#aba96c6a60940bf664b287bdb06901f0d',1,'component::hurtbox_s']]],
+  ['height_2',['height',['../structcomponent_1_1hurtbox__s.html#aefdfca717ae4f367dfff11ddb045c895',1,'component::hurtbox_s::height'],['../structcomponent_1_1hitbox__s.html#a3c8ca6e680cd44c45e76dfc561fd54f6',1,'component::hitbox_s::height']]],
+  ['hitbox_3',['hitbox',['../namespacecomponent.html#a0ae561e88973b1d50eb3048035956866',1,'component']]],
+  ['hitbox_5fs_4',['hitbox_s',['../structcomponent_1_1hitbox__s.html',1,'component']]],
+  ['hurt_5',['hurt',['../structcomponent_1_1hurtbox__s.html#a2c6fe8d0fd1d64fcc76e6af210480fa3',1,'component::hurtbox_s']]],
+  ['hurtbox_6',['hurtbox',['../namespacecomponent.html#a00cb098de199eed73e38d77f78adaed1',1,'component']]],
+  ['hurtbox_5fs_7',['hurtbox_s',['../structcomponent_1_1hurtbox__s.html',1,'component']]]
 ];

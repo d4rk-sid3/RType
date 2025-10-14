@@ -17,18 +17,26 @@ std::map<std::string, EnemyType> type_map = {
 };
 
 NetworkManager::NetworkManager(
-    int port, std::string address, std::vector<int8_t>& lastmsg_,
+    int port,
+    std::string address,
+    std::vector<int8_t>& lastmsg_,
     std::mutex& mtx_
 )
     : socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 0)),
-      server_endpoint_(
-          asio::ip::udp::endpoint(asio::ip::make_address(address), port)
-      ),
-      isrunning(true), lastmsg(lastmsg_), mtx(mtx_),
-      clients_lastmsg(tmp_clients) {
-    std::cout << "Client lancé " << std::endl;
-
-    receive_from_server();
+      isrunning(true),
+      lastmsg(lastmsg_),
+      mtx(mtx_),
+      clients_lastmsg(tmp_clients)
+{
+    try {
+        auto ip = asio::ip::make_address(address);
+        server_endpoint_ = asio::ip::udp::endpoint(ip, port);
+        std::cout << "Client lancé " << std::endl;
+        receive_from_server();
+    } catch (const std::exception &e) {
+        std::cerr << "Invalid ip address" << std::endl;
+        exit(84);
+    }
 }
 
 NetworkManager::NetworkManager(

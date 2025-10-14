@@ -12,14 +12,14 @@ The engine is contained in the registry class. It stores the components, the ent
 
 The project uses various components, from simple position components to logic components (equivalent to scripts). You can see their details in \doxylink{components_8hpp}{components.\+hpp}
 
-It also uses pretty straightforward systems to update these components, as you can see in \doxylink{systems_8hpp}{systems.\+hpp}\hypertarget{engine_autotoc_md135}{}\doxysubsection{\texorpdfstring{}{}}\label{engine_autotoc_md135}
+It also uses pretty straightforward systems to update these components, as you can see in \doxylink{systems_8hpp}{systems.\+hpp}\hypertarget{engine_autotoc_md18}{}\doxysubsection{\texorpdfstring{@section engine\+\_\+tutorial Step-\/by-\/step Tutorial}{@section engine\_tutorial Step-by-step Tutorial}}\label{engine_autotoc_md18}
 Let\textquotesingle{}s create a simple program that\+:
 \begin{DoxyItemize}
 \item Opens a window
 \item Spawns a player entity
 \item Displays its sprite
 \item Lets us move it using the keyboard
-\end{DoxyItemize}\hypertarget{engine_autotoc_md136}{}\doxysubsubsection{\texorpdfstring{1. Initialize the Engine}{1. Initialize the Engine}}\label{engine_autotoc_md136}
+\end{DoxyItemize}\hypertarget{engine_autotoc_md19}{}\doxysubsubsection{\texorpdfstring{1. Initialize the Engine}{1. Initialize the Engine}}\label{engine_autotoc_md19}
 Include the required headers\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{registry_8hpp}{registry.hpp}}"{}}}
@@ -48,7 +48,7 @@ Then create a registry instance and a rendering window (for example using SFML)\
 You just created an entity — a simple ID that will hold various components. Now let\textquotesingle{}s attach these components one by one to make it an actual {\bfseries{player}}.
 
 \DoxyHorRuler{0}
- \hypertarget{engine_autotoc_md138}{}\doxysubsubsection{\texorpdfstring{2. Add the Components}{2. Add the Components}}\label{engine_autotoc_md138}
+ \hypertarget{engine_autotoc_md21}{}\doxysubsubsection{\texorpdfstring{2. Add the Components}{2. Add the Components}}\label{engine_autotoc_md21}
 First, let\textquotesingle{}s add a {\bfseries{position}} component, which determines where the player is on screen.
 
 
@@ -101,7 +101,7 @@ Finally, let\textquotesingle{}s give the entity a {\bfseries{drawable}} componen
 \end{DoxyCode}
 
 
-The {\ttfamily set\+Texture\+From\+Name("{}player1"{})} is a custom helper that loads a texture previously registered in your asset manager. To register a texture in the resource manager, see \doxylink{ResourceManager_8hpp}{Resource\+Manager.\+hpp}. {\ttfamily Resource\+Manager\+::instance().load("{}path/to/your/texture.\+png"{}, TEXTURE)} does just that
+The {\ttfamily set\+Texture\+From\+Name(\"{}player1\"{})} is a custom helper that loads a texture previously registered in your asset manager. To register a texture in the resource manager, see \doxylink{ResourceManager_8hpp}{Resource\+Manager.\+hpp}. {\ttfamily Resource\+Manager\+::instance().load(\"{}path/to/your/texture.\+png\"{}, TEXTURE)} does just that
 
 \DoxyHorRuler{0}
 
@@ -120,7 +120,7 @@ After these steps, you have a complete entity\+:
 
 
 \DoxyHorRuler{0}
-\hypertarget{engine_autotoc_md144}{}\doxysubsubsection{\texorpdfstring{3. Running the Game Loop}{3. Running the Game Loop}}\label{engine_autotoc_md144}
+\hypertarget{engine_autotoc_md27}{}\doxysubsubsection{\texorpdfstring{3. Running the Game Loop}{3. Running the Game Loop}}\label{engine_autotoc_md27}
 Now we can add the main loop, which updates all the systems every frame. The registry automatically keeps track of all systems related to the components you added (movement, control, draw, etc.).
 
 
@@ -186,7 +186,7 @@ The other way of writing such logic behaviour is to use the logic component. A l
 More infos on that in \doxylink{components_8hpp}{components.\+hpp}
 
 \DoxyHorRuler{0}
- \hypertarget{engine_autotoc_md146}{}\doxysubsubsection{\texorpdfstring{4. Behind the Scenes}{4. Behind the Scenes}}\label{engine_autotoc_md146}
+ \hypertarget{engine_autotoc_md29}{}\doxysubsubsection{\texorpdfstring{4. Behind the Scenes}{4. Behind the Scenes}}\label{engine_autotoc_md29}
 Here’s what happens internally\+:
 
 
@@ -200,7 +200,7 @@ Here’s what happens internally\+:
 Each system only cares about the data it needs — that’s the power of ECS.
 
 \DoxyHorRuler{0}
- \hypertarget{engine_autotoc_md148}{}\doxysubsubsection{\texorpdfstring{5. Next Steps}{5. Next Steps}}\label{engine_autotoc_md148}
+ \hypertarget{engine_autotoc_md31}{}\doxysubsubsection{\texorpdfstring{5. Next Steps}{5. Next Steps}}\label{engine_autotoc_md31}
 From here, you can extend your engine by adding\+:
 \begin{DoxyItemize}
 \item A {\bfseries{hurtbox}} component for collision and health management
