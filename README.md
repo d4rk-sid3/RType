@@ -101,25 +101,43 @@ After building (see below), simply run:
 ### **Build the program** 
 
 On Linux : - You may execute the following commands :
+You have to install (libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev)
 ```bash
+    git clone https://github.com/microsoft/vcpkg.git
+    cd vcpkg
+    git fetch --all
+    git pull
+    export VCPKG_ROOT=/road/to/vcpkg
+    sudo apt-get install autoconf automake libtool
+    cd road/to/rtype/repo
     mkdir build
     cd build
     cmake ..
     make
+    cd ..
+    "./r-type_server"
+    "./r-type_client"
+    "./r-type_room"
+    "./r-type_admin_panel"
 ```
 
 On Windows : - You may execute the following commands :
 ```bash
+    git clone https://github.com/microsoft/vcpkg.git
+    C:\vcpkg
+    bootstrap-vcpkg.bat
+    setx PATH "$env:PATH;C:\vcpkg"
+    .\vcpkg integrate install
+    set VCPKG_ROOT=C:\vcpkg
+    cd to-rtype-repo
     mkdir build
     cd build
-    vcpkg install .. --build=missing  -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
-    cd ..
-    cmake -B ./build -DCMAKE_BUILD_TYPE=Release
-    cmake --build ./build
-    copy ".\Debug\r-type_server.exe" .
-    copy ".\Debug\r-type_client.exe" .
-    copy ".\Debug\r-type_room.exe" .
-    copy ".\Debug\r-type_admin_panel.exe" .
+    cmake .. -G "Visual Studio 17 2022" -A x64
+    cmake --build . --coonfig Release
+    copy ".\Release\r-type_server.exe" .
+    copy ".\Release\r-type_client.exe" .
+    copy ".\Release\r-type_room.exe" .
+    copy ".\Release\r-type_admin_panel.exe" .
 ```
 
 ### **Testing program** 
