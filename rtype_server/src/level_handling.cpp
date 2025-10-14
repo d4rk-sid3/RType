@@ -52,32 +52,21 @@ void Server::logGameEntities()
     counter = 0;
     result.clear();
 
-    std::vector<std::optional<component::position>> pos;
-    std::vector<std::optional<component::name>> name_;
-    std::vector<std::optional<component::unique_id>> uid;
-    size_t entity_num;
-
-
-    pos = reg.get_components<component::position>();
-    name_ = reg.get_components<component::name>();
-    uid = reg.get_components<component::unique_id>();
-    entity_num = reg.getEntityNum();
-
-    for (size_t i = 0; i < entity_num; i++) {
+    for (size_t i = 0; i < reg.getEntityNum(); i++) {
         try {
-            position pos_elem = pos[entity(i)].value();
-            name name_elem = name_[entity(i)].value();
-            EnemyType type = type_map[name_elem._name];
-            unique_id uid_elem = uid[entity(i)].value();
+            position &pos = reg.get_components<component::position>()[entity(i)].value();
+            name &name_ = reg.get_components<component::name>()[entity(i)].value();
+            EnemyType type = type_map[name_._name];
+            unique_id &uid = reg.get_components<component::unique_id>()[entity(i)].value();
 
             // Ignore special entities
-            if (std::find(special_entities.begin(), special_entities.end(), name_elem._name) != special_entities.end()) {
+            if (std::find(special_entities.begin(), special_entities.end(), name_._name) != special_entities.end()) {
                 continue;
             }
 
             // Clean up out of screen entities
-            if (pos_elem.x < -200 || pos_elem.x > 1000) {
-                if (name_elem._name != "ceiling" && name_elem._name != "floor") {
+            if (pos.x < -200 || pos.x > 1000) {
+                if (name_._name != "ceiling" && name_._name != "floor") {
                     reg.kill_entity(entity(i));
                     continue;
                 }
@@ -85,13 +74,13 @@ void Server::logGameEntities()
 
             ++counter;
 
-            vector<int8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(uid_elem), type,
-                {static_cast<int16_t>(pos_elem.x), static_cast<int16_t>(pos_elem.y)}});
+            vector<int8_t> tmp = encodeEnemyMovedResponse({0x37, static_cast<int16_t>(uid), type,
+                {static_cast<int16_t>(pos.x), static_cast<int16_t>(pos.y)}});
 
             std::cout << "Enemy_Type: "  << (type) << " ";
-            std::cout << "Enemy_Name: "  << (name_elem._name) << " ";
-            std::cout << "Enemy_Pos_x: "  << static_cast<int>(pos_elem.x) << " ";
-            std::cout << "Enemy_Pos_y: "  << static_cast<int>(pos_elem.y) << std::endl;
+            std::cout << "Enemy_Name: "  << (name_._name) << " ";
+            std::cout << "Enemy_Pos_x: "  << static_cast<int>(pos.x) << " ";
+            std::cout << "Enemy_Pos_y: "  << static_cast<int>(pos.y) << std::endl;
 
             result.insert(result.end(), tmp.begin(), tmp.end());
         } catch (...) {
