@@ -101,7 +101,11 @@ Finally, let\textquotesingle{}s give the entity a {\bfseries{drawable}} componen
 \end{DoxyCode}
 
 
-The {\ttfamily set\+Texture\+From\+Name("{}player1"{})} is a custom helper that loads a texture previously registered in your asset manager. To register a texture in the resource manager, see \doxylink{ResourceManager_8hpp}{Resource\+Manager.\+hpp}. {\ttfamily Resource\+Manager\+::instance().load("{}path/to/your/texture.\+png"{}, TEXTURE);} \hypertarget{engine_autotoc_md142}{}\doxysubsection{\texorpdfstring{does just that.}{does just that.}}\label{engine_autotoc_md142}
+The {\ttfamily set\+Texture\+From\+Name("{}player1"{})} is a custom helper that loads a texture previously registered in your asset manager. To register a texture in the resource manager, see \doxylink{ResourceManager_8hpp}{Resource\+Manager.\+hpp}. {\ttfamily Resource\+Manager\+::instance().load("{}path/to/your/texture.\+png"{}, TEXTURE)} does just that
+
+\DoxyHorRuler{0}
+
+
 After these steps, you have a complete entity\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\mbox{\hyperlink{classentity}{entity}}\ player\ =\ reg.spawn\_entity();}
