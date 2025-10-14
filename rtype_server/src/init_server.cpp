@@ -63,20 +63,8 @@ Server::~Server()
 
 void Server::run()
 {
-    isRunning = true;
-
+    win.setFramerateLimit(60);
     networkThread = std::thread([this]() { server_.run(); });
-
-    cooldownThread = std::thread(
-        [this]()
-        {
-            while (isRunning)
-            {
-                logGameEntities();
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
-            }
-        }
-    );
 
     while (win.isOpen()) {
         while (win.pollEvent(event))
@@ -90,10 +78,9 @@ void Server::run()
 
         double dt = frameClock.restart().asSeconds();
 
-        {
-            std::lock_guard<std::mutex> lock(regMtx);
-            reg.run_systems(dt);
-        }
+        reg.run_systems(dt);
+
+        logGameEntities();
 
         runLevel(dt);
 
@@ -107,7 +94,6 @@ void Server::run()
         }
     }
 
-    isRunning = false;
     server_.stop();
     networkThread.join();
     cooldownThread.join();

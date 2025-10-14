@@ -56,11 +56,6 @@ class Server {
     std::mutex mtx;
 
     /**
-     * @brief Mutex for thread safety with the registry
-     */
-    std::mutex regMtx;
-
-    /**
      * @brief The network manager that handles communication with clients
      */
     NetworkManager server_;
@@ -104,11 +99,6 @@ class Server {
     * @brief Counter used to know how many entities have been sent to the clients
     */
     int counter;
-
-    /**
-     * @brief Flag to control the running state of the server
-     */
-    std::atomic<bool> isRunning;
 
     /**
      * @brief Thread for running the network manager
