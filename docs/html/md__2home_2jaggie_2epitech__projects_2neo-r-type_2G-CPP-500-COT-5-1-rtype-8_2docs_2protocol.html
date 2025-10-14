@@ -367,177 +367,36 @@ Table of contents</h1>
 <div class="line">    <span class="keywordtype">char</span> usernames[32][32];     <span class="comment">// Max 32 users</span></div>
 <div class="line">};</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md186"></a>
-4.22 PLAYER_MOVE (0x23) — Indicate that the player moves</h2>
+4.22 PLAYER_MOVE (0x24) — Indicate that the player moves --&gt; Broadcast to all team members</h2>
 <p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>MoveRequest {</div>
-<div class="line">    int16_t type;               <span class="comment">// 0x23</span></div>
-<div class="line">    <span class="keyword">enum</span> direction (UP|DOWN|LEFT|RIGHT);</div>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>MoveResponse {</div>
+<div class="line">    int8_t type;               <span class="comment">// 0x24</span></div>
+<div class="line">    int16_t player_id;</div>
+<div class="line">    Vector2D direction;</div>
 <div class="line">};</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md187"></a>
-4.23 PLAYER_MOVE (0x24) — Indicate that the player moves --&gt; Broadcast to all team members</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>MoveResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x24</span></div>
-<div class="line">    <span class="keywordtype">int</span> player_id;</div>
-<div class="line">    Vector2D direction;</div>
-<div class="line">    Vector2D position;</div>
-<div class="line">    <span class="keywordtype">float</span> speed;</div>
-<div class="line">    time timestamp;</div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md188"></a>
-4.24 PLAYER_SHOOT (0x25) — Indicate that the player shoots</h2>
-<p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>ShootRequest {</div>
-<div class="line">    int16_t type;               <span class="comment">// 0x25</span></div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md189"></a>
-4.25 PLAYER_SHOOT (0x26) — Indicate that the player shoots --&gt; Broadcast to all team members</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>ShootResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x26</span></div>
-<div class="line">    <span class="keywordtype">int</span> player_id;</div>
-<div class="line">    Vector2D bullet_position;</div>
-<div class="line">    Vector2D bullet_direction;</div>
-<div class="line">    <span class="keywordtype">float</span> bullet_speed;</div>
-<div class="line">    <span class="keyword">enum</span> bullet_type;</div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md190"></a>
-4.26 PICKUP_ITEM (0x27) — Indicate that the player took an item --&gt; Broadcast to all team members</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>PickupItemResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x27</span></div>
-<div class="line">    <span class="keywordtype">int</span> player_id;</div>
-<div class="line">    <span class="keywordtype">int</span> item_id;</div>
-<div class="line">    Vector2D item_position;</div>
-<div class="line">    time timestamp;</div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md191"></a>
-4.27 PLAYER_STATE (0x28) — Player state --&gt; Broadcast to all team members</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>PlayerStateResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x28</span></div>
-<div class="line">    <span class="keywordtype">int</span> player_id;</div>
-<div class="line">    <span class="keywordtype">int</span> remaining_health;</div>
-<div class="line">    <span class="keywordtype">int</span> score;</div>
-<div class="line">    <span class="keywordtype">int</span> current_level;</div>
-<div class="line">    <span class="keyword">enum</span> state (DEATH|ALIVE);</div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md192"></a>
-4.28 PLAYER_STATE (0x29) — Player state --&gt; Broadcast to all team members</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>PlayerStateResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x29</span></div>
-<div class="line">    <span class="keywordtype">int</span> player_id;</div>
-<div class="line">    <span class="keywordtype">int</span> remaining_health;</div>
-<div class="line">    <span class="keywordtype">int</span> score;</div>
-<div class="line">    <span class="keywordtype">int</span> current_level;</div>
-<div class="line">    <span class="keyword">enum</span> state (DEATH|ALIVE);</div>
-<div class="line">    <span class="keyword">enum</span> state2 (PAUSE|IN_GAME);</div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md193"></a>
-4.29 BEAT_BOSS (0x30) — Indicate if the player beats the level boss --&gt; Broadcast to all team members</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>BeatBossResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x30</span></div>
-<div class="line">    <span class="keywordtype">int</span> player_id;</div>
-<div class="line">    <span class="keywordtype">int</span> boss_id;</div>
-<div class="line">    Vector2D player_position;</div>
-<div class="line">    time timestamp;</div>
-<div class="line">    <span class="keyword">enum</span> state WON;</div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md194"></a>
-4.30 CHECKPOINT (0x31) — Indicate if the player passes a level checkpoint --&gt; Broadcast to all team members</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>CheckpointResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x31</span></div>
-<div class="line">    <span class="keywordtype">int</span> player_id;</div>
-<div class="line">    <span class="keywordtype">int</span> checkpoint_id;</div>
-<div class="line">    Vector2D player_position;</div>
-<div class="line">    time timestamp;</div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md195"></a>
-4.31 GAME_STARTED (0x32) — Indicate to all client the game started --&gt; Broadcast to all team members</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>GameStartedResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x32</span></div>
-<div class="line">    <span class="keywordtype">int</span> player_id;</div>
-<div class="line">    <span class="keywordtype">int</span> checkpoint_id;</div>
-<div class="line">    Vector2D player_position;</div>
-<div class="line">    time timestamp;</div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md196"></a>
-4.32 GAME_PAUSED (0x33) — Indicate to server the game is paused</h2>
-<p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>GamePausedRequest {</div>
-<div class="line">    int16_t type;               <span class="comment">// 0x33</span></div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md197"></a>
-4.33 GAME_PAUSED (0x34) — Indicate to all clients the game is paused --&gt; Broadcast to all clients</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>GamePausedResponse {</div>
-<div class="line">    int16_t type;               <span class="comment">// 0x34</span></div>
-<div class="line">    time timestamp;</div>
-<div class="line">    <span class="keyword">enum</span> current_state(PAUSED|RESUMED)</div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md198"></a>
-4.34 GAME_STATE (0x35) — Indicate to all team members disconnected clients</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>GameStateResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x35</span></div>
-<div class="line">    std::vector &lt;int&gt; ids;      <span class="comment">// disconnected clients ID&#39;s</span></div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md199"></a>
-4.35 ENEMY_SPAWNED (0x36) — Indicate to all team members that an enemy spawned</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>EnemySpawnedResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x36</span></div>
-<div class="line">    <span class="keywordtype">int</span> enemy_id;</div>
-<div class="line">    <span class="keyword">enum</span> enemy_type(1|2|3|4);</div>
-<div class="line">    Vector2D position;</div>
-<div class="line">    Vector2D direction;</div>
-<div class="line">    time timestamp;</div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md200"></a>
-4.36 ENEMY_MOVED (0x37) — Indicate to all team members that an enemy moved</h2>
+4.23 ENEMY_MOVED (0x37) — Indicate to all team members that an enemy moved</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>EnemyMovedResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x37</span></div>
-<div class="line">    <span class="keywordtype">int</span> enemy_id;</div>
+<div class="line">    int8_t type; <span class="comment">// 0x37</span></div>
+<div class="line">    int16_t enemy_id;</div>
 <div class="line">    <span class="keyword">enum</span> enemy_type(1|2|3|4);</div>
 <div class="line">    Vector2D position;</div>
-<div class="line">    Vector2D direction;</div>
-<div class="line">    time timestamp;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md201"></a>
-4.37 ENEMY_MOVED (0x38) — Indicate to all team members that an enemy fired</h2>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md188"></a>
+4.24 NBR_ENTITY (0x38) — Indicate the numbers of entities</h2>
 <p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>EnemyFiredResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x38</span></div>
-<div class="line">    <span class="keywordtype">int</span> enemy_id;</div>
-<div class="line">    <span class="keyword">enum</span> enemy_type(1|2|3|4);</div>
-<div class="line">    Vector2D position;</div>
-<div class="line">    Vector2D direction;</div>
-<div class="line">    time timestamp;</div>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>NbrEntity {</div>
+<div class="line">    int8_t type; <span class="comment">// 0x38</span></div>
+<div class="line">    int16_t nbr;</div>
 <div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md202"></a>
-4.38 ENEMY_DIED (0x39) — Indicate to all team members that an enemy died</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>EnemyDiedResponse {</div>
-<div class="line">    uint8_t type;               <span class="comment">// 0x39</span></div>
-<div class="line">    <span class="keywordtype">int</span> enemy_id;</div>
-<div class="line">    <span class="keyword">enum</span> enemy_type(1|2|3|4);</div>
-<div class="line">    Vector2D position;</div>
-<div class="line">    time timestamp;</div>
-<div class="line">};</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md203"></a>
-4.39 COllision (0x40) — Indicate to all team members that an collision happens</h2>
-<p><b>Direction</b> : Serveur → <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> <b>Payload</b> :</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>CollisionResponse {</div>
-<div class="line">    int16_t type;               <span class="comment">// 0x40</span></div>
-<div class="line">    Vector2D ids;              <span class="comment">// ids of the two entities</span></div>
-<div class="line">    Vector2D position;          <span class="comment">// endroit du choc</span></div>
-<div class="line">    <span class="keyword">enum</span> collision_type(BULLET-BULLET|BULLET-OBSTACLE|BULLET-PLAYER|BULLET-ENEMY|PLAYER-ENEMY);</div>
-<div class="line">    time timestamp;</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md189"></a>
+4.25 ACTION_RESPONSE (0x25) — Indicate if an action like (shoot, ..) is make</h2>
+<p><b>Direction</b> : <a class="el" href="classClient.html" title="The client class. Handles the client side of the game. All the client does is send messages to the se...">Client</a> → Serveur <b>Payload</b> :</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>ActionResponse {</div>
+<div class="line">    int8_t type; <span class="comment">// 0x25</span></div>
+<div class="line">    int16_t player_id;</div>
+<div class="line">    <span class="keyword">enum</span> Action input;</div>
 <div class="line">};</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->

@@ -88,76 +88,76 @@ $(function() {
 <p>The client class definition file.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;../../utility_classes/include/Network.hpp&quot;</code><br />
 <code>#include &quot;Factory.hpp&quot;</code><br />
-<code>#include &quot;<a class="el" href="registry_8hpp_source.html">registry.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="entity_8hpp_source.html">entity.hpp</a>&quot;</code><br />
-<code>#include &lt;map&gt;</code><br />
+<code>#include &quot;<a class="el" href="registry_8hpp_source.html">registry.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for client.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="client_8hpp__incl.png" border="0" usemap="#a_2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2client_8hpp" alt=""/></div>
 <map name="a_2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2client_8hpp" id="a_2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2client_8hpp">
-<area shape="rect" title="The client class definition file." alt="" coords="617,5,807,101"/>
-<area shape="rect" title=" " alt="" coords="30,250,114,278"/>
-<area shape="poly" title=" " alt="" coords="617,78,489,110,350,152,221,200,115,246,113,241,219,195,348,146,488,105,615,73"/>
-<area shape="rect" title=" " alt="" coords="138,250,200,278"/>
-<area shape="poly" title=" " alt="" coords="617,92,219,244,214,246,212,241,217,239,615,87"/>
-<area shape="rect" title=" " alt="" coords="1588,149,1747,194"/>
-<area shape="poly" title=" " alt="" coords="808,59,1145,91,1357,116,1569,146,1573,147,1573,152,1569,152,1356,121,1144,96,807,65"/>
-<area shape="rect" title=" " alt="" coords="1771,158,1866,185"/>
-<area shape="poly" title=" " alt="" coords="807,52,986,58,1224,72,1492,100,1628,121,1760,146,1773,150,1771,155,1759,152,1627,126,1491,105,1224,77,986,63,807,58"/>
-<area shape="rect" href="registry_8hpp.html" title="This file defines the registry class. The registry is a container for all the entities and components..." alt="" coords="663,158,760,185"/>
-<area shape="poly" title=" " alt="" coords="714,101,714,142,709,142,709,101"/>
-<area shape="rect" title=" " alt="" coords="1560,486,1610,513"/>
-<area shape="poly" title=" " alt="" coords="808,55,1017,71,1140,85,1262,105,1374,132,1423,148,1466,166,1502,186,1529,209,1547,234,1553,262,1553,349,1555,382,1561,415,1577,470,1572,472,1556,416,1550,383,1548,350,1548,263,1542,237,1526,213,1499,191,1464,171,1421,153,1373,137,1261,110,1139,90,1016,76,807,61"/>
-<area shape="rect" href="entity_8hpp.html" title="This file contains the definition of the entity class." alt="" coords="217,410,302,438"/>
-<area shape="poly" title=" " alt="" coords="617,67,459,90,276,126,190,150,115,177,56,208,35,225,19,243,12,258,9,271,14,297,31,321,58,343,92,363,130,380,203,405,201,410,128,384,90,367,55,348,27,325,9,299,3,271,7,256,15,240,31,221,53,204,113,172,189,145,275,121,458,85,616,62"/>
-<area shape="poly" title=" " alt="" coords="663,177,563,183,430,194,278,214,127,244,117,247,116,242,126,239,278,209,429,189,563,177,662,172"/>
-<area shape="poly" title=" " alt="" coords="663,178,578,184,467,197,343,216,219,244,211,247,210,242,218,239,342,211,466,191,577,179,662,173"/>
-<area shape="rect" title=" " alt="" coords="325,250,370,278"/>
-<area shape="poly" title=" " alt="" coords="663,180,534,201,458,219,383,244,381,245,379,240,381,239,456,214,533,196,662,175"/>
-<area shape="rect" title=" " alt="" coords="927,250,1014,278"/>
-<area shape="poly" title=" " alt="" coords="752,183,915,239,923,242,921,247,914,244,751,188"/>
-<area shape="rect" title=" " alt="" coords="1137,486,1217,513"/>
-<area shape="poly" title=" " alt="" coords="761,171,913,178,1107,190,1281,210,1342,223,1362,231,1375,240,1382,251,1383,263,1375,287,1348,330,1301,383,1204,477,1201,473,1298,379,1344,327,1371,285,1378,262,1377,253,1371,244,1360,236,1340,228,1280,215,1106,195,913,183,761,177"/>
-<area shape="rect" title=" " alt="" coords="571,250,645,278"/>
-<area shape="poly" title=" " alt="" coords="699,188,636,242,633,238,695,184"/>
-<area shape="rect" title=" " alt="" coords="669,250,755,278"/>
-<area shape="poly" title=" " alt="" coords="714,186,714,235,709,235,709,186"/>
-<area shape="rect" title=" " alt="" coords="779,250,903,278"/>
-<area shape="poly" title=" " alt="" coords="732,183,811,239,808,243,729,188"/>
-<area shape="rect" title=" " alt="" coords="1391,486,1536,513"/>
-<area shape="poly" title=" " alt="" coords="761,171,926,177,1142,190,1338,210,1407,223,1431,231,1445,240,1466,265,1480,294,1487,326,1490,358,1485,421,1475,472,1469,470,1480,421,1484,358,1482,326,1475,296,1462,268,1442,244,1428,236,1406,228,1337,215,1142,195,926,183,761,177"/>
-<area shape="rect" href="ResourceManager_8hpp.html" title="The ResourceManager file. Contains the declaration of the ResourceManager class." alt="" coords="1297,410,1462,438"/>
-<area shape="poly" title=" " alt="" coords="761,171,922,176,1130,188,1231,197,1318,208,1383,222,1405,231,1419,240,1431,258,1436,278,1437,300,1433,322,1418,364,1399,398,1395,396,1413,362,1428,320,1432,300,1431,279,1426,260,1415,244,1403,235,1382,228,1317,214,1230,203,1130,194,922,182,761,176"/>
-<area shape="poly" title=" " alt="" coords="663,177,572,182,464,194,365,214,327,227,301,244,288,260,277,278,264,319,260,360,260,395,254,395,254,360,259,318,273,276,284,257,298,240,325,223,364,209,463,189,572,177,662,172"/>
-<area shape="rect" href="exceptions_8hpp.html" title="This file contains definition of the exceptions thrown by the engine." alt="" coords="1038,250,1159,278"/>
-<area shape="poly" title=" " alt="" coords="761,180,1026,239,1040,243,1039,248,1024,244,760,185"/>
-<area shape="rect" href="registry__single__comp_8tpp.html" title="This file contains the implementation of the registry functions to handle single components operation..." alt="" coords="394,242,547,286"/>
-<area shape="poly" title=" " alt="" coords="671,188,536,238,534,233,669,183"/>
-<area shape="rect" href="registry__tables_8tpp.html" title="This file contains the implementation of the registry functions to handle components tables." alt="" coords="1183,250,1361,278"/>
-<area shape="poly" title=" " alt="" coords="761,178,937,203,1159,239,1185,244,1184,249,1158,244,936,208,761,183"/>
-<area shape="poly" title=" " alt="" coords="1344,441,1228,483,1227,477,1343,436"/>
-<area shape="poly" title=" " alt="" coords="1397,436,1439,473,1436,477,1393,440"/>
-<area shape="poly" title=" " alt="" coords="1417,436,1546,482,1545,487,1416,441"/>
-<area shape="rect" title=" " alt="" coords="1241,486,1366,513"/>
-<area shape="poly" title=" " alt="" coords="1368,440,1330,477,1326,473,1364,436"/>
-<area shape="poly" title=" " alt="" coords="303,430,336,435,564,458,789,475,1122,493,1122,499,789,480,564,463,335,440,303,436"/>
-<area shape="rect" title=" " alt="" coords="1056,334,1141,362"/>
-<area shape="poly" title=" " alt="" coords="1101,278,1101,319,1096,319,1096,278"/>
-<area shape="poly" title=" " alt="" coords="535,239,668,189,670,194,537,244"/>
-<area shape="rect" href="components_8hpp.html" title="This file defines the different types of components available to the engine." alt="" coords="325,334,517,362"/>
-<area shape="poly" title=" " alt="" coords="460,288,439,322,434,320,455,285"/>
-<area shape="poly" title=" " alt="" coords="375,336,339,317,323,304,311,288,302,264,304,252,311,240,334,222,368,208,458,188,558,177,647,171,648,177,559,182,458,193,370,213,337,227,315,243,309,254,307,263,315,285,327,300,342,313,377,331"/>
-<area shape="poly" title=" " alt="" coords="518,354,1282,412,1281,418,518,360"/>
-<area shape="poly" title=" " alt="" coords="393,365,303,406,301,401,391,360"/>
-<area shape="rect" title=" " alt="" coords="431,410,507,438"/>
-<area shape="poly" title=" " alt="" coords="432,361,455,396,450,398,427,364"/>
-<area shape="rect" title=" " alt="" coords="348,410,406,438"/>
-<area shape="poly" title=" " alt="" coords="415,364,395,398,390,395,411,361"/>
-<area shape="poly" title=" " alt="" coords="1222,252,1182,244,959,208,775,183,776,177,959,203,1183,239,1224,247"/>
+<area shape="rect" title="The client class definition file." alt="" coords="631,5,822,101"/>
+<area shape="rect" title=" " alt="" coords="60,250,145,278"/>
+<area shape="poly" title=" " alt="" coords="632,79,509,111,375,152,249,200,145,246,143,241,247,195,374,146,507,106,630,74"/>
+<area shape="rect" title=" " alt="" coords="5,486,56,513"/>
+<area shape="poly" title=" " alt="" coords="631,65,455,87,354,104,255,125,165,152,92,184,64,201,43,221,30,241,25,263,25,349,31,470,25,470,20,350,20,262,25,239,39,217,61,197,89,179,163,147,254,120,353,99,454,82,630,60"/>
+<area shape="rect" title=" " alt="" coords="169,250,231,278"/>
+<area shape="poly" title=" " alt="" coords="632,93,250,244,245,246,243,241,248,239,630,89"/>
+<area shape="rect" title=" " alt="" coords="1616,149,1776,194"/>
+<area shape="poly" title=" " alt="" coords="823,59,1165,91,1381,116,1598,146,1602,147,1601,152,1597,152,1380,121,1165,96,822,64"/>
+<area shape="rect" title=" " alt="" coords="1799,158,1894,185"/>
+<area shape="poly" title=" " alt="" coords="822,52,1003,57,1244,71,1516,100,1654,120,1788,146,1801,150,1799,155,1787,152,1653,126,1515,105,1244,77,1003,63,822,58"/>
+<area shape="rect" href="entity_8hpp.html" title="This file contains the definition of the entity class." alt="" coords="1448,410,1533,438"/>
+<area shape="poly" title=" " alt="" coords="823,60,1002,81,1108,97,1215,116,1318,140,1410,168,1483,201,1511,220,1533,240,1551,270,1555,298,1550,328,1538,363,1529,383,1516,400,1512,397,1524,380,1533,361,1544,327,1550,298,1546,272,1528,243,1508,224,1481,206,1408,173,1317,145,1214,121,1107,102,1001,86,822,65"/>
+<area shape="rect" href="registry_8hpp.html" title="This file defines the registry class. The registry is a container for all the entities and components..." alt="" coords="678,158,775,185"/>
+<area shape="poly" title=" " alt="" coords="729,101,729,142,724,142,724,101"/>
+<area shape="rect" title=" " alt="" coords="460,486,540,513"/>
+<area shape="poly" title=" " alt="" coords="1448,436,1417,440,1165,465,917,482,555,499,555,494,917,477,1165,460,1417,435,1447,431"/>
+<area shape="poly" title=" " alt="" coords="678,177,581,183,451,195,304,215,158,244,148,247,146,242,157,239,304,209,450,190,580,178,677,172"/>
+<area shape="poly" title=" " alt="" coords="677,178,488,198,369,217,250,244,242,247,240,242,248,239,368,212,487,192,677,173"/>
+<area shape="poly" title=" " alt="" coords="776,171,951,175,1182,186,1294,194,1391,206,1465,221,1489,230,1504,240,1517,258,1524,277,1526,320,1518,362,1505,397,1500,395,1512,360,1521,320,1518,278,1512,260,1501,244,1487,234,1463,226,1391,211,1294,200,1181,191,951,180,775,176"/>
+<area shape="poly" title=" " alt="" coords="678,178,603,185,518,197,443,216,415,229,397,243,391,260,393,285,402,315,416,349,452,417,485,472,481,474,447,419,411,351,397,317,388,286,385,260,392,240,412,224,441,211,517,192,603,180,677,173"/>
+<area shape="rect" title=" " alt="" coords="407,250,452,278"/>
+<area shape="poly" title=" " alt="" coords="678,184,578,207,521,223,465,244,463,245,461,240,463,239,519,218,576,201,677,179"/>
+<area shape="rect" title=" " alt="" coords="475,250,562,278"/>
+<area shape="poly" title=" " alt="" coords="697,188,564,246,562,241,695,183"/>
+<area shape="rect" title=" " alt="" coords="585,250,660,278"/>
+<area shape="poly" title=" " alt="" coords="713,188,651,242,647,238,710,184"/>
+<area shape="rect" title=" " alt="" coords="683,250,770,278"/>
+<area shape="poly" title=" " alt="" coords="729,186,729,235,724,235,724,186"/>
+<area shape="rect" title=" " alt="" coords="794,250,918,278"/>
+<area shape="poly" title=" " alt="" coords="747,183,826,239,823,243,744,188"/>
+<area shape="rect" title=" " alt="" coords="141,486,286,513"/>
+<area shape="poly" title=" " alt="" coords="678,178,590,185,486,198,389,217,352,229,325,244,300,268,279,296,261,326,248,358,229,421,219,471,214,470,223,419,243,356,257,324,274,293,296,264,322,240,350,225,388,212,485,192,590,180,677,173"/>
+<area shape="rect" href="ResourceManager_8hpp.html" title="The ResourceManager file. Contains the declaration of the ResourceManager class." alt="" coords="259,410,424,438"/>
+<area shape="poly" title=" " alt="" coords="678,177,594,183,496,194,407,214,374,227,352,244,341,260,333,279,327,320,329,360,336,394,331,395,324,361,322,319,328,277,336,258,349,240,372,223,406,209,495,189,593,177,677,172"/>
+<area shape="rect" href="exceptions_8hpp.html" title="This file contains definition of the exceptions thrown by the engine." alt="" coords="941,250,1061,278"/>
+<area shape="poly" title=" " alt="" coords="767,183,947,242,946,247,766,188"/>
+<area shape="rect" href="registry__single__comp_8tpp.html" title="This file contains the implementation of the registry functions to handle single components operation..." alt="" coords="1338,242,1491,286"/>
+<area shape="poly" title=" " alt="" coords="776,175,1006,198,1156,216,1308,239,1324,242,1323,247,1307,244,1156,222,1005,203,775,180"/>
+<area shape="rect" href="registry__tables_8tpp.html" title="This file contains the implementation of the registry functions to handle components tables." alt="" coords="1085,250,1264,278"/>
+<area shape="poly" title=" " alt="" coords="776,181,1062,239,1086,244,1085,249,1061,244,775,187"/>
+<area shape="poly" title=" " alt="" coords="286,441,72,491,70,486,285,436"/>
+<area shape="poly" title=" " alt="" coords="371,436,459,476,457,481,368,441"/>
+<area shape="poly" title=" " alt="" coords="320,441,250,480,248,476,317,436"/>
+<area shape="rect" title=" " alt="" coords="311,486,436,513"/>
+<area shape="poly" title=" " alt="" coords="349,437,364,470,359,473,344,439"/>
+<area shape="rect" title=" " alt="" coords="959,334,1044,362"/>
+<area shape="poly" title=" " alt="" coords="1004,278,1004,319,999,319,999,278"/>
+<area shape="poly" title=" " alt="" coords="1337,245,1331,244,1180,222,1030,203,791,180,791,175,1030,198,1181,216,1332,239,1338,240"/>
+<area shape="rect" href="components_8hpp.html" title="This file defines the different types of components available to the engine." alt="" coords="1224,334,1416,362"/>
+<area shape="poly" title=" " alt="" coords="1391,289,1348,326,1345,322,1388,285"/>
+<area shape="poly" title=" " alt="" coords="1351,360,1447,401,1445,406,1349,365"/>
+<area shape="poly" title=" " alt="" coords="1316,335,1305,289,1293,264,1274,244,1238,225,1186,210,1123,198,1053,189,910,179,791,176,791,170,910,174,1054,184,1124,193,1187,205,1240,220,1277,240,1297,261,1310,287,1321,333"/>
+<area shape="poly" title=" " alt="" coords="1224,359,439,418,439,413,1223,354"/>
+<area shape="rect" title=" " alt="" coords="1328,410,1405,438"/>
+<area shape="poly" title=" " alt="" coords="1330,361,1352,396,1348,398,1326,364"/>
+<area shape="rect" title=" " alt="" coords="1245,410,1304,438"/>
+<area shape="poly" title=" " alt="" coords="1314,364,1293,398,1288,395,1309,361"/>
+<area shape="poly" title=" " alt="" coords="1123,252,1085,244,790,186,791,181,1086,239,1124,247"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">

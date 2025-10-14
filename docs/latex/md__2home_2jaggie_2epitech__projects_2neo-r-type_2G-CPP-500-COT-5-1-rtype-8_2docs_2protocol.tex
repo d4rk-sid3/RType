@@ -373,248 +373,51 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md186}{}\doxysubsection{\texorpdfstring{4.\+22 PLAYER\+\_\+\+MOVE (0x23) — Indicate that the player moves}{4.\+22 PLAYER\+\_\+\+MOVE (0x23) — Indicate that the player moves}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md186}
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md186}{}\doxysubsection{\texorpdfstring{4.\+22 PLAYER\+\_\+\+MOVE (0x24) — Indicate that the player moves -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}{4.\+22 PLAYER\+\_\+\+MOVE (0x24) — Indicate that the player moves -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md186}
 {\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }MoveRequest\ \{}
-\DoxyCodeLine{\ \ \ \ int16\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x23}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ direction\ (UP|DOWN|LEFT|RIGHT);}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md187}{}\doxysubsection{\texorpdfstring{4.\+23 PLAYER\+\_\+\+MOVE (0x24) — Indicate that the player moves -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}{4.\+23 PLAYER\+\_\+\+MOVE (0x24) — Indicate that the player moves -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md187}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{struct\ }MoveResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x24}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ player\_id;}
+\DoxyCodeLine{\ \ \ \ int8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x24}}
+\DoxyCodeLine{\ \ \ \ int16\_t\ player\_id;}
 \DoxyCodeLine{\ \ \ \ Vector2D\ direction;}
-\DoxyCodeLine{\ \ \ \ Vector2D\ \mbox{\hyperlink{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}{position}};}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{float}\ speed;}
-\DoxyCodeLine{\ \ \ \ time\ timestamp;}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md188}{}\doxysubsection{\texorpdfstring{4.\+24 PLAYER\+\_\+\+SHOOT (0x25) — Indicate that the player shoots}{4.\+24 PLAYER\+\_\+\+SHOOT (0x25) — Indicate that the player shoots}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md188}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }ShootRequest\ \{}
-\DoxyCodeLine{\ \ \ \ int16\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x25}}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md189}{}\doxysubsection{\texorpdfstring{4.\+25 PLAYER\+\_\+\+SHOOT (0x26) — Indicate that the player shoots -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}{4.\+25 PLAYER\+\_\+\+SHOOT (0x26) — Indicate that the player shoots -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md189}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }ShootResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x26}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ player\_id;}
-\DoxyCodeLine{\ \ \ \ Vector2D\ bullet\_position;}
-\DoxyCodeLine{\ \ \ \ Vector2D\ bullet\_direction;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{float}\ bullet\_speed;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ bullet\_type;}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md190}{}\doxysubsection{\texorpdfstring{4.\+26 PICKUP\+\_\+\+ITEM (0x27) — Indicate that the player took an item -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}{4.\+26 PICKUP\+\_\+\+ITEM (0x27) — Indicate that the player took an item -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md190}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }PickupItemResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x27}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ player\_id;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ item\_id;}
-\DoxyCodeLine{\ \ \ \ Vector2D\ item\_position;}
-\DoxyCodeLine{\ \ \ \ time\ timestamp;}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md191}{}\doxysubsection{\texorpdfstring{4.\+27 PLAYER\+\_\+\+STATE (0x28) — Player state -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}{4.\+27 PLAYER\+\_\+\+STATE (0x28) — Player state -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md191}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }PlayerStateResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x28}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ player\_id;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ remaining\_health;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ score;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ current\_level;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ state\ (DEATH|ALIVE);}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md192}{}\doxysubsection{\texorpdfstring{4.\+28 PLAYER\+\_\+\+STATE (0x29) — Player state -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}{4.\+28 PLAYER\+\_\+\+STATE (0x29) — Player state -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md192}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }PlayerStateResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x29}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ player\_id;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ remaining\_health;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ score;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ current\_level;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ state\ (DEATH|ALIVE);}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ state2\ (PAUSE|IN\_GAME);}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md193}{}\doxysubsection{\texorpdfstring{4.\+29 BEAT\+\_\+\+BOSS (0x30) — Indicate if the player beats the level boss -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}{4.\+29 BEAT\+\_\+\+BOSS (0x30) — Indicate if the player beats the level boss -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md193}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }BeatBossResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x30}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ player\_id;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ boss\_id;}
-\DoxyCodeLine{\ \ \ \ Vector2D\ player\_position;}
-\DoxyCodeLine{\ \ \ \ time\ timestamp;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ state\ WON;}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md194}{}\doxysubsection{\texorpdfstring{4.\+30 CHECKPOINT (0x31) — Indicate if the player passes a level checkpoint -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}{4.\+30 CHECKPOINT (0x31) — Indicate if the player passes a level checkpoint -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md194}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }CheckpointResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x31}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ player\_id;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ checkpoint\_id;}
-\DoxyCodeLine{\ \ \ \ Vector2D\ player\_position;}
-\DoxyCodeLine{\ \ \ \ time\ timestamp;}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md195}{}\doxysubsection{\texorpdfstring{4.\+31 GAME\+\_\+\+STARTED (0x32) — Indicate to all client the game started -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}{4.\+31 GAME\+\_\+\+STARTED (0x32) — Indicate to all client the game started -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md195}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }GameStartedResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x32}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ player\_id;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ checkpoint\_id;}
-\DoxyCodeLine{\ \ \ \ Vector2D\ player\_position;}
-\DoxyCodeLine{\ \ \ \ time\ timestamp;}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md196}{}\doxysubsection{\texorpdfstring{4.\+32 GAME\+\_\+\+PAUSED (0x33) — Indicate to server the game is paused}{4.\+32 GAME\+\_\+\+PAUSED (0x33) — Indicate to server the game is paused}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md196}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }GamePausedRequest\ \{}
-\DoxyCodeLine{\ \ \ \ int16\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x33}}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md197}{}\doxysubsection{\texorpdfstring{4.\+33 GAME\+\_\+\+PAUSED (0x34) — Indicate to all clients the game is paused -\/-\/\texorpdfstring{$>$}{>} Broadcast to all clients}{4.\+33 GAME\+\_\+\+PAUSED (0x34) — Indicate to all clients the game is paused -\/-\/\texorpdfstring{$>$}{>} Broadcast to all clients}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md197}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }GamePausedResponse\ \{}
-\DoxyCodeLine{\ \ \ \ int16\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x34}}
-\DoxyCodeLine{\ \ \ \ time\ timestamp;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ current\_state(PAUSED|RESUMED)}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md198}{}\doxysubsection{\texorpdfstring{4.\+34 GAME\+\_\+\+STATE (0x35) — Indicate to all team members disconnected clients}{4.\+34 GAME\+\_\+\+STATE (0x35) — Indicate to all team members disconnected clients}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md198}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }GameStateResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x35}}
-\DoxyCodeLine{\ \ \ \ std::vector\ <int>\ ids;\ \ \ \ \ \ \textcolor{comment}{//\ disconnected\ clients\ ID's}}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md199}{}\doxysubsection{\texorpdfstring{4.\+35 ENEMY\+\_\+\+SPAWNED (0x36) — Indicate to all team members that an enemy spawned}{4.\+35 ENEMY\+\_\+\+SPAWNED (0x36) — Indicate to all team members that an enemy spawned}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md199}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }EnemySpawnedResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x36}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ enemy\_id;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ enemy\_type(1|2|3|4);}
-\DoxyCodeLine{\ \ \ \ Vector2D\ \mbox{\hyperlink{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}{position}};}
-\DoxyCodeLine{\ \ \ \ Vector2D\ direction;}
-\DoxyCodeLine{\ \ \ \ time\ timestamp;}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md200}{}\doxysubsection{\texorpdfstring{4.\+36 ENEMY\+\_\+\+MOVED (0x37) — Indicate to all team members that an enemy moved}{4.\+36 ENEMY\+\_\+\+MOVED (0x37) — Indicate to all team members that an enemy moved}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md200}
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md187}{}\doxysubsection{\texorpdfstring{4.\+23 ENEMY\+\_\+\+MOVED (0x37) — Indicate to all team members that an enemy moved}{4.\+23 ENEMY\+\_\+\+MOVED (0x37) — Indicate to all team members that an enemy moved}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md187}
 {\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{struct\ }EnemyMovedResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x37}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ enemy\_id;}
+\DoxyCodeLine{\ \ \ \ int8\_t\ type;\ \textcolor{comment}{//\ 0x37}}
+\DoxyCodeLine{\ \ \ \ int16\_t\ enemy\_id;}
 \DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ enemy\_type(1|2|3|4);}
 \DoxyCodeLine{\ \ \ \ Vector2D\ \mbox{\hyperlink{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}{position}};}
-\DoxyCodeLine{\ \ \ \ Vector2D\ direction;}
-\DoxyCodeLine{\ \ \ \ time\ timestamp;}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md201}{}\doxysubsection{\texorpdfstring{4.\+37 ENEMY\+\_\+\+MOVED (0x38) — Indicate to all team members that an enemy fired}{4.\+37 ENEMY\+\_\+\+MOVED (0x38) — Indicate to all team members that an enemy fired}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md201}
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md188}{}\doxysubsection{\texorpdfstring{4.\+24 NBR\+\_\+\+ENTITY (0x38) — Indicate the numbers of entities}{4.\+24 NBR\+\_\+\+ENTITY (0x38) — Indicate the numbers of entities}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md188}
 {\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }EnemyFiredResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x38}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ enemy\_id;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ enemy\_type(1|2|3|4);}
-\DoxyCodeLine{\ \ \ \ Vector2D\ \mbox{\hyperlink{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}{position}};}
-\DoxyCodeLine{\ \ \ \ Vector2D\ direction;}
-\DoxyCodeLine{\ \ \ \ time\ timestamp;}
+\DoxyCodeLine{\textcolor{keyword}{struct\ }NbrEntity\ \{}
+\DoxyCodeLine{\ \ \ \ int8\_t\ type;\ \textcolor{comment}{//\ 0x38}}
+\DoxyCodeLine{\ \ \ \ int16\_t\ nbr;}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md202}{}\doxysubsection{\texorpdfstring{4.\+38 ENEMY\+\_\+\+DIED (0x39) — Indicate to all team members that an enemy died}{4.\+38 ENEMY\+\_\+\+DIED (0x39) — Indicate to all team members that an enemy died}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md202}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md189}{}\doxysubsection{\texorpdfstring{4.\+25 ACTION\+\_\+\+RESPONSE (0x25) — Indicate if an action like (shoot, ..) is make}{4.\+25 ACTION\+\_\+\+RESPONSE (0x25) — Indicate if an action like (shoot, ..) is make}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md189}
+{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }EnemyDiedResponse\ \{}
-\DoxyCodeLine{\ \ \ \ uint8\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x39}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ enemy\_id;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ enemy\_type(1|2|3|4);}
-\DoxyCodeLine{\ \ \ \ Vector2D\ \mbox{\hyperlink{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}{position}};}
-\DoxyCodeLine{\ \ \ \ time\ timestamp;}
-\DoxyCodeLine{\};}
-
-\end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md203}{}\doxysubsection{\texorpdfstring{4.\+39 COllision (0x40) — Indicate to all team members that an collision happens}{4.\+39 COllision (0x40) — Indicate to all team members that an collision happens}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md203}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{struct\ }CollisionResponse\ \{}
-\DoxyCodeLine{\ \ \ \ int16\_t\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x40}}
-\DoxyCodeLine{\ \ \ \ Vector2D\ ids;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ids\ of\ the\ two\ entities}}
-\DoxyCodeLine{\ \ \ \ Vector2D\ \mbox{\hyperlink{namespacecomponent_a32921f4e807a398b6ffaea1730431bec}{position}};\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ endroit\ du\ choc}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ collision\_type(BULLET-\/BULLET|BULLET-\/OBSTACLE|BULLET-\/PLAYER|BULLET-\/ENEMY|PLAYER-\/ENEMY);}
-\DoxyCodeLine{\ \ \ \ time\ timestamp;}
+\DoxyCodeLine{\textcolor{keyword}{struct\ }ActionResponse\ \{}
+\DoxyCodeLine{\ \ \ \ int8\_t\ type;\ \textcolor{comment}{//\ 0x25}}
+\DoxyCodeLine{\ \ \ \ int16\_t\ player\_id;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{enum}\ Action\ input;}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}

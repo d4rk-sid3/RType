@@ -114,7 +114,12 @@ class ResourceManager {
      * @return sf::Texture&
      */
     sf::Texture& getTexture(const std::string& id) {
-        return m_textureMap.at(id);
+        try {
+            return m_textureMap.at(id);
+        } catch (const std::out_of_range& e) {
+            std::cerr << "Texture not found: " << id << std::endl;
+            exit(84);
+        }
     }
 
     /**
@@ -124,7 +129,12 @@ class ResourceManager {
      * @return sf::Font&
      */
     sf::Font& getFont(const std::string& id) {
-        return m_fontMap.at(id);
+        try {
+            return m_fontMap.at(id);
+        } catch (const std::out_of_range& e) {
+            std::cerr << "Font not found: " << id << std::endl;
+            exit(84);
+        }
     }
 };
 
