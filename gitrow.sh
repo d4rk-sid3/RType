@@ -11,12 +11,19 @@ while IFS= read -r -d '' file; do
         echo "ERREUR sur : $file"
         exit 1
     fi
-done < <(find engine/ rtype_client/ rtype_server/ utility_classes -name "*.cpp" -o -name "*.hpp" -print0)
+done < <(find engine/ rtype_client/ rtype_server/ utility_classes \( -name "*.cpp" -o -name "*.hpp"\) -print0)
 
 if [ $count -eq 0 ]; then
     echo "Aucun fichier trouvé"
 else
     echo "Formatage réussi sur $count fichier(s)"
+fi
+
+./compiling.sh
+
+if [$? -ne 0 ]; then
+    echo "Le programma a échoué. Vous n'avez pas le droit de commit"
+    exit 1
 fi
 
 echo "Listez les fichiers à ajouter."
