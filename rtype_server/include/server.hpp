@@ -40,6 +40,22 @@ inline int player1_entity_id = -1;
 inline int player2_entity_id = -1;
 
 /**
+ * @brief A gloal variable to store the difficulty of the game
+ * 
+ */
+inline diff_mode_t diff_mode = NORMAL;
+
+/**
+ * @brief An enum to store the difficulty of the game
+ * 
+ */
+typedef enum diff_mode {
+  EASY,
+  MEDIUM,
+  HARD
+} diff_mode_t;
+
+/**
  * @brief A struct to store the information of an entity to be spawned on the level
  * 
  */

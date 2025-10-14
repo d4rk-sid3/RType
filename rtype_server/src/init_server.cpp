@@ -74,7 +74,12 @@ Server::Server(int p, registry &regis) : server_(p, std::ref(messages), std::ref
 {
     load_textures();
     initializeGame();
-    loadLevel("assets/levels/test.txt");
+    if (diff_mode == EASY)
+        loadLevel("assets/levels/easy.txt");
+    else if (diff_mode == HARD)
+        loadLevel("assets/levels/hard.txt");
+    else
+        loadLevel("assets/levels/medium.txt");
 }
 
 /**

@@ -1,11 +1,22 @@
 #include "server.hpp"
 #include "logic_functions.hpp"
 
+diff_mode_t get_diff_mode(std::string mode) {
+    if (mode == "easy")
+        return EASY;
+    if (mode == "medium")
+        return MEDIUM;
+    if (mode == "hard")
+        return HARD;
+    return EASY;
+}
+
 int main(int ac, char **av) {
+    diff_mode = get_diff_mode(av[2]);
+
     sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server");
     win.setFramerateLimit(100);
     registry reg(win);
-
 
     reg.control_active = false;
 
