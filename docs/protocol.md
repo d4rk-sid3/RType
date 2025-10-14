@@ -396,265 +396,54 @@ struct ListUsersResponse {
 };
 ```
 
-### 4.22 PLAYER_MOVE (0x23) — Indicate that the player moves
+### 4.22 PLAYER_MOVE (0x24) — Indicate that the player moves --> Broadcast to all team members
 
 **Direction** : Client → Serveur
-**Payload** :
-
-```c
-struct MoveRequest {
-    int16_t type;               // 0x23
-    enum direction (UP|DOWN|LEFT|RIGHT);
-};
-```
-
-### 4.23 PLAYER_MOVE (0x24) — Indicate that the player moves --> Broadcast to all team members
-
-**Direction** : Serveur → Client
 **Payload** :
 
 ```c
 struct MoveResponse {
-    uint8_t type;               // 0x24
-    int player_id;
+    int8_t type;               // 0x24
+    int16_t player_id;
     Vector2D direction;
-    Vector2D position;
-    float speed;
-    time timestamp;
 };
 ```
 
-### 4.24 PLAYER_SHOOT (0x25) — Indicate that the player shoots
-
-**Direction** : Client → Serveur
-**Payload** :
-
-```c
-struct ShootRequest {
-    int16_t type;               // 0x25
-};
-```
-
-### 4.25 PLAYER_SHOOT (0x26) — Indicate that the player shoots --> Broadcast to all team members
-
-**Direction** : Serveur → Client
-**Payload** :
-
-```c
-struct ShootResponse {
-    uint8_t type;               // 0x26
-    int player_id;
-    Vector2D bullet_position;
-    Vector2D bullet_direction;
-    float bullet_speed;
-    enum bullet_type;
-};
-```
-
-### 4.26 PICKUP_ITEM (0x27) — Indicate that the player took an item --> Broadcast to all team members
-
-**Direction** : Serveur → Client
-**Payload** :
-
-```c
-struct PickupItemResponse {
-    uint8_t type;               // 0x27
-    int player_id;
-    int item_id;
-    Vector2D item_position;
-    time timestamp;
-};
-```
-
-### 4.27 PLAYER_STATE (0x28) — Player state --> Broadcast to all team members
-
-**Direction** : Serveur → Client
-**Payload** :
-
-```c
-struct PlayerStateResponse {
-    uint8_t type;               // 0x28
-    int player_id;
-    int remaining_health;
-    int score;
-    int current_level;
-    enum state (DEATH|ALIVE);
-};
-```
-
-### 4.28 PLAYER_STATE (0x29) — Player state --> Broadcast to all team members
-
-**Direction** : Serveur → Client
-**Payload** :
-
-```c
-struct PlayerStateResponse {
-    uint8_t type;               // 0x29
-    int player_id;
-    int remaining_health;
-    int score;
-    int current_level;
-    enum state (DEATH|ALIVE);
-    enum state2 (PAUSE|IN_GAME);
-};
-```
-
-### 4.29 BEAT_BOSS (0x30) — Indicate if the player beats the level boss --> Broadcast to all team members
-
-**Direction** : Serveur → Client
-**Payload** :
-
-```c
-struct BeatBossResponse {
-    uint8_t type;               // 0x30
-    int player_id;
-    int boss_id;
-    Vector2D player_position;
-    time timestamp;
-    enum state WON;
-};
-```
-
-### 4.30 CHECKPOINT (0x31) — Indicate if the player passes a level checkpoint --> Broadcast to all team members
-
-**Direction** : Serveur → Client
-**Payload** :
-
-```c
-struct CheckpointResponse {
-    uint8_t type;               // 0x31
-    int player_id;
-    int checkpoint_id;
-    Vector2D player_position;
-    time timestamp;
-};
-```
-
-### 4.31 GAME_STARTED (0x32) — Indicate to all client the game started  --> Broadcast to all team members
-
-**Direction** : Serveur → Client
-**Payload** :
-
-```c
-struct GameStartedResponse {
-    uint8_t type;               // 0x32
-    int player_id;
-    int checkpoint_id;
-    Vector2D player_position;
-    time timestamp;
-};
-```
-
-### 4.32 GAME_PAUSED (0x33) — Indicate to server the game is paused
-
-**Direction** : Client → Serveur
-**Payload** :
-
-```c
-struct GamePausedRequest {
-    int16_t type;               // 0x33
-};
-```
-
-### 4.33 GAME_PAUSED (0x34) — Indicate to all clients the game is paused --> Broadcast to all clients
-
-**Direction** : Serveur → Client
-**Payload** :
-
-```c
-struct GamePausedResponse {
-    int16_t type;               // 0x34
-    time timestamp;
-    enum current_state(PAUSED|RESUMED)
-};
-```
-
-### 4.34 GAME_STATE (0x35) — Indicate to all team members disconnected clients 
-
-**Direction** : Serveur → Client
-**Payload** :
-
-```c
-struct GameStateResponse {
-    uint8_t type;               // 0x35
-    std::vector <int> ids;      // disconnected clients ID's
-};
-```
-
-### 4.35 ENEMY_SPAWNED (0x36) — Indicate to all team members that an enemy spawned 
-
-**Direction** : Serveur → Client
-**Payload** :
-
-```c
-struct EnemySpawnedResponse {
-    uint8_t type;               // 0x36
-    int enemy_id;
-    enum enemy_type(1|2|3|4);
-    Vector2D position;
-    Vector2D direction;
-    time timestamp;
-};
-```
-
-### 4.36 ENEMY_MOVED (0x37) — Indicate to all team members that an enemy moved 
+### 4.23 ENEMY_MOVED (0x37) — Indicate to all team members that an enemy moved 
 
 **Direction** : Serveur → Client
 **Payload** :
 
 ```c
 struct EnemyMovedResponse {
-    uint8_t type;               // 0x37
-    int enemy_id;
+    int8_t type; // 0x37
+    int16_t enemy_id;
     enum enemy_type(1|2|3|4);
     Vector2D position;
-    Vector2D direction;
-    time timestamp;
 };
 ```
 
-### 4.37 ENEMY_MOVED (0x38) — Indicate to all team members that an enemy fired 
+### 4.24 NBR_ENTITY (0x38) — Indicate the numbers of entities 
 
 **Direction** : Serveur → Client
 **Payload** :
 
 ```c
-struct EnemyFiredResponse {
-    uint8_t type;               // 0x38
-    int enemy_id;
-    enum enemy_type(1|2|3|4);
-    Vector2D position;
-    Vector2D direction;
-    time timestamp;
+struct NbrEntity {
+    int8_t type; // 0x38
+    int16_t nbr;
 };
 ```
 
-### 4.38 ENEMY_DIED (0x39) — Indicate to all team members that an enemy died 
+### 4.25 ACTION_RESPONSE (0x25) — Indicate if an action like (shoot, ..) is make
 
-**Direction** : Serveur → Client
+**Direction** : Client → Serveur
 **Payload** :
 
 ```c
-struct EnemyDiedResponse {
-    uint8_t type;               // 0x39
-    int enemy_id;
-    enum enemy_type(1|2|3|4);
-    Vector2D position;
-    time timestamp;
-};
-```
-
-### 4.39 COllision (0x40) — Indicate to all team members that an collision happens 
-
-**Direction** : Serveur → Client
-**Payload** :
-
-```c
-struct CollisionResponse {
-    int16_t type;               // 0x40
-    Vector2D ids;              // ids of the two entities
-    Vector2D position;          // endroit du choc
-    enum collision_type(BULLET-BULLET|BULLET-OBSTACLE|BULLET-PLAYER|BULLET-ENEMY|PLAYER-ENEMY);
-    time timestamp;
+struct ActionResponse {
+    int8_t type; // 0x25
+    int16_t player_id;
+    enum Action input;
 };
 ```
