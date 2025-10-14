@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['game_0',['GAME',['../client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84',1,'client.hpp']]],
-  ['game_5fover_1',['GAME_OVER',['../client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248a871723195985a4ae22d7e10d99bf8a00',1,'client.hpp']]]
+  ['font_0',['FONT',['../ResourceManager_8hpp.html#a509a729cba5db28cddc3c2ec18d0d83aa984c070727c93b2f2a9c0f6ff0ae737a',1,'ResourceManager.hpp']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['font_0',['FONT',['../ResourceManager_8hpp.html#a509a729cba5db28cddc3c2ec18d0d83aa984c070727c93b2f2a9c0f6ff0ae737a',1,'ResourceManager.hpp']]]
+  ['easy_0',['EASY',['../server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93a26d394b5caf2853dbcef5884f0f068dd',1,'server.hpp']]]
 ];

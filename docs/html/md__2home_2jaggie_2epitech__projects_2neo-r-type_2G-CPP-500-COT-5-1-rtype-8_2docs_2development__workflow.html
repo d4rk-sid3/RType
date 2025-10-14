@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R-TYPE: Server</title>
+<title>R-TYPE: 🚀 Workflow Équipe – Développement par Feature</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,52 +71,88 @@ $(function() {
 
 </div><!-- top -->
 <div><div class="header">
-  <div class="headertitle"><div class="title">Server</div></div>
+  <div class="headertitle"><div class="title">🚀 Workflow Équipe – Développement par Feature</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md8"></a> </p>
-<h1><a class="anchor" id="autotoc_md9"></a>
-Description</h1>
-<p><code><a class="el" href="classServer.html" title="The server class. Handles the server side of the game. At the start of the game, the server loads the...">Server</a></code> utilise <code>NetworkManager</code> pour recevoir les requêtes des clients et y répondre selon le protocole <b>R-Type</b>.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
-Responsabilités</h1>
+<div class="textblock"><p><a class="anchor" id="autotoc_md117"></a> Ce document décrit la méthodologie de travail officielle de notre équipe. <br  />
+ Chaque <b>feature</b> suit un cycle précis pour garantir qualité, cohérence et rapidité.</p>
+<hr  />
+<h1><a class="anchor" id="autotoc_md119"></a>
+🔹 Étapes par Feature</h1>
+<h2><a class="anchor" id="autotoc_md120"></a>
+1. Analyse des besoins</h2>
 <ul>
-<li>Écouter les messages des clients.</li>
-<li>Identifier le type de message (via <code>msg.first[0]</code>).</li>
-<li>Déléguer le traitement à une fonction (<code>recupMove</code>, <code>recupItem</code>, etc.).</li>
-<li>Envoyer la réponse appropriée.</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md11"></a>
-Principales fonctions</h1>
-<h2><a class="anchor" id="autotoc_md12"></a>
-<code>MoveResponse recupMove(...)</code></h2>
-<ul>
-<li>Décode un <code>MoveRequest (0x23)</code>.</li>
-<li>Affiche la direction du joueur.</li>
-<li>Retourne un <code>MoveResponse (0x24)</code>.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md13"></a>
-<code>PickupItemResponse recupItem(...)</code></h2>
-<ul>
-<li>Génère une réponse <code>PickupItemResponse (0x27)</code> lorsqu’un joueur prend un objet.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md14"></a>
-<code>PlayerStateResponse player_r(...)</code></h2>
-<ul>
-<li>Retourne un état de joueur (<code>0x28</code>) avec vie, score, niveau.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md15"></a>
-<code>PlayerStateResponse2 player_r2(...)</code></h2>
-<ul>
-<li>Version étendue (<code>0x29</code>) avec état de partie (pause, en jeu).</li>
+<li>Identifier clairement la feature à développer</li>
+<li>Déterminer son objectif et ses critères d’acceptation</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md17"></a>
-Exemple d’utilisation</h1>
-<p>```cpp</p>
-<p><a class="el" href="classServer.html" title="The server class. Handles the server side of the game. At the start of the game, the server loads the...">Server</a> srv(8080);</p>
-<p>while (true) {</p>
-<p>} </p>
+<h2><a class="anchor" id="autotoc_md122"></a>
+2. Conception / Design</h2>
+<ul>
+<li>Brainstorm rapide sur l’architecture ou la logique interne</li>
+<li>Choix techniques nécessaires</li>
+<li>Identification des impacts sur le reste du système</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md124"></a>
+3. Implémentation</h2>
+<ul>
+<li>Développer la feature dans une <b>branche dédiée</b></li>
+<li>Respecter les standards de code de l’équipe</li>
+<li>Faire de petits commits clairs et fréquents en respectant la convention (voir commit_convention.md)</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md126"></a>
+4. Tests</h2>
+<ul>
+<li>Écrire des <b>tests unitaires</b> pour les parties critiques</li>
+<li>Écrire des <b>tests d’intégration</b> si nécessaire</li>
+<li>Vérifier les <b>critères d’acceptation</b> définis</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="autotoc_md128"></a>
+5. Intégration / Review</h2>
+<ul>
+<li>Créer une <b>pull request</b> avec revue de code obligatoire</li>
+<li>Merge dans la branche principale seulement après validation</li>
+<li>Déploiement si nécessaire sur l’environnement prévu</li>
+<li>Mise a jour de chaque aspect de la documentation concerné</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md130"></a>
+🔹 Méthodologie Globale</h1>
+<ul>
+<li>Maintenir un <b>Backlog</b> (liste des features à développer)</li>
+<li>Organiser le travail en <b>Sprints (1–2 semaines)</b></li>
+<li>Utiliser <b>Trello</b> pour gérer les tâches générales</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md131"></a>
+Rituels</h2>
+<ul>
+<li><b>Daily Sync (5-10 min)</b> :<ul>
+<li>Ce que j’ai fait hier</li>
+<li>Ce que je fais aujourd’hui</li>
+<li>Mes blocages éventuels</li>
+</ul>
+</li>
+<li><b>Rétrospective (toutes les 2–3 semaines)</b> :<ul>
+<li>Qu’est-ce qui marche bien ?</li>
+<li>Qu’est-ce qu’on doit améliorer ?</li>
+</ul>
+</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md133"></a>
+🔹 Règles d’équipe</h1>
+<ul>
+<li>Toujours documenter</li>
+<li>Pas de merge sans <b>code review</b></li>
+<li>Les tests sont <b>obligatoires</b></li>
+<li>Communiquer tôt en cas de blocage</li>
+</ul>
+<hr  />
+<p>📌 Ce document est la référence officielle de notre workflow. <br  />
+ Toute l’équipe doit le suivre pour chaque feature. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

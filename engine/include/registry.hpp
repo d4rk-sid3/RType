@@ -17,17 +17,23 @@
  * ------------------------------------------------------------------------------------
  */
 
+#ifndef INCLUDED_REGISTRY_HPP
+#define INCLUDED_REGISTRY_HPP
+
 /**
+ * @file registry.hpp
+ * @author Farouk OKANLA
  * @brief This file defines the registry class. The registry is a container for
  * all the entities and components of the game. It is home to the ECS engine. It
  * stores the entities and the components and provides ways to interact with
  * them. It also provides the systems that will be executed at each frame to
  * update the state of the entities and their components
+ * @version 0.1
+ * @date 2025-10-13
+ *
+ * @copyright Copyright (c) 2025
  *
  */
-
-#ifndef INCLUDED_REGISTRY_HPP
-#define INCLUDED_REGISTRY_HPP
 
 #include <algorithm>
 #include <any>
@@ -47,38 +53,38 @@
 using namespace std;
 
 /**
- * @brief The registry class. The registry is a container for all the entities and
- * components of the game. It is home to the ECS engine. It stores the entities
- * and the components and provides ways to interact with them. It also provides
- * the systems that will be executed at each frame to update the state of the
- * entities and their components.
+ * @brief The registry class. The registry is a container for all the entities
+ * and components of the game. It is home to the ECS engine. It stores the
+ * entities and the components and provides ways to interact with them. It also
+ * provides the systems that will be executed at each frame to update the state
+ * of the entities and their components.
  *
  */
 class registry {
-    public:
+  public:
     /**
      * @brief A boolean that indicates if the collisions system is active
-     * 
+     *
      */
     bool collisions_active = true;
     /**
      * @brief A boolean that indicates if the render system is active
-     * 
+     *
      */
     bool render_active = true;
     /**
      * @brief A boolean that indicates if the logic system is active
-     * 
+     *
      */
     bool logic_active = true;
     /**
      * @brief A boolean that indicates if the control system is active
-     * 
+     *
      */
     bool control_active = true;
     /**
      * @brief A vector of entities id that are dead and can be reused
-     * 
+     *
      */
     vector<entity> dead_entities;
 
@@ -96,7 +102,6 @@ class registry {
 
     /* Single component management */
     template <typename Component> void remove_component(entity const& from);
-
 
     template <typename Component>
     Component& add_component(entity const& to, Component&& c);
@@ -160,7 +165,6 @@ class registry {
     sf::Clock clock;
 
     void register_all_systems();
-
 };
 
 #include "../src/registry_single_comp.tpp"

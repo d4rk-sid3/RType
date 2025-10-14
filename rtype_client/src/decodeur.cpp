@@ -1,24 +1,26 @@
-/* ------------------------------------------------------------------------------------ *
+/* ------------------------------------------------------------------------------------
+ * *
  *                                                                                      *
- * EPITECH PROJECT - Wed, Sep, 2025                                                     *
- * Title           - G-CPP-500-COT-5-1-rtype-8                                          *
- * Description     -                                                                    *
- *     decodeur                                                                         *
+ * EPITECH PROJECT - Wed, Sep, 2025 * Title           -
+ * G-CPP-500-COT-5-1-rtype-8                                          *
+ * Description     - * decodeur *
  *                                                                                      *
- * ------------------------------------------------------------------------------------ *
+ * ------------------------------------------------------------------------------------
+ * *
  *                                                                                      *
- *         ░        ░       ░░        ░        ░        ░░      ░░  ░░░░  ░             *
- *         ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒             *
- *         ▓      ▓▓▓       ▓▓▓▓▓  ▓▓▓▓▓▓▓  ▓▓▓▓      ▓▓▓  ▓▓▓▓▓▓▓        ▓             *
- *         █  ███████  ██████████  ███████  ████  ███████  ████  █  ████  █             *
- *         █        █  ███████        ████  ████        ██      ██  ████  █             *
+ *         ░        ░       ░░        ░        ░        ░░      ░░  ░░░░  ░ * ▒
+ * ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒             *
+ *         ▓      ▓▓▓       ▓▓▓▓▓  ▓▓▓▓▓▓▓  ▓▓▓▓      ▓▓▓  ▓▓▓▓▓▓▓        ▓ * █
+ * ███████  ██████████  ███████  ████  ███████  ████  █  ████  █             *
+ *         █        █  ███████        ████  ████        ██      ██  ████  █ *
  *                                                                                      *
- * ------------------------------------------------------------------------------------ */
+ * ------------------------------------------------------------------------------------
+ */
 
 #include "../include/client.hpp"
 
-EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
-{
+EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer
+) {
     std::vector<int8_t> tmp;
 
     {
@@ -27,7 +29,7 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
         tmp.insert(tmp.begin(), buffer.begin(), buffer.end() + 9);
     }
 
-    if (tmp[0] !=  0x37) {
+    if (tmp[0] != 0x37) {
         throw std::runtime_error("Invalid message type !");
     }
 
@@ -44,7 +46,7 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
     };
 
     EnemyMovedResponse pos;
-    
+
     pos.type = tmp[0];
     pos.enemy_id = toInt16(tmp[1], tmp[2]);
     pos.enemy_type = static_cast<EnemyType>(toInt16(tmp[3], tmp[4]));
@@ -58,8 +60,7 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
     return pos;
 }
 
-NbrEntity Client::decodeNbrEntity(std::vector<int8_t>& buffer)
-{
+NbrEntity Client::decodeNbrEntity(std::vector<int8_t>& buffer) {
     std::vector<int8_t> tmp;
 
     {

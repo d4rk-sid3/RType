@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['texture_0',['TEXTURE',['../ResourceManager_8hpp.html#a509a729cba5db28cddc3c2ec18d0d83aa3f07a311da6e3003d3922d665098da2d',1,'ResourceManager.hpp']]],
-  ['transition_1',['TRANSITION',['../client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c',1,'client.hpp']]]
+  ['hard_0',['HARD',['../server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f',1,'server.hpp']]]
 ];

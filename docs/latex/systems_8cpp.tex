@@ -1,5 +1,10 @@
 \doxysection{/home/amour/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/engine/src/systems.cpp File Reference}
 \hypertarget{systems_8cpp}{}\label{systems_8cpp}\index{/home/amour/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/src/systems.cpp@{/home/amour/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/src/systems.cpp}}
+
+
+This file contains the definition of the different systems of the registry.  
+
+
 {\ttfamily \#include \"{}../include/components.\+hpp\"{}}\newline
 {\ttfamily \#include \"{}../include/registry.\+hpp\"{}}\newline
 Include dependency graph for systems.\+cpp\+:\nopagebreak
@@ -25,6 +30,8 @@ void \mbox{\hyperlink{systems_8cpp_a22759635a24090e7b56c0368ba19ad42}{logic\+\_\
 
 
 \doxysubsection{Detailed Description}
+This file contains the definition of the different systems of the registry. 
+
 \begin{DoxyAuthor}{Author}
 Farouk OKANLA 
 \end{DoxyAuthor}
@@ -142,7 +149,7 @@ The logic system goes through each entity with a logic component and executes it
 
 The position system. This system updates the position of each entity based on its velocity. 
 
-This file contains the declaration of the different systems of the registry. Systems are functions that will be executed at each frame to update the state of all the components.
+The position system goes through each entity and updates its position based on its velocity.
 
 
 \begin{DoxyParams}{Parameters}

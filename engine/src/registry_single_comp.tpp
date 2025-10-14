@@ -16,13 +16,19 @@
  *                                                                                      *
  * ------------------------------------------------------------------------------------ */
 
-/**
- * @brief This file contains the implementation of the registry methods that handle the single component operations
- * 
- */
-
 #ifndef INCLUDED_REGISTRY_SINGLE_COMP_TPP
 #define INCLUDED_REGISTRY_SINGLE_COMP_TPP
+
+/**
+ * @file registry_single_comp.tpp
+ * @author Farouk OKANLA
+ * @brief This file contains the implementation of the registry functions to handle single components operations
+ * @version 0.1
+ * @date 2025-10-13
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 
 #include "../include/registry.hpp"
 #include "../include/components.hpp"

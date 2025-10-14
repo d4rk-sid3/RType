@@ -77,10 +77,14 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">server.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>The file contains the definition of the server class.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;Factory.hpp&quot;</code><br />
@@ -91,7 +95,7 @@ Include dependency graph for server.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="server_8hpp__incl.png" border="0" usemap="#a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hpp" alt=""/></div>
 <map name="a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hpp" id="a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hpp">
-<area shape="rect" title=" " alt="" coords="127,5,302,64"/>
+<area shape="rect" title="The file contains the definition of the server class." alt="" coords="127,5,302,64"/>
 <area shape="rect" title=" " alt="" coords="5,195,80,221"/>
 <area shape="poly" title=" " alt="" coords="188,66,67,186,63,182,184,63"/>
 <area shape="rect" title=" " alt="" coords="103,195,161,221"/>
@@ -100,7 +104,7 @@ Include dependency graph for server.hpp:</div>
 <area shape="poly" title=" " alt="" coords="217,64,217,97,212,97,212,64"/>
 <area shape="rect" title=" " alt="" coords="283,112,378,139"/>
 <area shape="poly" title=" " alt="" coords="253,62,304,101,301,105,250,66"/>
-<area shape="rect" href="registry_8hpp.html" title=" " alt="" coords="558,112,647,139"/>
+<area shape="rect" href="registry_8hpp.html" title="This file defines the registry class. The registry is a container for all the entities and components..." alt="" coords="558,112,647,139"/>
 <area shape="poly" title=" " alt="" coords="303,53,544,108,543,113,301,58"/>
 <area shape="poly" title=" " alt="" coords="558,133,317,156,186,172,91,189,83,192,82,186,90,184,185,167,317,151,558,128"/>
 <area shape="poly" title=" " alt="" coords="558,132,391,149,285,165,181,189,173,192,171,187,179,184,284,160,390,143,558,127"/>
@@ -118,15 +122,15 @@ Include dependency graph for server.hpp:</div>
 <area shape="poly" title=" " alt="" coords="647,125,757,129,912,139,1090,156,1270,184,1285,187,1284,193,1269,189,1089,162,912,144,757,134,647,130"/>
 <area shape="rect" title=" " alt="" coords="779,427,917,453"/>
 <area shape="poly" title=" " alt="" coords="647,123,741,125,856,132,911,140,961,151,1001,166,1028,185,1040,201,1046,217,1046,251,1032,285,1008,318,978,349,944,377,883,421,880,416,941,373,974,345,1004,315,1027,282,1040,250,1041,218,1035,203,1025,189,999,170,960,156,911,145,855,138,741,130,647,129"/>
-<area shape="rect" href="ResourceManager_8hpp.html" title=" " alt="" coords="337,352,489,379"/>
+<area shape="rect" href="ResourceManager_8hpp.html" title="The ResourceManager file. Contains the declaration of the ResourceManager class." alt="" coords="337,352,489,379"/>
 <area shape="poly" title=" " alt="" coords="558,132,496,139,426,150,365,166,342,176,327,188,324,198,323,212,327,249,342,303,359,324,380,341,377,346,356,328,337,305,322,250,317,212,318,196,323,185,339,172,363,161,425,144,496,133,558,127"/>
 <area shape="rect" href="entity_8hpp.html" title="This file contains the definition of the entity class." alt="" coords="236,352,313,379"/>
 <area shape="poly" title=" " alt="" coords="558,133,495,140,423,151,359,167,334,177,318,189,304,204,294,223,281,263,276,303,275,337,270,337,270,303,276,262,289,220,300,201,314,185,332,173,357,162,422,146,494,135,558,128"/>
-<area shape="rect" href="exceptions_8hpp.html" title=" " alt="" coords="337,195,447,221"/>
+<area shape="rect" href="exceptions_8hpp.html" title="This file contains definition of the exceptions thrown by the engine." alt="" coords="337,195,447,221"/>
 <area shape="poly" title=" " alt="" coords="571,142,439,192,437,187,569,137"/>
-<area shape="rect" href="registry__single__comp_8tpp.html" title=" " alt="" coords="708,187,847,229"/>
+<area shape="rect" href="registry__single__comp_8tpp.html" title="This file contains the implementation of the registry functions to handle single components operation..." alt="" coords="708,187,847,229"/>
 <area shape="poly" title=" " alt="" coords="624,137,712,178,710,183,622,142"/>
-<area shape="rect" href="registry__tables_8tpp.html" title=" " alt="" coords="521,195,684,221"/>
+<area shape="rect" href="registry__tables_8tpp.html" title="This file contains the implementation of the registry functions to handle components tables." alt="" coords="521,195,684,221"/>
 <area shape="poly" title=" " alt="" coords="598,139,597,180,591,180,593,139"/>
 <area shape="poly" title=" " alt="" coords="390,382,313,422,310,417,388,377"/>
 <area shape="poly" title=" " alt="" coords="490,377,765,422,764,427,489,382"/>
@@ -155,14 +159,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="server_8hpp__dep__incl.png" border="0" usemap="#a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hppdep" alt=""/></div>
 <map name="a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hppdep" id="a_2home_2amour_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2server_8hppdep">
-<area shape="rect" title=" " alt="" coords="303,5,477,64"/>
+<area shape="rect" title="The file contains the definition of the server class." alt="" coords="303,5,477,64"/>
 <area shape="rect" href="rtype__server_2src_2commands_8cpp.html" title=" " alt="" coords="5,112,185,171"/>
 <area shape="poly" title=" " alt="" coords="296,72,177,114,175,109,294,67"/>
 <area shape="rect" href="rtype__server_2src_2decodeur_8cpp.html" title=" " alt="" coords="208,112,377,171"/>
 <area shape="poly" title=" " alt="" coords="355,77,321,113,317,110,351,73"/>
 <area shape="rect" href="init__server_8cpp.html" title="This file contains the definition of the server initializing funcions." alt="" coords="401,112,576,171"/>
 <area shape="poly" title=" " alt="" coords="428,73,463,110,459,113,425,77"/>
-<area shape="rect" href="level__handling_8cpp.html" title=" " alt="" coords="600,112,798,171"/>
+<area shape="rect" href="level__handling_8cpp.html" title="This file contains the definition of the level handling functions." alt="" coords="600,112,798,171"/>
 <area shape="poly" title=" " alt="" coords="489,67,615,109,613,114,487,72"/>
 </map>
 </div>
@@ -181,16 +185,27 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a498d9f026138406895e9a34b504ac6a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8hpp.html#a498d9f026138406895e9a34b504ac6a6">WINDOW_WIDTH</a>&#160;&#160;&#160;738</td></tr>
-<tr class="memdesc:a498d9f026138406895e9a34b504ac6a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The file contains the definition of the server class.  <br /></td></tr>
 <tr class="separator:a498d9f026138406895e9a34b504ac6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5473cf64fa979b48335079c99532e243"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8hpp.html#a5473cf64fa979b48335079c99532e243">WINDOW_HEIGHT</a>&#160;&#160;&#160;432</td></tr>
 <tr class="separator:a5473cf64fa979b48335079c99532e243"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr class="memitem:a5a2a77296b8aa6c2e6f8903b6e9babee"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93">diff_mode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8hpp.html#a5a2a77296b8aa6c2e6f8903b6e9babee">diff_mode_t</a></td></tr>
+<tr class="memdesc:a5a2a77296b8aa6c2e6f8903b6e9babee"><td class="mdescLeft">&#160;</td><td class="mdescRight">An enum to store the difficulty of the game.  <br /></td></tr>
+<tr class="separator:a5a2a77296b8aa6c2e6f8903b6e9babee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e20dfd8260e2313e3f25e0b2152d78c"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structentity__info__s.html">entity_info_s</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8hpp.html#a3e20dfd8260e2313e3f25e0b2152d78c">entity_info_t</a></td></tr>
 <tr class="memdesc:a3e20dfd8260e2313e3f25e0b2152d78c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct to store the information of an entity to be spawned on the level.  <br /></td></tr>
 <tr class="separator:a3e20dfd8260e2313e3f25e0b2152d78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a27f718e46e2194b1b59f97cab001aa93"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93">diff_mode</a> { <a class="el" href="server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93a26d394b5caf2853dbcef5884f0f068dd">EASY</a>
+, <a class="el" href="server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93a5340ec7ecef6cc3886684a3bd3450d64">MEDIUM</a>
+, <a class="el" href="server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f">HARD</a>
+ }</td></tr>
+<tr class="memdesc:a27f718e46e2194b1b59f97cab001aa93"><td class="mdescLeft">&#160;</td><td class="mdescRight">An enum to store the difficulty of the game.  <a href="server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93">More...</a><br /></td></tr>
+<tr class="separator:a27f718e46e2194b1b59f97cab001aa93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -200,8 +215,17 @@ Variables</h2></td></tr>
 <tr class="memitem:ae70b2136c6af0a96d5e51407e69d3c8b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8hpp.html#ae70b2136c6af0a96d5e51407e69d3c8b">player2_entity_id</a> = -1</td></tr>
 <tr class="memdesc:ae70b2136c6af0a96d5e51407e69d3c8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A global variable to store the id of the second player in the registry.  <br /></td></tr>
 <tr class="separator:ae70b2136c6af0a96d5e51407e69d3c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af203dedfe7d4a9f0aa4fce4a2e48bdab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="server_8hpp.html#a5a2a77296b8aa6c2e6f8903b6e9babee">diff_mode_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8hpp.html#af203dedfe7d4a9f0aa4fce4a2e48bdab">diff_mode</a> = <a class="el" href="server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93a5340ec7ecef6cc3886684a3bd3450d64">MEDIUM</a></td></tr>
+<tr class="memdesc:af203dedfe7d4a9f0aa4fce4a2e48bdab"><td class="mdescLeft">&#160;</td><td class="mdescRight">A gloal variable to store the difficulty of the game.  <br /></td></tr>
+<tr class="separator:af203dedfe7d4a9f0aa4fce4a2e48bdab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The file contains the definition of the server class. </p>
+<dl class="section author"><dt>Author</dt><dd>Farouk OKANLA </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025-10-13</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 </dd></dl>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a5473cf64fa979b48335079c99532e243" name="a5473cf64fa979b48335079c99532e243"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5473cf64fa979b48335079c99532e243">&#9670;&#160;</a></span>WINDOW_HEIGHT</h2>
 
@@ -228,11 +252,25 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The file contains the definition of the server class. </p>
-
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="a5a2a77296b8aa6c2e6f8903b6e9babee" name="a5a2a77296b8aa6c2e6f8903b6e9babee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a2a77296b8aa6c2e6f8903b6e9babee">&#9670;&#160;</a></span>diff_mode_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93">diff_mode</a> <a class="el" href="server_8hpp.html#a5a2a77296b8aa6c2e6f8903b6e9babee">diff_mode_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An enum to store the difficulty of the game. </p>
+
+</div>
+</div>
 <a id="a3e20dfd8260e2313e3f25e0b2152d78c" name="a3e20dfd8260e2313e3f25e0b2152d78c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3e20dfd8260e2313e3f25e0b2152d78c">&#9670;&#160;</a></span>entity_info_t</h2>
 
@@ -249,7 +287,53 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a27f718e46e2194b1b59f97cab001aa93" name="a27f718e46e2194b1b59f97cab001aa93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27f718e46e2194b1b59f97cab001aa93">&#9670;&#160;</a></span>diff_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93">diff_mode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>An enum to store the difficulty of the game. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a27f718e46e2194b1b59f97cab001aa93a26d394b5caf2853dbcef5884f0f068dd" name="a27f718e46e2194b1b59f97cab001aa93a26d394b5caf2853dbcef5884f0f068dd"></a>EASY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a27f718e46e2194b1b59f97cab001aa93a5340ec7ecef6cc3886684a3bd3450d64" name="a27f718e46e2194b1b59f97cab001aa93a5340ec7ecef6cc3886684a3bd3450d64"></a>MEDIUM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f" name="a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f"></a>HARD&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="af203dedfe7d4a9f0aa4fce4a2e48bdab" name="af203dedfe7d4a9f0aa4fce4a2e48bdab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af203dedfe7d4a9f0aa4fce4a2e48bdab">&#9670;&#160;</a></span>diff_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="server_8hpp.html#a5a2a77296b8aa6c2e6f8903b6e9babee">diff_mode_t</a> <a class="el" href="server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93">diff_mode</a> = <a class="el" href="server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93a5340ec7ecef6cc3886684a3bd3450d64">MEDIUM</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A gloal variable to store the difficulty of the game. </p>
+
+</div>
+</div>
 <a id="ae955d48f44384878e63e44527f872ebe" name="ae955d48f44384878e63e44527f872ebe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae955d48f44384878e63e44527f872ebe">&#9670;&#160;</a></span>player1_entity_id</h2>
 

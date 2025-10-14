@@ -17,10 +17,9 @@
  * ------------------------------------------------------------------------------------
  */
 
-
 /**
  * @brief The Factory file. Contains the declaration of the Factory class.
- * 
+ *
  */
 #ifndef INCLUDED_FACTORY_HPP
 #define INCLUDED_FACTORY_HPP
@@ -33,10 +32,11 @@
 /**
  * @brief The Factory class. Handles the creation of entities.
  *  Since the entities of the ECS are defined by components, the Factory class
- *  is used to create predefined entities with the correct components configuration
- *  in a simple and reusable way. The factory then holds various functions, each one
- *  creating an entity with the correct components configuration. The factory also holds
- *  a reference to the registry, which is used to add the entities to the registry.
+ *  is used to create predefined entities with the correct components
+ * configuration in a simple and reusable way. The factory then holds various
+ * functions, each one creating an entity with the correct components
+ * configuration. The factory also holds a reference to the registry, which is
+ * used to add the entities to the registry.
  */
 class Factory {
   private:
@@ -48,7 +48,7 @@ class Factory {
     /**
      * @brief Creates an entity with the correct components configuration
      * corresponding to the given type. If the type is not found, it returns -1
-     * 
+     *
      * @param type The type of the entity to be created
      * @return entity The id of the newly created entity
      */
