@@ -131,9 +131,9 @@ namespace component {
         double frame_timer;
 
         /**
-         * @brief Set the Texture of the sprite to the texture associated with the
-         * name parameter in the ResourceManager
-         * 
+         * @brief Set the Texture of the sprite to the texture associated with
+         * the name parameter in the ResourceManager
+         *
          * @param texture_name the name of the texture in the resource manager
          */
         void setTextureFromName(std::string texture_name) {
@@ -330,17 +330,17 @@ namespace component {
          * @param reg A reference to the registry
          * @param entity The entity that owns this logic component
          */
-        void (*logic_function)(double, class registry &, entity);
-    }logic;
+        void (*logic_function)(double, class registry&, entity);
+    } logic;
 
     /**
-     * @brief The name component, defined by a string. It lets you give a name to each entity
-     * 
+     * @brief The name component, defined by a string. It lets you give a name
+     * to each entity
+     *
      */
     typedef struct name_s {
         std::string _name;
-    }name;
-
+    } name;
 
     /**
      * @brief The audio component defined by a single sf::Music. This component
@@ -353,8 +353,9 @@ namespace component {
     } audio;
 
     /**
-     * @brief The unique_id component, defined by an int. It lets you give a unique id to each entity
-     * 
+     * @brief The unique_id component, defined by an int. It lets you give a
+     * unique id to each entity
+     *
      */
     typedef int unique_id;
 } // namespace component

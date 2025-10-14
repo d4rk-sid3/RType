@@ -30,9 +30,9 @@
  * the state of all the components
  * @version 0.1
  * @date 2025-10-13
- * 
+ *
  * @copyright Copyright (c) 2025
- * 
+ *
  */
 
 #include "components.hpp"

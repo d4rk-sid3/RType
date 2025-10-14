@@ -17,7 +17,6 @@
  * ------------------------------------------------------------------------------------
  */
 
-
 #ifndef INCLUDED_EXCEPTIONS_HPP
 #define INCLUDED_EXCEPTIONS_HPP
 
@@ -27,9 +26,9 @@
  * @brief  This file contains definition of the exceptions thrown by the engine
  * @version 0.1
  * @date 2025-10-13
- * 
+ *
  * @copyright Copyright (c) 2025
- * 
+ *
  */
 #include <exception>
 

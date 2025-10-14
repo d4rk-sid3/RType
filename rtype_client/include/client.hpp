@@ -14,20 +14,19 @@
  * @brief The client class definition file
  * @version 0.1
  * @date 2025-10-13
- * 
+ *
  * @copyright Copyright (c) 2025
- * 
+ *
  */
 
 #include <algorithm>
+#include <map>
 #include <vector>
 
 #include "../../utility_classes/include/Network.hpp"
 #include "Factory.hpp"
-#include "registry.hpp"
-#include "Factory.hpp"
 #include "entity.hpp"
-#include <map>
+#include "registry.hpp"
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -35,13 +34,13 @@
 /**
  * @brief A global variable to store the id of the player in the registry
  * This variable is useful to access infos on the player all accross the program
- * 
+ *
  */
 inline int player_entity_id = -1;
 
 /**
  * @brief A struct to store infos on an entity to be spawned in the level
- * 
+ *
  */
 typedef struct entity_info_s {
     entity entity_id;
@@ -52,7 +51,7 @@ typedef struct entity_info_s {
 
 /**
  * @brief An enum to define the different states of the game
- * 
+ *
  */
 typedef enum { MENU, TRANSITION, GAME, GAME_OVER } state_t;
 
@@ -67,9 +66,10 @@ typedef struct menu_info_s {
 
 /**
  * @brief The client class. Handles the client side of the game.
- * All the client does is send messages to the server if the player tries to move,
- * and also receive the game state from the server in order to update the game
- * 
+ * All the client does is send messages to the server if the player tries to
+ * move, and also receive the game state from the server in order to update the
+ * game
+ *
  */
 class Client {
   private:
@@ -87,14 +87,14 @@ class Client {
     std::vector<EnemyMovedResponse> old;
     std::vector<EnemyMovedResponse> new_vec;
 
-    public:
+  public:
     /**
      * @brief The current state of the game
-     * 
+     *
      */
     state_t state = GAME;
 
-    Client(int p, std::string a, registry &reg);
+    Client(int p, std::string a, registry& reg);
     ~Client();
 
     void initMenu();
@@ -104,10 +104,12 @@ class Client {
     void sendPlayerInput();
     void sendPlayerAction();
 
-    NetworkManager &getManager() { return client_; }
+    NetworkManager& getManager() {
+        return client_;
+    }
 
     std::vector<EnemyMovedResponse> recupAllEntities();
-    
+
     // decodeur
     NbrEntity decodeNbrEntity(std::vector<int8_t>& buffer);
     EnemyMovedResponse decodeEnemyMovedResponse(std::vector<int8_t>& buffer);
