@@ -106,11 +106,6 @@ class Server {
     std::thread networkThread;
 
     /**
-     * @brief Thread for managing information sending cooldowns to clients
-     */
-    std::thread cooldownThread;
-
-    /**
      * @brief Load all information about the level from a file
      * @param path The path to the level file
      */

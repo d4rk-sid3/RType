@@ -96,5 +96,4 @@ void Server::run()
 
     server_.stop();
     networkThread.join();
-    cooldownThread.join();
 }
