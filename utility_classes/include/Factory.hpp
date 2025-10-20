@@ -66,6 +66,8 @@ class Factory {
 
     entity make_red_trooper();
 
+    entity make_plane();
+
     entity make_wall();
 
     entity make_floor();

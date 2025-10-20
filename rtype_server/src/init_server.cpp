@@ -48,6 +48,11 @@ void load_textures(void) {
     ResourceManager::Instance().load(
         "assets/sprites/enemies/enemy_missile.gif", "enemy_missile", TEXTURE
     );
+
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/plane.gif", "plane", TEXTURE
+    );
+
     ResourceManager::Instance().load(
         "assets/sprites/effects/Explosion.png", "explosion", TEXTURE
     );

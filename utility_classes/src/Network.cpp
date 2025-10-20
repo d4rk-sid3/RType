@@ -13,7 +13,7 @@ std::map<std::string, EnemyType> type_map = {
     {"player_missile", TYPE_5}, {"enemy_missile", TYPE_6},
     {"explosion", TYPE_7},      {"hit_effect", TYPE_8},
     {"floor", TYPE_9},          {"ceiling", TYPE_10},
-    {"boss", TYPE_11}
+    {"boss", TYPE_11},           {"plane", TYPE_PLANE} 
 };
 
 NetworkManager::NetworkManager(

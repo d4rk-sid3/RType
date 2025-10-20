@@ -42,6 +42,11 @@ void load_client_textures(void) {
     ResourceManager::Instance().load(
         "assets/sprites/enemies/red_trooper.gif", "red_trooper", TEXTURE
     );
+
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/plane.gif", "plane", TEXTURE
+    );
+
     ResourceManager::Instance().load(
         "assets/sprites/enemies/walker_walk.gif", "walker", TEXTURE
     );

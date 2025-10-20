@@ -46,6 +46,7 @@ extern bool boss_dead;
 
 void player_logic(double delta, registry& reg, entity entity);
 void red_trooper_logic(double delta, registry& reg, entity entity);
+void plane_logic(double delta, registry& reg, entity en);
 void walker_logic(double delta, registry& reg, entity entity);
 void boss_logic(double delta, registry& reg, entity entity);
 void start_text_logic(double delta, registry& reg, entity entity);

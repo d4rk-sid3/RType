@@ -40,7 +40,8 @@ enum EnemyType : int16_t {
     TYPE_8 = 8,
     TYPE_9 = 9,
     TYPE_10 = 10,
-    TYPE_11 = 11
+    TYPE_11 = 11,
+    TYPE_PLANE = 12
 };
 
 /**

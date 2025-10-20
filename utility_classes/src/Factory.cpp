@@ -39,6 +39,7 @@ int unique_ids = 0;
 #define ENEMY_MISSILE_SPEED 5
 #define BACKGROUND_SPEED 50
 #define WALKER_SPEED 120
+#define PLANE_SPEED 100
 
 Factory::Factory(registry& _reg) : reg(_reg) {}
 
@@ -49,6 +50,8 @@ entity Factory::make_entity(const std::string& type) {
         return make_player2();
     else if (type == "red_trooper")
         return make_red_trooper();
+    else if (type == "plane")
+        return make_plane();
     else if (type == "walker")
         return make_walker();
     else if (type == "player_missile")
@@ -214,6 +217,47 @@ entity Factory::make_enemy_missile() {
     );
     unique_ids++;
     return missile_id;
+}
+
+entity Factory::make_plane() {
+    entity plane_id = reg.spawn_entity();
+
+    auto& plane_sprite = reg.add_component<component::animated_drawable>(
+        plane_id, component::animated_drawable()
+    );
+    plane_sprite.setFrameRect(33, 36);
+    plane_sprite.frame_duration = 0.25;
+    plane_sprite.setTextureFromName("plane");
+
+    reg.add_component<component::position>(plane_id, {0, 0});
+    reg.add_component<component::velocity>(plane_id, {-PLANE_SPEED, 0});
+    reg.add_component<component::logic>(
+        plane_id, component::logic{plane_logic}
+    );
+    auto& plane_hurtbox =
+        reg.add_component<component::hurtbox>(plane_id, component::hurtbox());
+    plane_hurtbox.group = 2;
+    plane_hurtbox.health = 20;
+    plane_hurtbox.width = 33;
+    plane_hurtbox.height = 36;
+
+    auto& plane_hitbox =
+        reg.add_component<component::hitbox>(plane_id, component::hitbox());
+    plane_hitbox.targeted_group = 1;
+    plane_hitbox.damage = 20;
+    plane_hitbox.width = 33;
+    plane_hitbox.height = 36;
+    plane_hitbox.one_shot = false;
+
+    auto& entity_name =
+        reg.add_component<component::name>(plane_id, component::name());
+    entity_name._name = "plane";
+
+    reg.add_component<component::unique_id>(
+        plane_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return plane_id;
 }
 
 entity Factory::make_red_trooper() {

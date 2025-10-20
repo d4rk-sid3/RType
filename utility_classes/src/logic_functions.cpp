@@ -155,6 +155,42 @@ bool shoot_at_player(registry& reg, position enemy_pos, double attack_range) {
     return true;
 }
 
+void plane_logic(double delta, registry& reg, entity en) {
+    static bool shot = false;
+    static double shoot_timer = 0;
+    static double t = 0.0;
+    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
+    velocity& vel = reg.get_components<velocity>()[en].value();
+
+    t += delta;
+    vel.vx = -TROOPER_SPEED_X;
+    vel.vy = sin(t * 2) * TROOPER_SPEED_Y;
+
+    if (hb.hurt) {
+        Factory fac(reg);
+        entity hit_effect = fac.make_hit_effect();
+        position& pos = reg.get_components<position>()[en].value();
+        position& hit_pos = reg.get_components<position>()[hit_effect].value();
+        hit_pos.x = pos.x;
+        hit_pos.y = pos.y;
+    }
+
+    if (hb.health <= 0) {
+        Factory fac(reg);
+        entity explosion = fac.make_explosion();
+        position& pos = reg.get_components<position>()[en].value();
+        position& explosion_pos =
+            reg.get_components<position>()[explosion].value();
+        explosion_pos.x = pos.x;
+        explosion_pos.y = pos.y;
+
+        reg.kill_entity(en);
+    }
+
+    position& pos = reg.get_components<position>()[en].value();
+}
+
+
 void red_trooper_logic(double delta, registry& reg, entity en) {
     static bool shot = false;
     static double shoot_timer = 0;
