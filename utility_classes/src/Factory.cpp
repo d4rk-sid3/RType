@@ -39,7 +39,7 @@ int unique_ids = 0;
 #define ENEMY_MISSILE_SPEED 5
 #define BACKGROUND_SPEED 50
 #define WALKER_SPEED 120
-#define PLANE_SPEED 100
+#define PLANE_SPEED 300
 
 Factory::Factory(registry& _reg) : reg(_reg) {}
 

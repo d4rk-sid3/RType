@@ -156,15 +156,7 @@ bool shoot_at_player(registry& reg, position enemy_pos, double attack_range) {
 }
 
 void plane_logic(double delta, registry& reg, entity en) {
-    static bool shot = false;
-    static double shoot_timer = 0;
-    static double t = 0.0;
     hurtbox& hb = reg.get_components<hurtbox>()[en].value();
-    velocity& vel = reg.get_components<velocity>()[en].value();
-
-    t += delta;
-    vel.vx = -TROOPER_SPEED_X;
-    vel.vy = sin(t * 2) * TROOPER_SPEED_Y;
 
     if (hb.hurt) {
         Factory fac(reg);
@@ -186,8 +178,6 @@ void plane_logic(double delta, registry& reg, entity en) {
 
         reg.kill_entity(en);
     }
-
-    position& pos = reg.get_components<position>()[en].value();
 }
 
 

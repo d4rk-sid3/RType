@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['unique_5fid_0',['unique_id',['../namespacecomponent.html#a9d008508800cc3ed05b1794c9569a86e',1,'component']]],
-  ['unique_5fids_1',['unique_ids',['../components_8hpp.html#ac2619880da23ee8b66a14cb027d07c98',1,'components.hpp']]],
-  ['up_2',['up',['../structcomponent_1_1controllable__s.html#a6a8e40517a5c416126fc3d94ffb24b9e',1,'component::controllable_s']]],
-  ['user_20management_3',['6. Database Choice for User Management',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2comparatives__case__study.html#autotoc_md61',1,'']]],
-  ['username_4',['4.7 NAME (0x07) - Change username',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md170',1,'']]],
-  ['users_5',['Users',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md184',1,'4.20 LIST_USERS (0x21) — List Active Users'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md185',1,'4.21 LIST_USERS (0x22) — List Active Users']]]
+  ['v2_201_0',['RFC-RT001: R-TYPE Protocol v2.1',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html',1,'']]],
+  ['velocity_1',['velocity',['../namespacecomponent.html#a428fac7a425dfc47e9997f3e4633ad6a',1,'component']]],
+  ['velocity_5fs_2',['velocity_s',['../structcomponent_1_1velocity__s.html',1,'component']]],
+  ['vx_3',['vx',['../structcomponent_1_1velocity__s.html#a9a529dc007c25ad72c6684d46a370cc4',1,'component::velocity_s']]],
+  ['vy_4',['vy',['../structcomponent_1_1velocity__s.html#ae913ada66e385c24716f89193cb6464f',1,'component::velocity_s']]]
 ];
