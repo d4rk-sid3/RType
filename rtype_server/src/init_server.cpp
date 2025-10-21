@@ -80,6 +80,10 @@ void load_textures(void) {
         "assets/sprites/enemies/enemy_jet.gif", "green_trooper", TEXTURE
     );
 
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/tourelles.gif", "tourelles", TEXTURE
+    );
+
 }
 
 /**

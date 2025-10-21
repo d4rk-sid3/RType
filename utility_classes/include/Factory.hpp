@@ -96,6 +96,8 @@ class Factory {
 
     entity make_green_trooper();
 
+    entity make_tourelles();
+
     entity make_force();
 };
 

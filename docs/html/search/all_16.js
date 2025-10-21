@@ -1,25 +1,4 @@
 var searchData=
 [
-  ['lastmsg_0',['lastmsg',['../classClient.html#a6d1670a31e59886296677d92e6d956c1',1,'Client']]],
-  ['launch_20a_20game_20session_1',['4.10 LAUNCH_SESSION (0x11) — Launch a Game Session',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md42',1,'']]],
-  ['launch_5fsession_200x11_20—_20launch_20a_20game_20session_2',['4.10 LAUNCH_SESSION (0x11) — Launch a Game Session',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md42',1,'']]],
-  ['launch_5fsession_200x12_20—_20server_20response_3',['4.11 LAUNCH_SESSION (0x12) — Server Response',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md43',1,'']]],
-  ['left_4',['left',['../structcomponent_1_1controllable__s.html#a0c50867c275bc34cb3ef415c4ca2ddd8',1,'component::controllable_s']]],
-  ['level_5fhandling_2ecpp_5',['level_handling.cpp',['../level__handling_8cpp.html',1,'']]],
-  ['leveltimer_6',['levelTimer',['../classClient.html#a564cdb252a08c2cc3b79403ffd81162d',1,'Client::levelTimer'],['../classServer.html#afe9e4034cef5bf65a8cbff9911ee4a54',1,'Server::levelTimer']]],
-  ['like_20shoot_20is_20make_7',['4.25 ACTION_RESPONSE (0x25) — Indicate if an action like (shoot, ..) is make',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md57',1,'']]],
-  ['list_20active_20users_8',['List Active Users',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md52',1,'4.20 LIST_USERS (0x21) — List Active Users'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md53',1,'4.21 LIST_USERS (0x22) — List Active Users']]],
-  ['list_5fusers_200x21_20—_20list_20active_20users_9',['4.20 LIST_USERS (0x21) — List Active Users',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md52',1,'']]],
-  ['list_5fusers_200x22_20—_20list_20active_20users_10',['4.21 LIST_USERS (0x22) — List Active Users',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md53',1,'']]],
-  ['load_11',['load',['../classResourceManager.html#ad2c4fb1c59333ccc9bcff5306cf7ebf8',1,'ResourceManager']]],
-  ['load_5fclient_5ftextures_12',['load_client_textures',['../init__client_8cpp.html#a1957e9ebc2a88bc8e6c87fa64239c299',1,'init_client.cpp']]],
-  ['load_5ftextures_13',['load_textures',['../init__server_8cpp.html#a0c588e2ccf2ed315e2710776feac9eff',1,'init_server.cpp']]],
-  ['loadlevel_14',['loadLevel',['../classServer.html#a098d4a863bdca8def61420859eb52c80',1,'Server']]],
-  ['loggameentities_15',['logGameEntities',['../classServer.html#aee9efcc162e25166da798b5478e62167',1,'Server']]],
-  ['logic_16',['Game Logic',['../server_page.html#game_logic',1,'']]],
-  ['logic_17',['logic',['../namespacecomponent.html#a4389e557b74c9397d726bcf56ba076d0',1,'component']]],
-  ['logic_5factive_18',['logic_active',['../classregistry.html#a772d03d9734330401886ab2d380d52d1',1,'registry']]],
-  ['logic_5ffunction_19',['logic_function',['../structcomponent_1_1logic__s.html#a1362230c1aba4f3a2e565c0747898284',1,'component::logic_s']]],
-  ['logic_5fs_20',['logic_s',['../structcomponent_1_1logic__s.html',1,'component']]],
-  ['logic_5fsystem_21',['logic_system',['../systems_8cpp.html#a22759635a24090e7b56c0368ba19ad42',1,'logic_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::logic &gt; &gt; &amp;logics):&#160;systems.cpp'],['../systems_8hpp.html#a22759635a24090e7b56c0368ba19ad42',1,'logic_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::logic &gt; &gt; &amp;logics):&#160;systems.cpp']]]
+  ['x_0',['x',['../structcomponent_1_1position__s.html#a519bf08e88e2d13cc57b167c737c09f2',1,'component::position_s']]]
 ];

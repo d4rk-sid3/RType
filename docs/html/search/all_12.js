@@ -1,15 +1,11 @@
 var searchData=
 [
-  ['handling_0',['Game State Handling',['../client_page.html#game_state_sec',1,'']]],
-  ['hard_1',['HARD',['../server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f',1,'server.hpp']]],
-  ['health_2',['health',['../structcomponent_1_1hurtbox__s.html#aba96c6a60940bf664b287bdb06901f0d',1,'component::hurtbox_s']]],
-  ['height_3',['height',['../structcomponent_1_1hurtbox__s.html#aefdfca717ae4f367dfff11ddb045c895',1,'component::hurtbox_s::height'],['../structcomponent_1_1hitbox__s.html#a3c8ca6e680cd44c45e76dfc561fd54f6',1,'component::hitbox_s::height']]],
-  ['hello_200x01_20connexion_20initiale_4',['4.1 HELLO (0x01) - Connexion initiale',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md32',1,'']]],
-  ['help_20command_200x05_20get_20commands_20available_5',['4.5 HELP COMMAND (0x05) - Get commands available',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md36',1,'']]],
-  ['help_20response_200x06_20get_20commands_20available_6',['4.6 HELP RESPONSE (0x06) - Get commands available',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md37',1,'']]],
-  ['hitbox_7',['hitbox',['../namespacecomponent.html#a0ae561e88973b1d50eb3048035956866',1,'component']]],
-  ['hitbox_5fs_8',['hitbox_s',['../structcomponent_1_1hitbox__s.html',1,'component']]],
-  ['hurt_9',['hurt',['../structcomponent_1_1hurtbox__s.html#a2c6fe8d0fd1d64fcc76e6af210480fa3',1,'component::hurtbox_s']]],
-  ['hurtbox_10',['hurtbox',['../namespacecomponent.html#a00cb098de199eed73e38d77f78adaed1',1,'component']]],
-  ['hurtbox_5fs_11',['hurtbox_s',['../structcomponent_1_1hurtbox__s.html',1,'component']]]
+  ['targeted_5fgroup_0',['targeted_group',['../structcomponent_1_1hitbox__s.html#aaf505d165aeaf898b7fb6305faa3f928',1,'component::hitbox_s']]],
+  ['text_1',['text',['../structcomponent_1_1text__s.html#a4de4fddc82bc89744614a15f9ac5e0b7',1,'component::text_s::text'],['../namespacecomponent.html#af22b0841d9272d147f626b386da4d9ca',1,'component::text']]],
+  ['text_5fs_2',['text_s',['../structcomponent_1_1text__s.html',1,'component']]],
+  ['texture_3',['TEXTURE',['../ResourceManager_8hpp.html#a509a729cba5db28cddc3c2ec18d0d83aa3f07a311da6e3003d3922d665098da2d',1,'ResourceManager.hpp']]],
+  ['title_4',['title',['../structmenu__info__s.html#aeadcfaed1194b576d159c0450b88462e',1,'menu_info_s']]],
+  ['tmp_5',['tmp',['../classregistry.html#aa643bab506bd89dcfb558fb1255756e5',1,'registry']]],
+  ['transition_6',['TRANSITION',['../client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248a544dafaf104c4d12f4f6590528c12c3c',1,'client.hpp']]],
+  ['type_7',['type',['../structentity__info__s.html#a880a518d54a79a31c8b4d98af8b54eb0',1,'entity_info_s']]]
 ];

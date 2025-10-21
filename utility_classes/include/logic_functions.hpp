@@ -55,6 +55,7 @@ void fade_in_rect_logic(double delta, registry& reg, entity entity);
 void fade_out_rect_logic(double delta, registry& reg, entity entity);
 void force_logic(double delta, registry& reg, entity entity);
 void gtrooper_logic(double delta, registry& reg, entity en);
+void tourelles_logic(double delta, registry& reg, entity en);
 
 #endif
 

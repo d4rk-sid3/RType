@@ -72,6 +72,8 @@ entity Factory::make_entity(const std::string& type) {
         return make_force();
     else if (type == "green_trooper")
         return make_green_trooper();
+    else if (type == "tourelles")
+        return make_tourelles();
     return entity(-1);
 }
 
@@ -733,6 +735,48 @@ entity Factory::make_green_trooper() {
     );
     unique_ids++;
     return gtrooper_id;
+}
+
+entity Factory::make_tourelles() {
+    entity tourelles_id = reg.spawn_entity();
+
+    auto& tourelles_sprite = reg.add_component<component::animated_drawable>(
+        tourelles_id, component::animated_drawable()
+    );
+    tourelles_sprite.setFrameRect(33, 33);
+    tourelles_sprite.frame_duration = 0.25;
+    tourelles_sprite.setTextureFromName("tourelles");
+
+    reg.add_component<component::position>(tourelles_id, {0, 0});
+    reg.add_component<component::velocity>(tourelles_id, {-WALKER_SPEED, 0});
+    reg.add_component<component::logic>(
+        tourelles_id, component::logic{tourelles_logic}
+    );
+
+    auto& tourelles_hurtbox =
+        reg.add_component<component::hurtbox>(tourelles_id, component::hurtbox());
+    tourelles_hurtbox.group = 2;
+    tourelles_hurtbox.health = 40;
+    tourelles_hurtbox.width = 33;
+    tourelles_hurtbox.height = 33;
+
+    auto& tourelles_hitbox =
+        reg.add_component<component::hitbox>(tourelles_id, component::hitbox());
+    tourelles_hitbox.targeted_group = 1;
+    tourelles_hitbox.damage = 20;
+    tourelles_hitbox.width = 33;
+    tourelles_hitbox.height = 33;
+    tourelles_hitbox.one_shot = false;
+
+    auto& entity_name =
+        reg.add_component<component::name>(tourelles_id, component::name());
+    entity_name._name = "tourelles";
+
+    reg.add_component<component::unique_id>(
+        tourelles_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return tourelles_id;
 }
 
 entity Factory::make_boss() {

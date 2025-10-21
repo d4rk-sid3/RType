@@ -1,25 +1,6 @@
 var searchData=
 [
-  ['d’utilisation_0',['D’utilisation',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md7',1,'Exemple d’utilisation'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md17',1,'Exemple d’utilisation']]],
-  ['damage_1',['damage',['../structcomponent_1_1hitbox__s.html#aa328fa75249dba8908792c70b978c6ea',1,'component::hitbox_s']]],
-  ['de_20communication_2',['2.2 Modèle de communication',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md26',1,'']]],
-  ['dead_5fentities_3',['dead_entities',['../classregistry.html#ab2381c1b1b227a150443be6932f7c434',1,'registry']]],
-  ['decodeactionresponse_4',['decodeActionResponse',['../classServer.html#a268043e1a600716d031d621139d9d3a6',1,'Server']]],
-  ['decodeenemymovedresponse_5',['decodeEnemyMovedResponse',['../classClient.html#ad57127e6e1ade439817b5d339ddfbec1',1,'Client']]],
-  ['decodemoveresponse_6',['decodeMoveResponse',['../classServer.html#ac5a491fec7ae16a63d195b4b192f9d48',1,'Server']]],
-  ['decodenbrentity_7',['decodeNbrEntity',['../classClient.html#ad88aa07459555b36bd038b91505b51cf',1,'Client']]],
-  ['decodeur_2ecpp_8',['decodeur.cpp',['../rtype__client_2src_2decodeur_8cpp.html',1,'(Global Namespace)'],['../rtype__server_2src_2decodeur_8cpp.html',1,'(Global Namespace)']]],
-  ['description_9',['Description',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md1',1,'Description'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md9',1,'Description']]],
-  ['details_10',['Details',['../client_page.html#network_details_sec',1,'Network Details'],['../server_page.html#network_details',1,'Network Details']]],
-  ['diff_5fmode_11',['diff_mode',['../server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93',1,'diff_mode:&#160;server.hpp'],['../server_8hpp.html#af203dedfe7d4a9f0aa4fce4a2e48bdab',1,'diff_mode:&#160;server.hpp']]],
-  ['diff_5fmode_5ft_12',['diff_mode_t',['../server_8hpp.html#a5a2a77296b8aa6c2e6f8903b6e9babee',1,'server.hpp']]],
-  ['disconnect_13',['Disconnect',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md48',1,'4.16 DISCONNECT (0x17) — Disconnect'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md49',1,'4.17 DISCONNECT (0x18) — Disconnect']]],
-  ['disconnect_200x17_20—_20disconnect_14',['4.16 DISCONNECT (0x17) — Disconnect',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md48',1,'']]],
-  ['disconnect_200x18_20—_20disconnect_15',['4.17 DISCONNECT (0x18) — Disconnect',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md49',1,'']]],
-  ['done_5fonce_16',['done_once',['../structcomponent_1_1animated__drawable__s.html#a585aba3d5ee3a63eed8d7e466f5a2137',1,'component::animated_drawable_s']]],
-  ['down_17',['down',['../structcomponent_1_1controllable__s.html#a81b8202fa9c13eaeee2bf8e23a4f33ad',1,'component::controllable_s']]],
-  ['draw_5fsystem_18',['draw_system',['../systems_8cpp.html#a169ac84227fdc8f7393eb5257c3f16b2',1,'draw_system(double delta, registry &amp;reg, sf::RenderWindow &amp;window, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::drawable &gt; &gt; &amp;draws, std::vector&lt; optional&lt; component::animated_drawable &gt; &gt; &amp;anim_draws, std::vector&lt; optional&lt; component::text &gt; &gt; &amp;texts):&#160;systems.cpp'],['../systems_8hpp.html#a169ac84227fdc8f7393eb5257c3f16b2',1,'draw_system(double delta, registry &amp;reg, sf::RenderWindow &amp;window, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::drawable &gt; &gt; &amp;draws, std::vector&lt; optional&lt; component::animated_drawable &gt; &gt; &amp;anim_draws, std::vector&lt; optional&lt; component::text &gt; &gt; &amp;texts):&#160;systems.cpp']]],
-  ['drawable_19',['drawable',['../namespacecomponent.html#afaa0e7d53a27314c39fd8984cd068895',1,'component']]],
-  ['drawable_5fs_20',['drawable_s',['../structcomponent_1_1drawable__s.html',1,'component']]],
-  ['du_20protocole_21',['4. Commandes du protocole',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md31',1,'']]]
+  ['old_0',['old',['../classClient.html#a61d68b373a8df6cc460740b4db108f2f',1,'Client']]],
+  ['one_5fshot_1',['one_shot',['../structcomponent_1_1animated__drawable__s.html#a1bedfb04031a38d58df2da5fba3a2ef6',1,'component::animated_drawable_s::one_shot'],['../structcomponent_1_1hitbox__s.html#afc34eddd682b1269b749a4d848174b33',1,'component::hitbox_s::one_shot']]],
+  ['operator_20size_5ft_2',['operator size_t',['../classentity.html#aa02e13bb48fc0623b51a1515dbd943bc',1,'entity']]]
 ];

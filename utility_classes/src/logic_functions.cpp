@@ -531,4 +531,45 @@ void force_logic(double delta, registry& reg, entity en)
     }
 }
 
+void tourelles_logic(double delta, registry& reg, entity en) {
+    static bool tourelles_shot = false;
+    static double tourelles_shoot_timer = 0;
+    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
 
+    if (hb.health <= 0) {
+        Factory fac(reg);
+        entity explosion = fac.make_explosion();
+        position& pos = reg.get_components<position>()[en].value();
+        position& explosion_pos =
+            reg.get_components<position>()[explosion].value();
+        explosion_pos.x = pos.x;
+        explosion_pos.y = pos.y;
+
+        reg.kill_entity(en);
+    }
+
+    if (tourelles_shot) {
+        tourelles_shoot_timer += delta;
+        if (tourelles_shoot_timer > ENEMY_SHOOT_COOLDOWN) {
+            tourelles_shoot_timer = 0;
+            tourelles_shot = false;
+        }
+    } else {
+        tourelles_shoot_timer = 0;
+    }
+
+    position& pos = reg.get_components<position>()[en].value();
+    if (!tourelles_shot) {
+        if (shoot_at_player(reg, pos, 200))
+            tourelles_shot = true;
+    }
+
+    if (hb.hurt) {
+        Factory fac(reg);
+        entity hit_effect = fac.make_hit_effect();
+        position& pos = reg.get_components<position>()[en].value();
+        position& hit_pos = reg.get_components<position>()[hit_effect].value();
+        hit_pos.x = pos.x;
+        hit_pos.y = pos.y;
+    }
+}

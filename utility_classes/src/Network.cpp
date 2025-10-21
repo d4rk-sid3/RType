@@ -14,7 +14,8 @@ std::map<std::string, EnemyType> type_map = {
     {"explosion", TYPE_7},      {"hit_effect", TYPE_8},
     {"floor", TYPE_9},          {"ceiling", TYPE_10},
     {"boss", TYPE_11},          {"plane", TYPE_PLANE},
-    {"force", TYPE_FORCE},      {"green_trooper", TYPE_TROOPPER}
+    {"force", TYPE_FORCE},      {"green_trooper", TYPE_TROOPPER},
+    {"tourelles", TYPE_TOURELLES}
 };
 
 NetworkManager::NetworkManager(
