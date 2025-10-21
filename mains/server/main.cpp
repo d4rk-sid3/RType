@@ -43,9 +43,5 @@ int main(int ac, char **av) {
 
     Server server(std::stoi(av[1]));
 
-    if (boss_dead) {
-        printf("BOSS DEAD\n");
-        break;
-    }
     server.run();
 }

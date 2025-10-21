@@ -98,11 +98,6 @@ class Server {
      */
     std::mutex mtx;
 
-    void loadLevel(const std::string& path);
-    void initializeGame(void);
-    void logGameEntities(void);
-    void receivePlayerInput(double delta);
-
     /**
      * @brief The network manager that handles communication with clients
      */
@@ -158,7 +153,7 @@ class Server {
      * @brief Load all information about the level from a file
      * @param path The path to the level file
      */
-    void loadLevel(const std::string &path);
+    void loadLevel(const std::string& path);
 
     /**
      * @brief Initialize all game related elements

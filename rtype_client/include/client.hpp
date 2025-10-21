@@ -27,6 +27,9 @@
 #include "Factory.hpp"
 #include "entity.hpp"
 #include "registry.hpp"
+#include <algorithm>
+#include <vector>
+#include <map>
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -71,50 +74,171 @@ typedef struct menu_info_s {
  * game
  *
  */
+
 class Client {
   private:
-    registry& _reg;
+    /**
+     * @brief The registry that holds all entities and components
+     */
+    registry reg;
+
+    /**
+     * @brief The factory that creates entities and components
+     */
+    Factory factory;
+
+    /**
+     * @brief The port to connect to the server
+     */
     int port_;
+
+    /**
+     * @brief The menu information
+     */
     menu_info_t menu_info;
+
+    /**
+     * @brief The timer for the level
+     */
     double levelTimer = 0.0;
+
+    /**
+     * @brief The network manager that handles communication with the server
+     */
     NetworkManager client_;
+
+    /**
+     * @brief Mutex for thread safety
+     */
     std::mutex mtx;
 
-    // This map associates the servers_ids to the client_ids in the registry
+    /**
+     * @brief Map that associates server entity IDs to client entity IDs
+     */
     std::unordered_map<size_t, size_t> ids_assoc;
+
+    /**
+     * @brief The last message received from the server
+     */
     std::vector<int8_t> lastmsg;
 
+    /**
+     * @brief Vectors to hold old and new entity states for comparison
+     */
     std::vector<EnemyMovedResponse> old;
     std::vector<EnemyMovedResponse> new_vec;
 
-  public:
+    std::vector<std::vector<EnemyMovedResponse>> entity_states;
+
     /**
-     * @brief The current state of the game
-     *
+     * @brief Window for rendering
      */
-    state_t state = GAME;
+    sf::RenderWindow win;
 
-    Client(int p, std::string a, registry& reg);
-    ~Client();
+    /**
+     * @brief Event for handling window events
+     */
+    sf::Event event;
 
+    /**
+     * @brief The current state of the game (menu, transition, game, game over)
+     */
+    state_t state;
+
+    /**
+     * @brief Clock for managing frame time
+     */
+    sf::Clock frameClock;
+
+    /**
+     * @brief Thread for running the network manager
+     */
+    std::thread networkThread;
+
+    /**
+     * @brief Initialize all menu related elements
+     */
     void initMenu();
+
+    /**
+     * @brief Run the menu logic
+     * @param delta The time elapsed since the last frame
+     */
     void runMenu(double delta);
+
+    /**
+     * @brief Initialize all game related elements
+     */
     void initGame();
+
+    /**
+     * @brief Run the game logic
+     * @param delta The time elapsed since the last frame
+     */
     void runLevel(double delta);
+
+    /**
+     * @brief Send the player's input to the server
+     */
     void sendPlayerInput();
+
+    /**
+     * @brief Send the player's action (e.g., shooting) to the server
+     */
     void sendPlayerAction();
 
-    NetworkManager& getManager() {
-        return client_;
-    }
+  public:
+    /**
+     * @brief Construct a new Client object
+     * @param p The port to connect to the server
+     * @param addr The address of the server
+     */
+    Client(int p, std::string addr);
 
+    /**
+     * @brief Destroy the Client object
+     */
+    ~Client();
+
+    /**
+     * @brief Get all entities from the last server message
+     * @return A vector of EnemyMovedResponse structures representing the entities
+     */
     std::vector<EnemyMovedResponse> recupAllEntities();
 
-    // decodeur
+    /**
+     * @brief Decode a NbrEntity structure from a byte buffer
+     * @param buffer The byte buffer containing the encoded data
+     * @return The decoded NbrEntity structure
+     */
     NbrEntity decodeNbrEntity(std::vector<int8_t>& buffer);
+
+    /**
+     * @brief Decode an EnemyMovedResponse structure from a byte buffer
+     * @param buffer The byte buffer containing the encoded data
+     * @return The decoded EnemyMovedResponse structure
+     */
     EnemyMovedResponse decodeEnemyMovedResponse(std::vector<int8_t>& buffer);
+
+    /**
+     * @brief Encode a MoveResponse structure into a byte buffer
+     * @param pos The MoveResponse structure to encode
+     * @return A vector of int8_t representing the encoded data
+     */
     std::vector<int8_t> encodeMoveResponse(const MoveResponse& pos);
+
+    /**
+     * @brief Encode an ActionResponse structure into a byte buffer
+     * @param pos The ActionResponse structure to encode
+     * @return A vector of int8_t representing the encoded data
+     */
     std::vector<int8_t> encodeActionResponse(const ActionResponse& pos);
+
+    /**
+     * @brief Run the client application
+     */
+    void run();
 };
 
 #endif /* !CLIENT_HPP_ */
+

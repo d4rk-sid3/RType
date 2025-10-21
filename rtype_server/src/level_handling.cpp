@@ -34,6 +34,7 @@
 
 #include "Factory.hpp"
 #include "logic_functions.hpp"
+#include "server.hpp"
 
 using namespace component;
 
@@ -236,7 +237,5 @@ void Server::runLevel(double delta) {
             pos.x = 1000;
         }
     }
-
     receivePlayerInput(delta);
-
 }

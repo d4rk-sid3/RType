@@ -158,7 +158,7 @@ void Client::sendPlayerInput() {
     if (player_entity_id == -1)
         return;
     component::controllable& con =
-        _reg.get_components<component::controllable>()[player_entity_id].value(
+        reg.get_components<component::controllable>()[player_entity_id].value(
         );
 
     if (!con.left && !con.right && !con.up && !con.down)
@@ -248,28 +248,28 @@ void Client::runLevel(double delta) {
     for (auto it = new_vec.begin(); it != new_vec.end(); it++) {
         auto& entity = *it;
         try {
-        if (first_call) {
-            if (getKey(entity.enemy_type) == "player1") {
-                old.push_back(entity);
-                ids_assoc[entity.enemy_id] = factory.make_entity(getKey(entity.enemy_type));
-                player_entity_id = ids_assoc[entity.enemy_id];
-                printf("Player received and created\n");
+            if (first_call) {
+                if (getKey(entity.enemy_type) == "player1") {
+                    old.push_back(entity);
+                    ids_assoc[entity.enemy_id] = factory.make_entity(getKey(entity.enemy_type));
+                    player_entity_id = ids_assoc[entity.enemy_id];
+                    printf("Player received and created\n");
+                }
             }
-        }
-        if (isInside(old, entity.enemy_id)) {
-            printf("Entity %d already exists. Updating\n", entity.enemy_id);
-            auto &pos = reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
-            printf("Update successful\n");
-            pos.x = entity.position.x;
-            pos.y = entity.position.y;
-        } else {
-            printf("Entity %d does not exist. Creating\n", entity.enemy_id);
-            printf("Creating a : %s of type: %d\n", (getKey(entity.enemy_type)).c_str(), entity.enemy_type);
-            ids_assoc[entity.enemy_id] = factory.make_entity(getKey(entity.enemy_type));
-            auto &pos = reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
-            pos.x = entity.position.x;
-            pos.y = entity.position.y;
-        }
+            if (isInside(old, entity.enemy_id)) {
+                printf("Entity %d already exists. Updating\n", entity.enemy_id);
+                auto &pos = reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
+                printf("Update successful\n");
+                pos.x = entity.position.x;
+                pos.y = entity.position.y;
+            } else {
+                printf("Entity %d does not exist. Creating\n", entity.enemy_id);
+                printf("Creating a : %s of type: %d\n", (getKey(entity.enemy_type)).c_str(), entity.enemy_type);
+                ids_assoc[entity.enemy_id] = factory.make_entity(getKey(entity.enemy_type));
+                auto &pos = reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
+                pos.x = entity.position.x;
+                pos.y = entity.position.y;
+            }
         } catch (std::exception &e) {    
         }
     }
@@ -282,7 +282,7 @@ void Client::runLevel(double delta) {
             }
             printf("Entity %d does not exist anymore. Killing\n", entity.enemy_id);
             try {
-                _reg.kill_entity((class entity)(ids_assoc[entity.enemy_id]));
+                reg.kill_entity((class entity)(ids_assoc[entity.enemy_id]));
             } catch (std::exception& e) {
             }
         }
@@ -309,7 +309,7 @@ void Client::initMenu()
     menu_info.start_text = factory.make_start_text();
     menu_info.menu_background_music = factory.make_menu_background_music();
 
-    _reg.add_component<component::controllable>(
+    reg.add_component<component::controllable>(
         menu_info.start_text, component::controllable()
         );
 }
