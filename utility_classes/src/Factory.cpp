@@ -17,6 +17,17 @@
  * ------------------------------------------------------------------------------------
  */
 
+/**
+ * @file Factory.cpp
+ * @author Farouk OKANLA
+ * @brief This file contains the definition of the Factory class
+ * @version 0.1
+ * @date 2025-10-13
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
+
 #include "../include/Factory.hpp"
 
 #include "../../rtype_server/include/server.hpp"
@@ -82,10 +93,13 @@ entity Factory::make_player1() {
     player_hurtbox.width = 32;
     player_hurtbox.height = 16;
 
-    auto &entity_name = reg.add_component<component::name>(player_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(player_id, component::name());
     entity_name._name = "player1";
-    
-    reg.add_component<component::unique_id>(player_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        player_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return player_id;
 }
@@ -114,10 +128,13 @@ entity Factory::make_player2() {
     player_hurtbox.width = 32;
     player_hurtbox.height = 16;
 
-    auto &entity_name = reg.add_component<component::name>(player_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(player_id, component::name());
     entity_name._name = "player2";
-    
-    reg.add_component<component::unique_id>(player_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        player_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return player_id;
 }
@@ -148,10 +165,13 @@ entity Factory::make_player_missile() {
     player_shoot_music.audio->setLoop(false);
     player_shoot_music.audio->play();
 
-    auto &entity_name = reg.add_component<component::name>(missile_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(missile_id, component::name());
     entity_name._name = "player_missile";
-    
-    reg.add_component<component::unique_id>(missile_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        missile_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return missile_id;
 }
@@ -185,10 +205,13 @@ entity Factory::make_enemy_missile() {
     enemy_shoot_music.audio->setLoop(false);
     enemy_shoot_music.audio->play();
 
-    auto &entity_name = reg.add_component<component::name>(missile_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(missile_id, component::name());
     entity_name._name = "enemy_missile";
-    
-    reg.add_component<component::unique_id>(missile_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        missile_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return missile_id;
 }
@@ -223,10 +246,13 @@ entity Factory::make_red_trooper() {
     troper_hitbox.height = 36;
     troper_hitbox.one_shot = false;
 
-    auto &entity_name = reg.add_component<component::name>(troper_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(troper_id, component::name());
     entity_name._name = "red_trooper";
-    
-    reg.add_component<component::unique_id>(troper_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        troper_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return troper_id;
 }
@@ -243,7 +269,9 @@ entity Factory::make_walker() {
 
     reg.add_component<component::position>(walker_id, {0, 0});
     reg.add_component<component::velocity>(walker_id, {-WALKER_SPEED, 0});
-    reg.add_component<component::logic>(walker_id, component::logic{walker_logic});
+    reg.add_component<component::logic>(
+        walker_id, component::logic{walker_logic}
+    );
 
     auto& walker_hurtbox =
         reg.add_component<component::hurtbox>(walker_id, component::hurtbox());
@@ -260,10 +288,13 @@ entity Factory::make_walker() {
     walker_hitbox.height = 33;
     walker_hitbox.one_shot = false;
 
-    auto &entity_name = reg.add_component<component::name>(walker_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(walker_id, component::name());
     entity_name._name = "walker";
-    
-    reg.add_component<component::unique_id>(walker_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        walker_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return walker_id;
 }
@@ -288,10 +319,13 @@ entity Factory::make_explosion() {
     explosion_music.audio->setLoop(false);
     explosion_music.audio->play();
 
-    auto &entity_name = reg.add_component<component::name>(explosion_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(explosion_id, component::name());
     entity_name._name = "explosion";
-    
-    reg.add_component<component::unique_id>(explosion_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        explosion_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return explosion_id;
 }
@@ -315,10 +349,13 @@ entity Factory::make_hit_effect() {
     hit_effect_music.audio->setLoop(false);
     hit_effect_music.audio->play();
 
-    auto &entity_name = reg.add_component<component::name>(hit_effect_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(hit_effect_id, component::name());
     entity_name._name = "hit_effect";
-    
-    reg.add_component<component::unique_id>(hit_effect_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        hit_effect_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return hit_effect_id;
 }
@@ -333,7 +370,8 @@ entity Factory::make_ceiling() {
     ceiling_sprite.sprite.setTextureRect(sf::IntRect(0, 0, 100000, 64));
     ResourceManager::Instance().getTexture("ceiling").setRepeated(true);
 
-    auto &floor_hitbox = reg.add_component<component::hitbox>(ceiling_id, component::hitbox());
+    auto& floor_hitbox =
+        reg.add_component<component::hitbox>(ceiling_id, component::hitbox());
     floor_hitbox.damage = 10;
     floor_hitbox.height = 64;
     floor_hitbox.width = 10000;
@@ -342,10 +380,13 @@ entity Factory::make_ceiling() {
     reg.add_component<component::position>(ceiling_id, {0, -32});
     reg.add_component<component::velocity>(ceiling_id, {-BACKGROUND_SPEED, 0});
 
-    auto &entity_name = reg.add_component<component::name>(ceiling_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(ceiling_id, component::name());
     entity_name._name = "ceiling";
-    
-    reg.add_component<component::unique_id>(ceiling_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        ceiling_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return ceiling_id;
 }
@@ -359,7 +400,8 @@ entity Factory::make_floor() {
     floor_sprite.sprite.setTextureRect(sf::IntRect(0, 0, 100000, 64));
     ResourceManager::Instance().getTexture("ceiling").setRepeated(true);
 
-    auto &floor_hitbox = reg.add_component<component::hitbox>(floor_id, component::hitbox());
+    auto& floor_hitbox =
+        reg.add_component<component::hitbox>(floor_id, component::hitbox());
     floor_hitbox.damage = 10;
     floor_hitbox.height = 64;
     floor_hitbox.width = 10000;
@@ -370,10 +412,13 @@ entity Factory::make_floor() {
     );
     reg.add_component<component::velocity>(floor_id, {-BACKGROUND_SPEED, 0});
 
-    auto &entity_name = reg.add_component<component::name>(floor_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(floor_id, component::name());
     entity_name._name = "floor";
-    
-    reg.add_component<component::unique_id>(floor_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        floor_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return floor_id;
 }
@@ -388,10 +433,13 @@ entity Factory::make_wall() {
     reg.add_component<component::position>(wall_id, {0, 0});
     reg.add_component<component::velocity>(wall_id, {0, 0});
 
-    auto &entity_name = reg.add_component<component::name>(wall_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(wall_id, component::name());
     entity_name._name = "wall";
-    
-    reg.add_component<component::unique_id>(wall_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        wall_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return wall_id;
 }
@@ -411,10 +459,13 @@ entity Factory::make_background() {
         background_id, {-BACKGROUND_SPEED, 0}
     );
 
-    auto &entity_name = reg.add_component<component::name>(background_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(background_id, component::name());
     entity_name._name = "background";
-    
-    reg.add_component<component::unique_id>(background_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        background_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return background_id;
 }
@@ -432,10 +483,13 @@ entity Factory::make_title() {
     title_text.text.setOutlineColor(sf::Color(10, 14, 69));
     title_text.text.setOutlineThickness(2);
 
-    auto &entity_name = reg.add_component<component::name>(title_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(title_id, component::name());
     entity_name._name = "title";
-    
-    reg.add_component<component::unique_id>(title_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        title_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return title_id;
 }
@@ -458,10 +512,13 @@ entity Factory::make_start_text() {
         text_id, component::logic{start_text_logic}
     );
 
-    auto &entity_name = reg.add_component<component::name>(text_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(text_id, component::name());
     entity_name._name = "start_text";
-    
-    reg.add_component<component::unique_id>(text_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        text_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return text_id;
 }
@@ -475,10 +532,13 @@ entity Factory::make_menu_background_music() {
     music.audio->setLoop(true);
     music.audio->play();
 
-    auto &entity_name = reg.add_component<component::name>(music_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(music_id, component::name());
     entity_name._name = "menu_background_music";
-    
-    reg.add_component<component::unique_id>(music_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        music_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return music_id;
 }
@@ -492,10 +552,13 @@ entity Factory::make_game_background_music() {
     music.audio->setLoop(true);
     music.audio->play();
 
-    auto &entity_name = reg.add_component<component::name>(music_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(music_id, component::name());
     entity_name._name = "game_background_music";
-    
-    reg.add_component<component::unique_id>(music_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        music_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return music_id;
 }
@@ -515,10 +578,13 @@ entity Factory::make_fade_in_rect() {
         fade_id, component::logic{fade_in_rect_logic}
     );
 
-    auto &entity_name = reg.add_component<component::name>(fade_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(fade_id, component::name());
     entity_name._name = "fade_in_rect";
-    
-    reg.add_component<component::unique_id>(fade_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        fade_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return fade_id;
 }
@@ -538,16 +604,18 @@ entity Factory::make_fade_out_rect() {
         fade_id, component::logic{fade_out_rect_logic}
     );
 
-    auto &entity_name = reg.add_component<component::name>(fade_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(fade_id, component::name());
     entity_name._name = "fade_out_rect";
-    
-    reg.add_component<component::unique_id>(fade_id, (component::unique_id)unique_ids);
+
+    reg.add_component<component::unique_id>(
+        fade_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return fade_id;
 }
 
-entity Factory::make_boss()
-{
+entity Factory::make_boss() {
     entity boss_id = reg.spawn_entity();
 
     auto& boss_sprite =
@@ -560,14 +628,15 @@ entity Factory::make_boss()
     reg.add_component<component::hurtbox>(boss_id, {500, 2, 130, 50});
     reg.add_component<component::hitbox>(boss_id, {10, 1, 130, 50, false});
 
-    auto &entity_name = reg.add_component<component::name>(boss_id, component::name());
+    auto& entity_name =
+        reg.add_component<component::name>(boss_id, component::name());
     entity_name._name = "boss";
 
-    reg.add_component<component::logic>(
-        boss_id, component::logic{boss_logic}
-    );
+    reg.add_component<component::logic>(boss_id, component::logic{boss_logic});
 
-    reg.add_component<component::unique_id>(boss_id, (component::unique_id)unique_ids);
+    reg.add_component<component::unique_id>(
+        boss_id, (component::unique_id)unique_ids
+    );
     unique_ids++;
     return boss_id;
 }

@@ -1,123 +1,174 @@
-# R-Type
+# **R-Type**
 
-R-Type est une implémentation moderne du célèbre shoot’em up des années 80, construite en **C++**, avec un **moteur maison**, un **client** et un **serveur** réseau.
-Le projet suit une architecture modulaire pour favoriser la maintenance, les tests et l’évolution du code.
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)  
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
----
-
-## 🚀 Fonctionnalités principales
-
-* **Moteur de jeu** (gestion des entités, composants, systèmes).
-* **Architecture client/serveur** pour le multijoueur.
-* **Gestion des ressources** (sprites, audio, effets).
-* **Tests unitaires** intégrés.
-* **Documentation Doxygen** et conventions de commits.
+![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white)
+![vcpkg](https://img.shields.io/badge/vcpkg-%23007ACC.svg?style=for-the-badge&logo=visualstudio&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 
 ---
 
-## 📂 Organisation du projet
+## **Table of Contents**
 
-```
-.
-├── assets/               # Ressources (audio, sprites, backgrounds, effets…)
-├── engine/               # Cœur du moteur de jeu
-│   ├── include/          # Headers du moteur
-│   ├── src/              # Sources du moteur
-│   └── tests/            # Tests unitaires du moteur
-├── mains/                # Points d’entrée client et serveur
-├── rtype_client/         # Code spécifique du client
-├── rtype_server/         # Code spécifique du serveur
-├── utility_classes/      # Classes utilitaires (réseau, factory…)
-├── CMakeLists.txt        # Build principal
-├── conanfile.txt         # Dépendances Conan
-├── compiling.sh          # Script de compilation
-├── COMMIT_CONVENTION.md  # Conventions de commit
-├── development_workflow.md # Workflow de développement
-├── Doxyfile              # Configuration Doxygen
-└── protocol.md           # Spécification du protocole réseau
-```
-
----
-
-## 🛠️ Prérequis
-
-* **C++20** ou plus
-* **CMake ≥ 3.15**
-* **Conan** (gestion des dépendances)
-* **Make**
-* Un compilateur compatible (g++, clang++)
+- [**R-Type**](#r-type)
+  - [**Table of Contents**](#table-of-contents)
+  - [**Introduction**](#introduction)
+    - [**Main Libraries**](#main-libraries)
+    - [**Supported Platforms**](#supported-platforms)
+  - [**The Game**](#the-game)
+    - [**Story**](#story)
+  - [**How to Play ?**](#how-to-play-)
+    - [**Prerequisites**](#prerequisites)
+    - [**How to install and use VCPKG**](#how-to-install-and-use-vcpkg)
+    - [**Launch the Game**](#launch-the-game)
+  - [**For developers**](#for-developers)
+    - [**Build the program**](#build-the-program)
+    - [**Testing program**](#testing-program)
+    - [**Documentation**](#documentation)
+    - [**Technologies choices**](#technologies-choices)
+  - [**Thank for reading**](#thank-for-reading)
+  - [**Authors**](#authors)
 
 ---
 
-## ⚙️ Compilation
+## **Introduction**
 
-### Ou manuellement
+The **Epitech R-Type Project** is a reimagining of the classic shoot’em up **R-Type**, built from scratch using a **custom ECS (Entity Component System)** engine.  
+It includes a **multithreaded C++ server** and a **graphical client**, with networking, physics, UI, and persistence handled through modern open-source libraries.
 
+### **Main Libraries**
+- **SFML** → 2D graphics rendering, sound, and event management  
+- **Asio** → Networking and multithreading  
+- **SQLite3** → Lightweight, embedded database for user and score management  
+- **Libsodium** → Modern cryptographic library for secure password hashing and token management  
+- **vcpkg** → Dependency manager for cross-platform builds  
+
+---
+
+### **Supported Platforms**
+
+✅ **Windows**  
+✅ **Linux**
+
+---
+
+## **The Game**
+
+### **Story**
+
+This story begins in 2442, after humanity barely survives the Fourth World War. The Earth, now fully radioactive, forces humankind to look to the stars.  
+Five geniuses, known as *"Cold_as_Palmer"*, built ships capable of traveling to **Zelta**, a new habitable planet.
+
+But space is not empty.  
+Alien species, energy storms, and cosmic predators now stand between humanity and survival.  
+Only you, as the last pilot, can help them defeat the alien forces and reach Zelta safely.
+
+---
+
+## **How to Play ?**
+
+### **Prerequisites**
+
+You need:
+- **CMake ≥ 3.17**
+- **C++20 compatible compiler**
+- **vcpkg** (for dependency management)
+- On Linux, make sure you have Libx11 and his relatives installed. It's a library on Linux that provides a client-side interface to the X Window System, also known as the Xlib. On ubuntu, you can install it (apt-get install libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev)
+
+### **How to install and use VCPKG**
+
+- On home, git clone https://github.com/microsoft/vcpkg.git 
+- Enter the Add vcpkg to your PATH
+    - On linux (export VCPKG_ROOT=/home/route/to/vcpkg)
+    - On Windows (setx PATH "$env:PATH;C:\vcpkg")
+- You may have to update VCPK :
+    - Enter his repository and git fetch --all && git pull
+    - On Windows, you may also have to execute (.\vcpkg integrate install)
+- After all that, set (set VCPKG_ROOT=C:\vcpkg) and you can run the Game
+
+### **Launch the Game**
+
+After building (see below), simply run:
 ```bash
-mkdir build && cd build
-cmake ..
-cmake --build .
+./r-type_server [port:int] &
+./r-type_client [port:int] [adress:string]
 ```
 
----
+## **For developers**
 
-## ▶️ Exécution
+### **Build the program** 
 
-Le projet suit une architecture **client/serveur**.
-
-### Lancer le serveur
-
+On Linux : - You may execute the following commands :
+You have to install (libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev)
 ```bash
-./mains/server/main
+    git clone https://github.com/microsoft/vcpkg.git
+    cd vcpkg
+    git fetch --all
+    git pull
+    export VCPKG_ROOT=/road/to/vcpkg
+    sudo apt-get install autoconf automake libtool
+    cd road/to/rtype/repo
+    mkdir build
+    cd build
+    cmake ..
+    make
+    cd ..
+    "./r-type_server"
+    "./r-type_client"
+    "./r-type_room"
+    "./r-type_admin_panel"
 ```
 
-### Lancer le client
-
+On Windows : - You may execute the following commands :
 ```bash
-./mains/client/main
+    git clone https://github.com/microsoft/vcpkg.git
+    C:\vcpkg
+    bootstrap-vcpkg.bat
+    setx PATH "$env:PATH;C:\vcpkg"
+    .\vcpkg integrate install
+    set VCPKG_ROOT=C:\vcpkg
+    cd to-rtype-repo
+    mkdir build
+    cd build
+    cmake .. -G "Visual Studio 17 2022" -A x64
+    cmake --build . --coonfig Release
+    copy ".\Release\r-type_server.exe" .
+    copy ".\Release\r-type_client.exe" .
+    copy ".\Release\r-type_room.exe" .
+    copy ".\Release\r-type_admin_panel.exe" .
 ```
 
-*(Tu peux aussi créer des configurations dans ton IDE pour lancer les deux binaires.)*
+### **Testing program** 
 
----
+The project uses Google Tests for testing. They first need to be compiled to be executed.
+You can launch the tests by launching the compiled test binaries.
 
-## 🧪 Tests
-
-Chaque module contient un dossier `tests` avec des tests unitaires.
-Pour compiler et exécuter :
-
-```bash
-cmake --build . --target r-type_tests   # exemple pour le moteur
-./engine/tests/registry_tests           # exécution
+Lauch the regular compilation with CMake
+``` bash
+rm -rf build && mkdir build && cd build && cmake .. & make
+```
+The test binaries will be in the build directory. Just lanch them. For example:
+``` bash
+./registry_tests
 ```
 
----
+### **Documentation**
 
-## 📚 Documentation
+🧠 **Code Reference:** Generated with [Doxygen](https://www.doxygen.nl/)  
+📘 **Technical Docs:** [Notion Documentation](https://amazing-partridge-567)  
+📜 **Communication Protocol:** [docs/protocol.md](./docs/protocol.md)  
+💾 **Database Schema:** [docs/database.md](./docs/database.md)
 
-* **Documentation Doxygen** :
+### **Technologies choices**
 
-  ```bash
-  doxygen Doxyfile
-  ```
+Please consult the comparative study document [docs/comparatives_case_study.md](./docs/comparatives_case_study.md)
 
-  La documentation sera générée dans `docs/html`.
+## **Thank for reading**
 
-* **Conventions de commit** : voir `COMMIT_CONVENTION.md`
+Feel free to read the CONTRIBUTING.md. Do not hesitate to contact any member for any questions or remarks. You can click on each following name.
 
-* **Workflow de développement** : voir `development_workflow.md`
+## **Authors** 
 
-* **Protocole réseau** : voir `protocol.md`
-
----
-
-## 🤝 Contribution
-
-1. Forker le dépôt
-2. Créer une branche feature :
-
-   ```bash
-   git checkout -b feature/ma-feature
-   ```
-3. Committer selon `COMMIT_CONVENTION.md`
-4. Push et ouvrir une Pull Request
+<table> <tbody> <tr> <td align="center"><a href="https://github.com/FaroukJGRNT"><img src="https://avatars.githubusercontent.com/u/72017980?v=4" width="100px;" alt="FaroukJGRNT"/><br/><sub><b>Farouk OKANLA</b></sub></a><br/></td> <td align="center"><a href="https://github.com/amourguidi"><img src="https://avatars.githubusercontent.com/u/146477290?v=4" width="100px;" alt="amourguidi"/><br/><sub><b>Amour Guidi</b></sub></a><br/></td> <td align="center"><a href="https://github.com/Akanphi"><img src="https://avatars.githubusercontent.com/u/146476246?v=4" width="100px;" alt="Akanphi"/><br/><sub><b>Philippe ABIODOUN</b></sub></a><br/></td> <td align="center"><a href="https://github.com/racso27th"><img src="https://avatars.githubusercontent.com/u/72010794?v=4" width="100px;" alt="racso27th"/><br/><sub><b>Oscar Gbenou</b></sub></a><br/></td> <td align="center"><a href="https://github.com/Aimane01"><img src="https://avatars.githubusercontent.com/u/72015360?v=4" width="100px;" alt="Aimane01"/><br/><sub><b>Aïmane ALASSANE</b></sub></a><br/></td> </tr> </tbody> </table>

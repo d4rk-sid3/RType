@@ -20,7 +20,8 @@
 /**
  * @file systems.cpp
  * @author Farouk OKANLA
- * @brief
+ * @brief This file contains the definition of the different systems of the
+ * registry
  * @version 0.1
  * @date 2025-09-23
  *
@@ -31,6 +32,14 @@
 #include "../include/components.hpp"
 #include "../include/registry.hpp"
 
+/**
+ * @brief The position system. This system updates the position of each entity
+ *  based on its velocity
+ * @param delta The amount of time elapsed since the last frame
+ * @param reg A reference to the registry
+ * @param positions The table of position components
+ * @param velocities The table of velocity components
+ */
 void position_system(
     double delta, registry& reg,
     std::vector<optional<component::position>>& positions,
@@ -51,12 +60,26 @@ void position_system(
     }
 }
 
-void draw_system(double delta, registry &reg, sf::RenderWindow &window,
-                        std::vector<optional<component::position>> &positions,
-                        std::vector<optional<component::drawable>> &draws,
-                        std::vector<optional<component::animated_drawable>> &anim_draws,
-                        std::vector<optional<component::text>> &texts)
-{
+/**
+ * @brief The draw system. This system draws to screen all the entities that
+ * have a drawable, animated drawable or text component AND a position
+ * component.
+ *
+ * @param delta The amount of time elapsed since the last frame
+ * @param reg A reference to the registry
+ * @param window A reference to render window
+ * @param positions The table of position components
+ * @param draws The table of drawable components
+ * @param anim_draws The table of animated drawable components
+ * @param texts The table of text components
+ */
+void draw_system(
+    double delta, registry& reg, sf::RenderWindow& window,
+    std::vector<optional<component::position>>& positions,
+    std::vector<optional<component::drawable>>& draws,
+    std::vector<optional<component::animated_drawable>>& anim_draws,
+    std::vector<optional<component::text>>& texts
+) {
     if (reg.render_active == false) {
         return;
     }
@@ -83,15 +106,17 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
                 if (anim_draw.value().one_shot && anim_draw.value().done_once) {
                     reg.kill_entity(entity(i));
                     continue;
-                } 
-                anim_draw.value().sprite.setPosition(pos.value().x, pos.value().y);
+                }
+                anim_draw.value().sprite.setPosition(
+                    pos.value().x, pos.value().y
+                );
                 window.draw(anim_draw.value().sprite);
             }
         } catch (...) {
         }
         try {
             auto& pos = positions.at(i);
-            auto &text = texts.at(i);
+            auto& text = texts.at(i);
 
             if (text && pos) {
                 text.value().text.setPosition(pos.value().x, pos.value().y);
@@ -103,6 +128,15 @@ void draw_system(double delta, registry &reg, sf::RenderWindow &window,
     window.display();
 }
 
+/**
+ * @brief The control system. This system updates the controllable components by
+ * listening for inputs and setting the corresponding booleans in the component
+ * to true if the key is pressed and false otherwise
+ *
+ * @param delta The amount of time elapsed since the last frame
+ * @param reg A reference to the registry
+ * @param controls The table of controllable components
+ */
 void control_system(
     double delta, registry& reg,
     std::vector<optional<component::controllable>>& controls
@@ -123,13 +157,22 @@ void control_system(
     }
 }
 
+/**
+ * @brief The collision system. This system goes through each hurtbox and hitbox
+ * component and checks if they are colliding
+ *
+ * @param delta The amount of time elapsed since the last frame
+ * @param reg A reference to the registry
+ * @param positions The table of position components
+ * @param hurtboxes The table of hurtbox components
+ * @param hitboxes The table of hitbox components
+ */
 void collision_system(
     double delta, registry& reg,
     std::vector<optional<component::position>>& positions,
     std::vector<optional<component::hurtbox>>& hurtboxes,
     std::vector<optional<component::hitbox>>& hitboxes
-)
-{
+) {
     if (reg.collisions_active == false) {
         return;
     }
@@ -141,7 +184,7 @@ void collision_system(
             auto& hurtbox = hurtboxes.at(i);
 
             if (pos && hurtbox) {
-                hurtbox.value() .hurt = false;
+                hurtbox.value().hurt = false;
                 for (size_t j = 0; j < reg.getEntityNum(); ++j) {
                     // Go through each hitbox and their positions
                     auto& hit_pos = positions.at(j);
@@ -187,10 +230,16 @@ void collision_system(
     }
 }
 
+/**
+ * @brief The logic system goes through each entity with a logic component and
+ * executes its logic function
+ * @param delta The amount of time elapsed since the last frame
+ * @param reg A reference to the registry
+ * @param logics The table of logic components
+ */
 void logic_system(
     double delta, registry& reg, std::vector<optional<component::logic>>& logics
-)
-{
+) {
     if (reg.logic_active == false) {
         return;
     }

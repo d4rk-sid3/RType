@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['window_5fheight_0',['WINDOW_HEIGHT',['../client_8hpp.html#a5473cf64fa979b48335079c99532e243',1,'WINDOW_HEIGHT:&#160;client.hpp'],['../server_8hpp.html#a5473cf64fa979b48335079c99532e243',1,'WINDOW_HEIGHT:&#160;server.hpp']]],
-  ['window_5fwidth_1',['WINDOW_WIDTH',['../client_8hpp.html#a498d9f026138406895e9a34b504ac6a6',1,'WINDOW_WIDTH:&#160;client.hpp'],['../server_8hpp.html#a498d9f026138406895e9a34b504ac6a6',1,'WINDOW_WIDTH:&#160;server.hpp']]]
+  ['included_5fregistry_5fsingle_5fcomp_5ftpp_0',['INCLUDED_REGISTRY_SINGLE_COMP_TPP',['../registry__single__comp_8tpp.html#a09489f5e2097f52082070aa14df2aaa5',1,'registry_single_comp.tpp']]],
+  ['included_5fregistry_5ftables_5ftpp_1',['INCLUDED_REGISTRY_TABLES_TPP',['../registry__tables_8tpp.html#a37b867be6bb08ea747d3b7dc5380834b',1,'registry_tables.tpp']]]
 ];

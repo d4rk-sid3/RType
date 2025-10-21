@@ -17,6 +17,13 @@
  * ------------------------------------------------------------------------------------
  */
 
+/**
+ * @brief This file contains the logic functions declarations
+ * Logic functions are update functions that can be attached to an entity
+ * in order to give it a behavior. They are executed at each frame
+ *
+ */
+
 #ifndef INCLUDED_LOGICS_FUNCTIONS_HPP
 #define INCLUDED_LOGICS_FUNCTIONS_HPP
 
@@ -26,13 +33,13 @@
 #define PLAYER_MISSISLE_SPEED 10
 #define ENEMY_MISSISLE_SPEED 5
 #define SCROLL_SPEED 5
-#define PLAYER_SPEED 350
+#define PLAYER_SPEED 300
 #define TROOPER_SPEED_X 150
 #define TROOPER_SPEED_Y 60
 #define PLAYER_SHOOT_COOLDOWN 0.25
 #define ENEMY_SHOOT_COOLDOWN 2
 #define BOSS_SHOOT_COOLDOWN 2
-#define BOSS_MISSILE_SPEED 7
+#define BOSS_MISSILE_SPEED 200
 #define BOSS_SPEED 100
 
 extern bool boss_dead;

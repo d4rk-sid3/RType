@@ -7,6 +7,7 @@
 
 #ifndef NETWORK_HPP_
 #define NETWORK_HPP_
+
 #include <asio.hpp>
 #include <cstdlib>
 #include <ctype.h>
@@ -14,7 +15,7 @@
 #include <filesystem>
 #include <iostream>
 #include <limits.h>
-#include <poll.h>
+#include <queue>
 #include <sstream>
 #include <stdbool.h>
 #include <stdio.h>
@@ -23,44 +24,42 @@
 #include <string>
 #include <thread>
 #include <time.h>
-#include <unistd.h>
 #include <vector>
 
-#include <SFML/Graphics.hpp>
+#ifdef _WIN32
+#include <winsock2.h>
+#include <ws2tcpip.h>
+// Alias pour compatibilité
+typedef uint8_t u_int8_t;
+typedef uint16_t u_int16_t;
+typedef uint32_t u_int32_t;
+typedef uint64_t u_int64_t;
+#else
+#include <poll.h>
+#include <unistd.h>
+
 #include <arpa/inet.h>
-#include <bits/stdc++.h>
-#include <netinet/in.h>
 #include <netinet/ip.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
-#include <sys/stat.h>
+#endif
+#include <SFML/Graphics.hpp>
 
 #include "Types.hpp"
 
 class NetworkManager {
   public:
-
     // Constructeurs and destructeurs
-    /**
-     * @brief Construct a new Network Manager object for client
-     * @param port The port to connect to the server
-     * @param address The address of the server
-     * @param lastmsg Reference to the last message received from the server
-     * @param mtx Mutex for thread safety with the last message
-     */
-    NetworkManager(int port, std::string address, std::vector<int8_t> &lastmsg_, std::mutex& mtx_);
-
-    /**
-     * @brief Construct a new Network Manager object for server
-     * @param port The port to listen on
-     * @param clients_lastmsg_ Reference to the list of pairs of clients and their last messages
-     * @param mtx_ Mutex for thread safety with the clients' last messages
-     */
-    NetworkManager(int port, std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> &clients_lastmsg_, std::mutex& mtx_);
-
-    /**
-     * @brief Destroy the Network Manager object
-     */
+    NetworkManager(
+        int port, std::string address, std::vector<int8_t>& lastmsg_,
+        std::mutex& mtx_
+    );
+    NetworkManager(
+        int port,
+        std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>&
+            clients_lastmsg_,
+        std::mutex& mtx_
+    );
     ~NetworkManager();
 
     // Methodes for running the network io_context
@@ -79,15 +78,10 @@ class NetworkManager {
      * @brief Receive messages from clients
      */
     void receive_from_clients();
-
-    /**
-     * @brief Send a message to a specific client
-     * @param msg The message to send
-     * @param size The size of the message
-     * @param client The endpoint of the client to send the message to
-     */
-    void send_to_client( const std::vector<int8_t>& msg, size_t size,
-        const asio::ip::udp::endpoint& client );
+    void send_to_client(
+        const std::vector<int8_t>& msg, size_t size,
+        const asio::ip::udp::endpoint& client
+    );
 
     /**
      * @brief Receive messages from the server
@@ -135,8 +129,10 @@ class NetworkManager {
     /**
      * @brief List of pairs of clients and their last messages (used for server)
      */
-    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> tmp_clients;
-    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> &clients_lastmsg;
+    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>
+        tmp_clients;
+    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>&
+        clients_lastmsg;
 
     /**
      * @brief Reference to the last message received from the server (used for client)

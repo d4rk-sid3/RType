@@ -19,15 +19,21 @@
  * ------------------------------------------------------------------------------------
  */
 
+#ifndef INCLUDED_SYSTEMS_HPP
+#define INCLUDED_SYSTEMS_HPP
+
 /**
+ * @file systems.hpp
+ * @author Farouk OKANLA
  * @brief This file contains the declaration of the different systems of the
  * registry. Systems are functions that will be executed at each frame to update
  * the state of all the components
+ * @version 0.1
+ * @date 2025-10-13
+ *
+ * @copyright Copyright (c) 2025
  *
  */
-
-#ifndef INCLUDED_SYSTEMS_HPP
-#define INCLUDED_SYSTEMS_HPP
 
 #include "components.hpp"
 #include "registry.hpp"
