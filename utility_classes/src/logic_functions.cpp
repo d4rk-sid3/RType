@@ -436,9 +436,11 @@ void gtrooper_logic(double delta, registry& reg, entity en) {
     
     bool is_aligned = (fabs(player_pos.y - pos.y) <= ALIGN_THRESHOLD);
     
+    t += delta;
     if (is_aligned) {
-        t += delta;
+        printf("Aligned. T: %f\n", t);
         if (t >= BOSS_SHOOT_COOLDOWN) {
+            printf("Shooting\n");
             t = 0;
             Factory fac(reg);
             entity missile1 = fac.make_enemy_missile();
