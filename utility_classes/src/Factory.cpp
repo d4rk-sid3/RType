@@ -68,7 +68,8 @@ entity Factory::make_entity(const std::string& type) {
         return make_explosion();
     else if (type == "boss")
         return make_boss();
-
+    else if (type == "force")
+        return make_force();
     return entity(-1);
 }
 
@@ -95,6 +96,13 @@ entity Factory::make_player1() {
     player_hurtbox.health = 1;
     player_hurtbox.width = 32;
     player_hurtbox.height = 16;
+
+    auto& player_hitbox =
+        reg.add_component<component::hitbox>(player_id, component::hitbox());
+    player_hitbox.targeted_group = 3;
+    player_hitbox.damage = 100;
+    player_hitbox.width = 32;
+    player_hitbox.height = 16;
 
     auto& entity_name =
         reg.add_component<component::name>(player_id, component::name());
@@ -217,6 +225,42 @@ entity Factory::make_enemy_missile() {
     );
     unique_ids++;
     return missile_id;
+}
+
+entity Factory::make_force() {
+    entity force_id = reg.spawn_entity();
+
+    auto& force_sprite = reg.add_component<component::animated_drawable>(
+        force_id, component::animated_drawable()
+    );
+    force_sprite.setTextureFromName("force");
+    force_sprite.setFrameRect(24, 19);
+    force_sprite.frame_duration = 0.25;
+
+    reg.add_component<component::position>(force_id, {200, 200});
+    reg.add_component<component::velocity>(
+        force_id, {0, 0}
+    );
+    auto& force_hurtbox =
+        reg.add_component<component::hurtbox>(force_id, component::hurtbox());
+    force_hurtbox.health = 100;
+    force_hurtbox.group = 3;
+    force_hurtbox.width = 24;
+    force_hurtbox.height = 19;
+
+    auto& entity_name =
+        reg.add_component<component::name>(force_id, component::name());
+    entity_name._name = "force";
+
+    reg.add_component<component::unique_id>(
+        force_id, (component::unique_id)unique_ids
+    );
+
+    reg.add_component<component::logic>(
+        force_id, component::logic{force_logic}
+    );
+    unique_ids++;
+    return force_id;
 }
 
 entity Factory::make_plane() {

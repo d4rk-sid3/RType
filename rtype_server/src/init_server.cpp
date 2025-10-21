@@ -68,6 +68,9 @@ void load_textures(void) {
     ResourceManager::Instance().load(
         "assets/sprites/enemies/boss.gif", "boss", TEXTURE
     );
+    ResourceManager::Instance().load(
+        "assets/sprites/player/force.gif", "force", TEXTURE
+    );
 
     ResourceManager::Instance().load(
         "assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT
@@ -96,6 +99,8 @@ void Server::initializeGame(void) {
     pos2.x = 50;
     pos2.y = 150;
     factory.make_menu_background_music();
+
+    factory.make_force();
 }
 
 /**

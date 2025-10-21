@@ -34,6 +34,7 @@
 
 #include "../../rtype_server/include/server.hpp"
 #include "Factory.hpp"
+#include "entity.hpp"
 
 using namespace component;
 
@@ -377,5 +378,61 @@ void boss_logic(double delta, registry& reg, entity en) {
 
         boss_dead = true;
         reg.kill_entity(en);
+    }
+}
+
+void force_logic(double delta, registry& reg, entity en)
+{
+    static int attached_to = -1;
+    static double shoot_cooldown = 0.0;
+    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
+
+    if (hb.health <= 0) {
+        position & pos = reg.get_components<position>()[en].value();
+        double p1_distance = 100000;
+        double p2_distance = 100000;
+
+        if (player1_entity_id != -1) {
+            position& p1_pos = reg.get_components<position>()[player1_entity_id].value();
+            p1_distance = distance(p1_pos.x, p1_pos.y, pos.x, pos.y);
+        }
+        if (player2_entity_id != -1) {
+            position& p2_pos = reg.get_components<position>()[player2_entity_id].value();
+            p2_distance = distance(p2_pos.x, p2_pos.y, pos.x, pos.y);
+        }
+        if (p1_distance < p2_distance) {
+            attached_to = player1_entity_id;
+        } else if (p2_distance < p1_distance) {
+            attached_to = player2_entity_id;
+        } else {
+            return;
+        }
+
+        hurtbox &new_hb = reg.add_component<component::hurtbox>(en, component::hurtbox());
+        new_hb.health = 20;
+        new_hb.group = 1;
+        new_hb.width = 24;
+        new_hb.height = 19;
+    }
+
+    if (attached_to != -1) {
+        position & pos = reg.get_components<position>()[en].value();
+        position & player_pos = reg.get_components<position>()[attached_to].value();
+        pos.x = player_pos.x + 50;
+        pos.y = player_pos.y;
+
+        shoot_cooldown += delta;
+        if (shoot_cooldown >= FORCE_SHOOT_COOLDOWN) {
+            Factory fac(reg);
+            entity missile1 = fac.make_player_missile();
+            entity missile2 = fac.make_player_missile();
+            position & pos1 = reg.get_components<position>()[missile1].value();
+            position & pos2 = reg.get_components<position>()[missile2].value();
+            pos1.x = player_pos.x + 55;
+            pos1.y = player_pos.y - 15;
+            pos2.x = player_pos.x + 55;
+            pos2.y = player_pos.y + 15;
+            shoot_cooldown = 0;
+        }
     }
 }

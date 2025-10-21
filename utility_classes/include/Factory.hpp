@@ -93,6 +93,8 @@ class Factory {
     entity make_fade_out_rect();
 
     entity make_boss();
+
+    entity make_force();
 };
 
 #endif

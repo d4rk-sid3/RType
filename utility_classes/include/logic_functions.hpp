@@ -39,6 +39,7 @@
 #define PLAYER_SHOOT_COOLDOWN 0.25
 #define ENEMY_SHOOT_COOLDOWN 2
 #define BOSS_SHOOT_COOLDOWN 2
+#define FORCE_SHOOT_COOLDOWN 0.35
 #define BOSS_MISSILE_SPEED 200
 #define BOSS_SPEED 100
 
@@ -52,6 +53,7 @@ void boss_logic(double delta, registry& reg, entity entity);
 void start_text_logic(double delta, registry& reg, entity entity);
 void fade_in_rect_logic(double delta, registry& reg, entity entity);
 void fade_out_rect_logic(double delta, registry& reg, entity entity);
+void force_logic(double delta, registry& reg, entity entity);
 
 #endif
 

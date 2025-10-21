@@ -72,6 +72,10 @@ void load_client_textures(void) {
     ResourceManager::Instance().load(
         "assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT
     );
+    ResourceManager::Instance().load(
+        "assets/sprites/player/force.gif", "force", TEXTURE
+    );
+
 }
 
 /**
