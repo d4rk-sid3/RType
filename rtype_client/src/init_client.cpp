@@ -76,6 +76,10 @@ void load_client_textures(void) {
         "assets/sprites/player/force.gif", "force", TEXTURE
     );
 
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/enemy_jet.gif", "green_trooper", TEXTURE
+    );
+
 }
 
 /**

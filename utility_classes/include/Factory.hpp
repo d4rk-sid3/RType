@@ -94,6 +94,8 @@ class Factory {
 
     entity make_boss();
 
+    entity make_green_trooper();
+
     entity make_force();
 };
 

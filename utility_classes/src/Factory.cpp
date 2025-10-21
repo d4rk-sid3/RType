@@ -70,6 +70,8 @@ entity Factory::make_entity(const std::string& type) {
         return make_boss();
     else if (type == "force")
         return make_force();
+    else if (type == "green_trooper")
+        return make_green_trooper();
     return entity(-1);
 }
 
@@ -703,6 +705,36 @@ entity Factory::make_fade_out_rect() {
     return fade_id;
 }
 
+entity Factory::make_green_trooper() {
+    entity gtrooper_id = reg.spawn_entity();
+
+    auto& gtrooper_sprite =
+        reg.add_component<component::animated_drawable>(
+        gtrooper_id, component::animated_drawable()
+    );
+    gtrooper_sprite.setFrameRect(55, 58);
+    gtrooper_sprite.frame_duration = 0.25;
+    gtrooper_sprite.setTextureFromName("green_trooper");
+
+    reg.add_component<component::position>(gtrooper_id, {0, 0});
+    reg.add_component<component::velocity>(gtrooper_id, {0, 0});
+
+    reg.add_component<component::hurtbox>(gtrooper_id, {500, 2, 130, 50});
+    reg.add_component<component::hitbox>(gtrooper_id, {10, 1, 130, 50, false});
+
+    auto& entity_name =
+        reg.add_component<component::name>(gtrooper_id, component::name());
+    entity_name._name = "green_trooper";
+
+    reg.add_component<component::logic>(gtrooper_id, component::logic{gtrooper_logic});
+
+    reg.add_component<component::unique_id>(
+        gtrooper_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return gtrooper_id;
+}
+
 entity Factory::make_boss() {
     entity boss_id = reg.spawn_entity();
 
@@ -728,3 +760,4 @@ entity Factory::make_boss() {
     unique_ids++;
     return boss_id;
 }
+

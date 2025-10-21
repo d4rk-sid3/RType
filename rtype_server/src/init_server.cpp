@@ -75,6 +75,11 @@ void load_textures(void) {
     ResourceManager::Instance().load(
         "assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT
     );
+
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/enemy_jet.gif", "green_trooper", TEXTURE
+    );
+
 }
 
 /**
