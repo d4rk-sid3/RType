@@ -743,7 +743,7 @@ entity Factory::make_tourelles() {
     auto& tourelles_sprite = reg.add_component<component::animated_drawable>(
         tourelles_id, component::animated_drawable()
     );
-    tourelles_sprite.setFrameRect(33, 33);
+    tourelles_sprite.setFrameRect(34, 34);
     tourelles_sprite.frame_duration = 0.25;
     tourelles_sprite.setTextureFromName("tourelles");
 
