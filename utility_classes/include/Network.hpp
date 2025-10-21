@@ -127,6 +127,11 @@ class NetworkManager {
     bool isrunning;
 
     /**
+     * @brief Mutex for thread safety
+     */
+    std::mutex& mtx;
+
+    /**
      * @brief List of pairs of clients and their last messages (used for server)
      */
     std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>
@@ -139,11 +144,6 @@ class NetworkManager {
      */
     std::vector<int8_t> tmp_server;
     std::vector<int8_t> &lastmsg;
-
-    /**
-     * @brief Mutex for thread safety
-     */
-    std::mutex& mtx;
 };
 
 #endif /* !NETWORK_HPP_ */

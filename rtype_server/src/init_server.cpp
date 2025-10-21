@@ -90,8 +90,8 @@ void Server::initializeGame(void)
 }
 
 Server::Server(int p) :
-    win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server"),
-    reg(win), factory(reg), server_(p, std::ref(messages), std::ref(mtx)), p_(p)
+    p_(p), win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server"),
+    reg(win), factory(reg), server_(p, std::ref(messages), std::ref(mtx))
 {
     reg.control_active = false;
     counter = 0;

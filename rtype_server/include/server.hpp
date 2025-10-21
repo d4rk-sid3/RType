@@ -79,6 +79,11 @@ class Server {
     int p_;
 
     /**
+     * @brief The window for rendering (if needed)
+     */
+    sf::RenderWindow win;
+
+    /**
      * @brief The registry that holds all entities and components
      */
     registry reg;
@@ -87,16 +92,6 @@ class Server {
      * @brief The factory that creates entities and components
      */
     Factory factory;
-
-    /**
-     * @brief The current level timer
-     */
-    double levelTimer = 0.0;
-
-    /**
-     * @brief Mutex for thread safety with the network manager
-     */
-    std::mutex mtx;
 
     /**
      * @brief The network manager that handles communication with clients
@@ -114,6 +109,11 @@ class Server {
     std::vector<int8_t> result;
 
     /**
+     * @brief Mutex for thread safety with the network manager
+     */
+    std::mutex mtx;
+
+    /**
      * @brief List of all last messages received from clients
      */
     std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>
@@ -125,11 +125,6 @@ class Server {
     std::map<asio::ip::udp::endpoint, int> all_clients;
 
     /**
-     * @brief The window for rendering (if needed)
-     */
-    sf::RenderWindow win;
-
-    /**
      * @brief Event for handling window events
      */
     sf::Event event;
@@ -138,6 +133,11 @@ class Server {
      * @brief Clock for managing frame time
      */
     sf::Clock frameClock;
+
+    /**
+     * @brief The current level timer
+     */
+    double levelTimer = 0.0;
 
     /**
     * @brief Counter used to know how many entities have been sent to the clients

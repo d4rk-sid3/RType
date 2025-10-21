@@ -77,6 +77,12 @@ typedef struct menu_info_s {
 
 class Client {
   private:
+
+    /**
+     * @brief Window for rendering
+     */
+    sf::RenderWindow win;
+
     /**
      * @brief The registry that holds all entities and components
      */
@@ -129,11 +135,6 @@ class Client {
     std::vector<EnemyMovedResponse> new_vec;
 
     std::vector<std::vector<EnemyMovedResponse>> entity_states;
-
-    /**
-     * @brief Window for rendering
-     */
-    sf::RenderWindow win;
 
     /**
      * @brief Event for handling window events
