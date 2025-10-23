@@ -43,6 +43,8 @@ std\+::vector$<$ Enemy\+Moved\+Response $>$ \mbox{\hyperlink{classClient_a4c9eef
 \begin{DoxyCompactList}\small\item\em This functions gets all the entities informations sent by the server and puts them in a vector. \end{DoxyCompactList}\item 
 Nbr\+Entity \mbox{\hyperlink{classClient_ad88aa07459555b36bd038b91505b51cf}{decode\+Nbr\+Entity}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
 \item 
+Game\+State \mbox{\hyperlink{classClient_a6cf06559e7fb841301b70d20960e4e17}{decode\+Game\+State}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
+\item 
 Enemy\+Moved\+Response \mbox{\hyperlink{classClient_ad57127e6e1ade439817b5d339ddfbec1}{decode\+Enemy\+Moved\+Response}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
 \item 
 std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_a1a07e2ea5336182977e9b5a4dd42c9fc}{encode\+Move\+Response}} (const Move\+Response \&pos)
@@ -122,6 +124,12 @@ Destroy the \doxylink{classClient}{Client}\+:\+: \doxylink{classClient}{Client} 
 \index{decodeEnemyMovedResponse@{decodeEnemyMovedResponse}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{decodeEnemyMovedResponse()}{decodeEnemyMovedResponse()}}
 {\footnotesize\ttfamily Enemy\+Moved\+Response Client\+::decode\+Enemy\+Moved\+Response (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
+
+\Hypertarget{classClient_a6cf06559e7fb841301b70d20960e4e17}\label{classClient_a6cf06559e7fb841301b70d20960e4e17} 
+\index{Client@{Client}!decodeGameState@{decodeGameState}}
+\index{decodeGameState@{decodeGameState}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{decodeGameState()}{decodeGameState()}}
+{\footnotesize\ttfamily Game\+State Client\+::decode\+Game\+State (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
 
 \Hypertarget{classClient_ad88aa07459555b36bd038b91505b51cf}\label{classClient_ad88aa07459555b36bd038b91505b51cf} 
 \index{Client@{Client}!decodeNbrEntity@{decodeNbrEntity}}

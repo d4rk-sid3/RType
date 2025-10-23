@@ -60,6 +60,33 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer
     return pos;
 }
 
+GameState Client::decodeGameState(std::vector<int8_t>& buffer) {
+    std::vector<int8_t> tmp;
+
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+
+        tmp.insert(tmp.begin(), buffer.begin(), buffer.begin() + 3);
+    }
+
+    if (tmp[0] != 0x40) {
+        throw std::runtime_error("Invalid message type 0x38 !");
+    }
+
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+
+        buffer.erase(buffer.begin(), buffer.begin() + 3);
+    }
+
+    GameState pos;
+
+    pos.type = tmp[0];
+    pos.gState = static_cast<GAMESTATE>((tmp[1] << 8) | tmp[2]);
+
+    return pos;
+}
+
 NbrEntity Client::decodeNbrEntity(std::vector<int8_t>& buffer) {
     std::vector<int8_t> tmp;
 

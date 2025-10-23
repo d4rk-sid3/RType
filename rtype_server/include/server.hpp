@@ -107,6 +107,7 @@ class Server {
     // encodeur
     std::vector<int8_t> encodeNbrEntity(const NbrEntity& pos);
     std::vector<int8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos);
+    std::vector<int8_t> encodeGameState(const GameState& pos);
 
     // decodeur
     MoveResponse decodeMoveResponse(std::vector<int8_t>& buffer);
