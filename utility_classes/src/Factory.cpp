@@ -37,6 +37,7 @@ int unique_ids = 0;
 
 #define PLAYER_MISSILE_SPEED 500.0
 #define ENEMY_MISSILE_SPEED 5
+#define BIG_MISSILE_SPEED 400
 #define BACKGROUND_SPEED 50
 #define WALKER_SPEED 120
 #define PLANE_SPEED 300
@@ -74,6 +75,14 @@ entity Factory::make_entity(const std::string& type) {
         return make_green_trooper();
     else if (type == "tourelles")
         return make_tourelles();
+    else if (type == "big_missile")
+        return make_big_missile();
+    else if (type == "final_boss")
+        return make_final_boss();
+    else if (type == "small_shooter")
+        return make_small_shooter();
+    else if (type == "big_shooter")
+        return make_big_shooter();
     return entity(-1);
 }
 
@@ -805,3 +814,120 @@ entity Factory::make_boss() {
     return boss_id;
 }
 
+entity Factory::make_big_missile() {
+    entity missile_id = reg.spawn_entity();
+
+    auto& missile_sprite = reg.add_component<component::animated_drawable>(
+        missile_id, component::animated_drawable()
+    );
+    missile_sprite.setTextureFromName("big_missile");
+    missile_sprite.setFrameRect(64, 22);
+    missile_sprite.frame_duration = 0.25;
+
+    reg.add_component<component::position>(missile_id, {0, 0});
+    reg.add_component<component::velocity>(
+        missile_id, {-BIG_MISSILE_SPEED, 0}
+    );
+    auto& missile_hitbox =
+        reg.add_component<component::hitbox>(missile_id, component::hitbox());
+    missile_hitbox.damage = 10;
+    missile_hitbox.targeted_group = 1;
+    missile_hitbox.width = 64;
+    missile_hitbox.height = 22;
+    missile_hitbox.one_shot = false;
+
+    auto& enemy_shoot_music =
+        reg.add_component<component::audio>(missile_id, component::audio());
+    enemy_shoot_music.audio.reset(new sf::Music);
+    enemy_shoot_music.audio->openFromFile("assets/audio/enemy_shoot.wav");
+    enemy_shoot_music.audio->setLoop(false);
+    enemy_shoot_music.audio->play();
+
+    auto& entity_name =
+        reg.add_component<component::name>(missile_id, component::name());
+    entity_name._name = "big_missile";
+
+    reg.add_component<component::unique_id>(
+        missile_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return missile_id;
+}
+
+entity Factory::make_small_shooter() {
+    entity boss_id = reg.spawn_entity();
+
+    auto& boss_sprite =
+        reg.add_component<component::drawable>(boss_id, component::drawable());
+    boss_sprite.setTextureFromName("small_shooter");
+
+    reg.add_component<component::position>(boss_id, {0, 0});
+    reg.add_component<component::velocity>(boss_id, {0, 0});
+
+    reg.add_component<component::hurtbox>(boss_id, {300, 2, 118, 87});
+    reg.add_component<component::hitbox>(boss_id, {10, 1, 118, 87, false});
+
+    auto& entity_name =
+        reg.add_component<component::name>(boss_id, component::name());
+    entity_name._name = "small_shooter";
+
+    reg.add_component<component::logic>(boss_id, component::logic{small_shooter_logic});
+
+    reg.add_component<component::unique_id>(
+        boss_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return boss_id;
+}
+
+entity Factory::make_big_shooter() {
+    entity boss_id = reg.spawn_entity();
+
+    auto& boss_sprite =
+        reg.add_component<component::drawable>(boss_id, component::drawable());
+    boss_sprite.setTextureFromName("big_shooter");
+
+    reg.add_component<component::position>(boss_id, {0, 0});
+    reg.add_component<component::velocity>(boss_id, {0, 0});
+
+    reg.add_component<component::hurtbox>(boss_id, {300, 2, 103, 84});
+    reg.add_component<component::hitbox>(boss_id, {10, 1, 103, 84, false});
+
+    auto& entity_name =
+        reg.add_component<component::name>(boss_id, component::name());
+    entity_name._name = "big_shooter";
+
+    reg.add_component<component::logic>(boss_id, component::logic{big_shooter_logic});
+
+    reg.add_component<component::unique_id>(
+        boss_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return boss_id;
+}
+
+entity Factory::make_final_boss() {
+    entity boss_id = reg.spawn_entity();
+
+    auto& boss_sprite =
+        reg.add_component<component::animated_drawable>(boss_id, component::animated_drawable());
+    boss_sprite.setTextureFromName("final_boss");
+
+    reg.add_component<component::position>(boss_id, {0, 0});
+    reg.add_component<component::velocity>(boss_id, {0, 0});
+
+    reg.add_component<component::hurtbox>(boss_id, {700, 2, 184, 150});
+    reg.add_component<component::hitbox>(boss_id, {10, 1, 184, 150, false});
+
+    auto& entity_name =
+        reg.add_component<component::name>(boss_id, component::name());
+    entity_name._name = "final_boss";
+
+    reg.add_component<component::logic>(boss_id, component::logic{final_boss_logic});
+
+    reg.add_component<component::unique_id>(
+        boss_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return boss_id;
+}

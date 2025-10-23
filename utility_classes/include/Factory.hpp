@@ -99,6 +99,14 @@ class Factory {
     entity make_tourelles();
 
     entity make_force();
+
+    entity make_big_missile();
+
+    entity make_final_boss();
+
+    entity make_small_shooter();
+
+    entity make_big_shooter();
 };
 
 #endif

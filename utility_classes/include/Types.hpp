@@ -44,7 +44,11 @@ enum EnemyType : int16_t {
     TYPE_PLANE = 12,
     TYPE_FORCE = 13,
     TYPE_TROOPPER = 14,
-    TYPE_TOURELLES = 15
+    TYPE_TOURELLES = 15,
+    TYPE_FINAL_BOSS = 15,
+    TYPE_BIG_SHOOTER = 16,
+    TYPE_SMALL_SHOOTER = 17,
+    TYPE_BIG_MISSILE = 18
 };
 
 /**

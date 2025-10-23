@@ -39,6 +39,7 @@
 #define PLAYER_SHOOT_COOLDOWN 0.25
 #define ENEMY_SHOOT_COOLDOWN 2
 #define BOSS_SHOOT_COOLDOWN 2
+#define BOSS_SPAWN_COOLDOWN 5
 #define FORCE_SHOOT_COOLDOWN 0.35
 #define BOSS_MISSILE_SPEED 200
 #define BOSS_SPEED 100
@@ -56,6 +57,9 @@ void fade_out_rect_logic(double delta, registry& reg, entity entity);
 void force_logic(double delta, registry& reg, entity entity);
 void gtrooper_logic(double delta, registry& reg, entity en);
 void tourelles_logic(double delta, registry& reg, entity en);
+void final_boss_logic(double delta, registry& reg, entity en);
+void big_shooter_logic(double delta, registry& reg, entity en);
+void small_shooter_logic(double delta, registry& reg, entity en);
 
 #endif
 

@@ -40,6 +40,11 @@ using namespace component;
 
 bool boss_dead = false;
 
+bool boss1_dead = false;
+bool boss2_dead = false;
+
+bool final_boss_dead = false;
+
 double distance(double x1, double y1, double x2, double y2) {
     return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 }
@@ -443,16 +448,12 @@ void gtrooper_logic(double delta, registry& reg, entity en) {
             printf("Shooting\n");
             t = 0;
             Factory fac(reg);
-            entity missile1 = fac.make_enemy_missile();
+            entity missile1 = fac.make_big_missile();
             
             position& missile_pos1 = reg.get_components<position>()[missile1].value();
-            velocity& vel1 = reg.get_components<velocity>()[missile1].value();
             
             missile_pos1.x = pos.x + 30;
             missile_pos1.y = pos.y + 15;
-            
-            vel1.vx = -BOSS_MISSILE_SPEED;
-            vel1.vy = -BOSS_MISSILE_SPEED / 2;
         }
     }
     
@@ -571,5 +572,212 @@ void tourelles_logic(double delta, registry& reg, entity en) {
         position& hit_pos = reg.get_components<position>()[hit_effect].value();
         hit_pos.x = pos.x;
         hit_pos.y = pos.y;
+    }
+}
+
+void small_shooter_logic(double delta, registry& reg, entity en) {
+    static double t = 0.0;
+    static double t1 = 0.0;
+    static bool ready = false;
+    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
+    velocity& vel = reg.get_components<velocity>()[en].value();
+    position& pos = reg.get_components<position>()[en].value();
+
+    t1 += delta;
+
+    if (pos.x > 500 && !ready) {
+        vel.vx = -BOSS_SPEED;
+    } else {
+        ready = true;
+    }
+
+    vel.vy = sin(t1 * 2) * BOSS_SPEED;
+    vel.vx = sin(t1 * 2) * BOSS_SPEED;
+
+
+    if (t < BOSS_SHOOT_COOLDOWN) {
+        t += delta;
+    } else {
+        t = 0;
+        Factory fac(reg);
+        entity missile1 = fac.make_enemy_missile();
+        entity missile2 = fac.make_enemy_missile();
+        entity missile3 = fac.make_enemy_missile();
+
+        position& pos = reg.get_components<position>()[en].value();
+        position& pos1 = reg.get_components<position>()[missile1].value();
+        position& pos2 = reg.get_components<position>()[missile2].value();
+        position& pos3 = reg.get_components<position>()[missile3].value();
+
+        velocity& vel1 = reg.get_components<velocity>()[missile1].value();
+        velocity& vel2 = reg.get_components<velocity>()[missile2].value();
+        velocity& vel3 = reg.get_components<velocity>()[missile3].value();
+
+        pos1.x = pos.x + 30;
+        pos2.x = pos.x + 30;
+        pos3.x = pos.x + 30;
+        pos1.y = pos.y + 15;
+        pos2.y = pos.y + 15;
+        pos3.y = pos.y + 15;
+
+        vel1.vx = -BOSS_MISSILE_SPEED;
+        vel1.vy = -BOSS_MISSILE_SPEED / 2;
+        vel2.vx = -BOSS_MISSILE_SPEED;
+        vel2.vy = BOSS_MISSILE_SPEED / 2;
+        vel3.vx = -BOSS_MISSILE_SPEED;
+        vel3.vy = 0;
+    }
+
+    if (hb.hurt) {
+        Factory fac(reg);
+        entity hit_effect = fac.make_hit_effect();
+        position& hit_pos = reg.get_components<position>()[hit_effect].value();
+        hit_pos.x = pos.x;
+        hit_pos.y = pos.y;
+    }
+
+    if (hb.health <= 0) {
+        Factory fac(reg);
+        entity explosion = fac.make_explosion();
+        position& explosion_pos =
+            reg.get_components<position>()[explosion].value();
+        explosion_pos.x = pos.x;
+        explosion_pos.y = pos.y;
+
+        boss1_dead = true;
+        reg.kill_entity(en);
+    }
+}
+
+void big_shooter_logic(double delta, registry& reg, entity en) {
+    static double t = 0.0;
+    static double t1 = 0.0;
+    static bool ready = false;
+    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
+    velocity& vel = reg.get_components<velocity>()[en].value();
+    position& pos = reg.get_components<position>()[en].value();
+
+    t1 += delta;
+
+    if (pos.x > 500 && !ready) {
+        vel.vx = -BOSS_SPEED;
+    } else {
+        ready = true;
+    }
+
+    vel.vy = sin(t1 * 2) * BOSS_SPEED;
+    vel.vx = sin(t1 * 2) * BOSS_SPEED;
+
+
+    if (t < BOSS_SHOOT_COOLDOWN) {
+        t += delta;
+    } else {
+        t = 0;
+        Factory fac(reg);
+        entity missile1 = fac.make_big_missile();
+
+        position& pos = reg.get_components<position>()[en].value();
+        position& pos1 = reg.get_components<position>()[missile1].value();
+
+        velocity& vel1 = reg.get_components<velocity>()[missile1].value();
+
+        pos1.x = pos.x + 30;
+        pos1.y = pos.y + 15;
+
+        vel1.vx = -BOSS_MISSILE_SPEED;
+        vel1.vy = 0.0;
+    }
+
+    if (hb.hurt) {
+        Factory fac(reg);
+        entity hit_effect = fac.make_hit_effect();
+        position& hit_pos = reg.get_components<position>()[hit_effect].value();
+        hit_pos.x = pos.x;
+        hit_pos.y = pos.y;
+    }
+
+    if (hb.health <= 0) {
+        Factory fac(reg);
+        entity explosion = fac.make_explosion();
+        position& explosion_pos =
+            reg.get_components<position>()[explosion].value();
+        explosion_pos.x = pos.x;
+        explosion_pos.y = pos.y;
+
+        boss1_dead = true;
+        reg.kill_entity(en);
+    }
+}
+
+void final_boss_logic(double delta, registry& reg, entity en) {
+    static double t = 0.0;
+    static double t1 = 0.0;
+    static double t2 = 0.0;
+    static bool ready = false;
+    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
+    velocity& vel = reg.get_components<velocity>()[en].value();
+    position& pos = reg.get_components<position>()[en].value();
+
+    t1 += delta;
+
+    if (pos.x > 500 && !ready) {
+        vel.vx = -BOSS_SPEED;
+    } else {
+        ready = true;
+    }
+
+    vel.vy = sin(t1 * 2) * BOSS_SPEED;
+    vel.vx = 0;
+
+    if (t < BOSS_SHOOT_COOLDOWN) {
+        t += delta;
+    } else {
+        t = 0;
+        Factory fac(reg);
+        entity missile1 = fac.make_big_missile();
+
+        position& pos = reg.get_components<position>()[en].value();
+        position& pos1 = reg.get_components<position>()[missile1].value();
+
+        velocity& vel1 = reg.get_components<velocity>()[missile1].value();
+
+        pos1.x = pos.x + 30;
+        pos1.y = pos.y + 15;
+
+        vel1.vx = -BOSS_MISSILE_SPEED;
+        vel1.vy = 0.0;
+    }
+    if (t2 < BOSS_SPAWN_COOLDOWN) {
+        t2 += delta;
+    } else {
+        t2 = 0;
+        Factory fac(reg);
+        entity plane = fac.make_plane();
+
+        position& pos = reg.get_components<position>()[en].value();
+        position& pos1 = reg.get_components<position>()[plane].value();
+
+        pos1.x = pos.x + 30;
+        pos1.y = pos.y + 15;
+    }
+
+    if (hb.hurt) {
+        Factory fac(reg);
+        entity hit_effect = fac.make_hit_effect();
+        position& hit_pos = reg.get_components<position>()[hit_effect].value();
+        hit_pos.x = pos.x;
+        hit_pos.y = pos.y;
+    }
+
+    if (hb.health <= 0) {
+        Factory fac(reg);
+        entity explosion = fac.make_explosion();
+        position& explosion_pos =
+            reg.get_components<position>()[explosion].value();
+        explosion_pos.x = pos.x;
+        explosion_pos.y = pos.y;
+
+        boss1_dead = true;
+        reg.kill_entity(en);
     }
 }
