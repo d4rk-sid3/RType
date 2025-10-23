@@ -40,6 +40,18 @@ Server::encodeEnemyMovedResponse(const EnemyMovedResponse& pos) {
     return buffer;
 }
 
+std::vector<int8_t>
+Server::encodeGameState(const GameState& pos) {
+    std::vector<int8_t> buffer;
+
+    buffer.emplace_back(0x40);
+
+    buffer.emplace_back((pos.gState >> 8) & 0xFF);
+    buffer.emplace_back(pos.gState & 0xFF);
+
+    return buffer;
+}
+
 std::vector<int8_t> Server::encodeNbrEntity(const NbrEntity& pos) {
     std::vector<int8_t> buffer;
 

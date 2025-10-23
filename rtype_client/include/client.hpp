@@ -112,6 +112,7 @@ class Client {
 
     // decodeur
     NbrEntity decodeNbrEntity(std::vector<int8_t>& buffer);
+    GameState decodeGameState(std::vector<int8_t>& buffer);
     EnemyMovedResponse decodeEnemyMovedResponse(std::vector<int8_t>& buffer);
     std::vector<int8_t> encodeMoveResponse(const MoveResponse& pos);
     std::vector<int8_t> encodeActionResponse(const ActionResponse& pos);

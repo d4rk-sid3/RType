@@ -18,6 +18,8 @@ enum Action : int16_t { SPACE = 4 };
 
 enum BULLET_TYPE : int16_t { SOLIDE = 0, NONE = 1 };
 
+enum GAMESTATE : int16_t { WIN = 5, LOSE = 6};
+
 struct Vector2D {
     int16_t x;
     int16_t y;
@@ -78,6 +80,11 @@ struct MoveResponse {
     Direction direction;
 };
 
+struct GameState {
+    int8_t type; // 0x40
+    GAMESTATE gState;
+};
+
 typedef struct client_info {
     asio::ip::udp::endpoint endpoint;
     int player_id;
@@ -89,3 +96,4 @@ struct ActionResponse {
     int16_t player_id;
     Action input;
 };
+
