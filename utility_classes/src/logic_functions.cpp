@@ -622,6 +622,14 @@ void force_logic(double delta, registry& reg, entity en)
             shoot_cooldown = 0;
         }
     }
+    if (hb.hurt && attached_to != -1) {
+        Factory fac(reg);
+        entity hit_effect = fac.make_hit_effect();
+        position& pos = reg.get_components<position>()[en].value();
+        position& hit_pos = reg.get_components<position>()[hit_effect].value();
+        hit_pos.x = pos.x;
+        hit_pos.y = pos.y;
+    }
 }
 
 void tourelles_logic(double delta, registry& reg, entity en) {

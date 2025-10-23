@@ -3,7 +3,7 @@ entities = (
 
     {name = "space_enemy"; spawn_time = 2.4; y = 70.0},
 
-    {name = "tourelles"; spawn_time = 7.0; y = 367.0;},
+    {name = "tourelles"; spawn_time = 3.0; y = 367.0;},
 
     {name = "boss"; spawn_time = 9.0; y = 150.0;}
 );

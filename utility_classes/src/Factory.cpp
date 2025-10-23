@@ -788,7 +788,7 @@ entity Factory::make_tourelles() {
     tourelles_sprite.setTextureFromName("tourelles");
 
     reg.add_component<component::position>(tourelles_id, {0, 0});
-    reg.add_component<component::velocity>(tourelles_id, {-WALKER_SPEED, 0});
+    reg.add_component<component::velocity>(tourelles_id, {-SCROLL_SPEED, 0});
     reg.add_component<component::logic>(
         tourelles_id, component::logic{tourelles_logic}
     );
