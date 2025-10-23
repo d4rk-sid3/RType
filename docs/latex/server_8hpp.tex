@@ -1,0 +1,179 @@
+\doxysection{/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+server/include/server.hpp File Reference}
+\hypertarget{server_8hpp}{}\label{server_8hpp}\index{/home/jaggie/epitech\_projects/neo-\/r-\/type/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/rtype\_server/include/server.hpp@{/home/jaggie/epitech\_projects/neo-\/r-\/type/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/rtype\_server/include/server.hpp}}
+
+
+The file contains the definition of the server class.  
+
+
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include "{}Factory.\+hpp"{}}\newline
+{\ttfamily \#include "{}Network.\+hpp"{}}\newline
+{\ttfamily \#include "{}registry.\+hpp"{}}\newline
+Include dependency graph for server.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em A struct to store infos on an entity to be spawned in the level. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classServer}{Server}}
+\begin{DoxyCompactList}\small\item\em The server class. Handles the server side of the game. At the start of the game, the server loads the level entities from a configuration file The server holds the simulation of the game with all these entities and teh players. It listens from inputs from the clients and sends the game state to the them on each frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{server_8hpp_a498d9f026138406895e9a34b504ac6a6}{WINDOW\+\_\+\+WIDTH}}~738
+\item 
+\#define \mbox{\hyperlink{server_8hpp_a5473cf64fa979b48335079c99532e243}{WINDOW\+\_\+\+HEIGHT}}~432
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93}{diff\+\_\+mode}} \mbox{\hyperlink{server_8hpp_a5a2a77296b8aa6c2e6f8903b6e9babee}{diff\+\_\+mode\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em An enum to store the difficulty of the game. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}} \mbox{\hyperlink{server_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\+\_\+info\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em A struct to store the information of an entity to be spawned on the level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93}{diff\+\_\+mode}} \{ \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a26d394b5caf2853dbcef5884f0f068dd}{EASY}}
+, \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a5340ec7ecef6cc3886684a3bd3450d64}{MEDIUM}}
+, \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f}{HARD}}
+ \}
+\begin{DoxyCompactList}\small\item\em An enum to store the difficulty of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{server_8hpp_ae955d48f44384878e63e44527f872ebe}{player1\+\_\+entity\+\_\+id}} = -\/1
+\begin{DoxyCompactList}\small\item\em A global variable to store the id of the first player in the registry. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{server_8hpp_ae70b2136c6af0a96d5e51407e69d3c8b}{player2\+\_\+entity\+\_\+id}} = -\/1
+\begin{DoxyCompactList}\small\item\em A global variable to store the id of the second player in the registry. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8hpp_a5a2a77296b8aa6c2e6f8903b6e9babee}{diff\+\_\+mode\+\_\+t}} \mbox{\hyperlink{server_8hpp_af203dedfe7d4a9f0aa4fce4a2e48bdab}{diff\+\_\+mode}} = \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a5340ec7ecef6cc3886684a3bd3450d64}{MEDIUM}}
+\begin{DoxyCompactList}\small\item\em A gloal variable to store the difficulty of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The file contains the definition of the server class. 
+
+\begin{DoxyAuthor}{Author}
+Farouk OKANLA 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/10-\/13
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{server_8hpp_a5473cf64fa979b48335079c99532e243}\label{server_8hpp_a5473cf64fa979b48335079c99532e243} 
+\index{server.hpp@{server.hpp}!WINDOW\_HEIGHT@{WINDOW\_HEIGHT}}
+\index{WINDOW\_HEIGHT@{WINDOW\_HEIGHT}!server.hpp@{server.hpp}}
+\doxysubsubsection{\texorpdfstring{WINDOW\_HEIGHT}{WINDOW\_HEIGHT}}
+{\footnotesize\ttfamily \#define WINDOW\+\_\+\+HEIGHT~432}
+
+\Hypertarget{server_8hpp_a498d9f026138406895e9a34b504ac6a6}\label{server_8hpp_a498d9f026138406895e9a34b504ac6a6} 
+\index{server.hpp@{server.hpp}!WINDOW\_WIDTH@{WINDOW\_WIDTH}}
+\index{WINDOW\_WIDTH@{WINDOW\_WIDTH}!server.hpp@{server.hpp}}
+\doxysubsubsection{\texorpdfstring{WINDOW\_WIDTH}{WINDOW\_WIDTH}}
+{\footnotesize\ttfamily \#define WINDOW\+\_\+\+WIDTH~738}
+
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{server_8hpp_a5a2a77296b8aa6c2e6f8903b6e9babee}\label{server_8hpp_a5a2a77296b8aa6c2e6f8903b6e9babee} 
+\index{server.hpp@{server.hpp}!diff\_mode\_t@{diff\_mode\_t}}
+\index{diff\_mode\_t@{diff\_mode\_t}!server.hpp@{server.hpp}}
+\doxysubsubsection{\texorpdfstring{diff\_mode\_t}{diff\_mode\_t}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93}{diff\+\_\+mode}} \mbox{\hyperlink{server_8hpp_a5a2a77296b8aa6c2e6f8903b6e9babee}{diff\+\_\+mode\+\_\+t}}}
+
+
+
+An enum to store the difficulty of the game. 
+
+\Hypertarget{server_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}\label{server_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c} 
+\index{server.hpp@{server.hpp}!entity\_info\_t@{entity\_info\_t}}
+\index{entity\_info\_t@{entity\_info\_t}!server.hpp@{server.hpp}}
+\doxysubsubsection{\texorpdfstring{entity\_info\_t}{entity\_info\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\+\_\+info\+\_\+t}}}
+
+
+
+A struct to store the information of an entity to be spawned on the level. 
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{server_8hpp_a27f718e46e2194b1b59f97cab001aa93}\label{server_8hpp_a27f718e46e2194b1b59f97cab001aa93} 
+\index{server.hpp@{server.hpp}!diff\_mode@{diff\_mode}}
+\index{diff\_mode@{diff\_mode}!server.hpp@{server.hpp}}
+\doxysubsubsection{\texorpdfstring{diff\_mode}{diff\_mode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93}{diff\+\_\+mode}}}
+
+
+
+An enum to store the difficulty of the game. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EASY@{EASY}!server.hpp@{server.hpp}}\index{server.hpp@{server.hpp}!EASY@{EASY}}}\Hypertarget{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a26d394b5caf2853dbcef5884f0f068dd}\label{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a26d394b5caf2853dbcef5884f0f068dd} 
+EASY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MEDIUM@{MEDIUM}!server.hpp@{server.hpp}}\index{server.hpp@{server.hpp}!MEDIUM@{MEDIUM}}}\Hypertarget{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a5340ec7ecef6cc3886684a3bd3450d64}\label{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a5340ec7ecef6cc3886684a3bd3450d64} 
+MEDIUM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HARD@{HARD}!server.hpp@{server.hpp}}\index{server.hpp@{server.hpp}!HARD@{HARD}}}\Hypertarget{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f}\label{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f} 
+HARD&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{server_8hpp_af203dedfe7d4a9f0aa4fce4a2e48bdab}\label{server_8hpp_af203dedfe7d4a9f0aa4fce4a2e48bdab} 
+\index{server.hpp@{server.hpp}!diff\_mode@{diff\_mode}}
+\index{diff\_mode@{diff\_mode}!server.hpp@{server.hpp}}
+\doxysubsubsection{\texorpdfstring{diff\_mode}{diff\_mode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{server_8hpp_a5a2a77296b8aa6c2e6f8903b6e9babee}{diff\+\_\+mode\+\_\+t}} \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93}{diff\+\_\+mode}} = \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a5340ec7ecef6cc3886684a3bd3450d64}{MEDIUM}}\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+A gloal variable to store the difficulty of the game. 
+
+\Hypertarget{server_8hpp_ae955d48f44384878e63e44527f872ebe}\label{server_8hpp_ae955d48f44384878e63e44527f872ebe} 
+\index{server.hpp@{server.hpp}!player1\_entity\_id@{player1\_entity\_id}}
+\index{player1\_entity\_id@{player1\_entity\_id}!server.hpp@{server.hpp}}
+\doxysubsubsection{\texorpdfstring{player1\_entity\_id}{player1\_entity\_id}}
+{\footnotesize\ttfamily int player1\+\_\+entity\+\_\+id = -\/1\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+A global variable to store the id of the first player in the registry. 
+
+\Hypertarget{server_8hpp_ae70b2136c6af0a96d5e51407e69d3c8b}\label{server_8hpp_ae70b2136c6af0a96d5e51407e69d3c8b} 
+\index{server.hpp@{server.hpp}!player2\_entity\_id@{player2\_entity\_id}}
+\index{player2\_entity\_id@{player2\_entity\_id}!server.hpp@{server.hpp}}
+\doxysubsubsection{\texorpdfstring{player2\_entity\_id}{player2\_entity\_id}}
+{\footnotesize\ttfamily int player2\+\_\+entity\+\_\+id = -\/1\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+A global variable to store the id of the second player in the registry. 
+

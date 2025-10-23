@@ -84,13 +84,16 @@ void load_textures(void) {
         "assets/sprites/enemies/tourelles.gif", "tourelles", TEXTURE
     );
     ResourceManager::Instance().load(
-        "assets/sprites/enemies/boss_big_shooter.gif", "boss_big_shooter", TEXTURE
+        "assets/sprites/enemies/boss_big_shooter.gif", "big_shooter", TEXTURE
     );
     ResourceManager::Instance().load(
-        "assets/sprites/enemies/boss_small_shooter.gif", "boss_small_shooter", TEXTURE
+        "assets/sprites/enemies/boss_small_shooter.gif", "small_shooter", TEXTURE
     );
     ResourceManager::Instance().load(
         "assets/sprites/enemies/final_boss.gif", "final_boss", TEXTURE
+    );
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/big_missile.gif", "big_missile", TEXTURE
     );
 }
 

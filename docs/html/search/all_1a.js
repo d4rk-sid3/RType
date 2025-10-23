@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['p_20std_3a_3astring_20address_20tt_0',['&lt;tt&gt;Client(int p, std::string address)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md4',1,'']]],
+  ['p_5f_1',['p_',['../classServer.html#a9116b196578c1432fe60bcc63e982fa1',1,'Server']]],
+  ['parts_20of_20the_20project_2',['Parts of the project',['../index.html#parts_sub',1,'']]],
+  ['pickupitemresponse_20recupitem_20tt_3',['&lt;tt&gt;PickupItemResponse recupItem(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md13',1,'']]],
+  ['player_20moves_20broadcast_20to_20all_20team_20members_4',['4.22 PLAYER_MOVE (0x24) — Indicate that the player moves --&gt; Broadcast to all team members',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md69',1,'']]],
+  ['player1_5fentity_5fid_5',['player1_entity_id',['../server_8hpp.html#ae955d48f44384878e63e44527f872ebe',1,'server.hpp']]],
+  ['player2_5fentity_5fid_6',['player2_entity_id',['../server_8hpp.html#ae70b2136c6af0a96d5e51407e69d3c8b',1,'server.hpp']]],
+  ['player_5fentity_5fid_7',['player_entity_id',['../client_8hpp.html#a45a5fb16434b9906d8110a57b0ca5b4d',1,'client.hpp']]],
+  ['player_5fmove_200x24_20—_20indicate_20that_20the_20player_20moves_20broadcast_20to_20all_20team_20members_8',['4.22 PLAYER_MOVE (0x24) — Indicate that the player moves --&gt; Broadcast to all team members',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md69',1,'']]],
+  ['player_5fr_20tt_9',['&lt;tt&gt;PlayerStateResponse player_r(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md14',1,'']]],
+  ['player_5fr2_20tt_10',['&lt;tt&gt;PlayerStateResponse2 player_r2(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md15',1,'']]],
+  ['playerstateresponse_20player_5fr_20tt_11',['&lt;tt&gt;PlayerStateResponse player_r(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md14',1,'']]],
+  ['playerstateresponse2_20player_5fr2_20tt_12',['&lt;tt&gt;PlayerStateResponse2 player_r2(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md15',1,'']]],
+  ['port_5f_13',['port_',['../classClient.html#a7ea08b8b61ed228d643e1b85291c2621',1,'Client']]],
+  ['position_14',['position',['../namespacecomponent.html#a32921f4e807a398b6ffaea1730431bec',1,'component']]],
+  ['position_5fs_15',['position_s',['../structcomponent_1_1position__s.html',1,'component']]],
+  ['position_5fsystem_16',['position_system',['../systems_8cpp.html#a48efdd22550291cb9bacb3330d67ff48',1,'position_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::velocity &gt; &gt; &amp;velocities):&#160;systems.cpp'],['../systems_8hpp.html#a48efdd22550291cb9bacb3330d67ff48',1,'position_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::velocity &gt; &gt; &amp;velocities):&#160;systems.cpp']]],
+  ['principales_20fonctions_17',['Principales fonctions',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md11',1,'']]],
+  ['profile_18',['Profile',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md65',1,'4.18 PROFILE (0x19) — Check Profile'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md66',1,'4.19 PROFILE (0x20) — Check Profile']]],
+  ['profile_200x19_20—_20check_20profile_19',['4.18 PROFILE (0x19) — Check Profile',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md65',1,'']]],
+  ['profile_200x20_20—_20check_20profile_20',['4.19 PROFILE (0x20) — Check Profile',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md66',1,'']]],
+  ['project_21',['Parts of the project',['../index.html#parts_sub',1,'']]],
+  ['protocol_20v2_201_22',['RFC-RT001: R-TYPE Protocol v2.1',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html',1,'']]],
+  ['protocol_2emd_23',['protocol.md',['../protocol_8md.html',1,'']]],
+  ['protocole_24',['4. Commandes du protocole',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md46',1,'']]]
+];

@@ -1,0 +1,319 @@
+\doxysection{Client Class Reference}
+\hypertarget{classClient}{}\label{classClient}\index{Client@{Client}}
+
+
+The client class. Handles the client side of the game. All the client does is send messages to the server if the player tries to move, and also receive the game state from the server in order to update the game.  
+
+
+
+
+{\ttfamily \#include $<$client.\+hpp$>$}
+
+
+
+Collaboration diagram for Client\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{classClient__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classClient_a802e0a6f59303939f824d41580deb82a}{Client}} (int p, std\+::string a, \mbox{\hyperlink{classregistry}{registry}} \&reg)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classClient}{Client}\+:\+: \doxylink{classClient}{Client} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classClient_a840e519ca781888cbd54181572ebe3a7}{\texorpdfstring{$\sim$}{\string~}\+Client}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \doxylink{classClient}{Client}\+:\+: \doxylink{classClient}{Client} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a8e97ca84d92276123cf88091a6811cc1}{init\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em This function initializes the menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a1edfe2aa97fdb3d54c15afa0ef48496e}{run\+Menu}} (double delta)
+\begin{DoxyCompactList}\small\item\em This function runs the menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_add2ae689ce735011cd1b83601470f4d3}{init\+Game}} ()
+\begin{DoxyCompactList}\small\item\em This function initializes the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a101e55e53e7f9cc0433da705e66e1f08}{run\+Level}} (double delta)
+\begin{DoxyCompactList}\small\item\em This function updates the game state. It gets all the entities sent by the server and checks for changes. If an entity is new, it creates a new entity in the registry. If an entity is updated, it updates the entity in the registry. If an entity is removed, it removes the entity from the registry. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a9d0aec2907f33777ece928a1a0dee25e}{send\+Player\+Input}} ()
+\begin{DoxyCompactList}\small\item\em This function checks if the player is entering inputs and sends info to the server accordingly. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_ae075a5f69a51c05b60cc8469c2308bd6}{send\+Player\+Action}} ()
+\begin{DoxyCompactList}\small\item\em This function checks if the player is shooting and sends info to the server accordingly. \end{DoxyCompactList}\item 
+Network\+Manager \& \mbox{\hyperlink{classClient_af6829864546ed7e423fc1875be9864a9}{get\+Manager}} ()
+\item 
+std\+::vector$<$ Enemy\+Moved\+Response $>$ \mbox{\hyperlink{classClient_a4c9eefab245ca66e80ceb13fa67287e8}{recup\+All\+Entities}} ()
+\begin{DoxyCompactList}\small\item\em This functions gets all the entities informations sent by the server and puts them in a vector. \end{DoxyCompactList}\item 
+Nbr\+Entity \mbox{\hyperlink{classClient_ad88aa07459555b36bd038b91505b51cf}{decode\+Nbr\+Entity}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
+\item 
+Game\+State \mbox{\hyperlink{classClient_a6cf06559e7fb841301b70d20960e4e17}{decode\+Game\+State}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
+\item 
+Enemy\+Moved\+Response \mbox{\hyperlink{classClient_ad57127e6e1ade439817b5d339ddfbec1}{decode\+Enemy\+Moved\+Response}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
+\item 
+std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_a1a07e2ea5336182977e9b5a4dd42c9fc}{encode\+Move\+Response}} (const Move\+Response \&pos)
+\item 
+std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_aa317720a1d7ca0d8be350e164e327811}{encode\+Action\+Response}} (const Action\+Response \&pos)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} \mbox{\hyperlink{classClient_a3a70c6088987795c92e25d7ee2e99af5}{state}} = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}}
+\begin{DoxyCompactList}\small\item\em The current state of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classregistry}{registry}} \& \mbox{\hyperlink{classClient_ab2eb81a19237ea563d9d8702c450f8ae}{\+\_\+reg}}
+\item 
+int \mbox{\hyperlink{classClient_a7ea08b8b61ed228d643e1b85291c2621}{port\+\_\+}}
+\item 
+\mbox{\hyperlink{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac}{menu\+\_\+info\+\_\+t}} \mbox{\hyperlink{classClient_abb50cf46d7c960e987224057c9368bd1}{menu\+\_\+info}}
+\item 
+double \mbox{\hyperlink{classClient_a564cdb252a08c2cc3b79403ffd81162d}{level\+Timer}} = 0.\+0
+\item 
+Network\+Manager \mbox{\hyperlink{classClient_af413539d2fa6c48d0b040598ded120a4}{client\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classClient_a491a9c51718aaf40d01a60f60e752f4f}{mtx}}
+\item 
+std\+::unordered\+\_\+map$<$ size\+\_\+t, size\+\_\+t $>$ \mbox{\hyperlink{classClient_ae2a2b88ea0aaafbfbadc963eec4abb10}{ids\+\_\+assoc}}
+\item 
+std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_a6d1670a31e59886296677d92e6d956c1}{lastmsg}}
+\item 
+std\+::vector$<$ Enemy\+Moved\+Response $>$ \mbox{\hyperlink{classClient_a61d68b373a8df6cc460740b4db108f2f}{old}}
+\item 
+std\+::vector$<$ Enemy\+Moved\+Response $>$ \mbox{\hyperlink{classClient_aeedd43634db744ad30f2a2c650f2024f}{new\+\_\+vec}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The client class. Handles the client side of the game. All the client does is send messages to the server if the player tries to move, and also receive the game state from the server in order to update the game. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classClient_a802e0a6f59303939f824d41580deb82a}\label{classClient_a802e0a6f59303939f824d41580deb82a} 
+\index{Client@{Client}!Client@{Client}}
+\index{Client@{Client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily Client\+::\+Client (\begin{DoxyParamCaption}\item[{int}]{p,  }\item[{std\+::string}]{address,  }\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg }\end{DoxyParamCaption})}
+
+
+
+Construct a new \doxylink{classClient}{Client}\+:\+: \doxylink{classClient}{Client} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & The port to connect to \\
+\hline
+{\em address} & The server address \\
+\hline
+{\em reg} & A reference to the registry which will let the game take place \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classClient_a840e519ca781888cbd54181572ebe3a7}\label{classClient_a840e519ca781888cbd54181572ebe3a7} 
+\index{Client@{Client}!````~Client@{\texorpdfstring{$\sim$}{\string~}Client}}
+\index{````~Client@{\texorpdfstring{$\sim$}{\string~}Client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Client()}{\string~Client()}}
+{\footnotesize\ttfamily Client\+::\texorpdfstring{$\sim$}{\string~}\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroy the \doxylink{classClient}{Client}\+:\+: \doxylink{classClient}{Client} object. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classClient_ad57127e6e1ade439817b5d339ddfbec1}\label{classClient_ad57127e6e1ade439817b5d339ddfbec1} 
+\index{Client@{Client}!decodeEnemyMovedResponse@{decodeEnemyMovedResponse}}
+\index{decodeEnemyMovedResponse@{decodeEnemyMovedResponse}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{decodeEnemyMovedResponse()}{decodeEnemyMovedResponse()}}
+{\footnotesize\ttfamily Enemy\+Moved\+Response Client\+::decode\+Enemy\+Moved\+Response (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
+
+\Hypertarget{classClient_a6cf06559e7fb841301b70d20960e4e17}\label{classClient_a6cf06559e7fb841301b70d20960e4e17} 
+\index{Client@{Client}!decodeGameState@{decodeGameState}}
+\index{decodeGameState@{decodeGameState}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{decodeGameState()}{decodeGameState()}}
+{\footnotesize\ttfamily Game\+State Client\+::decode\+Game\+State (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
+
+\Hypertarget{classClient_ad88aa07459555b36bd038b91505b51cf}\label{classClient_ad88aa07459555b36bd038b91505b51cf} 
+\index{Client@{Client}!decodeNbrEntity@{decodeNbrEntity}}
+\index{decodeNbrEntity@{decodeNbrEntity}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{decodeNbrEntity()}{decodeNbrEntity()}}
+{\footnotesize\ttfamily Nbr\+Entity Client\+::decode\+Nbr\+Entity (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int8\+\_\+t $>$ \&}]{buffer }\end{DoxyParamCaption})}
+
+\Hypertarget{classClient_aa317720a1d7ca0d8be350e164e327811}\label{classClient_aa317720a1d7ca0d8be350e164e327811} 
+\index{Client@{Client}!encodeActionResponse@{encodeActionResponse}}
+\index{encodeActionResponse@{encodeActionResponse}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{encodeActionResponse()}{encodeActionResponse()}}
+{\footnotesize\ttfamily std\+::vector$<$ int8\+\_\+t $>$ Client\+::encode\+Action\+Response (\begin{DoxyParamCaption}\item[{const Action\+Response \&}]{pos }\end{DoxyParamCaption})}
+
+\Hypertarget{classClient_a1a07e2ea5336182977e9b5a4dd42c9fc}\label{classClient_a1a07e2ea5336182977e9b5a4dd42c9fc} 
+\index{Client@{Client}!encodeMoveResponse@{encodeMoveResponse}}
+\index{encodeMoveResponse@{encodeMoveResponse}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{encodeMoveResponse()}{encodeMoveResponse()}}
+{\footnotesize\ttfamily std\+::vector$<$ int8\+\_\+t $>$ Client\+::encode\+Move\+Response (\begin{DoxyParamCaption}\item[{const Move\+Response \&}]{pos }\end{DoxyParamCaption})}
+
+\Hypertarget{classClient_af6829864546ed7e423fc1875be9864a9}\label{classClient_af6829864546ed7e423fc1875be9864a9} 
+\index{Client@{Client}!getManager@{getManager}}
+\index{getManager@{getManager}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{getManager()}{getManager()}}
+{\footnotesize\ttfamily Network\+Manager \& Client\+::get\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classClient_add2ae689ce735011cd1b83601470f4d3}\label{classClient_add2ae689ce735011cd1b83601470f4d3} 
+\index{Client@{Client}!initGame@{initGame}}
+\index{initGame@{initGame}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{initGame()}{initGame()}}
+{\footnotesize\ttfamily void Client\+::init\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function initializes the game. 
+
+\Hypertarget{classClient_a8e97ca84d92276123cf88091a6811cc1}\label{classClient_a8e97ca84d92276123cf88091a6811cc1} 
+\index{Client@{Client}!initMenu@{initMenu}}
+\index{initMenu@{initMenu}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{initMenu()}{initMenu()}}
+{\footnotesize\ttfamily void Client\+::init\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function initializes the menu. 
+
+\Hypertarget{classClient_a4c9eefab245ca66e80ceb13fa67287e8}\label{classClient_a4c9eefab245ca66e80ceb13fa67287e8} 
+\index{Client@{Client}!recupAllEntities@{recupAllEntities}}
+\index{recupAllEntities@{recupAllEntities}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{recupAllEntities()}{recupAllEntities()}}
+{\footnotesize\ttfamily std\+::vector$<$ Enemy\+Moved\+Response $>$ Client\+::recup\+All\+Entities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This functions gets all the entities informations sent by the server and puts them in a vector. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$\+Enemy\+Moved\+Response$>$ 
+\end{DoxyReturn}
+\Hypertarget{classClient_a101e55e53e7f9cc0433da705e66e1f08}\label{classClient_a101e55e53e7f9cc0433da705e66e1f08} 
+\index{Client@{Client}!runLevel@{runLevel}}
+\index{runLevel@{runLevel}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{runLevel()}{runLevel()}}
+{\footnotesize\ttfamily void Client\+::run\+Level (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})}
+
+
+
+This function updates the game state. It gets all the entities sent by the server and checks for changes. If an entity is new, it creates a new entity in the registry. If an entity is updated, it updates the entity in the registry. If an entity is removed, it removes the entity from the registry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & the time since the last update \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classClient_a1edfe2aa97fdb3d54c15afa0ef48496e}\label{classClient_a1edfe2aa97fdb3d54c15afa0ef48496e} 
+\index{Client@{Client}!runMenu@{runMenu}}
+\index{runMenu@{runMenu}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{runMenu()}{runMenu()}}
+{\footnotesize\ttfamily void Client\+::run\+Menu (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})}
+
+
+
+This function runs the menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & The amount of time elapsed since the last frame \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classClient_ae075a5f69a51c05b60cc8469c2308bd6}\label{classClient_ae075a5f69a51c05b60cc8469c2308bd6} 
+\index{Client@{Client}!sendPlayerAction@{sendPlayerAction}}
+\index{sendPlayerAction@{sendPlayerAction}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{sendPlayerAction()}{sendPlayerAction()}}
+{\footnotesize\ttfamily void Client\+::send\+Player\+Action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function checks if the player is shooting and sends info to the server accordingly. 
+
+\Hypertarget{classClient_a9d0aec2907f33777ece928a1a0dee25e}\label{classClient_a9d0aec2907f33777ece928a1a0dee25e} 
+\index{Client@{Client}!sendPlayerInput@{sendPlayerInput}}
+\index{sendPlayerInput@{sendPlayerInput}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{sendPlayerInput()}{sendPlayerInput()}}
+{\footnotesize\ttfamily void Client\+::send\+Player\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function checks if the player is entering inputs and sends info to the server accordingly. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classClient_ab2eb81a19237ea563d9d8702c450f8ae}\label{classClient_ab2eb81a19237ea563d9d8702c450f8ae} 
+\index{Client@{Client}!\_reg@{\_reg}}
+\index{\_reg@{\_reg}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{\_reg}{\_reg}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry}{registry}}\& Client\+::\+\_\+reg\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classClient_af413539d2fa6c48d0b040598ded120a4}\label{classClient_af413539d2fa6c48d0b040598ded120a4} 
+\index{Client@{Client}!client\_@{client\_}}
+\index{client\_@{client\_}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{client\_}{client\_}}
+{\footnotesize\ttfamily Network\+Manager Client\+::client\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classClient_ae2a2b88ea0aaafbfbadc963eec4abb10}\label{classClient_ae2a2b88ea0aaafbfbadc963eec4abb10} 
+\index{Client@{Client}!ids\_assoc@{ids\_assoc}}
+\index{ids\_assoc@{ids\_assoc}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{ids\_assoc}{ids\_assoc}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$size\+\_\+t, size\+\_\+t$>$ Client\+::ids\+\_\+assoc\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classClient_a6d1670a31e59886296677d92e6d956c1}\label{classClient_a6d1670a31e59886296677d92e6d956c1} 
+\index{Client@{Client}!lastmsg@{lastmsg}}
+\index{lastmsg@{lastmsg}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{lastmsg}{lastmsg}}
+{\footnotesize\ttfamily std\+::vector$<$int8\+\_\+t$>$ Client\+::lastmsg\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classClient_a564cdb252a08c2cc3b79403ffd81162d}\label{classClient_a564cdb252a08c2cc3b79403ffd81162d} 
+\index{Client@{Client}!levelTimer@{levelTimer}}
+\index{levelTimer@{levelTimer}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{levelTimer}{levelTimer}}
+{\footnotesize\ttfamily double Client\+::level\+Timer = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classClient_abb50cf46d7c960e987224057c9368bd1}\label{classClient_abb50cf46d7c960e987224057c9368bd1} 
+\index{Client@{Client}!menu\_info@{menu\_info}}
+\index{menu\_info@{menu\_info}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{menu\_info}{menu\_info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac}{menu\+\_\+info\+\_\+t}} Client\+::menu\+\_\+info\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classClient_a491a9c51718aaf40d01a60f60e752f4f}\label{classClient_a491a9c51718aaf40d01a60f60e752f4f} 
+\index{Client@{Client}!mtx@{mtx}}
+\index{mtx@{mtx}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{mtx}{mtx}}
+{\footnotesize\ttfamily std\+::mutex Client\+::mtx\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classClient_aeedd43634db744ad30f2a2c650f2024f}\label{classClient_aeedd43634db744ad30f2a2c650f2024f} 
+\index{Client@{Client}!new\_vec@{new\_vec}}
+\index{new\_vec@{new\_vec}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{new\_vec}{new\_vec}}
+{\footnotesize\ttfamily std\+::vector$<$Enemy\+Moved\+Response$>$ Client\+::new\+\_\+vec\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classClient_a61d68b373a8df6cc460740b4db108f2f}\label{classClient_a61d68b373a8df6cc460740b4db108f2f} 
+\index{Client@{Client}!old@{old}}
+\index{old@{old}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{old}{old}}
+{\footnotesize\ttfamily std\+::vector$<$Enemy\+Moved\+Response$>$ Client\+::old\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classClient_a7ea08b8b61ed228d643e1b85291c2621}\label{classClient_a7ea08b8b61ed228d643e1b85291c2621} 
+\index{Client@{Client}!port\_@{port\_}}
+\index{port\_@{port\_}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{port\_}{port\_}}
+{\footnotesize\ttfamily int Client\+::port\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classClient_a3a70c6088987795c92e25d7ee2e99af5}\label{classClient_a3a70c6088987795c92e25d7ee2e99af5} 
+\index{Client@{Client}!state@{state}}
+\index{state@{state}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} Client\+::state = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}}}
+
+
+
+The current state of the game. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+client/include/\mbox{\hyperlink{client_8hpp}{client.\+hpp}}\item 
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+client/src/\mbox{\hyperlink{rtype__client_2src_2commands_8cpp}{commands.\+cpp}}\item 
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+client/src/\mbox{\hyperlink{rtype__client_2src_2decodeur_8cpp}{decodeur.\+cpp}}\item 
+/home/jaggie/epitech\+\_\+projects/neo-\/r-\/type/\+G-\/\+CPP-\/500-\/\+COT-\/5-\/1-\/rtype-\/8/rtype\+\_\+client/src/\mbox{\hyperlink{init__client_8cpp}{init\+\_\+client.\+cpp}}\end{DoxyCompactItemize}

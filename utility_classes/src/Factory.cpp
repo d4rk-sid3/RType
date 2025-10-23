@@ -912,6 +912,8 @@ entity Factory::make_final_boss() {
     auto& boss_sprite =
         reg.add_component<component::animated_drawable>(boss_id, component::animated_drawable());
     boss_sprite.setTextureFromName("final_boss");
+    boss_sprite.setFrameRect(184, 150);
+    boss_sprite.frame_duration = 0.25;
 
     reg.add_component<component::position>(boss_id, {0, 0});
     reg.add_component<component::velocity>(boss_id, {0, 0});

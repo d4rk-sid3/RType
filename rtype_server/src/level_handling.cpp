@@ -230,6 +230,9 @@ void Server::runLevel(double delta) {
 
         if (en.spawn_time <= levelTimer && en.entity_id.getId() == -1) {
             en.entity_id = factory.make_entity(en.type);
+            if (en.entity_id.getId() == -1) {
+                throw std::runtime_error("Failed to spawn entity");
+            }
             auto& pos =
                 reg.get_components<component::position>()[en.entity_id].value();
             pos.y = en.spawn_y;

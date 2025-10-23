@@ -585,10 +585,12 @@ void small_shooter_logic(double delta, registry& reg, entity en) {
 
     t1 += delta;
 
-    if (pos.x > 500 && !ready) {
-        vel.vx = -BOSS_SPEED;
-    } else {
+    if (pos.x <= 400)
         ready = true;
+
+    if (!ready) {
+        vel.vx = -BOSS_SPEED;
+        return;
     }
 
     vel.vy = sin(t1 * 2) * BOSS_SPEED;
@@ -659,11 +661,14 @@ void big_shooter_logic(double delta, registry& reg, entity en) {
 
     t1 += delta;
 
-    if (pos.x > 500 && !ready) {
-        vel.vx = -BOSS_SPEED;
-    } else {
+    if (pos.x <= 400)
         ready = true;
+
+    if (!ready) {
+        vel.vx = -BOSS_SPEED;
+        return;
     }
+
 
     vel.vy = sin(t1 * 2) * BOSS_SPEED;
     vel.vx = sin(t1 * 2) * BOSS_SPEED;
@@ -720,10 +725,12 @@ void final_boss_logic(double delta, registry& reg, entity en) {
 
     t1 += delta;
 
-    if (pos.x > 500 && !ready) {
-        vel.vx = -BOSS_SPEED;
-    } else {
+    if (pos.x <= 400)
         ready = true;
+
+    if (!ready) {
+        vel.vx = -BOSS_SPEED;
+        return;
     }
 
     vel.vy = sin(t1 * 2) * BOSS_SPEED;

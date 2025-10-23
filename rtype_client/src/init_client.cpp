@@ -42,17 +42,17 @@ void load_client_textures(void) {
     ResourceManager::Instance().load(
         "assets/sprites/enemies/red_trooper.gif", "red_trooper", TEXTURE
     );
-
-    ResourceManager::Instance().load(
-        "assets/sprites/enemies/plane.gif", "plane", TEXTURE
-    );
-
     ResourceManager::Instance().load(
         "assets/sprites/enemies/walker_walk.gif", "walker", TEXTURE
     );
     ResourceManager::Instance().load(
         "assets/sprites/enemies/enemy_missile.gif", "enemy_missile", TEXTURE
     );
+
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/plane.gif", "plane", TEXTURE
+    );
+
     ResourceManager::Instance().load(
         "assets/sprites/effects/Explosion.png", "explosion", TEXTURE
     );
@@ -68,12 +68,12 @@ void load_client_textures(void) {
     ResourceManager::Instance().load(
         "assets/sprites/enemies/boss.gif", "boss", TEXTURE
     );
+    ResourceManager::Instance().load(
+        "assets/sprites/player/force.gif", "force", TEXTURE
+    );
 
     ResourceManager::Instance().load(
         "assets/fonts/ARCADECLASSIC.TTF", "arcade", FONT
-    );
-    ResourceManager::Instance().load(
-        "assets/sprites/player/force.gif", "force", TEXTURE
     );
 
     ResourceManager::Instance().load(
@@ -83,7 +83,18 @@ void load_client_textures(void) {
     ResourceManager::Instance().load(
         "assets/sprites/enemies/tourelles.gif", "tourelles", TEXTURE
     );
-
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/boss_big_shooter.gif", "big_shooter", TEXTURE
+    );
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/boss_small_shooter.gif", "small_shooter", TEXTURE
+    );
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/final_boss.gif", "final_boss", TEXTURE
+    );
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/big_missile.gif", "big_missile", TEXTURE
+    );
 }
 
 /**
