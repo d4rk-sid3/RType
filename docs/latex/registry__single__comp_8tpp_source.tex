@@ -1,5 +1,5 @@
 \doxysection{registry\+\_\+single\+\_\+comp.\+tpp}
-\hypertarget{registry__single__comp_8tpp_source}{}\label{registry__single__comp_8tpp_source}\index{/home/jaggie/epitech\_projects/neo-\/r-\/type/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/src/registry\_single\_comp.tpp@{/home/jaggie/epitech\_projects/neo-\/r-\/type/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/src/registry\_single\_comp.tpp}}
+\hypertarget{registry__single__comp_8tpp_source}{}\label{registry__single__comp_8tpp_source}\index{/home/amour/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/src/registry\_single\_comp.tpp@{/home/amour/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/src/registry\_single\_comp.tpp}}
 \mbox{\hyperlink{registry__single__comp_8tpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ *}}
@@ -23,8 +23,8 @@
 \DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ INCLUDED\_REGISTRY\_SINGLE\_COMP\_TPP}}
 \DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ INCLUDED\_REGISTRY\_SINGLE\_COMP\_TPP}}
 \DoxyCodeLine{00021\ }
-\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{registry_8hpp}{../include/registry.hpp}}"{}}}
-\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{components_8hpp}{../include/components.hpp}}"{}}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ "{}../include/registry.hpp"{}}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ "{}../include/components.hpp"{}}}
 \DoxyCodeLine{00035\ }
 \DoxyCodeLine{00042\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Component>}
 \DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classregistry_a967f47ebfc3b74c85f483aae74bfd927}{registry::remove\_component}}(\mbox{\hyperlink{classentity}{entity}}\ \textcolor{keyword}{const}\ \&from)}
@@ -39,7 +39,7 @@
 \DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classNonExistentEntityID}{NonExistentEntityID}}();}
 \DoxyCodeLine{00053\ }
 \DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ Call\ the\ eraser\ function\ corresponding\ to\ the\ type}}
-\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{classregistry_afacfe5d75adf2f59ebc41cc3e0fb641e}{\_erase\_functions}}[\textcolor{keyword}{typeid}(Component)](from);}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{classregistry_af19c4c150891b7c6b7c8a34c2f835b8a}{\_erase\_functions}}[\textcolor{keyword}{typeid}(Component)](from);}
 \DoxyCodeLine{00056\ \}}
 \DoxyCodeLine{00057\ }
 \DoxyCodeLine{00066\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Component>}
@@ -55,17 +55,17 @@
 \DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classNonExistentEntityID}{NonExistentEntityID}}();}
 \DoxyCodeLine{00077\ }
 \DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//\ Get\ the\ table\ corresponding\ to\ the\ component\ type}}
-\DoxyCodeLine{00079\ \ \ \ \ vector<optional<Component>>\ \&table\ =\ \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{get\_components<Component>}}();}
+\DoxyCodeLine{00079\ \ \ \ \ vector<optional<Component>>\ \&table\ =\ get\_components<Component>();}
 \DoxyCodeLine{00080\ }
 \DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ table\ is\ large\ enough}}
-\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{table}}.size()\ <\ (\textcolor{keywordtype}{size\_t})\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{to}}\ +\ 1)\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{if}\ (table.size()\ <\ (\textcolor{keywordtype}{size\_t})to\ +\ 1)\ \{}
 \DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ not,\ add\ enough\ space\ to\ reach\ the\ entity's\ id}}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{table}}.resize((\textcolor{keywordtype}{size\_t})\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{to}}\ +\ 1);}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ table.resize((\textcolor{keywordtype}{size\_t})to\ +\ 1);}
 \DoxyCodeLine{00085\ \ \ \ \ \}}
 \DoxyCodeLine{00086\ \ \ \ \ \textcolor{comment}{//\ Move\ the\ component\ into\ the\ entity's\ place}}
-\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{table}}[(\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{size\_t}})\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{to}}]\ =\ std::move(\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{c}});}
+\DoxyCodeLine{00087\ \ \ \ \ table[(size\_t)to]\ =\ std::move(c);}
 \DoxyCodeLine{00088\ }
-\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{table}}[(\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{size\_t}})\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{to}}];}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{return}\ *table[(size\_t)to];}
 \DoxyCodeLine{00090\ \}}
 \DoxyCodeLine{00091\ }
 \DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif}}

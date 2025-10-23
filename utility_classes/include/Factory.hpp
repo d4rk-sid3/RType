@@ -107,6 +107,8 @@ class Factory {
     entity make_small_shooter();
 
     entity make_big_shooter();
+
+    entity make_space_enemy();
 };
 
 #endif

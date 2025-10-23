@@ -71,8 +71,8 @@ entity Factory::make_entity(const std::string& type) {
         return make_boss();
     else if (type == "force")
         return make_force();
-    else if (type == "green_trooper")
-        return make_green_trooper();
+    else if (type == "space_enemy")
+        return make_space_enemy();
     else if (type == "tourelles")
         return make_tourelles();
     else if (type == "big_missile")
@@ -746,14 +746,45 @@ entity Factory::make_green_trooper() {
     return gtrooper_id;
 }
 
+// ---------------- SPACE ENEMY ---------------------
+
+entity Factory::make_space_enemy() {
+    entity spacenemy_id = reg.spawn_entity();
+
+    auto& spacenemy_sprite =
+        reg.add_component<component::animated_drawable>(
+        spacenemy_id, component::animated_drawable()
+    );
+    spacenemy_sprite.setFrameRect(63, 50);
+    spacenemy_sprite.frame_duration = 0.25;
+    spacenemy_sprite.setTextureFromName("space_enemy");
+
+    reg.add_component<component::position>(spacenemy_id, {0, 0});
+    reg.add_component<component::velocity>(spacenemy_id, {0, 0});
+
+    reg.add_component<component::hurtbox>(spacenemy_id, {500, 2, 130, 50});
+    reg.add_component<component::hitbox>(spacenemy_id, {10, 1, 130, 50, false});
+
+    auto& entity_name =
+        reg.add_component<component::name>(spacenemy_id, component::name());
+    entity_name._name = "space_enemy";
+
+    reg.add_component<component::logic>(spacenemy_id, component::logic{spacenemy_logic});
+
+    reg.add_component<component::unique_id>(
+        spacenemy_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return spacenemy_id;
+}
+
+
 entity Factory::make_tourelles() {
     entity tourelles_id = reg.spawn_entity();
 
-    auto& tourelles_sprite = reg.add_component<component::animated_drawable>(
-        tourelles_id, component::animated_drawable()
+    auto& tourelles_sprite = reg.add_component<component::drawable>(
+        tourelles_id, component::drawable()
     );
-    tourelles_sprite.setFrameRect(34, 34);
-    tourelles_sprite.frame_duration = 0.25;
     tourelles_sprite.setTextureFromName("tourelles");
 
     reg.add_component<component::position>(tourelles_id, {0, 0});

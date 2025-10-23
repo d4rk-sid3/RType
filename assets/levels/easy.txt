@@ -1,7 +1,7 @@
 entities = (
     {name = "plane"; spawn_time = 1.4; y = 50.0},
 
-    {name = "green_trooper"; spawn_time = 2.4; y = 70.0},
+    {name = "space_enemy"; spawn_time = 2.4; y = 70.0},
 
     {name = "tourelles"; spawn_time = 7.0; y = 367.0;},
 

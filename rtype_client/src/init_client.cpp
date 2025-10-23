@@ -95,6 +95,10 @@ void load_client_textures(void) {
     ResourceManager::Instance().load(
         "assets/sprites/enemies/big_missile.gif", "big_missile", TEXTURE
     );
+
+    ResourceManager::Instance().load(
+        "assets/sprites/enemies/space_enemies.gif", "space_enemy", TEXTURE
+    );
 }
 
 /**
