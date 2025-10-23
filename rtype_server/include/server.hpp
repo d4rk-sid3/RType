@@ -74,6 +74,11 @@ typedef struct entity_info_s {
 class Server {
   private:
     /**
+     * @brief The Duration of one tick
+     */
+    const chrono::milliseconds tickDuration = std::chrono::milliseconds(50);
+
+    /**
      * @brief The port to listen on
      */
     int p_;

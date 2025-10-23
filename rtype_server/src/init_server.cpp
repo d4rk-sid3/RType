@@ -114,10 +114,11 @@ Server::~Server() {}
 
 void Server::run()
 {
-    win.setFramerateLimit(60);
     networkThread = std::thread([this]() { server_.run(); });
 
     while (win.isOpen()) {
+        auto start = std::chrono::steady_clock::now();
+
         while (win.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -143,6 +144,8 @@ void Server::run()
             printf("BOSS DEAD\n");
             break;
         }
+
+        std::this_thread::sleep_until(start + tickDuration);
     }
 
     server_.stop();

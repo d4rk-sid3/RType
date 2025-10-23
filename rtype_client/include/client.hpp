@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <vector>
 #include <map>
+#include <chrono>
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -129,12 +130,17 @@ class Client {
     std::vector<int8_t> lastmsg;
 
     /**
-     * @brief Vectors to hold old and new entity states for comparison
+     * @brief A vector containing entities states received from the server
      */
-    std::vector<EnemyMovedResponse> old;
-    std::vector<EnemyMovedResponse> new_vec;
+    std::vector<
+        std::pair<
+            std::chrono::time_point<std::chrono::steady_clock>,
+            std::vector<EnemyMovedResponse>
+                >
+            > entity_states;
 
-    std::vector<std::vector<EnemyMovedResponse>> entity_states;
+    // std::vector<EnemyMovedResponse> old;
+    // std::vector<EnemyMovedResponse> new_vec;
 
     /**
      * @brief Event for handling window events
@@ -155,6 +161,16 @@ class Client {
      * @brief Thread for running the network manager
      */
     std::thread networkThread;
+
+    /**
+     * @brief The moment of the last message
+     */
+    chrono::time_point<chrono::steady_clock> lastUpdate;
+
+    /**
+     * @brief The duration between each reception
+     */
+    const chrono::milliseconds laps = std::chrono::milliseconds(50);
 
     /**
      * @brief Initialize all menu related elements
@@ -179,6 +195,11 @@ class Client {
     void runLevel(double delta);
 
     /**
+     * @brief Receive information from the server
+     */
+    void receiveServerInfo();
+
+    /**
      * @brief Send the player's input to the server
      */
     void sendPlayerInput();
@@ -187,6 +208,23 @@ class Client {
      * @brief Send the player's action (e.g., shooting) to the server
      */
     void sendPlayerAction();
+
+    /**
+     * @brief Calculate the new position of an entity based on the last
+     * position, the position to reach, the time elapsed beatween the
+     * last position time and now
+     *
+     * @param pastPos the last position of the entity
+     * @param nextPos the position to reach
+     * @param now the actual time
+     * @param pastTime the time of the last position
+     * @param nextTime the time of the next position
+     *
+     * @return the position at now
+     */
+    Vector2D entityMovementExtrapol(Vector2D pastPos, Vector2D nextPos,
+        std::chrono::time_point<std::chrono::steady_clock> pastTime,
+        std::chrono::time_point<std::chrono::steady_clock> nextTime);
 
   public:
     /**

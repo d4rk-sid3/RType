@@ -110,7 +110,7 @@ bool isInside(std::vector<EnemyMovedResponse> vec, size_t id) {
 }
 
 /**
- * @brief This functions gets all the entities informations sent by the server
+ * @brief This functions gets all the entities information sent by the server
  * and puts them in a vector
  *
  * @return std::vector<EnemyMovedResponse>
@@ -133,14 +133,14 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities() {
             s.push_back(decodeEnemyMovedResponse(lastmsg));
         }
 
-        for (auto& a : s) {
-            std::cout << "Enemy_Type: " << static_cast<EnemyType>(a.enemy_type)
-                      << " ";
-            std::cout << "Enemy_Pos_x: " << static_cast<int16_t>(a.position.x)
-                      << " ";
-            std::cout << "Enemy_Pos_y: " << static_cast<int16_t>(a.position.y)
-                      << std::endl;
-        }
+        // for (auto& a : s) {
+        //     std::cout << "Enemy_Type: " << static_cast<EnemyType>(a.enemy_type)
+        //               << " ";
+        //     std::cout << "Enemy_Pos_x: " << static_cast<int16_t>(a.position.x)
+        //               << " ";
+        //     std::cout << "Enemy_Pos_y: " << static_cast<int16_t>(a.position.y)
+        //               << std::endl;
+        // }
         return s;
 
     } else {
@@ -213,6 +213,40 @@ void Client::sendPlayerAction() {
     client_.send_to_server(buff, buff.size());
 }
 
+void Client::receiveServerInfo() {
+    std::vector<EnemyMovedResponse> new_vec = recupAllEntities();
+
+    if (new_vec.empty())
+        return;
+    entity_states.emplace_back(std::chrono::steady_clock::now(), new_vec );
+    if (entity_states.size() == 1 || entity_states.size() == 2)
+        return;
+    if (entity_states.size() >= 3)
+        entity_states.erase(entity_states.begin());
+}
+
+Vector2D Client::entityMovementExtrapol(Vector2D pastPos, Vector2D nextPos,
+        std::chrono::time_point<std::chrono::steady_clock> pastTime,
+        std::chrono::time_point<std::chrono::steady_clock> nextTime) {
+
+    static auto progLinear = [](
+        auto duration_to_now, auto duration_to_end,
+        int16_t start, int16_t end) {
+        return ( ( (end - start) / duration_to_end ) * duration_to_now ) + start;
+    };
+
+    auto now = std::chrono::steady_clock::now();
+
+    auto duration_to_end =  std::chrono::duration_cast<std::chrono::milliseconds>(nextTime - pastTime).count();
+    auto duration_to_now =  std::chrono::duration_cast<std::chrono::milliseconds>(now - nextTime).count();
+
+    Vector2D newPos = {
+        static_cast<int16_t>(progLinear(duration_to_now, duration_to_end, pastPos.x, nextPos.x)),
+        static_cast<int16_t>(progLinear(duration_to_now, duration_to_end, pastPos.y, nextPos.y))
+    };
+
+}
+
 /**
  * @brief This function returns the name of an entity type
  *
@@ -236,60 +270,18 @@ std::string getKey(int value) {
  * @param delta the time since the last update
  */
 void Client::runLevel(double delta) {
-    static bool first_call = true;
-    sendPlayerInput();
-    sendPlayerAction();
-
-    new_vec = recupAllEntities();
-    if (new_vec.size() == 0) {
+    if (entity_states.size() != 2)
         return;
-    }
+    std::pair<
+            std::chrono::time_point<std::chrono::steady_clock>,
+            std::vector<EnemyMovedResponse>
+            >& old = entity_states.front();
+    std::pair<
+            std::chrono::time_point<std::chrono::steady_clock>,
+            std::vector<EnemyMovedResponse>
+            >& back = entity_states.back();
 
-    for (auto it = new_vec.begin(); it != new_vec.end(); it++) {
-        auto& entity = *it;
-        try {
-            if (first_call) {
-                if (getKey(entity.enemy_type) == "player1") {
-                    old.push_back(entity);
-                    ids_assoc[entity.enemy_id] = factory.make_entity(getKey(entity.enemy_type));
-                    player_entity_id = ids_assoc[entity.enemy_id];
-                    printf("Player received and created\n");
-                }
-            }
-            if (isInside(old, entity.enemy_id)) {
-                printf("Entity %d already exists. Updating\n", entity.enemy_id);
-                auto &pos = reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
-                printf("Update successful\n");
-                pos.x = entity.position.x;
-                pos.y = entity.position.y;
-            } else {
-                printf("Entity %d does not exist. Creating\n", entity.enemy_id);
-                printf("Creating a : %s of type: %d\n", (getKey(entity.enemy_type)).c_str(), entity.enemy_type);
-                ids_assoc[entity.enemy_id] = factory.make_entity(getKey(entity.enemy_type));
-                auto &pos = reg.get_components<component::position>()[ids_assoc[entity.enemy_id]].value();
-                pos.x = entity.position.x;
-                pos.y = entity.position.y;
-            }
-        } catch (std::exception &e) {    
-        }
-    }
-    
-    for (auto it = old.begin(); it != old.end(); it++) {
-        auto& entity = *it;
-        if (!isInside(new_vec, entity.enemy_id)) {
-            if (getKey(entity.enemy_type) == "player1") {
-                player_entity_id = -1;
-            }
-            printf("Entity %d does not exist anymore. Killing\n", entity.enemy_id);
-            try {
-                reg.kill_entity((class entity)(ids_assoc[entity.enemy_id]));
-            } catch (std::exception& e) {
-            }
-        }
-    }
 
-    old = new_vec;
-    first_call = false;
 }
 
 /**
@@ -313,7 +305,6 @@ void Client::initMenu()
         menu_info.start_text, component::controllable()
         );
 }
-
 
 /**
  * @brief This function runs the menu
@@ -357,6 +348,7 @@ void Client::run()
 
     while (win.isOpen()) {
         double dt = frameClock.restart().asSeconds();
+
         while (win.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -369,6 +361,9 @@ void Client::run()
             runMenu(dt);
         }
         if (state == GAME) {
+            sendPlayerInput();
+            sendPlayerAction();
+            receiveServerInfo();
             runLevel(dt);
         }
 
