@@ -10,16 +10,14 @@ The file contains the definition of the server class.
 {\ttfamily \#include "{}Factory.\+hpp"{}}\newline
 {\ttfamily \#include "{}Network.\+hpp"{}}\newline
 {\ttfamily \#include "{}registry.\+hpp"{}}\newline
-Include dependency graph for server.\+hpp\+:
-\nopagebreak
+Include dependency graph for server.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{server_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -54,7 +52,12 @@ enum \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93}{diff\+\_\+m
 , \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a5340ec7ecef6cc3886684a3bd3450d64}{MEDIUM}}
 , \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f}{HARD}}
  \}
-\begin{DoxyCompactList}\small\item\em An enum to store the difficulty of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em An enum to store the difficulty of the game. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{server_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} \{ \mbox{\hyperlink{server_8hpp_aa0aafed44fec19806d8f9ad834be1248a5f6aff2efe946ec43f8bad546893b0af}{LEVEL1}}
+, \mbox{\hyperlink{server_8hpp_aa0aafed44fec19806d8f9ad834be1248a00955312c6043316fe7dee6c67bbdc9a}{LEVEL2}}
+, \mbox{\hyperlink{server_8hpp_aa0aafed44fec19806d8f9ad834be1248a32187f6279619afdb13e71151dd5ed0b}{LEVEL3}}
+ \}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -143,6 +146,26 @@ MEDIUM&\\
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{HARD@{HARD}!server.hpp@{server.hpp}}\index{server.hpp@{server.hpp}!HARD@{HARD}}}\Hypertarget{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f}\label{server_8hpp_a27f718e46e2194b1b59f97cab001aa93a712b8eb9268f114b4afc567f24bc536f} 
 HARD&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{server_8hpp_aa0aafed44fec19806d8f9ad834be1248}\label{server_8hpp_aa0aafed44fec19806d8f9ad834be1248} 
+\index{server.hpp@{server.hpp}!state\_t@{state\_t}}
+\index{state\_t@{state\_t}!server.hpp@{server.hpp}}
+\doxysubsubsection{\texorpdfstring{state\_t}{state\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LEVEL1@{LEVEL1}!server.hpp@{server.hpp}}\index{server.hpp@{server.hpp}!LEVEL1@{LEVEL1}}}\Hypertarget{server_8hpp_aa0aafed44fec19806d8f9ad834be1248a5f6aff2efe946ec43f8bad546893b0af}\label{server_8hpp_aa0aafed44fec19806d8f9ad834be1248a5f6aff2efe946ec43f8bad546893b0af} 
+LEVEL1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LEVEL2@{LEVEL2}!server.hpp@{server.hpp}}\index{server.hpp@{server.hpp}!LEVEL2@{LEVEL2}}}\Hypertarget{server_8hpp_aa0aafed44fec19806d8f9ad834be1248a00955312c6043316fe7dee6c67bbdc9a}\label{server_8hpp_aa0aafed44fec19806d8f9ad834be1248a00955312c6043316fe7dee6c67bbdc9a} 
+LEVEL2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LEVEL3@{LEVEL3}!server.hpp@{server.hpp}}\index{server.hpp@{server.hpp}!LEVEL3@{LEVEL3}}}\Hypertarget{server_8hpp_aa0aafed44fec19806d8f9ad834be1248a32187f6279619afdb13e71151dd5ed0b}\label{server_8hpp_aa0aafed44fec19806d8f9ad834be1248a32187f6279619afdb13e71151dd5ed0b} 
+LEVEL3&\\
 \hline
 
 \end{DoxyEnumFields}

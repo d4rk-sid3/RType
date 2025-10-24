@@ -46,6 +46,11 @@
 
 extern bool boss_dead;
 
+extern bool boss1_dead;
+extern bool boss2_dead;
+
+extern bool final_boss_dead;
+
 void player_logic(double delta, registry& reg, entity entity);
 void red_trooper_logic(double delta, registry& reg, entity entity);
 void plane_logic(double delta, registry& reg, entity en);

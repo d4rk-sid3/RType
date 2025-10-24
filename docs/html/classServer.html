@@ -73,6 +73,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classServer-members.html">List of all members</a>  </div>
@@ -118,15 +119,27 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af56fa596fcd58a1ea62b5a059885f467" id="r_af56fa596fcd58a1ea62b5a059885f467"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af56fa596fcd58a1ea62b5a059885f467">runLevel</a> (double delta)</td></tr>
 <tr class="memdesc:af56fa596fcd58a1ea62b5a059885f467"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function runs the current level It makes sure to spawn new entities if their spawn time has come And calls the receivePlayerInput function as well as the logGameEntities function.  <br /></td></tr>
 <tr class="separator:af56fa596fcd58a1ea62b5a059885f467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a091f49dee581a534a900ba710394427c" id="r_a091f49dee581a534a900ba710394427c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a091f49dee581a534a900ba710394427c">handleWinOrLoss</a> ()</td></tr>
+<tr class="separator:a091f49dee581a534a900ba710394427c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a0597c0ae7c86932fd7a90dfea961b8a8" id="r_a0597c0ae7c86932fd7a90dfea961b8a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="server_8hpp.html#aa0aafed44fec19806d8f9ad834be1248">state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0597c0ae7c86932fd7a90dfea961b8a8">state</a> = <a class="el" href="server_8hpp.html#aa0aafed44fec19806d8f9ad834be1248a5f6aff2efe946ec43f8bad546893b0af">LEVEL1</a></td></tr>
+<tr class="separator:a0597c0ae7c86932fd7a90dfea961b8a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a098d4a863bdca8def61420859eb52c80" id="r_a098d4a863bdca8def61420859eb52c80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a098d4a863bdca8def61420859eb52c80">loadLevel</a> (const std::string &amp;path)</td></tr>
-<tr class="memdesc:a098d4a863bdca8def61420859eb52c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function loads a level from a configuration file It stores all the entities of the level in a vector with their spawn time and spawn y position.  <br /></td></tr>
-<tr class="separator:a098d4a863bdca8def61420859eb52c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae05dff9b30e2b1d627e62629bbbd999a" id="r_ae05dff9b30e2b1d627e62629bbbd999a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae05dff9b30e2b1d627e62629bbbd999a">loadLevel</a> ()</td></tr>
+<tr class="memdesc:ae05dff9b30e2b1d627e62629bbbd999a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function loads a level from a configuration file It stores all the entities of the level in a vector with their spawn time and spawn y position.  <br /></td></tr>
+<tr class="separator:ae05dff9b30e2b1d627e62629bbbd999a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac794315f4a5a23ec5199cc0ba42ac8e" id="r_aac794315f4a5a23ec5199cc0ba42ac8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac794315f4a5a23ec5199cc0ba42ac8e">clearGameEntities</a> ()</td></tr>
+<tr class="separator:aac794315f4a5a23ec5199cc0ba42ac8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ecd22493005346268b3feed09218d20" id="r_a7ecd22493005346268b3feed09218d20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ecd22493005346268b3feed09218d20">initializeGame</a> (void)</td></tr>
 <tr class="memdesc:a7ecd22493005346268b3feed09218d20"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initializes the game.  <br /></td></tr>
 <tr class="separator:a7ecd22493005346268b3feed09218d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a619edbff0be7523417ea9c5127ea3451" id="r_a619edbff0be7523417ea9c5127ea3451"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a619edbff0be7523417ea9c5127ea3451">initializePlayers</a> (void)</td></tr>
+<tr class="memdesc:a619edbff0be7523417ea9c5127ea3451"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initializes the players.  <br /></td></tr>
+<tr class="separator:a619edbff0be7523417ea9c5127ea3451"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee9efcc162e25166da798b5478e62167" id="r_aee9efcc162e25166da798b5478e62167"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee9efcc162e25166da798b5478e62167">logGameEntities</a> (void)</td></tr>
 <tr class="memdesc:aee9efcc162e25166da798b5478e62167"><td class="mdescLeft">&#160;</td><td class="mdescRight">This functions send to the clients information about each game entity alive.  <br /></td></tr>
 <tr class="separator:aee9efcc162e25166da798b5478e62167"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -210,6 +223,31 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aac794315f4a5a23ec5199cc0ba42ac8e" name="aac794315f4a5a23ec5199cc0ba42ac8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac794315f4a5a23ec5199cc0ba42ac8e">&#9670;&#160;</a></span>clearGameEntities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Server::clearGameEntities </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a268043e1a600716d031d621139d9d3a6" name="a268043e1a600716d031d621139d9d3a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a268043e1a600716d031d621139d9d3a6">&#9670;&#160;</a></span>decodeActionResponse()</h2>
 
@@ -320,6 +358,23 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a091f49dee581a534a900ba710394427c" name="a091f49dee581a534a900ba710394427c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a091f49dee581a534a900ba710394427c">&#9670;&#160;</a></span>handleWinOrLoss()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Server::handleWinOrLoss </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7ecd22493005346268b3feed09218d20" name="a7ecd22493005346268b3feed09218d20"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7ecd22493005346268b3feed09218d20">&#9670;&#160;</a></span>initializeGame()</h2>
 
@@ -347,8 +402,35 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a098d4a863bdca8def61420859eb52c80" name="a098d4a863bdca8def61420859eb52c80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a098d4a863bdca8def61420859eb52c80">&#9670;&#160;</a></span>loadLevel()</h2>
+<a id="a619edbff0be7523417ea9c5127ea3451" name="a619edbff0be7523417ea9c5127ea3451"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a619edbff0be7523417ea9c5127ea3451">&#9670;&#160;</a></span>initializePlayers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Server::initializePlayers </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function initializes the players. </p>
+
+</div>
+</div>
+<a id="ae05dff9b30e2b1d627e62629bbbd999a" name="ae05dff9b30e2b1d627e62629bbbd999a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae05dff9b30e2b1d627e62629bbbd999a">&#9670;&#160;</a></span>loadLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -359,7 +441,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Server::loadLevel </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span></td><td>)</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -682,6 +764,20 @@ Private Attributes</h2></td></tr>
 <span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0597c0ae7c86932fd7a90dfea961b8a8" name="a0597c0ae7c86932fd7a90dfea961b8a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0597c0ae7c86932fd7a90dfea961b8a8">&#9670;&#160;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="server_8hpp.html#aa0aafed44fec19806d8f9ad834be1248">state_t</a> Server::state = <a class="el" href="server_8hpp.html#aa0aafed44fec19806d8f9ad834be1248a5f6aff2efe946ec43f8bad546893b0af">LEVEL1</a></td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 </div>

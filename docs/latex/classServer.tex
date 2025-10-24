@@ -38,14 +38,25 @@ Move\+Response \mbox{\hyperlink{classServer_ac5a491fec7ae16a63d195b4b192f9d48}{d
 Action\+Response \mbox{\hyperlink{classServer_a268043e1a600716d031d621139d9d3a6}{decode\+Action\+Response}} (std\+::vector$<$ int8\+\_\+t $>$ \&buffer)
 \item 
 void \mbox{\hyperlink{classServer_af56fa596fcd58a1ea62b5a059885f467}{run\+Level}} (double delta)
-\begin{DoxyCompactList}\small\item\em This function runs the current level It makes sure to spawn new entities if their spawn time has come And calls the receive\+Player\+Input function as well as the log\+Game\+Entities function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This function runs the current level It makes sure to spawn new entities if their spawn time has come And calls the receive\+Player\+Input function as well as the log\+Game\+Entities function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classServer_a091f49dee581a534a900ba710394427c}{handle\+Win\+Or\+Loss}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{server_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} \mbox{\hyperlink{classServer_a0597c0ae7c86932fd7a90dfea961b8a8}{state}} = \mbox{\hyperlink{server_8hpp_aa0aafed44fec19806d8f9ad834be1248a5f6aff2efe946ec43f8bad546893b0af}{LEVEL1}}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classServer_a098d4a863bdca8def61420859eb52c80}{load\+Level}} (const std\+::string \&path)
+void \mbox{\hyperlink{classServer_ae05dff9b30e2b1d627e62629bbbd999a}{load\+Level}} ()
 \begin{DoxyCompactList}\small\item\em This function loads a level from a configuration file It stores all the entities of the level in a vector with their spawn time and spawn y position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classServer_aac794315f4a5a23ec5199cc0ba42ac8e}{clear\+Game\+Entities}} ()
+\item 
 void \mbox{\hyperlink{classServer_a7ecd22493005346268b3feed09218d20}{initialize\+Game}} (void)
 \begin{DoxyCompactList}\small\item\em This function initializes the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classServer_a619edbff0be7523417ea9c5127ea3451}{initialize\+Players}} (void)
+\begin{DoxyCompactList}\small\item\em This function initializes the players. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classServer_aee9efcc162e25166da798b5478e62167}{log\+Game\+Entities}} (void)
 \begin{DoxyCompactList}\small\item\em This functions send to the clients information about each game entity alive. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classServer_af59936648c727d2b909ebed8d2a0efa9}{receive\+Player\+Input}} (double delta)
@@ -109,6 +120,12 @@ Destroy the \doxylink{classServer}{Server}\+:\+: \doxylink{classServer}{Server} 
 
 
 \doxysubsection{Member Function Documentation}
+\Hypertarget{classServer_aac794315f4a5a23ec5199cc0ba42ac8e}\label{classServer_aac794315f4a5a23ec5199cc0ba42ac8e} 
+\index{Server@{Server}!clearGameEntities@{clearGameEntities}}
+\index{clearGameEntities@{clearGameEntities}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{clearGameEntities()}{clearGameEntities()}}
+{\footnotesize\ttfamily void Server\+::clear\+Game\+Entities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 \Hypertarget{classServer_a268043e1a600716d031d621139d9d3a6}\label{classServer_a268043e1a600716d031d621139d9d3a6} 
 \index{Server@{Server}!decodeActionResponse@{decodeActionResponse}}
 \index{decodeActionResponse@{decodeActionResponse}!Server@{Server}}
@@ -145,6 +162,12 @@ Destroy the \doxylink{classServer}{Server}\+:\+: \doxylink{classServer}{Server} 
 \doxysubsubsection{\texorpdfstring{getManager()}{getManager()}}
 {\footnotesize\ttfamily Network\+Manager \& Server\+::get\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+\Hypertarget{classServer_a091f49dee581a534a900ba710394427c}\label{classServer_a091f49dee581a534a900ba710394427c} 
+\index{Server@{Server}!handleWinOrLoss@{handleWinOrLoss}}
+\index{handleWinOrLoss@{handleWinOrLoss}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{handleWinOrLoss()}{handleWinOrLoss()}}
+{\footnotesize\ttfamily void Server\+::handle\+Win\+Or\+Loss (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 \Hypertarget{classServer_a7ecd22493005346268b3feed09218d20}\label{classServer_a7ecd22493005346268b3feed09218d20} 
 \index{Server@{Server}!initializeGame@{initializeGame}}
 \index{initializeGame@{initializeGame}!Server@{Server}}
@@ -155,11 +178,21 @@ Destroy the \doxylink{classServer}{Server}\+:\+: \doxylink{classServer}{Server} 
 
 This function initializes the game. 
 
-\Hypertarget{classServer_a098d4a863bdca8def61420859eb52c80}\label{classServer_a098d4a863bdca8def61420859eb52c80} 
+\Hypertarget{classServer_a619edbff0be7523417ea9c5127ea3451}\label{classServer_a619edbff0be7523417ea9c5127ea3451} 
+\index{Server@{Server}!initializePlayers@{initializePlayers}}
+\index{initializePlayers@{initializePlayers}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{initializePlayers()}{initializePlayers()}}
+{\footnotesize\ttfamily void Server\+::initialize\+Players (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+This function initializes the players. 
+
+\Hypertarget{classServer_ae05dff9b30e2b1d627e62629bbbd999a}\label{classServer_ae05dff9b30e2b1d627e62629bbbd999a} 
 \index{Server@{Server}!loadLevel@{loadLevel}}
 \index{loadLevel@{loadLevel}!Server@{Server}}
 \doxysubsubsection{\texorpdfstring{loadLevel()}{loadLevel()}}
-{\footnotesize\ttfamily void Server\+::load\+Level (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily void Server\+::load\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -272,6 +305,12 @@ This function runs the current level It makes sure to spawn new entities if thei
 \index{server\_@{server\_}!Server@{Server}}
 \doxysubsubsection{\texorpdfstring{server\_}{server\_}}
 {\footnotesize\ttfamily Network\+Manager Server\+::server\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classServer_a0597c0ae7c86932fd7a90dfea961b8a8}\label{classServer_a0597c0ae7c86932fd7a90dfea961b8a8} 
+\index{Server@{Server}!state@{state}}
+\index{state@{state}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \mbox{\hyperlink{server_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} Server\+::state = \mbox{\hyperlink{server_8hpp_aa0aafed44fec19806d8f9ad834be1248a5f6aff2efe946ec43f8bad546893b0af}{LEVEL1}}}
 
 
 

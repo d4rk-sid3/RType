@@ -315,6 +315,22 @@ void Client::runLevel(double delta) {
         if (!isInside(new_vec, entity.enemy_id)) {
             if (getKey(entity.enemy_type) == "player1") {
                 player_entity_id = -1;
+                player1_dead = true;
+            }
+            if (getKey(entity.enemy_type) == "player2") {
+                player2_dead = true;
+            }
+            if (getKey(entity.enemy_type) == "boss") {
+                boss_dead = true;
+            }
+            if (getKey(entity.enemy_type) == "small_shooter") {
+                boss2_dead = true;
+            }
+            if (getKey(entity.enemy_type) == "big_shooter") {
+                boss1_dead = true;
+            }
+            if (getKey(entity.enemy_type) == "final_boss") {
+                final_boss_dead = true;
             }
             try {
                 _reg.kill_entity((class entity)(ids_assoc[entity.enemy_id]));
@@ -373,7 +389,7 @@ void Client::runMenu(double delta) {
             _reg.dead_entities.begin(), _reg.dead_entities.end(),
             menu_info.menu_fade_in_rect
         ) != _reg.dead_entities.end()) {
-        state = GAME;
+        state = LEVEL1;
         initGame();
     }
 }
@@ -386,4 +402,100 @@ void Client::initGame() {
     Factory factory(_reg);
     factory.make_background();
     factory.make_game_background_music();
+}
+
+void Client::handleSubStates(double delta, sf::RenderWindow& win)
+{
+    if (state == LEVEL1) {
+        if (boss_dead) {
+            substate = VICTORY;
+        }
+    }
+    if (state == LEVEL2) {
+        if (boss1_dead && boss2_dead) {
+            substate = VICTORY;
+        }
+    }
+    if (state == LEVEL3) {
+        if (final_boss_dead) {
+            substate = VICTORY;
+        }
+    }
+    
+    if (substate == VICTORY) {
+        if (ui_handler.fade_started == false) {
+            ui_handler = UIHandler("LEVEL CLEARED", true);
+            ui_handler.fade_in(win, delta);
+        }
+        if (ui_handler.fade_started) {
+            ui_handler.fade_in(win, delta);
+        }
+        if (ui_handler.fade_ended) {
+            player1_dead = false;
+            player2_dead = false;
+            if (state == LEVEL1) {
+                state = LEVEL2;
+                substate = LEVEL2_START;
+            } else if (state == LEVEL2) {
+                state = LEVEL3;
+                substate = LEVEL3_START;
+            } else if (state == LEVEL3) {
+                substate = SUB_NONE;
+                exit(0);
+            }
+        }
+    }
+
+    if (player1_dead && player2_dead && substate != GAME_OVER) {
+        substate = GAME_OVER;
+        ui_handler = UIHandler("GAME OVER", true);
+    }
+    if (substate == GAME_OVER) {
+        if (ui_handler.fade_started == false) {
+            ui_handler.fade_in(win, delta);
+        }
+        if (ui_handler.fade_started) {
+            ui_handler.fade_in(win, delta);
+        }
+        if (ui_handler.fade_ended) {
+            substate = SUB_NONE;
+            exit(0);
+        }
+    }
+    if (substate == LEVEL1_START) {
+        if (ui_handler.fade_started == false) {
+            ui_handler = UIHandler("LEVEL 1", false);
+            ui_handler.fade_out(win, delta);
+        }
+        if (ui_handler.fade_started) {
+            ui_handler.fade_out(win, delta);
+        }
+        if (ui_handler.fade_ended) {
+            substate = SUB_NONE;
+        }
+    }
+    if (substate == LEVEL2_START) {
+        if (ui_handler.fade_started == false) {
+            ui_handler = UIHandler("LEVEL 2", false);
+            ui_handler.fade_out(win, delta);
+        }
+        if (ui_handler.fade_started) {
+            ui_handler.fade_out(win, delta);
+        }
+        if (ui_handler.fade_ended) {
+            substate = SUB_NONE;
+        }
+    }
+    if (substate == LEVEL3_START) {
+        if (ui_handler.fade_started == false) {
+            ui_handler = UIHandler("LEVEL 3", false);
+            ui_handler.fade_out(win, delta);
+        }
+        if (ui_handler.fade_started) {
+            ui_handler.fade_out(win, delta);
+        }
+        if (ui_handler.fade_ended) {
+            substate = SUB_NONE;
+        }
+    }
 }

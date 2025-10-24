@@ -57,11 +57,13 @@ int main(int ac, char **av) {
         if (client.state == MENU || client.state == TRANSITION) {
             client.runMenu(dt);
         }
-        if (client.state == GAME) {
+        if (client.state == LEVEL1 || client.state == LEVEL2 || client.state == LEVEL3) {
             client.runLevel(dt);
+            client.handleSubStates(dt, win);
         }
 
         reg.run_systems(dt);
+        client.ui_handler.draw(win);
     }   
 
     c.getContext().stop();

@@ -27,14 +27,17 @@ var searchData=
   ['spawn_5fy_24',['spawn_y',['../structentity__info__s.html#a1b33fd572598d15a521a5e4b788c2e94',1,'entity_info_s']]],
   ['sprite_25',['sprite',['../structcomponent_1_1drawable__s.html#a4bc7f46ba53b4f027eebb7bbd710976c',1,'component::drawable_s::sprite'],['../structcomponent_1_1animated__drawable__s.html#aed93697f18dc17d503b94335cd69c97e',1,'component::animated_drawable_s::sprite']]],
   ['start_5ftext_26',['start_text',['../structmenu__info__s.html#adcba8e6f82edd2665cdab0b48e8d22d4',1,'menu_info_s']]],
-  ['state_27',['state',['../classClient.html#a3a70c6088987795c92e25d7ee2e99af5',1,'Client']]],
+  ['state_27',['state',['../classClient.html#a3a70c6088987795c92e25d7ee2e99af5',1,'Client::state'],['../classServer.html#a0597c0ae7c86932fd7a90dfea961b8a8',1,'Server::state']]],
   ['state_20handling_28',['Game State Handling',['../client_page.html#game_state_sec',1,'']]],
-  ['state_5ft_29',['state_t',['../client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248',1,'client.hpp']]],
+  ['state_5ft_29',['state_t',['../client_8hpp.html#aa0aafed44fec19806d8f9ad834be1248',1,'state_t:&#160;client.hpp'],['../server_8hpp.html#aa0aafed44fec19806d8f9ad834be1248',1,'state_t:&#160;server.hpp']]],
   ['std_3a_3astring_20address_20tt_30',['&lt;tt&gt;Client(int p, std::string address)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md4',1,'']]],
   ['step_20by_20step_20tutorial_31',['@section engine_tutorial Step-by-step Tutorial',['../engine.html#autotoc_md18',1,'']]],
   ['step_20tutorial_32',['@section engine_tutorial Step-by-step Tutorial',['../engine.html#autotoc_md18',1,'']]],
   ['steps_33',['5. Next Steps',['../engine.html#autotoc_md31',1,'']]],
   ['structure_20tcp_34',['3.1 General Structure (TCP)',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md45',1,'']]],
-  ['systems_2ecpp_35',['systems.cpp',['../systems_8cpp.html',1,'']]],
-  ['systems_2ehpp_36',['systems.hpp',['../systems_8hpp.html',1,'']]]
+  ['sub_5fnone_35',['SUB_NONE',['../client_8hpp.html#a7200056c886361c0597814f8db61992ea777cb88c7c961952f33afb572cefa64d',1,'client.hpp']]],
+  ['substate_36',['substate',['../classClient.html#a9fbcd1b1cdfb39e26efd13c43b818211',1,'Client']]],
+  ['substate_5ft_37',['substate_t',['../client_8hpp.html#a7200056c886361c0597814f8db61992e',1,'client.hpp']]],
+  ['systems_2ecpp_38',['systems.cpp',['../systems_8cpp.html',1,'']]],
+  ['systems_2ehpp_39',['systems.hpp',['../systems_8hpp.html',1,'']]]
 ];

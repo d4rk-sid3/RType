@@ -108,10 +108,22 @@ void load_textures(void) {
 void Server::initializeGame(void) {
     Factory factory(reg);
     factory.make_background();
-    player1_entity_id = factory.make_entity("player1");
-    player2_entity_id = factory.make_entity("player2");
     factory.make_ceiling();
     factory.make_floor();
+    factory.make_menu_background_music();
+    factory.make_force();
+}
+
+/**
+ * @brief This function initializes the players
+ *
+ */
+void Server::initializePlayers(void) {
+    Factory factory(reg);
+    if (player1_entity_id == -1) 
+    player1_entity_id = factory.make_entity("player1");
+    if (player2_entity_id == -1)
+        player2_entity_id = factory.make_entity("player2");
 
     auto& pos1 =
         reg.get_components<component::position>()[player1_entity_id].value();
@@ -122,9 +134,6 @@ void Server::initializeGame(void) {
 
     pos2.x = 50;
     pos2.y = 150;
-    factory.make_menu_background_music();
-
-    factory.make_force();
 }
 
 /**
@@ -137,12 +146,7 @@ Server::Server(int p, registry& regis)
     : server_(p, std::ref(messages), std::ref(mtx)), p_(p), reg(regis) {
     load_textures();
     initializeGame();
-    if (diff_mode == EASY)
-        loadLevel("assets/levels/easy.txt");
-    else if (diff_mode == HARD)
-        loadLevel("assets/levels/hard.txt");
-    else
-        loadLevel("assets/levels/medium.txt");
+    loadLevel();
 }
 
 /**

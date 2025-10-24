@@ -16,11 +16,12 @@ var searchData=
   ['initiale_13',['4.1 HELLO (0x01) - Connexion initiale',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md47',1,'']]],
   ['initialize_20the_20engine_14',['1. Initialize the Engine',['../engine.html#autotoc_md19',1,'']]],
   ['initializegame_15',['initializeGame',['../classServer.html#a7ecd22493005346268b3feed09218d20',1,'Server']]],
-  ['initmenu_16',['initMenu',['../classClient.html#a8e97ca84d92276123cf88091a6811cc1',1,'Client']]],
-  ['instance_17',['Instance',['../classResourceManager.html#a48cd1c56c64af260a6ddb5fbd4daae54',1,'ResourceManager']]],
-  ['int_20p_20std_3a_3astring_20address_20tt_18',['&lt;tt&gt;Client(int p, std::string address)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md4',1,'']]],
-  ['introduction_19',['Introduction',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md36',1,'1. Introduction'],['../index.html#intro_sec',1,'Introduction']]],
-  ['is_20make_20',['4.25 ACTION_RESPONSE (0x25) — Indicate if an action like (shoot, ..) is make',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md72',1,'']]],
-  ['is_20our_20r_20type_21',['What is our R-TYPE',['../index.html#infos_sub',1,'']]],
-  ['isinside_22',['isInside',['../init__client_8cpp.html#aad0535b912db09140627976f8862b896',1,'init_client.cpp']]]
+  ['initializeplayers_16',['initializePlayers',['../classServer.html#a619edbff0be7523417ea9c5127ea3451',1,'Server']]],
+  ['initmenu_17',['initMenu',['../classClient.html#a8e97ca84d92276123cf88091a6811cc1',1,'Client']]],
+  ['instance_18',['Instance',['../classResourceManager.html#a48cd1c56c64af260a6ddb5fbd4daae54',1,'ResourceManager']]],
+  ['int_20p_20std_3a_3astring_20address_20tt_19',['&lt;tt&gt;Client(int p, std::string address)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md4',1,'']]],
+  ['introduction_20',['Introduction',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md36',1,'1. Introduction'],['../index.html#intro_sec',1,'Introduction']]],
+  ['is_20make_21',['4.25 ACTION_RESPONSE (0x25) — Indicate if an action like (shoot, ..) is make',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md72',1,'']]],
+  ['is_20our_20r_20type_22',['What is our R-TYPE',['../index.html#infos_sub',1,'']]],
+  ['isinside_23',['isInside',['../init__client_8cpp.html#aad0535b912db09140627976f8862b896',1,'init_client.cpp']]]
 ];

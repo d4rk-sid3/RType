@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['window_5fheight_0',['WINDOW_HEIGHT',['../client_8hpp.html#a5473cf64fa979b48335079c99532e243',1,'WINDOW_HEIGHT:&#160;client.hpp'],['../server_8hpp.html#a5473cf64fa979b48335079c99532e243',1,'WINDOW_HEIGHT:&#160;server.hpp']]],
-  ['window_5fwidth_1',['WINDOW_WIDTH',['../client_8hpp.html#a498d9f026138406895e9a34b504ac6a6',1,'WINDOW_WIDTH:&#160;client.hpp'],['../server_8hpp.html#a498d9f026138406895e9a34b504ac6a6',1,'WINDOW_WIDTH:&#160;server.hpp']]]
+  ['level1_5fpath_0',['LEVEL1_PATH',['../level__handling_8cpp.html#a51df635ef72bff92dce7a138a872b781',1,'level_handling.cpp']]],
+  ['level2_5fpath_1',['LEVEL2_PATH',['../level__handling_8cpp.html#a09135e9ecc0103091aef41f6857cede2',1,'level_handling.cpp']]],
+  ['level3_5fpath_2',['LEVEL3_PATH',['../level__handling_8cpp.html#af98aa057f3dfb1089700ef27aa70893c',1,'level_handling.cpp']]]
 ];

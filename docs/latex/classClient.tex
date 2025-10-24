@@ -37,6 +37,8 @@ void \mbox{\hyperlink{classClient_a9d0aec2907f33777ece928a1a0dee25e}{send\+Playe
 \begin{DoxyCompactList}\small\item\em This function checks if the player is entering inputs and sends info to the server accordingly. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classClient_ae075a5f69a51c05b60cc8469c2308bd6}{send\+Player\+Action}} ()
 \begin{DoxyCompactList}\small\item\em This function checks if the player is shooting and sends info to the server accordingly. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_afea24e1b20b4c5e3139e51f97b435ddb}{handle\+Sub\+States}} (double delta, sf\+::\+Render\+Window \&win)
+\item 
 Network\+Manager \& \mbox{\hyperlink{classClient_af6829864546ed7e423fc1875be9864a9}{get\+Manager}} ()
 \item 
 std\+::vector$<$ Enemy\+Moved\+Response $>$ \mbox{\hyperlink{classClient_a4c9eefab245ca66e80ceb13fa67287e8}{recup\+All\+Entities}} ()
@@ -54,8 +56,12 @@ std\+::vector$<$ int8\+\_\+t $>$ \mbox{\hyperlink{classClient_aa317720a1d7ca0d8b
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} \mbox{\hyperlink{classClient_a3a70c6088987795c92e25d7ee2e99af5}{state}} = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}}
-\begin{DoxyCompactList}\small\item\em The current state of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+UIHandler \mbox{\hyperlink{classClient_a029d1681c7aa5ef47d5be372cb6d6635}{ui\+\_\+handler}}
+\begin{DoxyCompactList}\small\item\em The current state of the game. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} \mbox{\hyperlink{classClient_a3a70c6088987795c92e25d7ee2e99af5}{state}} = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a5f6aff2efe946ec43f8bad546893b0af}{LEVEL1}}
+\item 
+\mbox{\hyperlink{client_8hpp_a7200056c886361c0597814f8db61992e}{substate\+\_\+t}} \mbox{\hyperlink{classClient_a9fbcd1b1cdfb39e26efd13c43b818211}{substate}} = \mbox{\hyperlink{client_8hpp_a7200056c886361c0597814f8db61992eaf59c5052d1c842c15ac9a16cf1f22fbb}{LEVEL1\+\_\+\+START}}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -152,6 +158,12 @@ Destroy the \doxylink{classClient}{Client}\+:\+: \doxylink{classClient}{Client} 
 \index{getManager@{getManager}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{getManager()}{getManager()}}
 {\footnotesize\ttfamily Network\+Manager \& Client\+::get\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classClient_afea24e1b20b4c5e3139e51f97b435ddb}\label{classClient_afea24e1b20b4c5e3139e51f97b435ddb} 
+\index{Client@{Client}!handleSubStates@{handleSubStates}}
+\index{handleSubStates@{handleSubStates}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{handleSubStates()}{handleSubStates()}}
+{\footnotesize\ttfamily void Client\+::handle\+Sub\+States (\begin{DoxyParamCaption}\item[{double}]{delta,  }\item[{sf\+::\+Render\+Window \&}]{win }\end{DoxyParamCaption})}
 
 \Hypertarget{classClient_add2ae689ce735011cd1b83601470f4d3}\label{classClient_add2ae689ce735011cd1b83601470f4d3} 
 \index{Client@{Client}!initGame@{initGame}}
@@ -303,7 +315,19 @@ This function checks if the player is entering inputs and sends info to the serv
 \index{Client@{Client}!state@{state}}
 \index{state@{state}!Client@{Client}}
 \doxysubsubsection{\texorpdfstring{state}{state}}
-{\footnotesize\ttfamily \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} Client\+::state = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248ad50cf309d7568040619ed26ee6835a84}{GAME}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248}{state\+\_\+t}} Client\+::state = \mbox{\hyperlink{client_8hpp_aa0aafed44fec19806d8f9ad834be1248a5f6aff2efe946ec43f8bad546893b0af}{LEVEL1}}}
+
+\Hypertarget{classClient_a9fbcd1b1cdfb39e26efd13c43b818211}\label{classClient_a9fbcd1b1cdfb39e26efd13c43b818211} 
+\index{Client@{Client}!substate@{substate}}
+\index{substate@{substate}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{substate}{substate}}
+{\footnotesize\ttfamily \mbox{\hyperlink{client_8hpp_a7200056c886361c0597814f8db61992e}{substate\+\_\+t}} Client\+::substate = \mbox{\hyperlink{client_8hpp_a7200056c886361c0597814f8db61992eaf59c5052d1c842c15ac9a16cf1f22fbb}{LEVEL1\+\_\+\+START}}}
+
+\Hypertarget{classClient_a029d1681c7aa5ef47d5be372cb6d6635}\label{classClient_a029d1681c7aa5ef47d5be372cb6d6635} 
+\index{Client@{Client}!ui\_handler@{ui\_handler}}
+\index{ui\_handler@{ui\_handler}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{ui\_handler}{ui\_handler}}
+{\footnotesize\ttfamily UIHandler Client\+::ui\+\_\+handler}
 
 
 

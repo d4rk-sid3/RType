@@ -66,16 +66,9 @@ int main(int ac, char **av) {
 
         double dt = frameClock.restart().asSeconds();
         reg.run_systems(dt);
-        server.runLevel(dt);
 
-        if (player1_entity_id == -1 && player2_entity_id == -1) {
-            printf("GAME OVER\n");
-            break;
-        }
-        if (boss_dead) {
-            printf("BOSS DEAD\n");
-            break;
-        }
+        server.runLevel(dt);
+        server.handleWinOrLoss();
     }
 
     c.getContext().stop();

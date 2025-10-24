@@ -40,6 +40,10 @@ using namespace component;
 
 using namespace libconfig;
 
+#define LEVEL1_PATH "assets/levels/easy.txt"
+#define LEVEL2_PATH "assets/levels/medium.txt"
+#define LEVEL3_PATH "assets/levels/hard.txt"
+
 /**
  * @brief This function loads a level from a configuration file
  * It stores all the entities of the level in a vector with their spawn time
@@ -47,9 +51,16 @@ using namespace libconfig;
  *
  * @param path
  */
-void Server::loadLevel(const std::string& path) {
+void Server::loadLevel() {
     Config conf;
-    conf.readFile(path.c_str());
+    if (state == LEVEL1) {
+        conf.readFile(LEVEL1_PATH);
+    } else if (state == LEVEL2) {
+        conf.readFile(LEVEL2_PATH);
+    } else if (state == LEVEL3) {
+        conf.readFile(LEVEL3_PATH);
+    }
+
     Setting& root = conf.getRoot();
 
     Setting& level_entities = root.lookup("entities");
@@ -62,6 +73,39 @@ void Server::loadLevel(const std::string& path) {
         info.spawn_time = entity["spawn_time"];
         info.spawn_y = entity["y"];
         entities.push_back(info);
+    }
+    clearGameEntities();
+    initializePlayers();
+    levelTimer = 0.0;
+}
+
+void Server::clearGameEntities() {
+    std::vector<std::string> special_entities = {
+        "background", "menu_background_music", "player1", "player2"
+    };
+
+    for (size_t i = 0; i < reg.getEntityNum(); i++) {
+        try {
+            position& pos =
+                reg.get_components<component::position>()[entity(i)].value();
+            name& name_ =
+                reg.get_components<component::name>()[entity(i)].value();
+
+            // Ignore special entities
+            if (std::find(
+                    special_entities.begin(), special_entities.end(),
+                    name_._name
+                ) != special_entities.end()) {
+                continue;
+            }
+
+            // Clean up out of screen entities
+            if (name_._name != "ceiling" && name_._name != "floor"
+                && name_._name != "player1" && name_._name != "player2") {
+                reg.kill_entity(entity(i));
+                continue;
+            }
+        } catch (...) {}
     }
 }
 
@@ -250,6 +294,38 @@ void Server::runLevel(double delta) {
 
         for (auto& tmp : all_clients) {
             server_.send_to_client(result, result.size(), tmp.first);
+        }
+    }
+}
+
+void Server::handleWinOrLoss() {
+    if (player1_entity_id == -1 && player2_entity_id == -1) {
+        printf("GAME OVER\n");
+        sleep(2);
+        exit(0);
+    }
+    if (state == LEVEL1) {
+        if (boss_dead) {
+            printf("BOSS DEAD\n");
+            sleep(2);
+            state = LEVEL2;
+            loadLevel();
+        }
+    }
+    if (state == LEVEL2) {
+        if (boss2_dead && boss1_dead) {
+            printf("BOSS2 and BOSS1 DEAD\n");
+            sleep(2);
+            state = LEVEL3;
+            loadLevel();
+        }
+    }
+    if (state == LEVEL3) {
+        if (final_boss_dead) {
+            printf("FINAL BOSS DEAD\n");
+            sleep(2);
+            exit(0);
+            loadLevel();
         }
     }
 }

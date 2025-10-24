@@ -27,6 +27,8 @@
 #include "Factory.hpp"
 #include "entity.hpp"
 #include "registry.hpp"
+#include "UIHandler.hpp"
+#include "logic_functions.hpp"
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -37,6 +39,9 @@
  *
  */
 inline int player_entity_id = -1;
+
+inline bool player1_dead = false;
+inline bool player2_dead = false;
 
 /**
  * @brief A struct to store infos on an entity to be spawned in the level
@@ -53,7 +58,8 @@ typedef struct entity_info_s {
  * @brief An enum to define the different states of the game
  *
  */
-typedef enum { MENU, TRANSITION, GAME, GAME_OVER } state_t;
+typedef enum { MENU, TRANSITION, LEVEL1, LEVEL2, LEVEL3 } state_t;
+typedef enum { GAME_OVER, VICTORY, LEVEL1_START, LEVEL2_START, LEVEL3_START, SUB_NONE } substate_t;
 
 typedef struct menu_info_s {
     entity background;
@@ -79,20 +85,22 @@ class Client {
     double levelTimer = 0.0;
     NetworkManager client_;
     std::mutex mtx;
-
+    
     // This map associates the servers_ids to the client_ids in the registry
     std::unordered_map<size_t, size_t> ids_assoc;
     std::vector<int8_t> lastmsg;
-
+    
     std::vector<EnemyMovedResponse> old;
     std::vector<EnemyMovedResponse> new_vec;
 
-  public:
+    public:
     /**
      * @brief The current state of the game
      *
      */
-    state_t state = GAME;
+    UIHandler ui_handler;
+    state_t state = LEVEL1;
+    substate_t substate = LEVEL1_START;
 
     Client(int p, std::string a, registry& reg);
     ~Client();
@@ -103,6 +111,7 @@ class Client {
     void runLevel(double delta);
     void sendPlayerInput();
     void sendPlayerAction();
+    void handleSubStates(double delta, sf::RenderWindow& win);
 
     NetworkManager& getManager() {
         return client_;

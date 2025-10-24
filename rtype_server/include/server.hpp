@@ -64,6 +64,8 @@ typedef struct entity_info_s {
     double spawn_y;
 } entity_info_t;
 
+typedef enum { LEVEL1, LEVEL2, LEVEL3 } state_t;
+
 /**
  * @brief The server class. Handles the server side of the game.
  * At the start of the game, the server loads the level entities from a
@@ -78,8 +80,10 @@ class Server {
     double levelTimer = 0.0;
     std::mutex mtx;
 
-    void loadLevel(const std::string& path);
+    void loadLevel();
+    void clearGameEntities();
     void initializeGame(void);
+    void initializePlayers(void);
     void logGameEntities(void);
     void receivePlayerInput(double delta);
 
@@ -114,6 +118,9 @@ class Server {
     ActionResponse decodeActionResponse(std::vector<int8_t>& buffer);
 
     void runLevel(double delta);
+    void handleWinOrLoss();
+
+    state_t state = LEVEL1;
 };
 
 #endif /* !SERVER_HPP_ */
