@@ -25,6 +25,7 @@
 #include "Network.hpp"
 #include "registry.hpp"
 #include "logic_functions.hpp"
+#include "Types.hpp"
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -51,18 +52,6 @@ typedef enum diff_mode { EASY, MEDIUM, HARD } diff_mode_t;
  *
  */
 inline diff_mode_t diff_mode = MEDIUM;
-
-/**
- * @brief A struct to store the information of an entity to be spawned on the
- * level
- *
- */
-typedef struct entity_info_s {
-    entity entity_id;
-    std::string type;
-    double spawn_time;
-    double spawn_y;
-} entity_info_t;
 
 /**
  * @brief The server class. Handles the server side of the game.
@@ -102,6 +91,11 @@ class Server {
      * @brief The network manager that handles communication with clients
      */
     NetworkManager server_;
+
+    /**
+     * @brief Thread for running the network manager
+     */
+    std::thread networkThread;
 
     /**
      * @brief List of all entities and their information in the game
@@ -150,9 +144,14 @@ class Server {
     int counter;
 
     /**
-     * @brief Thread for running the network manager
+     * @brief The starting moment of the game
      */
-    std::thread networkThread;
+    std::chrono::time_point<std::chrono::steady_clock> gameStarted;
+
+    /**
+    * @brief Counter used to know how many packages have been sent to the clients
+    */
+    uint32_t packageId;
 
     /**
      * @brief Load all information about the level from a file
@@ -197,10 +196,10 @@ class Server {
 
     /**
      * @brief Encode the number of entities into a byte buffer
-     * @param pos The NbrEntity structure to encode
+     * @param pos The MessageHeader structure to encode
      * @return A vector of int8_t representing the encoded data
      */
-    std::vector<int8_t> encodeNbrEntity(const NbrEntity& pos);
+    std::vector<int8_t> encodeMessageHeader(const MessageHeader& pos);
 
     /**
      * @brief Encode an EnemyMovedResponse structure into a byte buffer

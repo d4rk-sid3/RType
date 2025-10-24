@@ -11,6 +11,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include "entity.hpp"
 
 #ifndef TYPES_HPP_
 #define TYPES_HPP_
@@ -62,9 +63,11 @@ struct EnemyMovedResponse {
 };
 
 // Serveur -> Client
-struct NbrEntity {
+struct MessageHeader {
     int8_t type; // 0x38
+    uint32_t id;
     int16_t nbr;
+    int64_t timeElapsed;
 };
 
 struct MoveResponse {
@@ -84,5 +87,16 @@ typedef struct client_info {
     int player_id;
     std::vector<int8_t> lastmsg;
 } client_info_t;
+
+/**
+ * @brief A struct to store infos on an entity to be spawned in the level
+ *
+ */
+typedef struct entity_info_s {
+    entity entity_id;
+    std::string type;
+    double spawn_time;
+    double spawn_y;
+} entity_info_t;
 
 #endif /* !TYPES_HPP_ */

@@ -110,47 +110,6 @@ bool isInside(std::vector<EnemyMovedResponse> vec, size_t id) {
 }
 
 /**
- * @brief This functions gets all the entities information sent by the server
- * and puts them in a vector
- *
- * @return std::vector<EnemyMovedResponse>
- */
-std::vector<EnemyMovedResponse> Client::recupAllEntities() {
-    bool isempty;
-
-    {
-        std::lock_guard<std::mutex> lock(mtx);
-
-        isempty = lastmsg.empty();
-    }
-
-    if (!isempty) {
-        NbrEntity e = decodeNbrEntity(lastmsg);
-
-        std::vector<EnemyMovedResponse> s;
-
-        for (int a = 0; a < e.nbr; a++) {
-            s.push_back(decodeEnemyMovedResponse(lastmsg));
-        }
-
-        // for (auto& a : s) {
-        //     std::cout << "Enemy_Type: " << static_cast<EnemyType>(a.enemy_type)
-        //               << " ";
-        //     std::cout << "Enemy_Pos_x: " << static_cast<int16_t>(a.position.x)
-        //               << " ";
-        //     std::cout << "Enemy_Pos_y: " << static_cast<int16_t>(a.position.y)
-        //               << std::endl;
-        // }
-        return s;
-
-    } else {
-        std::vector<EnemyMovedResponse> tmp;
-
-        return tmp;
-    }
-}
-
-/**
  * @brief This function checks if the player is entering inputs and sends info
  * to the server accordingly
  */
@@ -214,35 +173,45 @@ void Client::sendPlayerAction() {
 }
 
 void Client::receiveServerInfo() {
-    std::vector<EnemyMovedResponse> new_vec = recupAllEntities();
+    bool isempty;
 
-    if (new_vec.empty())
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        isempty = lastmsg.empty();
+    }
+
+    if (isempty)
         return;
-    entity_states.emplace_back(std::chrono::steady_clock::now(), new_vec );
-    if (entity_states.size() == 1 || entity_states.size() == 2)
-        return;
-    if (entity_states.size() >= 3)
+
+    MessageHeader e = decodeMessageHeader(lastmsg);
+    std::vector<EnemyMovedResponse> s;
+
+    for (int a = 0; a < e.nbr; a++) {
+        s.push_back(decodeEnemyMovedResponse(lastmsg));
+    }
+    entity_states.push_back({e.timeElapsed, s});
+
+    if (entity_states.size() >= 5)
         entity_states.erase(entity_states.begin());
 }
 
 Vector2D Client::entityMovementExtrapol(Vector2D pastPos, Vector2D nextPos,
-        std::chrono::time_point<std::chrono::steady_clock> pastTime,
-        std::chrono::time_point<std::chrono::steady_clock> nextTime) {
+        int64_t now, int64_t pastTime, int64_t nextTime) {
 
     static auto progLinear = [](
-        auto duration_to_now, auto duration_to_end,
+        auto duration_to_now, auto totalDuration,
         int16_t start, int16_t end) {
-        return ( ( (end - start) / duration_to_end ) * duration_to_now ) + start;
+        return ( ( (end - start) / totalDuration ) * duration_to_now ) + start;
     };
 
-    auto now = std::chrono::steady_clock::now();
 
-    auto duration_to_end =  std::chrono::duration_cast<std::chrono::milliseconds>(nextTime - pastTime).count();
-    auto duration_to_now =  std::chrono::duration_cast<std::chrono::milliseconds>(now - nextTime).count();
+
+    auto totalDuration  = nextTime - pastTime;
+    auto nowDuration = now - pastTime;
 
     Vector2D newPos = {
-        static_cast<int16_t>(progLinear(duration_to_now, duration_to_end, pastPos.x, nextPos.x)),
-        static_cast<int16_t>(progLinear(duration_to_now, duration_to_end, pastPos.y, nextPos.y))
+        static_cast<int16_t>(progLinear(nowDuration, totalDuration, pastPos.x, nextPos.x)),
+        static_cast<int16_t>(progLinear(nowDuration, totalDuration, pastPos.y, nextPos.y))
     };
 
 }
@@ -273,13 +242,13 @@ void Client::runLevel(double delta) {
     if (entity_states.size() != 2)
         return;
     std::pair<
-            std::chrono::time_point<std::chrono::steady_clock>,
+            int64_t,
             std::vector<EnemyMovedResponse>
             >& old = entity_states.front();
     std::pair<
-            std::chrono::time_point<std::chrono::steady_clock>,
+            int64_t,
             std::vector<EnemyMovedResponse>
-            >& back = entity_states.back();
+            >& back = entity_states.at(1);
 
 
 }
@@ -345,6 +314,8 @@ void Client::initGame() {
 void Client::run()
 {
     networkThread =  std::thread([this]() { client_.run(); });
+
+    clientStarted = std::chrono::steady_clock::now();
 
     while (win.isOpen()) {
         double dt = frameClock.restart().asSeconds();

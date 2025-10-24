@@ -123,7 +123,14 @@ void Server::logGameEntities() {
         } catch (...) {
         }
     }
-    vector<int8_t> tmp = encodeNbrEntity({0x38, static_cast<int16_t>(counter)});
+    auto now = std::chrono::steady_clock::now();
+
+    vector<int8_t> tmp = encodeMessageHeader(
+        {0x38,
+            packageId,
+            static_cast<int16_t>(counter),
+            std::chrono::duration_cast<std::chrono::milliseconds>(now - gameStarted).count()
+        });
     result.insert(result.begin(), tmp.begin(), tmp.end());
 
     if (!result.empty()) {

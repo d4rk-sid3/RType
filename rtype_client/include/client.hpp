@@ -27,6 +27,7 @@
 #include "Factory.hpp"
 #include "entity.hpp"
 #include "registry.hpp"
+#include "Types.hpp"
 #include <algorithm>
 #include <vector>
 #include <map>
@@ -42,20 +43,9 @@
  */
 inline int player_entity_id = -1;
 
-/**
- * @brief A struct to store infos on an entity to be spawned in the level
- *
- */
-typedef struct entity_info_s {
-    entity entity_id;
-    std::string type;
-    double spawn_time;
-    double spawn_y;
-} entity_info_t;
 
 /**
  * @brief An enum to define the different states of the game
- *
  */
 typedef enum { MENU, TRANSITION, GAME, GAME_OVER } state_t;
 
@@ -134,7 +124,7 @@ class Client {
      */
     std::vector<
         std::pair<
-            std::chrono::time_point<std::chrono::steady_clock>,
+            int64_t,
             std::vector<EnemyMovedResponse>
                 >
             > entity_states;
@@ -165,12 +155,7 @@ class Client {
     /**
      * @brief The moment of the last message
      */
-    chrono::time_point<chrono::steady_clock> lastUpdate;
-
-    /**
-     * @brief The duration between each reception
-     */
-    const chrono::milliseconds laps = std::chrono::milliseconds(50);
+    chrono::time_point<chrono::steady_clock> clientStarted;
 
     /**
      * @brief Initialize all menu related elements
@@ -223,8 +208,7 @@ class Client {
      * @return the position at now
      */
     Vector2D entityMovementExtrapol(Vector2D pastPos, Vector2D nextPos,
-        std::chrono::time_point<std::chrono::steady_clock> pastTime,
-        std::chrono::time_point<std::chrono::steady_clock> nextTime);
+        int64_t now, int64_t pastTime, int64_t nextTime);
 
   public:
     /**
@@ -240,17 +224,11 @@ class Client {
     ~Client();
 
     /**
-     * @brief Get all entities from the last server message
-     * @return A vector of EnemyMovedResponse structures representing the entities
-     */
-    std::vector<EnemyMovedResponse> recupAllEntities();
-
-    /**
      * @brief Decode a NbrEntity structure from a byte buffer
      * @param buffer The byte buffer containing the encoded data
      * @return The decoded NbrEntity structure
      */
-    NbrEntity decodeNbrEntity(std::vector<int8_t>& buffer);
+    MessageHeader decodeMessageHeader(std::vector<int8_t>& buffer);
 
     /**
      * @brief Decode an EnemyMovedResponse structure from a byte buffer

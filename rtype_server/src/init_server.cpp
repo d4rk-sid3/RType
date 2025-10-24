@@ -116,6 +116,8 @@ void Server::run()
 {
     networkThread = std::thread([this]() { server_.run(); });
 
+    gameStarted = std::chrono::steady_clock::now();
+
     while (win.isOpen()) {
         auto start = std::chrono::steady_clock::now();
 
