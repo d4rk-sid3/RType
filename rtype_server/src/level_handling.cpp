@@ -40,10 +40,17 @@ using namespace component;
 
 using namespace libconfig;
 
-#define LEVEL1_PATH "assets/levels/easy.txt"
-#define LEVEL2_PATH "assets/levels/medium.txt"
-#define LEVEL3_PATH "assets/levels/hard.txt"
+#define LEVEL1_EASY "assets/levels/easy.txt"
+#define LEVEL2_EASY "assets/levels/easy_2.txt"
+#define LEVEL3_EASY "assets/levels/easy_3.txt"
 
+#define LEVEL1_MEDIUM "assets/levels/medium.txt"
+#define LEVEL2_MEDIUM "assets/levels/medium_2.txt"
+#define LEVEL3_MEDIUM "assets/levels/medium_3.txt"
+
+#define LEVEL1_HARD "assets/levels/hard.txt"
+#define LEVEL2_HARD "assets/levels/hard_2.txt"
+#define LEVEL3_HARD "assets/levels/hard_3.txt"
 /**
  * @brief This function loads a level from a configuration file
  * It stores all the entities of the level in a vector with their spawn time
@@ -52,13 +59,33 @@ using namespace libconfig;
  * @param path
  */
 void Server::loadLevel() {
+    if (diff_mode == PVP) {
+        initializePlayersPVP();
+        return;
+    }
+
     Config conf;
     if (state == LEVEL1) {
-        conf.readFile(LEVEL1_PATH);
+        if (diff_mode == EASY)
+            conf.readFile(LEVEL1_EASY);
+        if (diff_mode == MEDIUM)
+            conf.readFile(LEVEL1_MEDIUM);
+        if (diff_mode == HARD)
+            conf.readFile(LEVEL1_HARD);
     } else if (state == LEVEL2) {
-        conf.readFile(LEVEL2_PATH);
+        if (diff_mode == EASY)
+            conf.readFile(LEVEL2_EASY);
+        if (diff_mode == MEDIUM)
+            conf.readFile(LEVEL2_MEDIUM);
+        if (diff_mode == HARD)
+            conf.readFile(LEVEL2_HARD);
     } else if (state == LEVEL3) {
-        conf.readFile(LEVEL3_PATH);
+        if (diff_mode == EASY)
+            conf.readFile(LEVEL3_EASY);
+        if (diff_mode == MEDIUM)
+            conf.readFile(LEVEL3_MEDIUM);
+        if (diff_mode == HARD)
+            conf.readFile(LEVEL3_HARD);
     }
 
     Setting& root = conf.getRoot();
@@ -326,6 +353,18 @@ void Server::handleWinOrLoss() {
             sleep(2);
             exit(0);
             loadLevel();
+        }
+    }
+
+    if (diff_mode == PVP) {
+        if (player1_entity_id == -1) {
+            printf("PLAYER 2 WON\n");
+            sleep(2);
+            exit(0);
+        } else if (player2_entity_id == -1) {
+            printf("PLAYER 1 WON\n");
+            sleep(2);
+            exit(0);
         }
     }
 }

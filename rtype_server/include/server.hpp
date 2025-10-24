@@ -44,7 +44,7 @@ inline int player2_entity_id = -1;
  * @brief An enum to store the difficulty of the game
  *
  */
-typedef enum diff_mode { EASY, MEDIUM, HARD } diff_mode_t;
+typedef enum diff_mode { EASY, MEDIUM, HARD, PVP } diff_mode_t;
 
 /**
  * @brief A gloal variable to store the difficulty of the game
@@ -84,6 +84,7 @@ class Server {
     void clearGameEntities();
     void initializeGame(void);
     void initializePlayers(void);
+    void initializePlayersPVP(void);
     void logGameEntities(void);
     void receivePlayerInput(double delta);
 

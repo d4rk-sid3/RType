@@ -107,6 +107,64 @@ void player_logic(double delta, registry& reg, entity en) {
     }
 }
 
+void player_evil_logic(double delta, registry& reg, entity en) {
+    position& pos = reg.get_components<position>()[(size_t)en].value();
+    const controllable& control =
+        reg.get_components<controllable>()[(size_t)en].value();
+    velocity& vel = reg.get_components<velocity>()[(size_t)en].value();
+    static double shoot_timer = 0;
+
+    shoot_timer += delta;
+
+    if (control.left) {
+        vel.vx = -PLAYER_SPEED;
+    } else if (control.right) {
+        vel.vx = PLAYER_SPEED;
+    } else {
+        vel.vx = 0;
+    }
+
+    if (control.up) {
+        vel.vy = -PLAYER_SPEED;
+    } else if (control.down) {
+        vel.vy = PLAYER_SPEED;
+    } else {
+        vel.vy = 0;
+    }
+
+    if (control.space && shoot_timer > PLAYER_SHOOT_COOLDOWN) {
+        Factory fac(reg);
+
+        shoot_timer = 0;
+        entity missile = fac.make_evil_player_missile();
+
+        position& player_pos =
+            reg.get_components<position>()[(size_t)en].value();
+        position& missile_pos = reg.get_components<position>()[missile].value();
+        missile_pos.x = player_pos.x;
+        missile_pos.y = player_pos.y;
+    }
+
+    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
+    if (hb.health <= 0) {
+        Factory fac(reg);
+        entity explosion = fac.make_explosion();
+        position& pos = reg.get_components<position>()[en].value();
+        position& explosion_pos =
+            reg.get_components<position>()[explosion].value();
+        explosion_pos.x = pos.x;
+        explosion_pos.y = pos.y;
+
+        name& name_ = reg.get_components<name>()[en].value();
+        if (name_._name == "player1") {
+            player1_entity_id = -1;
+        } else if (name_._name == "player2_flipped") {
+            player2_entity_id = -1;
+        }
+        reg.kill_entity(en);
+    }
+}
+
 bool shoot_at_player(registry& reg, position enemy_pos, double attack_range) {
     position target_pos;
 
@@ -560,9 +618,13 @@ void spacenemy_logic(double delta, registry& reg, entity en) {
     if (hb.health <= 0) {
         Factory fac(reg);
         entity explosion = fac.make_explosion();
+        entity force = fac.make_force();
+        position &force_pos = reg.get_components<position>()[force].value();
         position& explosion_pos = reg.get_components<position>()[explosion].value();
         explosion_pos.x = pos.x;
         explosion_pos.y = pos.y;
+        force_pos.x = pos.x;
+        force_pos.y = pos.y;
         boss_dead = true;
         reg.kill_entity(en);
     }

@@ -18,7 +18,9 @@ std::map<std::string, EnemyType> type_map = {
     {"tourelles", TYPE_TOURELLES},
     {"big_missile", TYPE_BIG_MISSILE},      {"big_shooter", TYPE_BIG_SHOOTER},
     {"small_shooter", TYPE_SMALL_SHOOTER},      {"final_boss", TYPE_FINAL_BOSS},
-    {"space_enemy", TYPE_SPACE_ENEMY}
+    {"space_enemy", TYPE_SPACE_ENEMY},
+    {"player2_flipped", PLAYER2_FLIPPED},
+    {"evil_player_missile", EVIL_PLAYER_MISSILE}
 };
 
 NetworkManager::NetworkManager(

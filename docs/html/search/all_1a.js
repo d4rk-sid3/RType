@@ -26,5 +26,6 @@ var searchData=
   ['project_23',['Parts of the project',['../index.html#parts_sub',1,'']]],
   ['protocol_20v2_201_24',['RFC-RT001: R-TYPE Protocol v2.1',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html',1,'']]],
   ['protocol_2emd_25',['protocol.md',['../protocol_8md.html',1,'']]],
-  ['protocole_26',['4. Commandes du protocole',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md46',1,'']]]
+  ['protocole_26',['4. Commandes du protocole',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md46',1,'']]],
+  ['pvp_27',['PVP',['../server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93addbe5c6516ef695946446c87fd2dd69f',1,'server.hpp']]]
 ];

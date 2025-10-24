@@ -31,6 +31,12 @@ void load_textures(void) {
         "assets/sprites/player/player2.gif", "player2", TEXTURE
     );
     ResourceManager::Instance().load(
+        "assets/sprites/player/player2_flipped.gif", "player2_flipped", TEXTURE
+    );
+    ResourceManager::Instance().load(
+        "assets/sprites/player/player_missile_flipped.gif", "player_missile_flipped", TEXTURE
+    );
+    ResourceManager::Instance().load(
         "assets/sprites/player/player_up.gif", "player_up", TEXTURE
     );
     ResourceManager::Instance().load(
@@ -111,7 +117,6 @@ void Server::initializeGame(void) {
     factory.make_ceiling();
     factory.make_floor();
     factory.make_menu_background_music();
-    factory.make_force();
 }
 
 /**
@@ -134,6 +139,28 @@ void Server::initializePlayers(void) {
 
     pos2.x = 50;
     pos2.y = 150;
+}
+
+/**
+ * @brief This function initializes the players for pvp mode
+ *
+ */
+void Server::initializePlayersPVP(void) {
+    Factory factory(reg);
+    if (player1_entity_id == -1) 
+    player1_entity_id = factory.make_entity("player1");
+    if (player2_entity_id == -1)
+        player2_entity_id = factory.make_entity("player2_flipped");
+
+    auto& pos1 =
+        reg.get_components<component::position>()[player1_entity_id].value();
+    auto& pos2 =
+        reg.get_components<component::position>()[player2_entity_id].value();
+    pos1.x = 50;
+    pos1.y = 250;
+
+    pos2.x = WINDOW_WIDTH - 60;
+    pos2.y = 250;
 }
 
 /**

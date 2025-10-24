@@ -66,6 +66,7 @@ void final_boss_logic(double delta, registry& reg, entity en);
 void big_shooter_logic(double delta, registry& reg, entity en);
 void small_shooter_logic(double delta, registry& reg, entity en);
 void spacenemy_logic(double delta, registry& reg, entity en);
+void player_evil_logic(double delta, registry& reg, entity en);
 
 #endif
 

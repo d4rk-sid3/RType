@@ -14,6 +14,8 @@ diff_mode_t get_diff_mode(std::string mode) {
         return MEDIUM;
     if (mode == "hard")
         return HARD;
+    if (mode == "pvp")
+        return PVP;
     printServerUsage();
     exit(84);
 }

@@ -83,6 +83,10 @@ entity Factory::make_entity(const std::string& type) {
         return make_small_shooter();
     else if (type == "big_shooter")
         return make_big_shooter();
+    else if (type == "player2_flipped")
+        return make_player2_flipped();
+    else if (type == "evil_player_missile")
+        return make_evil_player_missile();
     return entity(-1);
 }
 
@@ -163,6 +167,41 @@ entity Factory::make_player2() {
     return player_id;
 }
 
+entity Factory::make_player2_flipped() {
+    entity player_id = reg.spawn_entity();
+
+    auto& player_sprite = reg.add_component<component::drawable>(
+        player_id, component::drawable()
+    );
+    player_sprite.setTextureFromName("player2_flipped");
+
+    reg.add_component<component::position>(player_id, {0, 0});
+    reg.add_component<component::velocity>(player_id, {0, 0});
+    reg.add_component<component::controllable>(
+        player_id, component::controllable()
+    );
+    reg.add_component<component::logic>(
+        player_id, component::logic{player_evil_logic}
+    );
+
+    auto& player_hurtbox =
+        reg.add_component<component::hurtbox>(player_id, component::hurtbox());
+    player_hurtbox.group = 2;
+    player_hurtbox.health = 1;
+    player_hurtbox.width = 32;
+    player_hurtbox.height = 16;
+
+    auto& entity_name =
+        reg.add_component<component::name>(player_id, component::name());
+    entity_name._name = "player2_flipped";
+
+    reg.add_component<component::unique_id>(
+        player_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return player_id;
+}
+
 entity Factory::make_player_missile() {
     entity missile_id = reg.spawn_entity();
     auto& missile_sprite = reg.add_component<component::drawable>(
@@ -192,6 +231,43 @@ entity Factory::make_player_missile() {
     auto& entity_name =
         reg.add_component<component::name>(missile_id, component::name());
     entity_name._name = "player_missile";
+
+    reg.add_component<component::unique_id>(
+        missile_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return missile_id;
+}
+
+entity Factory::make_evil_player_missile() {
+    entity missile_id = reg.spawn_entity();
+    auto& missile_sprite = reg.add_component<component::drawable>(
+        missile_id, component::drawable()
+    );
+    missile_sprite.setTextureFromName("player_missile_flipped");
+
+    reg.add_component<component::position>(missile_id, {100.0, 100.0});
+    reg.add_component<component::velocity>(
+        missile_id, {-PLAYER_MISSILE_SPEED, 0.0}
+    );
+    auto& missile_hitbox =
+        reg.add_component<component::hitbox>(missile_id, component::hitbox());
+    missile_hitbox.damage = 10;
+    missile_hitbox.targeted_group = 1;
+    missile_hitbox.width = 16;
+    missile_hitbox.height = 16;
+    missile_hitbox.one_shot = true;
+
+    auto& player_shoot_music =
+        reg.add_component<component::audio>(missile_id, component::audio());
+    player_shoot_music.audio.reset(new sf::Music);
+    player_shoot_music.audio->openFromFile("assets/audio/player_shoot.wav");
+    player_shoot_music.audio->setLoop(false);
+    player_shoot_music.audio->play();
+
+    auto& entity_name =
+        reg.add_component<component::name>(missile_id, component::name());
+    entity_name._name = "evil_player_missile";
 
     reg.add_component<component::unique_id>(
         missile_id, (component::unique_id)unique_ids
@@ -762,7 +838,7 @@ entity Factory::make_space_enemy() {
     reg.add_component<component::position>(spacenemy_id, {0, 0});
     reg.add_component<component::velocity>(spacenemy_id, {0, 0});
 
-    reg.add_component<component::hurtbox>(spacenemy_id, {500, 2, 130, 50});
+    reg.add_component<component::hurtbox>(spacenemy_id, {100, 2, 130, 50});
     reg.add_component<component::hitbox>(spacenemy_id, {10, 1, 130, 50, false});
 
     auto& entity_name =

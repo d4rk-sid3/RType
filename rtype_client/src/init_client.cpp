@@ -31,6 +31,12 @@ void load_client_textures(void) {
         "assets/sprites/player/player2.gif", "player2", TEXTURE
     );
     ResourceManager::Instance().load(
+        "assets/sprites/player/player2_flipped.gif", "player2_flipped", TEXTURE
+    );
+    ResourceManager::Instance().load(
+        "assets/sprites/player/player_missile_flipped.gif", "player_missile_flipped", TEXTURE
+    );
+    ResourceManager::Instance().load(
         "assets/sprites/player/player_up.gif", "player_up", TEXTURE
     );
     ResourceManager::Instance().load(

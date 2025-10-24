@@ -109,6 +109,10 @@ class Factory {
     entity make_big_shooter();
 
     entity make_space_enemy();
+
+    entity make_player2_flipped();
+
+    entity make_evil_player_missile();
 };
 
 #endif
