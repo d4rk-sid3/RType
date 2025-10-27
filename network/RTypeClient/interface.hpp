@@ -10,6 +10,25 @@
 enum class ElementTag { TEXT, BUTTON, RECTANGLE, CIRCLE, INPUTFIELD, TEXTURE };
 enum class ButtonState { NORMAL, HOVER, CLICKED };
 
+class EventHandler {
+    public:
+        std::vector<sf::Event> events;
+    
+        void pollEvents(sf::RenderWindow& window) {
+            events.clear();
+            sf::Event event;
+            while (window.pollEvent(event)) {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+                events.push_back(event);
+            }
+        }
+    
+        const std::vector<sf::Event>& getEvents() const {
+            return events;
+        }
+};
+
 class UIElement {
 public:
     std::string id;
@@ -21,18 +40,21 @@ public:
     virtual ~UIElement() {}
     virtual void display(sf::RenderWindow& window) = 0;
     virtual void update(EventHandler& eventHandler, sf::RenderWindow& window) = 0;
+    virtual ElementTag getTag() {return tag;}
 };
 
 class TextElement : public UIElement {
 public:
     sf::Text text;
     sf::Font font;
+    std::string fontpath;
 
     TextElement(const std::string& id, const std::string& fontPath, const std::string& str,
         sf::Color color, sf::Vector2f pos, unsigned int size)
     : UIElement(id, ElementTag::TEXT, pos)
     {
-        if (!font.loadFromFile(fontPath)) {
+        fontpath = fontPath;
+        if (!font.loadFromFile(fontpath)) {
             std::cerr << "Erreur : impossible to load the font " << fontPath << std::endl;
         }
         text.setFont(font);
@@ -49,6 +71,9 @@ public:
     void update(EventHandler& eventHandler, sf::RenderWindow& window) override {
         return;
     }
+
+    void displayFontPath() {std::cout << fontpath << std::endl;}
+
 };
 
 class RectangleElement : public UIElement {
@@ -131,7 +156,8 @@ class ButtonElement : public UIElement {
     
         void display(sf::RenderWindow& window) override {
             rect.display(window);
-            text.display(window);
+            text.displayFontPath();
+            return;
         }
     
         void updateState(sf::RenderWindow& window) {
@@ -191,11 +217,9 @@ class ButtonBuilder {
     public:
         ButtonBuilder(const std::string& id) : id(id) {}
     
-        ButtonBuilder& setText(const std::string& s, const std::string & fontPath) { 
+        ButtonBuilder& setText(const std::string& s, const std::string & fontpath) { 
             str = s;
-            if (!font.loadFromFile(fontPath)) {
-                std::cerr << "Erreur : impossible to load the font " << fontPath << std::endl;
-            }
+            fontPath = fontpath;
             return *this; 
         }
         ButtonBuilder& setTextColor(sf::Color c) { textColor = c; return *this; }
@@ -211,6 +235,7 @@ class ButtonBuilder {
     
         ButtonElement build() {
             RectangleElement rect(id, pos, size, normalColor, outlineColor, outlineThickness);
+            std::cout << "Ici : " << fontPath << std::endl;
             TextElement textEl(id, fontPath, str, textColor, pos + sf::Vector2f(5,5), textSize);
             return ButtonElement(id, rect, textEl, normalColor, hoverColor, clickedColor, onHover, onClick);
         }
@@ -311,23 +336,6 @@ class TextureElement : public UIElement {
 
         void update(EventHandler& eventHandler, sf::RenderWindow& window) override {
             return;
-        }
-};
-        
-class EventHandler {
-    public:
-        std::vector<sf::Event> events;
-    
-        void pollEvents(sf::RenderWindow& window) {
-            events.clear();
-            sf::Event event;
-            while (window.pollEvent(event)) {
-                events.push_back(event);
-            }
-        }
-    
-        const std::vector<sf::Event>& getEvents() const {
-            return events;
         }
 };
         
@@ -489,6 +497,19 @@ class ActionRegistry {
                 return it->second;
             return nullptr;
         }
+
+        void setDefaultActions() {
+            const std::vector<std::string> pages = {
+                "HomePage", "Register", "Login", "Dashboard", 
+                "Settings", "Scoreboard", "CreateParty", "JoinParty"
+            };
+    
+            for (const auto& page : pages) {
+                registerAction(page, [page]() {
+                    UIManager::getInstance().setUI(page);
+                });
+            }
+        }
 };
     
 std::shared_ptr<UIElement> parseTextElement(const libconfig::Setting& setting)
@@ -504,15 +525,15 @@ std::shared_ptr<UIElement> parseTextElement(const libconfig::Setting& setting)
         setting.lookupValue("id", id);
         setting.lookupValue("font", fontPath);
         setting.lookupValue("text", str);
-        setting.lookupValue("size", size);
+        setting.lookupValue("textSize", size);
 
-        const libconfig::Setting& posSetting = setting.lookup("position");
+        const libconfig::Setting& posSetting = setting.lookup("pos");
         if (posSetting.getLength() == 2) {
-            pos.x = posSetting[0];
-            pos.y = posSetting[1];
+            pos.x = static_cast<float>(posSetting[0]);
+            pos.y = static_cast<float>(posSetting[1]);
         }
 
-        const libconfig::Setting& colorSetting = setting.lookup("color");
+        const libconfig::Setting& colorSetting = setting.lookup("textColor");
         int r = 255, g = 255, b = 255, a = 255;
 
         if (colorSetting.getLength() >= 3) {
@@ -556,14 +577,19 @@ std::shared_ptr<UIElement> parseRectangleElement(const libconfig::Setting& setti
 
         if (setting.exists("pos")) {
             const libconfig::Setting& posSetting = setting.lookup("pos");
-            if (posSetting.getLength() == 2)
-                pos = { posSetting[0], posSetting[1] };
+
+            if (posSetting.getLength() == 2) {
+                float x = static_cast<float>(posSetting[0]);
+                float y = static_cast<float>(posSetting[1]);
+                pos.x = x;
+                pos.y = y;
+            }
         }
 
         if (setting.exists("size")) {
             const libconfig::Setting& sizeSetting = setting.lookup("size");
             if (sizeSetting.getLength() == 2)
-                size = { sizeSetting[0], sizeSetting[1] };
+                size = { static_cast<float>(sizeSetting[0]), static_cast<float>(sizeSetting[1]) };
         }
 
         if (setting.exists("innerColor")) {
@@ -697,13 +723,13 @@ std::shared_ptr<UIElement> parseTextureElement(const libconfig::Setting& setting
         if (setting.exists("pos")) {
             const libconfig::Setting& posSetting = setting.lookup("pos");
             if (posSetting.getLength() == 2)
-                pos = { posSetting[0], posSetting[1] };
+                pos = { static_cast<float>(posSetting[0]), static_cast<float>(posSetting[1]) };
         }
 
         if (setting.exists("scale")) {
             const libconfig::Setting& scaleSetting = setting.lookup("scale");
             if (scaleSetting.getLength() == 2)
-                scale = { scaleSetting[0], scaleSetting[1] };
+                scale = { static_cast<float>(scaleSetting[0]), static_cast<float>(scaleSetting[1]) };
         }
 
         return std::make_shared<TextureElement>(id, texturePath, pos, scale);
@@ -782,7 +808,7 @@ std::shared_ptr<UIElement> parseButtonElement(const libconfig::Setting& setting)
         sf::Color hoverColor = sf::Color::Yellow;
         sf::Color clickedColor = sf::Color::Red;
         sf::Color outlineColor = sf::Color::White;
-        float outlineThickness = 2.f;
+        float outlineThickness = 2.0f;
 
         unsigned int textSize = 20;
         sf::Color textColor = sf::Color::Black;
@@ -814,11 +840,11 @@ std::shared_ptr<UIElement> parseButtonElement(const libconfig::Setting& setting)
 
         if (setting.exists("pos")) {
             const auto& p = setting.lookup("pos");
-            pos = {p[0], p[1]};
+            pos = {static_cast<float>(p[0]), static_cast<float>(p[1])};
         }
         if (setting.exists("size")) {
             const auto& s = setting.lookup("size");
-            size = {s[0], s[1]};
+            size = {static_cast<float>(s[0]), static_cast<float>(s[1])};
         }
 
         if (setting.exists("colors")) {
@@ -909,6 +935,7 @@ std::shared_ptr<UIElement> parseButtonElement(const libconfig::Setting& setting)
             hoverCb = ActionRegistry::getInstance().get(hoverId);
 
         ButtonBuilder builder(id);
+        std::cout << "Afficher : " << fontPath << std::endl;
         builder.setText(text, fontPath)
                .setPosition(pos)
                .setSize(size)
@@ -999,64 +1026,4 @@ void loadUIFromFile(const std::string& filePath) {
         std::cerr << "Parsing error in file " << filePath 
                   << " at line " << e.getLine() << ": " << e.getError() << std::endl;
     }
-}
-
-
-// -----------------------------
-// Main pour tester
-// -----------------------------
-int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Menu Test");
-    sf::Font font;
-    font.loadFromFile("Gabriela-Regular.ttf");  
-
-    UIManager uiManager;
-    Drawer drawer;
-
-    // Création UI
-    auto mainMenu = std::make_shared<UI>("mainMenu");
-
-    auto text = std::make_shared<TextElement>("title", font, "Bienvenue", sf::Color::White, sf::Vector2f(300,50), 50);
-    mainMenu->addElement(text);
-
-    // auto button = std::make_shared<ButtonElement>("startBtn", sf::Vector2f(300, 200), sf::Vector2f(200,50),
-    //                                               "Start", font, sf::Color::Green, sf::Color::White,
-    //                                               nullptr,
-    //                                               [&](){ std::cout << "Button clicked!" << std::endl; });
-    //mainMenu->addElement(button);
-
-    auto input = std::make_shared<InputFieldElement>("username", sf::Vector2f(300, 300), sf::Vector2f(200,40), font);
-    mainMenu->addElement(input);
-
-    uiManager.addUI(mainMenu);
-    uiManager.setUI("mainMenu");
-
-    // Boucle principale
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-
-            // Gestion input clavier pour InputField
-            if (event.type == sf::Event::TextEntered) {
-                if (event.text.unicode < 128) {
-                    char c = static_cast<char>(event.text.unicode);
-                    if (c == 8) input->backspace(); // backspace
-                    else input->addChar(c);
-                }
-            }
-
-            // Gestion click
-            // if (event.type == sf::Event::MouseButtonPressed) {
-            //     if (button->isMouseOver(window) && button->onClick) button->onClick();
-            // }
-        }
-
-        window.clear(sf::Color::Black);
-        drawer.display(uiManager, window);
-        window.display();
-    }
-
-    return 0;
 }
