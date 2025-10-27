@@ -5,6 +5,7 @@
 #include <memory>
 #include <functional>
 #include <vector>
+#include <libconfig.h++>
 
 enum class ElementTag { TEXT, BUTTON, RECTANGLE, CIRCLE, INPUTFIELD, TEXTURE };
 enum class ButtonState { NORMAL, HOVER, CLICKED };
@@ -490,6 +491,516 @@ class ActionRegistry {
         }
 };
     
+std::shared_ptr<UIElement> parseTextElement(const libconfig::Setting& setting)
+{
+    try {
+        std::string id;
+        std::string fontPath;
+        std::string str;
+        unsigned int size = 20;
+        sf::Vector2f pos(0.f, 0.f);
+        sf::Color color = sf::Color::White;
+
+        setting.lookupValue("id", id);
+        setting.lookupValue("font", fontPath);
+        setting.lookupValue("text", str);
+        setting.lookupValue("size", size);
+
+        const libconfig::Setting& posSetting = setting.lookup("position");
+        if (posSetting.getLength() == 2) {
+            pos.x = posSetting[0];
+            pos.y = posSetting[1];
+        }
+
+        const libconfig::Setting& colorSetting = setting.lookup("color");
+        int r = 255, g = 255, b = 255, a = 255;
+
+        if (colorSetting.getLength() >= 3) {
+            r = colorSetting[0];
+            g = colorSetting[1];
+            b = colorSetting[2];
+            if (colorSetting.getLength() == 4) {
+                a = colorSetting[3];
+            }
+        }
+
+        color = sf::Color(
+            static_cast<sf::Uint8>(r),
+            static_cast<sf::Uint8>(g),
+            static_cast<sf::Uint8>(b),
+            static_cast<sf::Uint8>(a)
+        );
+        return std::make_shared<TextElement>(id, fontPath, str, color, pos, size);
+    }
+    catch (const libconfig::SettingNotFoundException& e) {
+        std::cerr << "Erreur : champ manquant dans TextElement (" << e.getPath() << ")" << std::endl;
+    }
+    catch (const libconfig::SettingTypeException& e) {
+        std::cerr << "Erreur : type invalide dans TextElement (" << e.getPath() << ")" << std::endl;
+    }
+
+    return nullptr;
+}
+
+std::shared_ptr<UIElement> parseRectangleElement(const libconfig::Setting& setting) {
+    try {
+        std::string id;
+        sf::Vector2f pos(0.f, 0.f), size(100.f, 50.f);
+        sf::Color innerColor = sf::Color::White;
+        sf::Color outerColor = sf::Color::Black;
+        float thickness = 2.0f;
+        int r = 255, g = 255, b = 255, a = 255;
+
+
+        setting.lookupValue("id", id);
+
+        if (setting.exists("pos")) {
+            const libconfig::Setting& posSetting = setting.lookup("pos");
+            if (posSetting.getLength() == 2)
+                pos = { posSetting[0], posSetting[1] };
+        }
+
+        if (setting.exists("size")) {
+            const libconfig::Setting& sizeSetting = setting.lookup("size");
+            if (sizeSetting.getLength() == 2)
+                size = { sizeSetting[0], sizeSetting[1] };
+        }
+
+        if (setting.exists("innerColor")) {
+            const libconfig::Setting& color = setting.lookup("innerColor");
+
+            if (color.getLength() >= 3) {
+                r = color[0];
+                g = color[1];
+                b = color[2];
+                if (color.getLength() == 4) {
+                    a = color[3];
+                }
+            }
+            innerColor = sf::Color(
+                static_cast<sf::Uint8>(r),
+                static_cast<sf::Uint8>(g),
+                static_cast<sf::Uint8>(b),
+                static_cast<sf::Uint8>(a)
+            );
+        }
+
+        if (setting.exists("outerColor")) {
+            const libconfig::Setting& color = setting.lookup("outerColor");
+            if (color.getLength() >= 3) {
+                r = color[0];
+                g = color[1];
+                b = color[2];
+                if (color.getLength() == 4) {
+                    a = color[3];
+                }
+            }
+            outerColor = sf::Color(
+                static_cast<sf::Uint8>(r),
+                static_cast<sf::Uint8>(g),
+                static_cast<sf::Uint8>(b),
+                static_cast<sf::Uint8>(a)
+            );
+        }
+        setting.lookupValue("outlineThickness", thickness);
+        return std::make_shared<RectangleElement>(id, pos, size, innerColor, outerColor, thickness);
+    }
+    catch (const libconfig::SettingNotFoundException& e) {
+        std::cerr << "RectangleElement: champ manquant (" << e.getPath() << ")\n";
+    }
+    catch (const libconfig::SettingTypeException& e) {
+        std::cerr << "RectangleElement: type invalide (" << e.getPath() << ")\n";
+    }
+
+    return nullptr;
+}
+
+std::shared_ptr<UIElement> parseCircleElement(const libconfig::Setting& setting) {
+    try {
+        std::string id;
+        sf::Vector2f pos(0.f, 0.f);
+        float radius = 50.f;
+        sf::Color innerColor = sf::Color::White;
+        sf::Color outerColor = sf::Color::Black;
+        float thickness = 2.0f;
+        int r = 255, g = 255, b = 255, a = 255;
+
+        setting.lookupValue("id", id);
+
+        if (setting.exists("pos")) {
+            const libconfig::Setting& posSetting = setting.lookup("pos");
+            if (posSetting.getLength() == 2)
+                pos = { posSetting[0], posSetting[1] };
+        }
+
+        setting.lookupValue("radius", radius);
+
+        if (setting.exists("innerColor")) {
+            const libconfig::Setting& color = setting.lookup("innerColor");
+            if (color.getLength() >= 3) {
+                r = color[0];
+                g = color[1];
+                b = color[2];
+                if (color.getLength() == 4) {
+                    a = color[3];
+                }
+            }
+            innerColor = sf::Color(
+                static_cast<sf::Uint8>(r),
+                static_cast<sf::Uint8>(g),
+                static_cast<sf::Uint8>(b),
+                static_cast<sf::Uint8>(a)
+            );
+        }
+
+        if (setting.exists("outerColor")) {
+            const libconfig::Setting& color = setting.lookup("outerColor");
+            if (color.getLength() >= 3) {
+                r = color[0];
+                g = color[1];
+                b = color[2];
+                if (color.getLength() == 4) {
+                    a = color[3];
+                }
+            }
+            outerColor = sf::Color(
+                static_cast<sf::Uint8>(r),
+                static_cast<sf::Uint8>(g),
+                static_cast<sf::Uint8>(b),
+                static_cast<sf::Uint8>(a)
+            );
+        }
+
+        setting.lookupValue("outlineThickness", thickness);
+        return std::make_shared<CircleElement>(id, pos, radius, innerColor, outerColor, thickness);
+    }
+    catch (const libconfig::SettingNotFoundException& e) {
+        std::cerr << "CircleElement: champ manquant (" << e.getPath() << ")\n";
+    }
+    catch (const libconfig::SettingTypeException& e) {
+        std::cerr << "CircleElement: type invalide (" << e.getPath() << ")\n";
+    }
+
+    return nullptr;
+}
+
+std::shared_ptr<UIElement> parseTextureElement(const libconfig::Setting& setting) {
+    try {
+        std::string id;
+        std::string texturePath;
+        sf::Vector2f pos(0.f, 0.f);
+        sf::Vector2f scale(1.f, 1.f);
+
+        setting.lookupValue("id", id);
+        setting.lookupValue("texturePath", texturePath);
+
+        if (setting.exists("pos")) {
+            const libconfig::Setting& posSetting = setting.lookup("pos");
+            if (posSetting.getLength() == 2)
+                pos = { posSetting[0], posSetting[1] };
+        }
+
+        if (setting.exists("scale")) {
+            const libconfig::Setting& scaleSetting = setting.lookup("scale");
+            if (scaleSetting.getLength() == 2)
+                scale = { scaleSetting[0], scaleSetting[1] };
+        }
+
+        return std::make_shared<TextureElement>(id, texturePath, pos, scale);
+    }
+    catch (const libconfig::SettingNotFoundException& e) {
+        std::cerr << "TextureElement: champ manquant (" << e.getPath() << ")\n";
+    }
+    catch (const libconfig::SettingTypeException& e) {
+        std::cerr << "TextureElement: type invalide (" << e.getPath() << ")\n";
+    }
+
+    return nullptr;
+}
+
+std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& setting) {
+    try {
+        std::string id;
+        std::string fontPath;
+        sf::Vector2f pos(0.f, 0.f), size(100.f, 30.f);
+        bool isPassword = false;
+        sf::Color activeColor = sf::Color::Blue;
+        int r = 255, g = 255, b = 255, a = 255;
+
+        setting.lookupValue("id", id);
+        setting.lookupValue("font", fontPath);
+
+        if (setting.exists("pos")) {
+            const libconfig::Setting& posSetting = setting.lookup("pos");
+            if (posSetting.getLength() == 2)
+                pos = { posSetting[0], posSetting[1] };
+        }
+
+        if (setting.exists("size")) {
+            const libconfig::Setting& sizeSetting = setting.lookup("size");
+            if (sizeSetting.getLength() == 2)
+                size = { sizeSetting[0], sizeSetting[1] };
+        }
+
+        setting.lookupValue("isPassword", isPassword);
+
+        if (setting.exists("activeOutlineColor")) {
+            const libconfig::Setting& color = setting.lookup("activeOutlineColor");
+            if (color.getLength() >= 3) {
+                r = color[0];
+                g = color[1];
+                b = color[2];
+                if (color.getLength() == 4) {
+                    a = color[3];
+                }
+            }
+            activeColor = sf::Color(
+                static_cast<sf::Uint8>(r),
+                static_cast<sf::Uint8>(g),
+                static_cast<sf::Uint8>(b),
+                static_cast<sf::Uint8>(a)
+            );
+        }
+
+        return std::make_shared<InputFieldElement>(id, fontPath, pos, size, isPassword, activeColor);
+    }
+    catch (const libconfig::SettingNotFoundException& e) {
+        std::cerr << "InputFieldElement: champ manquant (" << e.getPath() << ")\n";
+    }
+    catch (const libconfig::SettingTypeException& e) {
+        std::cerr << "InputFieldElement: type invalide (" << e.getPath() << ")\n";
+    }
+
+    return nullptr;
+}
+
+std::shared_ptr<UIElement> parseButtonElement(const libconfig::Setting& setting) {
+    try {
+        std::string id, text, fontPath;
+        sf::Vector2f pos(0,0), size(100,50);
+        sf::Color normalColor = sf::Color::Green;
+        sf::Color hoverColor = sf::Color::Yellow;
+        sf::Color clickedColor = sf::Color::Red;
+        sf::Color outlineColor = sf::Color::White;
+        float outlineThickness = 2.f;
+
+        unsigned int textSize = 20;
+        sf::Color textColor = sf::Color::Black;
+        int r = 255, g = 255, b = 255, a = 255;
+
+
+        setting.lookupValue("id", id);
+        setting.lookupValue("text", text);
+        setting.lookupValue("font", fontPath);
+
+        setting.lookupValue("textSize", textSize);
+        if (setting.exists("textColor")) {
+            const auto& c = setting.lookup("textColor");
+            if (c.getLength() >= 3) {
+                r = c[0];
+                g = c[1];
+                b = c[2];
+                if (c.getLength() == 4) {
+                    a = c[3];
+                }
+            }
+            textColor = sf::Color(
+                static_cast<sf::Uint8>(r),
+                static_cast<sf::Uint8>(g),
+                static_cast<sf::Uint8>(b),
+                static_cast<sf::Uint8>(a)
+            );
+        }
+
+        if (setting.exists("pos")) {
+            const auto& p = setting.lookup("pos");
+            pos = {p[0], p[1]};
+        }
+        if (setting.exists("size")) {
+            const auto& s = setting.lookup("size");
+            size = {s[0], s[1]};
+        }
+
+        if (setting.exists("colors")) {
+            const auto& colors = setting.lookup("colors");
+            if (colors.exists("normal")) { 
+                const auto& c = colors["normal"]; 
+                if (c.getLength() >= 3) {
+                    r = c[0];
+                    g = c[1];
+                    b = c[2];
+                    if (c.getLength() == 4) {
+                        a = c[3];
+                    }
+                }
+                normalColor = sf::Color(
+                    static_cast<sf::Uint8>(r),
+                    static_cast<sf::Uint8>(g),
+                    static_cast<sf::Uint8>(b),
+                    static_cast<sf::Uint8>(a)
+                ); 
+            }
+            if (colors.exists("hover")) { 
+                const auto& c = colors["hover"]; 
+                if (c.getLength() >= 3) {
+                    r = c[0];
+                    g = c[1];
+                    b = c[2];
+                    if (c.getLength() == 4) {
+                        a = c[3];
+                    }
+                }
+                hoverColor = sf::Color(
+                    static_cast<sf::Uint8>(r),
+                    static_cast<sf::Uint8>(g),
+                    static_cast<sf::Uint8>(b),
+                    static_cast<sf::Uint8>(a)
+                ); 
+            }
+            if (colors.exists("clicked")) { 
+                const auto& c = colors["clicked"]; 
+                if (c.getLength() >= 3) {
+                    r = c[0];
+                    g = c[1];
+                    b = c[2];
+                    if (c.getLength() == 4) {
+                        a = c[3];
+                    }
+                }
+                clickedColor = sf::Color(
+                    static_cast<sf::Uint8>(r),
+                    static_cast<sf::Uint8>(g),
+                    static_cast<sf::Uint8>(b),
+                    static_cast<sf::Uint8>(a)
+                ); 
+            }
+        }
+
+        if (setting.exists("outline")) {
+            const auto& outline = setting.lookup("outline");
+            outline.lookupValue("thickness", outlineThickness);
+            if (outline.exists("color")) {
+                const auto& c = outline.lookup("color");
+                if (c.getLength() >= 3) {
+                    r = c[0];
+                    g = c[1];
+                    b = c[2];
+                    if (c.getLength() == 4) {
+                        a = c[3];
+                    }
+                }
+                outlineColor = sf::Color(
+                    static_cast<sf::Uint8>(r),
+                    static_cast<sf::Uint8>(g),
+                    static_cast<sf::Uint8>(b),
+                    static_cast<sf::Uint8>(a)
+                ); 
+            }
+        }
+
+        std::function<void()> clickCb = nullptr;
+        std::function<void()> hoverCb = nullptr;
+        std::string clickId, hoverId;
+        setting.lookupValue("onClick", clickId);
+        setting.lookupValue("onHover", hoverId);
+        if (ActionRegistry::getInstance().get(clickId)) 
+            clickCb = ActionRegistry::getInstance().get(clickId);
+        if (ActionRegistry::getInstance().get(hoverId)) 
+            hoverCb = ActionRegistry::getInstance().get(hoverId);
+
+        ButtonBuilder builder(id);
+        builder.setText(text, fontPath)
+               .setPosition(pos)
+               .setSize(size)
+               .setColors(normalColor, hoverColor, clickedColor)
+               .setOutline(outlineThickness, outlineColor)
+               .setTextSize(textSize)
+               .setTextColor(textColor)
+               .setOnClick(clickCb)
+               .setOnHover(hoverCb);
+
+        return std::make_shared<ButtonElement>(builder.build());
+    }
+    catch (const libconfig::SettingNotFoundException& e) {
+        std::cerr << "ButtonElement: champ manquant (" << e.getPath() << ")\n";
+    }
+    catch (const libconfig::SettingTypeException& e) {
+        std::cerr << "ButtonElement: type invalide (" << e.getPath() << ")\n";
+    }
+
+    return nullptr;
+}
+
+std::shared_ptr<UI> parseUI(const libconfig::Setting& uiSetting)
+{
+    try {
+        std::string uiId;
+        uiSetting.lookupValue("id", uiId);
+
+        auto ui = std::make_shared<UI>(uiId);
+
+        if (uiSetting.exists("elements")) {
+            const libconfig::Setting& elements = uiSetting.lookup("elements");
+            for (int i = 0; i < elements.getLength(); ++i) {
+                const libconfig::Setting& el = elements[i];
+                std::string type;
+                el.lookupValue("type", type);
+
+                std::shared_ptr<UIElement> element = nullptr;
+
+                if (type == "text")
+                    element = parseTextElement(el);
+                else if (type == "rectangle")
+                    element = parseRectangleElement(el);
+                else if (type == "circle")
+                    element = parseCircleElement(el);
+                else if (type == "texture")
+                    element = parseTextureElement(el);
+                else if (type == "inputfield")
+                    element = parseInputFieldElement(el);
+                else if (type == "button")
+                    element = parseButtonElement(el);
+
+                if (element)
+                    ui->addElement(element);
+            }
+        }
+
+        return ui;
+    }
+    catch (const libconfig::SettingNotFoundException& e) {
+        std::cerr << "parseUI: champ manquant (" << e.getPath() << ")\n";
+    }
+    catch (const libconfig::SettingTypeException& e) {
+        std::cerr << "parseUI: type invalide (" << e.getPath() << ")\n";
+    }
+    return nullptr;
+}
+
+void loadUIFromFile(const std::string& filePath) {
+    try {
+        libconfig::Config cfg;
+        cfg.readFile(filePath.c_str());
+
+        const libconfig::Setting& root = cfg.getRoot();
+
+        for (int i = 0; i < root.getLength(); ++i) {
+            const libconfig::Setting& uiSetting = root[i];
+            auto ui = parseUI(uiSetting);
+            if (ui) {
+                UIManager::getInstance().addUI(ui);
+            }
+        }
+    }
+    catch (const libconfig::FileIOException& e) {
+        std::cerr << "Impossible to read the file: " << filePath << std::endl;
+    }
+    catch (const libconfig::ParseException& e) {
+        std::cerr << "Parsing error in file " << filePath 
+                  << " at line " << e.getLine() << ": " << e.getError() << std::endl;
+    }
+}
+
 
 // -----------------------------
 // Main pour tester
