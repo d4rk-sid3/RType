@@ -20,6 +20,15 @@ class EventHandler {
             while (window.pollEvent(event)) {
                 if (event.type == sf::Event::Closed)
                     window.close();
+                if (event.type == sf::Event::MouseButtonPressed) {
+                    if (event.mouseButton.button == sf::Mouse::Left) {                        
+                        int x = event.mouseButton.x;
+                        int y = event.mouseButton.y;
+                        
+                        std::cout << "Clic Gauche détecté en X: " << x 
+                                    << ", Y: " << y << std::endl;
+                    }
+                }
                 events.push_back(event);
             }
         }
@@ -28,6 +37,31 @@ class EventHandler {
             return events;
         }
 };
+
+class FontManager {
+public:
+    static FontManager& getInstance() {
+        static FontManager instance;
+        return instance;
+    }
+
+    FontManager(const FontManager&) = delete;
+    FontManager& operator=(const FontManager&) = delete;
+
+    sf::Font& getFont(const std::string& path) {
+        if (fonts.find(path) == fonts.end()) {
+            if (!fonts[path].loadFromFile(path))
+                std::cerr << "Error: impossible to load the font " << path << std::endl;
+        }
+        return fonts[path];
+    }
+
+private:
+    FontManager() = default;
+    ~FontManager() = default;
+    std::unordered_map<std::string, sf::Font> fonts;
+};
+
 
 class UIElement {
 public:
@@ -46,7 +80,6 @@ public:
 class TextElement : public UIElement {
 public:
     sf::Text text;
-    sf::Font font;
     std::string fontpath;
 
     TextElement(const std::string& id, const std::string& fontPath, const std::string& str,
@@ -54,10 +87,7 @@ public:
     : UIElement(id, ElementTag::TEXT, pos)
     {
         fontpath = fontPath;
-        if (!font.loadFromFile(fontpath)) {
-            std::cerr << "Erreur : impossible to load the font " << fontPath << std::endl;
-        }
-        text.setFont(font);
+        text.setFont(FontManager::getInstance().getFont(fontpath));
         text.setString(str);
         text.setFillColor(color);
         text.setCharacterSize(size);
@@ -156,7 +186,7 @@ class ButtonElement : public UIElement {
     
         void display(sf::RenderWindow& window) override {
             rect.display(window);
-            text.displayFontPath();
+            text.display(window);
             return;
         }
     
@@ -203,6 +233,7 @@ class ButtonBuilder {
         std::string fontPath;
         sf::Font font;
         sf::Vector2f pos = {0,0};
+        sf::Vector2f textPos = {0,0};
         sf::Vector2f size = {100,50};
         sf::Color normalColor = sf::Color::Green;
         sf::Color hoverColor = sf::Color::Yellow;
@@ -222,6 +253,10 @@ class ButtonBuilder {
             fontPath = fontpath;
             return *this; 
         }
+        ButtonBuilder& setTextPos(const sf::Vector2f pos) { 
+            textPos = pos;
+            return *this; 
+        }
         ButtonBuilder& setTextColor(sf::Color c) { textColor = c; return *this; }
         ButtonBuilder& setTextSize(unsigned int size) { textSize = size; return *this; }
         ButtonBuilder& setPosition(sf::Vector2f p) { pos = p; return *this; }
@@ -235,8 +270,7 @@ class ButtonBuilder {
     
         ButtonElement build() {
             RectangleElement rect(id, pos, size, normalColor, outlineColor, outlineThickness);
-            std::cout << "Ici : " << fontPath << std::endl;
-            TextElement textEl(id, fontPath, str, textColor, pos + sf::Vector2f(5,5), textSize);
+            TextElement textEl(id, fontPath, str, textColor, textPos, textSize);
             return ButtonElement(id, rect, textEl, normalColor, hoverColor, clickedColor, onHover, onClick);
         }
 };
@@ -347,7 +381,6 @@ class InputFieldElement : public UIElement {
         bool isPassword;
         bool active = false;
         sf::Color activeOutlineColor;
-        const sf::Font font;
     
         InputFieldElement(const std::string& id, const std::string& fontPath, sf::Vector2f pos, sf::Vector2f size,
                 bool password = false, sf::Color activeColor = sf::Color::Blue)
@@ -355,7 +388,7 @@ class InputFieldElement : public UIElement {
                 rect(id, pos, size, sf::Color::White, sf::Color::Black, 2.0f),
                 isPassword(password), activeOutlineColor(activeColor)
         {
-            text.setFont(font);
+            text.setFont(FontManager::getInstance().getFont(fontPath));
             text.setFillColor(sf::Color::Black);
             text.setPosition(pos + sf::Vector2f(5, 5));
             text.setCharacterSize(20);
@@ -759,13 +792,13 @@ std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& sett
         if (setting.exists("pos")) {
             const libconfig::Setting& posSetting = setting.lookup("pos");
             if (posSetting.getLength() == 2)
-                pos = { posSetting[0], posSetting[1] };
+                pos = { static_cast<float>(posSetting[0]), static_cast<float>(posSetting[1]) };
         }
 
         if (setting.exists("size")) {
             const libconfig::Setting& sizeSetting = setting.lookup("size");
             if (sizeSetting.getLength() == 2)
-                size = { sizeSetting[0], sizeSetting[1] };
+                size = { static_cast<float>(sizeSetting[0]), static_cast<float>(sizeSetting[1]) };
         }
 
         setting.lookupValue("isPassword", isPassword);
@@ -803,7 +836,7 @@ std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& sett
 std::shared_ptr<UIElement> parseButtonElement(const libconfig::Setting& setting) {
     try {
         std::string id, text, fontPath;
-        sf::Vector2f pos(0,0), size(100,50);
+        sf::Vector2f pos(0,0), size(100,50), textPos(0,0);
         sf::Color normalColor = sf::Color::Green;
         sf::Color hoverColor = sf::Color::Yellow;
         sf::Color clickedColor = sf::Color::Red;
@@ -841,6 +874,10 @@ std::shared_ptr<UIElement> parseButtonElement(const libconfig::Setting& setting)
         if (setting.exists("pos")) {
             const auto& p = setting.lookup("pos");
             pos = {static_cast<float>(p[0]), static_cast<float>(p[1])};
+        }
+        if (setting.exists("textPos")) {
+            const auto& p = setting.lookup("textPos");
+            textPos = {static_cast<float>(p[0]), static_cast<float>(p[1])};
         }
         if (setting.exists("size")) {
             const auto& s = setting.lookup("size");
@@ -935,8 +972,8 @@ std::shared_ptr<UIElement> parseButtonElement(const libconfig::Setting& setting)
             hoverCb = ActionRegistry::getInstance().get(hoverId);
 
         ButtonBuilder builder(id);
-        std::cout << "Afficher : " << fontPath << std::endl;
         builder.setText(text, fontPath)
+               .setTextPos(textPos)
                .setPosition(pos)
                .setSize(size)
                .setColors(normalColor, hoverColor, clickedColor)

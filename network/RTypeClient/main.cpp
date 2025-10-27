@@ -2,12 +2,12 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "R-Type Dashboard");
+    sf::RenderWindow window(sf::VideoMode(738, 432), "R-Type Dashboard");
     ActionRegistry::getInstance().setDefaultActions();
-    loadUIFromFile("dashboard.cfg");
+    loadUIFromFile("homepage.cfg");
     EventHandler eventHandler;
     UIRenderer renderer;
-    UIManager::getInstance().setUI("Dashboard");
+    UIManager::getInstance().setUI("Homepage");
 
     while (window.isOpen()) {
         eventHandler.pollEvents(window);
