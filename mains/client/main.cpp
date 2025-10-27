@@ -63,8 +63,10 @@ int main(int ac, char **av) {
         }
 
         reg.run_systems(dt);
+        // FIXME: The engine should not clear
+        // nor display, so the main loop will do that and possibly add more draws
         client.ui_handler.draw(win);
-    }   
+    }
 
     c.getContext().stop();
     t.join();
