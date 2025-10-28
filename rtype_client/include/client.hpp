@@ -33,15 +33,10 @@
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
 
-/**
- * @brief A global variable to store the id of the player in the registry
- * This variable is useful to access infos on the player all accross the program
- *
- */
-inline int player_entity_id = -1;
-
 inline bool player1_dead = false;
 inline bool player2_dead = false;
+
+inline int controllable_id = -1;
 
 /**
  * @brief A struct to store infos on an entity to be spawned in the level

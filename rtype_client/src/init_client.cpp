@@ -20,6 +20,20 @@
 #include "components.hpp"
 
 /**
+ * @brief This function returns the name of an entity type
+ *
+ * @param value the entity type
+ * @return std::string
+ */
+std::string getKey(int value) {
+    for (const auto& pair : type_map) {
+        if (pair.second == value)
+            return pair.first;
+    }
+    return "";
+}
+
+/**
  * @brief This function uses the ResourceManager to pre-load textures
  * and fonts that will be used in the game
  */
@@ -166,7 +180,7 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities() {
         }
 
         for (auto& a : s) {
-            std::cout << "Enemy_Type: " << static_cast<EnemyType>(a.enemy_type)
+            std::cout << "Enemy_Type: " << getKey(a.enemy_type)
                       << " ";
             std::cout << "Enemy_Pos_x: " << static_cast<int16_t>(a.position.x)
                       << " ";
@@ -187,10 +201,8 @@ std::vector<EnemyMovedResponse> Client::recupAllEntities() {
  * to the server accordingly
  */
 void Client::sendPlayerInput() {
-    if (player_entity_id == -1)
-        return;
     component::controllable& con =
-        _reg.get_components<component::controllable>()[player_entity_id].value(
+        _reg.get_components<component::controllable>()[controllable_id].value(
         );
 
     if (!con.left && !con.right && !con.up && !con.down)
@@ -199,7 +211,7 @@ void Client::sendPlayerInput() {
     MoveResponse pos;
 
     pos.type = 0x24;
-    pos.player_id = static_cast<int16_t>(player_entity_id);
+    pos.player_id = static_cast<int16_t>(-1);
 
     if (con.left) {
         pos.direction = LEFT;
@@ -227,11 +239,8 @@ void Client::sendPlayerInput() {
  *
  */
 void Client::sendPlayerAction() {
-    if (player_entity_id == -1)
-        return;
-
     component::controllable& con =
-        _reg.get_components<component::controllable>()[player_entity_id].value(
+        _reg.get_components<component::controllable>()[controllable_id].value(
         );
 
     if (!con.space)
@@ -240,7 +249,7 @@ void Client::sendPlayerAction() {
     ActionResponse pos;
 
     pos.type = 0x25;
-    pos.player_id = static_cast<int16_t>(player_entity_id);
+    pos.player_id = static_cast<int16_t>(-1);
 
     if (con.space) {
         pos.input = SPACE;
@@ -253,19 +262,6 @@ void Client::sendPlayerAction() {
     client_.send_to_server(buff, buff.size());
 }
 
-/**
- * @brief This function returns the name of an entity type
- *
- * @param value the entity type
- * @return std::string
- */
-std::string getKey(int value) {
-    for (const auto& pair : type_map) {
-        if (pair.second == value)
-            return pair.first;
-    }
-    return "";
-}
 
 /**
  * @brief This function updates the game state. It gets all the entities sent by
@@ -280,7 +276,7 @@ void Client::runLevel(double delta) {
     Factory fac(_reg);
     sendPlayerInput();
     sendPlayerAction();
-
+    
     new_vec = recupAllEntities();
     if (new_vec.size() == 0) {
         return;
@@ -289,14 +285,15 @@ void Client::runLevel(double delta) {
     for (auto it = new_vec.begin(); it != new_vec.end(); it++) {
         auto& entity = *it;
         try {
-            if (first_call) {
-                if (getKey(entity.enemy_type) == "player1") {
-                    old.push_back(entity);
-                    ids_assoc[entity.enemy_id] =
-                        fac.make_entity(getKey(entity.enemy_type));
-                    player_entity_id = ids_assoc[entity.enemy_id];
-                }
-            }
+            // if (new_level) {
+            //     if (getKey(entity.enemy_type) == "player1") {
+            //         old.push_back(entity);
+            //         ids_assoc[entity.enemy_id] =
+            //         fac.make_entity(getKey(entity.enemy_type));
+            //         player_entity_id = ids_assoc[entity.enemy_id];
+            //         new_level = false;
+            //     }
+            // }
             if (isInside(old, entity.enemy_id)) {
                 auto& pos = _reg.get_components<component::position>(
                 )[ids_assoc[entity.enemy_id]]
@@ -309,10 +306,10 @@ void Client::runLevel(double delta) {
                 auto& pos = _reg.get_components<component::position>(
                 )[ids_assoc[entity.enemy_id]]
                                 .value();
-                pos.x = entity.position.x;
-                pos.y = entity.position.y;
-            }
-        } catch (std::exception& e) {
+                                pos.x = entity.position.x;
+                                pos.y = entity.position.y;
+                            }
+                        } catch (std::exception& e) {
         }
     }
 
@@ -320,7 +317,6 @@ void Client::runLevel(double delta) {
         auto& entity = *it;
         if (!isInside(new_vec, entity.enemy_id)) {
             if (getKey(entity.enemy_type) == "player1") {
-                player_entity_id = -1;
                 player1_dead = true;
             }
             if (getKey(entity.enemy_type) == "player2") {
@@ -346,7 +342,7 @@ void Client::runLevel(double delta) {
     }
 
     old = new_vec;
-    first_call = false;
+    printf("STATE: %d\n", state);
 }
 
 /**
@@ -408,6 +404,9 @@ void Client::initGame() {
     Factory factory(_reg);
     factory.make_background();
     factory.make_game_background_music();
+
+    controllable_id = _reg.spawn_entity();
+    _reg.add_component<component::controllable>((entity)controllable_id, component::controllable());
 }
 
 void Client::handleSubStates(double delta, sf::RenderWindow& win)

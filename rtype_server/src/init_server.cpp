@@ -159,7 +159,7 @@ void Server::initializePlayersPVP(void) {
     pos1.x = 50;
     pos1.y = 250;
 
-    pos2.x = WINDOW_WIDTH - 60;
+    pos2.x = 50;
     pos2.y = 250;
 }
 
@@ -173,6 +173,8 @@ Server::Server(int p, registry& regis)
     : server_(p, std::ref(messages), std::ref(mtx)), p_(p), reg(regis) {
     load_textures();
     initializeGame();
+    if (custom_conf_path != "")
+        state = CUSTOM_LEVEL;
     loadLevel();
 }
 

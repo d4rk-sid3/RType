@@ -8,6 +8,8 @@ void printServerUsage() {
 }
 
 diff_mode_t get_diff_mode(std::string mode) {
+    if (mode == "-h")
+        return CUSTOM;
     if (mode == "easy")
         return EASY;
     if (mode == "medium")
@@ -24,6 +26,10 @@ void checkServerArgs(int ac, char **av) {
     if (ac == 2 && std::string(av[1]) == "-h") {
         printServerUsage();
         exit(0);
+    }
+    if (ac == 4 && std::string(av[2]) == "-f") {
+        custom_conf_path = av[3];
+        return;
     }
     if (ac != 3) {
         printServerUsage();

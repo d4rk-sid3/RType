@@ -51,6 +51,9 @@ using namespace libconfig;
 #define LEVEL1_HARD "assets/levels/hard.txt"
 #define LEVEL2_HARD "assets/levels/hard_2.txt"
 #define LEVEL3_HARD "assets/levels/hard_3.txt"
+
+bool all_entities_spawned = false;
+
 /**
  * @brief This function loads a level from a configuration file
  * It stores all the entities of the level in a vector with their spawn time
@@ -86,6 +89,13 @@ void Server::loadLevel() {
             conf.readFile(LEVEL3_MEDIUM);
         if (diff_mode == HARD)
             conf.readFile(LEVEL3_HARD);
+    } else if (state == CUSTOM_LEVEL) {
+        try {
+            conf.readFile(custom_conf_path);
+        } catch (const FileIOException& fioex) {
+            std::cerr << "I/O error while reading file." << std::endl;
+            exit(84);
+        }
     }
 
     Setting& root = conf.getRoot();
@@ -101,14 +111,14 @@ void Server::loadLevel() {
         info.spawn_y = entity["y"];
         entities.push_back(info);
     }
-    clearGameEntities();
+    //clearGameEntities();
     initializePlayers();
-    levelTimer = 0.0;
+    levelTimer = -2.0;
 }
 
 void Server::clearGameEntities() {
     std::vector<std::string> special_entities = {
-        "background", "menu_background_music", "player1", "player2"
+        "background", "menu_background_music"
     };
 
     for (size_t i = 0; i < reg.getEntityNum(); i++) {
@@ -127,13 +137,14 @@ void Server::clearGameEntities() {
             }
 
             // Clean up out of screen entities
-            if (name_._name != "ceiling" && name_._name != "floor"
-                && name_._name != "player1" && name_._name != "player2") {
+            if (name_._name != "ceiling" && name_._name != "floor") {
+                printf("Killing entity %s\n", name_._name.c_str());
                 reg.kill_entity(entity(i));
                 continue;
             }
         } catch (...) {}
     }
+    logGameEntities();
 }
 
 /**
@@ -145,6 +156,7 @@ void Server::logGameEntities() {
     std::vector<std::string> special_entities = {
         "background", "menu_background_music"
     };
+    int real_entities = 0;
 
     counter = 0;
     result.clear();
@@ -168,11 +180,14 @@ void Server::logGameEntities() {
             }
 
             // Clean up out of screen entities
-            if (pos.x < -200 || pos.x > 1000) {
+            if (pos.x < -200 || pos.x > 1000 || pos.y < -200 || pos.y > 1000) {
                 if (name_._name != "ceiling" && name_._name != "floor") {
                     reg.kill_entity(entity(i));
                     continue;
                 }
+            }
+            if (name_._name != "player2" && name_._name != "player1" && name_._name != "force") {
+                real_entities++;
             }
 
             ++counter;
@@ -196,6 +211,11 @@ void Server::logGameEntities() {
     }
     vector<int8_t> tmp = encodeNbrEntity({0x38, static_cast<int16_t>(counter)});
     result.insert(result.begin(), tmp.begin(), tmp.end());
+
+    if (real_entities == 0 && all_entities_spawned) {
+        printf("Victory\n");
+        exit(0);
+    }
 }
 
 /**
@@ -294,21 +314,29 @@ void Server::receivePlayerInput(double delta) {
 void Server::runLevel(double delta) {
     Factory factory(reg);
     levelTimer += delta;
+    int unspawned_entities = 0;
 
     // Spawn new ready entities
     for (auto it = entities.begin(); it != entities.end(); it++) {
         auto& en = *it;
 
-        if (en.spawn_time <= levelTimer && en.entity_id.getId() == -1) {
-            en.entity_id = factory.make_entity(en.type);
-            if (en.entity_id.getId() == -1) {
-                throw std::runtime_error("Failed to spawn entity");
+        if (en.entity_id.getId() == -1) {
+            unspawned_entities++;
+            if (en.spawn_time <= levelTimer) {
+                en.entity_id = factory.make_entity(en.type);
+                if (en.entity_id.getId() == -1) {
+                    throw std::runtime_error("Failed to spawn entity");
+                }
+                auto& pos =
+                    reg.get_components<component::position>()[en.entity_id].value();
+                pos.y = en.spawn_y;
+                pos.x = 1000;
             }
-            auto& pos =
-                reg.get_components<component::position>()[en.entity_id].value();
-            pos.y = en.spawn_y;
-            pos.x = 1000;
         }
+    }
+
+    if (unspawned_entities == 0 && state == CUSTOM_LEVEL) {
+        all_entities_spawned = true;
     }
 
     logGameEntities();
@@ -328,13 +356,11 @@ void Server::runLevel(double delta) {
 void Server::handleWinOrLoss() {
     if (player1_entity_id == -1 && player2_entity_id == -1) {
         printf("GAME OVER\n");
-        sleep(2);
         exit(0);
     }
     if (state == LEVEL1) {
         if (boss_dead) {
             printf("BOSS DEAD\n");
-            sleep(2);
             state = LEVEL2;
             loadLevel();
         }
@@ -342,7 +368,6 @@ void Server::handleWinOrLoss() {
     if (state == LEVEL2) {
         if (boss2_dead && boss1_dead) {
             printf("BOSS2 and BOSS1 DEAD\n");
-            sleep(2);
             state = LEVEL3;
             loadLevel();
         }
@@ -350,7 +375,6 @@ void Server::handleWinOrLoss() {
     if (state == LEVEL3) {
         if (final_boss_dead) {
             printf("FINAL BOSS DEAD\n");
-            sleep(2);
             exit(0);
             loadLevel();
         }
@@ -359,11 +383,9 @@ void Server::handleWinOrLoss() {
     if (diff_mode == PVP) {
         if (player1_entity_id == -1) {
             printf("PLAYER 2 WON\n");
-            sleep(2);
             exit(0);
         } else if (player2_entity_id == -1) {
             printf("PLAYER 1 WON\n");
-            sleep(2);
             exit(0);
         }
     }

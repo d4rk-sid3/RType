@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sub_5fnone_0',['SUB_NONE',['../client_8hpp.html#a7200056c886361c0597814f8db61992ea777cb88c7c961952f33afb572cefa64d',1,'client.hpp']]]
+  ['pvp_0',['PVP',['../server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93addbe5c6516ef695946446c87fd2dd69f',1,'server.hpp']]]
 ];

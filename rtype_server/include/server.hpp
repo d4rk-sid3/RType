@@ -44,13 +44,20 @@ inline int player2_entity_id = -1;
  * @brief An enum to store the difficulty of the game
  *
  */
-typedef enum diff_mode { EASY, MEDIUM, HARD, PVP } diff_mode_t;
+typedef enum diff_mode { EASY, MEDIUM, HARD, PVP, CUSTOM } diff_mode_t;
 
 /**
  * @brief A gloal variable to store the difficulty of the game
  *
  */
 inline diff_mode_t diff_mode = MEDIUM;
+
+
+/**
+ * @brief A global variable that holds the path to the custom conf file
+ * 
+ */
+inline std::string custom_conf_path = "";
 
 /**
  * @brief A struct to store the information of an entity to be spawned on the
@@ -64,7 +71,7 @@ typedef struct entity_info_s {
     double spawn_y;
 } entity_info_t;
 
-typedef enum { LEVEL1, LEVEL2, LEVEL3 } state_t;
+typedef enum { LEVEL1, LEVEL2, LEVEL3, CUSTOM_LEVEL } state_t;
 
 /**
  * @brief The server class. Handles the server side of the game.
