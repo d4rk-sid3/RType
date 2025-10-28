@@ -1,19 +1,18 @@
-#include "interface.hpp"
+#include "ClientUI.hpp"
+#include "UIRenderer.hpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(738, 432), "R-Type Dashboard");
-    ActionRegistry::getInstance().setDefaultActions();
-    loadUIFromFile("homepage.cfg");
-    EventHandler eventHandler;
+    ClientUI clientUI;
     UIRenderer renderer;
-    UIManager::getInstance().setUI("Homepage");
 
-    while (window.isOpen()) {
-        eventHandler.pollEvents(window);
-        window.clear();
-        renderer.render(eventHandler, window);
-        window.display();
+    clientUI.init();
+    while (clientUI.window.isOpen()) {
+        clientUI.deltaTime = clientUI.clock.restart().asSeconds();
+        clientUI.eventHandler.pollEvents(clientUI.window);
+        clientUI.window.clear();
+        renderer.render(clientUI);
+        clientUI.window.display();
     }
     return 0;
 }

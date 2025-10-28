@@ -6,6 +6,11 @@
 #include <functional>
 #include <vector>
 #include <libconfig.h++>
+#include <chrono>
+#include <sstream>
+#include <iomanip>
+#include <ctime>
+
 
 enum class ElementTag { TEXT, BUTTON, RECTANGLE, CIRCLE, INPUTFIELD, TEXTURE };
 enum class ButtonState { NORMAL, HOVER, CLICKED };
@@ -38,29 +43,7 @@ class EventHandler {
         }
 };
 
-class FontManager {
-public:
-    static FontManager& getInstance() {
-        static FontManager instance;
-        return instance;
-    }
 
-    FontManager(const FontManager&) = delete;
-    FontManager& operator=(const FontManager&) = delete;
-
-    sf::Font& getFont(const std::string& path) {
-        if (fonts.find(path) == fonts.end()) {
-            if (!fonts[path].loadFromFile(path))
-                std::cerr << "Error: impossible to load the font " << path << std::endl;
-        }
-        return fonts[path];
-    }
-
-private:
-    FontManager() = default;
-    ~FontManager() = default;
-    std::unordered_map<std::string, sf::Font> fonts;
-};
 
 
 class UIElement {
@@ -73,6 +56,7 @@ public:
         : id(id), tag(tag), pos(pos) {}
     virtual ~UIElement() {}
     virtual void display(sf::RenderWindow& window) = 0;
+    virtual void display(sf::RenderTexture& window) = 0;
     virtual void update(EventHandler& eventHandler, sf::RenderWindow& window) = 0;
     virtual ElementTag getTag() {return tag;}
 };
@@ -98,12 +82,16 @@ public:
         window.draw(text);
     }
 
+    void display(sf::RenderTexture& window) override {
+        window.draw(text);
+    }
+
     void update(EventHandler& eventHandler, sf::RenderWindow& window) override {
         return;
     }
 
     void displayFontPath() {std::cout << fontpath << std::endl;}
-
+    void setText(const std::string &texte) { text.setString(texte);}
 };
 
 class RectangleElement : public UIElement {
@@ -125,6 +113,10 @@ class RectangleElement : public UIElement {
         }
     
         void display(sf::RenderWindow& window) override {
+            window.draw(rect);
+        }
+
+        void display(sf::RenderTexture& window) override {
             window.draw(rect);
         }
     
@@ -188,6 +180,11 @@ class ButtonElement : public UIElement {
             rect.display(window);
             text.display(window);
             return;
+        }
+
+        void display(sf::RenderTexture& window) override {
+            rect.display(window);
+            text.display(window);
         }
     
         void updateState(sf::RenderWindow& window) {
@@ -298,6 +295,10 @@ class CircleElement : public UIElement {
         void display(sf::RenderWindow& window) override {
             window.draw(circle);
         }
+
+        void display(sf::RenderTexture& window) override {
+            window.draw(circle);
+        }
     
         void setPosition(sf::Vector2f pos) {
             this->pos = pos;
@@ -349,6 +350,10 @@ class TextureElement : public UIElement {
         void display(sf::RenderWindow& window) override {
             window.draw(sprite);
         }
+
+        void display(sf::RenderTexture& window) override {
+            window.draw(sprite);
+        }
     
         void setPosition(sf::Vector2f pos) {
             this->pos = pos;
@@ -391,7 +396,7 @@ class InputFieldElement : public UIElement {
             text.setFont(FontManager::getInstance().getFont(fontPath));
             text.setFillColor(sf::Color::Black);
             text.setPosition(pos + sf::Vector2f(5, 5));
-            text.setCharacterSize(20);
+            text.setCharacterSize(17);
         }
     
         void addChar(char c) {
@@ -445,6 +450,11 @@ class InputFieldElement : public UIElement {
             rect.display(window);
             window.draw(text);
         }
+
+        void display(sf::RenderTexture& window) override {
+            rect.display(window);
+            window.draw(text);
+        }
 };
 
 class UI {
@@ -461,12 +471,16 @@ class UI {
             }
             return nullptr;
         }
+        const std::string getId() {return id;}
 };
 
 class UIManager {
     private:
         std::unordered_map<std::string, std::shared_ptr<UI>> uis;
         std::shared_ptr<UI> currentUI;
+        std::shared_ptr<UI> nextUI;
+        float transitionAlpha = 1.f;
+        bool transitioning = false;
 
         UIManager() = default;
     public:
@@ -477,36 +491,41 @@ class UIManager {
             static UIManager instance;
             return instance;
         }
-
         void addUI(std::shared_ptr<UI> ui) { uis[ui->id] = ui; }
-
+        
         void setUI(const std::string& id) {
-            auto it = uis.find(id);
-            if (it != uis.end()) {
-                currentUI = it->second;
-            } else {
-                std::cerr << "UIManager: UI with id" << id << " not found !" << std::endl;
+            if (uis.find(id) != uis.end()) {
+                nextUI = uis[id];
+                transitioning = true;
+                transitionAlpha = 0.f;
             }
         }
-        std::shared_ptr<UI> getCurrentUI() const { return currentUI; }
-
-        std::shared_ptr<UI> getUI(const std::string& id) {
-            auto it = uis.find(id);
-            if (it != uis.end()) return it->second;
-            return nullptr;
-        }
-};
-
-class UIRenderer {
-    public:
-        void render(EventHandler& eventHandler, sf::RenderWindow& window) {
-            if (!UIManager::getInstance().getCurrentUI())
-                return;
     
-            for (auto& el : UIManager::getInstance().getCurrentUI()->elements) {
-                el->update(eventHandler, window);
-                el->display(window);
+        std::shared_ptr<UI> getCurrentUI() { return currentUI; }
+        std::shared_ptr<UI> getNextUI() { return nextUI; }
+        bool isTransitioning() const { return transitioning; }
+    
+        void updateTransition(float deltaTime) {
+            if (transitioning) {
+                transitionAlpha += deltaTime * 2.f;
+                if (transitionAlpha >= 1.f) {
+                    transitionAlpha = 1.f;
+                    currentUI = nextUI;
+                    nextUI = nullptr;
+                    transitioning = false;
+                }
             }
+            return;
+        }
+    
+        float getAlpha() const { return transitionAlpha; }
+
+        std::shared_ptr<UI> getUI(const std::string &id) {
+            for (auto &ui : uis) {
+                if (ui.first == id)
+                    return ui.second;
+            }
+            return nullptr;
         }
 };
 
@@ -533,7 +552,7 @@ class ActionRegistry {
 
         void setDefaultActions() {
             const std::vector<std::string> pages = {
-                "HomePage", "Register", "Login", "Dashboard", 
+                "Homepage", "Registerpage", "Loginpage", "Dashboardpage", 
                 "Settings", "Scoreboard", "CreateParty", "JoinParty"
             };
     
@@ -545,7 +564,7 @@ class ActionRegistry {
         }
 };
     
-std::shared_ptr<UIElement> parseTextElement(const libconfig::Setting& setting)
+inline std::shared_ptr<UIElement> parseTextElement(const libconfig::Setting& setting)
 {
     try {
         std::string id;
@@ -596,7 +615,7 @@ std::shared_ptr<UIElement> parseTextElement(const libconfig::Setting& setting)
     return nullptr;
 }
 
-std::shared_ptr<UIElement> parseRectangleElement(const libconfig::Setting& setting) {
+inline std::shared_ptr<UIElement> parseRectangleElement(const libconfig::Setting& setting) {
     try {
         std::string id;
         sf::Vector2f pos(0.f, 0.f), size(100.f, 50.f);
@@ -674,7 +693,7 @@ std::shared_ptr<UIElement> parseRectangleElement(const libconfig::Setting& setti
     return nullptr;
 }
 
-std::shared_ptr<UIElement> parseCircleElement(const libconfig::Setting& setting) {
+inline std::shared_ptr<UIElement> parseCircleElement(const libconfig::Setting& setting) {
     try {
         std::string id;
         sf::Vector2f pos(0.f, 0.f);
@@ -743,7 +762,7 @@ std::shared_ptr<UIElement> parseCircleElement(const libconfig::Setting& setting)
     return nullptr;
 }
 
-std::shared_ptr<UIElement> parseTextureElement(const libconfig::Setting& setting) {
+inline std::shared_ptr<UIElement> parseTextureElement(const libconfig::Setting& setting) {
     try {
         std::string id;
         std::string texturePath;
@@ -777,7 +796,7 @@ std::shared_ptr<UIElement> parseTextureElement(const libconfig::Setting& setting
     return nullptr;
 }
 
-std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& setting) {
+inline std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& setting) {
     try {
         std::string id;
         std::string fontPath;
@@ -833,7 +852,7 @@ std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& sett
     return nullptr;
 }
 
-std::shared_ptr<UIElement> parseButtonElement(const libconfig::Setting& setting) {
+inline std::shared_ptr<UIElement> parseButtonElement(const libconfig::Setting& setting) {
     try {
         std::string id, text, fontPath;
         sf::Vector2f pos(0,0), size(100,50), textPos(0,0);
@@ -995,7 +1014,7 @@ std::shared_ptr<UIElement> parseButtonElement(const libconfig::Setting& setting)
     return nullptr;
 }
 
-std::shared_ptr<UI> parseUI(const libconfig::Setting& uiSetting)
+inline std::shared_ptr<UI> parseUI(const libconfig::Setting& uiSetting)
 {
     try {
         std::string uiId;
@@ -1041,7 +1060,7 @@ std::shared_ptr<UI> parseUI(const libconfig::Setting& uiSetting)
     return nullptr;
 }
 
-void loadUIFromFile(const std::string& filePath) {
+inline void loadUIFromFile(const std::string& filePath) {
     try {
         libconfig::Config cfg;
         cfg.readFile(filePath.c_str());
@@ -1063,4 +1082,36 @@ void loadUIFromFile(const std::string& filePath) {
         std::cerr << "Parsing error in file " << filePath 
                   << " at line " << e.getLine() << ": " << e.getError() << std::endl;
     }
+}
+
+inline void loadAllUI(void)
+{
+    std::vector<std::string> _files = {"homepage.cfg", "registerpage.cfg", "loginpage.cfg",
+        "dashboard_player.cfg"};
+
+    for (auto elem : _files)
+        loadUIFromFile(elem);
+    return;
+}
+
+inline std::string getDate()
+{
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+    std::tm* local_time = std::localtime(&now_time_t);
+    std::stringstream ss;
+
+    ss << std::put_time(local_time, "%d/%m/%Y");
+    return ss.str();
+}
+
+inline std::string getHour()
+{
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+    std::tm* local_time = std::localtime(&now_time_t);
+    std::stringstream ss;
+
+    ss << std::put_time(local_time, "%H:%M:%S");
+    return ss.str();
 }
