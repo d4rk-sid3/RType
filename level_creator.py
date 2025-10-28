@@ -20,10 +20,6 @@ def create_level():
     entity_types = [
         "red_trooper",
         "walker",
-        "player_missile",
-        "enemy_missile",
-        "explosion",
-        "hit_effect",
         "floor",
         "ceiling",
         "boss",
@@ -31,13 +27,10 @@ def create_level():
         "force",
         "green_trooper",
         "tourelles",
-        "big_missile",
         "big_shooter",
         "small_shooter",
         "final_boss",
         "space_enemy",
-        "player2_flipped",
-        "evil_player_missile"
     ]
     
     while True:

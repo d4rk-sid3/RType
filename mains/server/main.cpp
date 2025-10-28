@@ -8,7 +8,7 @@ void printServerUsage() {
 }
 
 diff_mode_t get_diff_mode(std::string mode) {
-    if (mode == "-h")
+    if (mode == "-f")
         return CUSTOM;
     if (mode == "easy")
         return EASY;

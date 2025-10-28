@@ -186,7 +186,8 @@ void Server::logGameEntities() {
                     continue;
                 }
             }
-            if (name_._name != "player2" && name_._name != "player1" && name_._name != "force") {
+            if (name_._name != "player2" && name_._name != "player1"
+                && name_._name != "ceiling" && name_._name != "floor" && name_._name != "force") {
                 real_entities++;
             }
 
