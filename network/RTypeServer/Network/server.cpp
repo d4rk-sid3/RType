@@ -149,7 +149,7 @@ int main(int argc, char* argv[]) {
     try {
         if (argc != 3) {
             std::cerr << "Usage: server <address> <port>\nExample: server 0.0.0.0 8080\n";
-            return 1;
+            return 84;
         }
 
         std::string address = argv[1];
@@ -161,7 +161,6 @@ int main(int argc, char* argv[]) {
         Server server(ioc, endpoint);
 
         unsigned int nThreads = std::max(1u, std::thread::hardware_concurrency());
-        std::cout << "Server running on " << address << ":" << port << " with " << nThreads << " threads\n";
 
         std::vector<std::thread> v;
         for (unsigned int i = 0; i < nThreads; ++i) {
