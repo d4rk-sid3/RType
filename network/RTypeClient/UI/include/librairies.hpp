@@ -12,8 +12,14 @@
 #include <sstream>
 #include <iomanip>
 #include <ctime>
+#include <boost/asio.hpp>
+#include <deque>
+#include <atomic>
+#include <thread>
 
 
 enum class ElementTag { TEXT, BUTTON, RECTANGLE, CIRCLE, INPUTFIELD, TEXTURE };
 enum class ButtonState { NORMAL, HOVER, CLICKED };
+using boost::asio::ip::tcp;
+namespace asio = boost::asio;
 #endif
