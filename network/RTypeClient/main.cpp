@@ -1,5 +1,5 @@
-#include "ClientUI.hpp"
-#include "UIRenderer.hpp"
+#include "./UI/include/ClientUI.hpp"
+#include "./UI/include/UIRenderer.hpp"
 
 int main()
 {

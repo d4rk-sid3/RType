@@ -1,4 +1,6 @@
-#include "UIRenderer.hpp"
+#include "../include/UIRenderer.hpp"
+#include "../include/utils.hpp"
+#include "../../Managers/UIManager.hpp"
 
 void UIRenderer::render(ClientUI &clientUI) {
     auto& uiManager = UIManager::getInstance();

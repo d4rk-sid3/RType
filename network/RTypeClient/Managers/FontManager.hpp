@@ -1,5 +1,6 @@
 #ifndef FONTMANAGER
     #define FONTMANAGER
+    #include "../UI/include/librairies.hpp"
 
 class FontManager {
     public:
@@ -10,7 +11,7 @@ class FontManager {
     
         FontManager(const FontManager&) = delete;
         FontManager& operator=(const FontManager&) = delete;
-        sf::Font& FontManager::getFont(const std::string& path) {
+        sf::Font& getFont(const std::string& path) {
             if (fonts.find(path) == fonts.end()) {
                 if (!fonts[path].loadFromFile(path))
                     std::cerr << "Error: impossible to load the font " << path << std::endl;

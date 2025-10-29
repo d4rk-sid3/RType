@@ -1,6 +1,10 @@
 #ifndef CLIENTUI
     #define CLIENTUI
-    #include "interface.hpp"
+    #include "./librairies.hpp"
+    #include "EventHandler.hpp"
+    #include "../components/include/TextElement.hpp"
+    #include "../include/utils.hpp"
+
 
 class ClientUI {
     public:
