@@ -32,6 +32,7 @@
 #include <vector>
 #include <map>
 #include <chrono>
+#include <ranges>
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -204,11 +205,34 @@ class Client {
      * @param now the actual time
      * @param pastTime the time of the last position
      * @param nextTime the time of the next position
-     *
-     * @return the position at now
      */
-    Vector2D entityMovementExtrapol(Vector2D pastPos, Vector2D nextPos,
-        int64_t now, int64_t pastTime, int64_t nextTime);
+    void entityMoveInterpole(EnemyMovedResponse pastPos, int64_t pastTime, int64_t now, EnemyMovedResponse nextPos, int64_t nextTime);
+
+    /**
+     * @brief Calculate the new position of an entity based on the last
+     * position, the position to reach, the time elapsed beatween the
+     * last position time and now
+     *
+     * @param pastPos the last position of the entity
+     * @param pastpastPos the position before the last position
+     * @param now the actual time
+     * @param pastTime the time of the last position
+     * @param pastpastTime the time of the position before the last position
+     */
+    void entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTime, int64_t now, EnemyMovedResponse pastPos, int64_t pastTime);
+
+    /**
+     * @brief Calculate the new position of an entity based on the last
+     * position, the position to reach, the time elapsed beatween the
+     * last position time and now
+     *
+     * @param nextPos the next position of the entity
+     * @param nextnextPos the position after the next position
+     * @param now the actual time
+     * @param nextTime the time of the next position
+     * @param nextnextTime the time of the position next the next position
+     */
+    void entityMovCreate(EnemyMovedResponse nextPos, int64_t nextTime, int64_t now, EnemyMovedResponse nextnextPos, int64_t nextnextTime);
 
   public:
     /**
