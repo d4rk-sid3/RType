@@ -320,7 +320,10 @@ void Client::runLevel(double delta) {
 
     //////////////////////////
 
-    // if (entity_states.front().first < nowDuration + 1000 && nowDuration + 1000 < entity_states.back().first)
+    if (entity_states.front().first > nowDuration + 1200)
+        return;
+    else if (nowDuration + 1200 > entity_states.back().first)
+        exit(0);
 
 
     //////////////////////////
@@ -336,6 +339,9 @@ void Client::runLevel(double delta) {
             break;
         }
     }
+
+    if (pastIdx != entity_states.size() / 2 - 1)
+        return;
 
     std::pair<
             int64_t,
@@ -361,18 +367,21 @@ void Client::runLevel(double delta) {
             /// Supression
             /// Interpolation legere puis supression
 
-            std::pair<
-                int64_t,
-                std::vector<EnemyMovedResponse>
-            >& pastpastInfo = entity_states.at(pastIdx - 1);
+            if (pastIdx > 1) {
+                std::pair<
+                    int64_t,
+                    std::vector<EnemyMovedResponse>
+                >& pastpastInfo = entity_states.at(pastIdx - 1);
+    
+                auto pastpastEntity = std::find_if(pastpastInfo.second.begin(), pastpastInfo.second.end(),
+                    [&pastEntity](EnemyMovedResponse& ent) {
+                            return ent.enemy_id == pastEntity.enemy_id;
+                        });
+                if (pastpastEntity == pastInfo.second.end())
+                    return;
+                entityMovDelete(*pastpastEntity, pastpastInfo.first, nowDuration + 1200, pastEntity, pastInfo.first);
+            }
 
-            auto pastpastEntity = std::find_if(pastpastInfo.second.begin(), pastpastInfo.second.end(),
-                [&pastEntity](EnemyMovedResponse& ent) {
-                        return ent.enemy_id == pastEntity.enemy_id;
-                    });
-            if (pastpastEntity == pastInfo.second.end())
-                return;
-            entityMovDelete(*pastpastEntity, pastpastInfo.first, nowDuration + 1200, pastEntity, pastInfo.first);
         }
     }
 
@@ -388,18 +397,20 @@ void Client::runLevel(double delta) {
             /// Creation
             /// Création puis extrapolation légère
 
-            std::pair<
-                int64_t,
-                std::vector<EnemyMovedResponse>
-            >& nextnextInfo = entity_states.at(nextIdx + 1);
-
-            auto nextnextEntity = std::find_if(nextnextInfo.second.begin(), nextnextInfo.second.end(),
-            [&nextEntity](EnemyMovedResponse& ent) {
-                return ent.enemy_id == nextEntity.enemy_id;
-            });
-            if (nextnextEntity == nextnextInfo.second.end())
-                continue;
-            entityMovCreate(nextEntity, nextInfo.first, nowDuration + 1200, *nextnextEntity, nextnextInfo.first);
+            if (nextIdx < entity_states.size() - 1) {
+                std::pair<
+                    int64_t,
+                    std::vector<EnemyMovedResponse>
+                >& nextnextInfo = entity_states.at(nextIdx + 1);
+    
+                auto nextnextEntity = std::find_if(nextnextInfo.second.begin(), nextnextInfo.second.end(),
+                [&nextEntity](EnemyMovedResponse& ent) {
+                    return ent.enemy_id == nextEntity.enemy_id;
+                });
+                if (nextnextEntity == nextnextInfo.second.end())
+                    continue;
+                entityMovCreate(nextEntity, nextInfo.first, nowDuration + 1200, *nextnextEntity, nextnextInfo.first);
+            }
         }
     }
 }
@@ -470,6 +481,7 @@ void Client::run()
 
     while (win.isOpen()) {
         double dt = frameClock.restart().asSeconds();
+        auto now = std::chrono::steady_clock::now();
 
         while (win.pollEvent(event))
         {
@@ -490,6 +502,8 @@ void Client::run()
         }
 
         reg.run_systems(dt);
+
+        std::this_thread::sleep_until(now + tickDuration);
     }
 
     client_.stop();
