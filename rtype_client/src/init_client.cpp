@@ -367,11 +367,11 @@ void Client::runLevel(double delta) {
     for (size_t i = 0; i < entity_states.size() - 1; i++) {
         if (entity_states[i].first <= nowDuration + 1200 && nowDuration + 1200 <= entity_states[i + 1].first) {
             std::cout << "PastTime: " << entity_states[i].first << " NextTime: " << entity_states[i + 1].first << std::endl;
-            if (i > 1) {
+            if (i == 0 || i == 1) {
+                pastIdx = i;
+                nextIdx = i + 1;
+            } else if (i > 1) {
                 entity_states.erase(entity_states.begin(), entity_states.begin() + i - 1);
-                pastIdx = 1;
-                nextIdx = 2;
-            } else {
                 pastIdx = 1;
                 nextIdx = 2;
             }
