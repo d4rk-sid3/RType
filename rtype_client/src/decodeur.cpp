@@ -53,9 +53,9 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer
     pos.position.x = toInt16(tmp[5], tmp[6]);
     pos.position.y = toInt16(tmp[7], tmp[8]);
 
-    std::cout << "Enemy_Type: " << static_cast<int>(pos.enemy_type) << " ";
-    std::cout << "Enemy_Pos_x: " << pos.position.x << " ";
-    std::cout << "Enemy_Pos_y: " << pos.position.y << std::endl;
+    // std::cout << "Enemy_Type: " << static_cast<int>(pos.enemy_type) << " ";
+    // std::cout << "Enemy_Pos_x: " << pos.position.x << " ";
+    // std::cout << "Enemy_Pos_y: " << pos.position.y << std::endl;
 
     return pos;
 }

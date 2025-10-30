@@ -70,7 +70,7 @@ typedef struct menu_info_s {
 class Client {
   private:
 
-    const std::chrono::milliseconds tickDuration = std::chrono::milliseconds(1);
+    const std::chrono::milliseconds tickDuration = std::chrono::milliseconds(5);
 
     /**
      * @brief Window for rendering
