@@ -6,6 +6,7 @@ TextElement::TextElement(const std::string& id, const std::string& fontPath, con
 : UIElement(id, ElementTag::TEXT, pos)
 {
     fontpath = fontPath;
+    content = str;
     text.setFont(FontManager::getInstance().getFont(fontpath));
     text.setString(str);
     text.setFillColor(color);
@@ -26,4 +27,7 @@ void TextElement::update(EventHandler& eventHandler, sf::RenderWindow& window) {
 }
 
 void TextElement::displayFontPath() {std::cout << fontpath << std::endl;}
-void TextElement::setText(const std::string &texte) { text.setString(texte);}
+void TextElement::setText(const std::string &texte) { text.setString(texte); content = texte;}
+const std::string TextElement::getContent() const {
+    return content;
+}

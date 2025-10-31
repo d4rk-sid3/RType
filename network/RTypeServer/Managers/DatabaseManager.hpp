@@ -43,7 +43,14 @@ class DatabaseManager {
                     client_hash TEXT,
                     nb_games_played INTEGER DEFAULT 0,
                     nb_games_won INTEGER DEFAULT 0,
-                    level INTEGER DEFAULT 1
+                    level INTEGER DEFAULT 1,
+                    up TEXT NOT NULL DEFAULT 'UP',
+                    down TEXT NOT NULL DEFAULT 'DOWN',
+                    left TEXT NOT NULL DEFAULT 'LEFT',
+                    right TEXT NOT NULL DEFAULT 'RIGHT',
+                    shoot TEXT NOT NULL DEFAULT 'SPACE',
+                    role TEXT NOT NULL DEFAULT 'PLAYER',
+                    is_banned BOOL NOT NULL DEFAULT 0
                 );
             )";
             exec(createTableSQL);

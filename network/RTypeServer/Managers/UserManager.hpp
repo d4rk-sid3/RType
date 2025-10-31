@@ -226,7 +226,8 @@ class UserManager {
         void loadAllUsers(sqlite3 *db) {
             const char* sql = R"(
                 SELECT id, username, password_hash, auth_token, session_token,
-                       last_login, client_hash, nb_games_played, nb_games_won
+                       last_login, client_hash, nb_games_played, nb_games_won, level,
+                       up, down, left, right, shoot, role, is_banned
                 FROM users;
             )";
         
@@ -250,6 +251,23 @@ class UserManager {
                 user.setNbGamesPlayed(nb_games_played);
                 user.setNbGamesWon(nb_games_won);
                 user.setLevel(level);
+
+                std::string up = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 10));
+                std::string down = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 11));
+                std::string left = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 12));
+                std::string right = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 13));
+                std::string space = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 14));
+
+                std::vector<std::string> keyMap = {up, down, left, right, space};
+                user.getUserControl().bind_keys(keyMap);
+
+                std::string role = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 15));
+                user.setRole(role);
+
+                int is_banned = sqlite3_column_int(stmt, 16);
+                bool value = (is_banned == 0) ? false : true;
+
+                user.setBanned(value);
 
                 _username_index[user.getUsername()] = user.getId();
                 _users.emplace(user.getId(), std::move(user));

@@ -56,12 +56,23 @@ void ClientGraphics::handleNetworkEvent(const std::string& line)
         auto elem = currentUI->getElementById("message_login");
         auto cast = std::dynamic_pointer_cast<TextElement>(elem);
         cast->setText("The username or password you entered is not correct. Try again.");
-    } else if (keyword == "LOGIN_OK") {
+    } else if (keyword == "BANNED") {
+        auto currentUI = UIManager::getInstance().getUI("Loginpage");
+        auto elem = currentUI->getElementById("message_login");
+        auto cast = std::dynamic_pointer_cast<TextElement>(elem);
+        cast->setText("You have been banned from the server. Contact the administrator.");
+    }
+    else if (keyword == "LOGIN_OK") {
         std::string id = args[0];
         std::string username = args[1];
         std::string games_played = args[2];
         std::string games_won = args[3];
         std::string level = args[4];
+        std::string up = args[5];
+        std::string down = args[6];
+        std::string left = args[7];
+        std::string right = args[8];
+        std::string space = args[9];
 
         //Le username à gauche
         auto dashboardUI = UIManager::getInstance().getUI("Dashboardpage");
@@ -88,6 +99,35 @@ void ClientGraphics::handleNetworkEvent(const std::string& line)
         auto levell = dashboardUI->getElementById("level_number");
         auto cast_level = std::dynamic_pointer_cast<TextElement>(levell);
         cast_level->setText(level);
+
+        //Je get l'interface settings
+        auto settings_ui = UIManager::getInstance().getUI("SettingsPage");
+        
+        //Je recupere les elements un a un et je set les input fields
+        //UP
+        auto input_up = settings_ui->getElementById("input_up");
+        auto input_up_cast = std::dynamic_pointer_cast<InputFieldElement>(input_up);
+        input_up_cast->setText(up);
+
+        //DOWN
+        auto input_down = settings_ui->getElementById("input_down");
+        auto input_down_cast = std::dynamic_pointer_cast<InputFieldElement>(input_down);
+        input_down_cast->setText(down);
+
+        //LEFT
+        auto input_left = settings_ui->getElementById("input_left");
+        auto input_left_cast = std::dynamic_pointer_cast<InputFieldElement>(input_left);
+        input_left_cast->setText(left);
+
+        //RIGHT
+        auto input_right = settings_ui->getElementById("input_right");
+        auto input_right_cast = std::dynamic_pointer_cast<InputFieldElement>(input_right);
+        input_right_cast->setText(right);
+
+        //SHOOT
+        auto input_shoot = settings_ui->getElementById("shoot");
+        auto input_shoot_cast = std::dynamic_pointer_cast<InputFieldElement>(input_shoot);
+        input_shoot_cast->setText(space);
 
         UIManager::getInstance().setUI("Dashboardpage");
         return;

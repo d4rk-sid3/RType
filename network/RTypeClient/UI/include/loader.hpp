@@ -34,8 +34,7 @@ void loadAllUI(void)
         "UI/UIScenes/infospage.cfg",
         "UI/UIScenes/homepage.cfg",
         "UI/UIScenes/helppage.cfg",
-        "UI/UIScenes/dashboard_player.cfg",
-        "UI/UIScenes/settings.cfg"
+        "UI/UIScenes/dashboard_player.cfg"
     };
 
     for (auto elem : _files)
@@ -47,7 +46,8 @@ void loadDynamicUI(void)
 {
     std::vector<std::string> _files = {
         "UI/UIScenes/registerpage.cfg", 
-        "UI/UIScenes/loginpage.cfg"
+        "UI/UIScenes/loginpage.cfg",
+        "UI/UIScenes/settings.cfg"
     };
 
     for (auto elem : _files)

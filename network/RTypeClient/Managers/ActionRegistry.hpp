@@ -69,6 +69,24 @@ class ActionRegistry {
                     client->write(message);
                 }
             });
+
+            registerAction("SaveSettings", [client]() {
+                std::cout << "sjbjzkbhedvjz" << std::endl;
+                auto ui = UIManager::getInstance().getCurrentUI();
+                auto up = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_up"))->getText();
+                auto down = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_down"))->getText();
+                auto left = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_left"))->getText();
+                auto right = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_right"))->getText();
+                auto shoot = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("shoot"))->getText();
+
+                std::string result = up + " " + down + " " + left + " " + right + " " + shoot;
+
+                auto dashboard_ui = UIManager::getInstance().getUI("Dashboardpage");
+                auto username_text = std::dynamic_pointer_cast<TextElement>(dashboard_ui->getElementById("username_left"))->getContent();
+                std::string message = "SAVE " + username_text + " " + result + "\n";
+                std::cout << message << std::endl;
+                client->write(message);
+            });
         }
     
 };

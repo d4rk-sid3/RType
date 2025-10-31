@@ -28,6 +28,8 @@ enum class TokenType {
     SESSION
 };
 
+enum class Role { PLAYER, ADMIN };
+
 using boost::asio::ip::tcp;
 namespace asio = boost::asio;
 

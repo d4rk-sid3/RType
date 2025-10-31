@@ -53,6 +53,35 @@ void User::setLevel(const int level) {
     _stats.setLevel(level);
 }
 
+void User::bind_keys(const std::vector<std::string> &keyMap)
+{
+    _control.bind_keys(keyMap);
+    return;
+}
+
+UserControl &User::getUserControl() {
+    return _control;
+}
+
+const std::string User::getUserRole() const {
+    std::string role = (user_role == Role::PLAYER) ? "PLAYER" : "ADMIN";
+
+    return role;
+}
+
+void User::setRole(const std::string &role) {
+    Role my_role = (role == "PLAYER") ? Role::PLAYER : Role::ADMIN;
+
+    user_role = my_role;
+}
+
+void User::setBanned(const bool banned){
+    is_banned = banned;
+}
+
+const bool User::isUserBanned() const {
+    return is_banned;
+}
 void User::setName(const std::string &name)
 {
     _username = name;
@@ -77,7 +106,7 @@ void User::setNbGamesWon(const int games_won) { _stats.setNbGamesWon(games_won);
 const std::string User::getClientHash() { return _client_hash; }
 const std::weak_ptr<IToken> User::getAuthToken() { return _auth_token; }
 const std::weak_ptr<IToken> User::getSessionToken() { return _session_token; }
-const std::string& User::getAuthTokenHex() const {
+const std::string User::getAuthTokenHex() const {
     if (auto token = _auth_token.lock())
         return token->getHex();
     else
@@ -91,9 +120,10 @@ void User::save(sqlite3* db) const {
     const char* sql = R"(
         INSERT INTO users (
             id, username, password_hash, auth_token, session_token,
-            last_login, client_hash, nb_games_played, nb_games_won, level
+            last_login, client_hash, nb_games_played, nb_games_won, level, 
+            up, down, left, right, shoot, role, is_banned
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(id) DO UPDATE SET
             username = excluded.username,
             password_hash = excluded.password_hash,
@@ -102,8 +132,15 @@ void User::save(sqlite3* db) const {
             last_login = excluded.last_login,
             client_hash = excluded.client_hash,
             nb_games_played = excluded.nb_games_played,
-            nb_games_won = excluded.nb_games_won;
-            level = excluded.level;
+            nb_games_won = excluded.nb_games_won,
+            level = excluded.level,
+            up = excluded.up,
+            down = excluded.down,
+            left = excluded.left,
+            right = excluded.right,
+            shoot = excluded.shoot,
+            role = excluded.role,
+            is_banned = excluded.is_banned
     )";
 
     sqlite3_stmt* stmt = nullptr;
@@ -138,6 +175,18 @@ void User::save(sqlite3* db) const {
     sqlite3_bind_int(stmt, 9, nb_games_won);
     sqlite3_bind_int(stmt, 10, level);
 
+    const std::vector<std::string> keyMap = _control.getKeys();
+    for (auto a : keyMap) {
+        std::cout << "A : " << a << std::endl;
+    }
+
+    sqlite3_bind_text(stmt, 11, keyMap[0].c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 12, keyMap[1].c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 13, keyMap[2].c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 14, keyMap[3].c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 15, keyMap[4].c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 16, getUserRole().c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt, 17, isUserBanned() ? 1 : 0);
 
     if (sqlite3_step(stmt) != SQLITE_DONE) {
         sqlite3_finalize(stmt);

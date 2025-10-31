@@ -34,14 +34,12 @@ static std::string interpret_command(const std::string& line)
 
         UserManager::getInstance().createUser(username, password, DatabaseManager::getInstance().getDB());
         return "REGISTER_OK " + username + "\n";
-    }
-
-    if (keyword == "LOGIN") {
+    } else if (keyword == "LOGIN") {
         if (args.size() < 2)
             return "ERROR LOGIN\n"; //Missing username or password
 
         const std::string& username = args[0];
-        const std::string& password = args[1];
+        const std::string& password = args[1]; 
 
         if (username.empty() || password.empty())
             return "ERROR LOGIN\n"; //Missing username or password
@@ -52,14 +50,34 @@ static std::string interpret_command(const std::string& line)
             auto userOpt = UserManager::getInstance().getUserByUsername(username);
             if (userOpt) {
                 User& user = userOpt.value().get();
+                if (user.isUserBanned())
+                    return "BANNED\n";
+                std::vector<std::string> keyMap = user.getUserControl().getKeys();
+                std::string final_result = "";
+                for (auto value : keyMap) {
+                    final_result += value;
+                    final_result += " ";
+                }
+                final_result.pop_back();
                 std::string result = std::to_string(user.getId()) + " " + username + " " +
-                    std::to_string(user.getUserStats().getNbGamesPlayed()) + " " + std::to_string(user.getUserStats().getNbGamesWon()) +
-                    " " + std::to_string(user.getUserStats().getLevel());
+                    std::to_string(user.getUserStats().getNbGamesPlayed()) 
+                    + " " + std::to_string(user.getUserStats().getNbGamesWon()) +
+                    " " + std::to_string(user.getUserStats().getLevel()) + " " + final_result;
                 return "LOGIN_OK " + result + "\n";
             }
             std::cout << "Damn!! I don't know what happens here!!";
         } else
             return "LOGIN_FAIL\n";
+    } else if (keyword == "SAVE") {
+        std::cout << args[0] << std::endl;
+        auto userOpt = UserManager::getInstance().getUserByUsername(args[0]);
+        if (userOpt) {
+            std::cout << "I'm here" << std::endl;
+            User& user = userOpt.value().get();
+            std::vector<std::string> _keyMap = {args[1], args[2], args[3], args[4], args[5]};
+            user.bind_keys(_keyMap);
+            user.save(DatabaseManager::getInstance().getDB());
+        }
     }
 
     else if (keyword == "QUIT") {
@@ -87,7 +105,7 @@ void Session::stop() {
 
 void Session::do_read() {
     auto self = shared_from_this();
-    asio::async_read_until(socket_, streambuf_, '\n',
+    asio::async_read_until(socket_, streambuf_, '\n', 
         asio::bind_executor(strand_,
             [this, self](boost::system::error_code ec, std::size_t bytes_transferred) {
                 if (!ec) {
@@ -168,7 +186,7 @@ void Server::do_accept() {
                 std::cerr << "Accept error: " << ec.message() << "\n";
             }
             do_accept();
-        }
+        } 
     );
 }
 
