@@ -44,6 +44,15 @@ User::User(size_t id, std::string username, std::string plain_password)
     sodium_memzero(const_cast<char*>(plain_password.data()), plain_password.size());
     _password_hash = hashed_password;
 }
+
+const UserStats User::getUserStats() const {
+    return _stats;
+}
+
+void User::setLevel(const int level) {
+    _stats.setLevel(level);
+}
+
 void User::setName(const std::string &name)
 {
     _username = name;

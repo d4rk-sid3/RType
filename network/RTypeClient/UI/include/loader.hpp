@@ -31,10 +31,23 @@ void loadUIFromFile(const std::string& filePath) {
 void loadAllUI(void)
 {
     std::vector<std::string> _files = {
-        "UI/UIScenes/homepage.cfg", 
+        "UI/UIScenes/infospage.cfg",
+        "UI/UIScenes/homepage.cfg",
+        "UI/UIScenes/helppage.cfg",
+        "UI/UIScenes/dashboard_player.cfg",
+        "UI/UIScenes/settings.cfg"
+    };
+
+    for (auto elem : _files)
+        loadUIFromFile(elem);
+    return;
+}
+
+void loadDynamicUI(void)
+{
+    std::vector<std::string> _files = {
         "UI/UIScenes/registerpage.cfg", 
-        "UI/UIScenes/loginpage.cfg",
-        "UI/UIScenes/dashboard_player.cfg"
+        "UI/UIScenes/loginpage.cfg"
     };
 
     for (auto elem : _files)

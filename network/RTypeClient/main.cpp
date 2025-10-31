@@ -8,12 +8,18 @@ int main(int argc, char* argv[]) {
     }
 
     try {
-        ClientGraphics clientGraphics;
+        auto eventQueue = std::make_shared<ThreadSafeQueue>();
+        ClientGraphics clientGraphics(eventQueue);
         asio::io_context io_context;
         tcp::resolver resolver(io_context.get_executor());
         auto endpoints = resolver.resolve(argv[1], argv[2]);
 
-        auto client = std::make_shared<Client>(io_context, endpoints);
+        auto client = std::make_shared<Client>(io_context, endpoints, eventQueue);
+        client->start(endpoints);
+        
+        
+        ActionRegistry::getInstance().setNetworkActions(client);
+        clientGraphics.loadPages();
 
         std::thread t([&io_context]() { io_context.run(); });
 

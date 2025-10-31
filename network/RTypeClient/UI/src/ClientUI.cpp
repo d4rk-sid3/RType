@@ -1,7 +1,11 @@
 #include "../include/ClientUI.hpp"
-#include "../../Managers/UIManager.hpp"
 #include "../../Managers/ActionRegistry.hpp"
 #include "../include/loader.hpp"
+
+void ClientUI::loadPages()
+{
+    loadDynamicUI();
+}
 
 void ClientUI::init_date(void) {
     std::string date = getDate();
@@ -30,4 +34,4 @@ void ClientUI::init(void) {
     window.setFramerateLimit(60);
 }
 ClientUI::~ClientUI(){};
-ClientUI::ClientUI() : window(sf::VideoMode(738, 432), "R-Type Dashboard") {};
+ClientUI::ClientUI() : window(sf::VideoMode(738, 432), "R-Type") {};

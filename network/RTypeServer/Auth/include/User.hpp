@@ -1,6 +1,47 @@
 #ifndef USER
     #define USER
     #include "./IToken.hpp"
+    #include <SFML/Window/Keyboard.hpp>
+
+class UserControl {
+public:
+    enum class Action {
+        MOVE_UP,
+        MOVE_DOWN,
+        MOVE_LEFT,
+        MOVE_RIGHT,
+        SHOOT
+    };
+    UserControl() {
+        _keyBindings[Action::MOVE_UP] = sf::Keyboard::Up;
+        _keyBindings[Action::MOVE_DOWN] = sf::Keyboard::Down;
+        _keyBindings[Action::MOVE_LEFT] = sf::Keyboard::Left;
+        _keyBindings[Action::MOVE_RIGHT] = sf::Keyboard::Right;
+        _keyBindings[Action::SHOOT] = sf::Keyboard::Space;
+    }
+
+    void setKey(Action action, sf::Keyboard::Key newKey) {
+        _keyBindings[action] = newKey;
+    }
+
+    sf::Keyboard::Key getKey(Action action) const {
+        auto it = _keyBindings.find(action);
+        if (it != _keyBindings.end())
+            return it->second;
+        return sf::Keyboard::Unknown;
+    }
+
+    static std::string keyToString(sf::Keyboard::Key key) {
+        return std::to_string(static_cast<int>(key));
+    }
+
+    static sf::Keyboard::Key stringToKey(const std::string& s) {
+        return static_cast<sf::Keyboard::Key>(std::stoi(s));
+    }
+
+private:
+    std::unordered_map<Action, sf::Keyboard::Key> _keyBindings;
+};
 
 class UserStats {
     private:
@@ -38,6 +79,8 @@ class User {
         void setPasswordHash(const std::string &password_hash);
         void setNbGamesPlayed(const int games_played);
         void setNbGamesWon(const int games_won);
+        void setLevel(const int level);
+        const UserStats getUserStats() const;
         const std::string getClientHash();
         const std::weak_ptr<IToken> getAuthToken();
         const std::weak_ptr<IToken> getSessionToken();
@@ -57,5 +100,6 @@ class User {
         std::time_t _last_login_at = 0;
         std::string _client_hash = "";
         UserStats _stats;
+        UserControl _control;
 };
 #endif

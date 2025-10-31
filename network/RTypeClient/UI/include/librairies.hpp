@@ -16,6 +16,9 @@
 #include <deque>
 #include <atomic>
 #include <thread>
+#include <queue>
+#include <mutex>
+#include <optional>
 
 
 enum class ElementTag { TEXT, BUTTON, RECTANGLE, CIRCLE, INPUTFIELD, TEXTURE };

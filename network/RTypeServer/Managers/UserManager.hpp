@@ -15,21 +15,36 @@ class UserManager {
         UserManager(){};
     public:
         ~UserManager(){};
-        static UserManager& Instance() {
+        static UserManager& getInstance() {
             static UserManager instance;
             return instance;
         }
         UserManager(const UserManager&) = delete;
         UserManager& operator=(const UserManager&) = delete;
 
+        void updateId() {
+            _next_id = _users.size();
+        }
+
+        std::string generate_unique_username(const std::string& baseUsername)
+        {
+            std::string username = baseUsername;
+            int suffix = 1;
+        
+            while (_username_index.count(username) != 0) {
+                username = baseUsername + std::to_string(suffix);
+                ++suffix;
+            }
+            return username;
+        }
+        
         size_t createUser(const std::string& username, const std::string& plain_password, sqlite3 *db)
         {
-            if (_username_index.count(username) != 0)
-                throw std::runtime_error("username already exists");
+            std::string finalUsername = generate_unique_username(username);
             size_t id = _next_id++;
-            User u(id, username, plain_password);
+            User u(id, finalUsername, plain_password);
             _users.emplace(id, u);
-            _username_index[username] = id;
+            _username_index[finalUsername] = id;
             u.save(db);
             return id;
         }
@@ -230,9 +245,11 @@ class UserManager {
         
                 int nb_games_played = sqlite3_column_int(stmt, 7);
                 int nb_games_won = sqlite3_column_int(stmt, 8);
+                int level = sqlite3_column_int(stmt, 9);
         
                 user.setNbGamesPlayed(nb_games_played);
                 user.setNbGamesWon(nb_games_won);
+                user.setLevel(level);
 
                 _username_index[user.getUsername()] = user.getId();
                 _users.emplace(user.getId(), std::move(user));

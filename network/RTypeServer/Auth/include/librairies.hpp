@@ -16,6 +16,10 @@
     #include <random>
     #include <fstream>
     #include <sqlite3.h>
+    #include <boost/asio.hpp>
+    #include <deque>
+    #include <atomic>
+    #include <thread>
 
 using Clock = std::chrono::steady_clock;
 
@@ -23,5 +27,8 @@ enum class TokenType {
     AUTH,
     SESSION
 };
+
+using boost::asio::ip::tcp;
+namespace asio = boost::asio;
 
 #endif /* defined(_Game_) */

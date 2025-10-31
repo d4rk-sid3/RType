@@ -1,6 +1,6 @@
 #include "../include/Token128.hpp"
 
-Token128::Token128(TokenType type = TokenType::SESSION, uint64_t ttl_seconds = 86400)
+Token128::Token128(TokenType type, uint64_t ttl_seconds)
         : _type(type),
         _created_at(Clock::now()),
         _ttl(std::chrono::seconds(ttl_seconds))

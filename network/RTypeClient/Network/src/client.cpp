@@ -1,7 +1,11 @@
 #include "../include/client.hpp"
 
-Client::Client(asio::io_context& io_context, tcp::resolver::results_type endpoints)
-    : socket_(io_context) {
+Client::Client(asio::io_context& io_context, tcp::resolver::results_type endpoints, 
+    std::shared_ptr<ThreadSafeQueue> queue)
+    : socket_(io_context), _eventQueue(queue) {
+}
+
+void Client::start(tcp::resolver::results_type endpoints) {
     do_connect(endpoints);
 }
 
@@ -37,7 +41,8 @@ void Client::do_read() {
                 std::istream is(&read_buffer_);
                 std::string line;
                 std::getline(is, line);
-                std::cout << "[server] " << line << "\n";
+                if (!line.empty())
+                    _eventQueue->push(line);
                 do_read(); // relancer lecture
             } else {
                 std::cerr << "Read error: " << ec.message() << "\n";

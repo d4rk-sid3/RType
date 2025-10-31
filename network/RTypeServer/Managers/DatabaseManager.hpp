@@ -11,7 +11,7 @@ class DatabaseManager {
         DatabaseManager(const DatabaseManager&) = delete;
         DatabaseManager& operator=(const DatabaseManager&) = delete;
 
-        void open(const std::string& path = "game.db") {
+        void open(const std::string& path = "Database/r-type.dbgame.db") {
             if (_db) {
                 std::cerr << "La base de données est déjà ouverte.\n";
                 return;
@@ -42,7 +42,8 @@ class DatabaseManager {
                     last_login INTEGER,
                     client_hash TEXT,
                     nb_games_played INTEGER DEFAULT 0,
-                    nb_games_won INTEGER DEFAULT 0
+                    nb_games_won INTEGER DEFAULT 0,
+                    level INTEGER DEFAULT 1
                 );
             )";
             exec(createTableSQL);

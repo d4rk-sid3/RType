@@ -1,7 +1,7 @@
 #include "../include/Token256.hpp"
 
 
-Token256::Token256(TokenType type = TokenType::AUTH, uint64_t ttl_seconds = 86400)
+Token256::Token256(TokenType type, uint64_t ttl_seconds)
         : _type(type),
           _created_at(Clock::now()),
           _ttl(std::chrono::seconds(ttl_seconds))

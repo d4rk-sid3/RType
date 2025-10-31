@@ -10,6 +10,7 @@ std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& sett
         std::string fontPath;
         sf::Vector2f pos(0.f, 0.f), size(100.f, 30.f);
         bool isPassword = false;
+        bool remapMode = false;
         sf::Color activeColor = sf::Color::Blue;
         int r = 255, g = 255, b = 255, a = 255;
 
@@ -29,6 +30,7 @@ std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& sett
         }
 
         setting.lookupValue("isPassword", isPassword);
+        setting.lookupValue("remapMode", remapMode);
 
         if (setting.exists("activeOutlineColor")) {
             const libconfig::Setting& color = setting.lookup("activeOutlineColor");
@@ -48,7 +50,7 @@ std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& sett
             );
         }
 
-        return std::make_shared<InputFieldElement>(id, fontPath, pos, size, isPassword, activeColor);
+        return std::make_shared<InputFieldElement>(id, fontPath, pos, size, isPassword, activeColor, remapMode);
     }
     catch (const libconfig::SettingNotFoundException& e) {
         std::cerr << "InputFieldElement: champ manquant (" << e.getPath() << ")\n";

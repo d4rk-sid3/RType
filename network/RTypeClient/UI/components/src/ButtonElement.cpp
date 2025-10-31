@@ -30,19 +30,23 @@ void ButtonElement::display(sf::RenderTexture& window) {
 void ButtonElement::updateState(sf::RenderWindow& window) {
     bool over = isMouseOver(window);
 
-    if (over && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        if (state != ButtonState::CLICKED) {
-            state = ButtonState::CLICKED;
-            if (onClick) onClick();
+    if (state == ButtonState::CLICKED && !sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        if (over && onClick) {
+            onClick();
         }
-    } else if (state == ButtonState::CLICKED && !sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         state = over ? ButtonState::HOVER : ButtonState::NORMAL;
     }
-
-    if (over && state != ButtonState::HOVER) {
+    else if (over && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        if (state != ButtonState::CLICKED) {
+            state = ButtonState::CLICKED;
+            // Ne rien faire ici, on attend le relâchement
+        }
+    }
+    else if (over && state != ButtonState::HOVER) {
         state = ButtonState::HOVER;
         if (onHover) onHover();
-    } else if (!over && state != ButtonState::NORMAL) {
+    }
+    else if (!over && state != ButtonState::NORMAL) {
         state = ButtonState::NORMAL;
     }
 
@@ -52,6 +56,7 @@ void ButtonElement::updateState(sf::RenderWindow& window) {
         case ButtonState::CLICKED: rect.setInnerColor(clickedColor); break;
     }
 }
+
 
 void ButtonElement::update(EventHandler& eventHandler, sf::RenderWindow& window) {
     updateState(window);
