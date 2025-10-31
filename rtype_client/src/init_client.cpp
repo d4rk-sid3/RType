@@ -225,28 +225,28 @@ void Client::entityMoveInterpole(EnemyMovedResponse pastPos, int64_t pastTime, i
         static_cast<int16_t>(progLinear(nowDuration, totalDuration, pastPos.position.y, nextPos.position.y))
     };
 
-    if (std::find_if(ids_assoc.begin(), ids_assoc.end(),
-        [&pastPos](const std::pair<size_t, size_t> id) -> bool {
-                return pastPos.enemy_id == id.first;
-            }) == ids_assoc.end()) {
-        ids_assoc[pastPos.enemy_id] =
-            factory.make_entity(getKey(pastPos.enemy_type));
-            if (getKey(pastPos.enemy_type) == "player1") {
-                player_entity_id = ids_assoc[pastPos.enemy_id];
-            }
+    if (ids_assoc.find(pastPos.enemy_id) == ids_assoc.end()) {
+        auto new_entity = factory.make_entity(getKey(pastPos.enemy_type));
+        ids_assoc[pastPos.enemy_id] = new_entity;
+
+        if (getKey(pastPos.enemy_type) == "player1") {
+            player_entity_id = new_entity;
+        }
     }
 
-    if (getKey(pastPos.enemy_type) == "player1") {
-        std::cout << "Last Server Position: (" << pastPos.position.x << ", " << pastPos.position.y << ")\n";
-        std::cout << "Next Server Position: (" << nextPos.position.x << ", " << nextPos.position.y << ")\n";
-        std::cout << "Last Time: " << pastTime << " Next Time: " << nextTime << " Now: " << now << "\n";
-        // std::cout << "Player Position: (" << newPos.x << ", " << newPos.y << ")\n";
-        std::cout << "Player Position: (" << progLinear(nowDuration, totalDuration, pastPos.position.x, nextPos.position.x) << ", " <<
-         progLinear(nowDuration, totalDuration, pastPos.position.y, nextPos.position.y) << ")\n";
-    }
+    std::cerr << "Entity ID: " << pastPos.enemy_id << " ENTITY: " << ids_assoc.at(pastPos.enemy_id) << std::endl;
+
+    // if (getKey(pastPos.enemy_type) == "player1") {
+    //     std::cout << "Last Server Position: (" << pastPos.position.x << ", " << pastPos.position.y << ")\n";
+    //     std::cout << "Next Server Position: (" << nextPos.position.x << ", " << nextPos.position.y << ")\n";
+    //     std::cout << "Last Time: " << pastTime << " Next Time: " << nextTime << " Now: " << now << "\n";
+    //     // std::cout << "Player Position: (" << newPos.x << ", " << newPos.y << ")\n";
+    //     std::cout << "Player Position: (" << progLinear(nowDuration, totalDuration, pastPos.position.x, nextPos.position.x) << ", " <<
+    //      progLinear(nowDuration, totalDuration, pastPos.position.y, nextPos.position.y) << ")\n";
+    // }
 
     auto& pos = reg.get_components<component::position>(
-                )[ids_assoc[pastPos.enemy_id]]
+                )[ids_assoc.at(pastPos.enemy_id)]
                                 .value();
     pos.x = newPos.x;
     pos.y = newPos.y;
@@ -256,10 +256,18 @@ void Client::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTim
 
     if (now - pastTime > 25) {
         try {
-            reg.kill_entity((class entity)(ids_assoc[pastPos.enemy_id]));
+            reg.kill_entity((class entity)(ids_assoc.at(pastPos.enemy_id)));
             ids_assoc.erase(pastPos.enemy_id);
         } catch (std::exception& e) {
         }
+
+        auto it = ids_assoc.find(pastPos.enemy_id);
+        if (it != ids_assoc.end()) {
+            std::cerr << "dclcndsncdson  " << pastPos.enemy_id << "   " << it->second << "\n";
+        } else {
+            std::cerr << "enemy_id not found\n";
+        }
+
         return;
     }
 
@@ -280,16 +288,17 @@ void Client::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTim
         static_cast<int16_t>(progLinear(nowDuration, totalDuration, pastpastPos.position.y, pastPos.position.y))
     };
 
-    if (std::find_if(ids_assoc.begin(), ids_assoc.end(),
-        [&pastPos](const std::pair<size_t, size_t> id) -> bool {
-                return pastPos.enemy_id == id.first;
-            }) == ids_assoc.end()) {
-        ids_assoc[pastPos.enemy_id] =
-            factory.make_entity(getKey(pastPos.enemy_type));
+    if (ids_assoc.find(pastPos.enemy_id) == ids_assoc.end()) {
+        auto new_entity = factory.make_entity(getKey(pastPos.enemy_type));
+        ids_assoc[pastPos.enemy_id] = new_entity;
+
+        if (getKey(pastPos.enemy_type) == "player1") {
+            player_entity_id = new_entity;
+        }
     }
 
     auto& pos = reg.get_components<component::position>(
-                )[ids_assoc[pastPos.enemy_id]]
+                )[ids_assoc.at(pastPos.enemy_id)]
                                 .value();
     pos.x = newPos.x;
     pos.y = newPos.y;
@@ -316,18 +325,17 @@ void Client::entityMovCreate(EnemyMovedResponse nextPos, int64_t nextTime, int64
         static_cast<int16_t>(progLinear(nowDuration, totalDuration, nextPos.position.y, nextnextPos.position.y))
     };
 
-    if (std::find_if(ids_assoc.begin(), ids_assoc.end(),
-        [&nextPos](const std::pair<size_t, size_t> id) -> bool {
-                return nextPos.enemy_id == id.first;
-            }) == ids_assoc.end()) {
-        ids_assoc[nextPos.enemy_id] =
-            factory.make_entity(getKey(nextPos.enemy_type));
-            if (getKey(nextPos.enemy_type) == "player1") {
-                player_entity_id = ids_assoc[nextPos.enemy_id];
-            }
+    if (ids_assoc.find(nextPos.enemy_id) == ids_assoc.end()) {
+        auto new_entity = factory.make_entity(getKey(nextPos.enemy_type));
+        ids_assoc[nextPos.enemy_id] = new_entity;
+
+        if (getKey(nextPos.enemy_type) == "player1") {
+            player_entity_id = new_entity;
+        }
     }
+
     auto& pos = reg.get_components<component::position>(
-                )[ids_assoc[nextPos.enemy_id]]
+                )[ids_assoc.at(nextPos.enemy_id)]
                                 .value();
     pos.x = newPos.x;
     pos.y = newPos.y;
@@ -354,19 +362,18 @@ void Client::runLevel(double delta) {
 
     static uint64_t latence = 0;
 
-    if (entity_states.size() == 1) {
-        latence = entity_states.front().first - nowDuration;
+    if (latence == 0 && entity_states.size() == 1) {
+        latence = entity_states.front().first - nowDuration - 80;
     }
-
 
     if (entity_states.size() < 2)
         return;
 
     //////////////////////////
 
-    if (entity_states.front().first > nowDuration)
+    if (entity_states.front().first > nowDuration + latence)
         return;
-    else if (nowDuration > entity_states.back().first)
+    else if (nowDuration + latence > entity_states.back().first)
         exit(0);
 
     //////////////////////////
@@ -403,7 +410,7 @@ void Client::runLevel(double delta) {
             });
         if (nextEntity != nextInfo.second.end()) {
             // interpolation entre pastEntity et nextEntity
-            // std::cout << "INTERPOLATION " << nowDuration + latence << "\n";
+            std::cerr << "INTERPOLATION " << nowDuration + latence << "\n";
             entityMoveInterpole(pastEntity, pastInfo.first,
                 nowDuration + latence, *nextEntity, nextInfo.first);
         }
@@ -423,7 +430,7 @@ void Client::runLevel(double delta) {
                         });
                 if (pastpastEntity == pastInfo.second.end())
                     return;
-                // std::cout << "DELETE " << nowDuration + latence << "\n";
+                std::cerr << "DELETE " << nowDuration + latence << "\n";
                 entityMovDelete(*pastpastEntity, pastpastInfo.first, nowDuration + latence, pastEntity, pastInfo.first);
             }
 
@@ -452,7 +459,7 @@ void Client::runLevel(double delta) {
                 });
                 if (nextnextEntity == nextnextInfo.second.end())
                     continue;
-                // std::cout << "CREATE " << nowDuration + latence << "\n";
+                std::cerr << "CREATE " << nowDuration + latence << "\n";
                 entityMovCreate(nextEntity, nextInfo.first, nowDuration + latence, *nextnextEntity, nextnextInfo.first);
             }
         }
