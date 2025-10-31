@@ -342,8 +342,6 @@ void Client::entityMovCreate(EnemyMovedResponse nextPos, int64_t nextTime, int64
  * @param delta the time since the last update
  */
 void Client::runLevel(double delta) {
-    if (entity_states.size() < 4)
-        return;
 
     using namespace std::chrono;
 
@@ -354,18 +352,27 @@ void Client::runLevel(double delta) {
 
     std::cout << "Now: " << nowDuration << std::endl;
 
+    static uint64_t latence = 0;
+
+    if (entity_states.size() == 1) {
+        latence = entity_states.front().first - nowDuration;
+    }
+
+
+    if (entity_states.size() < 2)
+        return;
+
     //////////////////////////
 
-    if (entity_states.front().first > nowDuration + 1200)
+    if (entity_states.front().first > nowDuration)
         return;
-    else if (nowDuration + 1200 > entity_states.back().first)
+    else if (nowDuration > entity_states.back().first)
         exit(0);
-
 
     //////////////////////////
 
     for (size_t i = 0; i < entity_states.size() - 1; i++) {
-        if (entity_states[i].first <= nowDuration + 1200 && nowDuration + 1200 <= entity_states[i + 1].first) {
+        if (entity_states[i].first <= nowDuration + latence && nowDuration + latence <= entity_states[i + 1].first) {
             std::cout << "PastTime: " << entity_states[i].first << " NextTime: " << entity_states[i + 1].first << std::endl;
             if (i == 0 || i == 1) {
                 pastIdx = i;
@@ -396,15 +403,15 @@ void Client::runLevel(double delta) {
             });
         if (nextEntity != nextInfo.second.end()) {
             // interpolation entre pastEntity et nextEntity
-            // std::cout << "INTERPOLATION " << nowDuration << "\n";
+            // std::cout << "INTERPOLATION " << nowDuration + latence << "\n";
             entityMoveInterpole(pastEntity, pastInfo.first,
-                nowDuration + 1200, *nextEntity, nextInfo.first);
+                nowDuration + latence, *nextEntity, nextInfo.first);
         }
         if (nextEntity == nextInfo.second.end()) {
             /// Supression
             /// Interpolation legere puis supression
 
-            if (pastIdx > 1) {
+            if (pastIdx >= 1) {
                 std::pair<
                     int64_t,
                     std::vector<EnemyMovedResponse>
@@ -416,8 +423,8 @@ void Client::runLevel(double delta) {
                         });
                 if (pastpastEntity == pastInfo.second.end())
                     return;
-                // std::cout << "DELETE " << nowDuration << "\n";
-                entityMovDelete(*pastpastEntity, pastpastInfo.first, nowDuration + 1200, pastEntity, pastInfo.first);
+                // std::cout << "DELETE " << nowDuration + latence << "\n";
+                entityMovDelete(*pastpastEntity, pastpastInfo.first, nowDuration + latence, pastEntity, pastInfo.first);
             }
 
         }
@@ -445,8 +452,8 @@ void Client::runLevel(double delta) {
                 });
                 if (nextnextEntity == nextnextInfo.second.end())
                     continue;
-                // std::cout << "CREATE " << nowDuration << "\n";
-                entityMovCreate(nextEntity, nextInfo.first, nowDuration + 1200, *nextnextEntity, nextnextInfo.first);
+                // std::cout << "CREATE " << nowDuration + latence << "\n";
+                entityMovCreate(nextEntity, nextInfo.first, nowDuration + latence, *nextnextEntity, nextnextInfo.first);
             }
         }
     }
