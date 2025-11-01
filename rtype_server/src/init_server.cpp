@@ -31,6 +31,12 @@ void load_textures(void) {
         "assets/sprites/player/player2.gif", "player2", TEXTURE
     );
     ResourceManager::Instance().load(
+        "assets/sprites/player/player2_flipped.gif", "player2_flipped", TEXTURE
+    );
+    ResourceManager::Instance().load(
+        "assets/sprites/player/player_missile_flipped.gif", "player_missile_flipped", TEXTURE
+    );
+    ResourceManager::Instance().load(
         "assets/sprites/player/player_up.gif", "player_up", TEXTURE
     );
     ResourceManager::Instance().load(
@@ -113,8 +119,7 @@ void Server::initializeGame(void) {
  *
  */
 void Server::initializePlayers(void) {
-
-    if (player1_entity_id == -1)
+    if (player1_entity_id == -1) 
         player1_entity_id = factory.make_entity("player1");
     if (player2_entity_id == -1)
         player2_entity_id = factory.make_entity("player2");
@@ -128,7 +133,6 @@ void Server::initializePlayers(void) {
 
     pos2.x = 50;
     pos2.y = 150;
-    // factory.make_menu_background_music();
 }
 
 /**
@@ -136,8 +140,7 @@ void Server::initializePlayers(void) {
  *
  */
 void Server::initializePlayersPVP(void) {
-    Factory factory(reg);
-    if (player1_entity_id == -1)
+    if (player1_entity_id == -1) 
         player1_entity_id = factory.make_entity("player1");
     if (player2_entity_id == -1)
         player2_entity_id = factory.make_entity("player2_flipped");

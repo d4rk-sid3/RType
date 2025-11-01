@@ -27,5 +27,5 @@ int main(int ac, char **av) {
     checkClientArgs(ac, av);
     Client client(std::stoi(av[1]), av[2]);
 
-    client.run();
+        client.run();
 }
