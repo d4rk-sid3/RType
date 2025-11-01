@@ -1,5 +1,5 @@
 \doxysection{components.\+hpp}
-\hypertarget{components_8hpp_source}{}\label{components_8hpp_source}\index{/home/amour/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/include/components.hpp@{/home/amour/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/include/components.hpp}}
+\hypertarget{components_8hpp_source}{}\label{components_8hpp_source}\index{/home/jaggie/epitech\_projects/neo-\/r-\/type/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/include/components.hpp@{/home/jaggie/epitech\_projects/neo-\/r-\/type/G-\/CPP-\/500-\/COT-\/5-\/1-\/rtype-\/8/engine/include/components.hpp}}
 \mbox{\hyperlink{components_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -158,48 +158,47 @@
 \DoxyCodeLine{00319\ \ \ \ \ \}\ \mbox{\hyperlink{namespacecomponent_a0ae561e88973b1d50eb3048035956866}{hitbox}};}
 \DoxyCodeLine{00320\ }
 \DoxyCodeLine{00325\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcomponent_1_1logic__s}{logic\_s}}\ \{}
-\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ void\ (*\mbox{\hyperlink{structcomponent_1_1logic__s_a1362230c1aba4f3a2e565c0747898284}{logic\_function}})(double,\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classregistry}{registry}}\ \&,\ \mbox{\hyperlink{classentity}{entity}});}
-\DoxyCodeLine{00334\ \ \ \ \ \}\mbox{\hyperlink{namespacecomponent_a4389e557b74c9397d726bcf56ba076d0}{logic}};}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ void\ (*\mbox{\hyperlink{structcomponent_1_1logic__s_a1362230c1aba4f3a2e565c0747898284}{logic\_function}})(double,\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classregistry}{registry}}\&,\ \mbox{\hyperlink{classentity}{entity}});}
+\DoxyCodeLine{00334\ \ \ \ \ \}\ \mbox{\hyperlink{namespacecomponent_a4389e557b74c9397d726bcf56ba076d0}{logic}};}
 \DoxyCodeLine{00335\ }
-\DoxyCodeLine{00340\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcomponent_1_1name__s}{name\_s}}\ \{}
-\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structcomponent_1_1name__s_a7d824b9f299f3dc86b247d2cb3b56fde}{\_name}};}
-\DoxyCodeLine{00342\ \ \ \ \ \}\mbox{\hyperlink{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}{name}};}
-\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00341\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcomponent_1_1name__s}{name\_s}}\ \{}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structcomponent_1_1name__s_a7d824b9f299f3dc86b247d2cb3b56fde}{\_name}};}
+\DoxyCodeLine{00343\ \ \ \ \ \}\ \mbox{\hyperlink{namespacecomponent_af42f87bf296e95960edc1d8eb0ea059b}{name}};}
 \DoxyCodeLine{00344\ }
 \DoxyCodeLine{00351\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcomponent_1_1audio__s}{audio\_s}}\ \{}
 \DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ std::shared\_ptr<sf::Music>\ \mbox{\hyperlink{structcomponent_1_1audio__s_a73d8e17b7264772f17137ce198b072d6}{audio}};}
 \DoxyCodeLine{00353\ \ \ \ \ \}\ \mbox{\hyperlink{namespacecomponent_a0551f20926c6f673d130bfca015d8b76}{audio}};}
 \DoxyCodeLine{00354\ }
-\DoxyCodeLine{00359\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespacecomponent_a9d008508800cc3ed05b1794c9569a86e}{unique\_id}};}
-\DoxyCodeLine{00360\ \}\ \textcolor{comment}{//\ namespace\ component}}
-\DoxyCodeLine{00361\ }
-\DoxyCodeLine{00362\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00363\ }
-\DoxyCodeLine{00364\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{00365\ \textcolor{comment}{\ *\ *}}
-\DoxyCodeLine{00366\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
-\DoxyCodeLine{00367\ \textcolor{comment}{\ *\ MIT\ License\ *\ Copyright\ (c)\ 2025\ Anonymous\ *}}
-\DoxyCodeLine{00368\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
-\DoxyCodeLine{00369\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy}}
-\DoxyCodeLine{00370\ \textcolor{comment}{\ *\ *\ of\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to}}
-\DoxyCodeLine{00371\ \textcolor{comment}{\ *\ deal\ \ \ \ \ \ \ \ *\ in\ the\ Software\ without\ restriction,\ including\ without}}
-\DoxyCodeLine{00372\ \textcolor{comment}{\ *\ limitation\ the\ rights\ \ \ \ \ \ \ \ \ *\ to\ use,\ copy,\ modify,\ merge,\ publish,}}
-\DoxyCodeLine{00373\ \textcolor{comment}{\ *\ distribute,\ sublicense,\ and/or\ sell\ \ \ \ \ \ \ \ \ \ \ \ *\ copies\ of\ the\ Software,\ and}}
-\DoxyCodeLine{00374\ \textcolor{comment}{\ *\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ furnished\ to\ do}}
-\DoxyCodeLine{00375\ \textcolor{comment}{\ *\ so,\ subject\ to\ the\ following\ conditions:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
-\DoxyCodeLine{00376\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
-\DoxyCodeLine{00377\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in}}
-\DoxyCodeLine{00378\ \textcolor{comment}{\ *\ all\ \ \ \ \ \ \ *\ copies\ or\ substantial\ portions\ of\ the\ Software.\ *}}
-\DoxyCodeLine{00379\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
-\DoxyCodeLine{00380\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ *}}
-\DoxyCodeLine{00381\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ *}}
-\DoxyCodeLine{00382\ \textcolor{comment}{\ *\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ *}}
-\DoxyCodeLine{00383\ \textcolor{comment}{\ *\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ *}}
-\DoxyCodeLine{00384\ \textcolor{comment}{\ *\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,}}
-\DoxyCodeLine{00385\ \textcolor{comment}{\ *\ *\ OUT\ OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN}}
-\DoxyCodeLine{00386\ \textcolor{comment}{\ *\ THE\ \ \ \ \ \ \ \ *\ SOFTWARE.\ *}}
-\DoxyCodeLine{00387\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
-\DoxyCodeLine{00388\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{00389\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespacecomponent_a9d008508800cc3ed05b1794c9569a86e}{unique\_id}};}
+\DoxyCodeLine{00361\ \}\ \textcolor{comment}{//\ namespace\ component}}
+\DoxyCodeLine{00362\ }
+\DoxyCodeLine{00363\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00366\ \textcolor{comment}{\ *\ *}}
+\DoxyCodeLine{00367\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00368\ \textcolor{comment}{\ *\ MIT\ License\ *\ Copyright\ (c)\ 2025\ Anonymous\ *}}
+\DoxyCodeLine{00369\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00370\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy}}
+\DoxyCodeLine{00371\ \textcolor{comment}{\ *\ *\ of\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to}}
+\DoxyCodeLine{00372\ \textcolor{comment}{\ *\ deal\ \ \ \ \ \ \ \ *\ in\ the\ Software\ without\ restriction,\ including\ without}}
+\DoxyCodeLine{00373\ \textcolor{comment}{\ *\ limitation\ the\ rights\ \ \ \ \ \ \ \ \ *\ to\ use,\ copy,\ modify,\ merge,\ publish,}}
+\DoxyCodeLine{00374\ \textcolor{comment}{\ *\ distribute,\ sublicense,\ and/or\ sell\ \ \ \ \ \ \ \ \ \ \ \ *\ copies\ of\ the\ Software,\ and}}
+\DoxyCodeLine{00375\ \textcolor{comment}{\ *\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ furnished\ to\ do}}
+\DoxyCodeLine{00376\ \textcolor{comment}{\ *\ so,\ subject\ to\ the\ following\ conditions:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00377\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00378\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in}}
+\DoxyCodeLine{00379\ \textcolor{comment}{\ *\ all\ \ \ \ \ \ \ *\ copies\ or\ substantial\ portions\ of\ the\ Software.\ *}}
+\DoxyCodeLine{00380\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00381\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ *}}
+\DoxyCodeLine{00382\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ *}}
+\DoxyCodeLine{00383\ \textcolor{comment}{\ *\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ *}}
+\DoxyCodeLine{00384\ \textcolor{comment}{\ *\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ *}}
+\DoxyCodeLine{00385\ \textcolor{comment}{\ *\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,}}
+\DoxyCodeLine{00386\ \textcolor{comment}{\ *\ *\ OUT\ OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN}}
+\DoxyCodeLine{00387\ \textcolor{comment}{\ *\ THE\ \ \ \ \ \ \ \ *\ SOFTWARE.\ *}}
+\DoxyCodeLine{00388\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00389\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00390\ \textcolor{comment}{\ */}}
 
 \end{DoxyCode}

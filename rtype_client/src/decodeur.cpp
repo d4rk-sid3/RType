@@ -1,24 +1,26 @@
-/* ------------------------------------------------------------------------------------ *
+/* ------------------------------------------------------------------------------------
+ * *
  *                                                                                      *
- * EPITECH PROJECT - Wed, Sep, 2025                                                     *
- * Title           - G-CPP-500-COT-5-1-rtype-8                                          *
- * Description     -                                                                    *
- *     decodeur                                                                         *
+ * EPITECH PROJECT - Wed, Sep, 2025 * Title           -
+ * G-CPP-500-COT-5-1-rtype-8                                          *
+ * Description     - * decodeur *
  *                                                                                      *
- * ------------------------------------------------------------------------------------ *
+ * ------------------------------------------------------------------------------------
+ * *
  *                                                                                      *
- *         ░        ░       ░░        ░        ░        ░░      ░░  ░░░░  ░             *
- *         ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒             *
- *         ▓      ▓▓▓       ▓▓▓▓▓  ▓▓▓▓▓▓▓  ▓▓▓▓      ▓▓▓  ▓▓▓▓▓▓▓        ▓             *
- *         █  ███████  ██████████  ███████  ████  ███████  ████  █  ████  █             *
- *         █        █  ███████        ████  ████        ██      ██  ████  █             *
+ *         ░        ░       ░░        ░        ░        ░░      ░░  ░░░░  ░ * ▒
+ * ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒             *
+ *         ▓      ▓▓▓       ▓▓▓▓▓  ▓▓▓▓▓▓▓  ▓▓▓▓      ▓▓▓  ▓▓▓▓▓▓▓        ▓ * █
+ * ███████  ██████████  ███████  ████  ███████  ████  █  ████  █             *
+ *         █        █  ███████        ████  ████        ██      ██  ████  █ *
  *                                                                                      *
- * ------------------------------------------------------------------------------------ */
+ * ------------------------------------------------------------------------------------
+ */
 
 #include "../include/client.hpp"
 
-EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
-{
+EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer
+) {
     std::vector<int8_t> tmp;
 
     {
@@ -27,7 +29,7 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
         tmp.insert(tmp.begin(), buffer.begin(), buffer.end() + 9);
     }
 
-    if (tmp[0] !=  0x37) {
+    if (tmp[0] != 0x37) {
         throw std::runtime_error("Invalid message type !");
     }
 
@@ -44,22 +46,21 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer)
     };
 
     EnemyMovedResponse pos;
-    
+
     pos.type = tmp[0];
     pos.enemy_id = toInt16(tmp[1], tmp[2]);
     pos.enemy_type = static_cast<EnemyType>(toInt16(tmp[3], tmp[4]));
     pos.position.x = toInt16(tmp[5], tmp[6]);
     pos.position.y = toInt16(tmp[7], tmp[8]);
 
-    std::cout << "Enemy_Type: " << static_cast<int>(pos.enemy_type) << " ";
-    std::cout << "Enemy_Pos_x: " << pos.position.x << " ";
-    std::cout << "Enemy_Pos_y: " << pos.position.y << std::endl;
+    // std::cout << "Enemy_Type: " << static_cast<int>(pos.enemy_type) << " ";
+    // std::cout << "Enemy_Pos_x: " << pos.position.x << " ";
+    // std::cout << "Enemy_Pos_y: " << pos.position.y << std::endl;
 
     return pos;
 }
 
-NbrEntity Client::decodeNbrEntity(std::vector<int8_t>& buffer)
-{
+GameState Client::decodeGameState(std::vector<int8_t>& buffer) {
     std::vector<int8_t> tmp;
 
     {
@@ -68,7 +69,7 @@ NbrEntity Client::decodeNbrEntity(std::vector<int8_t>& buffer)
         tmp.insert(tmp.begin(), buffer.begin(), buffer.begin() + 3);
     }
 
-    if (tmp[0] != 0x38) {
+    if (tmp[0] != 0x40) {
         throw std::runtime_error("Invalid message type 0x38 !");
     }
 
@@ -78,10 +79,49 @@ NbrEntity Client::decodeNbrEntity(std::vector<int8_t>& buffer)
         buffer.erase(buffer.begin(), buffer.begin() + 3);
     }
 
-    NbrEntity pos;
+    GameState pos;
 
     pos.type = tmp[0];
-    pos.nbr = (tmp[1] << 8) | tmp[2];
+    pos.gState = static_cast<GAMESTATE>((tmp[1] << 8) | tmp[2]);
 
     return pos;
+}
+
+MessageHeader Client::decodeMessageHeader(std::vector<int8_t>& buffer) {
+    std::vector<int8_t> tmp;
+
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        tmp.insert(tmp.begin(), buffer.begin(), buffer.begin() + 15);
+    }
+
+    if (tmp[0] != 0x38) {
+        throw std::runtime_error("Invalid message type 0x38 !");
+    }
+
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        buffer.erase(buffer.begin(), buffer.begin() + 15);
+    }
+
+    MessageHeader msg;
+    size_t i = 0;
+
+    msg.type = buffer[i++];
+
+    msg.id = (static_cast<uint8_t>(tmp[i]) << 24) |
+             (static_cast<uint8_t>(tmp[i+1]) << 16) |
+             (static_cast<uint8_t>(tmp[i+2]) << 8) |
+             (static_cast<uint8_t>(tmp[i+3]));
+    i += 4;
+
+    msg.nbr = (static_cast<uint8_t>(tmp[i]) << 8) |
+              (static_cast<uint8_t>(tmp[i+1]));
+    i += 2;
+
+    msg.timeElapsed = 0;
+    for (int j = 0; j < 8; ++j)
+        msg.timeElapsed = (msg.timeElapsed << 8) | static_cast<uint8_t>(tmp[i++]);
+
+    return msg;
 }

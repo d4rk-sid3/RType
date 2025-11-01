@@ -1,9 +1,27 @@
 var searchData=
 [
-  ['player1_5fentity_5fid_0',['player1_entity_id',['../server_8hpp.html#ae955d48f44384878e63e44527f872ebe',1,'server.hpp']]],
-  ['player2_5fentity_5fid_1',['player2_entity_id',['../server_8hpp.html#ae70b2136c6af0a96d5e51407e69d3c8b',1,'server.hpp']]],
-  ['player_5fentity_5fid_2',['player_entity_id',['../client_8hpp.html#a45a5fb16434b9906d8110a57b0ca5b4d',1,'client.hpp']]],
-  ['position_3',['position',['../namespacecomponent.html#a32921f4e807a398b6ffaea1730431bec',1,'component']]],
-  ['position_5fs_4',['position_s',['../structcomponent_1_1position__s.html',1,'component']]],
-  ['position_5fsystem_5',['position_system',['../systems_8cpp.html#a48efdd22550291cb9bacb3330d67ff48',1,'position_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::velocity &gt; &gt; &amp;velocities):&#160;systems.cpp'],['../systems_8hpp.html#a48efdd22550291cb9bacb3330d67ff48',1,'position_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::velocity &gt; &gt; &amp;velocities):&#160;systems.cpp']]]
+  ['easy_0',['EASY',['../server_8hpp.html#a27f718e46e2194b1b59f97cab001aa93a26d394b5caf2853dbcef5884f0f068dd',1,'server.hpp']]],
+  ['encodeactionresponse_1',['encodeActionResponse',['../classClient.html#aa317720a1d7ca0d8be350e164e327811',1,'Client']]],
+  ['encodeenemymovedresponse_2',['encodeEnemyMovedResponse',['../classServer.html#a0a21ae22cb0560a554fec4e186583eaa',1,'Server']]],
+  ['encodegamestate_3',['encodeGameState',['../classServer.html#aa860fb492b5c1dcb27efe0a0ce7e8439',1,'Server']]],
+  ['encodemoveresponse_4',['encodeMoveResponse',['../classClient.html#a1a07e2ea5336182977e9b5a4dd42c9fc',1,'Client']]],
+  ['encodenbrentity_5',['encodeNbrEntity',['../classServer.html#a4f1fd5b9e8cdac6f505d6a6a03434fab',1,'Server']]],
+  ['enemy_20moved_6',['4.23 ENEMY_MOVED (0x37) — Indicate to all team members that an enemy moved',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md70',1,'']]],
+  ['enemy_5fmoved_200x37_20—_20indicate_20to_20all_20team_20members_20that_20an_20enemy_20moved_7',['4.23 ENEMY_MOVED (0x37) — Indicate to all team members that an enemy moved',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md70',1,'']]],
+  ['engine_8',['Engine',['../engine.html#autotoc_md19',1,'1. Initialize the Engine'],['../engine.html#engine_tutorial',1,'A simple tutorial on the engine'],['../engine.html',1,'R-TYPE&apos;s Game Engine']]],
+  ['engine_2edox_9',['engine.dox',['../engine_8dox.html',1,'']]],
+  ['engine_5ftutorial_20step_20by_20step_20tutorial_10',['@section engine_tutorial Step-by-step Tutorial',['../engine.html#autotoc_md18',1,'']]],
+  ['entities_11',['4.24 NBR_ENTITY (0x38) — Indicate the numbers of entities',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md71',1,'']]],
+  ['entities_12',['entities',['../classServer.html#ae4dff7b4e4736ca47c67d0a94899d22a',1,'Server']]],
+  ['entity_13',['entity',['../classentity.html',1,'entity'],['../classentity.html#a809636ddb2bc7eee38f2fb0e49c6c1e9',1,'entity::entity(size_t new_id)'],['../classentity.html#ac20edb72e9e89b902bf14b68773c1697',1,'entity::entity()']]],
+  ['entity_2ehpp_14',['entity.hpp',['../entity_8hpp.html',1,'']]],
+  ['entity_5fid_15',['entity_id',['../structentity__info__s.html#a353e31671fbeae1e8f621c7f4b8e9e44',1,'entity_info_s']]],
+  ['entity_5finfo_5fs_16',['entity_info_s',['../structentity__info__s.html',1,'']]],
+  ['entity_5finfo_5ft_17',['entity_info_t',['../client_8hpp.html#a3e20dfd8260e2313e3f25e0b2152d78c',1,'entity_info_t:&#160;client.hpp'],['../server_8hpp.html#a3e20dfd8260e2313e3f25e0b2152d78c',1,'entity_info_t:&#160;server.hpp']]],
+  ['entity_5fnum_18',['entity_num',['../classregistry.html#a736fb7871aa84c956c947d586f24a81b',1,'registry']]],
+  ['et_20états_19',['2.3 Sessions et états',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md42',1,'']]],
+  ['exceptions_2ehpp_20',['exceptions.hpp',['../exceptions_8hpp.html',1,'']]],
+  ['exemple_20d’utilisation_21',['Exemple d’utilisation',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md7',1,'Exemple d’utilisation'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md17',1,'Exemple d’utilisation']]],
+  ['existing_20session_22',['Existing Session',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md59',1,'4.12 JOIN_SESSION (0x13) — Join an Existing Session'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md60',1,'4.13 JOIN_SESSION (0x14) — Join an Existing Session']]],
+  ['explanation_23',['Global Explanation',['../server_page.html#global_infos',1,'']]]
 ];

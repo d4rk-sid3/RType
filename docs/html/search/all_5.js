@@ -1,13 +1,5 @@
 var searchData=
 [
-  ['encodeactionresponse_0',['encodeActionResponse',['../classClient.html#aa317720a1d7ca0d8be350e164e327811',1,'Client']]],
-  ['encodeenemymovedresponse_1',['encodeEnemyMovedResponse',['../classServer.html#a0a21ae22cb0560a554fec4e186583eaa',1,'Server']]],
-  ['encodemoveresponse_2',['encodeMoveResponse',['../classClient.html#a1a07e2ea5336182977e9b5a4dd42c9fc',1,'Client']]],
-  ['encodenbrentity_3',['encodeNbrEntity',['../classServer.html#a4f1fd5b9e8cdac6f505d6a6a03434fab',1,'Server']]],
-  ['entity_4',['entity',['../classentity.html',1,'entity'],['../classentity.html#a809636ddb2bc7eee38f2fb0e49c6c1e9',1,'entity::entity(size_t new_id)'],['../classentity.html#ac20edb72e9e89b902bf14b68773c1697',1,'entity::entity()']]],
-  ['entity_2ehpp_5',['entity.hpp',['../entity_8hpp.html',1,'']]],
-  ['entity_5fid_6',['entity_id',['../structentity__info__s.html#a353e31671fbeae1e8f621c7f4b8e9e44',1,'entity_info_s']]],
-  ['entity_5finfo_5fs_7',['entity_info_s',['../structentity__info__s.html',1,'']]],
-  ['entity_5finfo_5ft_8',['entity_info_t',['../client_8hpp.html#a3e20dfd8260e2313e3f25e0b2152d78c',1,'entity_info_t:&#160;client.hpp'],['../server_8hpp.html#a3e20dfd8260e2313e3f25e0b2152d78c',1,'entity_info_t:&#160;server.hpp']]],
-  ['exceptions_2ehpp_9',['exceptions.hpp',['../exceptions_8hpp.html',1,'']]]
+  ['5_20help_20command_200x05_20get_20commands_20available_0',['4.5 HELP COMMAND (0x05) - Get commands available',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md51',1,'']]],
+  ['5_20next_20steps_1',['5. Next Steps',['../engine.html#autotoc_md31',1,'']]]
 ];

@@ -1,20 +1,10 @@
 var searchData=
 [
-  ['recupallentities_0',['recupAllEntities',['../classClient.html#a4c9eefab245ca66e80ceb13fa67287e8',1,'Client']]],
-  ['register_5fcomponents_1',['register_components',['../classregistry.html#afe3919f4a56bbbeda89af4a6e5171f8b',1,'registry']]],
-  ['registry_2',['registry',['../classregistry.html',1,'registry'],['../classregistry.html#a15c27c6d008fb260402f20d8619e43f7',1,'registry::registry(sf::RenderWindow &amp;window)'],['../classregistry.html#a757883d504ab1bb5a06e0faa8e28664d',1,'registry::registry()']]],
-  ['registry_2ehpp_3',['registry.hpp',['../registry_8hpp.html',1,'']]],
-  ['registry_5fentities_2ecpp_4',['registry_entities.cpp',['../registry__entities_8cpp.html',1,'']]],
-  ['registry_5fsingle_5fcomp_2etpp_5',['registry_single_comp.tpp',['../registry__single__comp_8tpp.html',1,'']]],
-  ['registry_5fsystems_2ecpp_6',['registry_systems.cpp',['../registry__systems_8cpp.html',1,'']]],
-  ['registry_5ftables_2etpp_7',['registry_tables.tpp',['../registry__tables_8tpp.html',1,'']]],
-  ['remove_5fcomponent_8',['remove_component',['../classregistry.html#a967f47ebfc3b74c85f483aae74bfd927',1,'registry']]],
-  ['render_5factive_9',['render_active',['../classregistry.html#a0531fe6d4810e9a50289b9f866ad25cf',1,'registry']]],
-  ['resource_5ftype_10',['resource_type',['../ResourceManager_8hpp.html#a509a729cba5db28cddc3c2ec18d0d83a',1,'ResourceManager.hpp']]],
-  ['resourcemanager_11',['ResourceManager',['../classResourceManager.html',1,'']]],
-  ['resourcemanager_2ehpp_12',['ResourceManager.hpp',['../ResourceManager_8hpp.html',1,'']]],
-  ['right_13',['right',['../structcomponent_1_1controllable__s.html#a99dd2125bdf6b8d98dabf6b61181fb7a',1,'component::controllable_s']]],
-  ['run_5fsystems_14',['run_systems',['../classregistry.html#a957cd5c282db213979764cbe622ece89',1,'registry']]],
-  ['runlevel_15',['runLevel',['../classClient.html#a101e55e53e7f9cc0433da705e66e1f08',1,'Client::runLevel()'],['../classServer.html#af56fa596fcd58a1ea62b5a059885f467',1,'Server::runLevel()']]],
-  ['runmenu_16',['runMenu',['../classClient.html#a1edfe2aa97fdb3d54c15afa0ef48496e',1,'Client']]]
+  ['fonctionnement_0',['Fonctionnement',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md3',1,'']]],
+  ['fonctions_1',['Principales fonctions',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md11',1,'']]],
+  ['font_2',['FONT',['../ResourceManager_8hpp.html#a509a729cba5db28cddc3c2ec18d0d83aa984c070727c93b2f2a9c0f6ff0ae737a',1,'ResourceManager.hpp']]],
+  ['format_3',['3. Message Format',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md44',1,'']]],
+  ['frame_5fduration_4',['frame_duration',['../structcomponent_1_1animated__drawable__s.html#a9d413e2ed4cb1c7c6c190f851e6b457e',1,'component::animated_drawable_s']]],
+  ['frame_5frect_5',['frame_rect',['../structcomponent_1_1animated__drawable__s.html#af4c3d8a67784f0d561df90e54ee57a9f',1,'component::animated_drawable_s']]],
+  ['frame_5ftimer_6',['frame_timer',['../structcomponent_1_1animated__drawable__s.html#a1724bb73c3190e4ad4f5456959d0c2c6',1,'component::animated_drawable_s']]]
 ];

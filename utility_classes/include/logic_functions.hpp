@@ -21,7 +21,7 @@
  * @brief This file contains the logic functions declarations
  * Logic functions are update functions that can be attached to an entity
  * in order to give it a behavior. They are executed at each frame
- * 
+ *
  */
 
 #ifndef INCLUDED_LOGICS_FUNCTIONS_HPP
@@ -39,18 +39,34 @@
 #define PLAYER_SHOOT_COOLDOWN 0.25
 #define ENEMY_SHOOT_COOLDOWN 2
 #define BOSS_SHOOT_COOLDOWN 2
+#define BOSS_SPAWN_COOLDOWN 5
+#define FORCE_SHOOT_COOLDOWN 0.35
 #define BOSS_MISSILE_SPEED 200
 #define BOSS_SPEED 100
 
 extern bool boss_dead;
 
+extern bool boss1_dead;
+extern bool boss2_dead;
+
+extern bool final_boss_dead;
+
 void player_logic(double delta, registry& reg, entity entity);
 void red_trooper_logic(double delta, registry& reg, entity entity);
+void plane_logic(double delta, registry& reg, entity en);
 void walker_logic(double delta, registry& reg, entity entity);
 void boss_logic(double delta, registry& reg, entity entity);
 void start_text_logic(double delta, registry& reg, entity entity);
 void fade_in_rect_logic(double delta, registry& reg, entity entity);
 void fade_out_rect_logic(double delta, registry& reg, entity entity);
+void force_logic(double delta, registry& reg, entity entity);
+void gtrooper_logic(double delta, registry& reg, entity en);
+void tourelles_logic(double delta, registry& reg, entity en);
+void final_boss_logic(double delta, registry& reg, entity en);
+void big_shooter_logic(double delta, registry& reg, entity en);
+void small_shooter_logic(double delta, registry& reg, entity en);
+void spacenemy_logic(double delta, registry& reg, entity en);
+void player_evil_logic(double delta, registry& reg, entity en);
 
 #endif
 

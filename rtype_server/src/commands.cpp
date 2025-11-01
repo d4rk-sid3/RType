@@ -1,25 +1,27 @@
-/* ------------------------------------------------------------------------------------ *
+/* ------------------------------------------------------------------------------------
+ * *
  *                                                                                      *
- * EPITECH PROJECT - Wed, Sep, 2025                                                     *
- * Title           - G-CPP-500-COT-5-1-rtype-8                                          *
- * Description     -                                                                    *
- *     commands                                                                         *
+ * EPITECH PROJECT - Wed, Sep, 2025 * Title           -
+ * G-CPP-500-COT-5-1-rtype-8                                          *
+ * Description     - * commands *
  *                                                                                      *
- * ------------------------------------------------------------------------------------ *
+ * ------------------------------------------------------------------------------------
+ * *
  *                                                                                      *
- *         ░        ░       ░░        ░        ░        ░░      ░░  ░░░░  ░             *
- *         ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒             *
- *         ▓      ▓▓▓       ▓▓▓▓▓  ▓▓▓▓▓▓▓  ▓▓▓▓      ▓▓▓  ▓▓▓▓▓▓▓        ▓             *
- *         █  ███████  ██████████  ███████  ████  ███████  ████  █  ████  █             *
- *         █        █  ███████        ████  ████        ██      ██  ████  █             *
+ *         ░        ░       ░░        ░        ░        ░░      ░░  ░░░░  ░ * ▒
+ * ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒             *
+ *         ▓      ▓▓▓       ▓▓▓▓▓  ▓▓▓▓▓▓▓  ▓▓▓▓      ▓▓▓  ▓▓▓▓▓▓▓        ▓ * █
+ * ███████  ██████████  ███████  ████  ███████  ████  █  ████  █             *
+ *         █        █  ███████        ████  ████        ██      ██  ████  █ *
  *                                                                                      *
- * ------------------------------------------------------------------------------------ */
+ * ------------------------------------------------------------------------------------
+ */
 
 #include "../include/server.hpp"
 
-std::vector<int8_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& pos)
-{
-    std::vector <int8_t> buffer;
+std::vector<int8_t>
+Server::encodeEnemyMovedResponse(const EnemyMovedResponse& pos) {
+    std::vector<int8_t> buffer;
 
     buffer.emplace_back(0x37);
 
@@ -38,13 +40,38 @@ std::vector<int8_t> Server::encodeEnemyMovedResponse(const EnemyMovedResponse& p
     return buffer;
 }
 
-std::vector<int8_t> Server::encodeNbrEntity(const NbrEntity& pos)
+std::vector<int8_t>
+Server::encodeGameState(const GameState& pos) {
+    std::vector<int8_t> buffer;
+
+    buffer.emplace_back(0x40);
+
+    buffer.emplace_back((pos.gState >> 8) & 0xFF);
+    buffer.emplace_back(pos.gState & 0xFF);
+
+    return buffer;
+}
+
+std::vector<int8_t> Server::encodeMessageHeader(const MessageHeader& pos)
 {
-    std::vector <int8_t> buffer;
+    std::vector<int8_t> buffer;
 
-    buffer.emplace_back(0x38);
+    // type
+    buffer.push_back(pos.type);
 
-    buffer.emplace_back((pos.nbr >> 8) & 0xFF);
-    buffer.emplace_back(pos.nbr & 0xFF);
+    // id (uint32_t)
+    buffer.push_back((pos.id >> 24) & 0xFF);
+    buffer.push_back((pos.id >> 16) & 0xFF);
+    buffer.push_back((pos.id >> 8)  & 0xFF);
+    buffer.push_back(pos.id & 0xFF);
+
+    // nbr (int16_t)
+    buffer.push_back((pos.nbr >> 8) & 0xFF);
+    buffer.push_back(pos.nbr & 0xFF);
+
+    // timeElapsed (int64_t)
+    for (int i = 7; i >= 0; --i)
+        buffer.push_back((pos.timeElapsed >> (8 * i)) & 0xFF);
+
     return buffer;
 }
