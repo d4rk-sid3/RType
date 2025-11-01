@@ -29,7 +29,7 @@ class ActionRegistry {
         void setDefaultActions() {
             const std::vector<std::string> pages = {
                 "Homepage", "Registerpage", "Loginpage", "Dashboardpage", 
-                "AboutUsPage", "HelpPage", "SettingsPage", "JoinParty"
+                "AboutUsPage", "HelpPage", "SettingsPage", "CreateParty", "JoinParty"
             };
     
             for (const auto& page : pages) {

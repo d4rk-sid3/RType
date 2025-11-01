@@ -1,15 +1,15 @@
-#include "../include/client.hpp"
+#include "../include/ClientTCP.hpp"
 
-Client::Client(asio::io_context& io_context, tcp::resolver::results_type endpoints, 
+ClientTCP::ClientTCP(asio::io_context& io_context, tcp::resolver::results_type endpoints, 
     std::shared_ptr<ThreadSafeQueue> queue)
     : socket_(io_context), _eventQueue(queue) {
 }
 
-void Client::start(tcp::resolver::results_type endpoints) {
+void ClientTCP::start(tcp::resolver::results_type endpoints) {
     do_connect(endpoints);
 }
 
-void Client::write(const std::string& msg) {
+void ClientTCP::write(const std::string& msg) {
     auto self = shared_from_this();
     asio::post(socket_.get_executor(),
         [this, self, msg]() {
@@ -21,7 +21,7 @@ void Client::write(const std::string& msg) {
         });
 }
 
-void Client::do_connect(tcp::resolver::results_type endpoints) {
+void ClientTCP::do_connect(tcp::resolver::results_type endpoints) {
     auto self = shared_from_this();
     asio::async_connect(socket_, endpoints,
         [this, self](std::error_code ec, tcp::endpoint) {
@@ -33,7 +33,7 @@ void Client::do_connect(tcp::resolver::results_type endpoints) {
         });
 }
 
-void Client::do_read() {
+void ClientTCP::do_read() {
     auto self = shared_from_this();
     asio::async_read_until(socket_, read_buffer_, '\n',
         [this, self](std::error_code ec, std::size_t) {
@@ -51,7 +51,7 @@ void Client::do_read() {
         });
 }
 
-void Client::do_write() {
+void ClientTCP::do_write() {
     auto self = shared_from_this();
     asio::async_write(socket_,
         asio::buffer(write_queue_.front()),

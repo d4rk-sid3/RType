@@ -1,4 +1,4 @@
-#include "../include/Server.hpp"
+#include "../include/ServerTCP.hpp"
 
 //-----------------------SESSION-------------------------------
 
@@ -19,7 +19,7 @@ static std::string interpret_command(const std::string& line)
     std::string token;
     while (iss >> token)
         args.push_back(token);
-
+    std::cout << keyword << std::endl;
     if (keyword == "REGISTER") {
         if (args.size() < 2)
             return "ERROR REGISTER\n"; //Missing username or password
@@ -44,7 +44,7 @@ static std::string interpret_command(const std::string& line)
         if (username.empty() || password.empty())
             return "ERROR LOGIN\n"; //Missing username or password
 
-        bool valid = UserManager::getInstance().authenticate(username, password, DatabaseManager::getInstance().getServerKey());
+        bool valid = UserManager::getInstance().authenticate(username, password, DatabaseManager::getInstance().getServerTCPKey());
 
         if (valid) {
             auto userOpt = UserManager::getInstance().getUserByUsername(username);
@@ -77,6 +77,7 @@ static std::string interpret_command(const std::string& line)
             std::vector<std::string> _keyMap = {args[1], args[2], args[3], args[4], args[5]};
             user.bind_keys(_keyMap);
             user.save(DatabaseManager::getInstance().getDB());
+            return "SAVE_OK\n";
         }
     }
 
@@ -163,18 +164,18 @@ void Session::do_close() {
 
 //----------------------SERVER-----------------------------------------------
 
-Server::Server(asio::io_context& ioc, const tcp::endpoint& endpoint)
+ServerTCP::ServerTCP(asio::io_context& ioc, const tcp::endpoint& endpoint)
     : ioc_(ioc), acceptor_(ioc, endpoint)
 {
     init_database();
     do_accept();
 }
 
-Server::~Server() {
+ServerTCP::~ServerTCP() {
     DatabaseManager::getInstance().close();
 }
 
-void Server::do_accept() {
+void ServerTCP::do_accept() {
     acceptor_.async_accept(
         asio::make_strand(ioc_),
         [this](boost::system::error_code ec, tcp::socket socket) {
@@ -190,11 +191,11 @@ void Server::do_accept() {
     );
 }
 
-void Server::init_database()
+void ServerTCP::init_database()
 {
     DatabaseManager::getInstance().open("Database/r-type.db");
     DatabaseManager::getInstance().initialize();
-    DatabaseManager::getInstance().generateServerKey();
+    DatabaseManager::getInstance().generateServerTCPKey();
     UserManager::getInstance().loadAllUsers(DatabaseManager::getInstance().getDB());
     UserManager::getInstance().updateId();
     return;

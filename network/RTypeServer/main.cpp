@@ -1,4 +1,4 @@
-#include "./Network/include/Server.hpp"
+#include "./Network/ServerTCP/include/ServerTCP.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
         asio::io_context ioc{1};
 
         tcp::endpoint endpoint{asio::ip::make_address(address), port};
-        Server server(ioc, endpoint);
+        ServerTCP server(ioc, endpoint);
 
         unsigned int nThreads = std::max(1u, std::thread::hardware_concurrency());
 

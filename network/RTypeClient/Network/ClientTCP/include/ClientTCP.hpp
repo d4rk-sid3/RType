@@ -1,11 +1,11 @@
-#ifndef CLIENT
-    #define CLIENT
+#ifndef CLIENT_TCP
+    #define CLIENT_TCP
     #include "../../UI/include/librairies.hpp"
     #include "./ThreadSafeQueue.hpp"
 
-class Client : public std::enable_shared_from_this<Client> {
+class ClientTCP : public std::enable_shared_from_this<ClientTCP> {
 public:
-    Client(asio::io_context& io_context, tcp::resolver::results_type endpoints,
+    ClientTCP(asio::io_context& io_context, tcp::resolver::results_type endpoints,
         std::shared_ptr<ThreadSafeQueue> queue);
 
     void write(const std::string& msg);

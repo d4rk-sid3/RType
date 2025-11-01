@@ -1,4 +1,4 @@
-#include "./Network/include/client.hpp"
+#include "./Network/ClientTCP/include/ClientTCP.hpp"
 #include "./UI/include/ClientGraphics.hpp"
 
 int main(int argc, char* argv[]) {
@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
         tcp::resolver resolver(io_context.get_executor());
         auto endpoints = resolver.resolve(argv[1], argv[2]);
 
-        auto client = std::make_shared<Client>(io_context, endpoints, eventQueue);
+        auto client = std::make_shared<ClientTCP>(io_context, endpoints, eventQueue);
         client->start(endpoints);
         
         

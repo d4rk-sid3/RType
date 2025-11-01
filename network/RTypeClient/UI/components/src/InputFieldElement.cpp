@@ -1,16 +1,17 @@
 #include "../include/InputFieldElement.hpp"
 #include "../../../Managers/FontManager.hpp"
 
-InputFieldElement::InputFieldElement(const std::string& id, const std::string& fontPath, sf::Vector2f pos, sf::Vector2f size,
-    bool password, sf::Color activeColor, bool remapMode)
+InputFieldElement::InputFieldElement(const std::string& id, const std::string& fontPath, sf::Vector2f pos, sf::Vector2f sizes,
+    bool password, sf::Color activeColor, bool remapMode, unsigned int characterSize)
     : UIElement(id, ElementTag::INPUTFIELD, pos),
-        rect(id, pos, size, sf::Color::White, sf::Color::Black, 2.0f),
+        rect(id, pos, sizes, sf::Color::White, sf::Color::Black, 2.0f),
         isPassword(password), activeOutlineColor(activeColor), isRemapMode(remapMode)
 {
+    size = characterSize;
     text.setFont(FontManager::getInstance().getFont(fontPath));
     text.setFillColor(sf::Color::Black);
     text.setPosition(pos + sf::Vector2f(5, 5));
-    text.setCharacterSize(17);
+    text.setCharacterSize(size);
 }
 
 void InputFieldElement::addChar(char c) {

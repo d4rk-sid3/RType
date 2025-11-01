@@ -27,11 +27,11 @@ class Session : public std::enable_shared_from_this<Session> {
         std::deque<std::string> write_queue_;
 };
     
-// --- Server: accepts new connections and spawns sessions ---
-class Server {
+// --- ServerTCPTCP: accepts new connections and spawns sessions ---
+class ServerTCP {
     public:
-        Server(asio::io_context& ioc, const tcp::endpoint& endpoint);
-        ~Server();
+        ServerTCP(asio::io_context& ioc, const tcp::endpoint& endpoint);
+        ~ServerTCP();
         void init_database();
 
     private:

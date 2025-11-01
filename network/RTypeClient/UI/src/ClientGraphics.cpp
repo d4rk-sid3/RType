@@ -22,6 +22,7 @@ void ClientGraphics::handleNetworkEvent(const std::string& line)
 
     while (iss >> token)
         args.push_back(token);
+    std::cout << keyword << std::endl;
 
     if (keyword == "ERROR") {
         if (args.size() == 1) {
@@ -131,6 +132,13 @@ void ClientGraphics::handleNetworkEvent(const std::string& line)
 
         UIManager::getInstance().setUI("Dashboardpage");
         return;
+    } else if (keyword == "SAVE_OK") {
+        std::cout << "SAVE_OK" << std::endl;
+        auto settings_ui = UIManager::getInstance().getCurrentUI();
+        auto message_element = settings_ui->getElementById("message_settings");
+        auto cast_element = std::dynamic_pointer_cast<TextElement>(message_element);
+
+        cast_element->setText("Your informations have successfully been updated.");
     }
 }
 

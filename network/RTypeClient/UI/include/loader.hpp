@@ -34,7 +34,9 @@ void loadAllUI(void)
         "UI/UIScenes/infospage.cfg",
         "UI/UIScenes/homepage.cfg",
         "UI/UIScenes/helppage.cfg",
-        "UI/UIScenes/dashboard_player.cfg"
+        "UI/UIScenes/dashboard_player.cfg",
+        "UI/UIScenes/createParty.cfg",
+        "UI/UIScenes/joinParty.cfg"
     };
 
     for (auto elem : _files)
