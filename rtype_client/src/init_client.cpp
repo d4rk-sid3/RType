@@ -263,10 +263,6 @@ void Client::entityMoveInterpole(EnemyMovedResponse pastPos, int64_t pastTime, i
     if (ids_assoc.find(pastPos.enemy_id) == ids_assoc.end()) {
         auto new_entity = factory.make_entity(getKey(pastPos.enemy_type));
         ids_assoc[pastPos.enemy_id] = new_entity;
-
-        if (getKey(pastPos.enemy_type) == "player1") {
-            controllable_id = new_entity;
-        }
     }
 
     std::cerr << "Entity ID: " << pastPos.enemy_id << " ENTITY: " << ids_assoc.at(pastPos.enemy_id) << std::endl;
@@ -332,10 +328,6 @@ void Client::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTim
     if (ids_assoc.find(pastPos.enemy_id) == ids_assoc.end()) {
         auto new_entity = factory.make_entity(getKey(pastPos.enemy_type));
         ids_assoc[pastPos.enemy_id] = new_entity;
-
-        if (getKey(pastPos.enemy_type) == "player1") {
-            controllable_id = new_entity;
-        }
     }
 
     try {
@@ -371,10 +363,6 @@ void Client::entityMovCreate(EnemyMovedResponse nextPos, int64_t nextTime, int64
     if (ids_assoc.find(nextPos.enemy_id) == ids_assoc.end()) {
         auto new_entity = factory.make_entity(getKey(nextPos.enemy_type));
         ids_assoc[nextPos.enemy_id] = new_entity;
-
-        if (getKey(nextPos.enemy_type) == "player1") {
-            controllable_id = new_entity;
-        }
     }
 
     try {
