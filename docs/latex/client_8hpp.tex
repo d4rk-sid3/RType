@@ -14,7 +14,11 @@ The client class definition file.
 {\ttfamily \#include "{}registry.\+hpp"{}}\newline
 {\ttfamily \#include "{}UIHandler.\+hpp"{}}\newline
 {\ttfamily \#include "{}logic\+\_\+functions.\+hpp"{}}\newline
-Include dependency graph for client.\+hpp\+:\nopagebreak
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$ranges$>$}\newline
+{\ttfamily \#include "{}Types.\+hpp"{}}\newline
+Include dependency graph for client.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,8 +35,6 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}}
-\begin{DoxyCompactList}\small\item\em A struct to store infos on an entity to be spawned in the level. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structmenu__info__s}{menu\+\_\+info\+\_\+s}}
 \item 
 class \mbox{\hyperlink{classClient}{Client}}
@@ -47,8 +49,6 @@ class \mbox{\hyperlink{classClient}{Client}}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\+\_\+info\+\_\+t}}
-\begin{DoxyCompactList}\small\item\em A struct to store infos on an entity to be spawned in the level. \end{DoxyCompactList}\item 
 typedef struct \mbox{\hyperlink{structmenu__info__s}{menu\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac}{menu\+\_\+info\+\_\+t}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
@@ -117,16 +117,6 @@ Copyright (c) 2025
 
 
 \doxysubsection{Typedef Documentation}
-\Hypertarget{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}\label{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c} 
-\index{client.hpp@{client.hpp}!entity\_info\_t@{entity\_info\_t}}
-\index{entity\_info\_t@{entity\_info\_t}!client.hpp@{client.hpp}}
-\doxysubsubsection{\texorpdfstring{entity\_info\_t}{entity\_info\_t}}
-{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\+\_\+info\+\_\+t}}}
-
-
-
-A struct to store infos on an entity to be spawned in the level. 
-
 \Hypertarget{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac}\label{client_8hpp_a02538eb94f2146a51ffae5bc113fa7ac} 
 \index{client.hpp@{client.hpp}!menu\_info\_t@{menu\_info\_t}}
 \index{menu\_info\_t@{menu\_info\_t}!client.hpp@{client.hpp}}

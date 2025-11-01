@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logic_0',['logic',['../namespacecomponent.html#a4389e557b74c9397d726bcf56ba076d0',1,'component']]]
+  ['menu_5finfo_5ft_0',['menu_info_t',['../client_8hpp.html#a02538eb94f2146a51ffae5bc113fa7ac',1,'client.hpp']]]
 ];

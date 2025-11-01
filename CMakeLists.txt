@@ -131,13 +131,28 @@ if(CLANG_FORMAT_EXE)
 endif()
 
 # -------------------------------------------------------------
+# Engine
+file(GLOB_RECURSE ENGINE_SOURCES 
+        "engine/src/*.cpp")
+
+if(NOT ENGINE_SOURCES)
+    message(FATAL_ERROR "No engine source files found in engine/src/")
+endif()
+
+add_library(engine STATIC ${ENGINE_SOURCES})
+
+target_include_directories(engine PRIVATE 
+    ${CMAKE_SOURCE_DIR}/utility_classes/include 
+    ${CMAKE_SOURCE_DIR}/engine/include
+)
+
+# -------------------------------------------------------------
 # Client
 if(BUILD_CLIENT)
     file(GLOB_RECURSE CLIENT_SOURCES 
         "rtype_client/src/*.cpp" 
         "mains/client/main.cpp" 
-        "utility_classes/src/*.cpp" 
-        "engine/src/*.cpp")
+        "utility_classes/src/*.cpp")
     
     if(NOT CLIENT_SOURCES)
         message(FATAL_ERROR "No client source files found in rtype_client/src/")
@@ -160,6 +175,7 @@ if(BUILD_CLIENT)
         Ogg::ogg
         FLAC::FLAC
         unofficial::sqlite3::sqlite3
+        engine
     )
     
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -176,9 +192,8 @@ if(BUILD_SERVER)
     file(GLOB_RECURSE SERVER_SOURCES 
         "rtype_server/src/*.cpp" 
         "mains/server/main.cpp" 
-        "utility_classes/src/*.cpp" 
-        "engine/src/*.cpp")
-    
+        "utility_classes/src/*.cpp")
+
     if(NOT SERVER_SOURCES)
         message(FATAL_ERROR "No server source files found in rtype_server/src/")
     endif()
@@ -200,6 +215,7 @@ if(BUILD_SERVER)
         Ogg::ogg
         FLAC::FLAC
         unofficial::sqlite3::sqlite3
+        engine
     )
     
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -247,6 +263,7 @@ if(BUILD_TESTS)
         Ogg::ogg
         FLAC::FLAC
         unofficial::sqlite3::sqlite3
+        engine
     )
 
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")

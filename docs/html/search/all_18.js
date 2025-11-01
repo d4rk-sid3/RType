@@ -7,7 +7,7 @@ var searchData=
   ['name_5fs_4',['name_s',['../structcomponent_1_1name__s.html',1,'component']]],
   ['nbr_5fentity_200x38_20—_20indicate_20the_20numbers_20of_20entities_5',['4.24 NBR_ENTITY (0x38) — Indicate the numbers of entities',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md71',1,'']]],
   ['network_20details_6',['Network Details',['../client_page.html#network_details_sec',1,'Network Details'],['../server_page.html#network_details',1,'Network Details']]],
-  ['new_5fvec_7',['new_vec',['../classClient.html#aeedd43634db744ad30f2a2c650f2024f',1,'Client']]],
+  ['networkthread_7',['networkThread',['../classClient.html#a7017125194b437e39ff9506ac32fdd96',1,'Client::networkThread'],['../classServer.html#aac9551ed57feec8adb13207e450f919b',1,'Server::networkThread']]],
   ['next_20steps_8',['5. Next Steps',['../engine.html#autotoc_md31',1,'']]],
   ['nonexistentcomponenttype_9',['NonExistentComponentType',['../classNonExistentComponentType.html',1,'']]],
   ['nonexistententityid_10',['NonExistentEntityID',['../classNonExistentEntityID.html',1,'']]],

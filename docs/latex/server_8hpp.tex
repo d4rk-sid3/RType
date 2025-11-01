@@ -10,7 +10,10 @@ The file contains the definition of the server class.
 {\ttfamily \#include "{}Factory.\+hpp"{}}\newline
 {\ttfamily \#include "{}Network.\+hpp"{}}\newline
 {\ttfamily \#include "{}registry.\+hpp"{}}\newline
-Include dependency graph for server.\+hpp\+:\nopagebreak
+{\ttfamily \#include "{}logic\+\_\+functions.\+hpp"{}}\newline
+{\ttfamily \#include "{}Types.\+hpp"{}}\newline
+Include dependency graph for server.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -27,8 +30,6 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}}
-\begin{DoxyCompactList}\small\item\em A struct to store infos on an entity to be spawned in the level. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classServer}{Server}}
 \begin{DoxyCompactList}\small\item\em The server class. Handles the server side of the game. At the start of the game, the server loads the level entities from a configuration file The server holds the simulation of the game with all these entities and teh players. It listens from inputs from the clients and sends the game state to the them on each frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
@@ -42,9 +43,7 @@ class \mbox{\hyperlink{classServer}{Server}}
 \begin{DoxyCompactItemize}
 \item 
 typedef enum \mbox{\hyperlink{server_8hpp_a27f718e46e2194b1b59f97cab001aa93}{diff\+\_\+mode}} \mbox{\hyperlink{server_8hpp_a5a2a77296b8aa6c2e6f8903b6e9babee}{diff\+\_\+mode\+\_\+t}}
-\begin{DoxyCompactList}\small\item\em An enum to store the difficulty of the game. \end{DoxyCompactList}\item 
-typedef struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}} \mbox{\hyperlink{server_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\+\_\+info\+\_\+t}}
-\begin{DoxyCompactList}\small\item\em A struct to store the information of an entity to be spawned on the level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em An enum to store the difficulty of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -118,16 +117,6 @@ Copyright (c) 2025
 
 
 An enum to store the difficulty of the game. 
-
-\Hypertarget{server_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}\label{server_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c} 
-\index{server.hpp@{server.hpp}!entity\_info\_t@{entity\_info\_t}}
-\index{entity\_info\_t@{entity\_info\_t}!server.hpp@{server.hpp}}
-\doxysubsubsection{\texorpdfstring{entity\_info\_t}{entity\_info\_t}}
-{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structentity__info__s}{entity\+\_\+info\+\_\+s}} \mbox{\hyperlink{client_8hpp_a3e20dfd8260e2313e3f25e0b2152d78c}{entity\+\_\+info\+\_\+t}}}
-
-
-
-A struct to store the information of an entity to be spawned on the level. 
 
 
 
