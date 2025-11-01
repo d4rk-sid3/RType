@@ -34,7 +34,7 @@
 
 #include "Factory.hpp"
 #include "logic_functions.hpp"
-#include "gameInstance.hpp"
+#include "./../include/gameInstance.hpp"
 
 using namespace component;
 
@@ -91,7 +91,7 @@ void GameInstance::loadLevel() {
             conf.readFile(LEVEL3_HARD);
     } else if (state == CUSTOM_LEVEL) {
         try {
-            conf.readFile(custom_conf_path);
+            conf.readFile(custom_conf_path.c_str());
         } catch (const FileIOException& fioex) {
             std::cerr << "I/O error while reading file." << std::endl;
             exit(84);
@@ -242,34 +242,12 @@ void GameInstance::receivePlayerInput(double delta) {
 
     shoot_timer += delta;
 
-    size_t len = 0;
-
-    {
-        std::lock_guard<std::mutex> lock(mtx);
-        len = messages.size();
-    }
-
-    while (len != 0) {
+    while (messages.size() != 0) {
 
         std::pair<asio::ip::udp::endpoint, std::vector<int8_t>> msg;
 
-        {
-            std::lock_guard<std::mutex> lock(mtx);
-            msg = messages.front();
-            messages.erase(messages.begin());
-            len = messages.size();
-        }
-
-        if (std::find_if(
-                all_clients.begin(), all_clients.end(),
-                [msg](auto& tmp) { return tmp.first == msg.first; }
-            ) == all_clients.end()) {
-            if (all_clients.empty())
-                all_clients[msg.first] = player1_entity_id;
-            else
-                all_clients[msg.first] = player2_entity_id;
-            return;
-        }
+        msg = messages.front();
+        messages.erase(messages.begin());
 
         std::vector<int8_t> tmp = msg.second;
 

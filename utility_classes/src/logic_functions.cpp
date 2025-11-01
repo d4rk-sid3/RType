@@ -32,7 +32,7 @@
 
 #include <cmath>
 
-#include "../../rtype_server/include/server.hpp"
+#include "../../rtype_gameInstance/include/gameInstance.hpp"
 #include "Factory.hpp"
 #include "entity.hpp"
 

@@ -1,4 +1,5 @@
 #include "../../rtype_gameManager/include/gameManager.hpp"
+#include "../../network/RTypeServer/Network/ServerTCP/include/ServerTCP.hpp"
 
 #include "logic_functions.hpp"
 

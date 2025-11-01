@@ -5,7 +5,7 @@
 #include <vector>
 #include <map>
 #include <asio.hpp>
-#include "../rtype_gameInstance/include/gameInstance.hpp"
+#include "../../rtype_gameInstance/include/gameInstance.hpp"
 
 class GameManager {
     private:

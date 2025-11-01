@@ -30,7 +30,7 @@
 
 #include "../include/Factory.hpp"
 
-#include "../../rtype_server/include/server.hpp"
+#include "../../rtype_gameInstance/include/gameInstance.hpp"
 #include "logic_functions.hpp"
 
 int unique_ids = 0;

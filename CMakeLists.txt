@@ -174,10 +174,14 @@ endif()
 # Serveur
 if(BUILD_SERVER)
     file(GLOB_RECURSE SERVER_SOURCES 
-        "rtype_server/src/*.cpp" 
+        "rtype_gameInstance/src/*.cpp" 
+        "rtype_gameManager/src/*.cpp" 
         "mains/server/main.cpp" 
         "utility_classes/src/*.cpp" 
-        "engine/src/*.cpp")
+        "engine/src/*.cpp"
+        ${CMAKE_SOURCE_DIR}/network/RTypeServer/Auth/src/*.cpp
+        ${CMAKE_SOURCE_DIR}/network/RTypeServer/Network/ServerTCP/src/*.cpp
+        )
     
     if(NOT SERVER_SOURCES)
         message(FATAL_ERROR "No server source files found in rtype_server/src/")
@@ -186,9 +190,13 @@ if(BUILD_SERVER)
     add_executable(r-type_server ${SERVER_SOURCES})
     
     target_include_directories(r-type_server PRIVATE 
-        ${CMAKE_SOURCE_DIR}/rtype_server/include 
+        ${CMAKE_SOURCE_DIR}/rtype_gameInstance/include 
+        ${CMAKE_SOURCE_DIR}/rtype_gameManager/include 
         ${CMAKE_SOURCE_DIR}/utility_classes/include 
         ${CMAKE_SOURCE_DIR}/engine/include
+        ${CMAKE_SOURCE_DIR}/network/RTypeServer/Auth/include
+        ${CMAKE_SOURCE_DIR}/network/RTypeServer/Managers
+        ${CMAKE_SOURCE_DIR}/network/RTypeServer/Network/ServerTCP/include
     )
     
     target_link_libraries(r-type_server PRIVATE 
