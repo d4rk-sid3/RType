@@ -271,20 +271,15 @@ void Client::entityMoveInterpole(EnemyMovedResponse pastPos, int64_t pastTime, i
 
     std::cerr << "Entity ID: " << pastPos.enemy_id << " ENTITY: " << ids_assoc.at(pastPos.enemy_id) << std::endl;
 
-    // if (getKey(pastPos.enemy_type) == "player1") {
-    //     std::cout << "Last Server Position: (" << pastPos.position.x << ", " << pastPos.position.y << ")\n";
-    //     std::cout << "Next Server Position: (" << nextPos.position.x << ", " << nextPos.position.y << ")\n";
-    //     std::cout << "Last Time: " << pastTime << " Next Time: " << nextTime << " Now: " << now << "\n";
-    //     // std::cout << "Player Position: (" << newPos.x << ", " << newPos.y << ")\n";
-    //     std::cout << "Player Position: (" << progLinear(nowDuration, totalDuration, pastPos.position.x, nextPos.position.x) << ", " <<
-    //      progLinear(nowDuration, totalDuration, pastPos.position.y, nextPos.position.y) << ")\n";
-    // }
-
-    auto& pos = reg.get_components<component::position>(
+    if (ids_assoc.find(pastPos.enemy_id) != ids_assoc.end()) {
+        try {
+            auto& pos = reg.get_components<component::position>(
                 )[ids_assoc.at(pastPos.enemy_id)]
-                                .value();
-    pos.x = newPos.x;
-    pos.y = newPos.y;
+                                        .value();
+            pos.x = newPos.x;
+            pos.y = newPos.y;
+        } catch (...) {}
+    }
 }
 
 void Client::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTime, int64_t now, EnemyMovedResponse pastPos, int64_t pastTime) {
@@ -343,11 +338,13 @@ void Client::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTim
         }
     }
 
-    auto& pos = reg.get_components<component::position>(
+    try {
+        auto& pos = reg.get_components<component::position>(
                 )[ids_assoc.at(pastPos.enemy_id)]
-                                .value();
-    pos.x = newPos.x;
-    pos.y = newPos.y;
+                                    .value();
+        pos.x = newPos.x;
+        pos.y = newPos.y;
+    }  catch(const std::exception& e) {}
 }
 
 void Client::entityMovCreate(EnemyMovedResponse nextPos, int64_t nextTime, int64_t now, EnemyMovedResponse nextnextPos, int64_t nextnextTime) {
@@ -380,11 +377,14 @@ void Client::entityMovCreate(EnemyMovedResponse nextPos, int64_t nextTime, int64
         }
     }
 
-    auto& pos = reg.get_components<component::position>(
+    try {
+        auto& pos = reg.get_components<component::position>(
                 )[ids_assoc.at(nextPos.enemy_id)]
-                                .value();
-    pos.x = newPos.x;
-    pos.y = newPos.y;
+                                    .value();
+        pos.x = newPos.x;
+        pos.y = newPos.y;
+    } catch(const std::exception& e) {}
+
 }
 
 /**
