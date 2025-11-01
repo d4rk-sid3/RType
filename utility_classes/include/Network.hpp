@@ -52,13 +52,14 @@ class NetworkManager {
     // Constructeurs and destructeurs
     NetworkManager(
         int port, std::string address, std::vector<int8_t>& lastmsg_,
-        std::mutex& mtx_
+        std::mutex& mtx_, asio::io_context & _context
     );
+
     NetworkManager(
         int port,
         std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>&
             clients_lastmsg_,
-        std::mutex& mtx_
+        std::mutex& mtx_, asio::io_context & _context
     );
     ~NetworkManager();
 
@@ -99,7 +100,7 @@ class NetworkManager {
     /**
      * @brief Context for asynchronous operations
      */
-    asio::io_context context;
+    asio::io_context& context;
 
     /**
      * @brief The UDP socket used for communication

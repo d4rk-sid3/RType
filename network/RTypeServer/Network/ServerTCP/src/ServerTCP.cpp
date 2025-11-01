@@ -164,8 +164,8 @@ void Session::do_close() {
 
 //----------------------SERVER-----------------------------------------------
 
-ServerTCP::ServerTCP(asio::io_context& ioc, const tcp::endpoint& endpoint)
-    : ioc_(ioc), acceptor_(ioc, endpoint)
+ServerTCP::ServerTCP(asio::io_context& ioc, int port)
+    : ioc_(ioc), acceptor_(ioc, tcp::endpoint(tcp::v4(), port))
 {
     init_database();
     do_accept();

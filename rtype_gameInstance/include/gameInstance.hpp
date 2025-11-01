@@ -70,7 +70,7 @@ typedef enum { LEVEL1, LEVEL2, LEVEL3, CUSTOM_LEVEL } state_t;
  * entities and teh players. It listens from inputs from the clients and sends
  * the game state to the them on each frame
  */
-class Server {
+class GameInstance {
   private:
     /**
      * @brief The Duration of one tick
@@ -78,9 +78,9 @@ class Server {
     const chrono::milliseconds tickDuration = std::chrono::milliseconds(50);
 
     /**
-     * @brief The port to listen on
+     * @brief The current state of the game
      */
-    int p_;
+    state_t state;
 
     /**
      * @brief The window for rendering (if needed)
@@ -100,12 +100,7 @@ class Server {
     /**
      * @brief The network manager that handles communication with clients
      */
-    NetworkManager server_;
-
-    /**
-     * @brief Thread for running the network manager
-     */
-    std::thread networkThread;
+    NetworkManager& server_;
 
     /**
      * @brief List of all entities and their information in the game
@@ -116,11 +111,6 @@ class Server {
      * @brief Buffer for storing outgoing messages
      */
     std::vector<int8_t> result;
-
-    /**
-     * @brief Mutex for thread safety with the network manager
-     */
-    std::mutex mtx;
 
     /**
      * @brief List of all last messages received from clients
@@ -165,7 +155,6 @@ class Server {
 
     /**
      * @brief Load all information about the level from a file
-     * @param path The path to the level file
      */
     void loadLevel();
 
@@ -197,18 +186,25 @@ class Server {
 
     void initializePlayersPVP(void);
 
+    void handleWinOrLoss();
+
+    void addClient(asio::ip::udp::endpoint& client);
+
+    bool hasClient(asio::ip::udp::endpoint& client);
+
+    void addMessage(asio::ip::udp::endpoint& client, const std::vector<int8_t>& msg);
+
   public:
 
     /**
      * @brief Construct a new Server object
-     * @param p The port to listen on
      */
-    Server(int p);
+    GameInstance(asio::io_context & _context, NetworkManager& server);
 
     /**
-     * @brief Destroy the Server object
+     * @brief Destroy the GameInstance object
      */
-    ~Server();
+    ~GameInstance();
 
     /**
      * @brief Encode the number of entities into a byte buffer
@@ -249,10 +245,6 @@ class Server {
      * @brief Run the server application
      */
     void run();
-
-    void handleWinOrLoss();
-
-    state_t state = LEVEL1;
 };
 
 #endif /* !SERVER_HPP_ */

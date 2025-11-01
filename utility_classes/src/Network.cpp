@@ -27,9 +27,11 @@ NetworkManager::NetworkManager(
     int port,
     std::string address,
     std::vector<int8_t>& lastmsg_,
-    std::mutex& mtx_
+    std::mutex& mtx_,
+    asio::io_context & _context
 )
-    : socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 0)),
+    : context(_context),
+      socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 0)),
       isrunning(true),
       lastmsg(lastmsg_),
       mtx(mtx_),
@@ -50,9 +52,11 @@ NetworkManager::NetworkManager(
     int port,
     std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>&
         clients_lastmsg_,
-    std::mutex& mtx_
+    std::mutex& mtx_,
+    asio::io_context & _context
 )
-    : socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)),
+    : context(_context),
+      socket(context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)),
       isrunning(true), clients_lastmsg(clients_lastmsg_), mtx(mtx_),
       lastmsg(tmp_server) {
     std::cout << "Serveur pret à être lancé " << port << std::endl;

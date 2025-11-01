@@ -17,9 +17,9 @@
  * ------------------------------------------------------------------------------------
  */
 
-#include "../include/server.hpp"
+#include "../include/gameInstance.hpp"
 
-MoveResponse Server::decodeMoveResponse(std::vector<int8_t>& buffer) {
+MoveResponse GameInstance::decodeMoveResponse(std::vector<int8_t>& buffer) {
 
     std::vector<int8_t> tmp;
 
@@ -48,7 +48,7 @@ MoveResponse Server::decodeMoveResponse(std::vector<int8_t>& buffer) {
     return pos;
 }
 
-ActionResponse Server::decodeActionResponse(std::vector<int8_t>& buffer) {
+ActionResponse GameInstance::decodeActionResponse(std::vector<int8_t>& buffer) {
 
     std::vector<int8_t> tmp;
 

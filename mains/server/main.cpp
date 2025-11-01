@@ -1,4 +1,5 @@
-#include "server.hpp"
+#include "../../rtype_gameManager/include/gameManager.hpp"
+
 #include "logic_functions.hpp"
 
 void printServerUsage() {
@@ -43,11 +44,31 @@ void checkServerArgs(int ac, char **av) {
     }
 }
 
-int main(int ac, char **av) {
+int main(int ac, char **av)
+{
     checkServerArgs(ac, av);
-    diff_mode = get_diff_mode(av[2]);
 
-    Server server(std::stoi(av[1]));
+    diff_mode = get_diff_mode(av[3]);
 
-    server.run();
+    unsigned int nThreads = std::max(1u, std::thread::hardware_concurrency());
+
+    asio::io_context ioc(nThreads);
+
+    std::vector<std::thread> v;
+
+    for (unsigned int i = 0; i < nThreads; ++i) {
+        v.emplace_back([&ioc]() { ioc.run(); });
+    }
+
+    ServerTCP server(ioc, std::stoi(av[1]));
+
+    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> messages;
+
+    std::mutex mtx;
+
+    NetworkManager server_(std::stoi(av[2]), std::ref(messages), std::ref(mtx), ioc);
+
+    GameManager gameManager(messages, mtx, server_);
+
+    for (auto& t : v) t.join();
 }

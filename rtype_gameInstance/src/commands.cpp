@@ -17,10 +17,10 @@
  * ------------------------------------------------------------------------------------
  */
 
-#include "../include/server.hpp"
+#include "../include/gameInstance.hpp"
 
 std::vector<int8_t>
-Server::encodeEnemyMovedResponse(const EnemyMovedResponse& pos) {
+GameInstance::encodeEnemyMovedResponse(const EnemyMovedResponse& pos) {
     std::vector<int8_t> buffer;
 
     buffer.emplace_back(0x37);
@@ -41,7 +41,7 @@ Server::encodeEnemyMovedResponse(const EnemyMovedResponse& pos) {
 }
 
 std::vector<int8_t>
-Server::encodeGameState(const GameState& pos) {
+GameInstance::encodeGameState(const GameState& pos) {
     std::vector<int8_t> buffer;
 
     buffer.emplace_back(0x40);
@@ -52,7 +52,7 @@ Server::encodeGameState(const GameState& pos) {
     return buffer;
 }
 
-std::vector<int8_t> Server::encodeMessageHeader(const MessageHeader& pos)
+std::vector<int8_t> GameInstance::encodeMessageHeader(const MessageHeader& pos)
 {
     std::vector<int8_t> buffer;
 

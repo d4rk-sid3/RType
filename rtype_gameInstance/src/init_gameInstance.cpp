@@ -16,7 +16,7 @@
  *
  */
 
-#include "../include/server.hpp"
+#include "../include/gameInstance.hpp"
 
 /**
  * @brief This function uses the ResourceManager to pre-load textures and fonts
@@ -107,7 +107,25 @@ void load_textures(void) {
     );
 }
 
-void Server::initializeGame(void) {
+bool GameInstance::hasClient(asio::ip::udp::endpoint& client)
+{
+    return all_clients.find(client) != all_clients.end();
+}
+
+void GameInstance::addMessage(asio::ip::udp::endpoint& client, const std::vector<int8_t>& msg) {
+    messages.push_back(std::make_pair(client, msg));
+}
+
+void GameInstance::addClient(asio::ip::udp::endpoint& client) {
+    static size_t player_id = 0;
+
+    if (!hasClient(client)) {
+        all_clients[client] = player_id;
+        player_id++;
+    }
+}
+
+void GameInstance::initializeGame(void) {
     factory.make_background();
     factory.make_ceiling();
     factory.make_floor();
@@ -118,7 +136,7 @@ void Server::initializeGame(void) {
  * @brief This function initializes the players
  *
  */
-void Server::initializePlayers(void) {
+void GameInstance::initializePlayers(void) {
     if (player1_entity_id == -1) 
         player1_entity_id = factory.make_entity("player1");
     if (player2_entity_id == -1)
@@ -139,7 +157,7 @@ void Server::initializePlayers(void) {
  * @brief This function initializes the players for pvp mode
  *
  */
-void Server::initializePlayersPVP(void) {
+void GameInstance::initializePlayersPVP(void) {
     if (player1_entity_id == -1) 
         player1_entity_id = factory.make_entity("player1");
     if (player2_entity_id == -1)
@@ -156,9 +174,9 @@ void Server::initializePlayersPVP(void) {
     pos2.y = 250;
 }
 
-Server::Server(int p) :
-    p_(p), win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server"),
-    reg(win), factory(reg), server_(p, std::ref(messages), std::ref(mtx))
+GameInstance::GameInstance(asio::io_context & _context, NetworkManager& server) :
+    win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server"),
+    reg(win), factory(reg), server_(server)
 {
     reg.control_active = false;
     counter = 0;
@@ -167,19 +185,19 @@ Server::Server(int p) :
     initializeGame();
     if (custom_conf_path != "")
         state = CUSTOM_LEVEL;
+    else
+        state = LEVEL1;
     loadLevel();
 }
 
 /**
- * @brief Destroy the Server:: Server object
+ * @brief Destroy the GameInstance:: Server object
  *
  */
-Server::~Server() {}
+GameInstance::~GameInstance() {}
 
-void Server::run()
+void GameInstance::run()
 {
-    networkThread = std::thread([this]() { server_.run(); });
-
     gameStarted = std::chrono::steady_clock::now();
 
     while (win.isOpen()) {
@@ -205,7 +223,4 @@ void Server::run()
 
         std::this_thread::sleep_until(start + tickDuration);
     }
-
-    server_.stop();
-    networkThread.join();
 }

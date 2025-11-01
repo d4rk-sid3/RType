@@ -34,7 +34,7 @@
 
 #include "Factory.hpp"
 #include "logic_functions.hpp"
-#include "server.hpp"
+#include "gameInstance.hpp"
 
 using namespace component;
 
@@ -61,7 +61,7 @@ bool all_entities_spawned = false;
  *
  * @param path
  */
-void Server::loadLevel() {
+void GameInstance::loadLevel() {
     if (diff_mode == PVP) {
         initializePlayersPVP();
         return;
@@ -116,7 +116,7 @@ void Server::loadLevel() {
     levelTimer = -2.0;
 }
 
-void Server::clearGameEntities() {
+void GameInstance::clearGameEntities() {
     std::vector<std::string> special_entities = {
         "background", "menu_background_music"
     };
@@ -152,7 +152,7 @@ void Server::clearGameEntities() {
  * alive
  *
  */
-void Server::logGameEntities() {
+void GameInstance::logGameEntities() {
     std::vector<std::string> special_entities = {
         "background", "menu_background_music"
     };
@@ -220,15 +220,15 @@ void Server::logGameEntities() {
         });
     result.insert(result.begin(), tmp.begin(), tmp.end());
 
-    if (real_entities == 0 && all_entities_spawned) {
-        printf("Victory\n");
-        exit(0);
-    }
-
     if (!result.empty()) {
         for (auto & tmp : all_clients) {
             server_.send_to_client(result, result.size(), tmp.first);
         }
+    }
+
+    if (real_entities == 0 && all_entities_spawned) {
+        printf("Victory\n");
+        exit(0);
     }
 }
 
@@ -237,7 +237,7 @@ void Server::logGameEntities() {
  *
  * @param delta
  */
-void Server::receivePlayerInput(double delta) {
+void GameInstance::receivePlayerInput(double delta) {
     static double shoot_timer = 0;
 
     shoot_timer += delta;
@@ -321,7 +321,7 @@ void Server::receivePlayerInput(double delta) {
  * function
  * @param delta The amount of time elapsed since the last frame
  */
-void Server::runLevel(double delta) {
+void GameInstance::runLevel(double delta) {
     levelTimer += delta;
     int unspawned_entities = 0;
 
@@ -352,7 +352,7 @@ void Server::runLevel(double delta) {
     receivePlayerInput(delta);
 }
 
-void Server::handleWinOrLoss() {
+void GameInstance::handleWinOrLoss() {
     if (player1_entity_id == -1 && player2_entity_id == -1) {
         printf("GAME OVER\n");
         exit(0);

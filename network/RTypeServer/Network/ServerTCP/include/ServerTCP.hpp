@@ -30,7 +30,7 @@ class Session : public std::enable_shared_from_this<Session> {
 // --- ServerTCPTCP: accepts new connections and spawns sessions ---
 class ServerTCP {
     public:
-        ServerTCP(asio::io_context& ioc, const tcp::endpoint& endpoint);
+        ServerTCP(asio::io_context& ioc, int port);
         ~ServerTCP();
         void init_database();
 
