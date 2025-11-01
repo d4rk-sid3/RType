@@ -46,7 +46,7 @@ inline int player2_entity_id = -1;
  * @brief An enum to store the difficulty of the game
  *
  */
-typedef enum diff_mode { EASY, MEDIUM, HARD } diff_mode_t;
+typedef enum diff_mode {EASY, MEDIUM, HARD, PVP, CUSTOM } diff_mode_t;
 
 /**
  * @brief A gloal variable to store the difficulty of the game
@@ -167,7 +167,7 @@ class Server {
      * @brief Load all information about the level from a file
      * @param path The path to the level file
      */
-    void loadLevel(const std::string& path);
+    void loadLevel();
 
     /**
      * @brief Initialize all game related elements
@@ -191,13 +191,11 @@ class Server {
      */
     void runLevel(double delta);
 
-    void loadLevel();
     void clearGameEntities();
-    void initializeGame(void);
+
     void initializePlayers(void);
+
     void initializePlayersPVP(void);
-    void logGameEntities(void);
-    void receivePlayerInput(double delta);
 
   public:
 
@@ -225,6 +223,12 @@ class Server {
      * @return A vector of int8_t representing the encoded data
      */
     std::vector<int8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos);
+
+    /**
+     * @brief Encode an GameState structure into a byte buffer
+     * @param pos The GameState structure to encode
+     * @return A vector of int8_t representing the encoded data
+     */
     std::vector<int8_t> encodeGameState(const GameState& pos);
 
     /**

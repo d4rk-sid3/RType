@@ -290,19 +290,30 @@ void Client::entityMoveInterpole(EnemyMovedResponse pastPos, int64_t pastTime, i
 void Client::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTime, int64_t now, EnemyMovedResponse pastPos, int64_t pastTime) {
 
     if (now - pastTime > 25) {
-        try {
-            reg.kill_entity((class entity)(ids_assoc.at(pastPos.enemy_id)));
+        if (ids_assoc.find(pastPos.enemy_id) != ids_assoc.end()) {
+            try {
+                reg.kill_entity((class entity)(ids_assoc.at(pastPos.enemy_id)));
+            } catch (...) {}
             ids_assoc.erase(pastPos.enemy_id);
-        } catch (std::exception& e) {
+            if (getKey(pastPos.enemy_type) == "player1") {
+                player1_dead = true;
+            }
+            if (getKey(pastPos.enemy_type) == "player2") {
+                player2_dead = true;
+            }
+            if (getKey(pastPos.enemy_type) == "boss") {
+                boss_dead = true;
+            }
+            if (getKey(pastPos.enemy_type) == "small_shooter") {
+                boss2_dead = true;
+            }
+            if (getKey(pastPos.enemy_type) == "big_shooter") {
+                boss1_dead = true;
+            }
+            if (getKey(pastPos.enemy_type) == "final_boss") {
+                final_boss_dead = true;
+            }
         }
-
-        auto it = ids_assoc.find(pastPos.enemy_id);
-        if (it != ids_assoc.end()) {
-            std::cerr << "dclcndsncdson  " << pastPos.enemy_id << "   " << it->second << "\n";
-        } else {
-            std::cerr << "enemy_id not found\n";
-        }
-
         return;
     }
 
@@ -328,7 +339,7 @@ void Client::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTim
         ids_assoc[pastPos.enemy_id] = new_entity;
 
         if (getKey(pastPos.enemy_type) == "player1") {
-            player_entity_id = new_entity;
+            controllable_id = new_entity;
         }
     }
 
@@ -365,7 +376,7 @@ void Client::entityMovCreate(EnemyMovedResponse nextPos, int64_t nextTime, int64
         ids_assoc[nextPos.enemy_id] = new_entity;
 
         if (getKey(nextPos.enemy_type) == "player1") {
-            player_entity_id = new_entity;
+            controllable_id = new_entity;
         }
     }
 
@@ -374,25 +385,6 @@ void Client::entityMovCreate(EnemyMovedResponse nextPos, int64_t nextTime, int64
                                 .value();
     pos.x = newPos.x;
     pos.y = newPos.y;
-}
-
-if (getKey(entity.enemy_type) == "player1") {
-    player1_dead = true;
-}
-if (getKey(entity.enemy_type) == "player2") {
-    player2_dead = true;
-}
-if (getKey(entity.enemy_type) == "boss") {
-    boss_dead = true;
-}
-if (getKey(entity.enemy_type) == "small_shooter") {
-    boss2_dead = true;
-}
-if (getKey(entity.enemy_type) == "big_shooter") {
-    boss1_dead = true;
-}
-if (getKey(entity.enemy_type) == "final_boss") {
-    final_boss_dead = true;
 }
 
 /**
@@ -699,14 +691,19 @@ void Client::run()
         if (state == MENU || state == TRANSITION) {
             runMenu(dt);
         }
-        if (state == GAME) {
+        if (state == LEVEL1 || state == LEVEL2 || state == LEVEL3) {
             sendPlayerInput();
             sendPlayerAction();
             receiveServerInfo();
             runLevel(dt);
+            handleSubStates(dt, win);
         }
 
         reg.run_systems(dt);
+
+        // FIXME: The engine should not clear
+        // nor display, so the main loop will do that and possibly add more draws
+        ui_handler.draw(win);
 
         std::this_thread::sleep_until(now + tickDuration);
     }

@@ -42,17 +42,6 @@ inline bool player2_dead = false;
 inline int controllable_id = -1;
 
 /**
- * @brief A struct to store infos on an entity to be spawned in the level
- *
- */
-typedef struct entity_info_s {
-    entity entity_id;
-    std::string type;
-    double spawn_time;
-    double spawn_y;
-} entity_info_t;
-
-/**
  * @brief An enum to define the different states of the game
  */
 typedef enum { MENU, TRANSITION, LEVEL1, LEVEL2, LEVEL3 } state_t;

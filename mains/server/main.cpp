@@ -50,19 +50,4 @@ int main(int ac, char **av) {
     Server server(std::stoi(av[1]));
 
     server.run();
-
-    while (win.pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
-            win.close();
-        if (event.type == sf::Event::KeyPressed)
-            if (event.key.code == sf::Keyboard::Escape)
-                win.close();
-    }
-
-    double dt = frameClock.restart().asSeconds();
-    reg.run_systems(dt);
-
-    server.runLevel(dt);
-    server.handleWinOrLoss();
 }

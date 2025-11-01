@@ -190,7 +190,6 @@ void Server::run()
                 if (event.key.code == sf::Keyboard::Escape)
                     win.close();
         }
-
         double dt = frameClock.restart().asSeconds();
 
         reg.run_systems(dt);
@@ -199,14 +198,7 @@ void Server::run()
 
         runLevel(dt);
 
-        if (player1_entity_id == -1 && player2_entity_id == -1) {
-            printf("GAME OVER\n");
-            break;
-        }
-        if (boss_dead) {
-            printf("BOSS DEAD\n");
-            break;
-        }
+        handleWinOrLoss();
 
         std::this_thread::sleep_until(start + tickDuration);
     }
