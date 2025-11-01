@@ -409,7 +409,7 @@ void Client::runLevel(double delta) {
     static uint64_t latence = 0;
 
     if (latence == 0 && entity_states.size() == 1) {
-        latence = entity_states.front().first - nowDuration - 80;
+        latence = entity_states.front().first - nowDuration - 100;
     }
 
     if (entity_states.size() < 2)
