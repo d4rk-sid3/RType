@@ -25,24 +25,10 @@ void checkClientArgs(int ac, char **av) {
 
 int main(int ac, char **av) {
     checkClientArgs(ac, av);
-    sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type");
-    win.setFramerateLimit(240);
-    registry reg(win);
+    Client client(std::stoi(av[1]), av[2]);
 
-    reg.logic_active = false;
-    reg.collisions_active = false;
 
-    sf::Event event;
-    sf::Clock frameClock;
-    Client client(std::stoi(av[1]), av[2], reg);
-
-    NetworkManager &c = client.getManager();
-
-    std::vector<int8_t> msg(1, 0x5);   
-
-    c.send_to_server(msg, msg.size());
-
-    std::thread t([&c]() { c.run(); });
+    client.run();
 
     while (win.isOpen()) {
         double dt = frameClock.restart().asSeconds();
@@ -67,7 +53,4 @@ int main(int ac, char **av) {
         // nor display, so the main loop will do that and possibly add more draws
         client.ui_handler.draw(win);
     }
-
-    c.getContext().stop();
-    t.join();
 }

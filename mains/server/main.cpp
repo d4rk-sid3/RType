@@ -47,38 +47,22 @@ int main(int ac, char **av) {
     checkServerArgs(ac, av);
     diff_mode = get_diff_mode(av[2]);
 
-    sf::RenderWindow win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server");
-    win.setFramerateLimit(100);
-    registry reg(win);
+    Server server(std::stoi(av[1]));
 
-    reg.control_active = false;
+    server.run();
 
-    sf::Event event;
-    sf::Clock frameClock;
-    Server server(std::stoi(av[1]), reg);
-
-    NetworkManager &c = server.getManager();
-
-    std::thread t([&c]() { c.run(); });
-
-
-    while (win.isOpen()) {
-        while (win.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
+    while (win.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            win.close();
+        if (event.type == sf::Event::KeyPressed)
+            if (event.key.code == sf::Keyboard::Escape)
                 win.close();
-            if (event.type == sf::Event::KeyPressed)
-                if (event.key.code == sf::Keyboard::Escape)
-                    win.close();
-        }
-
-        double dt = frameClock.restart().asSeconds();
-        reg.run_systems(dt);
-
-        server.runLevel(dt);
-        server.handleWinOrLoss();
     }
 
-    c.getContext().stop();
-    t.join();
+    double dt = frameClock.restart().asSeconds();
+    reg.run_systems(dt);
+
+    server.runLevel(dt);
+    server.handleWinOrLoss();
 }

@@ -11,6 +11,10 @@
 #include <map>
 #include <string>
 #include <vector>
+#include "entity.hpp"
+
+#ifndef TYPES_HPP_
+#define TYPES_HPP_
 
 enum Direction : int16_t { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 };
 
@@ -72,9 +76,11 @@ struct EnemyMovedResponse {
 };
 
 // Serveur -> Client
-struct NbrEntity {
+struct MessageHeader {
     int8_t type; // 0x38
+    uint32_t id;
     int16_t nbr;
+    int64_t timeElapsed;
 };
 
 struct MoveResponse {
@@ -88,15 +94,27 @@ struct GameState {
     GAMESTATE gState;
 };
 
-typedef struct client_info {
-    asio::ip::udp::endpoint endpoint;
-    int player_id;
-    std::vector<int8_t> lastmsg;
-} client_info_t;
-
 struct ActionResponse {
     int8_t type; // 0x25
     int16_t player_id;
     Action input;
 };
 
+typedef struct client_info {
+    asio::ip::udp::endpoint endpoint;
+    int player_id;
+    std::vector<int8_t> lastmsg;
+} client_info_t;
+
+/**
+ * @brief A struct to store infos on an entity to be spawned in the level
+ *
+ */
+typedef struct entity_info_s {
+    entity entity_id;
+    std::string type;
+    double spawn_time;
+    double spawn_y;
+} entity_info_t;
+
+#endif /* !TYPES_HPP_ */

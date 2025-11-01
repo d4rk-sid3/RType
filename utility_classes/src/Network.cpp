@@ -71,6 +71,12 @@ void NetworkManager::run() {
     }
 }
 
+void NetworkManager::stop()
+{
+    isrunning = false;
+    context.stop();
+}
+
 void NetworkManager::receive_from_clients() {
     socket.async_receive_from(
         asio::buffer(buff), last_sender_,
@@ -151,16 +157,4 @@ void NetworkManager::send_to_server(
             }
         }
     );
-}
-
-asio::ip::udp::endpoint NetworkManager::getLastSender() const {
-    return last_sender_;
-}
-
-asio::ip::udp::endpoint& NetworkManager::getServerendpoint() {
-    return server_endpoint_;
-}
-
-asio::io_context& NetworkManager::getContext() {
-    return context;
 }

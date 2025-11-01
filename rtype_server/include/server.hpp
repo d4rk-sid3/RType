@@ -25,6 +25,8 @@
 #include "Factory.hpp"
 #include "Network.hpp"
 #include "registry.hpp"
+#include "logic_functions.hpp"
+#include "Types.hpp"
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -44,7 +46,7 @@ inline int player2_entity_id = -1;
  * @brief An enum to store the difficulty of the game
  *
  */
-typedef enum diff_mode { EASY, MEDIUM, HARD, PVP, CUSTOM } diff_mode_t;
+typedef enum diff_mode { EASY, MEDIUM, HARD } diff_mode_t;
 
 /**
  * @brief A gloal variable to store the difficulty of the game
@@ -52,26 +54,14 @@ typedef enum diff_mode { EASY, MEDIUM, HARD, PVP, CUSTOM } diff_mode_t;
  */
 inline diff_mode_t diff_mode = MEDIUM;
 
-
 /**
  * @brief A global variable that holds the path to the custom conf file
- * 
+ *
  */
 inline std::string custom_conf_path = "";
 
-/**
- * @brief A struct to store the information of an entity to be spawned on the
- * level
- *
- */
-typedef struct entity_info_s {
-    entity entity_id;
-    std::string type;
-    double spawn_time;
-    double spawn_y;
-} entity_info_t;
-
 typedef enum { LEVEL1, LEVEL2, LEVEL3, CUSTOM_LEVEL } state_t;
+
 
 /**
  * @brief The server class. Handles the server side of the game.
@@ -82,10 +72,124 @@ typedef enum { LEVEL1, LEVEL2, LEVEL3, CUSTOM_LEVEL } state_t;
  */
 class Server {
   private:
+    /**
+     * @brief The Duration of one tick
+     */
+    const chrono::milliseconds tickDuration = std::chrono::milliseconds(50);
+
+    /**
+     * @brief The port to listen on
+     */
     int p_;
-    registry& reg;
-    double levelTimer = 0.0;
+
+    /**
+     * @brief The window for rendering (if needed)
+     */
+    sf::RenderWindow win;
+
+    /**
+     * @brief The registry that holds all entities and components
+     */
+    registry reg;
+
+    /**
+     * @brief The factory that creates entities and components
+     */
+    Factory factory;
+
+    /**
+     * @brief The network manager that handles communication with clients
+     */
+    NetworkManager server_;
+
+    /**
+     * @brief Thread for running the network manager
+     */
+    std::thread networkThread;
+
+    /**
+     * @brief List of all entities and their information in the game
+     */
+    std::vector<entity_info_t> entities;
+
+    /**
+     * @brief Buffer for storing outgoing messages
+     */
+    std::vector<int8_t> result;
+
+    /**
+     * @brief Mutex for thread safety with the network manager
+     */
     std::mutex mtx;
+
+    /**
+     * @brief List of all last messages received from clients
+     */
+    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>
+        messages;
+
+    /**
+     * @brief Map of all connected clients and their player IDs
+     */
+    std::map<asio::ip::udp::endpoint, int> all_clients;
+
+    /**
+     * @brief Event for handling window events
+     */
+    sf::Event event;
+
+    /**
+     * @brief Clock for managing frame time
+     */
+    sf::Clock frameClock;
+
+    /**
+     * @brief The current level timer
+     */
+    double levelTimer = 0.0;
+
+    /**
+    * @brief Counter used to know how many entities have been sent to the clients
+    */
+    int counter;
+
+    /**
+     * @brief The starting moment of the game
+     */
+    std::chrono::time_point<std::chrono::steady_clock> gameStarted;
+
+    /**
+    * @brief Counter used to know how many packages have been sent to the clients
+    */
+    uint32_t packageId;
+
+    /**
+     * @brief Load all information about the level from a file
+     * @param path The path to the level file
+     */
+    void loadLevel(const std::string& path);
+
+    /**
+     * @brief Initialize all game related elements
+     */
+    void initializeGame(void);
+
+    /**
+     * @brief Log all game entities and send their states to clients
+     */
+    void logGameEntities(void);
+
+    /**
+     * @brief Receive and process player input from clients
+     * @param delta The time elapsed since the last frame
+     */
+    void receivePlayerInput(double delta);
+
+    /**
+     * @brief Manage the game level, including spawning entities and processing game logic
+     * @param delta The time elapsed since the last frame
+     */
+    void runLevel(double delta);
 
     void loadLevel();
     void clearGameEntities();
@@ -95,37 +199,53 @@ class Server {
     void logGameEntities(void);
     void receivePlayerInput(double delta);
 
-    NetworkManager server_;
-
-    std::vector<entity_info_t> entities;
-
-    std::vector<int8_t> result;
-
-    std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>
-        messages;
-
-    int counter = 0;
-
-    std::map<asio::ip::udp::endpoint, int> all_clients;
-
   public:
-    Server(int p, registry& reg);
+
+    /**
+     * @brief Construct a new Server object
+     * @param p The port to listen on
+     */
+    Server(int p);
+
+    /**
+     * @brief Destroy the Server object
+     */
     ~Server();
 
-    NetworkManager& getManager() {
-        return server_;
-    }
+    /**
+     * @brief Encode the number of entities into a byte buffer
+     * @param pos The MessageHeader structure to encode
+     * @return A vector of int8_t representing the encoded data
+     */
+    std::vector<int8_t> encodeMessageHeader(const MessageHeader& pos);
 
-    // encodeur
-    std::vector<int8_t> encodeNbrEntity(const NbrEntity& pos);
+    /**
+     * @brief Encode an EnemyMovedResponse structure into a byte buffer
+     * @param pos The EnemyMovedResponse structure to encode
+     * @return A vector of int8_t representing the encoded data
+     */
     std::vector<int8_t> encodeEnemyMovedResponse(const EnemyMovedResponse& pos);
     std::vector<int8_t> encodeGameState(const GameState& pos);
 
-    // decodeur
+    /**
+     * @brief Decode a MoveResponse structure from a byte buffer
+     * @param buffer The byte buffer containing the encoded data
+     * @return The decoded MoveResponse structure
+     */
     MoveResponse decodeMoveResponse(std::vector<int8_t>& buffer);
+
+    /**
+     * @brief Decode an ActionResponse structure from a byte buffer
+     * @param buffer The byte buffer containing the encoded data
+     * @return The decoded ActionResponse structure
+     */
     ActionResponse decodeActionResponse(std::vector<int8_t>& buffer);
 
-    void runLevel(double delta);
+    /**
+     * @brief Run the server application
+     */
+    void run();
+
     void handleWinOrLoss();
 
     state_t state = LEVEL1;

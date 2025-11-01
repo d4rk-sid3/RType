@@ -210,12 +210,25 @@ void Server::logGameEntities() {
         } catch (...) {
         }
     }
-    vector<int8_t> tmp = encodeNbrEntity({0x38, static_cast<int16_t>(counter)});
+    auto now = std::chrono::steady_clock::now();
+
+    vector<int8_t> tmp = encodeMessageHeader(
+        {0x38,
+            packageId,
+            static_cast<int16_t>(counter),
+            std::chrono::duration_cast<std::chrono::milliseconds>(now - gameStarted).count()
+        });
     result.insert(result.begin(), tmp.begin(), tmp.end());
 
     if (real_entities == 0 && all_entities_spawned) {
         printf("Victory\n");
         exit(0);
+    }
+
+    if (!result.empty()) {
+        for (auto & tmp : all_clients) {
+            server_.send_to_client(result, result.size(), tmp.first);
+        }
     }
 }
 
@@ -281,27 +294,23 @@ void Server::receivePlayerInput(double delta) {
                     vel.vy = PLAYER_SPEED;
                 }
             }
+
             if (tmp[0] == 0x25) {
 
                 ActionResponse action_info = decodeActionResponse(tmp);
 
-                if (action_info.input == SPACE &&
-                    shoot_timer > PLAYER_SHOOT_COOLDOWN) {
-                    Factory fac(reg);
+                if (action_info.input == SPACE && shoot_timer > PLAYER_SHOOT_COOLDOWN) {
                     shoot_timer = 0;
-                    entity missile = fac.make_player_missile();
-                    position& pos = reg.get_components<component::position>(
-                    )[all_clients[msg.first]]
-                                        .value();
-                    position& missile_pos =
-                        reg.get_components<component::position>()[missile]
-                            .value();
+                    entity missile = factory.make_player_missile();
+                    position &pos = reg.get_components<component::position>()[all_clients[msg.first]].value();
+                    position &missile_pos = reg.get_components<component::position>()[missile].value();
                     missile_pos.x = pos.x + 8;
                     missile_pos.y = pos.y + 6;
                 }
             }
-        } catch (...) {
-        }
+
+        } catch (...) {}
+
     }
 }
 
@@ -313,7 +322,6 @@ void Server::receivePlayerInput(double delta) {
  * @param delta The amount of time elapsed since the last frame
  */
 void Server::runLevel(double delta) {
-    Factory factory(reg);
     levelTimer += delta;
     int unspawned_entities = 0;
 
@@ -342,16 +350,6 @@ void Server::runLevel(double delta) {
 
     logGameEntities();
     receivePlayerInput(delta);
-
-    if (!result.empty()) {
-        // std::cout << "[SERVER] sending " << result.size() << " bytes" <<
-        // std::endl; server_.send_to_client(result, result.size(),
-        // server_.getLastSender());
-
-        for (auto& tmp : all_clients) {
-            server_.send_to_client(result, result.size(), tmp.first);
-        }
-    }
 }
 
 void Server::handleWinOrLoss() {

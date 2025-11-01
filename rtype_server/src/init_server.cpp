@@ -31,12 +31,6 @@ void load_textures(void) {
         "assets/sprites/player/player2.gif", "player2", TEXTURE
     );
     ResourceManager::Instance().load(
-        "assets/sprites/player/player2_flipped.gif", "player2_flipped", TEXTURE
-    );
-    ResourceManager::Instance().load(
-        "assets/sprites/player/player_missile_flipped.gif", "player_missile_flipped", TEXTURE
-    );
-    ResourceManager::Instance().load(
         "assets/sprites/player/player_up.gif", "player_up", TEXTURE
     );
     ResourceManager::Instance().load(
@@ -107,12 +101,7 @@ void load_textures(void) {
     );
 }
 
-/**
- * @brief This function initializes the game
- *
- */
 void Server::initializeGame(void) {
-    Factory factory(reg);
     factory.make_background();
     factory.make_ceiling();
     factory.make_floor();
@@ -124,9 +113,9 @@ void Server::initializeGame(void) {
  *
  */
 void Server::initializePlayers(void) {
-    Factory factory(reg);
-    if (player1_entity_id == -1) 
-    player1_entity_id = factory.make_entity("player1");
+
+    if (player1_entity_id == -1)
+        player1_entity_id = factory.make_entity("player1");
     if (player2_entity_id == -1)
         player2_entity_id = factory.make_entity("player2");
 
@@ -139,6 +128,7 @@ void Server::initializePlayers(void) {
 
     pos2.x = 50;
     pos2.y = 150;
+    // factory.make_menu_background_music();
 }
 
 /**
@@ -147,8 +137,8 @@ void Server::initializePlayers(void) {
  */
 void Server::initializePlayersPVP(void) {
     Factory factory(reg);
-    if (player1_entity_id == -1) 
-    player1_entity_id = factory.make_entity("player1");
+    if (player1_entity_id == -1)
+        player1_entity_id = factory.make_entity("player1");
     if (player2_entity_id == -1)
         player2_entity_id = factory.make_entity("player2_flipped");
 
@@ -163,14 +153,13 @@ void Server::initializePlayersPVP(void) {
     pos2.y = 250;
 }
 
-/**
- * @brief Construct a new Server:: Server object
- *
- * @param p The port
- * @param regis A reference to a registry
- */
-Server::Server(int p, registry& regis)
-    : server_(p, std::ref(messages), std::ref(mtx)), p_(p), reg(regis) {
+Server::Server(int p) :
+    p_(p), win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server"),
+    reg(win), factory(reg), server_(p, std::ref(messages), std::ref(mtx))
+{
+    reg.control_active = false;
+    counter = 0;
+
     load_textures();
     initializeGame();
     if (custom_conf_path != "")
@@ -183,3 +172,45 @@ Server::Server(int p, registry& regis)
  *
  */
 Server::~Server() {}
+
+void Server::run()
+{
+    networkThread = std::thread([this]() { server_.run(); });
+
+    gameStarted = std::chrono::steady_clock::now();
+
+    while (win.isOpen()) {
+        auto start = std::chrono::steady_clock::now();
+
+        while (win.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                win.close();
+            if (event.type == sf::Event::KeyPressed)
+                if (event.key.code == sf::Keyboard::Escape)
+                    win.close();
+        }
+
+        double dt = frameClock.restart().asSeconds();
+
+        reg.run_systems(dt);
+
+        logGameEntities();
+
+        runLevel(dt);
+
+        if (player1_entity_id == -1 && player2_entity_id == -1) {
+            printf("GAME OVER\n");
+            break;
+        }
+        if (boss_dead) {
+            printf("BOSS DEAD\n");
+            break;
+        }
+
+        std::this_thread::sleep_until(start + tickDuration);
+    }
+
+    server_.stop();
+    networkThread.join();
+}
