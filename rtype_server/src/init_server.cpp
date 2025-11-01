@@ -126,7 +126,7 @@ void Server::initializeGame(void) {
 void Server::initializePlayers(void) {
     Factory factory(reg);
     if (player1_entity_id == -1) 
-    player1_entity_id = factory.make_entity("player1");
+        player1_entity_id = factory.make_entity("player1");
     if (player2_entity_id == -1)
         player2_entity_id = factory.make_entity("player2");
 
@@ -148,7 +148,7 @@ void Server::initializePlayers(void) {
 void Server::initializePlayersPVP(void) {
     Factory factory(reg);
     if (player1_entity_id == -1) 
-    player1_entity_id = factory.make_entity("player1");
+        player1_entity_id = factory.make_entity("player1");
     if (player2_entity_id == -1)
         player2_entity_id = factory.make_entity("player2_flipped");
 

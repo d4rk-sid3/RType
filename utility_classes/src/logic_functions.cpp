@@ -100,8 +100,10 @@ void player_logic(double delta, registry& reg, entity en) {
         name& name_ = reg.get_components<name>()[en].value();
         if (name_._name == "player1") {
             player1_entity_id = -1;
+            printf("Player 1 dead\n");
         } else if (name_._name == "player2") {
             player2_entity_id = -1;
+            printf("Player 2 dead\n");
         }
         reg.kill_entity(en);
     }
@@ -871,7 +873,7 @@ void big_shooter_logic(double delta, registry& reg, entity en) {
         explosion_pos.x = pos.x;
         explosion_pos.y = pos.y;
 
-        boss1_dead = true;
+        boss2_dead = true;
         reg.kill_entity(en);
     }
 }
@@ -946,7 +948,7 @@ void final_boss_logic(double delta, registry& reg, entity en) {
         explosion_pos.x = pos.x;
         explosion_pos.y = pos.y;
 
-        boss1_dead = true;
+        final_boss_dead = true;
         reg.kill_entity(en);
     }
 }
