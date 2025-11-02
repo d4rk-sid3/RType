@@ -133,6 +133,7 @@ GraphicsClient::GraphicsClient (NetworkManager& client, std::vector<int8_t>& _la
 {
     state = LEVEL1;
     substate = LEVEL1_START;
+    isRunning_ = false;
 
     reg.logic_active = false;
     reg.collisions_active = false;
@@ -143,6 +144,10 @@ GraphicsClient::GraphicsClient (NetworkManager& client, std::vector<int8_t>& _la
     load_client_textures();
     // initMenu();
     initGame();
+}
+
+bool GraphicsClient::isRunning() const {
+    return isRunning_;
 }
 
 /**
@@ -660,6 +665,8 @@ void GraphicsClient::handleSubStates(double delta, sf::RenderWindow& win)
 
 void GraphicsClient::run()
 {
+    isRunning_ = true;
+
     clientStarted = std::chrono::steady_clock::now();
 
     while (win.isOpen()) {

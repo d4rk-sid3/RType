@@ -68,6 +68,8 @@ class GraphicsClient {
 
     const std::chrono::milliseconds tickDuration = std::chrono::milliseconds(5);
 
+    bool isRunning_;
+
     /**
      * @brief Window for rendering
      */
@@ -283,6 +285,12 @@ class GraphicsClient {
      * @return A vector of int8_t representing the encoded data
      */
     std::vector<int8_t> encodeActionResponse(const ActionResponse& pos);
+
+    /**
+     * @brief Check if the client is running
+     * @return true if the client is running, false otherwise
+     */
+    bool isRunning() const;
 
     /**
      * @brief Run the client application

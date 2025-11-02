@@ -29,6 +29,7 @@ int main(int ac, char **av) {
 
     int port = std::stoi(av[1]);
     std::string address = av[2];
+    bool isGaming = false;
 
     auto eventQueue = std::make_shared<ThreadSafeQueue>();
     ClientGraphics clientGraphics(eventQueue);
@@ -51,9 +52,18 @@ int main(int ac, char **av) {
 
     GraphicsClient grClient(networkManager, lastmsg, mtx);
 
-    clientGraphics.run();
-
-    grClient.run();
+    while (1)
+    {
+        if (isGaming == false) {
+            if (!clientGraphics.isRunning()) {
+                clientGraphics.run();
+            }
+        } else {
+            if (!grClient.isRunning()) {
+                grClient.run();
+            }
+        }
+    }
 
     context.stop();
     
