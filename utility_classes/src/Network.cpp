@@ -41,6 +41,7 @@ NetworkManager::NetworkManager(
         auto ip = asio::ip::make_address(address);
         server_endpoint_ = asio::ip::udp::endpoint(ip, port);
         std::cout << "Client lancé " << std::endl;
+        socket.connect(server_endpoint_);
         receive_from_server();
     } catch (const std::exception &e) {
         std::cerr << "Invalid ip address" << std::endl;
@@ -82,7 +83,7 @@ void NetworkManager::stop()
 }
 
 asio::ip::udp::endpoint NetworkManager::getEndpoint() {
-    return socket.local_endpoint();
+    return socket.remote_endpoint();
 }
 
 void NetworkManager::receive_from_clients() {

@@ -102,6 +102,8 @@ int main(int ac, char **av) {
 
     asio::ip::udp::endpoint endpoint = networkManager.getEndpoint();
 
+    std::cout << "Client UDP endpoint: " << endpoint.address().to_string() << ":" << endpoint.port() << std::endl;
+
     std::thread t([&context]() { context.run(); });
 
     GraphicsClient grClient(networkManager, lastmsg, mtx);

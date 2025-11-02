@@ -66,7 +66,13 @@ NetworkManager& GameManager::getUdpServer() {
     return *udpServer_;
 }
 
-GameManager::~GameManager() = default;
+GameManager::~GameManager() {
+    for (auto& thread : gameThreads_) {
+        if (thread.joinable()) {
+            thread.join();
+        }
+    }
+}
 
 // --- LOGIQUE DE JEU ---
 
@@ -130,4 +136,16 @@ void GameManager::process_messages() {
         }
     }
     getMessages().clear();
+}
+
+void GameManager::start_game(const std::string& id) {
+    std::lock_guard<std::mutex> lock(getMutex());
+    if (active_games_.count(id)) {
+        std::cout << "Starting game with ID: " << id << std::endl;
+
+        std::thread gameThread([this, id]() {
+            active_games_[id]->run();
+        });
+        gameThreads_.emplace_back(std::move(gameThread));
+    }
 }

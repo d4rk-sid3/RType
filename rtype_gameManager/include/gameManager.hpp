@@ -21,6 +21,8 @@ class GameManager {
     
         GameManager(const GameManager&) = delete;
         GameManager& operator=(const GameManager&) = delete;
+
+        std::vector<std::thread> gameThreads_;
     
     public:
         static GameManager& getInstance();
@@ -44,6 +46,7 @@ class GameManager {
     
         std::shared_ptr<GameInstance> create_game(const std::string& id);
         std::shared_ptr<GameInstance> get_game(const std::string& id);
+        void start_game(const std::string& id);
         void remove_game(const std::string& id);
         void list_games();
     };
