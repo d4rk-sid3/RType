@@ -2,7 +2,7 @@
     #define ACTIONREGISTRY
     #include "../UI/include/librairies.hpp"
     #include "UIManager.hpp"
-    #include "../Network/include/client.hpp"
+    #include "../Network/ClientTCP/include/ClientTCP.hpp"
     #include "../UI/components/include/InputFieldElement.hpp"
 
 class ActionRegistry {
@@ -39,7 +39,7 @@ class ActionRegistry {
             }
         }
 
-        void setNetworkActions(std::shared_ptr<Client> client) {
+        void setNetworkActions(std::shared_ptr<ClientTCP> client) {
             registerAction("Login", [client]() {
                 std::cout << "Loginnnnnn" << std::endl;
                 auto ui = UIManager::getInstance().getCurrentUI();
