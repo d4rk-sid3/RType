@@ -73,6 +73,11 @@ typedef enum { LEVEL1, LEVEL2, LEVEL3, CUSTOM_LEVEL } state_t;
 class GameInstance {
   private:
     /**
+     * @brief Id of the game instance
+     */
+    std::string id;
+
+    /**
      * @brief The Duration of one tick
      */
     const chrono::milliseconds tickDuration = std::chrono::milliseconds(50);
@@ -188,23 +193,23 @@ class GameInstance {
 
     void handleWinOrLoss();
 
-    void addClient(asio::ip::udp::endpoint& client);
-
-    bool hasClient(asio::ip::udp::endpoint& client);
-
-    void addMessage(asio::ip::udp::endpoint& client, const std::vector<int8_t>& msg);
-
   public:
 
     /**
      * @brief Construct a new Server object
      */
-    GameInstance(asio::io_context & _context, NetworkManager& server);
+    GameInstance(std::string _id, NetworkManager& server);
 
     /**
      * @brief Destroy the GameInstance object
      */
     ~GameInstance();
+
+    void addClient(const asio::ip::udp::endpoint& client);
+
+    void addMessage(const asio::ip::udp::endpoint& client, const std::vector<int8_t>& msg);
+
+    bool hasClient(const asio::ip::udp::endpoint& client);
 
     /**
      * @brief Encode the number of entities into a byte buffer

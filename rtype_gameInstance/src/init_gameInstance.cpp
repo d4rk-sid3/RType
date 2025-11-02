@@ -107,16 +107,16 @@ void load_textures(void) {
     );
 }
 
-bool GameInstance::hasClient(asio::ip::udp::endpoint& client)
+bool GameInstance::hasClient(const asio::ip::udp::endpoint& client)
 {
     return all_clients.find(client) != all_clients.end();
 }
 
-void GameInstance::addMessage(asio::ip::udp::endpoint& client, const std::vector<int8_t>& msg) {
+void GameInstance::addMessage(const asio::ip::udp::endpoint& client, const std::vector<int8_t>& msg) {
     messages.push_back(std::make_pair(client, msg));
 }
 
-void GameInstance::addClient(asio::ip::udp::endpoint& client) {
+void GameInstance::addClient(const asio::ip::udp::endpoint& client) {
     static size_t player_id = 0;
 
     if (!hasClient(client)) {
@@ -174,7 +174,8 @@ void GameInstance::initializePlayersPVP(void) {
     pos2.y = 250;
 }
 
-GameInstance::GameInstance(asio::io_context & _context, NetworkManager& server) :
+GameInstance::GameInstance(std::string _id, NetworkManager& server) :
+    id(_id),
     win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server"),
     reg(win), factory(reg), server_(server)
 {

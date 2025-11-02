@@ -23,21 +23,13 @@ MoveResponse GameInstance::decodeMoveResponse(std::vector<int8_t>& buffer) {
 
     std::vector<int8_t> tmp;
 
-    {
-        std::lock_guard<std::mutex> lock(mtx);
-
-        tmp.insert(tmp.begin(), buffer.begin(), buffer.begin() + 5);
-    }
+    tmp.insert(tmp.begin(), buffer.begin(), buffer.begin() + 5);
 
     if (tmp[0] != 0x24) {
         throw std::runtime_error("Type de message invalide !");
     }
 
-    {
-        std::lock_guard<std::mutex> lock(mtx);
-
-        buffer.clear();
-    }
+    buffer.clear();
 
     MoveResponse pos;
 
@@ -52,21 +44,13 @@ ActionResponse GameInstance::decodeActionResponse(std::vector<int8_t>& buffer) {
 
     std::vector<int8_t> tmp;
 
-    {
-        std::lock_guard<std::mutex> lock(mtx);
-
-        tmp.insert(tmp.begin(), buffer.begin(), buffer.begin() + 5);
-    }
+    tmp.insert(tmp.begin(), buffer.begin(), buffer.begin() + 5);
 
     if (tmp[0] != 0x25) {
         throw std::runtime_error("Type de message invalide !");
     }
 
-    {
-        std::lock_guard<std::mutex> lock(mtx);
-
-        buffer.clear();
-    }
+    buffer.clear();
 
     ActionResponse pos;
 
