@@ -4,6 +4,16 @@
     #include "UIManager.hpp"
     #include "../Network/ClientTCP/include/ClientTCP.hpp"
     #include "../UI/components/include/InputFieldElement.hpp"
+    #include "../../utility_classes/include/Network.hpp"
+
+inline std::string endpoint_to_string(const asio::ip::udp::endpoint& ep)
+{
+    std::string address = ep.address().to_string();
+    
+    unsigned short port = ep.port();
+    
+    return address + ":" + std::to_string(port);
+}
 
 class ActionRegistry {
     public:
@@ -29,7 +39,7 @@ class ActionRegistry {
         void setDefaultActions() {
             const std::vector<std::string> pages = {
                 "Homepage", "Registerpage", "Loginpage", "Dashboardpage", 
-                "AboutUsPage", "HelpPage", "SettingsPage", "CreateParty", "JoinParty"
+                "AboutUsPage", "HelpPage", "SettingsPage", "JoinParty"
             };
     
             for (const auto& page : pages) {
@@ -83,10 +93,24 @@ class ActionRegistry {
                 std::string message = "SAVE " + username_text + " " + result + "\n";
                 client->write(message);
             });
+        }
 
-            registerAction("CreateParty", [client]() {
-                std::string message = "CREATE_GAME\n";
-                client->write(message);
+        void setInstanceActions(NetworkManager &networkManager, std::shared_ptr<ClientTCP> client) {
+            registerAction("CreateParty", [&networkManager, client]() {
+                std::string message = "CREATE_GAME ";
+                std::string udp_endpoint = endpoint_to_string(networkManager.getEndpoint());
+                std::string final = message + udp_endpoint + "\n";
+                client->write(final);
+            });
+
+            registerAction("JoinMe", [&networkManager, client]() {
+                std::string message = "JOIN_GAME ";
+                auto ui = UIManager::getInstance().getCurrentUI();
+                auto value = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("join_code"))->getText();
+
+                std::string udp_endpoint = endpoint_to_string(networkManager.getEndpoint());
+                std::string final = message + value + " "+ udp_endpoint + "\n";
+                client->write(final);
             });
         }
     

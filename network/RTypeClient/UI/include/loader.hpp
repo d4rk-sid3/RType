@@ -46,9 +46,10 @@ void loadDynamicUI(void)
     std::vector<std::string> _files = {
         "UIScenes/registerpage.cfg", 
         "UIScenes/loginpage.cfg",
+        "UIScenes/createParty.cfg",
+        "UIScenes/joinParty.cfg",
         "UIScenes/dashboard_player.cfg",
-        "UIScenes/settings.cfg",
-        "UIScenes/createParty.cfg"
+        "UIScenes/settings.cfg"
     };
 
     for (auto elem : _files)

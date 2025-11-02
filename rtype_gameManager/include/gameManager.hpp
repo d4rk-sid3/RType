@@ -16,11 +16,6 @@ class GameManager {
         std::map<std::string, std::shared_ptr<GameInstance>> active_games_;
     
         void process_messages();
-    
-        void addClientToGame(
-            const std::string& game_id,
-            asio::ip::udp::endpoint& client
-        );
         
         GameManager() = default;
     
@@ -34,6 +29,11 @@ class GameManager {
             std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>& messages,
             std::mutex& mtx,
             NetworkManager& _udpServer
+        );
+
+        void addClientToGame(
+            const std::string& game_id,
+            asio::ip::udp::endpoint& client
         );
     
         std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>& getMessages();

@@ -81,6 +81,9 @@ int main(int ac, char **av) {
     int port = std::stoi(av[1]);
     std::string address = av[2];
     bool isGaming = false;
+    std::vector<int8_t> lastmsg;
+    std::mutex mtx;
+
 
     auto eventQueue = std::make_shared<ThreadSafeQueue>();
     ClientGraphics clientGraphics(eventQueue);
@@ -91,13 +94,11 @@ int main(int ac, char **av) {
     auto endpoints = resolver.resolve(address, std::to_string(port));
     auto client = std::make_shared<ClientTCP>(context, endpoints, eventQueue);
     client->start(endpoints);
-    ActionRegistry::getInstance().setNetworkActions(client);
-    clientGraphics.loadPages();
-
-    std::vector<int8_t> lastmsg;
-    std::mutex mtx;
 
     NetworkManager networkManager(port, address, lastmsg, mtx, context);
+    ActionRegistry::getInstance().setNetworkActions(client);
+    ActionRegistry::getInstance().setInstanceActions(networkManager, client);
+    clientGraphics.loadPages();
 
     asio::ip::udp::endpoint endpoint = networkManager.getEndpoint();
 

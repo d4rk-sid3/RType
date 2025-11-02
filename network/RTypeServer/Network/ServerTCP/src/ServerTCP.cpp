@@ -15,6 +15,30 @@ std::string generate_five_digit_random() {
     return std::to_string(randomNumberInt);
 }
 
+asio::ip::udp::endpoint string_to_endpoint(const std::string& ep_str)
+{
+    size_t pos = ep_str.find_last_of(':');
+
+    if (pos == std::string::npos) {
+        throw std::runtime_error("Format d'endpoint invalide (doit contenir ':').");
+    }
+
+    std::string address_str = ep_str.substr(0, pos);
+    
+    std::string port_str = ep_str.substr(pos + 1);
+
+    unsigned short port = 0;
+    try {
+        port = static_cast<unsigned short>(std::stoi(port_str));
+    } catch (const std::exception& e) {
+        throw std::runtime_error("Port invalide: " + port_str);
+    }
+    
+    asio::ip::address address = asio::ip::make_address(address_str);
+
+    return asio::ip::udp::endpoint(address, port);
+}
+
 static std::string interpret_command(const std::string& line)
 {
     std::string cmd = line;
@@ -28,6 +52,8 @@ static std::string interpret_command(const std::string& line)
     std::string token;
     while (iss >> token)
         args.push_back(token);
+    std::cout << keyword << std::endl;
+
     if (keyword == "REGISTER") {
         if (args.size() < 2)
             return "ERROR REGISTER\n"; //Missing username or password
@@ -88,11 +114,24 @@ static std::string interpret_command(const std::string& line)
     } else if (keyword == "CREATE_GAME") {
         std::string code = generate_five_digit_random();
         std::cout << code << std::endl;
+        std::cout << args[0] << std::endl;
+        asio::ip::udp::endpoint end = string_to_endpoint(args[0]);
 
         GameManager::getInstance().create_game(code);
+        GameManager::getInstance().addClientToGame(code, end);
         std::string message = "CODE " + code + "\n";
         std::cout << message;
         return message;
+    } else if (keyword == "JOIN_GAME") {
+        std::cout << args[0] << std::endl;
+        std::cout << args[1] << std::endl;
+        std::string code = args[0];
+        asio::ip::udp::endpoint end = string_to_endpoint(args[1]);
+        
+
+        GameManager::getInstance().addClientToGame(code, end);
+
+
     } else if (keyword == "LIST") {
         std::vector<std::string> _users = UserManager::getInstance().getUsersList();
         std::string begin = "List of users : \n";
