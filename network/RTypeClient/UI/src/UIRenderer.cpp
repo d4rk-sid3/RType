@@ -14,6 +14,12 @@ void UIRenderer::render(ClientUI &clientUI) {
 
         std::string date = getHour();
         cast->setText(date);
+
+        auto the_date = current->getElementById("date");
+        auto date_cast = std::dynamic_pointer_cast<TextElement>(the_date);
+        std::string dates = getDate();
+
+        date_cast->setText(dates);
     }
 
     auto next = uiManager.getNextUI();

@@ -2,9 +2,18 @@
 
 //-----------------------SESSION-------------------------------
 
-#include <string>
-#include <sstream>
-#include <vector>
+std::string generate_five_digit_random() {
+    static std::random_device rd;
+    static std::mt19937 generator(rd());
+
+    const int min_value = 10000;
+    const int max_value = 99999;
+    
+    std::uniform_int_distribution<int> distribution(min_value, max_value);
+
+    int randomNumberInt = distribution(generator);
+    return std::to_string(randomNumberInt);
+}
 
 static std::string interpret_command(const std::string& line)
 {
@@ -79,6 +88,13 @@ static std::string interpret_command(const std::string& line)
             user.save(DatabaseManager::getInstance().getDB());
             return "SAVE_OK\n";
         }
+    } else if (keyword == "CREATE_GAME") {
+        std::cout << "Create" << std::endl;
+        std::string code = generate_five_digit_random();
+
+        GameManager::getInstance().create_game(code);
+        std::string message = "CODE " + code + "\n";
+        return message;
     }
 
     else if (keyword == "QUIT") {

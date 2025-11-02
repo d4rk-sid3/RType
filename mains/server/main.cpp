@@ -63,16 +63,15 @@ int main(int ac, char **av)
 
     std::vector<std::thread> v;
     
-    ServerTCP server(ioc, std::stoi(av[1]));
-
     NetworkManager server_(std::stoi(av[2]), std::ref(messages), std::ref(mtx), ioc);
+    
+    GameManager::init(messages, mtx, server_);
+
+    ServerTCP server(ioc, std::stoi(av[1]));
 
     for (unsigned int i = 0; i < nThreads; ++i) {
         v.emplace_back([&ioc]() { ioc.run(); });
     }
 
-    GameManager gameManager(messages, mtx, server_);
-
-    //ioc.stop();
     for (auto& t : v) t.join();
 }

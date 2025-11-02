@@ -22,32 +22,68 @@
 #include "../include/gameManager.hpp"
 
 
-GameManager::GameManager(
+GameManager& GameManager::getInstance() {
+    static GameManager instance; 
+    return instance;
+}
+
+void GameManager::init(
     std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>& messages,
-    std::mutex& mtx, NetworkManager& _udpServer) 
-    : messages(messages), mtx(mtx), udpServer(_udpServer)
-{
-}
-
-GameManager::~GameManager()
-{
-}
-
+    std::mutex& mtx,
+    NetworkManager& _udpServer
+) {
+    GameManager& instance = getInstance();
     
+    if (instance.messages_ != nullptr) {
+        return; 
+    }
+    
+    instance.messages_ = &messages;
+    instance.mtx_ = &mtx;
+    instance.udpServer_ = &_udpServer;
+}
+
+// --- ACCESSEURS ---
+
+static void check_init(const void* ptr, const std::string& componentName) {
+    if (ptr == nullptr) {
+        throw std::runtime_error("GameManager not initialized. Call GameManager::init() before accessing " + componentName + ".");
+    }
+}
+
+std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>& GameManager::getMessages() {
+    check_init(messages_, "messages");
+    return *messages_;
+}
+
+std::mutex& GameManager::getMutex() {
+    check_init(mtx_, "mutex");
+    return *mtx_;
+}
+
+NetworkManager& GameManager::getUdpServer() {
+    check_init(udpServer_, "UDP server");
+    return *udpServer_;
+}
+
+GameManager::~GameManager() = default;
+
+// --- LOGIQUE DE JEU ---
+
 std::shared_ptr<GameInstance> GameManager::create_game(const std::string& id) {
-    std::lock_guard<std::mutex> lock(mtx);
+    std::lock_guard<std::mutex> lock(getMutex()); 
     
     if (active_games_.count(id)) {
         return nullptr;
     }
-    auto new_game = std::make_shared<GameInstance>(id, udpServer);
+    auto new_game = std::make_shared<GameInstance>(id, getUdpServer()); 
     active_games_[id] = new_game;
     
     return new_game;
 }
 
 std::shared_ptr<GameInstance> GameManager::get_game(const std::string& id) {
-    std::lock_guard<std::mutex> lock(mtx);
+    std::lock_guard<std::mutex> lock(getMutex());
     if (active_games_.count(id)) {
         return active_games_[id];
     }
@@ -55,12 +91,12 @@ std::shared_ptr<GameInstance> GameManager::get_game(const std::string& id) {
 }
 
 void GameManager::remove_game(const std::string& id) {
-    std::lock_guard<std::mutex> lock(mtx);
+    std::lock_guard<std::mutex> lock(getMutex());
     active_games_.erase(id);
 }
 
 void GameManager::list_games() {
-    std::lock_guard<std::mutex> lock(mtx);
+    std::lock_guard<std::mutex> lock(getMutex());
     std::cout << "Active Games: ";
     for (const auto& pair : active_games_) {
         std::cout << pair.first << " ";
@@ -72,15 +108,15 @@ void GameManager::addClientToGame(
     const std::string& game_id,
     asio::ip::udp::endpoint& client
 ) {
-    std::lock_guard<std::mutex> lock(mtx);
+    std::lock_guard<std::mutex> lock(getMutex());
     if (active_games_.count(game_id)) {
         active_games_[game_id]->addClient(client);
     }
 }
 
 void GameManager::process_messages() {
-    std::lock_guard<std::mutex> lock(mtx);
-    for (auto& msg_pair : messages) {
+    std::lock_guard<std::mutex> lock(getMutex());
+    for (auto& msg_pair : getMessages()) { 
         const auto& endpoint = msg_pair.first;
         const auto& msg = msg_pair.second;
 
@@ -92,5 +128,5 @@ void GameManager::process_messages() {
             }
         }
     }
-    messages.clear();
+    getMessages().clear();
 }

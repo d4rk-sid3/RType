@@ -15,10 +15,6 @@ class ClientUI {
         std::shared_ptr<TextElement> message_login;
         std::shared_ptr<TextElement> message_register;
 
-        void init_date(void);
-
-        void init_hour(void);
-
         void init(void);
         void loadPages();
         ~ClientUI();

@@ -139,6 +139,15 @@ void ClientGraphics::handleNetworkEvent(const std::string& line)
         auto cast_element = std::dynamic_pointer_cast<TextElement>(message_element);
 
         cast_element->setText("Your informations have successfully been updated.");
+    } else if (keyword == "CODE") {
+        std::string code = args[0];
+
+        auto create_ui = UIManager::getInstance().getUI("CreateParty");
+        auto message_element = create_ui->getElementById("code_value");
+        auto cast_element = std::dynamic_pointer_cast<TextElement>(message_element);
+
+        cast_element->setText(code);
+        UIManager::getInstance().setUI("CreateParty");
     }
 }
 

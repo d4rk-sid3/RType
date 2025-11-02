@@ -87,6 +87,12 @@ class ActionRegistry {
                 std::cout << message << std::endl;
                 client->write(message);
             });
+
+            registerAction("CreateParty", [client]() {
+                std::cout << "Lolo" << std::endl;
+                std::string message = "CREATE_GAME\n";
+                client->write(message);
+            });
         }
     
 };

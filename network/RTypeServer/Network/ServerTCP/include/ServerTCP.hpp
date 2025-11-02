@@ -3,6 +3,7 @@
     #include "../../Auth/include/librairies.hpp"
     #include "../../Managers/DatabaseManager.hpp"
     #include "../../Managers/UserManager.hpp"
+    #include "../../../../rtype_gameManager/include/gameManager.hpp"
 
 class Session : public std::enable_shared_from_this<Session> {
     public:
