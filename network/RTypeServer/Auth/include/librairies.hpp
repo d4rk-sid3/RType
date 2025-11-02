@@ -16,7 +16,7 @@
     #include <random>
     #include <fstream>
     #include <sqlite3.h>
-    #include <boost/asio.hpp>
+    #include <asio.hpp>
     #include <deque>
     #include <atomic>
     #include <thread>
@@ -30,9 +30,9 @@ enum class TokenType {
 
 enum class Role { PLAYER, ADMIN };
 
-using boost::asio::ip::tcp;
+//using boost::asio::ip::tcp;
 // namespace asio = boost::asio;
 
-using boost::asio::ip::udp;
+//using boost::asio::ip::udp;
 
 #endif /* defined(_Game_) */

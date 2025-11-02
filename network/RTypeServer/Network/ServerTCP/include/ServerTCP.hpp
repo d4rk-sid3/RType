@@ -6,7 +6,7 @@
 
 class Session : public std::enable_shared_from_this<Session> {
     public:
-        Session(tcp::socket socket, asio::io_context& ioc);
+        Session(asio::ip::tcp::socket socket, asio::io_context& ioc);
     
         void start();
     
@@ -21,9 +21,9 @@ class Session : public std::enable_shared_from_this<Session> {
     
         void do_close();
     
-        tcp::socket socket_;
+        asio::ip::tcp::socket socket_;
         asio::strand<asio::io_context::executor_type> strand_;
-        boost::asio::streambuf streambuf_;
+        asio::streambuf streambuf_;
         std::deque<std::string> write_queue_;
 };
     
@@ -38,6 +38,6 @@ class ServerTCP {
         void do_accept();
 
         asio::io_context& ioc_;
-        tcp::acceptor acceptor_;
+        asio::ip::tcp::acceptor acceptor_;
 };
 #endif

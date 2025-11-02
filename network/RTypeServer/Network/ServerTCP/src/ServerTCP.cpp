@@ -44,7 +44,7 @@ static std::string interpret_command(const std::string& line)
         if (username.empty() || password.empty())
             return "ERROR LOGIN\n"; //Missing username or password
 
-        bool valid = UserManager::getInstance().authenticate(username, password, DatabaseManager::getInstance().getServerTCPKey());
+        bool valid = UserManager::getInstance().authenticate(username, password, DatabaseManager::getInstance().getServerKey());
 
         if (valid) {
             auto userOpt = UserManager::getInstance().getUserByUsername(username);
@@ -88,7 +88,7 @@ static std::string interpret_command(const std::string& line)
 }
 
 
-Session::Session(tcp::socket socket, asio::io_context& ioc)
+Session::Session(asio::ip::tcp::socket socket, asio::io_context& ioc)
         : socket_(std::move(socket)),
           strand_(asio::make_strand(ioc))
 {}
@@ -99,7 +99,7 @@ void Session::start() {
 
 void Session::stop() {
     asio::post(strand_, [self = shared_from_this()]() {
-        boost::system::error_code ec;
+        std::error_code ec;
         self->socket_.close(ec);
     });
 }
@@ -108,7 +108,7 @@ void Session::do_read() {
     auto self = shared_from_this();
     asio::async_read_until(socket_, streambuf_, '\n', 
         asio::bind_executor(strand_,
-            [this, self](boost::system::error_code ec, std::size_t bytes_transferred) {
+            [this, self](std::error_code ec, std::size_t bytes_transferred) {
                 if (!ec) {
                     std::string line;
                     std::istream is(&streambuf_);
@@ -142,7 +142,7 @@ void Session::do_write() {
     asio::async_write(socket_,
         asio::buffer(write_queue_.front()),
         asio::bind_executor(strand_,
-            [this, self](boost::system::error_code ec, std::size_t bytes_transferred) {
+            [this, self](std::error_code ec, std::size_t bytes_transferred) {
                 if (!ec) {
                     write_queue_.pop_front();
                     if (!write_queue_.empty())
@@ -157,15 +157,15 @@ void Session::do_write() {
 }
 
 void Session::do_close() {
-    boost::system::error_code ec;
-    socket_.shutdown(tcp::socket::shutdown_both, ec);
+    std::error_code ec;
+    socket_.shutdown(asio::ip::tcp::socket::shutdown_both, ec);
     socket_.close(ec);
 }
 
 //----------------------SERVER-----------------------------------------------
 
 ServerTCP::ServerTCP(asio::io_context& ioc, int port)
-    : ioc_(ioc), acceptor_(ioc, tcp::endpoint(tcp::v4(), port))
+    : ioc_(ioc), acceptor_(ioc, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))
 {
     init_database();
     do_accept();
@@ -178,7 +178,7 @@ ServerTCP::~ServerTCP() {
 void ServerTCP::do_accept() {
     acceptor_.async_accept(
         asio::make_strand(ioc_),
-        [this](boost::system::error_code ec, tcp::socket socket) {
+        [this](std::error_code ec, asio::ip::tcp::socket socket) {
             if (!ec) {
                 std::cout << "New connection from " << socket.remote_endpoint() << "\n";
                 auto session = std::make_shared<Session>(std::move(socket), ioc_);
@@ -195,7 +195,7 @@ void ServerTCP::init_database()
 {
     DatabaseManager::getInstance().open("Database/r-type.db");
     DatabaseManager::getInstance().initialize();
-    DatabaseManager::getInstance().generateServerTCPKey();
+    DatabaseManager::getInstance().generateServerKey();
     UserManager::getInstance().loadAllUsers(DatabaseManager::getInstance().getDB());
     UserManager::getInstance().updateId();
     return;
