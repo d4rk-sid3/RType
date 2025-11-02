@@ -10,7 +10,7 @@ void ClientUI::loadPages()
 void ClientUI::init_date(void) {
     std::string date = getDate();
     auto dashboard_ui = UIManager::getInstance().getUI("Dashboardpage");
-    auto today_date = std::make_shared<TextElement>("date", "UI/assets/fonts/Gabriela-Regular.ttf", date, sf::Color::White, (sf::Vector2f){588.0, 195.0}, 17);
+    auto today_date = std::make_shared<TextElement>("date", "assets_UI/fonts/Gabriela-Regular.ttf", date, sf::Color::White, (sf::Vector2f){588.0, 195.0}, 17);
     auto cast = std::dynamic_pointer_cast<UIElement>(today_date);
     dashboard_ui->addElement(cast);
     return;
@@ -19,7 +19,7 @@ void ClientUI::init_date(void) {
 void ClientUI::init_hour(void) {
     std::string date = getHour();
     auto dashboard_ui = UIManager::getInstance().getUI("Dashboardpage");
-    hour = std::make_shared<TextElement>("Hour", "UI/assets/fonts/Gabriela-Regular.ttf", date, sf::Color::White, (sf::Vector2f){581.0, 151.0}, 27);
+    hour = std::make_shared<TextElement>("Hour", "assets_UI/fonts/Gabriela-Regular.ttf", date, sf::Color::White, (sf::Vector2f){581.0, 151.0}, 27);
     auto cast = std::dynamic_pointer_cast<UIElement>(hour);
     dashboard_ui->addElement(cast);
     return;
