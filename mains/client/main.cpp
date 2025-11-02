@@ -39,7 +39,7 @@ int main(int ac, char **av) {
     asio::io_context context(nThreads);
 
 
-    tcp::resolver resolver(context);
+    asio::ip::tcp::resolver resolver(context);
     auto endpoints = resolver.resolve(address, std::to_string(port));
     auto client = std::make_shared<ClientTCP>(context, endpoints, eventQueue);
     client->start(endpoints);
@@ -52,15 +52,15 @@ int main(int ac, char **av) {
         v.emplace_back([&context]() { context.run(); });
     }
 
-    NetworkManager networkManager(port, address, lastmsg, mtx, context);
+    // NetworkManager networkManager(port, address, lastmsg, mtx, context);
 
-    Client client(networkManager, lastmsg, mtx);
+    // Client my_client(networkManager, lastmsg, mtx);
 
-    client.run();
+    // my_client.run();
 
-    context.stop();
-    for (auto& thread : v) {
-        thread.join();
-    }
+    // context.stop();
+    // for (auto& thread : v) {
+    //     thread.join();
+    // }
 
 }
