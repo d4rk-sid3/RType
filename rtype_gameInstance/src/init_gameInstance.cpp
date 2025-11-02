@@ -175,9 +175,7 @@ void GameInstance::initializePlayersPVP(void) {
 }
 
 GameInstance::GameInstance(std::string _id, NetworkManager& server) :
-    id(_id),
-    win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server"),
-    reg(win), factory(reg), server_(server)
+    id(_id), reg(win), factory(reg), server_(server)
 {
     reg.control_active = false;
     counter = 0;
@@ -200,6 +198,8 @@ GameInstance::~GameInstance() {}
 void GameInstance::run()
 {
     gameStarted = std::chrono::steady_clock::now();
+
+    win.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server");
 
     while (win.isOpen()) {
         auto start = std::chrono::steady_clock::now();
