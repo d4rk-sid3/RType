@@ -83,7 +83,7 @@ void NetworkManager::stop()
 }
 
 asio::ip::udp::endpoint NetworkManager::getEndpoint() {
-    return socket.remote_endpoint();
+    return socket.local_endpoint();
 }
 
 void NetworkManager::receive_from_clients() {
