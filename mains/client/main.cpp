@@ -38,6 +38,14 @@ int main(int ac, char **av) {
     unsigned int nThreads = std::max(1u, std::thread::hardware_concurrency());
     asio::io_context context(nThreads);
 
+
+    tcp::resolver resolver(context);
+    auto endpoints = resolver.resolve(address, std::to_string(port));
+    auto client = std::make_shared<ClientTCP>(context, endpoints, eventQueue);
+    client->start(endpoints);
+    ActionRegistry::getInstance().setNetworkActions(client);
+    clientGraphics.loadPages();
+
     std::vector<std::thread> v;
 
     for (unsigned int i = 0; i < nThreads; ++i) {
@@ -50,23 +58,9 @@ int main(int ac, char **av) {
 
     client.run();
 
-    // auto eventQueue = std::make_shared<ThreadSafeQueue>();
-    //     ClientGraphics clientGraphics(eventQueue);
-    //     asio::io_context io_context;
-    //     tcp::resolver resolver(io_context.get_executor());
-    //     auto endpoints = resolver.resolve(argv[1], argv[2]);
+    context.stop();
+    for (auto& thread : v) {
+        thread.join();
+    }
 
-    //     auto client = std::make_shared<ClientTCP>(io_context, endpoints, eventQueue);
-    //     client->start(endpoints);
-        
-        
-    //     ActionRegistry::getInstance().setNetworkActions(client);
-    //     clientGraphics.loadPages();
-
-    //     std::thread t([&io_context]() { io_context.run(); });
-
-    //     clientGraphics.run();
-
-    //     io_context.stop();
-    //     t.join();
 }
