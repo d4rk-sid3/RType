@@ -63,7 +63,7 @@ typedef struct menu_info_s {
  * game
  *
  */
-class Client {
+class GraphicsClient {
   private:
 
     const std::chrono::milliseconds tickDuration = std::chrono::milliseconds(5);
@@ -249,12 +249,12 @@ class Client {
      * @param p The port to connect to the server
      * @param addr The address of the server
      */
-    Client(NetworkManager& client, std::vector<int8_t>& lastmsg, std::mutex& mtx);
+    GraphicsClient(NetworkManager& client, std::vector<int8_t>& lastmsg, std::mutex& mtx);
 
     /**
      * @brief Destroy the Client object
      */
-    ~Client();
+    ~GraphicsClient();
 
     /**
      * @brief Decode a NbrEntity structure from a byte buffer

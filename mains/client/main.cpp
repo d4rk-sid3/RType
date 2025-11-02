@@ -1,4 +1,4 @@
-#include "client.hpp"
+#include "../../rtype_graphicsClient/include/graphicsClient.hpp"
 #include "../../network/RTypeClient/UI/include/ClientGraphics.hpp"
 
 void printClientUsage() {
@@ -29,38 +29,29 @@ int main(int ac, char **av) {
 
     int port = std::stoi(av[1]);
     std::string address = av[2];
-    std::vector<int8_t> lastmsg;
-    std::mutex mtx;
 
     auto eventQueue = std::make_shared<ThreadSafeQueue>();
     ClientGraphics clientGraphics(eventQueue);
 
-    unsigned int nThreads = std::max(1u, std::thread::hardware_concurrency());
-    asio::io_context context(nThreads);
+    asio::io_context context;
 
-
-    tcp::resolver resolver(context);
+    asio::ip::tcp::resolver resolver(context);
     auto endpoints = resolver.resolve(address, std::to_string(port));
     auto client = std::make_shared<ClientTCP>(context, endpoints, eventQueue);
     client->start(endpoints);
     ActionRegistry::getInstance().setNetworkActions(client);
     clientGraphics.loadPages();
 
-    std::vector<std::thread> v;
-
-    for (unsigned int i = 0; i < nThreads; ++i) {
-        v.emplace_back([&context]() { context.run(); });
-    }
+    std::vector<int8_t> lastmsg;
+    std::mutex mtx;
 
     NetworkManager networkManager(port, address, lastmsg, mtx, context);
 
-    Client client(networkManager, lastmsg, mtx);
+    std::thread t([&context]() { context.run(); });
 
-    client.run();
+    GraphicsClient grClient(networkManager, lastmsg, mtx);
+
+    grClient.run();
 
     context.stop();
-    for (auto& thread : v) {
-        thread.join();
-    }
-
 }

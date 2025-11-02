@@ -17,9 +17,9 @@
  * ------------------------------------------------------------------------------------
  */
 
-#include "../include/client.hpp"
+#include "../include/graphicsClient.hpp"
 
-EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer
+EnemyMovedResponse GraphicsClient::decodeEnemyMovedResponse(std::vector<int8_t>& buffer
 ) {
     std::vector<int8_t> tmp;
 
@@ -60,7 +60,7 @@ EnemyMovedResponse Client::decodeEnemyMovedResponse(std::vector<int8_t>& buffer
     return pos;
 }
 
-GameState Client::decodeGameState(std::vector<int8_t>& buffer) {
+GameState GraphicsClient::decodeGameState(std::vector<int8_t>& buffer) {
     std::vector<int8_t> tmp;
 
     {
@@ -87,7 +87,7 @@ GameState Client::decodeGameState(std::vector<int8_t>& buffer) {
     return pos;
 }
 
-MessageHeader Client::decodeMessageHeader(std::vector<int8_t>& buffer) {
+MessageHeader GraphicsClient::decodeMessageHeader(std::vector<int8_t>& buffer) {
     std::vector<int8_t> tmp;
 
     {

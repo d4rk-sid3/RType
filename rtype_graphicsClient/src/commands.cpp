@@ -18,9 +18,9 @@
  * ------------------------------------------------------------------------------------
  */
 
-#include "../include/client.hpp"
+#include "../include/graphicsClient.hpp"
 
-std::vector<int8_t> Client::encodeMoveResponse(const MoveResponse& pos) {
+std::vector<int8_t> GraphicsClient::encodeMoveResponse(const MoveResponse& pos) {
     std::vector<int8_t> buffer;
 
     buffer.emplace_back(pos.type);
@@ -34,7 +34,7 @@ std::vector<int8_t> Client::encodeMoveResponse(const MoveResponse& pos) {
     return buffer;
 }
 
-std::vector<int8_t> Client::encodeActionResponse(const ActionResponse& pos) {
+std::vector<int8_t> GraphicsClient::encodeActionResponse(const ActionResponse& pos) {
     std::vector<int8_t> buffer;
 
     buffer.emplace_back(pos.type);

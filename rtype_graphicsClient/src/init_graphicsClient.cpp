@@ -16,7 +16,7 @@
  *
  */
 
-#include "../include/client.hpp"
+#include "../include/graphicsClient.hpp"
 #include "components.hpp"
 
 /**
@@ -122,12 +122,12 @@ std::string getKey(int value) {
 }
 
 /**
- * @brief Construct a new Client:: Client object
+ * @brief Construct a new GraphicsClient:: Client object
  *
  * @param p The port to connect to
  * @param address The server address
  */
-Client::Client(NetworkManager& client, std::vector<int8_t>& _lastmsg, std::mutex& _mtx):
+GraphicsClient::GraphicsClient (NetworkManager& client, std::vector<int8_t>& _lastmsg, std::mutex& _mtx):
     client_(client), lastmsg(_lastmsg), mtx(_mtx),
     win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), reg(win), factory(reg)
 {
@@ -166,7 +166,7 @@ bool isInside(std::vector<EnemyMovedResponse> vec, size_t id) {
  * @brief This function checks if the player is entering inputs and sends info
  * to the server accordingly
  */
-void Client::sendPlayerInput() {
+void GraphicsClient::sendPlayerInput() {
     component::controllable& con =
         reg.get_components<component::controllable>()[controllable_id].value(
         );
@@ -199,7 +199,7 @@ void Client::sendPlayerInput() {
  * server accordingly
  *
  */
-void Client::sendPlayerAction() {
+void GraphicsClient::sendPlayerAction() {
     component::controllable& con =
         reg.get_components<component::controllable>()[controllable_id].value(
         );
@@ -221,7 +221,7 @@ void Client::sendPlayerAction() {
     client_.send_to_server(buff, buff.size());
 }
 
-void Client::receiveServerInfo() {
+void GraphicsClient::receiveServerInfo() {
     bool isempty;
 
     {
@@ -241,7 +241,7 @@ void Client::receiveServerInfo() {
     entity_states.push_back({e.timeElapsed, s});
 }
 
-void Client::entityMoveInterpole(EnemyMovedResponse pastPos, int64_t pastTime, int64_t now, EnemyMovedResponse nextPos, int64_t nextTime) {
+void GraphicsClient::entityMoveInterpole(EnemyMovedResponse pastPos, int64_t pastTime, int64_t now, EnemyMovedResponse nextPos, int64_t nextTime) {
 
     static auto progLinear = [](
         auto duration_to_now, auto totalDuration,
@@ -278,7 +278,7 @@ void Client::entityMoveInterpole(EnemyMovedResponse pastPos, int64_t pastTime, i
     }
 }
 
-void Client::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTime, int64_t now, EnemyMovedResponse pastPos, int64_t pastTime) {
+void GraphicsClient::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTime, int64_t now, EnemyMovedResponse pastPos, int64_t pastTime) {
 
     if (now - pastTime > 25) {
         if (ids_assoc.find(pastPos.enemy_id) != ids_assoc.end()) {
@@ -339,7 +339,7 @@ void Client::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTim
     }  catch(const std::exception& e) {}
 }
 
-void Client::entityMovCreate(EnemyMovedResponse nextPos, int64_t nextTime, int64_t now, EnemyMovedResponse nextnextPos, int64_t nextnextTime) {
+void GraphicsClient::entityMovCreate(EnemyMovedResponse nextPos, int64_t nextTime, int64_t now, EnemyMovedResponse nextnextPos, int64_t nextnextTime) {
     if (nextTime - now > 25)
         return;
 
@@ -383,7 +383,7 @@ void Client::entityMovCreate(EnemyMovedResponse nextPos, int64_t nextTime, int64
  *
  * @param delta the time since the last update
  */
-void Client::runLevel(double delta) {
+void GraphicsClient::runLevel(double delta) {
 
     using namespace std::chrono;
 
@@ -502,16 +502,16 @@ void Client::runLevel(double delta) {
 }
 
 /**
- * @brief Destroy the Client:: Client object
+ * @brief Destroy the GraphicsClient:: Client object
  *
  */
-Client::~Client() {}
+GraphicsClient::~GraphicsClient() = default;
 
 /**
  * @brief This function initializes the menu
  *
  */
-void Client::initMenu()
+void GraphicsClient::initMenu()
 {
     menu_info.background = factory.make_background();
     menu_info.title = factory.make_title();
@@ -528,7 +528,7 @@ void Client::initMenu()
  *
  * @param delta The amount of time elapsed since the last frame
  */
-void Client::runMenu(double delta) {
+void GraphicsClient::runMenu(double delta) {
 
     if (state == MENU) {
         component::controllable &start_text =
@@ -554,7 +554,7 @@ void Client::runMenu(double delta) {
  * @brief This function initializes the game
  *
  */
-void Client::initGame() {
+void GraphicsClient::initGame() {
     factory.make_background();
     // factory.make_game_background_music();
 
@@ -562,7 +562,7 @@ void Client::initGame() {
     reg.add_component<component::controllable>((entity)controllable_id, component::controllable());
 }
 
-void Client::handleSubStates(double delta, sf::RenderWindow& win)
+void GraphicsClient::handleSubStates(double delta, sf::RenderWindow& win)
 {
     if (state == LEVEL1) {
         if (boss_dead) {
@@ -658,7 +658,7 @@ void Client::handleSubStates(double delta, sf::RenderWindow& win)
     }
 }
 
-void Client::run()
+void GraphicsClient::run()
 {
     clientStarted = std::chrono::steady_clock::now();
 
