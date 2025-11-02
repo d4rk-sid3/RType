@@ -134,8 +134,9 @@ Client::Client(int p, std::string address):
     state = LEVEL1;
     substate = LEVEL1_START;
 
-    reg.logic_active = false;
-    reg.collisions_active = false;
+    reg.toggleMovement();
+    reg.toggleRendering();
+    reg.toggleControl();
 
     std::vector<int8_t> msg(1, 0x5);
     client_.send_to_server(msg, msg.size());

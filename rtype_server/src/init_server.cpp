@@ -157,10 +157,12 @@ void Server::initializePlayersPVP(void) {
 }
 
 Server::Server(int p) :
-    p_(p), win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server"),
-    reg(win), factory(reg), server_(p, std::ref(messages), std::ref(mtx))
+    p_(p),
+    reg(), factory(reg), server_(p, std::ref(messages), std::ref(mtx))
 {
-    reg.control_active = false;
+    reg.toggleLogic();
+    reg.toggleMovement();
+    reg.togglePhysics();
     counter = 0;
 
     load_textures();
@@ -182,17 +184,9 @@ void Server::run()
 
     gameStarted = std::chrono::steady_clock::now();
 
-    while (win.isOpen()) {
+    while (1) {
         auto start = std::chrono::steady_clock::now();
 
-        while (win.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                win.close();
-            if (event.type == sf::Event::KeyPressed)
-                if (event.key.code == sf::Keyboard::Escape)
-                    win.close();
-        }
         double dt = frameClock.restart().asSeconds();
 
         reg.run_systems(dt);

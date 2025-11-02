@@ -12,6 +12,26 @@ The registry class. The registry is a container for all the entities and compone
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} \mbox{\hyperlink{classregistry_a20c08fcd6e0f4a8f528e429f59b61e1e}{toggle\+Movement}} ()
+\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} \mbox{\hyperlink{classregistry_a44a211670ca68c02ce193353fc9bf049}{toggle\+Physics}} ()
+\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} \mbox{\hyperlink{classregistry_a825a270f286c1744bc7a1610f46ab49c}{toggle\+Rendering}} ()
+\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} \mbox{\hyperlink{classregistry_a6270765d95f0e4d902e5ec029f8c10bc}{toggle\+Control}} ()
+\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} \mbox{\hyperlink{classregistry_a185290a8e00b029c0e3f75a8fda58a94}{toggle\+Logic}} ()
+\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_a2758920b8b06a6b20bd7d496d108939b}{get\+Movement}} ()
+\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_ac9e09bbcbf1a43e7b50caf76e6b19198}{get\+Physics}} ()
+\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_a6606ef75f6393c1906f891f995f1e469}{get\+Rendering}} ()
+\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_a7458a26fa7b4c694bb7287e6725cff1d}{get\+Control}} ()
+\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_acf29c5dee5ae25cc4f4672e5f799b599}{get\+Logic}} ()
+\item 
 \mbox{\hyperlink{classregistry_a15c27c6d008fb260402f20d8619e43f7}{registry}} (sf\+::\+Render\+Window \&\mbox{\hyperlink{classregistry_a2156b3e51c6c5c91b3ff8246238a643a}{window}})
 \begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classregistry_a15c27c6d008fb260402f20d8619e43f7}{registry\+::registry} object. This version takes a renderwindow as parameter and registers the drawable system. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classregistry_a757883d504ab1bb5a06e0faa8e28664d}{registry}} ()
@@ -47,14 +67,6 @@ sf\+::\+Render\+Window \& \mbox{\hyperlink{classregistry_a202893edec86ab9275b46b
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_aee17149de7f585a04c59e916b03110f5}{collisions\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}
-\begin{DoxyCompactList}\small\item\em A boolean that indicates if the collisions system is active. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_a0531fe6d4810e9a50289b9f866ad25cf}{render\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}
-\begin{DoxyCompactList}\small\item\em A boolean that indicates if the render system is active. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_a772d03d9734330401886ab2d380d52d1}{logic\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}
-\begin{DoxyCompactList}\small\item\em A boolean that indicates if the logic system is active. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_aa007145268e3b27a52137b978cf7f887}{control\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}
-\begin{DoxyCompactList}\small\item\em A boolean that indicates if the control system is active. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{vector}}$<$ \mbox{\hyperlink{classentity}{entity}} $>$ \mbox{\hyperlink{classregistry_ab2381c1b1b227a150443be6932f7c434}{dead\+\_\+entities}}
 \begin{DoxyCompactList}\small\item\em A vector of entities id that are dead and can be reused. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
@@ -78,7 +90,17 @@ sf\+::\+Render\+Window \& \mbox{\hyperlink{classregistry_a2156b3e51c6c5c91b3ff82
 sf\+::\+Render\+Window \mbox{\hyperlink{classregistry_aa643bab506bd89dcfb558fb1255756e5}{tmp}}
 \item 
 sf\+::\+Clock \mbox{\hyperlink{classregistry_a5e7155f2ef2a96409dcf2ee3599c54ce}{clock}}
-\end{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_aee17149de7f585a04c59e916b03110f5}{collisions\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{false}}
+\begin{DoxyCompactList}\small\item\em A boolean that indicates if the collisions system is active. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_a0531fe6d4810e9a50289b9f866ad25cf}{render\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{false}}
+\begin{DoxyCompactList}\small\item\em A boolean that indicates if the render system is active. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_a772d03d9734330401886ab2d380d52d1}{logic\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{false}}
+\begin{DoxyCompactList}\small\item\em A boolean that indicates if the logic system is active. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_aa007145268e3b27a52137b978cf7f887}{control\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{false}}
+\begin{DoxyCompactList}\small\item\em A boolean that indicates if the control system is active. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} \mbox{\hyperlink{classregistry_a9db2f8741e8d99bec4cb2e4430e6809a}{movement\+\_\+active}} = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{false}}
+\begin{DoxyCompactList}\small\item\em A boolean that indicates if the movement system is active. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -225,6 +247,12 @@ Get the number of registered types of components.
 \begin{DoxyReturn}{Returns}
 size\+\_\+t 
 \end{DoxyReturn}
+\Hypertarget{classregistry_a7458a26fa7b4c694bb7287e6725cff1d}\label{classregistry_a7458a26fa7b4c694bb7287e6725cff1d} 
+\index{registry@{registry}!getControl@{getControl}}
+\index{getControl@{getControl}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{getControl()}{getControl()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::get\+Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \Hypertarget{classregistry_a05b69b2f3a790c425e0d1df40e7fb322}\label{classregistry_a05b69b2f3a790c425e0d1df40e7fb322} 
 \index{registry@{registry}!getEntityNum@{getEntityNum}}
 \index{getEntityNum@{getEntityNum}!registry@{registry}}
@@ -251,6 +279,30 @@ Get the number of registered erase functions.
 \begin{DoxyReturn}{Returns}
 size\+\_\+t 
 \end{DoxyReturn}
+\Hypertarget{classregistry_acf29c5dee5ae25cc4f4672e5f799b599}\label{classregistry_acf29c5dee5ae25cc4f4672e5f799b599} 
+\index{registry@{registry}!getLogic@{getLogic}}
+\index{getLogic@{getLogic}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{getLogic()}{getLogic()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::get\+Logic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classregistry_a2758920b8b06a6b20bd7d496d108939b}\label{classregistry_a2758920b8b06a6b20bd7d496d108939b} 
+\index{registry@{registry}!getMovement@{getMovement}}
+\index{getMovement@{getMovement}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{getMovement()}{getMovement()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::get\+Movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classregistry_ac9e09bbcbf1a43e7b50caf76e6b19198}\label{classregistry_ac9e09bbcbf1a43e7b50caf76e6b19198} 
+\index{registry@{registry}!getPhysics@{getPhysics}}
+\index{getPhysics@{getPhysics}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{getPhysics()}{getPhysics()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::get\+Physics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classregistry_a6606ef75f6393c1906f891f995f1e469}\label{classregistry_a6606ef75f6393c1906f891f995f1e469} 
+\index{registry@{registry}!getRendering@{getRendering}}
+\index{getRendering@{getRendering}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{getRendering()}{getRendering()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::get\+Rendering (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \Hypertarget{classregistry_a488b346a5739fcfe1245bbda1536538e}\label{classregistry_a488b346a5739fcfe1245bbda1536538e} 
 \index{registry@{registry}!kill\_entity@{kill\_entity}}
 \index{kill\_entity@{kill\_entity}!registry@{registry}}
@@ -339,6 +391,36 @@ This function creates a new entity.
 \begin{DoxyReturn}{Returns}
 entity The id of the newly created entity 
 \end{DoxyReturn}
+\Hypertarget{classregistry_a6270765d95f0e4d902e5ec029f8c10bc}\label{classregistry_a6270765d95f0e4d902e5ec029f8c10bc} 
+\index{registry@{registry}!toggleControl@{toggleControl}}
+\index{toggleControl@{toggleControl}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{toggleControl()}{toggleControl()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} registry\+::toggle\+Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classregistry_a185290a8e00b029c0e3f75a8fda58a94}\label{classregistry_a185290a8e00b029c0e3f75a8fda58a94} 
+\index{registry@{registry}!toggleLogic@{toggleLogic}}
+\index{toggleLogic@{toggleLogic}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{toggleLogic()}{toggleLogic()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} registry\+::toggle\+Logic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classregistry_a20c08fcd6e0f4a8f528e429f59b61e1e}\label{classregistry_a20c08fcd6e0f4a8f528e429f59b61e1e} 
+\index{registry@{registry}!toggleMovement@{toggleMovement}}
+\index{toggleMovement@{toggleMovement}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{toggleMovement()}{toggleMovement()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} registry\+::toggle\+Movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classregistry_a44a211670ca68c02ce193353fc9bf049}\label{classregistry_a44a211670ca68c02ce193353fc9bf049} 
+\index{registry@{registry}!togglePhysics@{togglePhysics}}
+\index{togglePhysics@{togglePhysics}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{togglePhysics()}{togglePhysics()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} registry\+::toggle\+Physics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classregistry_a825a270f286c1744bc7a1610f46ab49c}\label{classregistry_a825a270f286c1744bc7a1610f46ab49c} 
+\index{registry@{registry}!toggleRendering@{toggleRendering}}
+\index{toggleRendering@{toggleRendering}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{toggleRendering()}{toggleRendering()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{void}} registry\+::toggle\+Rendering (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 
 
 \doxysubsection{Member Data Documentation}
@@ -370,7 +452,7 @@ entity The id of the newly created entity
 \index{registry@{registry}!collisions\_active@{collisions\_active}}
 \index{collisions\_active@{collisions\_active}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{collisions\_active}{collisions\_active}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::collisions\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::collisions\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{false}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -380,7 +462,7 @@ A boolean that indicates if the collisions system is active.
 \index{registry@{registry}!control\_active@{control\_active}}
 \index{control\_active@{control\_active}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{control\_active}{control\_active}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::control\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::control\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{false}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -406,17 +488,27 @@ A vector of entities id that are dead and can be reused.
 \index{registry@{registry}!logic\_active@{logic\_active}}
 \index{logic\_active@{logic\_active}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{logic\_active}{logic\_active}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::logic\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::logic\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{false}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 A boolean that indicates if the logic system is active. 
 
+\Hypertarget{classregistry_a9db2f8741e8d99bec4cb2e4430e6809a}\label{classregistry_a9db2f8741e8d99bec4cb2e4430e6809a} 
+\index{registry@{registry}!movement\_active@{movement\_active}}
+\index{movement\_active@{movement\_active}!registry@{registry}}
+\doxysubsubsection{\texorpdfstring{movement\_active}{movement\_active}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::movement\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{false}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A boolean that indicates if the movement system is active. 
+
 \Hypertarget{classregistry_a0531fe6d4810e9a50289b9f866ad25cf}\label{classregistry_a0531fe6d4810e9a50289b9f866ad25cf} 
 \index{registry@{registry}!render\_active@{render\_active}}
 \index{render\_active@{render\_active}!registry@{registry}}
 \doxysubsubsection{\texorpdfstring{render\_active}{render\_active}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::render\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{true}}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{bool}} registry\+::render\+\_\+active = \mbox{\hyperlink{classregistry_ad397b1104bc8510105b4e4d6b90f87cc}{false}}\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

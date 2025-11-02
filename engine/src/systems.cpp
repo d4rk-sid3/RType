@@ -45,6 +45,9 @@ void position_system(
     std::vector<optional<component::position>>& positions,
     std::vector<optional<component::velocity>>& velocities
 ) {
+    if (!reg.getMovement())
+        return;
+
     for (size_t i = 0; i < reg.getEntityNum(); ++i) {
         try {
             auto& pos = positions.at(i);
@@ -80,7 +83,7 @@ void draw_system(
     std::vector<optional<component::animated_drawable>>& anim_draws,
     std::vector<optional<component::text>>& texts
 ) {
-    if (reg.render_active == false) {
+    if (reg.getRendering() == false) {
         return;
     }
 
@@ -141,7 +144,7 @@ void control_system(
     double delta, registry& reg,
     std::vector<optional<component::controllable>>& controls
 ) {
-    if (reg.control_active == false) {
+    if (reg.getControl() == false) {
         return;
     }
 
@@ -173,7 +176,7 @@ void collision_system(
     std::vector<optional<component::hurtbox>>& hurtboxes,
     std::vector<optional<component::hitbox>>& hitboxes
 ) {
-    if (reg.collisions_active == false) {
+    if (reg.getPhysics() == false) {
         return;
     }
 
@@ -240,7 +243,7 @@ void collision_system(
 void logic_system(
     double delta, registry& reg, std::vector<optional<component::logic>>& logics
 ) {
-    if (reg.logic_active == false) {
+    if (reg.getLogic() == false) {
         return;
     }
 

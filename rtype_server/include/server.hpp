@@ -83,11 +83,6 @@ class Server {
     int p_;
 
     /**
-     * @brief The window for rendering (if needed)
-     */
-    sf::RenderWindow win;
-
-    /**
      * @brief The registry that holds all entities and components
      */
     registry reg;
