@@ -202,6 +202,7 @@ if(BUILD_SERVER)
     target_link_libraries(r-type_server PRIVATE 
         sfml-system sfml-window sfml-graphics sfml-network sfml-audio
         asio::asio
+        sodium
         ${LIBCONFIG_TARGET}
         OpenAL::OpenAL
         Vorbis::vorbisenc Vorbis::vorbisfile Vorbis::vorbis
