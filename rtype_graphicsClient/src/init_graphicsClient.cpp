@@ -398,16 +398,21 @@ void GraphicsClient::runLevel(double delta) {
 
     std::cout << "Now: " << nowDuration << std::endl;
 
-    static uint64_t latence = 0;
+    static int64_t latence = 0;
 
     if (latence == 0 && entity_states.size() == 1) {
         latence = entity_states.front().first - nowDuration - 100;
     }
-
+    std::cout << "SIZE: " << entity_states.size() << std::endl;
     if (entity_states.size() < 2)
         return;
 
     //////////////////////////
+
+    std::cout << "Latence: " << latence << std::endl;
+    std::cout << "Now + Latence: " << nowDuration + latence << std::endl;
+    std::cout << "First Time: " << entity_states.front().first << std::endl;
+    std::cout << "Last Time: " << entity_states.back().first << std::endl;
 
     if (entity_states.front().first > nowDuration + latence)
         return;

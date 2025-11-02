@@ -118,7 +118,7 @@ class GraphicsClient {
     /**
      * @brief The last message received from the server
      */
-    std::vector<int8_t> lastmsg;
+    std::vector<int8_t>& lastmsg;
 
     /**
      * @brief A vector containing entities states received from the server
