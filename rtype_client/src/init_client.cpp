@@ -127,8 +127,8 @@ std::string getKey(int value) {
  * @param p The port to connect to
  * @param address The server address
  */
-Client::Client(int p, std::string address):
-    port_(p), client_(p, address, std::ref(lastmsg), std::ref(mtx)),
+Client::Client(NetworkManager& client, std::vector<int8_t>& _lastmsg, std::mutex& _mtx):
+    client_(client), lastmsg(_lastmsg), mtx(_mtx),
     win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), reg(win), factory(reg)
 {
     state = LEVEL1;
@@ -660,8 +660,6 @@ void Client::handleSubStates(double delta, sf::RenderWindow& win)
 
 void Client::run()
 {
-    networkThread =  std::thread([this]() { client_.run(); });
-
     clientStarted = std::chrono::steady_clock::now();
 
     while (win.isOpen()) {
@@ -695,7 +693,4 @@ void Client::run()
 
         std::this_thread::sleep_until(now + tickDuration);
     }
-
-    client_.stop();
-    networkThread.join();
 }

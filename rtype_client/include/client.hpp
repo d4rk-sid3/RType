@@ -101,12 +101,12 @@ class Client {
     /**
      * @brief The network manager that handles communication with the server
      */
-    NetworkManager client_;
+    NetworkManager& client_;
 
     /**
      * @brief Mutex for thread safety
      */
-    std::mutex mtx;
+    std::mutex& mtx;
 
     /**
      * @brief Map that associates server entity IDs to client entity IDs
@@ -134,10 +134,14 @@ class Client {
     sf::Event event;
 
     /**
-     * @brief The current state of the game (menu, transition, game, game over)
+     * @brief The current state of the game
      */
     state_t state;
-    substate_t substate = LEVEL1_START;
+
+    /**
+     * @brief The current substate of the game
+     */
+    substate_t substate;
 
     /**
      * @brief Clock for managing frame time
@@ -145,17 +149,12 @@ class Client {
     sf::Clock frameClock;
 
     /**
-     * @brief Thread for running the network manager
-     */
-    std::thread networkThread;
-
-    /**
      * @brief The moment of the last message
      */
     chrono::time_point<chrono::steady_clock> clientStarted;
 
     /**
-     * nljnjln
+     * @brief The UI handler for managing the user interface
      */
     UIHandler ui_handler;
 
@@ -250,7 +249,7 @@ class Client {
      * @param p The port to connect to the server
      * @param addr The address of the server
      */
-    Client(int p, std::string addr);
+    Client(NetworkManager& client, std::vector<int8_t>& lastmsg, std::mutex& mtx);
 
     /**
      * @brief Destroy the Client object

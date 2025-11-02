@@ -25,7 +25,24 @@ void checkClientArgs(int ac, char **av) {
 
 int main(int ac, char **av) {
     checkClientArgs(ac, av);
-    Client client(std::stoi(av[1]), av[2]);
+
+    int port = std::stoi(av[1]);
+    std::string address = av[2];
+    std::vector<int8_t> lastmsg;
+    std::mutex mtx;
+
+    unsigned int nThreads = std::max(1u, std::thread::hardware_concurrency());
+    asio::io_context context(nThreads);
+
+    std::vector<std::thread> v;
+
+    for (unsigned int i = 0; i < nThreads; ++i) {
+        v.emplace_back([&context]() { context.run(); });
+    }
+
+    NetworkManager networkManager(port, address, lastmsg, mtx, context);
+
+    Client client(networkManager, lastmsg, mtx);
 
     client.run();
 

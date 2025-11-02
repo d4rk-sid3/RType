@@ -55,21 +55,21 @@ int main(int ac, char **av)
 
     unsigned int nThreads = std::max(1u, std::thread::hardware_concurrency());
 
-    asio::io_context ioc(nThreads);
-
-    std::vector<std::thread> v;
-
-    ServerTCP server(ioc, std::stoi(av[1]));
-
-    for (unsigned int i = 0; i < nThreads; ++i) {
-        v.emplace_back([&ioc]() { ioc.run(); });
-    }
-
     std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> messages;
 
     std::mutex mtx;
 
+    asio::io_context ioc(nThreads);
+
+    std::vector<std::thread> v;
+    
+    ServerTCP server(ioc, std::stoi(av[1]));
+
     NetworkManager server_(std::stoi(av[2]), std::ref(messages), std::ref(mtx), ioc);
+
+    for (unsigned int i = 0; i < nThreads; ++i) {
+        v.emplace_back([&ioc]() { ioc.run(); });
+    }
 
     GameManager gameManager(messages, mtx, server_);
 
