@@ -59,11 +59,11 @@ int main(int ac, char **av)
 
     std::vector<std::thread> v;
 
+    ServerTCP server(ioc, std::stoi(av[1]));
+
     for (unsigned int i = 0; i < nThreads; ++i) {
         v.emplace_back([&ioc]() { ioc.run(); });
     }
-
-    ServerTCP server(ioc, std::stoi(av[1]));
 
     std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>> messages;
 
