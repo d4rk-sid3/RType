@@ -1,11 +1,11 @@
 #include "../include/ClientTCP.hpp"
 
-ClientTCP::ClientTCP(asio::io_context& io_context, tcp::resolver::results_type endpoints, 
+ClientTCP::ClientTCP(asio::io_context& io_context, asio::ip::tcp::resolver::results_type endpoints, 
     std::shared_ptr<ThreadSafeQueue> queue)
     : socket_(io_context), _eventQueue(queue) {
 }
 
-void ClientTCP::start(tcp::resolver::results_type endpoints) {
+void ClientTCP::start(asio::ip::tcp::resolver::results_type endpoints) {
     do_connect(endpoints);
 }
 
@@ -21,10 +21,10 @@ void ClientTCP::write(const std::string& msg) {
         });
 }
 
-void ClientTCP::do_connect(tcp::resolver::results_type endpoints) {
+void ClientTCP::do_connect(asio::ip::tcp::resolver::results_type endpoints) {
     auto self = shared_from_this();
     asio::async_connect(socket_, endpoints,
-        [this, self](std::error_code ec, tcp::endpoint) {
+        [this, self](std::error_code ec, asio::ip::tcp::endpoint) {
             if (!ec) {
                 do_read();
             } else {
