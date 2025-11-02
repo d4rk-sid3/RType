@@ -134,8 +134,7 @@ endif()
 # Client
 if(BUILD_CLIENT)
     file(GLOB_RECURSE CLIENT_SOURCES 
-        "rtype_client/src/*.cpp" 
-        "rtype_client/src/*.cpp" 
+        "rtype_graphicsClient/src/*.cpp" 
         "mains/client/main.cpp" 
         "utility_classes/src/*.cpp" 
         "engine/src/*.cpp"
@@ -145,13 +144,13 @@ if(BUILD_CLIENT)
         )
     
     if(NOT CLIENT_SOURCES)
-        message(FATAL_ERROR "No client source files found in rtype_client/src/")
+        message(FATAL_ERROR "No client source files found in rtype_graphicsClient/src/")
     endif()
     
     add_executable(r-type_client ${CLIENT_SOURCES})
     
     target_include_directories(r-type_client PRIVATE 
-        ${CMAKE_SOURCE_DIR}/rtype_client/include 
+        ${CMAKE_SOURCE_DIR}/rtype_graphicsClient/include 
         ${CMAKE_SOURCE_DIR}/network/RTypeClient/Managers 
         ${CMAKE_SOURCE_DIR}/network/RTypeClient/Network/ClientTCP/include
         ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/components/include
