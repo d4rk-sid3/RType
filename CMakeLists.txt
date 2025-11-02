@@ -146,6 +146,12 @@ target_include_directories(engine PRIVATE
     ${CMAKE_SOURCE_DIR}/engine/include
 )
 
+target_link_libraries(engine PUBLIC
+    sfml-graphics
+    sfml-window
+    sfml-system
+)
+
 # -------------------------------------------------------------
 # Client
 if(BUILD_CLIENT)
@@ -277,3 +283,15 @@ if(BUILD_TESTS)
     include(GoogleTest)
     gtest_discover_tests(r-type_tests)
 endif()
+
+# -------------------------------------------------------------
+# Apocalypse
+add_executable(apocalypse ${CMAKE_SOURCE_DIR}/apocalypse/main.cpp)
+
+target_link_libraries(apocalypse PRIVATE 
+    engine
+)
+
+target_include_directories(apocalypse PRIVATE 
+    ${CMAKE_SOURCE_DIR}/engine/include
+)
