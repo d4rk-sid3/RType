@@ -116,7 +116,7 @@ int main(int ac, char **av) {
     if (clientGraphics.isAdmin())
         launchAdminConsole(client, eventQueue);
 
-    if (isGaming)
+    if (clientGraphics.inGame())
         grClient.run();
 
     context.stop();
