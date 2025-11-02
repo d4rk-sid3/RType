@@ -129,7 +129,7 @@ void GameInstance::initializeGame(void) {
     factory.make_background();
     factory.make_ceiling();
     factory.make_floor();
-    factory.make_menu_background_music();
+    // factory.make_menu_background_music();
 }
 
 /**

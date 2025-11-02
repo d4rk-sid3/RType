@@ -77,6 +77,7 @@ std::shared_ptr<GameInstance> GameManager::create_game(const std::string& id) {
         return nullptr;
     }
     auto new_game = std::make_shared<GameInstance>(id, getUdpServer()); 
+    std::cout << "Game created with ID: " << id << std::endl;
     active_games_[id] = new_game;
     
     return new_game;

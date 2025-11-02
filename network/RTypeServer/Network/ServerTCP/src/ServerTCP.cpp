@@ -90,6 +90,7 @@ static std::string interpret_command(const std::string& line)
 
         GameManager::getInstance().create_game(code);
         std::string message = "CODE " + code + "\n";
+        std::cout << message;
         return message;
     } else if (keyword == "LIST") {
         std::vector<std::string> _users = UserManager::getInstance().getUsersList();
