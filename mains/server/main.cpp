@@ -73,5 +73,6 @@ int main(int ac, char **av)
 
     GameManager gameManager(messages, mtx, server_);
 
+    ioc.stop();
     for (auto& t : v) t.join();
 }

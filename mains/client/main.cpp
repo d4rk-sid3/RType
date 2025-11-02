@@ -1,4 +1,5 @@
 #include "client.hpp"
+#include "../../network/RTypeClient/UI/include/ClientGraphics.hpp"
 
 void printClientUsage() {
     std::cerr << "Usage:\n\t./r-type_client [port] [ip_address]\n" << std::endl;
@@ -30,6 +31,9 @@ int main(int ac, char **av) {
     std::string address = av[2];
     std::vector<int8_t> lastmsg;
     std::mutex mtx;
+
+    auto eventQueue = std::make_shared<ThreadSafeQueue>();
+    ClientGraphics clientGraphics(eventQueue);
 
     unsigned int nThreads = std::max(1u, std::thread::hardware_concurrency());
     asio::io_context context(nThreads);

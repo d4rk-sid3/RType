@@ -135,9 +135,14 @@ endif()
 if(BUILD_CLIENT)
     file(GLOB_RECURSE CLIENT_SOURCES 
         "rtype_client/src/*.cpp" 
+        "rtype_client/src/*.cpp" 
         "mains/client/main.cpp" 
         "utility_classes/src/*.cpp" 
-        "engine/src/*.cpp")
+        "engine/src/*.cpp"
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/components/src/*.cpp
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/src/*.cpp
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/Network/ClientTCP/src/*.cpp
+        )
     
     if(NOT CLIENT_SOURCES)
         message(FATAL_ERROR "No client source files found in rtype_client/src/")
@@ -147,6 +152,11 @@ if(BUILD_CLIENT)
     
     target_include_directories(r-type_client PRIVATE 
         ${CMAKE_SOURCE_DIR}/rtype_client/include 
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/Managers 
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/Network/ClientTCP/include
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/components/include
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/include
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/parsers/include
         ${CMAKE_SOURCE_DIR}/utility_classes/include 
         ${CMAKE_SOURCE_DIR}/engine/include
     )

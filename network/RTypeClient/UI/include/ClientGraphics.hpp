@@ -2,7 +2,7 @@
     #define CLIENTGRAPHICS
     #include "./ClientUI.hpp"
     #include "./UIRenderer.hpp"
-    #include "../../Network/include/ThreadSafeQueue.hpp"
+    #include "../../Network/ClientTCP/include/ThreadSafeQueue.hpp"
     #include "../../Managers/ActionRegistry.hpp"
 
 class ClientGraphics {
