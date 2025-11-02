@@ -30,4 +30,6 @@ enum class TokenType {
 
 enum class Role { PLAYER, ADMIN };
 
+//adding nothing
+
 #endif /* defined(_Game_) */
