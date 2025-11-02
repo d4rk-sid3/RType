@@ -23,7 +23,7 @@ class GameManager {
         GameManager& operator=(const GameManager&) = delete;
 
         std::vector<std::thread> gameThreads_;
-    
+
     public:
         static GameManager& getInstance();
         

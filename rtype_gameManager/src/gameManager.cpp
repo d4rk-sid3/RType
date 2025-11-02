@@ -130,6 +130,7 @@ void GameManager::process_messages() {
         for (auto& game_pair : active_games_) {
             auto& gameInstance = game_pair.second;
             if (gameInstance->hasClient(endpoint)) {
+                std::cout << "Processing message for game: " << game_pair.first << std::endl;
                 gameInstance->addMessage(endpoint, msg);
                 break;
             }

@@ -199,13 +199,6 @@ void GameInstance::logGameEntities() {
                  type,
                  {static_cast<int16_t>(pos.x), static_cast<int16_t>(pos.y)}}
             );
-
-            std::cout << "Enemy_Type: " << (type) << " ";
-            std::cout << "Enemy_Name: " << (name_._name) << " ";
-            std::cout << "Enemy_Pos_x: " << static_cast<int>(pos.x) << " ";
-            std::cout << "Enemy_Pos_y: " << static_cast<int>(pos.y)
-                      << std::endl;
-
             result.insert(result.end(), tmp.begin(), tmp.end());
         } catch (...) {
         }
