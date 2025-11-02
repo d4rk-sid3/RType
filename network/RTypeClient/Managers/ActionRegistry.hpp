@@ -81,7 +81,6 @@ class ActionRegistry {
                 auto dashboard_ui = UIManager::getInstance().getUI("Dashboardpage");
                 auto username_text = std::dynamic_pointer_cast<TextElement>(dashboard_ui->getElementById("username_left"))->getContent();
                 std::string message = "SAVE " + username_text + " " + result + "\n";
-                std::cout << message << std::endl;
                 client->write(message);
             });
 

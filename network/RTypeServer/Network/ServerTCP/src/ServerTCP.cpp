@@ -87,6 +87,7 @@ static std::string interpret_command(const std::string& line)
         }
     } else if (keyword == "CREATE_GAME") {
         std::string code = generate_five_digit_random();
+        std::cout << code << std::endl;
 
         GameManager::getInstance().create_game(code);
         std::string message = "CODE " + code + "\n";
