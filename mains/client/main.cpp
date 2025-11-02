@@ -48,6 +48,8 @@ int main(int ac, char **av) {
 
     NetworkManager networkManager(port, address, lastmsg, mtx, context);
 
+    asio::ip::udp::endpoint endpoint = networkManager.getEndpoint();
+
     std::thread t([&context]() { context.run(); });
 
     GraphicsClient grClient(networkManager, lastmsg, mtx);

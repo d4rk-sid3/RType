@@ -96,6 +96,8 @@ class NetworkManager {
      */
     void send_to_server( const std::vector<int8_t>& msg, size_t size );
 
+    asio::ip::udp::endpoint getEndpoint();
+
   private:
     /**
      * @brief Context for asynchronous operations

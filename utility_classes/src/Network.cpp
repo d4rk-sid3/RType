@@ -81,6 +81,10 @@ void NetworkManager::stop()
     context.stop();
 }
 
+asio::ip::udp::endpoint NetworkManager::getEndpoint() {
+    return socket.local_endpoint();
+}
+
 void NetworkManager::receive_from_clients() {
     socket.async_receive_from(
         asio::buffer(buff), last_sender_,
