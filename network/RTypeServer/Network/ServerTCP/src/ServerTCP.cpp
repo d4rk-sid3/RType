@@ -132,8 +132,11 @@ static std::string interpret_command(const std::string& line)
         return "JOIN_OK\n";
     } else if (keyword == "LAUNCH_GAME") {
         std::string code = args[0];
-        std::cout << "CODE : : " << code << std::endl;
-        GameManager::getInstance().start_game(code);
+
+        std::thread([code]() {
+            GameManager::getInstance().start_game(code);
+        }).detach();
+        
         return "LAUNCH_OK\n";
     }
     else if (keyword == "LIST") {
