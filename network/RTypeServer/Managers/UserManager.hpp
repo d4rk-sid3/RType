@@ -141,6 +141,14 @@ class UserManager {
             return out;
         }
 
+        std::vector<std::string> getUsersList() const {
+            std::vector<std::string> out;
+            out.reserve(_users.size());
+            for (const auto& kv : _users)
+                out.push_back(kv.second.getUsername());
+            return out;
+        }
+
         void displayUsers() {
             for (const auto& kv : _users) {
                 std::cout << "----------------------------------" << std::endl;

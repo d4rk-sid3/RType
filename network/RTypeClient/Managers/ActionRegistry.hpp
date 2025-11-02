@@ -41,7 +41,6 @@ class ActionRegistry {
 
         void setNetworkActions(std::shared_ptr<ClientTCP> client) {
             registerAction("Login", [client]() {
-                std::cout << "Loginnnnnn" << std::endl;
                 auto ui = UIManager::getInstance().getCurrentUI();
                 auto usernameField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("username"));
                 auto passwordField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("password"));
@@ -56,7 +55,6 @@ class ActionRegistry {
             });
     
             registerAction("Register", [client]() {
-                std::cout << "sjbjzkbhedvjz" << std::endl;
                 auto ui = UIManager::getInstance().getCurrentUI();
                 auto usernameField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("username"));
                 auto passwordField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("password"));
@@ -71,7 +69,6 @@ class ActionRegistry {
             });
 
             registerAction("SaveSettings", [client]() {
-                std::cout << "sjbjzkbhedvjz" << std::endl;
                 auto ui = UIManager::getInstance().getCurrentUI();
                 auto up = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_up"))->getText();
                 auto down = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_down"))->getText();
@@ -89,7 +86,6 @@ class ActionRegistry {
             });
 
             registerAction("CreateParty", [client]() {
-                std::cout << "Lolo" << std::endl;
                 std::string message = "CREATE_GAME\n";
                 client->write(message);
             });

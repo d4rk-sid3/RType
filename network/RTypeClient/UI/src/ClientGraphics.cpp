@@ -148,10 +148,20 @@ void ClientGraphics::handleNetworkEvent(const std::string& line)
 
         cast_element->setText(code);
         UIManager::getInstance().setUI("CreateParty");
+    } else if (keyword == "ADMIN_OK") {
+        std::cout << "Administrator authentication successful. Closing the graphical interface.\n";
+        
+        _isAdmin = true; 
+        clientUI.window.close();
+        return;
     }
 }
 
 ClientGraphics::~ClientGraphics() = default;
+
+bool ClientGraphics::isAdmin() {
+    return _isAdmin;
+}
 
 void ClientGraphics::run()
 {

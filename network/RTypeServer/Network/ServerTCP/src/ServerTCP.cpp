@@ -28,7 +28,6 @@ static std::string interpret_command(const std::string& line)
     std::string token;
     while (iss >> token)
         args.push_back(token);
-    std::cout << keyword << std::endl;
     if (keyword == "REGISTER") {
         if (args.size() < 2)
             return "ERROR REGISTER\n"; //Missing username or password
@@ -37,7 +36,6 @@ static std::string interpret_command(const std::string& line)
         const std::string& password = args[1];
 
         if (username.empty() || password.empty()) {
-            std::cout << "Joking" << std::endl;
             return "ERROR REGISTER\n"; //Missing username or password
         }
 
@@ -61,6 +59,8 @@ static std::string interpret_command(const std::string& line)
                 User& user = userOpt.value().get();
                 if (user.isUserBanned())
                     return "BANNED\n";
+                if (user.getUserRole() == "ADMIN")
+                    return "ADMIN_OK\n";
                 std::vector<std::string> keyMap = user.getUserControl().getKeys();
                 std::string final_result = "";
                 for (auto value : keyMap) {
@@ -74,14 +74,11 @@ static std::string interpret_command(const std::string& line)
                     " " + std::to_string(user.getUserStats().getLevel()) + " " + final_result;
                 return "LOGIN_OK " + result + "\n";
             }
-            std::cout << "Damn!! I don't know what happens here!!";
         } else
             return "LOGIN_FAIL\n";
     } else if (keyword == "SAVE") {
-        std::cout << args[0] << std::endl;
         auto userOpt = UserManager::getInstance().getUserByUsername(args[0]);
         if (userOpt) {
-            std::cout << "I'm here" << std::endl;
             User& user = userOpt.value().get();
             std::vector<std::string> _keyMap = {args[1], args[2], args[3], args[4], args[5]};
             user.bind_keys(_keyMap);
@@ -89,14 +86,42 @@ static std::string interpret_command(const std::string& line)
             return "SAVE_OK\n";
         }
     } else if (keyword == "CREATE_GAME") {
-        std::cout << "Create" << std::endl;
         std::string code = generate_five_digit_random();
 
         GameManager::getInstance().create_game(code);
         std::string message = "CODE " + code + "\n";
         return message;
-    }
+    } else if (keyword == "LIST") {
+        std::vector<std::string> _users = UserManager::getInstance().getUsersList();
+        std::string begin = "List of users : \n";
+        int i = 1;
 
+        for (auto user : _users) {
+            begin += std::to_string(i) + ". " + user + "\n";
+            i++;
+        }
+        return begin;
+    } else if (keyword == "BAN") {
+        auto userOpt = UserManager::getInstance().getUserByUsername(args[0]);
+        if (userOpt) {
+            User& user = userOpt.value().get();
+            user.setBanned(true);
+            user.save(DatabaseManager::getInstance().getDB());
+            std::string value = "User " + args[0] + " has been successfully banned from the server.\n";
+            return value;
+        }
+        return "No user with username " + args[0] + " has been found in the database.\n";
+    }  else if (keyword == "RELEASE") {
+        auto userOpt = UserManager::getInstance().getUserByUsername(args[0]);
+        if (userOpt) {
+            User& user = userOpt.value().get();
+            user.setBanned(false);
+            user.save(DatabaseManager::getInstance().getDB());
+            std::string value = "User " + args[0] + " has been successfully released from the server.\n";
+            return value;
+        }
+        return "No user with username " + args[0] + " has been found in the database.\n";
+    }
     else if (keyword == "QUIT") {
         return "BYE\n";
     }
