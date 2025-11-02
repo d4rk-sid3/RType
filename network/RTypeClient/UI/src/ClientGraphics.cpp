@@ -8,6 +8,11 @@ void ClientGraphics::loadPages() {
     clientUI.loadPages();
 }
 
+bool ClientGraphics::inGame()
+{
+    return _inGame;
+}
+
 void ClientGraphics::handleNetworkEvent(const std::string& line)
 {
     std::string cmd = line;
@@ -154,6 +159,9 @@ void ClientGraphics::handleNetworkEvent(const std::string& line)
         _isAdmin = true; 
         clientUI.window.close();
         return;
+    } else if (keyword == "LAUNCH_OK") {
+        _inGame = true;
+        clientUI.window.close();
     }
 }
 

@@ -80,7 +80,6 @@ int main(int ac, char **av) {
 
     int port = std::stoi(av[1]);
     std::string address = av[2];
-    bool isGaming = false;
     std::vector<int8_t> lastmsg;
     std::mutex mtx;
 
@@ -113,7 +112,7 @@ int main(int ac, char **av) {
     if (clientGraphics.isAdmin())
         launchAdminConsole(client, eventQueue);
 
-    if (isGaming)
+    if (clientGraphics.inGame())
         grClient.run();
 
     context.stop();

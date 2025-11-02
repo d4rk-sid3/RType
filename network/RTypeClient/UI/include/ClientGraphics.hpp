@@ -11,12 +11,14 @@ class ClientGraphics {
         UIRenderer renderer;
         std::shared_ptr<ThreadSafeQueue> _queue;
         bool _isAdmin = false;
+        bool _inGame = false;
 
         ClientGraphics(std::shared_ptr<ThreadSafeQueue> queue);
         void handleNetworkEvent(const std::string &string);
         void loadPages();
         ~ClientGraphics();
         bool isAdmin();
+        bool inGame();
         void run();
 };
 #endif
