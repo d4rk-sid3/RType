@@ -4,8 +4,9 @@
 #include "logic_functions.hpp"
 
 void printServerUsage() {
-    std::cerr << "Usage:\n\t./r-type_server [port] [difficulty]\n" << std::endl;
-    std::cerr << "\t\tport: The port number to run the server on" << std::endl;
+    std::cerr << "Usage:\n\t./r-type_server [tcpport] [udpport] [difficulty]\n" << std::endl;
+    std::cerr << "\t\ttcpport: The TCP port number to run the server on" << std::endl;
+    std::cerr << "\t\tudpport: The UDP port number to run the server on" << std::endl;
     std::cerr << "\t\tdifficulty: The difficulty of the game (easy | medium | hard)" << std::endl;
 }
 
@@ -29,16 +30,17 @@ void checkServerArgs(int ac, char **av) {
         printServerUsage();
         exit(0);
     }
-    if (ac == 4 && std::string(av[2]) == "-f") {
+    if (ac == 5 && std::string(av[2]) == "-f") {
         custom_conf_path = av[3];
         return;
     }
-    if (ac != 3) {
+    if (ac != 4) {
         printServerUsage();
         exit(84);
     }
     try {
         std::stoi(av[1]);
+        std::stoi(av[2]);
     } catch (...) {
         printServerUsage();
         exit(84);
