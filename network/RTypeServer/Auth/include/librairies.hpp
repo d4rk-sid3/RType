@@ -32,7 +32,7 @@ enum class Role { PLAYER, ADMIN };
 
 using boost::asio::ip::tcp;
 // namespace asio = boost::asio;
-
+ 
 using boost::asio::ip::udp;
 
 #endif /* defined(_Game_) */
