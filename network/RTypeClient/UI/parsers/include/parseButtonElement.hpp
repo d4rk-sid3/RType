@@ -140,7 +140,6 @@ std::shared_ptr<UIElement> parseButtonElement(const libconfig::Setting& setting)
         setting.lookupValue("onHover", hoverId);
         if (ActionRegistry::getInstance().get(clickId)) {
             clickCb = ActionRegistry::getInstance().get(clickId);
-            std::cout << "Found the function " << clickId << std::endl;
         }
         if (ActionRegistry::getInstance().get(hoverId)) 
             hoverCb = ActionRegistry::getInstance().get(hoverId);

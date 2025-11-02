@@ -34,8 +34,6 @@ std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& sett
         setting.lookupValue("remapMode", remapMode);
         setting.lookupValue("textSize", textSize);
 
-        std::cout << "TextSize : " << textSize << std::endl;
-
         if (setting.exists("activeOutlineColor")) {
             const libconfig::Setting& color = setting.lookup("activeOutlineColor");
             if (color.getLength() >= 3) {
