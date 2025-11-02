@@ -110,7 +110,7 @@ entity Factory::make_player1() {
     auto& player_hurtbox =
         reg.add_component<component::hurtbox>(player_id, component::hurtbox());
     player_hurtbox.group = 1;
-    player_hurtbox.health = 1000;
+    player_hurtbox.health = 1;
     player_hurtbox.width = 32;
     player_hurtbox.height = 16;
 
@@ -905,7 +905,7 @@ entity Factory::make_boss() {
     reg.add_component<component::position>(boss_id, {0, 0});
     reg.add_component<component::velocity>(boss_id, {0, 0});
 
-    reg.add_component<component::hurtbox>(boss_id, {5, 2, 130, 50});
+    reg.add_component<component::hurtbox>(boss_id, {500, 2, 130, 50});
     reg.add_component<component::hitbox>(boss_id, {10, 1, 130, 50, false});
 
     auto& entity_name =
@@ -920,6 +920,7 @@ entity Factory::make_boss() {
     unique_ids++;
     return boss_id;
 }
+
 
 entity Factory::make_big_missile() {
     entity missile_id = reg.spawn_entity();

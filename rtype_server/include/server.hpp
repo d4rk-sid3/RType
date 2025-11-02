@@ -78,6 +78,11 @@ class Server {
     const chrono::milliseconds tickDuration = std::chrono::milliseconds(50);
 
     /**
+     * @brief The window for rendering (if needed)
+     */
+    sf::RenderWindow win;
+
+    /**
      * @brief The port to listen on
      */
     int p_;
