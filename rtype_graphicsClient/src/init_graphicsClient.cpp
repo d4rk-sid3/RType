@@ -128,8 +128,7 @@ std::string getKey(int value) {
  * @param address The server address
  */
 GraphicsClient::GraphicsClient (NetworkManager& client, std::vector<int8_t>& _lastmsg, std::mutex& _mtx):
-    client_(client), lastmsg(_lastmsg), mtx(_mtx),
-    win(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type"), reg(win), factory(reg)
+    client_(client), lastmsg(_lastmsg), mtx(_mtx), reg(win), factory(reg)
 {
     state = LEVEL1;
     substate = LEVEL1_START;
@@ -666,6 +665,8 @@ void GraphicsClient::handleSubStates(double delta, sf::RenderWindow& win)
 void GraphicsClient::run()
 {
     isRunning_ = true;
+
+    win.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type");
 
     clientStarted = std::chrono::steady_clock::now();
 
