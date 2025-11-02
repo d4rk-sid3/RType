@@ -2,9 +2,11 @@
 #include "../../network/RTypeClient/UI/include/ClientGraphics.hpp"
 
 void printClientUsage() {
-    std::cerr << "Usage:\n\t./r-type_client [port] [ip_address]\n" << std::endl;
-    std::cerr << "\t\tport: The port number of the server" << std::endl;
+    std::cerr << "Usage:\n\t./r-type_client [tcp_port] [udp_port] [ip_address]\n" << std::endl;
+    std::cerr << "\t\ttcp_port: The TCP port number of the server" << std::endl;
+    std::cerr << "\t\tudp_port: The UDP port number of the server" << std::endl;
     std::cerr << "\t\tip_address: The ip address of the server" << std::endl;
+
 }
 
 void checkClientArgs(int ac, char **av) {
@@ -12,7 +14,7 @@ void checkClientArgs(int ac, char **av) {
         printClientUsage();
         exit(0);
     }
-    if (ac != 3) {
+    if (ac != 4) {
         printClientUsage();
         exit(84);
     }
@@ -79,7 +81,8 @@ int main(int ac, char **av) {
     checkClientArgs(ac, av);
 
     int port = std::stoi(av[1]);
-    std::string address = av[2];
+    int udp_port = std::stoi(av[2]);
+    std::string address = av[3];
     bool isGaming = false;
     std::vector<int8_t> lastmsg;
     std::mutex mtx;
@@ -95,7 +98,7 @@ int main(int ac, char **av) {
     auto client = std::make_shared<ClientTCP>(context, endpoints, eventQueue);
     client->start(endpoints);
 
-    NetworkManager networkManager(port, address, lastmsg, mtx, context);
+    NetworkManager networkManager(udp_port, address, lastmsg, mtx, context);
     ActionRegistry::getInstance().setNetworkActions(client);
     ActionRegistry::getInstance().setInstanceActions(networkManager, client);
     clientGraphics.loadPages();
