@@ -52,18 +52,10 @@ int main(int ac, char **av) {
 
     GraphicsClient grClient(networkManager, lastmsg, mtx);
 
-    while (1)
-    {
-        if (isGaming == false) {
-            if (!clientGraphics.isRunning()) {
-                clientGraphics.run();
-            }
-        } else {
-            if (!grClient.isRunning()) {
-                grClient.run();
-            }
-        }
-    }
+    clientGraphics.run();
+
+    if (isGaming)
+        grClient.run();
 
     context.stop();
     
