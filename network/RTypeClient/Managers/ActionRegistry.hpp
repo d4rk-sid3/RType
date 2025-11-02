@@ -93,6 +93,14 @@ class ActionRegistry {
                 std::string message = "SAVE " + username_text + " " + result + "\n";
                 client->write(message);
             });
+
+            registerAction("LaunchGame", [client]() {
+                auto ui = UIManager::getInstance().getCurrentUI();
+                auto code = std::dynamic_pointer_cast<TextElement>(ui->getElementById("code_value"))->getContent();
+
+                std::string message = "LAUNCH_GAME " + code + "\n";
+                client->write(message);
+            });
         }
 
         void setInstanceActions(NetworkManager &networkManager, std::shared_ptr<ClientTCP> client) {

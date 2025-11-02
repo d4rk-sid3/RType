@@ -128,11 +128,15 @@ static std::string interpret_command(const std::string& line)
         std::string code = args[0];
         asio::ip::udp::endpoint end = string_to_endpoint(args[1]);
         
-
         GameManager::getInstance().addClientToGame(code, end);
-
-
-    } else if (keyword == "LIST") {
+        return "JOIN_OK";
+    } else if (keyword == "LAUNCH_GAME") {
+        std::string code = args[0];
+        std::cout << "CODE : : " << code << std::endl;
+        GameManager::getInstance().start_game(code);
+        return "LAUNCH_OK";
+    }
+    else if (keyword == "LIST") {
         std::vector<std::string> _users = UserManager::getInstance().getUsersList();
         std::string begin = "List of users : \n";
         int i = 1;
