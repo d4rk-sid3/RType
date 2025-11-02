@@ -11,7 +11,7 @@ class DatabaseManager {
         DatabaseManager(const DatabaseManager&) = delete;
         DatabaseManager& operator=(const DatabaseManager&) = delete;
 
-        void open(const std::string& path = "Database/r-type.dbgame.db") {
+        void open(const std::string& path = "Database/r-type.db") {
             if (_db) {
                 std::cerr << "La base de données est déjà ouverte.\n";
                 return;
