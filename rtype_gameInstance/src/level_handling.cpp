@@ -234,17 +234,32 @@ void GameInstance::receivePlayerInput(double delta) {
     static double shoot_timer = 0;
 
     shoot_timer += delta;
+    size_t msg_size = 0;
 
-    while (messages.size() != 0) {
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        msg_size = messages.size();
+    }
 
-        std::cout << "Message SIZE: " << messages.size() << std::endl;
+    while (msg_size != 0) {
+
+        std::cout << "Message SIZE: " << msg_size << std::endl;
 
         std::pair<asio::ip::udp::endpoint, std::vector<int8_t>> msg;
 
-        msg = messages.front();
-        messages.erase(messages.begin());
+        {
+            std::lock_guard<std::mutex> lock(mtx);
+            msg = messages.front();
+            messages.erase(messages.begin());
+            msg_size = messages.size();
+        }
 
         std::vector<int8_t> tmp = msg.second;
+
+        for (auto a : tmp) {
+            std::cout << " " << std::to_string(a);
+        }
+        std::cout << std::endl;
 
         try {
             if (tmp[0] == 0x24) {

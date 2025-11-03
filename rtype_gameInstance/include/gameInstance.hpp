@@ -118,6 +118,11 @@ class GameInstance {
     std::vector<int8_t> result;
 
     /**
+     * @brief A mutex for thread safety
+     */
+    std::mutex mtx;
+
+    /**
      * @brief List of all last messages received from clients
      */
     std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>

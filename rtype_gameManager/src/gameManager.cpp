@@ -90,7 +90,7 @@ GameManager::~GameManager() {
 // --- LOGIQUE DE JEU ---
 
 std::shared_ptr<GameInstance> GameManager::create_game(const std::string& id) {
-    std::lock_guard<std::mutex> lock(getMutex()); 
+    // std::lock_guard<std::mutex> lock(getMutex()); 
     
     if (active_games_.count(id)) {
         return nullptr;
@@ -103,7 +103,7 @@ std::shared_ptr<GameInstance> GameManager::create_game(const std::string& id) {
 }
 
 std::shared_ptr<GameInstance> GameManager::get_game(const std::string& id) {
-    std::lock_guard<std::mutex> lock(getMutex());
+    // std::lock_guard<std::mutex> lock(getMutex());
     if (active_games_.count(id)) {
         return active_games_[id];
     }
@@ -111,12 +111,12 @@ std::shared_ptr<GameInstance> GameManager::get_game(const std::string& id) {
 }
 
 void GameManager::remove_game(const std::string& id) {
-    std::lock_guard<std::mutex> lock(getMutex());
+    // std::lock_guard<std::mutex> lock(getMutex());
     active_games_.erase(id);
 }
 
 void GameManager::list_games() {
-    std::lock_guard<std::mutex> lock(getMutex());
+    // std::lock_guard<std::mutex> lock(getMutex());
     std::cout << "Active Games: ";
     for (const auto& pair : active_games_) {
         std::cout << pair.first << " ";
@@ -129,7 +129,7 @@ void GameManager::addClientToGame(
     asio::ip::udp::endpoint& client,
     const std::string& session_id
 ) {
-    std::lock_guard<std::mutex> lock(getMutex());
+    // std::lock_guard<std::mutex> lock(getMutex());
     if (active_games_.count(game_id)) {
         active_games_[game_id]->addClient(client);
         active_games_[game_id]->addSessionId(session_id);
@@ -137,8 +137,24 @@ void GameManager::addClientToGame(
 }
 
 void GameManager::process_messages() {
-    std::lock_guard<std::mutex> lock(getMutex());
-    for (auto& msg_pair : getMessages()) { 
+    std::pair<asio::ip::udp::endpoint, std::vector<int8_t>> msg_pair;
+
+    size_t len = 0;
+    {
+        std::lock_guard<std::mutex> lock(getMutex());
+        len = getMessages().size();
+    }
+
+    while (len > 0) {
+        {
+            std::lock_guard<std::mutex> lock(getMutex());
+            if (getMessages().empty()) {
+                return;
+            }
+            msg_pair = getMessages().front();
+            getMessages().erase(getMessages().begin());
+            len = getMessages().size();
+        }
         const auto& endpoint = msg_pair.first;
         const auto& msg = msg_pair.second;
 

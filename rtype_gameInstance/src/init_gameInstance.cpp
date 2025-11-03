@@ -113,6 +113,7 @@ bool GameInstance::hasClient(const asio::ip::udp::endpoint& client)
 }
 
 void GameInstance::addMessage(const asio::ip::udp::endpoint& client, const std::vector<int8_t>& msg) {
+    std::lock_guard<std::mutex> lock(mtx);
     messages.push_back(std::make_pair(client, msg));
 }
 
