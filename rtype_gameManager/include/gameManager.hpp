@@ -18,12 +18,14 @@ class GameManager {
     
         void process_messages();
         
-        GameManager() = default;
+        GameManager();
     
         GameManager(const GameManager&) = delete;
         GameManager& operator=(const GameManager&) = delete;
 
         std::vector<std::thread> gameThreads_;
+
+        std::atomic<bool> isRunning;
 
     public:
         static GameManager& getInstance();

@@ -66,7 +66,20 @@ NetworkManager& GameManager::getUdpServer() {
     return *udpServer_;
 }
 
+GameManager::GameManager() {
+    isRunning.store(true);
+    std::thread messageThread([this]() {
+        while (isRunning.load()) {
+            process_messages();
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        }
+    });
+    messageThread.detach();
+    gameThreads_.emplace_back(std::move(messageThread));
+}
+
 GameManager::~GameManager() {
+    isRunning.store(false);
     for (auto& thread : gameThreads_) {
         if (thread.joinable()) {
             thread.join();
