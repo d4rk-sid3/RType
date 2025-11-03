@@ -156,18 +156,27 @@ target_link_libraries(engine PUBLIC
 # Client
 if(BUILD_CLIENT)
     file(GLOB_RECURSE CLIENT_SOURCES 
-        "rtype_client/src/*.cpp" 
+        "rtype_graphicsClient/src/*.cpp" 
         "mains/client/main.cpp" 
-        "utility_classes/src/*.cpp")
+        "utility_classes/src/*.cpp"
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/components/src/*.cpp
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/src/*.cpp
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/Network/ClientTCP/src/*.cpp
+        )
     
     if(NOT CLIENT_SOURCES)
-        message(FATAL_ERROR "No client source files found in rtype_client/src/")
+        message(FATAL_ERROR "No client source files found in rtype_graphicsClient/src/")
     endif()
     
     add_executable(r-type_client ${CLIENT_SOURCES})
     
     target_include_directories(r-type_client PRIVATE 
-        ${CMAKE_SOURCE_DIR}/rtype_client/include 
+        ${CMAKE_SOURCE_DIR}/rtype_graphicsClient/include 
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/Managers 
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/Network/ClientTCP/include
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/components/include
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/include
+        ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/parsers/include
         ${CMAKE_SOURCE_DIR}/utility_classes/include 
         ${CMAKE_SOURCE_DIR}/engine/include
     )
@@ -196,9 +205,13 @@ endif()
 # Serveur
 if(BUILD_SERVER)
     file(GLOB_RECURSE SERVER_SOURCES 
-        "rtype_server/src/*.cpp" 
+        "rtype_gameInstance/src/*.cpp" 
+        "rtype_gameManager/src/*.cpp" 
         "mains/server/main.cpp" 
-        "utility_classes/src/*.cpp")
+        "utility_classes/src/*.cpp"
+        ${CMAKE_SOURCE_DIR}/network/RTypeServer/Auth/src/*.cpp
+        ${CMAKE_SOURCE_DIR}/network/RTypeServer/Network/ServerTCP/src/*.cpp
+        )
 
     if(NOT SERVER_SOURCES)
         message(FATAL_ERROR "No server source files found in rtype_server/src/")
@@ -207,14 +220,19 @@ if(BUILD_SERVER)
     add_executable(r-type_server ${SERVER_SOURCES})
     
     target_include_directories(r-type_server PRIVATE 
-        ${CMAKE_SOURCE_DIR}/rtype_server/include 
+        ${CMAKE_SOURCE_DIR}/rtype_gameInstance/include 
+        ${CMAKE_SOURCE_DIR}/rtype_gameManager/include 
         ${CMAKE_SOURCE_DIR}/utility_classes/include 
         ${CMAKE_SOURCE_DIR}/engine/include
+        ${CMAKE_SOURCE_DIR}/network/RTypeServer/Auth/include
+        ${CMAKE_SOURCE_DIR}/network/RTypeServer/Managers
+        ${CMAKE_SOURCE_DIR}/network/RTypeServer/Network/ServerTCP/include
     )
     
     target_link_libraries(r-type_server PRIVATE 
         sfml-system sfml-window sfml-graphics sfml-network sfml-audio
         asio::asio
+        sodium
         ${LIBCONFIG_TARGET}
         OpenAL::OpenAL
         Vorbis::vorbisenc Vorbis::vorbisfile Vorbis::vorbis

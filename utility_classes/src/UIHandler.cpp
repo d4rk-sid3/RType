@@ -17,7 +17,7 @@
  * ------------------------------------------------------------------------------------ */
 
 #include "UIHandler.hpp"
-#include "../../rtype_server/include/server.hpp"
+#include "../../rtype_gameInstance/include/gameInstance.hpp"
 
 
 UIHandler::UIHandler(const std::string &text, bool fade_in)
