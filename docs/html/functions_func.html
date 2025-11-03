@@ -82,7 +82,7 @@ $(function() {
 
 <h3><a id="index_c" name="index_c"></a>- c -</h3><ul>
 <li>clearGameEntities()&#160;:&#160;<a class="el" href="classServer.html#aac794315f4a5a23ec5199cc0ba42ac8e">Server</a></li>
-<li>Client()&#160;:&#160;<a class="el" href="classClient.html#a802e0a6f59303939f824d41580deb82a">Client</a></li>
+<li>Client()&#160;:&#160;<a class="el" href="classClient.html#a39aa2a9e2589d8e5317863670d18759b">Client</a></li>
 <li>controllable_s()&#160;:&#160;<a class="el" href="structcomponent_1_1controllable__s.html#a56a342d1e9424ad06902ab59f2c39db3">component::controllable_s</a></li>
 </ul>
 
@@ -91,8 +91,8 @@ $(function() {
 <li>decodeActionResponse()&#160;:&#160;<a class="el" href="classServer.html#a268043e1a600716d031d621139d9d3a6">Server</a></li>
 <li>decodeEnemyMovedResponse()&#160;:&#160;<a class="el" href="classClient.html#ad57127e6e1ade439817b5d339ddfbec1">Client</a></li>
 <li>decodeGameState()&#160;:&#160;<a class="el" href="classClient.html#a6cf06559e7fb841301b70d20960e4e17">Client</a></li>
+<li>decodeMessageHeader()&#160;:&#160;<a class="el" href="classClient.html#ada60da3cdaccd2575fb38c6a4d78ecb7">Client</a></li>
 <li>decodeMoveResponse()&#160;:&#160;<a class="el" href="classServer.html#ac5a491fec7ae16a63d195b4b192f9d48">Server</a></li>
-<li>decodeNbrEntity()&#160;:&#160;<a class="el" href="classClient.html#ad88aa07459555b36bd038b91505b51cf">Client</a></li>
 </ul>
 
 
@@ -100,9 +100,12 @@ $(function() {
 <li>encodeActionResponse()&#160;:&#160;<a class="el" href="classClient.html#aa317720a1d7ca0d8be350e164e327811">Client</a></li>
 <li>encodeEnemyMovedResponse()&#160;:&#160;<a class="el" href="classServer.html#a0a21ae22cb0560a554fec4e186583eaa">Server</a></li>
 <li>encodeGameState()&#160;:&#160;<a class="el" href="classServer.html#aa860fb492b5c1dcb27efe0a0ce7e8439">Server</a></li>
+<li>encodeMessageHeader()&#160;:&#160;<a class="el" href="classServer.html#abed355fa2d70faaf6e62d8602f368591">Server</a></li>
 <li>encodeMoveResponse()&#160;:&#160;<a class="el" href="classClient.html#a1a07e2ea5336182977e9b5a4dd42c9fc">Client</a></li>
-<li>encodeNbrEntity()&#160;:&#160;<a class="el" href="classServer.html#a4f1fd5b9e8cdac6f505d6a6a03434fab">Server</a></li>
 <li>entity()&#160;:&#160;<a class="el" href="classentity.html#a809636ddb2bc7eee38f2fb0e49c6c1e9">entity</a></li>
+<li>entityMovCreate()&#160;:&#160;<a class="el" href="classClient.html#a9c26beb2a6dacc50a8ed5fdf12e02b9e">Client</a></li>
+<li>entityMovDelete()&#160;:&#160;<a class="el" href="classClient.html#a676971a2e7b41563df1d6a8503499381">Client</a></li>
+<li>entityMoveInterpole()&#160;:&#160;<a class="el" href="classClient.html#a3deb408ff6c35977f942daf1cc0797a9">Client</a></li>
 </ul>
 
 
@@ -110,12 +113,16 @@ $(function() {
 <li>get_components()&#160;:&#160;<a class="el" href="classregistry.html#ad397b1104bc8510105b4e4d6b90f87cc">registry</a></li>
 <li>get_window()&#160;:&#160;<a class="el" href="classregistry.html#a202893edec86ab9275b46be5ea71e78e">registry</a></li>
 <li>getComponentNum()&#160;:&#160;<a class="el" href="classregistry.html#a2203e584cc8b5829c26094e21bab2d21">registry</a></li>
+<li>getControl()&#160;:&#160;<a class="el" href="classregistry.html#a7458a26fa7b4c694bb7287e6725cff1d">registry</a></li>
 <li>getEntityNum()&#160;:&#160;<a class="el" href="classregistry.html#a05b69b2f3a790c425e0d1df40e7fb322">registry</a></li>
 <li>getEraseFunctionNum()&#160;:&#160;<a class="el" href="classregistry.html#a6492780080f9630f136627d42800880a">registry</a></li>
 <li>getFont()&#160;:&#160;<a class="el" href="classResourceManager.html#ad7fe4904d2a5ae24bbc60360fc012c56">ResourceManager</a></li>
 <li>getId()&#160;:&#160;<a class="el" href="classentity.html#a49afbb4a974ddc6a5393d7f0c30ab63b">entity</a></li>
 <li>getKeyboardInput()&#160;:&#160;<a class="el" href="structcomponent_1_1controllable__s.html#a50d82bffaf22ef937e0c2d18f4e05c22">component::controllable_s</a></li>
-<li>getManager()&#160;:&#160;<a class="el" href="classClient.html#af6829864546ed7e423fc1875be9864a9">Client</a>, <a class="el" href="classServer.html#acfd2d06240a094a14b1a9d507e342508">Server</a></li>
+<li>getLogic()&#160;:&#160;<a class="el" href="classregistry.html#acf29c5dee5ae25cc4f4672e5f799b599">registry</a></li>
+<li>getMovement()&#160;:&#160;<a class="el" href="classregistry.html#a2758920b8b06a6b20bd7d496d108939b">registry</a></li>
+<li>getPhysics()&#160;:&#160;<a class="el" href="classregistry.html#ac9e09bbcbf1a43e7b50caf76e6b19198">registry</a></li>
+<li>getRendering()&#160;:&#160;<a class="el" href="classregistry.html#a6606ef75f6393c1906f891f995f1e469">registry</a></li>
 <li>getTexture()&#160;:&#160;<a class="el" href="classResourceManager.html#a78632647a9a86d0b477de5055a5a2fcc">ResourceManager</a></li>
 </ul>
 
@@ -155,12 +162,13 @@ $(function() {
 
 <h3><a id="index_r" name="index_r"></a>- r -</h3><ul>
 <li>receivePlayerInput()&#160;:&#160;<a class="el" href="classServer.html#af59936648c727d2b909ebed8d2a0efa9">Server</a></li>
-<li>recupAllEntities()&#160;:&#160;<a class="el" href="classClient.html#a4c9eefab245ca66e80ceb13fa67287e8">Client</a></li>
+<li>receiveServerInfo()&#160;:&#160;<a class="el" href="classClient.html#a921a72f346a37590330b0f573cd3d177">Client</a></li>
 <li>register_all_systems()&#160;:&#160;<a class="el" href="classregistry.html#abb95393f9205c5615c365ffb249f49bb">registry</a></li>
 <li>register_components()&#160;:&#160;<a class="el" href="classregistry.html#afe3919f4a56bbbeda89af4a6e5171f8b">registry</a></li>
 <li>registry()&#160;:&#160;<a class="el" href="classregistry.html#a15c27c6d008fb260402f20d8619e43f7">registry</a></li>
 <li>remove_component()&#160;:&#160;<a class="el" href="classregistry.html#a967f47ebfc3b74c85f483aae74bfd927">registry</a></li>
 <li>ResourceManager()&#160;:&#160;<a class="el" href="classResourceManager.html#a3b32babd2e81909bbd90d7f2d566fadb">ResourceManager</a></li>
+<li>run()&#160;:&#160;<a class="el" href="classClient.html#ae0bc335d720265d4d6e8a72cf7a2a9aa">Client</a>, <a class="el" href="classServer.html#abb27d30b40a94326e3fd629d3b30b7d5">Server</a></li>
 <li>run_systems()&#160;:&#160;<a class="el" href="classregistry.html#a957cd5c282db213979764cbe622ece89">registry</a></li>
 <li>runLevel()&#160;:&#160;<a class="el" href="classClient.html#a101e55e53e7f9cc0433da705e66e1f08">Client</a>, <a class="el" href="classServer.html#af56fa596fcd58a1ea62b5a059885f467">Server</a></li>
 <li>runMenu()&#160;:&#160;<a class="el" href="classClient.html#a1edfe2aa97fdb3d54c15afa0ef48496e">Client</a></li>
@@ -170,12 +178,21 @@ $(function() {
 <h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
 <li>sendPlayerAction()&#160;:&#160;<a class="el" href="classClient.html#ae075a5f69a51c05b60cc8469c2308bd6">Client</a></li>
 <li>sendPlayerInput()&#160;:&#160;<a class="el" href="classClient.html#a9d0aec2907f33777ece928a1a0dee25e">Client</a></li>
-<li>Server()&#160;:&#160;<a class="el" href="classServer.html#afc422f4323d93d0d986198d8e3967bb2">Server</a></li>
+<li>Server()&#160;:&#160;<a class="el" href="classServer.html#aa37d52e1d2f14f8ca96a907d34e71b3f">Server</a></li>
 <li>setFontFromName()&#160;:&#160;<a class="el" href="structcomponent_1_1text__s.html#a19afaebcafa561f6cf076139f54775b2">component::text_s</a></li>
 <li>setFrameRect()&#160;:&#160;<a class="el" href="structcomponent_1_1animated__drawable__s.html#a3e4ebe0724612533507c3110a2d70ae7">component::animated_drawable_s</a></li>
 <li>setPosition()&#160;:&#160;<a class="el" href="structcomponent_1_1position__s.html#a021b18ef6d20b3967c4511a5851a82ea">component::position_s</a></li>
 <li>setTextureFromName()&#160;:&#160;<a class="el" href="structcomponent_1_1animated__drawable__s.html#a2173193d80d09809b58d877f69f633c0">component::animated_drawable_s</a>, <a class="el" href="structcomponent_1_1drawable__s.html#a7ee88f7aa48fd311461240b86f0db87a">component::drawable_s</a></li>
 <li>spawn_entity()&#160;:&#160;<a class="el" href="classregistry.html#a582fb369da9636c38840ce731bb8a200">registry</a></li>
+</ul>
+
+
+<h3><a id="index_t" name="index_t"></a>- t -</h3><ul>
+<li>toggleControl()&#160;:&#160;<a class="el" href="classregistry.html#a6270765d95f0e4d902e5ec029f8c10bc">registry</a></li>
+<li>toggleLogic()&#160;:&#160;<a class="el" href="classregistry.html#a185290a8e00b029c0e3f75a8fda58a94">registry</a></li>
+<li>toggleMovement()&#160;:&#160;<a class="el" href="classregistry.html#a20c08fcd6e0f4a8f528e429f59b61e1e">registry</a></li>
+<li>togglePhysics()&#160;:&#160;<a class="el" href="classregistry.html#a44a211670ca68c02ce193353fc9bf049">registry</a></li>
+<li>toggleRendering()&#160;:&#160;<a class="el" href="classregistry.html#a825a270f286c1744bc7a1610f46ab49c">registry</a></li>
 </ul>
 
 

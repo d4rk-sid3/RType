@@ -18,8 +18,9 @@ var searchData=
   ['messages_15',['messages',['../classServer.html#af3a69df452a40496780d77883b62052d',1,'Server']]],
   ['modèle_20de_20communication_16',['2.2 Modèle de communication',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md41',1,'']]],
   ['moved_17',['4.23 ENEMY_MOVED (0x37) — Indicate to all team members that an enemy moved',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md70',1,'']]],
-  ['moverequest_20getmovekey_20tt_18',['&lt;tt&gt;MoveRequest getMoveKey()&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md5',1,'']]],
-  ['moveresponse_20recupmove_20tt_19',['&lt;tt&gt;MoveResponse recupMove(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md12',1,'']]],
-  ['moves_20broadcast_20to_20all_20team_20members_20',['4.22 PLAYER_MOVE (0x24) — Indicate that the player moves --&gt; Broadcast to all team members',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md69',1,'']]],
-  ['mtx_21',['mtx',['../classClient.html#a491a9c51718aaf40d01a60f60e752f4f',1,'Client::mtx'],['../classServer.html#af700fd88dd2b8c20422e440dd480db8c',1,'Server::mtx']]]
+  ['movement_5factive_18',['movement_active',['../classregistry.html#a9db2f8741e8d99bec4cb2e4430e6809a',1,'registry']]],
+  ['moverequest_20getmovekey_20tt_19',['&lt;tt&gt;MoveRequest getMoveKey()&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__client_2include_2Client.html#autotoc_md5',1,'']]],
+  ['moveresponse_20recupmove_20tt_20',['&lt;tt&gt;MoveResponse recupMove(...)&lt;/tt&gt;',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2rtype__server_2include_2Server.html#autotoc_md12',1,'']]],
+  ['moves_20broadcast_20to_20all_20team_20members_21',['4.22 PLAYER_MOVE (0x24) — Indicate that the player moves --&gt; Broadcast to all team members',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md69',1,'']]],
+  ['mtx_22',['mtx',['../classClient.html#a491a9c51718aaf40d01a60f60e752f4f',1,'Client::mtx'],['../classServer.html#af700fd88dd2b8c20422e440dd480db8c',1,'Server::mtx']]]
 ];

@@ -134,8 +134,9 @@ GraphicsClient::GraphicsClient (NetworkManager& client, std::vector<int8_t>& _la
     substate = LEVEL1_START;
     isRunning_ = false;
 
-    reg.logic_active = false;
-    reg.collisions_active = false;
+    reg.toggleMovement();
+    reg.toggleRendering();
+    reg.toggleControl();
 
     std::vector<int8_t> msg(1, 0x5);
     client_.send_to_server(msg, msg.size());

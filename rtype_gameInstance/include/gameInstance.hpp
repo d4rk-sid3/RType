@@ -93,6 +93,11 @@ class GameInstance {
     sf::RenderWindow win;
 
     /**
+     * @brief The port to listen on
+     */
+    int p_;
+
+    /**
      * @brief The registry that holds all entities and components
      */
     registry reg;

@@ -49,6 +49,9 @@ void registry::register_all_systems() {
     register_components<component::audio>();
     register_components<component::name>();
     register_components<component::unique_id>();
+    register_components<component::drawable>();
+    register_components<component::animated_drawable>();
+    register_components<component::text>();
 
     add_system(
         [this, &controllables = this->get_components<component::controllable>(),
@@ -80,6 +83,7 @@ void registry::register_all_systems() {
  */
 registry::registry() : tmp(sf::RenderWindow()), window(tmp) {
     register_all_systems();
+    window.close();
 }
 
 /**
@@ -90,10 +94,6 @@ registry::registry() : tmp(sf::RenderWindow()), window(tmp) {
  */
 registry::registry(sf::RenderWindow& _window) : window(_window) {
     register_all_systems();
-
-    register_components<component::drawable>();
-    register_components<component::animated_drawable>();
-    register_components<component::text>();
 
     add_system([this, &window = this->window,
                 &positions = this->get_components<component::position>(),
