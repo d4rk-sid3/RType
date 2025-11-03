@@ -195,6 +195,14 @@ GameInstance::GameInstance(std::string _id, NetworkManager& server) :
  */
 GameInstance::~GameInstance() {}
 
+void GameInstance::addSessionId(const std::string& id) {
+    sessionIds.push_back(id);
+}
+
+const std::vector<std::string>& GameInstance::getSessionIds() const {
+    return sessionIds;
+}
+
 void GameInstance::run()
 {
     gameStarted = std::chrono::steady_clock::now();

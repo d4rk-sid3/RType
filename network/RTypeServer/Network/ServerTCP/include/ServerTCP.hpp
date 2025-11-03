@@ -13,10 +13,14 @@ class Session : public std::enable_shared_from_this<Session> {
     
         void stop();
     
+        void enqueue_write(const std::string& msg);
+
+        std::string getId() const;
+        void setId(const std::string& id);
+
     private:
         void do_read();
     
-        void enqueue_write(const std::string& msg);
     
         void do_write();
     
@@ -26,6 +30,7 @@ class Session : public std::enable_shared_from_this<Session> {
         asio::strand<asio::io_context::executor_type> strand_;
         asio::streambuf streambuf_;
         std::deque<std::string> write_queue_;
+        std::string id_;
 };
     
 // --- ServerTCPTCP: accepts new connections and spawns sessions ---

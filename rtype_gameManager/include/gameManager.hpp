@@ -6,6 +6,7 @@
 #include <map>
 #include <asio.hpp>
 #include "../../rtype_gameInstance/include/gameInstance.hpp"
+#include "../../../RTypeServer/Network/ServerTCP/include/SessionManager.hpp"
 
 class GameManager {
     private:
@@ -35,7 +36,8 @@ class GameManager {
 
         void addClientToGame(
             const std::string& game_id,
-            asio::ip::udp::endpoint& client
+            asio::ip::udp::endpoint& client,
+            const std::string& session_id
         );
     
         std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>& getMessages();

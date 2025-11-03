@@ -193,6 +193,8 @@ class GameInstance {
 
     void handleWinOrLoss();
 
+    std::vector<std::string> sessionIds;
+
   public:
 
     /**
@@ -250,6 +252,10 @@ class GameInstance {
      * @brief Run the server application
      */
     void run();
+
+    void addSessionId(const std::string& id);
+  
+    const std::vector<std::string>& getSessionIds() const;
 };
 
 #endif /* !SERVER_HPP_ */

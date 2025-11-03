@@ -1,4 +1,4 @@
-#include "../include/ServerTCP.hpp"
+#include "../include/SessionManager.hpp"
 
 //-----------------------SESSION-------------------------------
 
@@ -13,6 +13,16 @@ std::string generate_five_digit_random() {
 
     int randomNumberInt = distribution(generator);
     return std::to_string(randomNumberInt);
+}
+
+std::string generateUniqueSessionId()
+{
+    static std::mt19937_64 rng(std::random_device{}());
+    static std::uniform_int_distribution<uint64_t> dist;
+
+    std::ostringstream oss;
+    oss << std::hex << std::setw(16) << std::setfill('0') << dist(rng);
+    return oss.str();
 }
 
 asio::ip::udp::endpoint string_to_endpoint(const std::string& ep_str)
@@ -39,7 +49,7 @@ asio::ip::udp::endpoint string_to_endpoint(const std::string& ep_str)
     return asio::ip::udp::endpoint(address, port);
 }
 
-static std::string interpret_command(const std::string& line)
+static std::string interpret_command(const std::string& line, const std::string& sessionId)
 {
     std::string cmd = line;
     if (!cmd.empty() && (cmd.back() == '\r' || cmd.back() == '\n'))
@@ -118,7 +128,7 @@ static std::string interpret_command(const std::string& line)
         asio::ip::udp::endpoint end = string_to_endpoint(args[0]);
 
         GameManager::getInstance().create_game(code);
-        GameManager::getInstance().addClientToGame(code, end);
+        GameManager::getInstance().addClientToGame(code, end, sessionId);
         std::string message = "CODE " + code + "\n";
         std::cout << message;
         return message;
@@ -128,18 +138,13 @@ static std::string interpret_command(const std::string& line)
         std::string code = args[0];
         asio::ip::udp::endpoint end = string_to_endpoint(args[1]);
         
-        GameManager::getInstance().addClientToGame(code, end);
+        GameManager::getInstance().addClientToGame(code, end, sessionId);
         return "JOIN_OK\n";
     } else if (keyword == "LAUNCH_GAME") {
         std::string code = args[0];
 
-        std::thread([code]() {
-            GameManager::getInstance().start_game(code);
-        }).detach();
-        
-        return "LAUNCH_OK\n";
-    }
-    else if (keyword == "LIST") {
+        GameManager::getInstance().start_game(code);
+    } else if (keyword == "LIST") {
         std::vector<std::string> _users = UserManager::getInstance().getUsersList();
         std::string begin = "List of users : \n";
         int i = 1;
@@ -182,6 +187,9 @@ Session::Session(asio::ip::tcp::socket socket, asio::io_context& ioc)
           strand_(asio::make_strand(ioc))
 {}
 
+std::string Session::getId() const { return id_; }
+void Session::setId(const std::string& id) { id_ = id; }
+
 void Session::start() {
     do_read();
 }
@@ -202,7 +210,7 @@ void Session::do_read() {
                     std::string line;
                     std::istream is(&streambuf_);
                     std::getline(is, line);
-                    std::string response = interpret_command(line);
+                    std::string response = interpret_command(line, id_);
 
                     if (!response.empty())
                         enqueue_write(response);
@@ -271,6 +279,8 @@ void ServerTCP::do_accept() {
             if (!ec) {
                 std::cout << "New connection from " << socket.remote_endpoint() << "\n";
                 auto session = std::make_shared<Session>(std::move(socket), ioc_);
+                session->setId(generateUniqueSessionId());
+                SessionManager::getInstance().addSession(session->getId(), session);
                 session->start();
             } else {
                 std::cerr << "Accept error: " << ec.message() << "\n";

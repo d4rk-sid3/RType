@@ -113,11 +113,13 @@ void GameManager::list_games() {
 
 void GameManager::addClientToGame(
     const std::string& game_id,
-    asio::ip::udp::endpoint& client
+    asio::ip::udp::endpoint& client,
+    const std::string& session_id
 ) {
     std::lock_guard<std::mutex> lock(getMutex());
     if (active_games_.count(game_id)) {
         active_games_[game_id]->addClient(client);
+        active_games_[game_id]->addSessionId(session_id);
     }
 }
 
@@ -145,6 +147,11 @@ void GameManager::start_game(const std::string& id) {
         std::cout << "Starting game with ID: " << id << std::endl;
 
         std::thread gameThread([this, id]() {
+            for (const auto& sid : active_games_[id]->getSessionIds()) {
+                auto session = SessionManager::getInstance().getSession(sid);
+                if (session)
+                    session->enqueue_write("LAUNCH_OK\n");
+            }
             active_games_[id]->run();
         });
         gameThreads_.emplace_back(std::move(gameThread));
