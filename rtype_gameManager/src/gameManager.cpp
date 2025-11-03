@@ -74,7 +74,6 @@ GameManager::GameManager() {
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     });
-    messageThread.detach();
     gameThreads_.emplace_back(std::move(messageThread));
 }
 
