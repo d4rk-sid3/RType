@@ -237,6 +237,8 @@ void GameInstance::receivePlayerInput(double delta) {
 
     while (messages.size() != 0) {
 
+        std::cout << "Message SIZE: " << messages.size() << std::endl;
+
         std::pair<asio::ip::udp::endpoint, std::vector<int8_t>> msg;
 
         msg = messages.front();
