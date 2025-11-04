@@ -34,10 +34,11 @@ var searchData=
   ['result_31',['result',['../classServer.html#a379417d6e9d241dc4e8d5792dc927e3d',1,'Server']]],
   ['rfc_20rt001_3a_20r_20type_20protocol_20v2_201_32',['RFC-RT001: R-TYPE Protocol v2.1',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html',1,'']]],
   ['right_33',['right',['../structcomponent_1_1controllable__s.html#a99dd2125bdf6b8d98dabf6b61181fb7a',1,'component::controllable_s']]],
-  ['rt001_3a_20r_20type_20protocol_20v2_201_34',['RFC-RT001: R-TYPE Protocol v2.1',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html',1,'']]],
-  ['run_35',['run',['../classClient.html#ae0bc335d720265d4d6e8a72cf7a2a9aa',1,'Client::run()'],['../classServer.html#abb27d30b40a94326e3fd629d3b30b7d5',1,'Server::run()']]],
-  ['run_5fsystems_36',['run_systems',['../classregistry.html#a957cd5c282db213979764cbe622ece89',1,'registry']]],
-  ['runlevel_37',['runLevel',['../classClient.html#a101e55e53e7f9cc0433da705e66e1f08',1,'Client::runLevel()'],['../classServer.html#af56fa596fcd58a1ea62b5a059885f467',1,'Server::runLevel()']]],
-  ['runmenu_38',['runMenu',['../classClient.html#a1edfe2aa97fdb3d54c15afa0ef48496e',1,'Client']]],
-  ['running_20the_20game_20loop_39',['3. Running the Game Loop',['../engine.html#autotoc_md27',1,'']]]
+  ['right_5fkey_34',['right_key',['../structcomponent_1_1controllable__s.html#a2c6aa519c683c51eb0d88b93dd822281',1,'component::controllable_s']]],
+  ['rt001_3a_20r_20type_20protocol_20v2_201_35',['RFC-RT001: R-TYPE Protocol v2.1',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html',1,'']]],
+  ['run_36',['run',['../classClient.html#ae0bc335d720265d4d6e8a72cf7a2a9aa',1,'Client::run()'],['../classServer.html#abb27d30b40a94326e3fd629d3b30b7d5',1,'Server::run()']]],
+  ['run_5fsystems_37',['run_systems',['../classregistry.html#a957cd5c282db213979764cbe622ece89',1,'registry']]],
+  ['runlevel_38',['runLevel',['../classClient.html#a101e55e53e7f9cc0433da705e66e1f08',1,'Client::runLevel()'],['../classServer.html#af56fa596fcd58a1ea62b5a059885f467',1,'Server::runLevel()']]],
+  ['runmenu_39',['runMenu',['../classClient.html#a1edfe2aa97fdb3d54c15afa0ef48496e',1,'Client']]],
+  ['running_20the_20game_20loop_40',['3. Running the Game Loop',['../engine.html#autotoc_md27',1,'']]]
 ];

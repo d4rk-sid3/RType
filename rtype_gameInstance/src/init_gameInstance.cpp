@@ -31,6 +31,12 @@ void load_textures(void) {
         "assets/sprites/player/player2.gif", "player2", TEXTURE
     );
     ResourceManager::Instance().load(
+        "assets/sprites/player/player3.gif", "player3", TEXTURE
+    );
+    ResourceManager::Instance().load(
+        "assets/sprites/player/player4.gif", "player4", TEXTURE
+    );
+    ResourceManager::Instance().load(
         "assets/sprites/player/player2_flipped.gif", "player2_flipped", TEXTURE
     );
     ResourceManager::Instance().load(
@@ -142,16 +148,30 @@ void GameInstance::initializePlayers(void) {
         player1_entity_id = factory.make_entity("player1");
     if (player2_entity_id == -1)
         player2_entity_id = factory.make_entity("player2");
+    if (player3_entity_id == -1)
+        player3_entity_id = factory.make_entity("player3");
+    if (player4_entity_id == -1)
+        player4_entity_id = factory.make_entity("player4");
 
     auto& pos1 =
         reg.get_components<component::position>()[player1_entity_id].value();
     auto& pos2 =
         reg.get_components<component::position>()[player2_entity_id].value();
+    auto& pos3 =
+        reg.get_components<component::position>()[player3_entity_id].value();
+    auto& pos4 =
+        reg.get_components<component::position>()[player4_entity_id].value();
     pos1.x = 50;
-    pos1.y = 250;
+    pos1.y = 100;
 
     pos2.x = 50;
     pos2.y = 150;
+
+    pos3.x = 50;
+    pos3.y = 200;
+
+    pos4.x = 50;
+    pos4.y = 250;
 }
 
 /**

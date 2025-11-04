@@ -38,6 +38,8 @@
 
 inline bool player1_dead = false;
 inline bool player2_dead = false;
+inline bool player3_dead = false;
+inline bool player4_dead = false;
 
 inline int controllable_id = -1;
 
