@@ -57,7 +57,9 @@ enum EnemyType : int16_t {
     TYPE_BIG_MISSILE = 19,
     TYPE_SPACE_ENEMY = 20,
     PLAYER2_FLIPPED = 21,
-    EVIL_PLAYER_MISSILE = 22
+    EVIL_PLAYER_MISSILE = 22,
+    PLAYER3 = 23,
+    PLAYER4 = 24
 };
 
 /**
