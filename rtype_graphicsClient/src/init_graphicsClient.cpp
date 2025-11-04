@@ -430,7 +430,7 @@ void GraphicsClient::runLevel(double delta) {
     if (entity_states.front().first > nowDuration + latence)
         return;
     else if (nowDuration + latence > entity_states.back().first)
-        exit(0);
+        return;
 
     //////////////////////////
 

@@ -2,7 +2,7 @@
 \hypertarget{client_page}{}\label{client_page}\index{R-\/TYPE Client@{R-\/TYPE Client}}
 This page details how the client works.\hypertarget{server_page_global_infos}{}\doxysection{\texorpdfstring{Global Explanation}{Global Explanation}}\label{server_page_global_infos}
 Since the real computings, simulations, updates happen in the server\textquotesingle{}s registry, the client is then a simple displayer of the informations sent by the client. The client only listens for the game state from the server to display it. It also listens for player inputs and notifies the server about them.\hypertarget{client_page_game_state_sec}{}\doxysection{\texorpdfstring{Game State Handling}{Game State Handling}}\label{client_page_game_state_sec}
-On each frame, the client looks up in its buffer to recuperate all the entities informations sent by the server. This vector of entities informations is considered as the new state. The client the compares the new state with the old one. If an entity is present in the old state as well as in the new one, we just update the position. If an entity is present only in the new state, it then needs to be created. And if an entity is only present in the old state, it needs to be destroyed. At the same time, the client listens for player key inputs. If an input is detected, the player sends the info to the server which will update the game state accordingly. See more details in \doxylink{init__client_8cpp}{init\+\_\+client.\+cpp}\hypertarget{client_page_network_details_sec}{}\doxysection{\texorpdfstring{Network Details}{Network Details}}\label{client_page_network_details_sec}
+On each frame, the client looks up in its buffer to recuperate all the entities informations sent by the server. This vector of entities informations is considered as the new state. The client the compares the new state with the old one. If an entity is present in the old state as well as in the new one, we just update the position. If an entity is present only in the new state, it then needs to be created. And if an entity is only present in the old state, it needs to be destroyed. At the same time, the client listens for player key inputs. If an input is detected, the player sends the info to the server which will update the game state accordingly. See more details in init\+\_\+client.\+cpp\hypertarget{client_page_network_details_sec}{}\doxysection{\texorpdfstring{Network Details}{Network Details}}\label{client_page_network_details_sec}
 The client uses a {\ttfamily Network\+Manager} instance to communicate with the server. This communication is done over {\bfseries{UDP}} using the {\bfseries{ASIO}} library, which provides asynchronous networking capabilities.
 
 When the client starts, it creates a {\ttfamily Network\+Manager} object by providing\+:
@@ -14,12 +14,12 @@ When the client starts, it creates a {\ttfamily Network\+Manager} object by prov
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{classClient_a39aa2a9e2589d8e5317863670d18759b}{Client::Client}}(\textcolor{keywordtype}{int}\ port,\ std::string\ address,\ \mbox{\hyperlink{classregistry}{registry}}\&\ reg)}
+\DoxyCodeLine{Client::Client(\textcolor{keywordtype}{int}\ port,\ std::string\ address,\ \mbox{\hyperlink{classregistry}{registry}}\&\ reg)}
 \DoxyCodeLine{\ \ \ \ :\ port\_(port),}
 \DoxyCodeLine{\ \ \ \ \ \ client\_(port,\ address,\ std::ref(lastmsg),\ std::ref(mtx)),}
 \DoxyCodeLine{\ \ \ \ \ \ \_reg(reg)}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{init__client_8cpp_a1957e9ebc2a88bc8e6c87fa64239c299}{load\_client\_textures}}();}
+\DoxyCodeLine{\ \ \ \ load\_client\_textures();}
 \DoxyCodeLine{\ \ \ \ initGame();}
 \DoxyCodeLine{\}}
 

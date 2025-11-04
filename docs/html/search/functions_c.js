@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['sendplayeraction_0',['sendPlayerAction',['../classClient.html#ae075a5f69a51c05b60cc8469c2308bd6',1,'Client']]],
-  ['sendplayerinput_1',['sendPlayerInput',['../classClient.html#a9d0aec2907f33777ece928a1a0dee25e',1,'Client']]],
-  ['server_2',['Server',['../classServer.html#aa37d52e1d2f14f8ca96a907d34e71b3f',1,'Server']]],
-  ['setfontfromname_3',['setFontFromName',['../structcomponent_1_1text__s.html#a19afaebcafa561f6cf076139f54775b2',1,'component::text_s']]],
-  ['setframerect_4',['setFrameRect',['../structcomponent_1_1animated__drawable__s.html#a3e4ebe0724612533507c3110a2d70ae7',1,'component::animated_drawable_s']]],
-  ['setposition_5',['setPosition',['../structcomponent_1_1position__s.html#a021b18ef6d20b3967c4511a5851a82ea',1,'component::position_s']]],
-  ['settexturefromname_6',['setTextureFromName',['../structcomponent_1_1drawable__s.html#a7ee88f7aa48fd311461240b86f0db87a',1,'component::drawable_s::setTextureFromName()'],['../structcomponent_1_1animated__drawable__s.html#a2173193d80d09809b58d877f69f633c0',1,'component::animated_drawable_s::setTextureFromName()']]],
-  ['spawn_5fentity_7',['spawn_entity',['../classregistry.html#a582fb369da9636c38840ce731bb8a200',1,'registry']]]
+  ['togglecontrol_0',['toggleControl',['../classregistry.html#a6270765d95f0e4d902e5ec029f8c10bc',1,'registry']]],
+  ['togglelogic_1',['toggleLogic',['../classregistry.html#a185290a8e00b029c0e3f75a8fda58a94',1,'registry']]],
+  ['togglemovement_2',['toggleMovement',['../classregistry.html#a20c08fcd6e0f4a8f528e429f59b61e1e',1,'registry']]],
+  ['togglephysics_3',['togglePhysics',['../classregistry.html#a44a211670ca68c02ce193353fc9bf049',1,'registry']]],
+  ['togglerendering_4',['toggleRendering',['../classregistry.html#a825a270f286c1744bc7a1610f46ab49c',1,'registry']]]
 ];

@@ -113,11 +113,13 @@ int main(int ac, char **av) {
 
     clientGraphics.run();
 
+    printf("window closed\n");
     if (clientGraphics.isAdmin())
         launchAdminConsole(client, eventQueue);
 
     if (clientGraphics.inGame())
         grClient.run();
+    printf("Stopping context\n");
 
     context.stop();
     
