@@ -341,11 +341,20 @@ void GameInstance::runLevel(double delta) {
 }
 
 void GameInstance::handleWinOrLoss() {
-    if (player1_entity_id == -1 && player2_entity_id == -1
-        && player3_entity_id == -1 && player4_entity_id == -1) {
+    if (std::all_of(all_clients.begin(), all_clients.end(),
+        [] (std::pair<asio::ip::udp::endpoint, int>& elem) {
+                return elem.second == -1;
+            }
+        )
+    ) {
         printf("GAME OVER\n");
         win.close();
     }
+    // if (player1_entity_id == -1 && player2_entity_id == -1
+    //     && player3_entity_id == -1 && player4_entity_id == -1) {
+    //     printf("GAME OVER\n");
+    //     exit(0);
+    // }
     if (state == LEVEL1) {
         if (boss_dead) {
             printf("BOSS DEAD\n");
@@ -369,12 +378,19 @@ void GameInstance::handleWinOrLoss() {
     }
 
     if (diff_mode == PVP) {
-        if (player1_entity_id == -1) {
+        if (all_clients.begin()->second == -1) {
             printf("PLAYER 2 WON\n");
-            win.close();
-        } else if (player2_entity_id == -1) {
+            exit(0);
+        } else {
             printf("PLAYER 1 WON\n");
             win.close();
         }
+        // if (player1_entity_id == -1) {
+        //     printf("PLAYER 2 WON\n");
+        //     exit(0);
+        // } else if (player2_entity_id == -1) {
+        //     printf("PLAYER 1 WON\n");
+        //     exit(0);
+        // }
     }
 }
