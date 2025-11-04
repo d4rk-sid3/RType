@@ -174,49 +174,43 @@ void player_evil_logic(double delta, registry& reg, entity en) {
 }
 
 bool shoot_at_player(registry& reg, position enemy_pos, double attack_range) {
-    position target_pos;
+    std::array<int, 4> players = {
+        player1_entity_id, player2_entity_id,
+        player3_entity_id, player4_entity_id
+    };
 
-    double distance1 = 1000000;
-    double distance2 = 1000000;
-    if (player1_entity_id != -1) {
-        position player1_pos =
-            reg.get_components<position>()[player1_entity_id].value();
-        distance1 =
-            distance(player1_pos.x, player1_pos.y, enemy_pos.x, enemy_pos.y);
-        if (distance1 > attack_range) {
-            distance1 = 1000000;
+    double min_distance = 1e9;
+    int target_id = -1;
+
+    // Trouver le joueur le plus proche dans la portée
+    for (int player_id : players) {
+        if (player_id == -1)
+            continue;
+
+        auto player_pos_opt = reg.get_components<position>()[player_id];
+        if (!player_pos_opt.has_value())
+            continue;
+
+        position player_pos = player_pos_opt.value();
+        double d = distance(player_pos.x, player_pos.y, enemy_pos.x, enemy_pos.y);
+
+        if (d < attack_range && d < min_distance) {
+            min_distance = d;
+            target_id = player_id;
         }
     }
-    if (player2_entity_id != -1) {
-        position player2_pos =
-            reg.get_components<position>()[player2_entity_id].value();
-        distance2 =
-            distance(player2_pos.x, player2_pos.y, enemy_pos.x, enemy_pos.y);
-        if (distance2 > attack_range) {
-            distance2 = 1000000;
-        }
-    }
 
-    if (distance1 == distance2) {
+    // Aucun joueur dans la portée
+    if (target_id == -1)
         return false;
-    }
 
-    if (distance1 < distance2) {
-        if (distance1 < attack_range)
-            target_pos =
-                reg.get_components<position>()[player1_entity_id].value();
-        else
-            return false;
-    } else if (distance2 < distance1) {
-        if (distance2 < attack_range)
-            target_pos =
-                reg.get_components<position>()[player2_entity_id].value();
-        else
-            return false;
-    }
+    // Obtenir la position de la cible
+    position target_pos = reg.get_components<position>()[target_id].value();
 
+    // Créer et diriger le missile
     Factory fac(reg);
     entity missile = fac.make_enemy_missile();
+
     position& missile_pos = reg.get_components<position>()[missile].value();
     missile_pos.x = enemy_pos.x + 8;
     missile_pos.y = enemy_pos.y + 8;
@@ -224,6 +218,7 @@ bool shoot_at_player(registry& reg, position enemy_pos, double attack_range) {
     velocity& vel = reg.get_components<velocity>()[missile].value();
     vel.vx = target_pos.x - enemy_pos.x;
     vel.vy = target_pos.y - enemy_pos.y;
+
     return true;
 }
 
