@@ -53,6 +53,11 @@ inline int player3_entity_id = -1;
 inline int player4_entity_id = -1;
 
 /**
+ * @brief Map of all connected clients and their player IDs
+ */
+inline std::map<asio::ip::udp::endpoint, int> all_clients;
+
+/**
  * @brief An enum to store the difficulty of the game
  *
  */
@@ -137,11 +142,6 @@ class Server {
      */
     std::vector<std::pair<asio::ip::udp::endpoint, std::vector<int8_t>>>
         messages;
-
-    /**
-     * @brief Map of all connected clients and their player IDs
-     */
-    std::map<asio::ip::udp::endpoint, int> all_clients;
 
     /**
      * @brief Event for handling window events
