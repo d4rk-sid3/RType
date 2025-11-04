@@ -62,10 +62,6 @@ bool all_entities_spawned = false;
  * @param path
  */
 void GameInstance::loadLevel() {
-    if (diff_mode == PVP) {
-        initializePlayersPVP();
-        return;
-    }
 
     Config conf;
     if (state == LEVEL1) {
@@ -112,7 +108,7 @@ void GameInstance::loadLevel() {
         entities.push_back(info);
     }
     //clearGameEntities();
-    initializePlayers();
+    // initializePlayers();
     levelTimer = -2.0;
 }
 
@@ -342,7 +338,7 @@ void GameInstance::runLevel(double delta) {
 
 void GameInstance::handleWinOrLoss() {
     if (std::all_of(all_clients.begin(), all_clients.end(),
-        [] (std::pair<asio::ip::udp::endpoint, int>& elem) {
+        [] (auto& elem) {
                 return elem.second == -1;
             }
         )

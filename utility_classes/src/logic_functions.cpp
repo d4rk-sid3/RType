@@ -469,7 +469,7 @@ void boss_logic(double delta, registry& reg, entity en) {
 
 void gtrooper_logic(double delta, registry& reg, entity en) {
     static double t = 0.0;
-    static size_t target_player_id = player1_entity_id;
+    static size_t target_player_id = all_clients.begin()->second;
     static double retarget_timer = 0.0;
     const double RETARGET_INTERVAL = 3.0;
     const float TARGET_X = 500.0f;
@@ -561,7 +561,7 @@ void gtrooper_logic(double delta, registry& reg, entity en) {
 
 void spacenemy_logic(double delta, registry& reg, entity en) {
     static double t = 0.0;
-    static size_t target_player_id = player1_entity_id;
+    static size_t target_player_id = all_clients.begin()->second;
     static double retarget_timer = 0.0;
     const double RETARGET_INTERVAL = 3.0;
     const float TARGET_X = 500.0f;
@@ -583,13 +583,13 @@ void spacenemy_logic(double delta, registry& reg, entity en) {
     // Choix aléatoire de cible tous les RETARGET_INTERVAL secondes
     retarget_timer += delta;
     if (retarget_timer >= RETARGET_INTERVAL) {
-        std::array<int, 4> players = { player1_entity_id, player2_entity_id, player3_entity_id, player4_entity_id };
+        // std::array<int, 4> players = { player1_entity_id, player2_entity_id, player3_entity_id, player4_entity_id };
         std::vector<int> valid_players;
         auto& positions = reg.get_components<position>();
 
-        for (int pid : players) {
-            if (pid != -1 && positions[pid].has_value())
-                valid_players.push_back(pid);
+        for (auto& [player_endpoint, player_id] : all_clients) {
+            if (player_id != -1 && positions[player_id].has_value())
+                valid_players.push_back(player_id);
         }
 
         if (!valid_players.empty()) {
@@ -657,13 +657,13 @@ void force_logic(double delta, registry& reg, entity en)
     if (hb.health <= 0) {
         position& pos = reg.get_components<position>()[en].value();
 
-        std::array<int, 4> players = { player1_entity_id, player2_entity_id,
-                                       player3_entity_id, player4_entity_id };
+        // std::array<int, 4> players = { player1_entity_id, player2_entity_id,
+        //                                player3_entity_id, player4_entity_id };
 
         double min_distance = 1e9;
         attached_to = -1;
 
-        for (int player_id : players) {
+        for (auto& [player_endpoint, player_id] : all_clients) {
             if (player_id == -1)
                 continue;
 

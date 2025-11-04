@@ -261,10 +261,11 @@ void GameInstance::run()
 {
     gameStarted = std::chrono::steady_clock::now();
 
-    if (player1_entity_id != -1)
-        all_clients.begin()->second = player1_entity_id;
-    if (player2_entity_id != -1)
-        all_clients.rbegin()->second = player2_entity_id;
+    if (diff_mode == PVP) {
+        initializePlayersPVP();
+    } else {
+        initializePlayers();
+    }
 
     win.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server");
 
