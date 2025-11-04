@@ -62,26 +62,18 @@ using namespace std;
  */
 class registry {
   public:
-    /**
-     * @brief A boolean that indicates if the collisions system is active
-     *
-     */
-    bool collisions_active = true;
-    /**
-     * @brief A boolean that indicates if the render system is active
-     *
-     */
-    bool render_active = true;
-    /**
-     * @brief A boolean that indicates if the logic system is active
-     *
-     */
-    bool logic_active = true;
-    /**
-     * @brief A boolean that indicates if the control system is active
-     *
-     */
-    bool control_active = true;
+    void toggleMovement() {movement_active = !movement_active;};
+    void togglePhysics() {collisions_active = !collisions_active;};
+    void toggleRendering() {render_active = !render_active;};
+    void toggleControl() {control_active = !control_active;};
+    void toggleLogic() {logic_active = !logic_active;};
+
+    bool  getMovement() {return movement_active;};
+    bool  getPhysics() {return collisions_active;};
+    bool  getRendering() {return render_active;};
+    bool  getControl() {return control_active;};
+    bool  getLogic() {return logic_active;};
+
     /**
      * @brief A vector of entities id that are dead and can be reused
      *
@@ -165,6 +157,32 @@ class registry {
     sf::Clock clock;
 
     void register_all_systems();
+    /**
+     * @brief A boolean that indicates if the collisions system is active
+     *
+     */
+    bool collisions_active = false;
+    /**
+     * @brief A boolean that indicates if the render system is active
+     *
+     */
+    bool render_active = false;
+    /**
+     * @brief A boolean that indicates if the logic system is active
+     *
+     */
+    bool logic_active = false;
+    /**
+     * @brief A boolean that indicates if the control system is active
+     *
+     */
+    bool control_active = false;
+
+    /**
+     * @brief A boolean that indicates if the movement system is active
+     * 
+     */
+    bool movement_active = false;
 };
 
 #include "../src/registry_single_comp.tpp"

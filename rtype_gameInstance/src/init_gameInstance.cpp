@@ -178,7 +178,10 @@ void GameInstance::initializePlayersPVP(void) {
 GameInstance::GameInstance(std::string _id, NetworkManager& server) :
     id(_id), reg(win), factory(reg), server_(server)
 {
-    reg.control_active = false;
+    reg.toggleLogic();
+    reg.toggleMovement();
+    reg.togglePhysics();
+    reg.toggleRendering();
     counter = 0;
 
     load_textures();

@@ -221,7 +221,7 @@ void GameInstance::logGameEntities() {
 
     if (real_entities == 0 && all_entities_spawned) {
         printf("Victory\n");
-        exit(0);
+        win.close();
     }
 }
 
@@ -343,7 +343,7 @@ void GameInstance::runLevel(double delta) {
 void GameInstance::handleWinOrLoss() {
     if (player1_entity_id == -1 && player2_entity_id == -1) {
         printf("GAME OVER\n");
-        exit(0);
+        win.close();
     }
     if (state == LEVEL1) {
         if (boss_dead) {
@@ -362,7 +362,7 @@ void GameInstance::handleWinOrLoss() {
     if (state == LEVEL3) {
         if (final_boss_dead) {
             printf("FINAL BOSS DEAD\n");
-            exit(0);
+            win.close();
             loadLevel();
         }
     }
@@ -370,10 +370,10 @@ void GameInstance::handleWinOrLoss() {
     if (diff_mode == PVP) {
         if (player1_entity_id == -1) {
             printf("PLAYER 2 WON\n");
-            exit(0);
+            win.close();
         } else if (player2_entity_id == -1) {
             printf("PLAYER 1 WON\n");
-            exit(0);
+            win.close();
         }
     }
 }

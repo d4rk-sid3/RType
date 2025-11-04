@@ -131,13 +131,34 @@ if(CLANG_FORMAT_EXE)
 endif()
 
 # -------------------------------------------------------------
+# Engine
+file(GLOB_RECURSE ENGINE_SOURCES 
+        "engine/src/*.cpp")
+
+if(NOT ENGINE_SOURCES)
+    message(FATAL_ERROR "No engine source files found in engine/src/")
+endif()
+
+add_library(engine STATIC ${ENGINE_SOURCES})
+
+target_include_directories(engine PRIVATE 
+    ${CMAKE_SOURCE_DIR}/utility_classes/include 
+    ${CMAKE_SOURCE_DIR}/engine/include
+)
+
+target_link_libraries(engine PUBLIC
+    sfml-graphics
+    sfml-window
+    sfml-system
+)
+
+# -------------------------------------------------------------
 # Client
 if(BUILD_CLIENT)
     file(GLOB_RECURSE CLIENT_SOURCES 
         "rtype_graphicsClient/src/*.cpp" 
         "mains/client/main.cpp" 
-        "utility_classes/src/*.cpp" 
-        "engine/src/*.cpp"
+        "utility_classes/src/*.cpp"
         ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/components/src/*.cpp
         ${CMAKE_SOURCE_DIR}/network/RTypeClient/UI/src/*.cpp
         ${CMAKE_SOURCE_DIR}/network/RTypeClient/Network/ClientTCP/src/*.cpp
@@ -169,6 +190,7 @@ if(BUILD_CLIENT)
         Ogg::ogg
         FLAC::FLAC
         unofficial::sqlite3::sqlite3
+        engine
     )
     
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -186,12 +208,11 @@ if(BUILD_SERVER)
         "rtype_gameInstance/src/*.cpp" 
         "rtype_gameManager/src/*.cpp" 
         "mains/server/main.cpp" 
-        "utility_classes/src/*.cpp" 
-        "engine/src/*.cpp"
+        "utility_classes/src/*.cpp"
         ${CMAKE_SOURCE_DIR}/network/RTypeServer/Auth/src/*.cpp
         ${CMAKE_SOURCE_DIR}/network/RTypeServer/Network/ServerTCP/src/*.cpp
         )
-    
+
     if(NOT SERVER_SOURCES)
         message(FATAL_ERROR "No server source files found in rtype_server/src/")
     endif()
@@ -218,6 +239,7 @@ if(BUILD_SERVER)
         Ogg::ogg
         FLAC::FLAC
         unofficial::sqlite3::sqlite3
+        engine
     )
     
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -265,6 +287,7 @@ if(BUILD_TESTS)
         Ogg::ogg
         FLAC::FLAC
         unofficial::sqlite3::sqlite3
+        engine
     )
 
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -278,3 +301,15 @@ if(BUILD_TESTS)
     include(GoogleTest)
     gtest_discover_tests(r-type_tests)
 endif()
+
+# -------------------------------------------------------------
+# Apocalypse
+add_executable(apocalypse ${CMAKE_SOURCE_DIR}/apocalypse/main.cpp)
+
+target_link_libraries(apocalypse PRIVATE 
+    engine
+)
+
+target_include_directories(apocalypse PRIVATE 
+    ${CMAKE_SOURCE_DIR}/engine/include
+)
