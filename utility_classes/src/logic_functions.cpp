@@ -86,44 +86,6 @@ void player_logic(double delta, registry& reg, entity en) {
         missile_pos.x = player_pos.x;
         missile_pos.y = player_pos.y;
     }
-
-    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
-    if (hb.health <= 0) {
-        Factory fac(reg);
-        entity explosion = fac.make_explosion();
-        position& pos = reg.get_components<position>()[en].value();
-        position& explosion_pos =
-            reg.get_components<position>()[explosion].value();
-        explosion_pos.x = pos.x;
-        explosion_pos.y = pos.y;
-
-        name& name_ = reg.get_components<name>()[en].value();
-
-        int i = 0;
-
-        for (auto& player : all_clients) {
-            if (player.second == (size_t)en) {
-                player.second = -1;
-                printf("Player %d dead\n", i + 1);
-                break;
-            }
-            i++;
-        }
-        // if (name_._name == "player1") {
-        //     player1_entity_id = -1;
-        //     printf("Player 1 dead\n");
-        // } else if (name_._name == "player2") {
-        //     player2_entity_id = -1;
-        //     printf("Player 2 dead\n");
-        // } else if (name_._name == "player3") {
-        //     player3_entity_id = -1;
-        //     printf("Player 3 dead\n");
-        // } else if (name_._name == "player4") {
-        //     player4_entity_id = -1;
-        //     printf("Player 4 dead\n");
-        // }
-        reg.kill_entity(en);
-    }
 }
 
 void player_evil_logic(double delta, registry& reg, entity en) {
@@ -163,41 +125,9 @@ void player_evil_logic(double delta, registry& reg, entity en) {
         missile_pos.x = player_pos.x;
         missile_pos.y = player_pos.y;
     }
-
-    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
-    if (hb.health <= 0) {
-        Factory fac(reg);
-        entity explosion = fac.make_explosion();
-        position& pos = reg.get_components<position>()[en].value();
-        position& explosion_pos =
-            reg.get_components<position>()[explosion].value();
-        explosion_pos.x = pos.x;
-        explosion_pos.y = pos.y;
-
-        name& name_ = reg.get_components<name>()[en].value();
-
-        int i = 0;
-        for (auto& player : all_clients) {
-            if (player.second == (size_t)en) {
-                player.second = -1;
-                break;
-            }
-            i++;
-        }
-        // if (name_._name == "player1") {
-        //     player1_entity_id = -1;
-        // } else if (name_._name == "player2_flipped") {
-        //     player2_entity_id = -1;
-        // }
-        reg.kill_entity(en);
-    }
 }
 
 bool shoot_at_player(registry& reg, position enemy_pos, double attack_range) {
-    // std::array<int, 4> players = {
-    //     player1_entity_id, player2_entity_id,
-    //     player3_entity_id, player4_entity_id
-    // };
 
     double min_distance = 1e9;
     int target_id = -1;

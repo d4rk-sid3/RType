@@ -41,21 +41,6 @@ inline int player1_entity_id = -1;
  *
  */
 inline int player2_entity_id = -1;
-/**
- * @brief A global variable to store the id of the third player in the registry
- *
- */
-inline int player3_entity_id = -1;
-/**
- * @brief A global variable to store the id of the fourth player in the registry
- *
- */
-inline int player4_entity_id = -1;
-
-/**
- * @brief Map of all connected clients and their player IDs
- */
-inline std::map<asio::ip::udp::endpoint, int> all_clients;
 
 /**
  * @brief An enum to store the difficulty of the game
@@ -169,6 +154,11 @@ class GameInstance {
     int counter;
 
     /**
+     * @brief Map of all connected clients and their player IDs
+     */
+    std::map<asio::ip::udp::endpoint, int> all_clients;
+
+    /**
      * @brief The starting moment of the game
      */
     std::chrono::time_point<std::chrono::steady_clock> gameStarted;
@@ -210,6 +200,8 @@ class GameInstance {
     void initializePlayers(void);
 
     void initializePlayersPVP(void);
+
+    void updatePlayerHealth(void);
 
     void handleWinOrLoss();
 

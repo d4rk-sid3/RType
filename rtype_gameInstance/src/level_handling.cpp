@@ -346,11 +346,7 @@ void GameInstance::handleWinOrLoss() {
         printf("GAME OVER\n");
         win.close();
     }
-    // if (player1_entity_id == -1 && player2_entity_id == -1
-    //     && player3_entity_id == -1 && player4_entity_id == -1) {
-    //     printf("GAME OVER\n");
-    //     exit(0);
-    // }
+    
     if (state == LEVEL1) {
         if (boss_dead) {
             printf("BOSS DEAD\n");
@@ -381,12 +377,34 @@ void GameInstance::handleWinOrLoss() {
             printf("PLAYER 1 WON\n");
             win.close();
         }
-        // if (player1_entity_id == -1) {
-        //     printf("PLAYER 2 WON\n");
-        //     exit(0);
-        // } else if (player2_entity_id == -1) {
-        //     printf("PLAYER 1 WON\n");
-        //     exit(0);
-        // }
+    }
+}
+
+void GameInstance::updatePlayerHealth(void)
+{
+    for (auto& [endpoint, en] : all_clients) {
+        hurtbox& hb = reg.get_components<hurtbox>()[en].value();
+        if (hb.health <= 0) {
+            entity explosion = factory.make_explosion();
+            position& pos = reg.get_components<position>()[en].value();
+            position& explosion_pos =
+                reg.get_components<position>()[explosion].value();
+            explosion_pos.x = pos.x;
+            explosion_pos.y = pos.y;
+
+            name& name_ = reg.get_components<name>()[en].value();
+
+            int i = 0;
+
+            for (auto& player : all_clients) {
+                if (player.second == (size_t)en) {
+                    player.second = -1;
+                    printf("Player %d dead\n", i + 1);
+                    break;
+                }
+                i++;
+            }
+            reg.kill_entity((entity)en);
+        }
     }
 }
