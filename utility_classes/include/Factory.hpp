@@ -58,6 +58,10 @@ class Factory {
 
     entity make_player2();
 
+    entity make_player3();
+    
+    entity make_player4();
+
     entity make_player_missile();
 
     entity make_enemy_missile();

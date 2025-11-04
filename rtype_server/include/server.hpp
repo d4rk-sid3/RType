@@ -41,6 +41,16 @@ inline int player1_entity_id = -1;
  *
  */
 inline int player2_entity_id = -1;
+/**
+ * @brief A global variable to store the id of the third player in the registry
+ *
+ */
+inline int player3_entity_id = -1;
+/**
+ * @brief A global variable to store the id of the fourth player in the registry
+ *
+ */
+inline int player4_entity_id = -1;
 
 /**
  * @brief An enum to store the difficulty of the game

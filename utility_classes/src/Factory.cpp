@@ -49,6 +49,10 @@ entity Factory:: make_entity(const std::string& type) {
         return make_player1();
     else if (type == "player2")
         return make_player2();
+    else if (type == "player3")
+        return make_player3();
+    else if (type == "player4")
+        return make_player4();
     else if (type == "red_trooper")
         return make_red_trooper();
     else if (type == "plane")
@@ -166,6 +170,77 @@ entity Factory::make_player2() {
     unique_ids++;
     return player_id;
 }
+
+entity Factory::make_player3() {
+    entity player_id = reg.spawn_entity();
+
+    auto& player_sprite = reg.add_component<component::drawable>(
+        player_id, component::drawable()
+    );
+    player_sprite.setTextureFromName("player3");
+
+    reg.add_component<component::position>(player_id, {0, 0});
+    reg.add_component<component::velocity>(player_id, {0, 0});
+    reg.add_component<component::controllable>(
+        player_id, component::controllable()
+    );
+    reg.add_component<component::logic>(
+        player_id, component::logic{player_logic}
+    );
+
+    auto& player_hurtbox =
+        reg.add_component<component::hurtbox>(player_id, component::hurtbox());
+    player_hurtbox.group = 1;
+    player_hurtbox.health = 1;
+    player_hurtbox.width = 32;
+    player_hurtbox.height = 16;
+
+    auto& entity_name =
+        reg.add_component<component::name>(player_id, component::name());
+    entity_name._name = "player3";
+
+    reg.add_component<component::unique_id>(
+        player_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return player_id;
+}
+
+entity Factory::make_player4() {
+    entity player_id = reg.spawn_entity();
+
+    auto& player_sprite = reg.add_component<component::drawable>(
+        player_id, component::drawable()
+    );
+    player_sprite.setTextureFromName("player4");
+
+    reg.add_component<component::position>(player_id, {0, 0});
+    reg.add_component<component::velocity>(player_id, {0, 0});
+    reg.add_component<component::controllable>(
+        player_id, component::controllable()
+    );
+    reg.add_component<component::logic>(
+        player_id, component::logic{player_logic}
+    );
+
+    auto& player_hurtbox =
+        reg.add_component<component::hurtbox>(player_id, component::hurtbox());
+    player_hurtbox.group = 1;
+    player_hurtbox.health = 1;
+    player_hurtbox.width = 32;
+    player_hurtbox.height = 16;
+
+    auto& entity_name =
+        reg.add_component<component::name>(player_id, component::name());
+    entity_name._name = "player4";
+
+    reg.add_component<component::unique_id>(
+        player_id, (component::unique_id)unique_ids
+    );
+    unique_ids++;
+    return player_id;
+}
+
 
 entity Factory::make_player2_flipped() {
     entity player_id = reg.spawn_entity();

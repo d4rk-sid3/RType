@@ -353,7 +353,8 @@ void Server::runLevel(double delta) {
 }
 
 void Server::handleWinOrLoss() {
-    if (player1_entity_id == -1 && player2_entity_id == -1) {
+    if (player1_entity_id == -1 && player2_entity_id == -1
+        && player3_entity_id == -1 && player4_entity_id == -1) {
         printf("GAME OVER\n");
         exit(0);
     }

@@ -31,6 +31,12 @@ void load_client_textures(void) {
         "assets/sprites/player/player2.gif", "player2", TEXTURE
     );
     ResourceManager::Instance().load(
+        "assets/sprites/player/player3.gif", "player3", TEXTURE
+    );
+    ResourceManager::Instance().load(
+        "assets/sprites/player/player4.gif", "player4", TEXTURE
+    );
+    ResourceManager::Instance().load(
         "assets/sprites/player/player2_flipped.gif", "player2_flipped", TEXTURE
     );
     ResourceManager::Instance().load(
@@ -292,6 +298,12 @@ void Client::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pastpastTim
             }
             if (getKey(pastPos.enemy_type) == "player2") {
                 player2_dead = true;
+            }
+            if (getKey(pastPos.enemy_type) == "player3") {
+                player3_dead = true;
+            }
+            if (getKey(pastPos.enemy_type) == "player4") {
+                player4_dead = true;
             }
             if (getKey(pastPos.enemy_type) == "boss") {
                 boss_dead = true;
@@ -605,7 +617,7 @@ void Client::handleSubStates(double delta, sf::RenderWindow& win)
         }
     }
 
-    if (player1_dead && player2_dead && substate != GAME_OVER) {
+    if (player1_dead && player2_dead && player3_dead && player4_dead && substate != GAME_OVER) {
         substate = GAME_OVER;
         ui_handler = UIHandler("GAME OVER", true);
     }

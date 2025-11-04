@@ -104,6 +104,12 @@ void player_logic(double delta, registry& reg, entity en) {
         } else if (name_._name == "player2") {
             player2_entity_id = -1;
             printf("Player 2 dead\n");
+        } else if (name_._name == "player3") {
+            player3_entity_id = -1;
+            printf("Player 3 dead\n");
+        } else if (name_._name == "player4") {
+            player4_entity_id = -1;
+            printf("Player 4 dead\n");
         }
         reg.kill_entity(en);
     }
