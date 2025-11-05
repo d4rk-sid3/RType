@@ -312,6 +312,7 @@ void GameInstance::handleWinOrLoss() {
         )
     ) {
         printf("GAME OVER\n");
+        win.close();
     }
     
     if (state == LEVEL1) {

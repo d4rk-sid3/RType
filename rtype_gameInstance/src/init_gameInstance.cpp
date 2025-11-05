@@ -244,9 +244,9 @@ void GameInstance::run()
 
         runLevel(dt);
 
-        handleWinOrLoss();
-
         updatePlayerHealth();
+
+        handleWinOrLoss();
 
         std::this_thread::sleep_until(start + tickDuration);
     }
