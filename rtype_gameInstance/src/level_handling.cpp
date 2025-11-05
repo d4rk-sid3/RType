@@ -312,7 +312,6 @@ void GameInstance::handleWinOrLoss() {
         )
     ) {
         printf("GAME OVER\n");
-        win.close();
     }
     
     if (state == LEVEL1) {
@@ -340,10 +339,8 @@ void GameInstance::handleWinOrLoss() {
     if (diff_mode == PVP) {
         if (all_clients.begin()->second == -1) {
             printf("PLAYER 2 WON\n");
-            exit(0);
         } else {
             printf("PLAYER 1 WON\n");
-            win.close();
         }
     }
 }
@@ -356,14 +353,15 @@ void GameInstance::updatePlayerHealth(void)
             entity explosion = factory.make_explosion();
             position& pos = reg.get_components<position>()[en].value();
             position& explosion_pos =
-                reg.get_components<position>()[explosion].value();
+            reg.get_components<position>()[explosion].value();
             explosion_pos.x = pos.x;
             explosion_pos.y = pos.y;
-
+            
             name& name_ = reg.get_components<name>()[en].value();
 
             int i = 0;
-
+            
+            reg.kill_entity((entity)en);
             for (auto& player : all_clients) {
                 if (player.second == (size_t)en) {
                     player.second = -1;
@@ -372,7 +370,6 @@ void GameInstance::updatePlayerHealth(void)
                 }
                 i++;
             }
-            reg.kill_entity((entity)en);
         }
     }
 }

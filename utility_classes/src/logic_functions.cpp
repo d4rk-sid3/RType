@@ -145,6 +145,8 @@ bool shoot_at_player(registry& reg, position enemy_pos, double attack_range) {
     double min_distance = 1e9;
     int target_id = -1;
     std::vector<int> player_ids = get_players_ids(reg);
+    if (player_ids.size() == 0)
+        return false;
 
     // Trouver le joueur le plus proche dans la portée
     for (auto& player_id : player_ids) {
@@ -412,93 +414,7 @@ void boss_logic(double delta, registry& reg, entity en) {
 }
 
 void gtrooper_logic(double delta, registry& reg, entity en) {
-    static double t = 0.0;
-    static size_t target_player_id = 0;
-    static double retarget_timer = 0.0;
-    const double RETARGET_INTERVAL = 3.0;
-    const float TARGET_X = 500.0f;
-    const float X_THRESHOLD = 10.0f;
-
-    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
-    velocity& vel = reg.get_components<velocity>()[en].value();
-    position& pos = reg.get_components<position>()[en].value();
-    
-    bool reached_target_x = (pos.x <= TARGET_X + X_THRESHOLD);
-    
-    if (!reached_target_x) {
-        vel.vx = -BOSS_SPEED;
-        vel.vy = 0;
-        return;
-    }
-    
-    vel.vx = 0;
-    
-    retarget_timer += delta;
-    if (retarget_timer >= RETARGET_INTERVAL) {
-        size_t target_player_id_ = rand() % 2;
-
-        if (target_player_id_ == 0) {
-            target_player_id = player1_entity_id;
-        }
-        if (target_player_id_ == 1) {
-            target_player_id = player2_entity_id;
-        }
-        retarget_timer = 0.0;
-    }
-    
-    auto& positions = reg.get_components<position>();
-
-    if (!positions[target_player_id].has_value()) {
-        vel.vy = 0;
-        return;
-    }
-    
-    position& player_pos = positions[target_player_id].value();
-    
-    float diff_y = player_pos.y - pos.y;
-    const float ALIGN_THRESHOLD = 20.0f;
-    
-    if (fabs(diff_y) > ALIGN_THRESHOLD) {
-        vel.vy = (diff_y > 0) ? BOSS_SPEED : -BOSS_SPEED;
-    } else {
-        vel.vy = 0;
-    }
-    
-    bool is_aligned = (fabs(player_pos.y - pos.y) <= ALIGN_THRESHOLD);
-    
-    t += delta;
-    if (is_aligned) {
-        printf("Aligned. T: %f\n", t);
-        if (t >= BOSS_SHOOT_COOLDOWN) {
-            printf("Shooting\n");
-            t = 0;
-            Factory fac(reg);
-            entity missile1 = fac.make_big_missile();
-            
-            position& missile_pos1 = reg.get_components<position>()[missile1].value();
-            
-            missile_pos1.x = pos.x + 30;
-            missile_pos1.y = pos.y + 15;
-        }
-    }
-    
-    if (hb.hurt) {
-        Factory fac(reg);
-        entity hit_effect = fac.make_hit_effect();
-        position& hit_pos = reg.get_components<position>()[hit_effect].value();
-        hit_pos.x = pos.x;
-        hit_pos.y = pos.y;
-    }
-    
-    if (hb.health <= 0) {
-        Factory fac(reg);
-        entity explosion = fac.make_explosion();
-        position& explosion_pos = reg.get_components<position>()[explosion].value();
-        explosion_pos.x = pos.x;
-        explosion_pos.y = pos.y;
-        boss_dead = true;
-        reg.kill_entity(en);
-    }
+    return;
 }
 
 // ------------------------ SPACE ENEMY -----------------------
@@ -506,7 +422,10 @@ void gtrooper_logic(double delta, registry& reg, entity en) {
 void spacenemy_logic(double delta, registry& reg, entity en) {
     static double t = 0.0;
     std::vector<int> player_ids = get_players_ids(reg);
-    static size_t target_player_id = player_ids[0];
+    static size_t target_player_id = -1;
+    if (player_ids.size() == 0) {
+        return;
+    }
     static double retarget_timer = 0.0;
     const double RETARGET_INTERVAL = 3.0;
     const float TARGET_X = 500.0f;
