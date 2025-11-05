@@ -158,6 +158,30 @@ class UserManager {
             }
         }
 
+        std::string getTopThreeUsersString() const {
+            std::vector<User> users;
+            for (const auto& [id, user] : _users) {
+                if (user.getUserRole() == "PLAYER")
+                    users.push_back(user);
+            }
+        
+            std::sort(users.begin(), users.end(), [](const User& a, const User& b) {
+                return a.getUserStats().getNbGamesWon() > b.getUserStats().getNbGamesWon();
+            });
+        
+            std::ostringstream oss;
+            for (size_t i = 0; i < 3; ++i) {
+                if (i < users.size()) {
+                    oss << users[i].getUsername() << " " << users[i].getUserStats().getNbGamesWon();
+                } else {
+                    oss << "Username 0";
+                }
+                if (i < 2)
+                    oss << " ";
+            }
+            return oss.str();
+        }
+
         void generateAuthTokenAssign(size_t id, const uint8_t server_key[32])
         {
             assignAuthToken(id, TokenManager::getInstance().generateAuthToken(id, server_key));

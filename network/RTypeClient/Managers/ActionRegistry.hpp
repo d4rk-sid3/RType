@@ -63,6 +63,10 @@ class ActionRegistry {
                     client->write(message);
                 }
             });
+
+            registerAction("Leaderboard", [client]() {
+                client->write("LEADERBOARD\n");
+            });
     
             registerAction("Register", [client]() {
                 auto ui = UIManager::getInstance().getCurrentUI();

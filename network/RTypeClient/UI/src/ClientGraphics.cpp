@@ -162,6 +162,38 @@ void ClientGraphics::handleNetworkEvent(const std::string& line)
     } else if (keyword == "LAUNCH_OK") {
         _inGame = true;
         clientUI.window.close();
+    } else if (keyword == "LEADERBOARD") {
+        auto leaderboard_ui = UIManager::getInstance().getUI("Leaderboardpage");
+        auto us1 = leaderboard_ui->getElementById("first_username");
+        auto us1_cast = std::dynamic_pointer_cast<TextElement>(us1);
+        
+        us1_cast->setText(args[0]);
+
+        auto us1_points = leaderboard_ui->getElementById("first_points");
+        auto us1_points_cast = std::dynamic_pointer_cast<TextElement>(us1_points);
+        
+        us1_points_cast->setText(args[1]);
+
+        auto us2 = leaderboard_ui->getElementById("second_username");
+        auto us2_cast = std::dynamic_pointer_cast<TextElement>(us2);
+        
+        us2_cast->setText(args[2]);
+
+        auto us2_points = leaderboard_ui->getElementById("second_points");
+        auto us2_points_cast = std::dynamic_pointer_cast<TextElement>(us2_points);
+        
+        us2_points_cast->setText(args[3]);
+
+        auto us3 = leaderboard_ui->getElementById("third_username");
+        auto us3_cast = std::dynamic_pointer_cast<TextElement>(us3);
+        
+        us3_cast->setText(args[4]);
+
+        auto us3_points = leaderboard_ui->getElementById("third_points");
+        auto us3_points_cast = std::dynamic_pointer_cast<TextElement>(us3_points);
+        
+        us3_points_cast->setText(args[5]);
+        UIManager::getInstance().setUI("Leaderboardpage");
     }
 }
 
