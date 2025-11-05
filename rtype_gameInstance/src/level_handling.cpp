@@ -107,40 +107,8 @@ void GameInstance::loadLevel() {
         info.spawn_y = entity["y"];
         entities.push_back(info);
     }
-    //clearGameEntities();
     // initializePlayers();
     levelTimer = -2.0;
-}
-
-void GameInstance::clearGameEntities() {
-    std::vector<std::string> special_entities = {
-        "background", "menu_background_music"
-    };
-
-    for (size_t i = 0; i < reg.getEntityNum(); i++) {
-        try {
-            position& pos =
-                reg.get_components<component::position>()[entity(i)].value();
-            name& name_ =
-                reg.get_components<component::name>()[entity(i)].value();
-
-            // Ignore special entities
-            if (std::find(
-                    special_entities.begin(), special_entities.end(),
-                    name_._name
-                ) != special_entities.end()) {
-                continue;
-            }
-
-            // Clean up out of screen entities
-            if (name_._name != "ceiling" && name_._name != "floor") {
-                printf("Killing entity %s\n", name_._name.c_str());
-                reg.kill_entity(entity(i));
-                continue;
-            }
-        } catch (...) {}
-    }
-    logGameEntities();
 }
 
 /**

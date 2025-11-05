@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['client_0',['R-TYPE Client',['../client_page.html',1,'']]]
+  ['adding_20content_0',['Adding content',['../add.html',1,'']]]
 ];

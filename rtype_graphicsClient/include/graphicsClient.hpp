@@ -92,10 +92,6 @@ class GraphicsClient {
      */
     int port_;
 
-    /**
-     * @brief The menu information
-     */
-    menu_info_t menu_info;
 
     /**
      * @brief The timer for the level
@@ -161,17 +157,6 @@ class GraphicsClient {
      * @brief The UI handler for managing the user interface
      */
     UIHandler ui_handler;
-
-    /**
-     * @brief Initialize all menu related elements
-     */
-    void initMenu();
-
-    /**
-     * @brief Run the menu logic
-     * @param delta The time elapsed since the last frame
-     */
-    void runMenu(double delta);
 
     /**
      * @brief Initialize all game related elements

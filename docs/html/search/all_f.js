@@ -12,5 +12,6 @@ var searchData=
   ['et_20états_9',['2.3 Sessions et états',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md24',1,'']]],
   ['exceptions_2ehpp_10',['exceptions.hpp',['../exceptions_8hpp.html',1,'']]],
   ['existing_20session_11',['Existing Session',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md41',1,'4.12 JOIN_SESSION (0x13) — Join an Existing Session'],['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md42',1,'4.13 JOIN_SESSION (0x14) — Join an Existing Session']]],
-  ['explanation_12',['Global Explanation',['../server_page.html#global_infos',1,'']]]
+  ['experience_12',['Customizing you experience',['../index.html#sec',1,'']]],
+  ['explanation_13',['Global Explanation',['../server_page.html#global_infos',1,'']]]
 ];
