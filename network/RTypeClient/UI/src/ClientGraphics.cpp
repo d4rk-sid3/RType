@@ -17,10 +17,19 @@ sf::Keyboard::Key StringtoKey(std::string &my_key)
 {
     sf::Keyboard::Key key;
 
-    std::cout << my_key << std::endl;
+    std::vector<std::string> _keys = {"UP", "DOWN", "LEFT", "RIGHT", "SPACE"};
 
-    if (my_key == "SPACE") {
-        key = sf::Keyboard::Space;
+    if ((std::find(_keys.begin(), _keys.end(), my_key)) != _keys.end()) {
+        if (my_key == "UP")
+            key = sf::Keyboard::Up;
+        if (my_key == "DOWN")
+            key = sf::Keyboard::Down;
+        if (my_key == "LEFT")
+            key = sf::Keyboard::Left;
+        if (my_key == "RIGHT")
+            key = sf::Keyboard::Right;
+        if (my_key == "SPACE")
+            key = sf::Keyboard::Space;
         return key;
     }
     char the_key = my_key[0];
@@ -178,12 +187,24 @@ void ClientGraphics::handleNetworkEvent(const std::string& line)
         UIManager::getInstance().setUI("Dashboardpage");
         return;
     } else if (keyword == "SAVE_OK") {
-        std::cout << "SAVE_OK" << std::endl;
         auto settings_ui = UIManager::getInstance().getCurrentUI();
         auto message_element = settings_ui->getElementById("message_settings");
         auto cast_element = std::dynamic_pointer_cast<TextElement>(message_element);
 
         cast_element->setText("Your informations have successfully been updated.");
+
+        std::cout << "Key : " << args[0];
+        std::cout << "Key : " << args[1];
+        std::cout << "Key : " << args[2];
+        std::cout << "Key : " << args[3];
+        std::cout << "Key : " << args[4];
+
+        UP = StringtoKey(args[0]);
+        DOWN = StringtoKey(args[1]);
+        LEFT = StringtoKey(args[2]);
+        RIGHT = StringtoKey(args[3]);
+        SPACE = StringtoKey(args[4]);
+
     } else if (keyword == "CODE") {
         std::string code = args[0];
 

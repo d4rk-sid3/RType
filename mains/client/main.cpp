@@ -111,9 +111,8 @@ int main(int ac, char **av) {
 
     clientGraphics.run();
 
-    for (auto c : clientGraphics.getControllable()) {
-        if (c == sf::Keyboard::Key::S)
-        std::cout << "PAPA : " << c << std::endl;
+    for (auto key : clientGraphics.getControllable()) {
+        std::cout << key << std::endl;
     }
     GraphicsClient grClient(networkManager, lastmsg, mtx, clientGraphics.getControllable());
 
