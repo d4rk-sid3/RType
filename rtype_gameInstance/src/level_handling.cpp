@@ -349,6 +349,9 @@ void GameInstance::handleWinOrLoss() {
 void GameInstance::updatePlayerHealth(void)
 {
     for (auto& [endpoint, en] : all_clients) {
+        if (en == -1) {
+            continue;
+        }
         hurtbox& hb = reg.get_components<hurtbox>()[en].value();
         if (hb.health <= 0) {
             entity explosion = factory.make_explosion();
