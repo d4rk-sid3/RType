@@ -127,13 +127,27 @@ void player_evil_logic(double delta, registry& reg, entity en) {
     }
 }
 
+std::vector<int> get_players_ids(registry& reg) {
+    std::vector<int> players_ids;
+    for (int i = 0; i < reg.getEntityNum(); ++i) {
+        try {
+            name& name_ = reg.get_components<name>()[i].value();
+            if (name_._name == "player1" || name_._name == "player2" || name_._name == "player3" || name_._name == "player4")
+                players_ids.push_back(i);
+        } catch (...) {
+        }
+    }
+    return players_ids;
+}
+
 bool shoot_at_player(registry& reg, position enemy_pos, double attack_range) {
 
     double min_distance = 1e9;
     int target_id = -1;
+    std::vector<int> player_ids = get_players_ids(reg);
 
     // Trouver le joueur le plus proche dans la portée
-    for (auto& [client_id, player_id] : all_clients) {
+    for (auto& player_id : player_ids) {
         if (player_id == -1)
             continue;
 
@@ -399,7 +413,7 @@ void boss_logic(double delta, registry& reg, entity en) {
 
 void gtrooper_logic(double delta, registry& reg, entity en) {
     static double t = 0.0;
-    static size_t target_player_id = all_clients.begin()->second;
+    static size_t target_player_id = 0;
     static double retarget_timer = 0.0;
     const double RETARGET_INTERVAL = 3.0;
     const float TARGET_X = 500.0f;
@@ -491,7 +505,8 @@ void gtrooper_logic(double delta, registry& reg, entity en) {
 
 void spacenemy_logic(double delta, registry& reg, entity en) {
     static double t = 0.0;
-    static size_t target_player_id = all_clients.begin()->second;
+    std::vector<int> player_ids = get_players_ids(reg);
+    static size_t target_player_id = player_ids[0];
     static double retarget_timer = 0.0;
     const double RETARGET_INTERVAL = 3.0;
     const float TARGET_X = 500.0f;
@@ -513,11 +528,10 @@ void spacenemy_logic(double delta, registry& reg, entity en) {
     // Choix aléatoire de cible tous les RETARGET_INTERVAL secondes
     retarget_timer += delta;
     if (retarget_timer >= RETARGET_INTERVAL) {
-        // std::array<int, 4> players = { player1_entity_id, player2_entity_id, player3_entity_id, player4_entity_id };
         std::vector<int> valid_players;
         auto& positions = reg.get_components<position>();
 
-        for (auto& [player_endpoint, player_id] : all_clients) {
+        for (auto& player_id : player_ids) {
             if (player_id != -1 && positions[player_id].has_value())
                 valid_players.push_back(player_id);
         }
@@ -587,13 +601,11 @@ void force_logic(double delta, registry& reg, entity en)
     if (hb.health <= 0) {
         position& pos = reg.get_components<position>()[en].value();
 
-        // std::array<int, 4> players = { player1_entity_id, player2_entity_id,
-        //                                player3_entity_id, player4_entity_id };
-
+        std::vector<int> player_ids = get_players_ids(reg);
         double min_distance = 1e9;
         attached_to = -1;
 
-        for (auto& [player_endpoint, player_id] : all_clients) {
+        for (auto& player_id : player_ids) {
             if (player_id == -1)
                 continue;
 
