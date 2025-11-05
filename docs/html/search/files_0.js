@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['client_2edox_0',['client.dox',['../client_8dox.html',1,'']]],
-  ['components_2ehpp_1',['components.hpp',['../components_8hpp.html',1,'']]]
+  ['adding_5fcontent_2edox_0',['adding_content.dox',['../adding__content_8dox.html',1,'']]]
 ];

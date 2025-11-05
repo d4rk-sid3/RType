@@ -18,8 +18,23 @@
 #ifndef INCLUDED_UIHANDLER_HPP
     #define INCLUDED_UIHANDLER_HPP
 
+/**
+ * @file UIHandler.hpp
+ * @author Farouk OKANLA
+ * @brief This file contains the definition of the UIHandler class
+ * @version 0.1
+ * @date 2025-11-05
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include <SFML/Graphics.hpp>
 
+/**
+ * @brief The UIHandler class is a customable class
+ * It allows you to create diverses ui effects
+ */
 class UIHandler
 {
     private:
@@ -28,14 +43,49 @@ class UIHandler
         double t = 0.0;
     protected:
     public:
+        /**
+         * @brief A boolean to tell if the fade has ended
+         * 
+         */
         bool fade_ended = false;
+        /**
+         * @brief A boolean to tell if the fade has started
+         * 
+         */
         bool fade_started = false;
+        /**
+         * @brief Construct a new UIHandler object
+         * 
+         */
         UIHandler() {};
+        /**
+         * @brief Construct a new UIHandler object
+         * 
+         * @param text the text to display in the center of the screen
+         * @param fade_in 
+         */
         UIHandler(const std::string &text, bool fade_in);
         ~UIHandler() = default;
 
+        /**
+         * @brief Fades the screen to black
+         * 
+         * @param window the window
+         * @param delta the amount of time elapsed since the previous frame
+         */
         void fade_in(sf::RenderWindow &window, double delta);
+        /**
+         * @brief Fades out the screen from black
+         * 
+         * @param window the window
+         * @param delta the amount of time elapsed since the previous frame
+         */
         void fade_out(sf::RenderWindow &window, double delta);
+        /**
+         * @brief Draws your ui elements to the window
+         * 
+         * @param window the window to draw to
+         */
         void draw(sf::RenderWindow &window);
 };
 

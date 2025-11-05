@@ -8,7 +8,8 @@ var searchData=
   ['help_20response_200x06_20get_20commands_20available_5',['4.6 HELP RESPONSE (0x06) - Get commands available',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md34',1,'']]],
   ['hitbox_6',['hitbox',['../namespacecomponent.html#a0ae561e88973b1d50eb3048035956866',1,'component']]],
   ['hitbox_5fs_7',['hitbox_s',['../structcomponent_1_1hitbox__s.html',1,'component']]],
-  ['hurt_8',['hurt',['../structcomponent_1_1hurtbox__s.html#a2c6fe8d0fd1d64fcc76e6af210480fa3',1,'component::hurtbox_s']]],
-  ['hurtbox_9',['hurtbox',['../namespacecomponent.html#a00cb098de199eed73e38d77f78adaed1',1,'component']]],
-  ['hurtbox_5fs_10',['hurtbox_s',['../structcomponent_1_1hurtbox__s.html',1,'component']]]
+  ['how_20can_20you_20add_20custom_20content_20to_20r_20type_8',['How can you add custom content to R-TYPE',['../add.html#sec1',1,'']]],
+  ['hurt_9',['hurt',['../structcomponent_1_1hurtbox__s.html#a2c6fe8d0fd1d64fcc76e6af210480fa3',1,'component::hurtbox_s']]],
+  ['hurtbox_10',['hurtbox',['../namespacecomponent.html#a00cb098de199eed73e38d77f78adaed1',1,'component']]],
+  ['hurtbox_5fs_11',['hurtbox_s',['../structcomponent_1_1hurtbox__s.html',1,'component']]]
 ];

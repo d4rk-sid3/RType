@@ -1,7 +1,7 @@
 var searchData=
 [
   ['réponse_20serveur_0',['4.2 WELCOME (0x02) - Réponse serveur',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html#autotoc_md30',1,'']]],
-  ['r_20type_1',['What is our R-TYPE',['../index.html#infos_sub',1,'']]],
+  ['r_20type_1',['R TYPE',['../add.html#sec1',1,'How can you add custom content to R-TYPE'],['../index.html#infos_sub',1,'What is our R-TYPE']]],
   ['r_20type_20client_2',['R-TYPE Client',['../client_page.html',1,'']]],
   ['r_20type_20documentation_3',['R-TYPE Documentation',['../index.html',1,'']]],
   ['r_20type_20protocol_20v2_201_4',['RFC-RT001: R-TYPE Protocol v2.1',['../md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol.html',1,'']]],

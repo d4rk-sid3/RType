@@ -195,8 +195,6 @@ class GameInstance {
      */
     void runLevel(double delta);
 
-    void clearGameEntities();
-
     void initializePlayers(void);
 
     void initializePlayersPVP(void);

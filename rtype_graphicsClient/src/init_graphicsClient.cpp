@@ -530,22 +530,6 @@ void GraphicsClient::runLevel(double delta) {
 GraphicsClient::~GraphicsClient() = default;
 
 /**
- * @brief This function initializes the menu
- *
- */
-void GraphicsClient::initMenu()
-{
-    menu_info.background = factory.make_background();
-    menu_info.title = factory.make_title();
-    menu_info.start_text = factory.make_start_text();
-    menu_info.menu_background_music = factory.make_menu_background_music();
-
-    reg.add_component<component::controllable>(
-        menu_info.start_text, component::controllable()
-        );
-}
-
-/**
  * @brief This function initializes the game
  *
  */
