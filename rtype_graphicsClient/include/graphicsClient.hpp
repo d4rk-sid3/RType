@@ -176,7 +176,7 @@ class GraphicsClient {
     /**
      * @brief Initialize all game related elements
      */
-    void initGame();
+    void initGame(std::vector<sf::Keyboard::Key> keyTab);
 
     /**
      * @brief Run the game logic
@@ -253,7 +253,7 @@ class GraphicsClient {
      * @param p The port to connect to the server
      * @param addr The address of the server
      */
-    GraphicsClient(NetworkManager& client, std::vector<int8_t>& lastmsg, std::mutex& mtx);
+    GraphicsClient(NetworkManager& client, std::vector<int8_t>& lastmsg, std::mutex& mtx, std::vector<sf::Keyboard::Key> keyTab);
 
     /**
      * @brief Destroy the Client object

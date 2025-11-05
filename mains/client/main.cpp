@@ -109,9 +109,9 @@ int main(int ac, char **av) {
 
     std::thread t([&context]() { context.run(); });
 
-    GraphicsClient grClient(networkManager, lastmsg, mtx);
-
     clientGraphics.run();
+
+    GraphicsClient grClient(networkManager, lastmsg, mtx);
 
     printf("window closed\n");
     if (clientGraphics.isAdmin())

@@ -133,7 +133,7 @@ std::string getKey(int value) {
  * @param p The port to connect to
  * @param address The server address
  */
-GraphicsClient::GraphicsClient (NetworkManager& client, std::vector<int8_t>& _lastmsg, std::mutex& _mtx):
+GraphicsClient::GraphicsClient (NetworkManager& client, std::vector<int8_t>& _lastmsg, std::mutex& _mtx, std::vector<sf::Keyboard::Key> keyTab):
     client_(client), lastmsg(_lastmsg), mtx(_mtx), reg(win), factory(reg)
 {
     state = LEVEL1;
@@ -149,7 +149,7 @@ GraphicsClient::GraphicsClient (NetworkManager& client, std::vector<int8_t>& _la
 
     load_client_textures();
     // initMenu();
-    initGame();
+    initGame(keyTab);
 }
 
 bool GraphicsClient::isRunning() const {
@@ -546,42 +546,15 @@ void GraphicsClient::initMenu()
 }
 
 /**
- * @brief This function runs the menu
- *
- * @param delta The amount of time elapsed since the last frame
- */
-void GraphicsClient::runMenu(double delta) {
-
-    if (state == MENU) {
-        component::controllable &start_text =
-            reg.get_components<component::controllable>()[menu_info.start_text].value();
-
-        if (start_text.space) {
-            state = TRANSITION;
-            menu_info.menu_fade_in_rect = factory.make_fade_in_rect();
-        }
-    }
-
-    if (state == TRANSITION &&
-        std::find(
-            reg.dead_entities.begin(), reg.dead_entities.end(),
-            menu_info.menu_fade_in_rect
-        ) != reg.dead_entities.end()) {
-        state = LEVEL1;
-        initGame();
-    }
-}
-
-/**
  * @brief This function initializes the game
  *
  */
-void GraphicsClient::initGame() {
+void GraphicsClient::initGame(std::vector<sf::Keyboard::Key> keyTab) {
     factory.make_background();
     // factory.make_game_background_music();
 
     controllable_id = reg.spawn_entity();
-    reg.add_component<component::controllable>((entity)controllable_id, component::controllable());
+    reg.add_component<component::controllable>((entity)controllable_id, component::controllable(keyTab[0], keyTab[1], keyTab[2], keyTab[3], keyTab[4]));
 }
 
 void GraphicsClient::handleSubStates(double delta, sf::RenderWindow& win)
@@ -699,9 +672,6 @@ void GraphicsClient::run()
             if (event.type == sf::Event::KeyPressed)
                 if (event.key.code == sf::Keyboard::Escape)
                     win.close();
-        }
-        if (state == MENU || state == TRANSITION) {
-            runMenu(dt);
         }
         if (state == LEVEL1 || state == LEVEL2 || state == LEVEL3) {
             sendPlayerInput();
