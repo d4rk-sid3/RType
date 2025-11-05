@@ -111,7 +111,11 @@ int main(int ac, char **av) {
 
     clientGraphics.run();
 
-    GraphicsClient grClient(networkManager, lastmsg, mtx);
+    for (auto c : clientGraphics.getControllable()) {
+        if (c == sf::Keyboard::Key::S)
+        std::cout << "PAPA : " << c << std::endl;
+    }
+    GraphicsClient grClient(networkManager, lastmsg, mtx, clientGraphics.getControllable());
 
     printf("window closed\n");
     if (clientGraphics.isAdmin())

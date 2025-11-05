@@ -12,6 +12,11 @@ class ClientGraphics {
         std::shared_ptr<ThreadSafeQueue> _queue;
         bool _isAdmin = false;
         bool _inGame = false;
+        sf::Keyboard::Key UP;
+        sf::Keyboard::Key DOWN;
+        sf::Keyboard::Key LEFT;
+        sf::Keyboard::Key RIGHT;
+        sf::Keyboard::Key SPACE;
 
         ClientGraphics(std::shared_ptr<ThreadSafeQueue> queue);
         void handleNetworkEvent(const std::string &string);
@@ -20,5 +25,6 @@ class ClientGraphics {
         bool isAdmin();
         bool inGame();
         void run();
+        const std::vector<sf::Keyboard::Key> getControllable() const;
 };
 #endif
