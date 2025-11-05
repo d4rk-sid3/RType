@@ -8,11 +8,10 @@ var searchData=
   ['geterasefunctionnum_5',['getEraseFunctionNum',['../classregistry.html#a6492780080f9630f136627d42800880a',1,'registry']]],
   ['getfont_6',['getFont',['../classResourceManager.html#ad7fe4904d2a5ae24bbc60360fc012c56',1,'ResourceManager']]],
   ['getid_7',['getId',['../classentity.html#a49afbb4a974ddc6a5393d7f0c30ab63b',1,'entity']]],
-  ['getkey_8',['getKey',['../init__client_8cpp.html#a566bdf948a52a4fe98e76eb50b18ac5b',1,'init_client.cpp']]],
-  ['getkeyboardinput_9',['getKeyboardInput',['../structcomponent_1_1controllable__s.html#a50d82bffaf22ef937e0c2d18f4e05c22',1,'component::controllable_s']]],
-  ['getlogic_10',['getLogic',['../classregistry.html#acf29c5dee5ae25cc4f4672e5f799b599',1,'registry']]],
-  ['getmovement_11',['getMovement',['../classregistry.html#a2758920b8b06a6b20bd7d496d108939b',1,'registry']]],
-  ['getphysics_12',['getPhysics',['../classregistry.html#ac9e09bbcbf1a43e7b50caf76e6b19198',1,'registry']]],
-  ['getrendering_13',['getRendering',['../classregistry.html#a6606ef75f6393c1906f891f995f1e469',1,'registry']]],
-  ['gettexture_14',['getTexture',['../classResourceManager.html#a78632647a9a86d0b477de5055a5a2fcc',1,'ResourceManager']]]
+  ['getkeyboardinput_8',['getKeyboardInput',['../structcomponent_1_1controllable__s.html#a50d82bffaf22ef937e0c2d18f4e05c22',1,'component::controllable_s']]],
+  ['getlogic_9',['getLogic',['../classregistry.html#acf29c5dee5ae25cc4f4672e5f799b599',1,'registry']]],
+  ['getmovement_10',['getMovement',['../classregistry.html#a2758920b8b06a6b20bd7d496d108939b',1,'registry']]],
+  ['getphysics_11',['getPhysics',['../classregistry.html#ac9e09bbcbf1a43e7b50caf76e6b19198',1,'registry']]],
+  ['getrendering_12',['getRendering',['../classregistry.html#a6606ef75f6393c1906f891f995f1e469',1,'registry']]],
+  ['gettexture_13',['getTexture',['../classResourceManager.html#a78632647a9a86d0b477de5055a5a2fcc',1,'ResourceManager']]]
 ];

@@ -109,15 +109,21 @@ int main(int ac, char **av) {
 
     std::thread t([&context]() { context.run(); });
 
-    GraphicsClient grClient(networkManager, lastmsg, mtx);
-
     clientGraphics.run();
 
+    for (auto c : clientGraphics.getControllable()) {
+        if (c == sf::Keyboard::Key::S)
+        std::cout << "PAPA : " << c << std::endl;
+    }
+    GraphicsClient grClient(networkManager, lastmsg, mtx, clientGraphics.getControllable());
+
+    printf("window closed\n");
     if (clientGraphics.isAdmin())
         launchAdminConsole(client, eventQueue);
 
     if (clientGraphics.inGame())
         grClient.run();
+    printf("Stopping context\n");
 
     context.stop();
     

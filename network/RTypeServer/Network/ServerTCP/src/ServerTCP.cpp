@@ -174,6 +174,13 @@ static std::string interpret_command(const std::string& line, const std::string&
             return value;
         }
         return "No user with username " + args[0] + " has been found in the database.\n";
+    } else if (keyword == "LEADERBOARD") {
+        std::string value = UserManager::getInstance().getTopThreeUsersString();
+        std::string response = "LEADERBOARD " + value + "\n";
+
+        std::cout << response << std::endl;
+
+        return response;
     }
     else if (keyword == "QUIT") {
         return "BYE\n";

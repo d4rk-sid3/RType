@@ -48,6 +48,7 @@ void loadDynamicUI(void)
         "UIScenes/loginpage.cfg",
         "UIScenes/createParty.cfg",
         "UIScenes/joinParty.cfg",
+        "UIScenes/leaderboard.cfg",
         "UIScenes/dashboard_player.cfg",
         "UIScenes/settings.cfg"
     };

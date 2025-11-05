@@ -230,6 +230,15 @@ namespace component {
             space_key = sf::Keyboard::Space;
         }
 
+        controllable_s(
+            sf::Keyboard::Key _up, sf::Keyboard::Key _down,sf::Keyboard::Key _left,
+            sf::Keyboard::Key _right, sf::Keyboard::Key _space
+        )
+            : up(false), down(false), left(false), right(false), space(false),
+            up_key(_up), down_key(_down), left_key(_left), right_key(_right), space_key(_space) {
+
+        }
+
         /**
          * @brief Constructor with preinitialized value
          *

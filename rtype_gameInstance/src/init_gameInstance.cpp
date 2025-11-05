@@ -144,34 +144,19 @@ void GameInstance::initializeGame(void) {
  *
  */
 void GameInstance::initializePlayers(void) {
-    if (player1_entity_id == -1) 
-        player1_entity_id = factory.make_entity("player1");
-    if (player2_entity_id == -1)
-        player2_entity_id = factory.make_entity("player2");
-    if (player3_entity_id == -1)
-        player3_entity_id = factory.make_entity("player3");
-    if (player4_entity_id == -1)
-        player4_entity_id = factory.make_entity("player4");
+    std::vector<std::string> tab = {"player1", "player2", "player3", "player4"};
+    int i = 0;
 
-    auto& pos1 =
-        reg.get_components<component::position>()[player1_entity_id].value();
-    auto& pos2 =
-        reg.get_components<component::position>()[player2_entity_id].value();
-    auto& pos3 =
-        reg.get_components<component::position>()[player3_entity_id].value();
-    auto& pos4 =
-        reg.get_components<component::position>()[player4_entity_id].value();
-    pos1.x = 50;
-    pos1.y = 100;
+    for (auto & player : all_clients) {
+        player.second = factory.make_entity(tab[i]);
 
-    pos2.x = 50;
-    pos2.y = 150;
-
-    pos3.x = 50;
-    pos3.y = 200;
-
-    pos4.x = 50;
-    pos4.y = 250;
+        auto& pos =
+            reg.get_components<component::position>()[player.second].value();
+        
+        pos.x = 50;
+        pos.y = 100 + (i*50);
+        i++;
+    }
 }
 
 /**
@@ -179,20 +164,21 @@ void GameInstance::initializePlayers(void) {
  *
  */
 void GameInstance::initializePlayersPVP(void) {
-    if (player1_entity_id == -1) 
-        player1_entity_id = factory.make_entity("player1");
-    if (player2_entity_id == -1)
-        player2_entity_id = factory.make_entity("player2_flipped");
 
-    auto& pos1 =
-        reg.get_components<component::position>()[player1_entity_id].value();
-    auto& pos2 =
-        reg.get_components<component::position>()[player2_entity_id].value();
-    pos1.x = 50;
-    pos1.y = 250;
+    std::vector<std::string> tab = {"player1", "player2_flipped"};
 
-    pos2.x = 50;
-    pos2.y = 250;
+    int i = 0;
+
+    for (auto & player : all_clients) {
+        player.second = factory.make_entity(tab[i]);
+
+        auto& pos =
+            reg.get_components<component::position>()[player.second].value();
+        
+        pos.x = 50;
+        pos.y = 250;
+        i++;
+    }
 }
 
 GameInstance::GameInstance(std::string _id, NetworkManager& server) :
@@ -231,10 +217,11 @@ void GameInstance::run()
 {
     gameStarted = std::chrono::steady_clock::now();
 
-    if (player1_entity_id != -1)
-        all_clients.begin()->second = player1_entity_id;
-    if (player2_entity_id != -1)
-        all_clients.rbegin()->second = player2_entity_id;
+    if (diff_mode == PVP) {
+        initializePlayersPVP();
+    } else {
+        initializePlayers();
+    }
 
     win.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server");
 
@@ -258,6 +245,8 @@ void GameInstance::run()
         runLevel(dt);
 
         handleWinOrLoss();
+
+        updatePlayerHealth();
 
         std::this_thread::sleep_until(start + tickDuration);
     }
