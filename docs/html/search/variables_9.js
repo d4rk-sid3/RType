@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['id_0',['id',['../classentity.html#ad4209a4551450888dcd849a128001133',1,'entity']]],
-  ['ids_5fassoc_1',['ids_assoc',['../classClient.html#ae2a2b88ea0aaafbfbadc963eec4abb10',1,'Client']]]
+  ['left_0',['left',['../structcomponent_1_1controllable__s.html#a0c50867c275bc34cb3ef415c4ca2ddd8',1,'component::controllable_s']]],
+  ['left_5fkey_1',['left_key',['../structcomponent_1_1controllable__s.html#a1ad771ccd7948925dcc9b093283c3fc8',1,'component::controllable_s']]],
+  ['logic_5factive_2',['logic_active',['../classregistry.html#a772d03d9734330401886ab2d380d52d1',1,'registry']]],
+  ['logic_5ffunction_3',['logic_function',['../structcomponent_1_1logic__s.html#a1362230c1aba4f3a2e565c0747898284',1,'component::logic_s']]]
 ];

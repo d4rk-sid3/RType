@@ -134,11 +134,6 @@ class GameInstance {
         messages;
 
     /**
-     * @brief Map of all connected clients and their player IDs
-     */
-    std::map<asio::ip::udp::endpoint, int> all_clients;
-
-    /**
      * @brief Event for handling window events
      */
     sf::Event event;
@@ -157,6 +152,11 @@ class GameInstance {
     * @brief Counter used to know how many entities have been sent to the clients
     */
     int counter;
+
+    /**
+     * @brief Map of all connected clients and their player IDs
+     */
+    std::map<asio::ip::udp::endpoint, int> all_clients;
 
     /**
      * @brief The starting moment of the game
@@ -200,6 +200,8 @@ class GameInstance {
     void initializePlayers(void);
 
     void initializePlayersPVP(void);
+
+    void updatePlayerHealth(void);
 
     void handleWinOrLoss();
 
