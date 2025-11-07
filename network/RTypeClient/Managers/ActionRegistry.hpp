@@ -50,80 +50,113 @@ class ActionRegistry {
         }
 
         void setNetworkActions(std::shared_ptr<ClientTCP> client) {
-            registerAction("Login", [client]() {
-                auto ui = UIManager::getInstance().getCurrentUI();
-                auto usernameField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("username"));
-                auto passwordField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("password"));
-    
-                if (usernameField && passwordField) {
-                    std::string username = usernameField->getText();
-                    std::string password = passwordField->getText();
-    
-                    std::string message = "LOGIN " + username + " " + password + "\n";
+
+            registerAction("Login", [weak_client = std::weak_ptr<ClientTCP>(client)]() {
+                if (auto client = weak_client.lock()) {
+                    auto ui = UIManager::getInstance().getCurrentUI();
+                    auto usernameField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("username"));
+                    auto passwordField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("password"));
+        
+                    if (usernameField && passwordField) {
+                        std::string username = usernameField->getText();
+                        std::string password = passwordField->getText();
+        
+                        std::string message = "LOGIN " + username + " " + password + "\n";
+                        client->write(message);
+                    }
+                }
+            });
+        
+            registerAction("Leaderboard", [weak_client = std::weak_ptr<ClientTCP>(client)]() {
+                if (auto client = weak_client.lock()) {
+                    client->write("LEADERBOARD\n");
+                }
+            });
+        
+            registerAction("Register", [weak_client = std::weak_ptr<ClientTCP>(client)]() {
+                if (auto client = weak_client.lock()) {
+                    auto ui = UIManager::getInstance().getCurrentUI();
+                    auto usernameField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("username"));
+                    auto passwordField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("password"));
+        
+                    if (usernameField && passwordField) {
+                        std::string username = usernameField->getText();
+                        std::string password = passwordField->getText();
+        
+                        std::string message = "REGISTER " + username + " " + password + "\n";
+                        client->write(message);
+                    }
+                }
+            });
+        
+            registerAction("SaveSettings", [weak_client = std::weak_ptr<ClientTCP>(client)]() {
+                if (auto client = weak_client.lock()) {
+                    auto ui = UIManager::getInstance().getCurrentUI();
+                    auto up = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_up"))->getText();
+                    auto down = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_down"))->getText();
+                    auto left = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_left"))->getText();
+                    auto right = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_right"))->getText();
+                    auto shoot = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("shoot"))->getText();
+        
+                    std::string result = up + " " + down + " " + left + " " + right + " " + shoot;
+        
+                    auto dashboard_ui = UIManager::getInstance().getUI("Dashboardpage");
+                    auto username_text = std::dynamic_pointer_cast<TextElement>(dashboard_ui->getElementById("username_left"))->getContent();
+                    std::string message = "SAVE " + username_text + " " + result + "\n";
                     client->write(message);
                 }
             });
-
-            registerAction("Leaderboard", [client]() {
-                client->write("LEADERBOARD\n");
-            });
-    
-            registerAction("Register", [client]() {
-                auto ui = UIManager::getInstance().getCurrentUI();
-                auto usernameField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("username"));
-                auto passwordField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("password"));
-    
-                if (usernameField && passwordField) {
-                    std::string username = usernameField->getText();
-                    std::string password = passwordField->getText();
-    
-                    std::string message = "REGISTER " + username + " " + password + "\n";
+        
+            registerAction("LaunchGame", [weak_client = std::weak_ptr<ClientTCP>(client)]() {
+                if (auto client = weak_client.lock()) {
+                    auto ui = UIManager::getInstance().getCurrentUI();
+                    auto code = std::dynamic_pointer_cast<TextElement>(ui->getElementById("code_value"))->getContent();
+        
+                    std::string message = "LAUNCH_GAME " + code + "\n";
                     client->write(message);
                 }
-            });
-
-            registerAction("SaveSettings", [client]() {
-                auto ui = UIManager::getInstance().getCurrentUI();
-                auto up = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_up"))->getText();
-                auto down = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_down"))->getText();
-                auto left = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_left"))->getText();
-                auto right = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_right"))->getText();
-                auto shoot = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("shoot"))->getText();
-
-                std::string result = up + " " + down + " " + left + " " + right + " " + shoot;
-
-                auto dashboard_ui = UIManager::getInstance().getUI("Dashboardpage");
-                auto username_text = std::dynamic_pointer_cast<TextElement>(dashboard_ui->getElementById("username_left"))->getContent();
-                std::string message = "SAVE " + username_text + " " + result + "\n";
-                client->write(message);
-            });
-
-            registerAction("LaunchGame", [client]() {
-                auto ui = UIManager::getInstance().getCurrentUI();
-                auto code = std::dynamic_pointer_cast<TextElement>(ui->getElementById("code_value"))->getContent();
-
-                std::string message = "LAUNCH_GAME " + code + "\n";
-                client->write(message);
             });
         }
+        
 
-        void setInstanceActions(NetworkManager &networkManager, std::shared_ptr<ClientTCP> client) {
-            registerAction("CreateParty", [&networkManager, client]() {
-                std::string message = "CREATE_GAME ";
-                std::string udp_endpoint = endpoint_to_string(networkManager.getEndpoint());
-                std::string final = message + udp_endpoint + "\n";
-                client->write(final);
+        void setInstanceActions(NetworkManager& networkManager, std::shared_ptr<ClientTCP> client) {
+        
+            registerAction("CreateParty", [&networkManager, weak_client = std::weak_ptr<ClientTCP>(client)]() {
+                if (auto client = weak_client.lock()) {
+                    std::string message = "CREATE_GAME ";
+                    std::string udp_endpoint = endpoint_to_string(networkManager.getEndpoint());
+                    std::string final = message + udp_endpoint + "\n";
+                    client->write(final);
+                } else {
+                    std::cerr << "[CreateParty] ClientTCP instance expired, cannot send CREATE_GAME\n";
+                }
             });
-
-            registerAction("JoinMe", [&networkManager, client]() {
-                std::string message = "JOIN_GAME ";
-                auto ui = UIManager::getInstance().getCurrentUI();
-                auto value = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("join_code"))->getText();
-
-                std::string udp_endpoint = endpoint_to_string(networkManager.getEndpoint());
-                std::string final = message + value + " "+ udp_endpoint + "\n";
-                client->write(final);
+        
+            registerAction("JoinMe", [&networkManager, weak_client = std::weak_ptr<ClientTCP>(client)]() {
+                if (auto client = weak_client.lock()) {
+                    auto ui = UIManager::getInstance().getCurrentUI();
+                    auto value_elem = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("join_code"));
+                    if (!value_elem) {
+                        std::cerr << "[JoinMe] join_code field not found\n";
+                        return;
+                    }
+        
+                    std::string value = value_elem->getText();
+                    std::string udp_endpoint = endpoint_to_string(networkManager.getEndpoint());
+                    std::string final = "JOIN_GAME " + value + " " + udp_endpoint + "\n";
+                    client->write(final);
+                } else {
+                    std::cerr << "[JoinMe] ClientTCP instance expired, cannot send JOIN_GAME\n";
+                }
             });
+        }
+        
+
+        void clear() {
+            for (auto &entry : actions) {
+                entry.second = nullptr;
+            }
+            actions.clear();
         }
     
 };

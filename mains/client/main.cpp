@@ -124,6 +124,10 @@ int main(int ac, char **av) {
         grClient.run();
     printf("Stopping context\n");
 
+    ActionRegistry::getInstance().clear();
+
+    client.reset();
+    
     context.stop();
     
     t.join();
