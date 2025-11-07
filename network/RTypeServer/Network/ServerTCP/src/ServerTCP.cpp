@@ -1,4 +1,5 @@
 #include "../include/SessionManager.hpp"
+#include "../../../RTypeClient/UI/include/GameSettings.hpp"
 
 //-----------------------SESSION-------------------------------
 
@@ -130,7 +131,36 @@ static std::string interpret_command(const std::string& line, const std::string&
     } else if (keyword == "CREATE_GAME") {
         std::string code = generate_five_digit_random();
         asio::ip::udp::endpoint end = string_to_endpoint(args[0]);
+        GameSettings::GameMode gameMode = GameSettings::GameMode::NORMAL;
+        GameSettings::Difficulty diff = GameSettings::Difficulty::EASY;
+        std::string filepath = "";
 
+        std::string last = "";
+
+        for (auto value : args)
+            last += value;
+        std::cout << last << std::endl;
+
+        if (args[1] == "NORMAL") {
+            gameMode = GameSettings::GameMode::NORMAL;
+            std::string level = args[2];
+            if (level == "EASY")
+                diff = GameSettings::Difficulty::EASY;
+            else if (level == "MEDIUM")
+                diff = GameSettings::Difficulty::MEDIUM;
+            else if (level == "HARD")
+                diff = GameSettings::Difficulty::DIFFICULT;
+        } else if (args[1] == "PVP") {
+            gameMode = GameSettings::GameMode::PVP;
+        } else if (args[1] == "CUSTOM") {
+            gameMode = GameSettings::GameMode::CUSTOM;
+            filepath = args[2];
+        }
+
+        GameSettings gameSettings(gameMode, diff, filepath);
+
+        //Tu passes ici la variable à ta gameInstance
+        
         GameManager::getInstance().create_game(code);
         GameManager::getInstance().addClientToGame(code, end, sessionId);
         std::string message = "CODE " + code + "\n";

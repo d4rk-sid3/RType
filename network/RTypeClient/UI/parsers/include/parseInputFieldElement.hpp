@@ -14,6 +14,7 @@ std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& sett
         sf::Color activeColor = sf::Color::Blue;
         int r = 255, g = 255, b = 255, a = 255;
         unsigned int textSize = 17;
+        bool can_display = true;
 
         setting.lookupValue("id", id);
         setting.lookupValue("font", fontPath);
@@ -22,6 +23,11 @@ std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& sett
             const libconfig::Setting& posSetting = setting.lookup("pos");
             if (posSetting.getLength() == 2)
                 pos = { static_cast<float>(posSetting[0]), static_cast<float>(posSetting[1]) };
+        }
+
+        if (setting.exists("display")) {
+            std::cout << "Display existe oh" << std::endl;
+            setting.lookupValue("display", can_display);
         }
 
         if (setting.exists("size")) {
@@ -52,7 +58,10 @@ std::shared_ptr<UIElement> parseInputFieldElement(const libconfig::Setting& sett
             );
         }
 
-        return std::make_shared<InputFieldElement>(id, fontPath, pos, size, isPassword, activeColor, remapMode, textSize);
+        if (!can_display)
+            std::cout << "J'ai bien vu que c'est false unh" << std::endl;
+
+        return std::make_shared<InputFieldElement>(id, fontPath, pos, size, isPassword, activeColor, remapMode, textSize, can_display);
     }
     catch (const libconfig::SettingNotFoundException& e) {
         std::cerr << "InputFieldElement: champ manquant (" << e.getPath() << ")\n";

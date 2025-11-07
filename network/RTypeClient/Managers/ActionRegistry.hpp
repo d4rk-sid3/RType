@@ -39,7 +39,7 @@ class ActionRegistry {
         void setDefaultActions() {
             const std::vector<std::string> pages = {
                 "Homepage", "Registerpage", "Loginpage", "Dashboardpage", 
-                "AboutUsPage", "HelpPage", "SettingsPage", "JoinParty"
+                "AboutUsPage", "HelpPage", "SettingsPage", "JoinParty", "CustomParty"
             };
     
             for (const auto& page : pages) {
@@ -124,8 +124,43 @@ class ActionRegistry {
             registerAction("CreateParty", [&networkManager, weak_client = std::weak_ptr<ClientTCP>(client)]() {
                 if (auto client = weak_client.lock()) {
                     std::string message = "CREATE_GAME ";
+                    std::string custom = "";
                     std::string udp_endpoint = endpoint_to_string(networkManager.getEndpoint());
-                    std::string final = message + udp_endpoint + "\n";
+
+                    message += udp_endpoint;
+                    message += " ";
+
+                    auto ui = UIManager::getInstance().getCurrentUI();
+
+                    auto elem = ui->getElementById("mode_choice");
+                    auto cast = std::dynamic_pointer_cast<ChoiceFieldElement>(elem);
+
+                    if (cast->getSelectedIndex() == 0) {
+                        custom += "NORMAL ";
+                        auto diff_choice = ui->getElementById("difficulty_choice");
+                        auto diff_choice_cast = std::dynamic_pointer_cast<ChoiceFieldElement>(diff_choice);
+                        switch(diff_choice_cast->getSelectedIndex()) {
+                            case 0:
+                                custom += "EASY";
+                                break;
+                            case 1:
+                                custom += "MEDIUM";
+                                break;
+                            case 2:
+                                custom += "DIFFICULT";
+                                break;
+                        }
+                    } else if (cast->getSelectedIndex() == 1) {
+                        custom += "PVP";
+                    } else if (cast->getSelectedIndex() == 2) {
+                        custom += "CUSTOM ";
+                        auto input = ui->getElementById("file_path");
+                        auto input_cast = std::dynamic_pointer_cast<InputFieldElement>(input);
+
+                        custom += input_cast->getText();
+                    }
+
+                    std::string final = message + custom + "\n";
                     client->write(final);
                 } else {
                     std::cerr << "[CreateParty] ClientTCP instance expired, cannot send CREATE_GAME\n";

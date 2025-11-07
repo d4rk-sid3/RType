@@ -4,6 +4,8 @@
     #include "EventHandler.hpp"
     #include "../components/include/TextElement.hpp"
     #include "../include/utils.hpp"
+    #include "../components/include/ChoiceFieldElement.hpp"
+    #include "../components/include/InputFieldElement.hpp"
 
 class ClientUI {
     public:
