@@ -17,6 +17,7 @@
  */
 
 #include "../include/gameInstance.hpp"
+#include "../../network/RTypeClient/UI/include/GameSettings.hpp"
 
 /**
  * @brief This function uses the ResourceManager to pre-load textures and fonts
@@ -181,7 +182,7 @@ void GameInstance::initializePlayersPVP(void) {
     }
 }
 
-GameInstance::GameInstance(std::string _id, NetworkManager& server) :
+GameInstance::GameInstance(std::string _id, NetworkManager& server, const GameSettings& settings) :
     id(_id), reg(win), factory(reg), server_(server)
 {
     reg.toggleLogic();
@@ -192,6 +193,25 @@ GameInstance::GameInstance(std::string _id, NetworkManager& server) :
 
     load_textures();
     initializeGame();
+
+    if (settings.getMode() == GameSettings::GameMode::PVP) {
+        diff_mode = PVP;
+    } else if (settings.getMode() == GameSettings::GameMode::CUSTOM) {
+        diff_mode = CUSTOM;
+        custom_conf_path = settings.getFilePath();
+    } else {
+        switch (settings.getDifficulty()) {
+            case GameSettings::Difficulty::MEDIUM:
+                diff_mode = MEDIUM;
+                break;
+            case GameSettings::Difficulty::DIFFICULT:
+                diff_mode = HARD;
+                break;
+            default:
+                diff_mode = EASY;
+                break;
+        }
+    }
     if (custom_conf_path != "")
         state = CUSTOM_LEVEL;
     else

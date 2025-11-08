@@ -160,8 +160,8 @@ static std::string interpret_command(const std::string& line, const std::string&
         GameSettings gameSettings(gameMode, diff, filepath);
 
         //Tu passes ici la variable à ta gameInstance
-        
-        GameManager::getInstance().create_game(code);
+
+        GameManager::getInstance().create_game(code, gameSettings);
         GameManager::getInstance().addClientToGame(code, end, sessionId);
         std::string message = "CODE " + code + "\n";
         std::cout << message << std::endl;

@@ -49,12 +49,6 @@ inline int player2_entity_id = -1;
 typedef enum diff_mode {EASY, MEDIUM, HARD, PVP, CUSTOM } diff_mode_t;
 
 /**
- * @brief A gloal variable to store the difficulty of the game
- *
- */
-inline diff_mode_t diff_mode = MEDIUM;
-
-/**
  * @brief A global variable that holds the path to the custom conf file
  *
  */
@@ -96,6 +90,12 @@ class GameInstance {
      * @brief The port to listen on
      */
     int p_;
+
+    /**
+     * @brief A gloal variable to store the difficulty of the game
+     *
+     */
+    diff_mode_t diff_mode;
 
     /**
      * @brief The registry that holds all entities and components
@@ -210,7 +210,7 @@ class GameInstance {
     /**
      * @brief Construct a new Server object
      */
-    GameInstance(std::string _id, NetworkManager& server);
+    GameInstance(std::string _id, NetworkManager& server, const GameSettings& settings);
 
     /**
      * @brief Destroy the GameInstance object
