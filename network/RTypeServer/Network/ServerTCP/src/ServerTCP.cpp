@@ -148,7 +148,7 @@ static std::string interpret_command(const std::string& line, const std::string&
                 diff = GameSettings::Difficulty::EASY;
             else if (level == "MEDIUM")
                 diff = GameSettings::Difficulty::MEDIUM;
-            else if (level == "HARD")
+            else if (level == "DIFFICULT")
                 diff = GameSettings::Difficulty::DIFFICULT;
         } else if (args[1] == "PVP") {
             gameMode = GameSettings::GameMode::PVP;
