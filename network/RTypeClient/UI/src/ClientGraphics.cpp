@@ -208,12 +208,17 @@ void ClientGraphics::handleNetworkEvent(const std::string& line)
     } else if (keyword == "CODE") {
         std::string code = args[0];
 
+        std::cout << "Mamamias" << std::endl;
+
         auto create_ui = UIManager::getInstance().getUI("CreateParty");
+        std::cout << "Getter bien getté" << std::endl;
         auto message_element = create_ui->getElementById("code_value");
         auto cast_element = std::dynamic_pointer_cast<TextElement>(message_element);
 
         cast_element->setText(code);
+        std::cout << "Bien set" << std::endl;
         UIManager::getInstance().setUI("CreateParty");
+        std::cout << "Perfectly created" << std::endl;
     } else if (keyword == "ADMIN_OK") {
         std::cout << "Administrator authentication successful. Closing the graphical interface.\n";
         

@@ -27,26 +27,27 @@ void ButtonElement::display(sf::RenderTexture& window) {
     text.display(window);
 }
 
-void ButtonElement::updateState(sf::RenderWindow& window) {
+void ButtonElement::updateState(sf::RenderWindow& window) 
+{
     bool over = isMouseOver(window);
+    bool isPressed = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 
-    if (state == ButtonState::CLICKED && !sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+    if (over && isPressed && !wasPressed) {
+        state = ButtonState::CLICKED;
+        wasPressed = true;
+    }
+    else if (wasPressed && !isPressed) {
         if (over && onClick) {
             onClick();
         }
+        wasPressed = false;
         state = over ? ButtonState::HOVER : ButtonState::NORMAL;
     }
-    else if (over && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        if (state != ButtonState::CLICKED) {
-            state = ButtonState::CLICKED;
-            // Ne rien faire ici, on attend le relâchement
-        }
-    }
-    else if (over && state != ButtonState::HOVER) {
+    else if (over && !isPressed && state != ButtonState::HOVER) {
         state = ButtonState::HOVER;
         if (onHover) onHover();
     }
-    else if (!over && state != ButtonState::NORMAL) {
+    else if (!over && !isPressed && state != ButtonState::NORMAL) {
         state = ButtonState::NORMAL;
     }
 

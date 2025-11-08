@@ -164,6 +164,7 @@ static std::string interpret_command(const std::string& line, const std::string&
         GameManager::getInstance().create_game(code);
         GameManager::getInstance().addClientToGame(code, end, sessionId);
         std::string message = "CODE " + code + "\n";
+        std::cout << message << std::endl;
         return message;
     } else if (keyword == "JOIN_GAME") {
         std::string code = args[0];

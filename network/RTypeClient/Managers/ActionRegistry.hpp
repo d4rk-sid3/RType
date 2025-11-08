@@ -54,6 +54,8 @@ class ActionRegistry {
             registerAction("Login", [weak_client = std::weak_ptr<ClientTCP>(client)]() {
                 if (auto client = weak_client.lock()) {
                     auto ui = UIManager::getInstance().getCurrentUI();
+                    if (!ui) return;
+
                     auto usernameField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("username"));
                     auto passwordField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("password"));
         
@@ -76,6 +78,8 @@ class ActionRegistry {
             registerAction("Register", [weak_client = std::weak_ptr<ClientTCP>(client)]() {
                 if (auto client = weak_client.lock()) {
                     auto ui = UIManager::getInstance().getCurrentUI();
+                    if (!ui) return;
+
                     auto usernameField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("username"));
                     auto passwordField = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("password"));
         
@@ -92,16 +96,25 @@ class ActionRegistry {
             registerAction("SaveSettings", [weak_client = std::weak_ptr<ClientTCP>(client)]() {
                 if (auto client = weak_client.lock()) {
                     auto ui = UIManager::getInstance().getCurrentUI();
-                    auto up = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_up"))->getText();
-                    auto down = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_down"))->getText();
-                    auto left = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_left"))->getText();
-                    auto right = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_right"))->getText();
-                    auto shoot = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("shoot"))->getText();
-        
-                    std::string result = up + " " + down + " " + left + " " + right + " " + shoot;
+                    if (!ui) return;
+                    auto up_el = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_up"));
+                    auto down_el = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_down"));
+                    auto left_el = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_left"));
+                    auto right_el = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("input_right"));
+                    auto shoot_el = std::dynamic_pointer_cast<InputFieldElement>(ui->getElementById("shoot"));
+
+                    if (!up_el || !down_el || !left_el || !right_el || !shoot_el) return;
+
+                    std::string result = up_el->getText() + " " + down_el->getText() + " " +
+                                        left_el->getText() + " " + right_el->getText() + " " +
+                                        shoot_el->getText();
         
                     auto dashboard_ui = UIManager::getInstance().getUI("Dashboardpage");
-                    auto username_text = std::dynamic_pointer_cast<TextElement>(dashboard_ui->getElementById("username_left"))->getContent();
+                    if (!dashboard_ui) return;
+                    auto username_text_el = std::dynamic_pointer_cast<TextElement>(dashboard_ui->getElementById("username_left"));
+                    if (!username_text_el) return;
+                    std::string username_text = username_text_el->getContent();
+
                     std::string message = "SAVE " + username_text + " " + result + "\n";
                     client->write(message);
                 }
@@ -110,8 +123,10 @@ class ActionRegistry {
             registerAction("LaunchGame", [weak_client = std::weak_ptr<ClientTCP>(client)]() {
                 if (auto client = weak_client.lock()) {
                     auto ui = UIManager::getInstance().getCurrentUI();
-                    auto code = std::dynamic_pointer_cast<TextElement>(ui->getElementById("code_value"))->getContent();
-        
+                    if (!ui) return;
+                    auto code_el = std::dynamic_pointer_cast<TextElement>(ui->getElementById("code_value"));
+                    if (!code_el) return;
+                    std::string code = code_el->getContent();
                     std::string message = "LAUNCH_GAME " + code + "\n";
                     client->write(message);
                 }
