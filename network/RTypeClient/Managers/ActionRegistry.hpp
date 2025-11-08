@@ -158,6 +158,8 @@ class ActionRegistry {
                         auto input_cast = std::dynamic_pointer_cast<InputFieldElement>(input);
 
                         custom += input_cast->getText();
+                        if (input_cast->getText().size() == 0)
+                            return;
                     }
 
                     std::string final = message + custom + "\n";
@@ -179,7 +181,8 @@ class ActionRegistry {
                     std::string value = value_elem->getText();
                     std::string udp_endpoint = endpoint_to_string(networkManager.getEndpoint());
                     std::string final = "JOIN_GAME " + value + " " + udp_endpoint + "\n";
-                    client->write(final);
+                    if (value.size() == 5)
+                        client->write(final);
                 } else {
                     std::cerr << "[JoinMe] ClientTCP instance expired, cannot send JOIN_GAME\n";
                 }
