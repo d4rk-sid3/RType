@@ -19,6 +19,13 @@
 #include "../include/graphicsClient.hpp"
 #include "components.hpp"
 
+bool boss_dead = false;
+
+bool boss1_dead = false;
+bool boss2_dead = false;
+
+bool final_boss_dead = false;
+
 /**
  * @brief This function uses the ResourceManager to pre-load textures
  * and fonts that will be used in the game

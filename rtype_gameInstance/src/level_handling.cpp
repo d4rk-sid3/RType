@@ -138,6 +138,71 @@ void GameInstance::logGameEntities() {
             unique_id& uid =
                 reg.get_components<component::unique_id>()[entity(i)].value();
 
+            if (name_._name == "boss") {
+                hurtbox& hb = reg.get_components<hurtbox>()[entity(i)].value();
+             
+                if (hb.health <= 0) {
+                    Factory fac(reg);
+                    entity explosion = fac.make_explosion();
+                    position& explosion_pos =
+                        reg.get_components<position>()[explosion].value();
+                    explosion_pos.x = pos.x;
+                    explosion_pos.y = pos.y;
+
+                    boss_dead = true;
+                    reg.kill_entity(entity(i));
+                    continue;
+                }
+            }
+            if (name_._name == "small_shooter") {
+                hurtbox& hb = reg.get_components<hurtbox>()[entity(i)].value();
+            
+                if (hb.health <= 0) {
+                    Factory fac(reg);
+                    entity explosion = fac.make_explosion();
+                    position& explosion_pos =
+                        reg.get_components<position>()[explosion].value();
+                    explosion_pos.x = pos.x;
+                    explosion_pos.y = pos.y;
+
+                    boss1_dead = true;
+                    reg.kill_entity(entity(i));
+                    continue;
+                }
+            }
+            if (name_._name == "big_shooter") {
+                hurtbox& hb = reg.get_components<hurtbox>()[entity(i)].value();
+            
+                if (hb.health <= 0) {
+                    Factory fac(reg);
+                    entity explosion = fac.make_explosion();
+                    position& explosion_pos =
+                        reg.get_components<position>()[explosion].value();
+                    explosion_pos.x = pos.x;
+                    explosion_pos.y = pos.y;
+
+                    boss2_dead = true;
+                    reg.kill_entity(entity(i));
+                    continue;
+                }
+            }
+            if (name_._name == "final_boss") {
+                hurtbox& hb = reg.get_components<hurtbox>()[entity(i)].value();
+            
+                if (hb.health <= 0) {
+                    Factory fac(reg);
+                    entity explosion = fac.make_explosion();
+                    position& explosion_pos =
+                        reg.get_components<position>()[explosion].value();
+                    explosion_pos.x = pos.x;
+                    explosion_pos.y = pos.y;
+
+                    final_boss_dead = true;
+                    reg.kill_entity(entity(i));
+                    continue;
+                }
+            }
+
             // Ignore special entities
             if (std::find(
                     special_entities.begin(), special_entities.end(),
@@ -147,10 +212,12 @@ void GameInstance::logGameEntities() {
             }
 
             // Clean up out of screen entities
-            if (pos.x < -200 || pos.x > 1000 || pos.y < -200 || pos.y > 1000) {
-                if (name_._name != "ceiling" && name_._name != "floor") {
-                    reg.kill_entity(entity(i));
-                    continue;
+            if (diff_mode != PVP) {
+                if (pos.x < -200 || pos.x > 1000 || pos.y < -200 || pos.y > 1000) {
+                    if (name_._name != "ceiling" && name_._name != "floor") {
+                        reg.kill_entity(entity(i));
+                        continue;
+                    }
                 }
             }
             if (name_._name != "player2" && name_._name != "player1"

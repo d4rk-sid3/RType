@@ -38,13 +38,6 @@
 
 using namespace component;
 
-bool boss_dead = false;
-
-bool boss1_dead = false;
-bool boss2_dead = false;
-
-bool final_boss_dead = false;
-
 double distance(double x1, double y1, double x2, double y2) {
     return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 }
@@ -400,17 +393,6 @@ void boss_logic(double delta, registry& reg, entity en) {
         hit_pos.y = pos.y;
     }
 
-    if (hb.health <= 0) {
-        Factory fac(reg);
-        entity explosion = fac.make_explosion();
-        position& explosion_pos =
-            reg.get_components<position>()[explosion].value();
-        explosion_pos.x = pos.x;
-        explosion_pos.y = pos.y;
-
-        boss_dead = true;
-        reg.kill_entity(en);
-    }
 }
 
 void gtrooper_logic(double delta, registry& reg, entity en) {
@@ -505,7 +487,6 @@ void spacenemy_logic(double delta, registry& reg, entity en) {
         explosion_pos.y = pos.y;
         force_pos.x = pos.x;
         force_pos.y = pos.y;
-        boss_dead = true;
         reg.kill_entity(en);
     }
 }
@@ -705,17 +686,6 @@ void small_shooter_logic(double delta, registry& reg, entity en) {
         hit_pos.y = pos.y;
     }
 
-    if (hb.health <= 0) {
-        Factory fac(reg);
-        entity explosion = fac.make_explosion();
-        position& explosion_pos =
-            reg.get_components<position>()[explosion].value();
-        explosion_pos.x = pos.x;
-        explosion_pos.y = pos.y;
-
-        boss1_dead = true;
-        reg.kill_entity(en);
-    }
 }
 
 void big_shooter_logic(double delta, registry& reg, entity en) {
@@ -768,17 +738,6 @@ void big_shooter_logic(double delta, registry& reg, entity en) {
         hit_pos.y = pos.y;
     }
 
-    if (hb.health <= 0) {
-        Factory fac(reg);
-        entity explosion = fac.make_explosion();
-        position& explosion_pos =
-            reg.get_components<position>()[explosion].value();
-        explosion_pos.x = pos.x;
-        explosion_pos.y = pos.y;
-
-        boss2_dead = true;
-        reg.kill_entity(en);
-    }
 }
 
 void final_boss_logic(double delta, registry& reg, entity en) {
@@ -843,15 +802,4 @@ void final_boss_logic(double delta, registry& reg, entity en) {
         hit_pos.y = pos.y;
     }
 
-    if (hb.health <= 0) {
-        Factory fac(reg);
-        entity explosion = fac.make_explosion();
-        position& explosion_pos =
-            reg.get_components<position>()[explosion].value();
-        explosion_pos.x = pos.x;
-        explosion_pos.y = pos.y;
-
-        final_boss_dead = true;
-        reg.kill_entity(en);
-    }
 }
