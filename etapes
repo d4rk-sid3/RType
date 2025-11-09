@@ -11,6 +11,8 @@ git fetch --all
 git pull
 ////
 sudo apt-get install autoconf automake libtool
+sudo apt-get update
+sudo apt-get install build-essential autoconf automake libtool pkg-config
 */
 
 WINDOWS
