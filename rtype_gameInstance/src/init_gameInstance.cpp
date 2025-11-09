@@ -17,7 +17,6 @@
  */
 
 #include "../include/gameInstance.hpp"
-#include "../../network/RTypeClient/UI/include/GameSettings.hpp"
 
 /**
  * @brief This function uses the ResourceManager to pre-load textures and fonts

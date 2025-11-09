@@ -27,6 +27,7 @@
 #include "registry.hpp"
 #include "logic_functions.hpp"
 #include "Types.hpp"
+#include "../../network/RTypeClient/UI/include/GameSettings.hpp"
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
