@@ -49,12 +49,6 @@ inline int player2_entity_id = -1;
  */
 typedef enum diff_mode {EASY, MEDIUM, HARD, PVP, CUSTOM } diff_mode_t;
 
-/**
- * @brief A global variable that holds the path to the custom conf file
- *
- */
-inline std::string custom_conf_path = "";
-
 typedef enum { LEVEL1, LEVEL2, LEVEL3, CUSTOM_LEVEL } state_t;
 
 
@@ -81,6 +75,12 @@ class GameInstance {
      * @brief The current state of the game
      */
     state_t state;
+
+    /**
+     * @brief A global variable that holds the path to the custom conf file
+     *
+     */
+    std::string custom_conf_path;
 
     /**
      * @brief The window for rendering (if needed)
