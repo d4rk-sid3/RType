@@ -175,7 +175,10 @@ void GameInstance::initializePlayersPVP(void) {
         auto& pos =
             reg.get_components<component::position>()[player.second].value();
         
-        pos.x = 50;
+        if (i == 0)
+            pos.x = 50;
+        else
+            pos.x = 250;
         pos.y = 250;
         i++;
     }

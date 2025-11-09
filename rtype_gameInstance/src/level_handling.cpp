@@ -62,6 +62,9 @@ bool all_entities_spawned = false;
  * @param path
  */
 void GameInstance::loadLevel() {
+    if (diff_mode == PVP) {
+        return;
+    }
 
     Config conf;
     if (state == LEVEL1) {
