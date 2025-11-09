@@ -206,6 +206,13 @@ class GameInstance {
 
     std::vector<std::string> sessionIds;
 
+    bool boss_dead = false;
+
+    bool boss1_dead = false;
+    bool boss2_dead = false;
+
+    bool final_boss_dead = false;
+
   public:
 
     /**
