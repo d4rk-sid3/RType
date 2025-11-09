@@ -140,7 +140,7 @@ void GameInstance::logGameEntities() {
 
             if (name_._name == "boss") {
                 hurtbox& hb = reg.get_components<hurtbox>()[entity(i)].value();
-            
+             
                 if (hb.health <= 0) {
                     Factory fac(reg);
                     entity explosion = fac.make_explosion();
@@ -212,10 +212,12 @@ void GameInstance::logGameEntities() {
             }
 
             // Clean up out of screen entities
-            if (pos.x < -200 || pos.x > 1000 || pos.y < -200 || pos.y > 1000) {
-                if (name_._name != "ceiling" && name_._name != "floor") {
-                    reg.kill_entity(entity(i));
-                    continue;
+            if (diff_mode != PVP) {
+                if (pos.x < -200 || pos.x > 1000 || pos.y < -200 || pos.y > 1000) {
+                    if (name_._name != "ceiling" && name_._name != "floor") {
+                        reg.kill_entity(entity(i));
+                        continue;
+                    }
                 }
             }
             if (name_._name != "player2" && name_._name != "player1"

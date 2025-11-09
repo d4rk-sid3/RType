@@ -134,8 +134,10 @@ void GameInstance::addClient(const asio::ip::udp::endpoint& client) {
 
 void GameInstance::initializeGame(void) {
     factory.make_background();
-    factory.make_ceiling();
-    factory.make_floor();
+    if (diff_mode != PVP) {
+        factory.make_ceiling();
+        factory.make_floor();
+    }
     // factory.make_menu_background_music();
 }
 
