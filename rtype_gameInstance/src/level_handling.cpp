@@ -151,8 +151,8 @@ void GameInstance::logGameEntities() {
 
                     boss_dead = true;
                     reg.kill_entity(entity(i));
+                    continue;
                 }
-                continue;
             }
             if (name_._name == "small_shooter") {
                 hurtbox& hb = reg.get_components<hurtbox>()[entity(i)].value();
@@ -167,8 +167,8 @@ void GameInstance::logGameEntities() {
 
                     boss1_dead = true;
                     reg.kill_entity(entity(i));
+                    continue;
                 }
-                continue;
             }
             if (name_._name == "big_shooter") {
                 hurtbox& hb = reg.get_components<hurtbox>()[entity(i)].value();
@@ -183,8 +183,8 @@ void GameInstance::logGameEntities() {
 
                     boss2_dead = true;
                     reg.kill_entity(entity(i));
+                    continue;
                 }
-                continue;
             }
             if (name_._name == "final_boss") {
                 hurtbox& hb = reg.get_components<hurtbox>()[entity(i)].value();
@@ -199,8 +199,8 @@ void GameInstance::logGameEntities() {
 
                     final_boss_dead = true;
                     reg.kill_entity(entity(i));
+                    continue;
                 }
-                continue;
             }
 
             // Ignore special entities
