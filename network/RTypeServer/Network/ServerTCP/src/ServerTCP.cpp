@@ -1,5 +1,4 @@
 #include "../include/SessionManager.hpp"
-#include "../../../RTypeClient/UI/include/GameSettings.hpp"
 
 //-----------------------SESSION-------------------------------
 

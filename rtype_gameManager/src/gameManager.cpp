@@ -21,9 +21,6 @@
 
 #include "../include/gameManager.hpp"
 
-#include "../../network/RTypeClient/UI/include/GameSettings.hpp"
-
-
 GameManager& GameManager::getInstance() {
     static GameManager instance; 
     return instance;

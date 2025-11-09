@@ -1,5 +1,5 @@
 #pragma once
-#include "./librairies.hpp"
+#include <iostream>
 
 class GameSettings {
     public:
