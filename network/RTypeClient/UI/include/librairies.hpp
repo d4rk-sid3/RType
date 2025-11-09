@@ -21,6 +21,6 @@
 #include <optional>
 
 
-enum class ElementTag { TEXT, BUTTON, RECTANGLE, CIRCLE, INPUTFIELD, TEXTURE };
+enum class ElementTag { TEXT, BUTTON, RECTANGLE, CIRCLE, INPUTFIELD, TEXTURE, CHOICEFIELD };
 enum class ButtonState { NORMAL, HOVER, CLICKED };
 #endif

@@ -38,6 +38,8 @@
 
 inline bool player1_dead = false;
 inline bool player2_dead = false;
+inline bool player3_dead = false;
+inline bool player4_dead = false;
 
 inline int controllable_id = -1;
 
@@ -90,10 +92,6 @@ class GraphicsClient {
      */
     int port_;
 
-    /**
-     * @brief The menu information
-     */
-    menu_info_t menu_info;
 
     /**
      * @brief The timer for the level
@@ -161,20 +159,9 @@ class GraphicsClient {
     UIHandler ui_handler;
 
     /**
-     * @brief Initialize all menu related elements
-     */
-    void initMenu();
-
-    /**
-     * @brief Run the menu logic
-     * @param delta The time elapsed since the last frame
-     */
-    void runMenu(double delta);
-
-    /**
      * @brief Initialize all game related elements
      */
-    void initGame();
+    void initGame(std::vector<sf::Keyboard::Key> keyTab);
 
     /**
      * @brief Run the game logic
@@ -251,7 +238,7 @@ class GraphicsClient {
      * @param p The port to connect to the server
      * @param addr The address of the server
      */
-    GraphicsClient(NetworkManager& client, std::vector<int8_t>& lastmsg, std::mutex& mtx);
+    GraphicsClient(NetworkManager& client, std::vector<int8_t>& lastmsg, std::mutex& mtx, std::vector<sf::Keyboard::Key> keyTab);
 
     /**
      * @brief Destroy the Client object

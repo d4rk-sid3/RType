@@ -1,12 +1,12 @@
 \chapter{RFC-\/\+RT001\+: R-\/\+TYPE Protocol v2.1}
 \hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol}{}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol}\index{RFC-\/RT001: R-\/TYPE Protocol v2.1@{RFC-\/RT001: R-\/TYPE Protocol v2.1}}
-\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md33}%
-\Hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md33}%
+\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md15}%
+\Hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md15}%
  {\bfseries{Status}}\+: Standard ~\newline
  {\bfseries{Date}}\+: 2025-\/09-\/23 ~\newline
  {\bfseries{Authors}}\+: Akandé Philippe, Aïmane Alassane ~\newline
- {\bfseries{Category}}\+: Network Protocol\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md34}{}\doxysection{\texorpdfstring{Abstract}{Abstract}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md34}
-This document specifies the network communication protocol for R-\/\+Type, a a horizontally scrolling shooter arcade video game. The protocole use TCP for reliability and UDP for real time data transmission, with a binary serialization system.\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md35}{}\doxysection{\texorpdfstring{Table of contents}{Table of contents}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md35}
+ {\bfseries{Category}}\+: Network Protocol\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md16}{}\doxysection{\texorpdfstring{Abstract}{Abstract}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md16}
+This document specifies the network communication protocol for R-\/\+Type, a a horizontally scrolling shooter arcade video game. The protocole use TCP for reliability and UDP for real time data transmission, with a binary serialization system.\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md17}{}\doxysection{\texorpdfstring{Table of contents}{Table of contents}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md17}
 
 \begin{DoxyEnumerate}
 \item Introduction
@@ -18,13 +18,13 @@ This document specifies the network communication protocol for R-\/\+Type, a a h
 \item Error handling
 \item Security
 \item Versioning
-\end{DoxyEnumerate}\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md36}{}\doxysection{\texorpdfstring{1. Introduction}{1. Introduction}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md36}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md37}{}\doxysubsection{\texorpdfstring{1.\+1. Objectives}{1.\+1. Objectives}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md37}
-R-\/\+Type protocol enables communication between a central server and multiple clients to synchronize the player\textquotesingle{}s state, objects and environments.\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md38}{}\doxysubsection{\texorpdfstring{1.\+2. Convention}{1.\+2. Convention}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md38}
+\end{DoxyEnumerate}\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md18}{}\doxysection{\texorpdfstring{1. Introduction}{1. Introduction}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md18}
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md19}{}\doxysubsection{\texorpdfstring{1.\+1. Objectives}{1.\+1. Objectives}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md19}
+R-\/\+Type protocol enables communication between a central server and multiple clients to synchronize the player\textquotesingle{}s state, objects and environments.\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md20}{}\doxysubsection{\texorpdfstring{1.\+2. Convention}{1.\+2. Convention}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md20}
 The keywords "{}\+MUST"{}, "{}\+SHOULD"{}, "{}\+MAY"{} in this document are interpreted according to RFC 2119.
 
 \DoxyHorRuler{0}
- \hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md40}{}\doxysection{\texorpdfstring{2. General architecture}{2. General architecture}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md40}
+ \hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md22}{}\doxysection{\texorpdfstring{2. General architecture}{2. General architecture}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md22}
 The protocol uses a hybrid approach\+:
 
 
@@ -32,7 +32,7 @@ The protocol uses a hybrid approach\+:
 \item {\bfseries{TCP (Port 7890)}}\+: Critical commands, authentication, game state
 \item {\bfseries{UDP (Port 7891)}}\+: Real-\/time position updates, quantum physics
 \item {\bfseries{Web\+Socket (Port 7892)}}\+: Web client support (optional)
-\end{DoxyItemize}\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md41}{}\doxysubsection{\texorpdfstring{2.\+2 Modèle de communication}{2.\+2 Modèle de communication}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md41}
+\end{DoxyItemize}\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md23}{}\doxysubsection{\texorpdfstring{2.\+2 Modèle de communication}{2.\+2 Modèle de communication}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md23}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Client\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Server}
@@ -50,7 +50,7 @@ The protocol uses a hybrid approach\+:
 \DoxyCodeLine{\ \ |<-\/-\/\ Action\ Results\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/|}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md42}{}\doxysubsection{\texorpdfstring{2.\+3 Sessions et états}{2.\+3 Sessions et états}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md42}
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md24}{}\doxysubsection{\texorpdfstring{2.\+3 Sessions et états}{2.\+3 Sessions et états}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md24}
 Each client hold a {\bfseries{session}} identified by an UUID 128-\/bits. The possible state are \+:
 
 
@@ -64,8 +64,8 @@ Each client hold a {\bfseries{session}} identified by an UUID 128-\/bits. The po
 \end{DoxyItemize}
 
 \DoxyHorRuler{0}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md44}{}\doxysection{\texorpdfstring{3. Message Format}{3. Message Format}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md44}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md45}{}\doxysubsection{\texorpdfstring{3.\+1 General Structure (TCP)}{3.\+1 General Structure (TCP)}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md45}
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md26}{}\doxysection{\texorpdfstring{3. Message Format}{3. Message Format}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md26}
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md27}{}\doxysubsection{\texorpdfstring{3.\+1 General Structure (TCP)}{3.\+1 General Structure (TCP)}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md27}
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
 \hline
@@ -88,9 +88,9 @@ PLAYER\+\_\+\+UPDATE   &0x09   &Position joueur   &Bidirectionnel    \\\cline{1-
 DISCONNECT   &0x0A   &Déconnexion propre   &Bidirectionnel    \\\cline{1-4}
 ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \end{longtabu}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md46}{}\doxysection{\texorpdfstring{4. Commandes du protocole}{4. Commandes du protocole}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md46}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md47}{}\doxysubsection{\texorpdfstring{4.\+1 HELLO (0x01) -\/ Connexion initiale}{4.\+1 HELLO (0x01) -\/ Connexion initiale}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md47}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur ~\newline
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md28}{}\doxysection{\texorpdfstring{4. Commandes du protocole}{4. Commandes du protocole}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md28}
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md29}{}\doxysubsection{\texorpdfstring{4.\+1 HELLO (0x01) -\/ Connexion initiale}{4.\+1 HELLO (0x01) -\/ Connexion initiale}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md29}
+{\bfseries{Direction}} \+: Client → Serveur ~\newline
  {\bfseries{Payload}} \+:
 
 
@@ -102,8 +102,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md48}{}\doxysubsection{\texorpdfstring{4.\+2 WELCOME (0x02) -\/ Réponse serveur}{4.\+2 WELCOME (0x02) -\/ Réponse serveur}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md48}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} ~\newline
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md30}{}\doxysubsection{\texorpdfstring{4.\+2 WELCOME (0x02) -\/ Réponse serveur}{4.\+2 WELCOME (0x02) -\/ Réponse serveur}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md30}
+{\bfseries{Direction}} \+: Serveur → Client ~\newline
  {\bfseries{Payload}} \+:
 
 
@@ -116,8 +116,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md49}{}\doxysubsection{\texorpdfstring{4.\+3 AUTH (0x03) -\/ Authentification}{4.\+3 AUTH (0x03) -\/ Authentification}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md49}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur ~\newline
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md31}{}\doxysubsection{\texorpdfstring{4.\+3 AUTH (0x03) -\/ Authentification}{4.\+3 AUTH (0x03) -\/ Authentification}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md31}
+{\bfseries{Direction}} \+: Client → Serveur ~\newline
  {\bfseries{Payload}} \+:
 
 
@@ -137,8 +137,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \item {\ttfamily 0} (Guest) \+: Connexion anonyme sans credentials
 \item {\ttfamily 1} (User\+Pass) \+: Username + mot de passe SHA256
 \item {\ttfamily 2} (Token) \+: Token JWT ou OAuth2 Dans le cas où le client est déconnecté en pleine partie (crash du serveur/autre), il peut tout simplement fournir son token de session pour qu\textquotesingle{}on lui restaure sa partie si son token est toujours valide
-\end{DoxyItemize}\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md50}{}\doxysubsection{\texorpdfstring{4.\+4 AUTH\+\_\+\+RESULT (0x04) -\/ Authentication Result}{4.\+4 AUTH\+\_\+\+RESULT (0x04) -\/ Authentication Result}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md50}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\end{DoxyItemize}\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md32}{}\doxysubsection{\texorpdfstring{4.\+4 AUTH\+\_\+\+RESULT (0x04) -\/ Authentication Result}{4.\+4 AUTH\+\_\+\+RESULT (0x04) -\/ Authentication Result}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md32}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -151,8 +151,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
- uint128\+\_\+t \+: UUID\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md51}{}\doxysubsection{\texorpdfstring{4.\+5 HELP COMMAND (0x05) -\/ Get commands available}{4.\+5 HELP COMMAND (0x05) -\/ Get commands available}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md51}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
+ uint128\+\_\+t \+: UUID\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md33}{}\doxysubsection{\texorpdfstring{4.\+5 HELP COMMAND (0x05) -\/ Get commands available}{4.\+5 HELP COMMAND (0x05) -\/ Get commands available}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md33}
+{\bfseries{Direction}} \+: Client → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -161,8 +161,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md52}{}\doxysubsection{\texorpdfstring{4.\+6 HELP RESPONSE (0x06) -\/ Get commands available}{4.\+6 HELP RESPONSE (0x06) -\/ Get commands available}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md52}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md34}{}\doxysubsection{\texorpdfstring{4.\+6 HELP RESPONSE (0x06) -\/ Get commands available}{4.\+6 HELP RESPONSE (0x06) -\/ Get commands available}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md34}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -183,8 +183,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \item DISCONNECT
 \item PROFILE \mbox{[}username\mbox{]}
 \item LIST\+\_\+\+USERS
-\end{DoxyItemize}\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md53}{}\doxysubsection{\texorpdfstring{4.\+7 NAME (0x07) -\/ Change username}{4.\+7 NAME (0x07) -\/ Change username}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md53}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
+\end{DoxyItemize}\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md35}{}\doxysubsection{\texorpdfstring{4.\+7 NAME (0x07) -\/ Change username}{4.\+7 NAME (0x07) -\/ Change username}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md35}
+{\bfseries{Direction}} \+: Client → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -195,8 +195,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md54}{}\doxysubsection{\texorpdfstring{4.\+7 NAME (0x08) -\/ Name result}{4.\+7 NAME (0x08) -\/ Name result}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md54}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md36}{}\doxysubsection{\texorpdfstring{4.\+7 NAME (0x08) -\/ Name result}{4.\+7 NAME (0x08) -\/ Name result}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md36}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -206,8 +206,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md55}{}\doxysubsection{\texorpdfstring{4.\+8 CREATE\+\_\+\+SESSION (0x09) — Create a Game Session}{4.\+8 CREATE\+\_\+\+SESSION (0x09) — Create a Game Session}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md55}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md37}{}\doxysubsection{\texorpdfstring{4.\+8 CREATE\+\_\+\+SESSION (0x09) — Create a Game Session}{4.\+8 CREATE\+\_\+\+SESSION (0x09) — Create a Game Session}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md37}
+{\bfseries{Direction}} \+: Client → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -218,8 +218,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md56}{}\doxysubsection{\texorpdfstring{4.\+9 SESSION\+\_\+\+RESPONSE (0x10) — Game Session}{4.\+9 SESSION\+\_\+\+RESPONSE (0x10) — Game Session}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md56}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md38}{}\doxysubsection{\texorpdfstring{4.\+9 SESSION\+\_\+\+RESPONSE (0x10) — Game Session}{4.\+9 SESSION\+\_\+\+RESPONSE (0x10) — Game Session}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md38}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -231,8 +231,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md57}{}\doxysubsection{\texorpdfstring{4.\+10 LAUNCH\+\_\+\+SESSION (0x11) — Launch a Game Session}{4.\+10 LAUNCH\+\_\+\+SESSION (0x11) — Launch a Game Session}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md57}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md39}{}\doxysubsection{\texorpdfstring{4.\+10 LAUNCH\+\_\+\+SESSION (0x11) — Launch a Game Session}{4.\+10 LAUNCH\+\_\+\+SESSION (0x11) — Launch a Game Session}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md39}
+{\bfseries{Direction}} \+: Client → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -243,8 +243,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md58}{}\doxysubsection{\texorpdfstring{4.\+11 LAUNCH\+\_\+\+SESSION (0x12) — Server Response}{4.\+11 LAUNCH\+\_\+\+SESSION (0x12) — Server Response}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md58}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md40}{}\doxysubsection{\texorpdfstring{4.\+11 LAUNCH\+\_\+\+SESSION (0x12) — Server Response}{4.\+11 LAUNCH\+\_\+\+SESSION (0x12) — Server Response}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md40}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -254,8 +254,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md59}{}\doxysubsection{\texorpdfstring{4.\+12 JOIN\+\_\+\+SESSION (0x13) — Join an Existing Session}{4.\+12 JOIN\+\_\+\+SESSION (0x13) — Join an Existing Session}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md59}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md41}{}\doxysubsection{\texorpdfstring{4.\+12 JOIN\+\_\+\+SESSION (0x13) — Join an Existing Session}{4.\+12 JOIN\+\_\+\+SESSION (0x13) — Join an Existing Session}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md41}
+{\bfseries{Direction}} \+: Client → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -266,8 +266,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md60}{}\doxysubsection{\texorpdfstring{4.\+13 JOIN\+\_\+\+SESSION (0x14) — Join an Existing Session}{4.\+13 JOIN\+\_\+\+SESSION (0x14) — Join an Existing Session}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md60}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md42}{}\doxysubsection{\texorpdfstring{4.\+13 JOIN\+\_\+\+SESSION (0x14) — Join an Existing Session}{4.\+13 JOIN\+\_\+\+SESSION (0x14) — Join an Existing Session}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md42}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -278,8 +278,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md61}{}\doxysubsection{\texorpdfstring{4.\+14 REGISTER (0x15) — Create Account}{4.\+14 REGISTER (0x15) — Create Account}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md61}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md43}{}\doxysubsection{\texorpdfstring{4.\+14 REGISTER (0x15) — Create Account}{4.\+14 REGISTER (0x15) — Create Account}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md43}
+{\bfseries{Direction}} \+: Client → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -290,8 +290,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md62}{}\doxysubsection{\texorpdfstring{4.\+15 REGISTER (0x16) — Create Account}{4.\+15 REGISTER (0x16) — Create Account}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md62}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md44}{}\doxysubsection{\texorpdfstring{4.\+15 REGISTER (0x16) — Create Account}{4.\+15 REGISTER (0x16) — Create Account}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md44}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -302,8 +302,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md63}{}\doxysubsection{\texorpdfstring{4.\+16 DISCONNECT (0x17) — Disconnect}{4.\+16 DISCONNECT (0x17) — Disconnect}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md63}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md45}{}\doxysubsection{\texorpdfstring{4.\+16 DISCONNECT (0x17) — Disconnect}{4.\+16 DISCONNECT (0x17) — Disconnect}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md45}
+{\bfseries{Direction}} \+: Client → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -313,8 +313,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md64}{}\doxysubsection{\texorpdfstring{4.\+17 DISCONNECT (0x18) — Disconnect}{4.\+17 DISCONNECT (0x18) — Disconnect}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md64}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md46}{}\doxysubsection{\texorpdfstring{4.\+17 DISCONNECT (0x18) — Disconnect}{4.\+17 DISCONNECT (0x18) — Disconnect}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md46}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -324,8 +324,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md65}{}\doxysubsection{\texorpdfstring{4.\+18 PROFILE (0x19) — Check Profile}{4.\+18 PROFILE (0x19) — Check Profile}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md65}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md47}{}\doxysubsection{\texorpdfstring{4.\+18 PROFILE (0x19) — Check Profile}{4.\+18 PROFILE (0x19) — Check Profile}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md47}
+{\bfseries{Direction}} \+: Client → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -335,8 +335,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md66}{}\doxysubsection{\texorpdfstring{4.\+19 PROFILE (0x20) — Check Profile}{4.\+19 PROFILE (0x20) — Check Profile}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md66}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md48}{}\doxysubsection{\texorpdfstring{4.\+19 PROFILE (0x20) — Check Profile}{4.\+19 PROFILE (0x20) — Check Profile}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md48}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -350,8 +350,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md67}{}\doxysubsection{\texorpdfstring{4.\+20 LIST\+\_\+\+USERS (0x21) — List Active Users}{4.\+20 LIST\+\_\+\+USERS (0x21) — List Active Users}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md67}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md49}{}\doxysubsection{\texorpdfstring{4.\+20 LIST\+\_\+\+USERS (0x21) — List Active Users}{4.\+20 LIST\+\_\+\+USERS (0x21) — List Active Users}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md49}
+{\bfseries{Direction}} \+: Client → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -361,8 +361,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md68}{}\doxysubsection{\texorpdfstring{4.\+21 LIST\+\_\+\+USERS (0x22) — List Active Users}{4.\+21 LIST\+\_\+\+USERS (0x22) — List Active Users}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md68}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md50}{}\doxysubsection{\texorpdfstring{4.\+21 LIST\+\_\+\+USERS (0x22) — List Active Users}{4.\+21 LIST\+\_\+\+USERS (0x22) — List Active Users}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md50}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -373,8 +373,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md69}{}\doxysubsection{\texorpdfstring{4.\+22 PLAYER\+\_\+\+MOVE (0x24) — Indicate that the player moves -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}{4.\+22 PLAYER\+\_\+\+MOVE (0x24) — Indicate that the player moves -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md69}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md51}{}\doxysubsection{\texorpdfstring{4.\+22 PLAYER\+\_\+\+MOVE (0x24) — Indicate that the player moves -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}{4.\+22 PLAYER\+\_\+\+MOVE (0x24) — Indicate that the player moves -\/-\/\texorpdfstring{$>$}{>} Broadcast to all team members}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md51}
+{\bfseries{Direction}} \+: Client → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -385,8 +385,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md70}{}\doxysubsection{\texorpdfstring{4.\+23 ENEMY\+\_\+\+MOVED (0x37) — Indicate to all team members that an enemy moved}{4.\+23 ENEMY\+\_\+\+MOVED (0x37) — Indicate to all team members that an enemy moved}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md70}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md52}{}\doxysubsection{\texorpdfstring{4.\+23 ENEMY\+\_\+\+MOVED (0x37) — Indicate to all team members that an enemy moved}{4.\+23 ENEMY\+\_\+\+MOVED (0x37) — Indicate to all team members that an enemy moved}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md52}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -398,8 +398,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md71}{}\doxysubsection{\texorpdfstring{4.\+24 NBR\+\_\+\+ENTITY (0x38) — Indicate the numbers of entities}{4.\+24 NBR\+\_\+\+ENTITY (0x38) — Indicate the numbers of entities}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md71}
-{\bfseries{Direction}} \+: Serveur → \doxylink{classClient}{Client} {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md53}{}\doxysubsection{\texorpdfstring{4.\+24 NBR\+\_\+\+ENTITY (0x38) — Indicate the numbers of entities}{4.\+24 NBR\+\_\+\+ENTITY (0x38) — Indicate the numbers of entities}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md53}
+{\bfseries{Direction}} \+: Serveur → Client {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}
@@ -409,8 +409,8 @@ ERROR   &0x0F   &Message d\textquotesingle{}erreur   &S → C   \\\cline{1-4}
 \DoxyCodeLine{\};}
 
 \end{DoxyCode}
-\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md72}{}\doxysubsection{\texorpdfstring{4.\+25 ACTION\+\_\+\+RESPONSE (0x25) — Indicate if an action like (shoot, ..) is make}{4.\+25 ACTION\+\_\+\+RESPONSE (0x25) — Indicate if an action like (shoot, ..) is make}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md72}
-{\bfseries{Direction}} \+: \doxylink{classClient}{Client} → Serveur {\bfseries{Payload}} \+:
+\hypertarget{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md54}{}\doxysubsection{\texorpdfstring{4.\+25 ACTION\+\_\+\+RESPONSE (0x25) — Indicate if an action like (shoot, ..) is make}{4.\+25 ACTION\+\_\+\+RESPONSE (0x25) — Indicate if an action like (shoot, ..) is make}}\label{md__2home_2jaggie_2epitech__projects_2neo-r-type_2G-CPP-500-COT-5-1-rtype-8_2docs_2protocol_autotoc_md54}
+{\bfseries{Direction}} \+: Client → Serveur {\bfseries{Payload}} \+:
 
 
 \begin{DoxyCode}{0}

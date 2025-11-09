@@ -21,7 +21,6 @@
 
 #include "../include/gameManager.hpp"
 
-
 GameManager& GameManager::getInstance() {
     static GameManager instance; 
     return instance;
@@ -88,13 +87,13 @@ GameManager::~GameManager() {
 
 // --- LOGIQUE DE JEU ---
 
-std::shared_ptr<GameInstance> GameManager::create_game(const std::string& id) {
+std::shared_ptr<GameInstance> GameManager::create_game(const std::string& id, const GameSettings& settings) {
     // std::lock_guard<std::mutex> lock(getMutex()); 
     
     if (active_games_.count(id)) {
         return nullptr;
     }
-    auto new_game = std::make_shared<GameInstance>(id, getUdpServer()); 
+    auto new_game = std::make_shared<GameInstance>(id, getUdpServer(), settings);
     std::cout << "Game created with ID: " << id << std::endl;
     active_games_[id] = new_game;
     

@@ -2,10 +2,10 @@
 #include "../../../Managers/FontManager.hpp"
 
 InputFieldElement::InputFieldElement(const std::string& id, const std::string& fontPath, sf::Vector2f pos, sf::Vector2f sizes,
-    bool password, sf::Color activeColor, bool remapMode, unsigned int characterSize)
+    bool password, sf::Color activeColor, bool remapMode, unsigned int characterSize, bool display)
     : UIElement(id, ElementTag::INPUTFIELD, pos),
         rect(id, pos, sizes, sf::Color::White, sf::Color::Black, 2.0f),
-        isPassword(password), activeOutlineColor(activeColor), isRemapMode(remapMode)
+        isPassword(password), activeOutlineColor(activeColor), isRemapMode(remapMode), can_display(display)
 {
     size = characterSize;
     text.setFont(FontManager::getInstance().getFont(fontPath));
@@ -91,20 +91,26 @@ void InputFieldElement::handleInput(const sf::Event& event) {
 }
 
 void InputFieldElement::update(EventHandler& eventHandler, sf::RenderWindow& window) {
-    updateActive(window);
-    for (const auto& event : eventHandler.getEvents()) {
-        handleInput(event);
+    if (can_display) {
+        updateActive(window);
+        for (const auto& event : eventHandler.getEvents()) {
+            handleInput(event);
+        }
     }
 }
 
 void InputFieldElement::display(sf::RenderWindow& window) {
-    rect.display(window);
-    window.draw(text);
+    if (can_display) {
+        rect.display(window);
+        window.draw(text);
+    }
 }
 
 void InputFieldElement::display(sf::RenderTexture& window) {
-    rect.display(window);
-    window.draw(text);
+    if (can_display) {
+        rect.display(window);
+        window.draw(text);
+    }
 }
 
 const std::string &InputFieldElement::getText() const {

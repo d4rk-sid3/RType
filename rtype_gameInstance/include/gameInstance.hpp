@@ -27,6 +27,7 @@
 #include "registry.hpp"
 #include "logic_functions.hpp"
 #include "Types.hpp"
+#include "./GameSettings.hpp"
 
 #define WINDOW_WIDTH 738
 #define WINDOW_HEIGHT 432
@@ -47,18 +48,6 @@ inline int player2_entity_id = -1;
  *
  */
 typedef enum diff_mode {EASY, MEDIUM, HARD, PVP, CUSTOM } diff_mode_t;
-
-/**
- * @brief A gloal variable to store the difficulty of the game
- *
- */
-inline diff_mode_t diff_mode = MEDIUM;
-
-/**
- * @brief A global variable that holds the path to the custom conf file
- *
- */
-inline std::string custom_conf_path = "";
 
 typedef enum { LEVEL1, LEVEL2, LEVEL3, CUSTOM_LEVEL } state_t;
 
@@ -88,6 +77,12 @@ class GameInstance {
     state_t state;
 
     /**
+     * @brief A global variable that holds the path to the custom conf file
+     *
+     */
+    std::string custom_conf_path;
+
+    /**
      * @brief The window for rendering (if needed)
      */
     sf::RenderWindow win;
@@ -96,6 +91,12 @@ class GameInstance {
      * @brief The port to listen on
      */
     int p_;
+
+    /**
+     * @brief A gloal variable to store the difficulty of the game
+     *
+     */
+    diff_mode_t diff_mode;
 
     /**
      * @brief The registry that holds all entities and components
@@ -134,11 +135,6 @@ class GameInstance {
         messages;
 
     /**
-     * @brief Map of all connected clients and their player IDs
-     */
-    std::map<asio::ip::udp::endpoint, int> all_clients;
-
-    /**
      * @brief Event for handling window events
      */
     sf::Event event;
@@ -157,6 +153,11 @@ class GameInstance {
     * @brief Counter used to know how many entities have been sent to the clients
     */
     int counter;
+
+    /**
+     * @brief Map of all connected clients and their player IDs
+     */
+    std::map<asio::ip::udp::endpoint, int> all_clients;
 
     /**
      * @brief The starting moment of the game
@@ -195,11 +196,11 @@ class GameInstance {
      */
     void runLevel(double delta);
 
-    void clearGameEntities();
-
     void initializePlayers(void);
 
     void initializePlayersPVP(void);
+
+    void updatePlayerHealth(void);
 
     void handleWinOrLoss();
 
@@ -210,7 +211,7 @@ class GameInstance {
     /**
      * @brief Construct a new Server object
      */
-    GameInstance(std::string _id, NetworkManager& server);
+    GameInstance(std::string _id, NetworkManager& server, const GameSettings& settings);
 
     /**
      * @brief Destroy the GameInstance object

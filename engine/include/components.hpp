@@ -182,6 +182,12 @@ namespace component {
      *
      */
     typedef struct controllable_s {
+        sf::Keyboard::Key up_key;
+        sf::Keyboard::Key down_key;
+        sf::Keyboard::Key left_key;
+        sf::Keyboard::Key right_key;
+        sf::Keyboard::Key space_key;
+
         /**
          * @var bool up
          * @brief  Check if up is pressed
@@ -216,7 +222,22 @@ namespace component {
          * @brief Default constructor
          */
         controllable_s()
-            : up(false), down(false), left(false), right(false), space(false) {}
+            : up(false), down(false), left(false), right(false), space(false) {
+            up_key = sf::Keyboard::Up;
+            down_key = sf::Keyboard::Down;
+            left_key = sf::Keyboard::Left;
+            right_key = sf::Keyboard::Right;
+            space_key = sf::Keyboard::Space;
+        }
+
+        controllable_s(
+            sf::Keyboard::Key _up, sf::Keyboard::Key _down,sf::Keyboard::Key _left,
+            sf::Keyboard::Key _right, sf::Keyboard::Key _space
+        )
+            : up(false), down(false), left(false), right(false), space(false),
+            up_key(_up), down_key(_down), left_key(_left), right_key(_right), space_key(_space) {
+
+        }
 
         /**
          * @brief Constructor with preinitialized value
@@ -234,11 +255,11 @@ namespace component {
          * @brief Get the key that has been pressed
          */
         void getKeyboardInput() {
-            this->up = sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
-            this->down = sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
-            this->left = sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
-            this->right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
-            this->space = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+            this->up = sf::Keyboard::isKeyPressed(up_key);
+            this->down = sf::Keyboard::isKeyPressed(down_key);
+            this->left = sf::Keyboard::isKeyPressed(left_key);
+            this->right = sf::Keyboard::isKeyPressed(right_key);
+            this->space = sf::Keyboard::isKeyPressed(space_key);
         }
     } controllable;
 

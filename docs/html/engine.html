@@ -86,7 +86,7 @@ A simple tutorial on the engine</h1>
 <p>The engine is contained in the registry class. It stores the components, the entities, the systems and provides methods to manage them.</p>
 <p>The project uses various components, from simple position components to logic components (equivalent to scripts). You can see their details in <a class="el" href="components_8hpp.html">components.hpp</a></p>
 <p>It also uses pretty straightforward systems to update these components, as you can see in <a class="el" href="systems_8hpp.html">systems.hpp</a></p>
-<h2><a class="anchor" id="autotoc_md18"></a>
+<h2><a class="anchor" id="autotoc_md0"></a>
 </h2>
 <p>Let's create a simple program that:</p><ul>
 <li>Opens a window</li>
@@ -94,7 +94,7 @@ A simple tutorial on the engine</h1>
 <li>Displays its sprite</li>
 <li>Lets us move it using the keyboard</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md19"></a>
+<h3><a class="anchor" id="autotoc_md1"></a>
 1. Initialize the Engine</h3>
 <p>Include the required headers: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="registry_8hpp.html">registry.hpp</a>&quot;</span></div>
 <div class="ttc" id="aregistry_8hpp_html"><div class="ttname"><a href="registry_8hpp.html">registry.hpp</a></div><div class="ttdoc">This file defines the registry class. The registry is a container for all the entities and components...</div></div>
@@ -108,7 +108,7 @@ A simple tutorial on the engine</h1>
 <div class="ttc" id="aclassentity_html"><div class="ttname"><a href="classentity.html">entity</a></div><div class="ttdoc">The entity class, defined by an id to which components will be associated.</div><div class="ttdef"><b>Definition</b> entity.hpp:40</div></div>
 </div><!-- fragment --><p>You just created an entity — a simple ID that will hold various components. Now let's attach these components one by one to make it an actual <b>player</b>.</p>
 <hr  />
- <h3><a class="anchor" id="autotoc_md21"></a>
+ <h3><a class="anchor" id="autotoc_md3"></a>
 2. Add the Components</h3>
 <p>First, let's add a <b>position</b> component, which determines where the player is on screen.</p>
 <div class="fragment"><div class="line">reg.add_component&lt;<a class="code hl_struct" href="structcomponent_1_1position__s.html">component::position</a>&gt;(player, {100.f, 300.f});</div>
@@ -145,7 +145,7 @@ A simple tutorial on the engine</h1>
 <div class="line">ResourceManager::instance().load(<span class="stringliteral">&quot;path/to/your/texture.png&quot;</span>, <a class="code hl_enumvalue" href="ResourceManager_8hpp.html#a509a729cba5db28cddc3c2ec18d0d83aa3f07a311da6e3003d3922d665098da2d">TEXTURE</a>);</div>
 <div class="line">sprite.setTextureFromName(<span class="stringliteral">&quot;player1&quot;</span>);</div>
 </div><!-- fragment --><hr  />
-<h3><a class="anchor" id="autotoc_md27"></a>
+<h3><a class="anchor" id="autotoc_md9"></a>
 3. Running the Game Loop</h3>
 <p>Now we can add the main loop, which updates all the systems every frame. The registry automatically keeps track of all systems related to the components you added (movement, control, draw, etc.).</p>
 <div class="fragment"><div class="line">    <span class="comment">// Main loop</span></div>
@@ -194,7 +194,7 @@ A simple tutorial on the engine</h1>
 <p>The other way of writing such logic behaviour is to use the logic component. A logic component is just a function considered as a component, attached to an entity to tell it what to do, like we just did. It is run on each frame and acts as an update function.</p>
 <p>More infos on that in <a class="el" href="components_8hpp.html">components.hpp</a></p>
 <hr  />
- <h3><a class="anchor" id="autotoc_md29"></a>
+ <h3><a class="anchor" id="autotoc_md11"></a>
 4. Behind the Scenes</h3>
 <p>Here’s what happens internally:</p>
 <ul>
@@ -205,7 +205,7 @@ A simple tutorial on the engine</h1>
 </ul>
 <p>Each system only cares about the data it needs — that’s the power of ECS.</p>
 <hr  />
- <h3><a class="anchor" id="autotoc_md31"></a>
+ <h3><a class="anchor" id="autotoc_md13"></a>
 5. Next Steps</h3>
 <p>From here, you can extend your engine by adding:</p><ul>
 <li>A <b>hurtbox</b> component for collision and health management</li>
@@ -217,10 +217,10 @@ A simple tutorial on the engine</h1>
 <div class="line">hurtbox.<a class="code hl_variable" href="structcomponent_1_1hurtbox__s.html#aba96c6a60940bf664b287bdb06901f0d">health</a> = 3;</div>
 <div class="line">hurtbox.<a class="code hl_variable" href="structcomponent_1_1hurtbox__s.html#a7731a2e82df13ecc8e0b444f83eebd07">width</a> = 32;</div>
 <div class="line">hurtbox.<a class="code hl_variable" href="structcomponent_1_1hurtbox__s.html#aefdfca717ae4f367dfff11ddb045c895">height</a> = 16;</div>
-<div class="ttc" id="astructcomponent_1_1hurtbox__s_html"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html">component::hurtbox_s</a></div><div class="ttdoc">The hurtbox component, defined by a size, health and a group (1 for the player, 2 for the enemies for...</div><div class="ttdef"><b>Definition</b> components.hpp:252</div></div>
-<div class="ttc" id="astructcomponent_1_1hurtbox__s_html_a7731a2e82df13ecc8e0b444f83eebd07"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html#a7731a2e82df13ecc8e0b444f83eebd07">component::hurtbox_s::width</a></div><div class="ttdeci">int width</div><div class="ttdoc">The width of the hurtbox.</div><div class="ttdef"><b>Definition</b> components.hpp:269</div></div>
-<div class="ttc" id="astructcomponent_1_1hurtbox__s_html_aba96c6a60940bf664b287bdb06901f0d"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html#aba96c6a60940bf664b287bdb06901f0d">component::hurtbox_s::health</a></div><div class="ttdeci">int health</div><div class="ttdoc">The health of the hurtbox. When it reaches 0, the entity is considered dead.</div><div class="ttdef"><b>Definition</b> components.hpp:257</div></div>
-<div class="ttc" id="astructcomponent_1_1hurtbox__s_html_aefdfca717ae4f367dfff11ddb045c895"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html#aefdfca717ae4f367dfff11ddb045c895">component::hurtbox_s::height</a></div><div class="ttdeci">int height</div><div class="ttdoc">The height of the hurtbox.</div><div class="ttdef"><b>Definition</b> components.hpp:274</div></div>
+<div class="ttc" id="astructcomponent_1_1hurtbox__s_html"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html">component::hurtbox_s</a></div><div class="ttdoc">The hurtbox component, defined by a size, health and a group (1 for the player, 2 for the enemies for...</div><div class="ttdef"><b>Definition</b> components.hpp:273</div></div>
+<div class="ttc" id="astructcomponent_1_1hurtbox__s_html_a7731a2e82df13ecc8e0b444f83eebd07"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html#a7731a2e82df13ecc8e0b444f83eebd07">component::hurtbox_s::width</a></div><div class="ttdeci">int width</div><div class="ttdoc">The width of the hurtbox.</div><div class="ttdef"><b>Definition</b> components.hpp:290</div></div>
+<div class="ttc" id="astructcomponent_1_1hurtbox__s_html_aba96c6a60940bf664b287bdb06901f0d"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html#aba96c6a60940bf664b287bdb06901f0d">component::hurtbox_s::health</a></div><div class="ttdeci">int health</div><div class="ttdoc">The health of the hurtbox. When it reaches 0, the entity is considered dead.</div><div class="ttdef"><b>Definition</b> components.hpp:278</div></div>
+<div class="ttc" id="astructcomponent_1_1hurtbox__s_html_aefdfca717ae4f367dfff11ddb045c895"><div class="ttname"><a href="structcomponent_1_1hurtbox__s.html#aefdfca717ae4f367dfff11ddb045c895">component::hurtbox_s::height</a></div><div class="ttdeci">int height</div><div class="ttdoc">The height of the hurtbox.</div><div class="ttdef"><b>Definition</b> components.hpp:295</div></div>
 </div><!-- fragment --><p>With these, you can start building enemies, bullets, pickups, and much more — all using the same simple ECS principles.</p>
 <hr  />
 <p> 🧩 <b>Summary</b></p><ul>

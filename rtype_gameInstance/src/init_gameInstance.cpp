@@ -31,6 +31,12 @@ void load_textures(void) {
         "assets/sprites/player/player2.gif", "player2", TEXTURE
     );
     ResourceManager::Instance().load(
+        "assets/sprites/player/player3.gif", "player3", TEXTURE
+    );
+    ResourceManager::Instance().load(
+        "assets/sprites/player/player4.gif", "player4", TEXTURE
+    );
+    ResourceManager::Instance().load(
         "assets/sprites/player/player2_flipped.gif", "player2_flipped", TEXTURE
     );
     ResourceManager::Instance().load(
@@ -138,20 +144,19 @@ void GameInstance::initializeGame(void) {
  *
  */
 void GameInstance::initializePlayers(void) {
-    if (player1_entity_id == -1) 
-        player1_entity_id = factory.make_entity("player1");
-    if (player2_entity_id == -1)
-        player2_entity_id = factory.make_entity("player2");
+    std::vector<std::string> tab = {"player1", "player2", "player3", "player4"};
+    int i = 0;
 
-    auto& pos1 =
-        reg.get_components<component::position>()[player1_entity_id].value();
-    auto& pos2 =
-        reg.get_components<component::position>()[player2_entity_id].value();
-    pos1.x = 50;
-    pos1.y = 250;
+    for (auto & player : all_clients) {
+        player.second = factory.make_entity(tab[i]);
 
-    pos2.x = 50;
-    pos2.y = 150;
+        auto& pos =
+            reg.get_components<component::position>()[player.second].value();
+        
+        pos.x = 50;
+        pos.y = 100 + (i*50);
+        i++;
+    }
 }
 
 /**
@@ -159,23 +164,27 @@ void GameInstance::initializePlayers(void) {
  *
  */
 void GameInstance::initializePlayersPVP(void) {
-    if (player1_entity_id == -1) 
-        player1_entity_id = factory.make_entity("player1");
-    if (player2_entity_id == -1)
-        player2_entity_id = factory.make_entity("player2_flipped");
 
-    auto& pos1 =
-        reg.get_components<component::position>()[player1_entity_id].value();
-    auto& pos2 =
-        reg.get_components<component::position>()[player2_entity_id].value();
-    pos1.x = 50;
-    pos1.y = 250;
+    std::vector<std::string> tab = {"player1", "player2_flipped"};
 
-    pos2.x = 50;
-    pos2.y = 250;
+    int i = 0;
+
+    for (auto & player : all_clients) {
+        player.second = factory.make_entity(tab[i]);
+
+        auto& pos =
+            reg.get_components<component::position>()[player.second].value();
+        
+        if (i == 0)
+            pos.x = 50;
+        else
+            pos.x = 250;
+        pos.y = 250;
+        i++;
+    }
 }
 
-GameInstance::GameInstance(std::string _id, NetworkManager& server) :
+GameInstance::GameInstance(std::string _id, NetworkManager& server, const GameSettings& settings) :
     id(_id), reg(win), factory(reg), server_(server)
 {
     reg.toggleLogic();
@@ -186,10 +195,28 @@ GameInstance::GameInstance(std::string _id, NetworkManager& server) :
 
     load_textures();
     initializeGame();
-    if (custom_conf_path != "")
-        state = CUSTOM_LEVEL;
-    else
+
+    if (settings.getMode() == GameSettings::GameMode::PVP) {
+        diff_mode = PVP;
         state = LEVEL1;
+    } else if (settings.getMode() == GameSettings::GameMode::CUSTOM) {
+        diff_mode = CUSTOM;
+        custom_conf_path = settings.getFilePath();
+        state = CUSTOM_LEVEL;
+    } else {
+        switch (settings.getDifficulty()) {
+            case GameSettings::Difficulty::MEDIUM:
+                diff_mode = MEDIUM;
+                break;
+            case GameSettings::Difficulty::DIFFICULT:
+                diff_mode = HARD;
+                break;
+            default:
+                diff_mode = EASY;
+                break;
+        }
+        state = LEVEL1;
+    }
     loadLevel();
 }
 
@@ -211,10 +238,11 @@ void GameInstance::run()
 {
     gameStarted = std::chrono::steady_clock::now();
 
-    if (player1_entity_id != -1)
-        all_clients.begin()->second = player1_entity_id;
-    if (player2_entity_id != -1)
-        all_clients.rbegin()->second = player2_entity_id;
+    if (diff_mode == PVP) {
+        initializePlayersPVP();
+    } else {
+        initializePlayers();
+    }
 
     win.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "R-Type Server");
 
@@ -236,6 +264,8 @@ void GameInstance::run()
         logGameEntities();
 
         runLevel(dt);
+
+        updatePlayerHealth();
 
         handleWinOrLoss();
 

@@ -86,27 +86,6 @@ void player_logic(double delta, registry& reg, entity en) {
         missile_pos.x = player_pos.x;
         missile_pos.y = player_pos.y;
     }
-
-    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
-    if (hb.health <= 0) {
-        Factory fac(reg);
-        entity explosion = fac.make_explosion();
-        position& pos = reg.get_components<position>()[en].value();
-        position& explosion_pos =
-            reg.get_components<position>()[explosion].value();
-        explosion_pos.x = pos.x;
-        explosion_pos.y = pos.y;
-
-        name& name_ = reg.get_components<name>()[en].value();
-        if (name_._name == "player1") {
-            player1_entity_id = -1;
-            printf("Player 1 dead\n");
-        } else if (name_._name == "player2") {
-            player2_entity_id = -1;
-            printf("Player 2 dead\n");
-        }
-        reg.kill_entity(en);
-    }
 }
 
 void player_evil_logic(double delta, registry& reg, entity en) {
@@ -146,71 +125,58 @@ void player_evil_logic(double delta, registry& reg, entity en) {
         missile_pos.x = player_pos.x;
         missile_pos.y = player_pos.y;
     }
+}
 
-    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
-    if (hb.health <= 0) {
-        Factory fac(reg);
-        entity explosion = fac.make_explosion();
-        position& pos = reg.get_components<position>()[en].value();
-        position& explosion_pos =
-            reg.get_components<position>()[explosion].value();
-        explosion_pos.x = pos.x;
-        explosion_pos.y = pos.y;
-
-        name& name_ = reg.get_components<name>()[en].value();
-        if (name_._name == "player1") {
-            player1_entity_id = -1;
-        } else if (name_._name == "player2_flipped") {
-            player2_entity_id = -1;
+std::vector<int> get_players_ids(registry& reg) {
+    std::vector<int> players_ids;
+    for (int i = 0; i < reg.getEntityNum(); ++i) {
+        try {
+            name& name_ = reg.get_components<name>()[i].value();
+            if (name_._name == "player1" || name_._name == "player2" || name_._name == "player3" || name_._name == "player4")
+                players_ids.push_back(i);
+        } catch (...) {
         }
-        reg.kill_entity(en);
     }
+    return players_ids;
 }
 
 bool shoot_at_player(registry& reg, position enemy_pos, double attack_range) {
-    position target_pos;
 
-    double distance1 = 1000000;
-    double distance2 = 1000000;
-    if (player1_entity_id != -1) {
-        position player1_pos =
-            reg.get_components<position>()[player1_entity_id].value();
-        distance1 =
-            distance(player1_pos.x, player1_pos.y, enemy_pos.x, enemy_pos.y);
-        if (distance1 > attack_range) {
-            distance1 = 1000000;
-        }
-    }
-    if (player2_entity_id != -1) {
-        position player2_pos =
-            reg.get_components<position>()[player2_entity_id].value();
-        distance2 =
-            distance(player2_pos.x, player2_pos.y, enemy_pos.x, enemy_pos.y);
-        if (distance2 > attack_range) {
-            distance2 = 1000000;
-        }
-    }
-
-    if (distance1 == distance2) {
+    double min_distance = 1e9;
+    int target_id = -1;
+    std::vector<int> player_ids = get_players_ids(reg);
+    if (player_ids.size() == 0)
         return false;
+
+    // Trouver le joueur le plus proche dans la portée
+    for (auto& player_id : player_ids) {
+        if (player_id == -1)
+            continue;
+
+        auto player_pos_opt = reg.get_components<position>()[player_id];
+        if (!player_pos_opt.has_value())
+            continue;
+
+        position player_pos = player_pos_opt.value();
+        double d = distance(player_pos.x, player_pos.y, enemy_pos.x, enemy_pos.y);
+
+        if (d < attack_range && d < min_distance) {
+            min_distance = d;
+            target_id = player_id;
+        }
     }
 
-    if (distance1 < distance2) {
-        if (distance1 < attack_range)
-            target_pos =
-                reg.get_components<position>()[player1_entity_id].value();
-        else
-            return false;
-    } else if (distance2 < distance1) {
-        if (distance2 < attack_range)
-            target_pos =
-                reg.get_components<position>()[player2_entity_id].value();
-        else
-            return false;
-    }
+    // Aucun joueur dans la portée
+    if (target_id == -1)
+        return false;
 
+    // Obtenir la position de la cible
+    position target_pos = reg.get_components<position>()[target_id].value();
+
+    // Créer et diriger le missile
     Factory fac(reg);
     entity missile = fac.make_enemy_missile();
+
     position& missile_pos = reg.get_components<position>()[missile].value();
     missile_pos.x = enemy_pos.x + 8;
     missile_pos.y = enemy_pos.y + 8;
@@ -218,6 +184,7 @@ bool shoot_at_player(registry& reg, position enemy_pos, double attack_range) {
     velocity& vel = reg.get_components<velocity>()[missile].value();
     vel.vx = target_pos.x - enemy_pos.x;
     vel.vy = target_pos.y - enemy_pos.y;
+
     return true;
 }
 
@@ -447,168 +414,78 @@ void boss_logic(double delta, registry& reg, entity en) {
 }
 
 void gtrooper_logic(double delta, registry& reg, entity en) {
-    static double t = 0.0;
-    static size_t target_player_id = player1_entity_id;
-    static double retarget_timer = 0.0;
-    const double RETARGET_INTERVAL = 3.0;
-    const float TARGET_X = 500.0f;
-    const float X_THRESHOLD = 10.0f;
-
-    hurtbox& hb = reg.get_components<hurtbox>()[en].value();
-    velocity& vel = reg.get_components<velocity>()[en].value();
-    position& pos = reg.get_components<position>()[en].value();
-    
-    bool reached_target_x = (pos.x <= TARGET_X + X_THRESHOLD);
-    
-    if (!reached_target_x) {
-        vel.vx = -BOSS_SPEED;
-        vel.vy = 0;
-        return;
-    }
-    
-    vel.vx = 0;
-    
-    retarget_timer += delta;
-    if (retarget_timer >= RETARGET_INTERVAL) {
-        size_t target_player_id_ = rand() % 2;
-
-        if (target_player_id_ == 0) {
-            target_player_id = player1_entity_id;
-        }
-        if (target_player_id_ == 1) {
-            target_player_id = player2_entity_id;
-        }
-        retarget_timer = 0.0;
-    }
-    
-    auto& positions = reg.get_components<position>();
-
-    if (!positions[target_player_id].has_value()) {
-        vel.vy = 0;
-        return;
-    }
-    
-    position& player_pos = positions[target_player_id].value();
-    
-    float diff_y = player_pos.y - pos.y;
-    const float ALIGN_THRESHOLD = 20.0f;
-    
-    if (fabs(diff_y) > ALIGN_THRESHOLD) {
-        vel.vy = (diff_y > 0) ? BOSS_SPEED : -BOSS_SPEED;
-    } else {
-        vel.vy = 0;
-    }
-    
-    bool is_aligned = (fabs(player_pos.y - pos.y) <= ALIGN_THRESHOLD);
-    
-    t += delta;
-    if (is_aligned) {
-        printf("Aligned. T: %f\n", t);
-        if (t >= BOSS_SHOOT_COOLDOWN) {
-            printf("Shooting\n");
-            t = 0;
-            Factory fac(reg);
-            entity missile1 = fac.make_big_missile();
-            
-            position& missile_pos1 = reg.get_components<position>()[missile1].value();
-            
-            missile_pos1.x = pos.x + 30;
-            missile_pos1.y = pos.y + 15;
-        }
-    }
-    
-    if (hb.hurt) {
-        Factory fac(reg);
-        entity hit_effect = fac.make_hit_effect();
-        position& hit_pos = reg.get_components<position>()[hit_effect].value();
-        hit_pos.x = pos.x;
-        hit_pos.y = pos.y;
-    }
-    
-    if (hb.health <= 0) {
-        Factory fac(reg);
-        entity explosion = fac.make_explosion();
-        position& explosion_pos = reg.get_components<position>()[explosion].value();
-        explosion_pos.x = pos.x;
-        explosion_pos.y = pos.y;
-        boss_dead = true;
-        reg.kill_entity(en);
-    }
+    return;
 }
 
 // ------------------------ SPACE ENEMY -----------------------
 
 void spacenemy_logic(double delta, registry& reg, entity en) {
     static double t = 0.0;
-    static size_t target_player_id = player1_entity_id;
+    std::vector<int> player_ids = get_players_ids(reg);
+    static size_t target_player_id = -1;
+    if (player_ids.size() == 0) {
+        return;
+    }
     static double retarget_timer = 0.0;
     const double RETARGET_INTERVAL = 3.0;
     const float TARGET_X = 500.0f;
     const float X_THRESHOLD = 10.0f;
+    const float ALIGN_THRESHOLD = 20.0f;
 
     hurtbox& hb = reg.get_components<hurtbox>()[en].value();
     velocity& vel = reg.get_components<velocity>()[en].value();
     position& pos = reg.get_components<position>()[en].value();
-    
-    bool reached_target_x = (pos.x <= TARGET_X + X_THRESHOLD);
-    
-    if (!reached_target_x) {
+
+    // Déplacement vers TARGET_X
+    if (pos.x > TARGET_X + X_THRESHOLD) {
         vel.vx = -BOSS_SPEED;
         vel.vy = 0;
         return;
     }
-    
     vel.vx = 0;
-    
+
+    // Choix aléatoire de cible tous les RETARGET_INTERVAL secondes
     retarget_timer += delta;
     if (retarget_timer >= RETARGET_INTERVAL) {
-        size_t target_player_id_ = rand() % 2;
+        std::vector<int> valid_players;
+        auto& positions = reg.get_components<position>();
 
-        if (target_player_id_ == 0) {
-            target_player_id = player1_entity_id;
+        for (auto& player_id : player_ids) {
+            if (player_id != -1 && positions[player_id].has_value())
+                valid_players.push_back(player_id);
         }
-        if (target_player_id_ == 1) {
-            target_player_id = player2_entity_id;
+
+        if (!valid_players.empty()) {
+            target_player_id = valid_players[rand() % valid_players.size()];
         }
         retarget_timer = 0.0;
     }
-    
-    auto& positions = reg.get_components<position>();
 
+    auto& positions = reg.get_components<position>();
     if (!positions[target_player_id].has_value()) {
         vel.vy = 0;
         return;
     }
-    
+
     position& player_pos = positions[target_player_id].value();
-    
     float diff_y = player_pos.y - pos.y;
-    const float ALIGN_THRESHOLD = 20.0f;
-    
-    if (fabs(diff_y) > ALIGN_THRESHOLD) {
-        vel.vy = (diff_y > 0) ? BOSS_SPEED : -BOSS_SPEED;
-    } else {
-        vel.vy = 0;
-    }
-    
-    bool is_aligned = (fabs(player_pos.y - pos.y) <= ALIGN_THRESHOLD);
-    
+
+    vel.vy = (fabs(diff_y) > ALIGN_THRESHOLD) ? ((diff_y > 0) ? BOSS_SPEED : -BOSS_SPEED) : 0;
+
+    bool is_aligned = (fabs(diff_y) <= ALIGN_THRESHOLD);
+
+    // Tir automatique quand aligné
     t += delta;
-    if (is_aligned) {
-        printf("Aligned. T: %f\n", t);
-        if (t >= BOSS_SHOOT_COOLDOWN) {
-            printf("Shooting\n");
-            t = 0;
-            Factory fac(reg);
-            entity missile1 = fac.make_big_missile();
-            
-            position& missile_pos1 = reg.get_components<position>()[missile1].value();
-            
-            missile_pos1.x = pos.x + 30;
-            missile_pos1.y = pos.y + 15;
-        }
+    if (is_aligned && t >= BOSS_SHOOT_COOLDOWN) {
+        t = 0;
+        Factory fac(reg);
+        entity missile1 = fac.make_big_missile();
+        position& missile_pos1 = reg.get_components<position>()[missile1].value();
+        missile_pos1.x = pos.x + 30;
+        missile_pos1.y = pos.y + 15;
     }
-    
+
+    // Effet de hit
     if (hb.hurt) {
         Factory fac(reg);
         entity hit_effect = fac.make_hit_effect();
@@ -616,13 +493,14 @@ void spacenemy_logic(double delta, registry& reg, entity en) {
         hit_pos.x = pos.x;
         hit_pos.y = pos.y;
     }
-    
+
+    // Mort du boss
     if (hb.health <= 0) {
         Factory fac(reg);
         entity explosion = fac.make_explosion();
         entity force = fac.make_force();
-        position &force_pos = reg.get_components<position>()[force].value();
         position& explosion_pos = reg.get_components<position>()[explosion].value();
+        position& force_pos = reg.get_components<position>()[force].value();
         explosion_pos.x = pos.x;
         explosion_pos.y = pos.y;
         force_pos.x = pos.x;
@@ -638,28 +516,34 @@ void force_logic(double delta, registry& reg, entity en)
     static double shoot_cooldown = 0.0;
     hurtbox& hb = reg.get_components<hurtbox>()[en].value();
 
+    // Si le force est mort, il se rattache au joueur le plus proche
     if (hb.health <= 0) {
-        position & pos = reg.get_components<position>()[en].value();
-        double p1_distance = 100000;
-        double p2_distance = 100000;
+        position& pos = reg.get_components<position>()[en].value();
 
-        if (player1_entity_id != -1) {
-            position& p1_pos = reg.get_components<position>()[player1_entity_id].value();
-            p1_distance = distance(p1_pos.x, p1_pos.y, pos.x, pos.y);
+        std::vector<int> player_ids = get_players_ids(reg);
+        double min_distance = 1e9;
+        attached_to = -1;
+
+        for (auto& player_id : player_ids) {
+            if (player_id == -1)
+                continue;
+
+            auto player_pos_opt = reg.get_components<position>()[player_id];
+            if (!player_pos_opt.has_value())
+                continue;
+
+            position player_pos = player_pos_opt.value();
+            double d = distance(player_pos.x, player_pos.y, pos.x, pos.y);
+            if (d < min_distance) {
+                min_distance = d;
+                attached_to = player_id;
+            }
         }
-        if (player2_entity_id != -1) {
-            position& p2_pos = reg.get_components<position>()[player2_entity_id].value();
-            p2_distance = distance(p2_pos.x, p2_pos.y, pos.x, pos.y);
-        }
-        if (p1_distance < p2_distance) {
-            attached_to = player1_entity_id;
-        } else if (p2_distance < p1_distance) {
-            attached_to = player2_entity_id;
-        } else {
+
+        if (attached_to == -1)
             return;
-        }
 
-        hurtbox &new_hb = reg.add_component<component::hurtbox>(en, component::hurtbox());
+        hurtbox& new_hb = reg.add_component<component::hurtbox>(en, component::hurtbox());
         new_hb.health = 20;
         new_hb.group = 1;
         new_hb.width = 24;
@@ -667,25 +551,32 @@ void force_logic(double delta, registry& reg, entity en)
     }
 
     if (attached_to != -1) {
-        position & pos = reg.get_components<position>()[en].value();
-        position & player_pos = reg.get_components<position>()[attached_to].value();
+        position& pos = reg.get_components<position>()[en].value();
+        position& player_pos = reg.get_components<position>()[attached_to].value();
+
+        // Positionner le force à côté du joueur
         pos.x = player_pos.x + 50;
         pos.y = player_pos.y;
 
+        // Tir automatique
         shoot_cooldown += delta;
         if (shoot_cooldown >= FORCE_SHOOT_COOLDOWN) {
             Factory fac(reg);
-            entity missile1 = fac.make_player_missile();
-            entity missile2 = fac.make_player_missile();
-            position & pos1 = reg.get_components<position>()[missile1].value();
-            position & pos2 = reg.get_components<position>()[missile2].value();
-            pos1.x = player_pos.x + 55;
-            pos1.y = player_pos.y - 15;
-            pos2.x = player_pos.x + 55;
-            pos2.y = player_pos.y + 15;
+
+            auto spawn_missile = [&](double offset_y) {
+                entity missile = fac.make_player_missile();
+                position& m_pos = reg.get_components<position>()[missile].value();
+                m_pos.x = player_pos.x + 55;
+                m_pos.y = player_pos.y + offset_y;
+            };
+
+            spawn_missile(-15);
+            spawn_missile(15);
             shoot_cooldown = 0;
         }
     }
+
+    // Effet de hit
     if (hb.hurt && attached_to != -1) {
         Factory fac(reg);
         entity hit_effect = fac.make_hit_effect();
@@ -693,6 +584,18 @@ void force_logic(double delta, registry& reg, entity en)
         position& hit_pos = reg.get_components<position>()[hit_effect].value();
         hit_pos.x = pos.x;
         hit_pos.y = pos.y;
+    }
+
+    if (hb.health <= 0) {
+        Factory fac(reg);
+        entity explosion = fac.make_explosion();
+        position& pos = reg.get_components<position>()[en].value();
+        position& explosion_pos =
+            reg.get_components<position>()[explosion].value();
+        explosion_pos.x = pos.x;
+        explosion_pos.y = pos.y;
+
+        reg.kill_entity(en);
     }
 }
 

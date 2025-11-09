@@ -35,6 +35,7 @@ class ButtonElement : public UIElement {
             sf::Vector2f mousePos = (sf::Vector2f)sf::Mouse::getPosition(window);
             return rect.rect.getGlobalBounds().contains(mousePos);
         }
+        bool wasPressed = false;
 };
     
 class ButtonBuilder {

@@ -20,17 +20,17 @@ The server handles all the game logic. It starts by loading a configuration file
 \end{DoxyCode}
 
 
-During the game, it then spawns the entities at the correct moment. Thanks to the logic components and the logic system as well as all the other ones. The entities evolve in the scene. All the server has to do now is to go through each game entity (and skip special ones like the background, the music) and send its infos (type and position) to each client. See more in \doxylink{level__handling_8cpp}{level\+\_\+handling.\+cpp}.
+During the game, it then spawns the entities at the correct moment. Thanks to the logic components and the logic system as well as all the other ones. The entities evolve in the scene. All the server has to do now is to go through each game entity (and skip special ones like the background, the music) and send its infos (type and position) to each client. See more in level\+\_\+handling.\+cpp.
 
 Simultaneously, the server listens to inputs from the clients If an input is received, the server then applies velocity to the corresponding player entity.\hypertarget{server_page_network_details}{}\doxysection{\texorpdfstring{Network Details}{Network Details}}\label{server_page_network_details}
 When the server starts, it call a {\ttfamily Network\+Manager} that listens for incoming UDP packets from clients\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{classServer_aa37d52e1d2f14f8ca96a907d34e71b3f}{Server::Server}}(\textcolor{keywordtype}{int}\ p,\ \mbox{\hyperlink{classregistry}{registry}}\&\ regis)}
+\DoxyCodeLine{Server::Server(\textcolor{keywordtype}{int}\ p,\ \mbox{\hyperlink{classregistry}{registry}}\&\ regis)}
 \DoxyCodeLine{\ \ \ \ :\ server\_(p,\ std::ref(messages),\ std::ref(mtx)),\ p\_(p),\ reg(regis)}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{init__server_8cpp_a0c588e2ccf2ed315e2710776feac9eff}{load\_textures}}();}
+\DoxyCodeLine{\ \ \ \ load\_textures();}
 \DoxyCodeLine{\ \ \ \ initializeGame();}
 \DoxyCodeLine{\ \ \ \ loadLevel(\textcolor{stringliteral}{"{}assets/levels/test.txt"{}});}
 \DoxyCodeLine{\}}

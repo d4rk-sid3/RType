@@ -119,22 +119,53 @@ static std::string interpret_command(const std::string& line, const std::string&
             std::vector<std::string> _keyMap = {args[1], args[2], args[3], args[4], args[5]};
             user.bind_keys(_keyMap);
             user.save(DatabaseManager::getInstance().getDB());
-            return "SAVE_OK\n";
+            std::string response = "";
+            for (auto value : _keyMap) {
+                response += value;
+                response += " ";
+            }
+            response.pop_back();
+            return "SAVE_OK " + response + "\n";
         }
     } else if (keyword == "CREATE_GAME") {
         std::string code = generate_five_digit_random();
-        std::cout << code << std::endl;
-        std::cout << args[0] << std::endl;
         asio::ip::udp::endpoint end = string_to_endpoint(args[0]);
+        GameSettings::GameMode gameMode = GameSettings::GameMode::NORMAL;
+        GameSettings::Difficulty diff = GameSettings::Difficulty::EASY;
+        std::string filepath = "";
 
-        GameManager::getInstance().create_game(code);
+        std::string last = "";
+
+        for (auto value : args)
+            last += value;
+        std::cout << last << std::endl;
+
+        if (args[1] == "NORMAL") {
+            gameMode = GameSettings::GameMode::NORMAL;
+            std::string level = args[2];
+            if (level == "EASY")
+                diff = GameSettings::Difficulty::EASY;
+            else if (level == "MEDIUM")
+                diff = GameSettings::Difficulty::MEDIUM;
+            else if (level == "DIFFICULT")
+                diff = GameSettings::Difficulty::DIFFICULT;
+        } else if (args[1] == "PVP") {
+            gameMode = GameSettings::GameMode::PVP;
+        } else if (args[1] == "CUSTOM") {
+            gameMode = GameSettings::GameMode::CUSTOM;
+            filepath = args[2];
+        }
+
+        GameSettings gameSettings(gameMode, diff, filepath);
+
+        //Tu passes ici la variable à ta gameInstance
+
+        GameManager::getInstance().create_game(code, gameSettings);
         GameManager::getInstance().addClientToGame(code, end, sessionId);
         std::string message = "CODE " + code + "\n";
-        std::cout << message;
+        std::cout << message << std::endl;
         return message;
     } else if (keyword == "JOIN_GAME") {
-        std::cout << args[0] << std::endl;
-        std::cout << args[1] << std::endl;
         std::string code = args[0];
         asio::ip::udp::endpoint end = string_to_endpoint(args[1]);
         
@@ -174,6 +205,11 @@ static std::string interpret_command(const std::string& line, const std::string&
             return value;
         }
         return "No user with username " + args[0] + " has been found in the database.\n";
+    } else if (keyword == "LEADERBOARD") {
+        std::string value = UserManager::getInstance().getTopThreeUsersString();
+        std::string response = "LEADERBOARD " + value + "\n";
+
+        return response;
     }
     else if (keyword == "QUIT") {
         return "BYE\n";

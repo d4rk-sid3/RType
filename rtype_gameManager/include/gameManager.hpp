@@ -48,7 +48,7 @@ class GameManager {
     
         ~GameManager();
     
-        std::shared_ptr<GameInstance> create_game(const std::string& id);
+        std::shared_ptr<GameInstance> create_game(const std::string& id, const GameSettings& settings);
         std::shared_ptr<GameInstance> get_game(const std::string& id);
         void start_game(const std::string& id);
         void remove_game(const std::string& id);

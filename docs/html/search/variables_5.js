@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['entities_0',['entities',['../classServer.html#ae4dff7b4e4736ca47c67d0a94899d22a',1,'Server']]],
-  ['entity_5fnum_1',['entity_num',['../classregistry.html#a736fb7871aa84c956c947d586f24a81b',1,'registry']]],
-  ['entity_5fstates_2',['entity_states',['../classClient.html#adda1af9107c6bf3f508d1e512bfedc32',1,'Client']]],
-  ['event_3',['event',['../classClient.html#a1885c92bd9e8d2f3041f740532c251d1',1,'Client::event'],['../classServer.html#a54885a69b63baf2e3017681804d3b003',1,'Server::event']]]
+  ['frame_5fduration_0',['frame_duration',['../structcomponent_1_1animated__drawable__s.html#a9d413e2ed4cb1c7c6c190f851e6b457e',1,'component::animated_drawable_s']]],
+  ['frame_5frect_1',['frame_rect',['../structcomponent_1_1animated__drawable__s.html#af4c3d8a67784f0d561df90e54ee57a9f',1,'component::animated_drawable_s']]],
+  ['frame_5ftimer_2',['frame_timer',['../structcomponent_1_1animated__drawable__s.html#a1724bb73c3190e4ad4f5456959d0c2c6',1,'component::animated_drawable_s']]]
 ];

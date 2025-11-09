@@ -31,6 +31,12 @@ void load_client_textures(void) {
         "assets/sprites/player/player2.gif", "player2", TEXTURE
     );
     ResourceManager::Instance().load(
+        "assets/sprites/player/player3.gif", "player3", TEXTURE
+    );
+    ResourceManager::Instance().load(
+        "assets/sprites/player/player4.gif", "player4", TEXTURE
+    );
+    ResourceManager::Instance().load(
         "assets/sprites/player/player2_flipped.gif", "player2_flipped", TEXTURE
     );
     ResourceManager::Instance().load(
@@ -127,7 +133,7 @@ std::string getKey(int value) {
  * @param p The port to connect to
  * @param address The server address
  */
-GraphicsClient::GraphicsClient (NetworkManager& client, std::vector<int8_t>& _lastmsg, std::mutex& _mtx):
+GraphicsClient::GraphicsClient (NetworkManager& client, std::vector<int8_t>& _lastmsg, std::mutex& _mtx, std::vector<sf::Keyboard::Key> keyTab):
     client_(client), lastmsg(_lastmsg), mtx(_mtx), reg(win), factory(reg)
 {
     state = LEVEL1;
@@ -143,7 +149,7 @@ GraphicsClient::GraphicsClient (NetworkManager& client, std::vector<int8_t>& _la
 
     load_client_textures();
     // initMenu();
-    initGame();
+    initGame(keyTab);
 }
 
 bool GraphicsClient::isRunning() const {
@@ -297,6 +303,12 @@ void GraphicsClient::entityMovDelete(EnemyMovedResponse pastpastPos, int64_t pas
             if (getKey(pastPos.enemy_type) == "player2") {
                 player2_dead = true;
             }
+            if (getKey(pastPos.enemy_type) == "player3") {
+                player3_dead = true;
+            }
+            if (getKey(pastPos.enemy_type) == "player4") {
+                player4_dead = true;
+            }
             if (getKey(pastPos.enemy_type) == "boss") {
                 boss_dead = true;
             }
@@ -417,8 +429,12 @@ void GraphicsClient::runLevel(double delta) {
 
     if (entity_states.front().first > nowDuration + latence)
         return;
-    else if (nowDuration + latence > entity_states.back().first)
-        exit(0);
+    else if (nowDuration + latence > entity_states.back().first) {
+        if (nowDuration + latence > entity_states.back().first + 2500)
+            win.close();
+        else
+            return;
+    }
 
     //////////////////////////
 
@@ -518,58 +534,15 @@ void GraphicsClient::runLevel(double delta) {
 GraphicsClient::~GraphicsClient() = default;
 
 /**
- * @brief This function initializes the menu
- *
- */
-void GraphicsClient::initMenu()
-{
-    menu_info.background = factory.make_background();
-    menu_info.title = factory.make_title();
-    menu_info.start_text = factory.make_start_text();
-    menu_info.menu_background_music = factory.make_menu_background_music();
-
-    reg.add_component<component::controllable>(
-        menu_info.start_text, component::controllable()
-        );
-}
-
-/**
- * @brief This function runs the menu
- *
- * @param delta The amount of time elapsed since the last frame
- */
-void GraphicsClient::runMenu(double delta) {
-
-    if (state == MENU) {
-        component::controllable &start_text =
-            reg.get_components<component::controllable>()[menu_info.start_text].value();
-
-        if (start_text.space) {
-            state = TRANSITION;
-            menu_info.menu_fade_in_rect = factory.make_fade_in_rect();
-        }
-    }
-
-    if (state == TRANSITION &&
-        std::find(
-            reg.dead_entities.begin(), reg.dead_entities.end(),
-            menu_info.menu_fade_in_rect
-        ) != reg.dead_entities.end()) {
-        state = LEVEL1;
-        initGame();
-    }
-}
-
-/**
  * @brief This function initializes the game
  *
  */
-void GraphicsClient::initGame() {
+void GraphicsClient::initGame(std::vector<sf::Keyboard::Key> keyTab) {
     factory.make_background();
     // factory.make_game_background_music();
 
     controllable_id = reg.spawn_entity();
-    reg.add_component<component::controllable>((entity)controllable_id, component::controllable());
+    reg.add_component<component::controllable>((entity)controllable_id, component::controllable(keyTab[0], keyTab[1], keyTab[2], keyTab[3], keyTab[4]));
 }
 
 void GraphicsClient::handleSubStates(double delta, sf::RenderWindow& win)
@@ -614,7 +587,7 @@ void GraphicsClient::handleSubStates(double delta, sf::RenderWindow& win)
         }
     }
 
-    if (player1_dead && player2_dead && substate != GAME_OVER) {
+    if (player1_dead && player2_dead && player3_dead && player4_dead && substate != GAME_OVER) {
         substate = GAME_OVER;
         ui_handler = UIHandler("GAME OVER", true);
     }
@@ -687,9 +660,6 @@ void GraphicsClient::run()
             if (event.type == sf::Event::KeyPressed)
                 if (event.key.code == sf::Keyboard::Escape)
                     win.close();
-        }
-        if (state == MENU || state == TRANSITION) {
-            runMenu(dt);
         }
         if (state == LEVEL1 || state == LEVEL2 || state == LEVEL3) {
             sendPlayerInput();

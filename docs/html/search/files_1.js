@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['decodeur_2ecpp_0',['decodeur.cpp',['../rtype__client_2src_2decodeur_8cpp.html',1,'(Global Namespace)'],['../rtype__server_2src_2decodeur_8cpp.html',1,'(Global Namespace)']]]
+  ['client_2edox_0',['client.dox',['../client_8dox.html',1,'']]],
+  ['components_2ehpp_1',['components.hpp',['../components_8hpp.html',1,'']]]
 ];

@@ -8,6 +8,7 @@
     #include "./parseRectangleElement.hpp"
     #include "./parseTextureElement.hpp"
     #include "./parseTextElement.hpp"
+    #include "./parseChoiceFieldElement.hpp"
 
 std::shared_ptr<UI> parseUI(const libconfig::Setting& uiSetting)
 {
@@ -38,6 +39,8 @@ std::shared_ptr<UI> parseUI(const libconfig::Setting& uiSetting)
                     element = parseInputFieldElement(el);
                 else if (type == "button")
                     element = parseButtonElement(el);
+                else if (type == "choicefield")
+                    element = parseChoiceFieldElement(el);
 
                 if (element)
                     ui->addElement(element);

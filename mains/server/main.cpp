@@ -4,25 +4,9 @@
 #include "logic_functions.hpp"
 
 void printServerUsage() {
-    std::cerr << "Usage:\n\t./r-type_server [tcpport] [udpport] [difficulty]\n" << std::endl;
+    std::cerr << "Usage:\n\t./r-type_server [tcpport] [udpport]\n" << std::endl;
     std::cerr << "\t\ttcpport: The TCP port number to run the server on" << std::endl;
     std::cerr << "\t\tudpport: The UDP port number to run the server on" << std::endl;
-    std::cerr << "\t\tdifficulty: The difficulty of the game (easy | medium | hard)" << std::endl;
-}
-
-diff_mode_t get_diff_mode(std::string mode) {
-    if (mode == "-f")
-        return CUSTOM;
-    if (mode == "easy")
-        return EASY;
-    if (mode == "medium")
-        return MEDIUM;
-    if (mode == "hard")
-        return HARD;
-    if (mode == "pvp")
-        return PVP;
-    printServerUsage();
-    exit(84);
 }
 
 void checkServerArgs(int ac, char **av) {
@@ -30,11 +14,7 @@ void checkServerArgs(int ac, char **av) {
         printServerUsage();
         exit(0);
     }
-    if (ac == 5 && std::string(av[2]) == "-f") {
-        custom_conf_path = av[3];
-        return;
-    }
-    if (ac != 4) {
+    if (ac != 3) {
         printServerUsage();
         exit(84);
     }
@@ -50,8 +30,6 @@ void checkServerArgs(int ac, char **av) {
 int main(int ac, char **av)
 {
     checkServerArgs(ac, av);
-
-    diff_mode = get_diff_mode(av[3]);
 
     unsigned int nThreads = std::max(1u, std::thread::hardware_concurrency());
 

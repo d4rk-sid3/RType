@@ -14,10 +14,11 @@ class InputFieldElement : public UIElement {
         bool isRemapMode = false;
         sf::Color activeOutlineColor;
         unsigned int size;
+        bool can_display = true;
     
         InputFieldElement(const std::string& id, const std::string& fontPath, sf::Vector2f pos, sf::Vector2f size,
                 bool password = false, sf::Color activeColor = sf::Color::Blue, bool remapMode = false, 
-                unsigned int characterSize = 17);
+                unsigned int characterSize = 17, bool display = true);
     
         void addChar(char c);
     

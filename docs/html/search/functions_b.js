@@ -1,14 +1,8 @@
 var searchData=
 [
-  ['receiveplayerinput_0',['receivePlayerInput',['../classServer.html#af59936648c727d2b909ebed8d2a0efa9',1,'Server']]],
-  ['receiveserverinfo_1',['receiveServerInfo',['../classClient.html#a921a72f346a37590330b0f573cd3d177',1,'Client']]],
-  ['register_5fall_5fsystems_2',['register_all_systems',['../classregistry.html#abb95393f9205c5615c365ffb249f49bb',1,'registry']]],
-  ['register_5fcomponents_3',['register_components',['../classregistry.html#afe3919f4a56bbbeda89af4a6e5171f8b',1,'registry']]],
-  ['registry_4',['registry',['../classregistry.html#a15c27c6d008fb260402f20d8619e43f7',1,'registry::registry(sf::RenderWindow &amp;window)'],['../classregistry.html#a757883d504ab1bb5a06e0faa8e28664d',1,'registry::registry()']]],
-  ['remove_5fcomponent_5',['remove_component',['../classregistry.html#a967f47ebfc3b74c85f483aae74bfd927',1,'registry']]],
-  ['resourcemanager_6',['ResourceManager',['../classResourceManager.html#a3b32babd2e81909bbd90d7f2d566fadb',1,'ResourceManager']]],
-  ['run_7',['run',['../classClient.html#ae0bc335d720265d4d6e8a72cf7a2a9aa',1,'Client::run()'],['../classServer.html#abb27d30b40a94326e3fd629d3b30b7d5',1,'Server::run()']]],
-  ['run_5fsystems_8',['run_systems',['../classregistry.html#a957cd5c282db213979764cbe622ece89',1,'registry']]],
-  ['runlevel_9',['runLevel',['../classClient.html#a101e55e53e7f9cc0433da705e66e1f08',1,'Client::runLevel()'],['../classServer.html#af56fa596fcd58a1ea62b5a059885f467',1,'Server::runLevel()']]],
-  ['runmenu_10',['runMenu',['../classClient.html#a1edfe2aa97fdb3d54c15afa0ef48496e',1,'Client']]]
+  ['setfontfromname_0',['setFontFromName',['../structcomponent_1_1text__s.html#a19afaebcafa561f6cf076139f54775b2',1,'component::text_s']]],
+  ['setframerect_1',['setFrameRect',['../structcomponent_1_1animated__drawable__s.html#a3e4ebe0724612533507c3110a2d70ae7',1,'component::animated_drawable_s']]],
+  ['setposition_2',['setPosition',['../structcomponent_1_1position__s.html#a021b18ef6d20b3967c4511a5851a82ea',1,'component::position_s']]],
+  ['settexturefromname_3',['setTextureFromName',['../structcomponent_1_1drawable__s.html#a7ee88f7aa48fd311461240b86f0db87a',1,'component::drawable_s::setTextureFromName()'],['../structcomponent_1_1animated__drawable__s.html#a2173193d80d09809b58d877f69f633c0',1,'component::animated_drawable_s::setTextureFromName()']]],
+  ['spawn_5fentity_4',['spawn_entity',['../classregistry.html#a582fb369da9636c38840ce731bb8a200',1,'registry']]]
 ];
