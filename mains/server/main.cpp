@@ -14,10 +14,6 @@ void checkServerArgs(int ac, char **av) {
         printServerUsage();
         exit(0);
     }
-    if (ac == 5 && std::string(av[3]) == "-f") {
-        custom_conf_path = av[4];
-        return;
-    }
     if (ac != 3) {
         printServerUsage();
         exit(84);

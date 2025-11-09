@@ -79,21 +79,17 @@ You need:
 
 ### **How to install and use VCPKG**
 
-- On home, git clone https://github.com/microsoft/vcpkg.git 
-- Enter the Add vcpkg to your PATH
-    - On linux (export VCPKG_ROOT=/home/route/to/vcpkg)
-    - On Windows (setx PATH "$env:PATH;C:\vcpkg")
-- You may have to update VCPK :
-    - Enter his repository and git fetch --all && git pull
-    - On Windows, you may also have to execute (.\vcpkg integrate install)
-- After all that, set (set VCPKG_ROOT=C:\vcpkg) and you can run the Game
+```bash
+chomd +x installvcpkg.sh
+./installvcpkg.sh
+```
 
 ### **Launch the Game**
 
 After building (see below), simply run:
 ```bash
-./r-type_server [port:int] &
-./r-type_client [port:int] [adress:string]
+./r-type_server [port:int] [port:int] &
+./r-type_client [port:int] [port:int] [adress:string]
 ```
 
 ## **For developers**
@@ -103,12 +99,8 @@ After building (see below), simply run:
 On Linux : - You may execute the following commands :
 You have to install (libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev)
 ```bash
-    git clone https://github.com/microsoft/vcpkg.git
-    cd vcpkg
-    git fetch --all
-    git pull
-    export VCPKG_ROOT=/road/to/vcpkg
-    sudo apt-get install autoconf automake libtool
+    chomd +x installvcpkg.sh
+    ./installvcpkg.sh
     cd road/to/rtype/repo
     mkdir build
     cd build

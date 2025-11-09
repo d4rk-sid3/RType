@@ -53,6 +53,12 @@ else
         ./bootstrap-vcpkg.sh
     fi
 
+    # Installation des dépendances nécessaires sur Linux
+    if [ "$PLATFORM" = "linux" ]; then
+        echo "🔧 Installation des dépendances requises pour Linux..."
+        sudo apt-get install autoconf automake libtool
+    fi
+
     echo "✅ vcpkg installé avec succès."
 fi
 
