@@ -83,7 +83,6 @@ int main(int ac, char **av) {
     int port = std::stoi(av[1]);
     int udp_port = std::stoi(av[2]);
     std::string address = av[3];
-    bool isGaming = false;
     std::vector<int8_t> lastmsg;
     std::mutex mtx;
 
