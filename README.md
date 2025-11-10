@@ -28,6 +28,8 @@
     - [**Testing program**](#testing-program)
     - [**Documentation**](#documentation)
     - [**Technologies choices**](#technologies-choices)
+  - [**For game designers**](#for-game-designers)
+    - [**Add content**](#add-content)
   - [**Thank for reading**](#thank-for-reading)
   - [**Authors**](#authors)
 
@@ -154,6 +156,19 @@ The test binaries will be in the build directory. Just lanch them. For example:
 ``` bash
 ./registry_tests
 ```
+
+## **For developers**
+
+### **Add content**
+
+You can customize your experience with R-TYPE by creating your own
+custom levels.
+To do so, use the level_creator script to generate a new custom
+level configuration file. Then, run the game and select, before
+launching the room, the custom mode.
+Enter the path to your configuration file and there you go, you can play
+your custom level until every enemy get destroyed.
+See more infos in the documentation, page "Adding Content".
 
 ### **Documentation**
 
