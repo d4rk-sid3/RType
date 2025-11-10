@@ -11,6 +11,8 @@ class RegistrySystemTest : public testing::Test {
     entity e2 = reg.spawn_entity();
 
     void SetUp() override {
+        reg.toggleMovement();
+        reg.togglePhysics();
         reg.add_component<component::position>(e1, {100, 50});
         reg.add_component<component::velocity>(e1, {0, 0});
         reg.add_component<component::hurtbox>(e1, {500, 1, 32, 32});
