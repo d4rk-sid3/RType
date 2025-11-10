@@ -323,11 +323,30 @@ void GameInstance::receivePlayerInput(double delta) {
 
                 if (action_info.input == SPACE && shoot_timer > PLAYER_SHOOT_COOLDOWN) {
                     shoot_timer = 0;
-                    entity missile = factory.make_player_missile();
                     position &pos = reg.get_components<component::position>()[all_clients[msg.first]].value();
-                    position &missile_pos = reg.get_components<component::position>()[missile].value();
-                    missile_pos.x = pos.x + 8;
-                    missile_pos.y = pos.y + 6;
+                    if (diff_mode == PVP) {
+                        name& name_ = reg.get_components<name>()[all_clients[msg.first]].value();
+                        if (name_._name == "player1") {
+                            entity missile = factory.make_player_missile();
+                            position &missile_pos = reg.get_components<component::position>()[missile].value();
+                            missile_pos.x = pos.x + 50;
+                            missile_pos.y = pos.y + 6;
+                        }
+                        else {
+                            std::cout << "EVIL MISSILE SPAWN" << std::endl;
+                            entity missile = factory.make_evil_player_missile();
+                            position &missile_pos = reg.get_components<component::position>()[missile].value();
+                            missile_pos.x = pos.x - 10;
+                            missile_pos.y = pos.y + 6;
+                        }
+                        
+                    } else {
+                        entity missile = factory.make_player_missile();
+                        position &pos = reg.get_components<component::position>()[all_clients[msg.first]].value();
+                        position &missile_pos = reg.get_components<component::position>()[missile].value();
+                        missile_pos.x = pos.x + 8;
+                        missile_pos.y = pos.y + 6;
+                    }
                 }
             }
 
