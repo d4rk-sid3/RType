@@ -546,7 +546,7 @@ GraphicsClient::~GraphicsClient() = default;
  */
 void GraphicsClient::initGame(std::vector<sf::Keyboard::Key> keyTab) {
     factory.make_background();
-    // factory.make_game_background_music();
+    factory.make_game_background_music();
 
     controllable_id = reg.spawn_entity();
     reg.add_component<component::controllable>((entity)controllable_id, component::controllable(keyTab[0], keyTab[1], keyTab[2], keyTab[3], keyTab[4]));
