@@ -88,8 +88,8 @@ chomd +x installvcpkg.sh
 
 After building (see below), simply run:
 ```bash
-./r-type_server [port:int] [port:int] &
-./r-type_client [port:int] [port:int] [adress:string]
+./r-type_server [portTCP:int] [portUDP:int] &
+./r-type_client [portTCP:int] [portUDP:int] [adress:string]
 ```
 
 ## **For developers**
@@ -97,7 +97,8 @@ After building (see below), simply run:
 ### **Build the program** 
 
 On Linux : - You may execute the following commands :
-You have to install (libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev)
+You have to install (libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev).
+
 ```bash
     chomd +x installvcpkg.sh
     ./installvcpkg.sh
@@ -111,6 +112,14 @@ You have to install (libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-d
     "./r-type_client"
     "./r-type_room"
     "./r-type_admin_panel"
+```
+
+Before launching the server, you have to define your server secret key for generating robust tokens.
+Follow the instructions below : 
+
+```bash
+  cd network/RtypeServer/Scripts
+  source set_env.sh
 ```
 
 On Windows : - You may execute the following commands :
