@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['health_0',['health',['../structcomponent_1_1hurtbox__s.html#aba96c6a60940bf664b287bdb06901f0d',1,'component::hurtbox_s']]],
-  ['height_1',['height',['../structcomponent_1_1hurtbox__s.html#aefdfca717ae4f367dfff11ddb045c895',1,'component::hurtbox_s::height'],['../structcomponent_1_1hitbox__s.html#a3c8ca6e680cd44c45e76dfc561fd54f6',1,'component::hitbox_s::height']]],
-  ['hurt_2',['hurt',['../structcomponent_1_1hurtbox__s.html#a2c6fe8d0fd1d64fcc76e6af210480fa3',1,'component::hurtbox_s']]]
+  ['gamestarted_0',['gameStarted',['../classGameInstance.html#a57a0f2fbefad90a0922bafcf4d75fcf7',1,'GameInstance']]],
+  ['gamethreads_5f_1',['gameThreads_',['../classGameManager.html#afdbc36f10a9a1a20b169ef07584e356e',1,'GameManager']]],
+  ['group_2',['group',['../structcomponent_1_1hurtbox__s.html#a2ae83e5eea64fb8925d67190392dc804',1,'component::hurtbox_s']]]
 ];

@@ -57,15 +57,22 @@
  * #include "registry.hpp"
  * ```
  * 
- * Then create a registry instance and a rendering window (for example using SFML):
+ * Then create a registry instance and a window (for example using SFML):
+ * The engine is divided into subststems : Physics, Movement, Rendering, Logic, and Control
+ * You need to toggle the systems you need using the toggle functions of the registry.
+ *
+ *
  * ```cpp
  * int main()
  * {
  *     sf::RenderWindow window(sf::VideoMode(800, 600), "R-TYPE ECS Demo");
  *     Registry reg(window);
+ *     reg.toggleMovement();
+ *     reg.toggleRendering();
+ *     reg.toggleControl();
  *     
  *```
- * You just created a registry with a window. The engine then knows 
+ * You just created a registry with a window and toggled the necessary subsystems. The engine then knows 
  * it needs to activate the rendering systems and its affiliate components.
  * Don't worry, basic components and systems are allready registered by default.
  * Now, you can start creating an entity:

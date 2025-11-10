@@ -751,7 +751,7 @@ GENERATE_BUGLIST       = YES
 # The GENERATE_DEPRECATEDLIST tag can be used to enable (YES) or disable (NO)
 # the deprecated list. This list is created by putting \deprecated commands in
 # the documentation.
-# The default value is: YES.
+# The default value is: YES.Rendering
 
 GENERATE_DEPRECATEDLIST= YES
 
@@ -945,11 +945,13 @@ WARN_LOGFILE           =
 
 INPUT                  = "@CMAKE_CURRENT_SOURCE_DIR@/engine/src" \
                          "@CMAKE_CURRENT_SOURCE_DIR@/engine/include" \
-                          "@CMAKE_CURRENT_SOURCE_DIR@/rtype_client/src" \
-                          "@CMAKE_CURRENT_SOURCE_DIR@/rtype_client/include" \
-                          "@CMAKE_CURRENT_SOURCE_DIR@/rtype_server/include" \
+                          "@CMAKE_CURRENT_SOURCE_DIR@/rtype_gameInstance/src" \
+                          "@CMAKE_CURRENT_SOURCE_DIR@/rtype_gameInstance/include" \
+                          "@CMAKE_CURRENT_SOURCE_DIR@/rtype_gameManager/src" \
+                          "@CMAKE_CURRENT_SOURCE_DIR@/rtype_gameManager/include" \
+                          "@CMAKE_CURRENT_SOURCE_DIR@/rtype_graphicsClient/src" \
+                          "@CMAKE_CURRENT_SOURCE_DIR@/rtype_graphicsClient/include" \
                           "@CMAKE_CURRENT_SOURCE_DIR@/docs \
-                          "@CMAKE_CURRENT_SOURCE_DIR@/rtype_server/src"
 
 
 # This tag can be used to specify the character encoding of the source files

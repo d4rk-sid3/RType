@@ -94,10 +94,11 @@ Network Details</h1>
 <div class="line">      client_(port, address, std::ref(lastmsg), std::ref(mtx)),</div>
 <div class="line">      _reg(reg)</div>
 <div class="line">{</div>
-<div class="line">    load_client_textures();</div>
+<div class="line">    <a class="code hl_function" href="init__graphicsClient_8cpp.html#a1957e9ebc2a88bc8e6c87fa64239c299">load_client_textures</a>();</div>
 <div class="line">    initGame();</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassregistry_html"><div class="ttname"><a href="classregistry.html">registry</a></div><div class="ttdoc">The registry class. The registry is a container for all the entities and components of the game....</div><div class="ttdef"><b>Definition</b> registry.hpp:63</div></div>
+<div class="ttc" id="ainit__graphicsClient_8cpp_html_a1957e9ebc2a88bc8e6c87fa64239c299"><div class="ttname"><a href="init__graphicsClient_8cpp.html#a1957e9ebc2a88bc8e6c87fa64239c299">load_client_textures</a></div><div class="ttdeci">void load_client_textures(void)</div><div class="ttdoc">This function uses the ResourceManager to pre-load textures and fonts that will be used in the game.</div><div class="ttdef"><b>Definition</b> init_graphicsClient.cpp:33</div></div>
 </div><!-- fragment --><p>The constructor of <code>NetworkManager</code> immediately calls <code>receive_from_server()</code>, which starts an asynchronous loop that listens for incoming data from the server.</p>
 <p>The client constantly listens for messages from the server through:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> NetworkManager::receive_from_server();</div>

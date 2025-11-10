@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['frame_5fduration_0',['frame_duration',['../structcomponent_1_1animated__drawable__s.html#a9d413e2ed4cb1c7c6c190f851e6b457e',1,'component::animated_drawable_s']]],
-  ['frame_5frect_1',['frame_rect',['../structcomponent_1_1animated__drawable__s.html#af4c3d8a67784f0d561df90e54ee57a9f',1,'component::animated_drawable_s']]],
-  ['frame_5ftimer_2',['frame_timer',['../structcomponent_1_1animated__drawable__s.html#a1724bb73c3190e4ad4f5456959d0c2c6',1,'component::animated_drawable_s']]]
+  ['entities_0',['entities',['../classGameInstance.html#a968a2af7cd256a90f5817476ed59a282',1,'GameInstance']]],
+  ['entity_5fnum_1',['entity_num',['../classregistry.html#a736fb7871aa84c956c947d586f24a81b',1,'registry']]],
+  ['entity_5fstates_2',['entity_states',['../classGraphicsClient.html#ab667d961345c874e680ed6708124e7bd',1,'GraphicsClient']]],
+  ['event_3',['event',['../classGameInstance.html#ac6d9765733c7f096b34d23721fea8377',1,'GameInstance::event'],['../classGraphicsClient.html#a8e09b6740aedd962c2e739887d32c2b5',1,'GraphicsClient::event']]]
 ];
