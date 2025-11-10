@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['setfontfromname_0',['setFontFromName',['../structcomponent_1_1text__s.html#a19afaebcafa561f6cf076139f54775b2',1,'component::text_s']]],
-  ['setframerect_1',['setFrameRect',['../structcomponent_1_1animated__drawable__s.html#a3e4ebe0724612533507c3110a2d70ae7',1,'component::animated_drawable_s']]],
-  ['setposition_2',['setPosition',['../structcomponent_1_1position__s.html#a021b18ef6d20b3967c4511a5851a82ea',1,'component::position_s']]],
-  ['settexturefromname_3',['setTextureFromName',['../structcomponent_1_1drawable__s.html#a7ee88f7aa48fd311461240b86f0db87a',1,'component::drawable_s::setTextureFromName()'],['../structcomponent_1_1animated__drawable__s.html#a2173193d80d09809b58d877f69f633c0',1,'component::animated_drawable_s::setTextureFromName()']]],
-  ['spawn_5fentity_4',['spawn_entity',['../classregistry.html#a582fb369da9636c38840ce731bb8a200',1,'registry']]]
+  ['position_5fsystem_0',['position_system',['../systems_8cpp.html#a48efdd22550291cb9bacb3330d67ff48',1,'position_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::velocity &gt; &gt; &amp;velocities):&#160;systems.cpp'],['../systems_8hpp.html#a48efdd22550291cb9bacb3330d67ff48',1,'position_system(double delta, registry &amp;reg, std::vector&lt; optional&lt; component::position &gt; &gt; &amp;positions, std::vector&lt; optional&lt; component::velocity &gt; &gt; &amp;velocities):&#160;systems.cpp']]],
+  ['process_5fmessages_1',['process_messages',['../classGameManager.html#a9af164d814b86c517a35ac0356743595',1,'GameManager']]]
 ];

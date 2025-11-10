@@ -92,7 +92,7 @@ Game Logic</h1>
 <div class="line">    {<a class="code hl_typedef" href="namespacecomponent.html#af42f87bf296e95960edc1d8eb0ea059b">name</a> = <span class="stringliteral">&quot;boss&quot;</span>; spawn_time = 10.0; y = 150.0;}</div>
 <div class="line"> );</div>
 <div class="ttc" id="anamespacecomponent_html_af42f87bf296e95960edc1d8eb0ea059b"><div class="ttname"><a href="namespacecomponent.html#af42f87bf296e95960edc1d8eb0ea059b">component::name</a></div><div class="ttdeci">struct component::name_s name</div><div class="ttdoc">The name component, defined by a string. It lets you give a name to each entity.</div></div>
-</div><!-- fragment --><p>During the game, it then spawns the entities at the correct moment. Thanks to the logic components and the logic system as well as all the other ones. The entities evolve in the scene. All the server has to do now is to go through each game entity (and skip special ones like the background, the music) and send its infos (type and position) to each client. See more in level_handling.cpp.</p>
+</div><!-- fragment --><p>During the game, it then spawns the entities at the correct moment. Thanks to the logic components and the logic system as well as all the other ones. The entities evolve in the scene. All the server has to do now is to go through each game entity (and skip special ones like the background, the music) and send its infos (type and position) to each client. See more in <a class="el" href="level__handling_8cpp.html">level_handling.cpp</a>.</p>
 <p>Simultaneously, the server listens to inputs from the clients If an input is received, the server then applies velocity to the corresponding player entity.</p>
 <h1><a class="anchor" id="network_details"></a>
 Network Details</h1>
@@ -100,11 +100,12 @@ Network Details</h1>
 <div class="fragment"><div class="line">Server::Server(<span class="keywordtype">int</span> p, <a class="code hl_class" href="classregistry.html">registry</a>&amp; regis)</div>
 <div class="line">    : server_(p, std::ref(messages), std::ref(mtx)), p_(p), reg(regis)</div>
 <div class="line">{</div>
-<div class="line">    load_textures();</div>
+<div class="line">    <a class="code hl_function" href="init__gameInstance_8cpp.html#a0c588e2ccf2ed315e2710776feac9eff">load_textures</a>();</div>
 <div class="line">    initializeGame();</div>
 <div class="line">    loadLevel(<span class="stringliteral">&quot;assets/levels/test.txt&quot;</span>);</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassregistry_html"><div class="ttname"><a href="classregistry.html">registry</a></div><div class="ttdoc">The registry class. The registry is a container for all the entities and components of the game....</div><div class="ttdef"><b>Definition</b> registry.hpp:63</div></div>
+<div class="ttc" id="ainit__gameInstance_8cpp_html_a0c588e2ccf2ed315e2710776feac9eff"><div class="ttname"><a href="init__gameInstance_8cpp.html#a0c588e2ccf2ed315e2710776feac9eff">load_textures</a></div><div class="ttdeci">void load_textures(void)</div><div class="ttdoc">This function uses the ResourceManager to pre-load textures and fonts that will be used in the game.</div><div class="ttdef"><b>Definition</b> init_gameInstance.cpp:26</div></div>
 </div><!-- fragment --><p>The constructor of <code>NetworkManager</code> creates a UDP socket bind to the given port and starts an asynchronous loop:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> NetworkManager::receive_from_clients();</div>
 </div><!-- fragment --><p>This allows the server to receive messages (typically player inputs) from all connected clients.</p>

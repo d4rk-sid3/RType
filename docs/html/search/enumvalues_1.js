@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['texture_0',['TEXTURE',['../ResourceManager_8hpp.html#a509a729cba5db28cddc3c2ec18d0d83aa3f07a311da6e3003d3922d665098da2d',1,'ResourceManager.hpp']]]
+  ['difficult_0',['DIFFICULT',['../classGameSettings.html#a3bedaa9073519fcf43a6b12553bf3180a65516a42c1fe0ff17bdfe1c342f99a92',1,'GameSettings']]]
 ];

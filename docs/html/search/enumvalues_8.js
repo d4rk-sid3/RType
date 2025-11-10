@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sub_5fnone_0',['SUB_NONE',['../client_8hpp.html#a7200056c886361c0597814f8db61992ea777cb88c7c961952f33afb572cefa64d',1,'client.hpp']]]
+  ['normal_0',['NORMAL',['../classGameSettings.html#abd81557c9320b8dfa70f66a42396cf11a1e23852820b9154316c7c06e2b7ba051',1,'GameSettings']]]
 ];
