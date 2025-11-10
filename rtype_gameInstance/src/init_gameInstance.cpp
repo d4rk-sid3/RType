@@ -124,11 +124,11 @@ void GameInstance::addMessage(const asio::ip::udp::endpoint& client, const std::
 }
 
 void GameInstance::addClient(const asio::ip::udp::endpoint& client) {
-    static size_t player_id = 0;
+    
+    std::cout << "Adding client: " << client.address().to_string() << ":" << client.port() << std::endl;
 
     if (!hasClient(client)) {
-        all_clients[client] = player_id;
-        player_id++;
+        all_clients[client] = -1;
     }
 }
 
