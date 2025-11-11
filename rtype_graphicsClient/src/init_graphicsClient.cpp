@@ -256,6 +256,26 @@ void GraphicsClient::receiveServerInfo() {
     for (int a = 0; a < e.nbr; a++) {
         s.push_back(decodeEnemyMovedResponse(lastmsg));
     }
+
+    if (entity_states.empty()) {
+        entity_states.push_back({e.timeElapsed, s});
+        return;
+    }
+
+
+    if (std::find_if(entity_states.begin(), entity_states.end(), 
+        [&e](std::pair<int64_t, std::vector<EnemyMovedResponse>>&tmp) {
+            return e.timeElapsed == tmp.first;
+        }) != entity_states.end())
+        return;
+
+    for (int i = 0; i < entity_states.size() - 1; i++) {
+        if (entity_states[i].first < e.timeElapsed && entity_states[i + 1].first > e.timeElapsed){
+            entity_states.insert(entity_states.begin() + i - 1, {e.timeElapsed, s});
+            return;
+        }
+    }
+
     entity_states.push_back({e.timeElapsed, s});
 }
 
