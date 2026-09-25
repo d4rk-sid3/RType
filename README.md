@@ -1,12 +1,15 @@
 # **R-Type**
 
+<p align="center">
+  <img src="assets_UI/images/background.jpg" alt="R-Type" width="720" />
+</p>
+
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)  
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
 ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 ![CMake](https://img.shields.io/badge/CMake-%23008FBA.svg?style=for-the-badge&logo=cmake&logoColor=white)
 ![vcpkg](https://img.shields.io/badge/vcpkg-%23007ACC.svg?style=for-the-badge&logo=visualstudio&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 
 ---
 
@@ -39,6 +42,28 @@
 
 The **Epitech R-Type Project** is a reimagining of the classic shoot’em up **R-Type**, built from scratch using a **custom ECS (Entity Component System)** engine.  
 It includes a **multithreaded C++ server** and a **graphical client**, with networking, physics, UI, and persistence handled through modern open-source libraries.
+
+### **Architecture at a glance**
+
+```mermaid
+flowchart LR
+    C1["r-type_client<br/>SFML · UI scenes"] -- "TCP: auth, lobby, commands" --> T
+    C2["r-type_client"] -- TCP --> T
+    subgraph S["r-type_server (Asio)"]
+        T["ServerTCP<br/>auth · parties"] --> GM["GameManager"]
+        GM -- "one thread per party" --> GI1["GameInstance · ECS<br/>20 ticks/s"]
+        GM --> GI2["GameInstance"]
+    end
+    C1 <-- "UDP: real-time state" --> GI1
+    C2 <-- UDP --> GI1
+    T --- DB[("SQLite<br/>users · scores")]
+```
+
+- **Hybrid networking:** reliable **TCP** for authentication, lobbies and commands; **UDP** for the real-time game state. The binary protocol is specified in [docs/protocol.md](./docs/protocol.md).
+- **Custom ECS engine:** a registry of sparse component arrays and systems (position, control, collision, drawing, animation) — no game engine used.
+- **Parallel parties:** the `GameManager` runs every `GameInstance` in its own thread with a fixed 50 ms tick, so several games are simulated at the same time by one server.
+- **Security:** passwords hashed with libsodium, session tokens derived from a server secret that is never versioned.
+- **Data-driven UI:** client scenes (login, dashboard, lobby, settings, leaderboard) are described in libconfig files under `UIScenes/`.
 
 ### **Main Libraries**
 - **SFML** → 2D graphics rendering, sound, and event management  
