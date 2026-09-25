@@ -30,7 +30,7 @@
     - [**Technologies choices**](#technologies-choices)
   - [**For game designers**](#for-game-designers)
     - [**Add content**](#add-content)
-  - [**Thank for reading**](#thank-for-reading)
+  - [**Thanks for reading**](#thanks-for-reading)
   - [**Authors**](#authors)
 
 ---
@@ -82,7 +82,7 @@ You need:
 ### **How to install and use VCPKG**
 
 ```bash
-chomd +x installvcpkg.sh
+chmod +x installvcpkg.sh
 ./installvcpkg.sh
 ```
 
@@ -102,9 +102,9 @@ On Linux : - You may execute the following commands :
 You have to install (libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev).
 
 ```bash
-    chomd +x installvcpkg.sh
+    chmod +x installvcpkg.sh
     ./installvcpkg.sh
-    cd road/to/rtype/repo
+    cd path/to/rtype
     mkdir build
     cd build
     cmake ..
@@ -132,11 +132,11 @@ On Windows : - You may execute the following commands :
     setx PATH "$env:PATH;C:\vcpkg"
     .\vcpkg integrate install
     set VCPKG_ROOT=C:\vcpkg
-    cd to-rtype-repo
+    cd path\to\rtype
     mkdir build
     cd build
     cmake .. -G "Visual Studio 17 2022" -A x64
-    cmake --build . --coonfig Release
+    cmake --build . --config Release
     copy ".\Release\r-type_server.exe" .
     copy ".\Release\r-type_client.exe" .
     copy ".\Release\r-type_room.exe" .
@@ -148,11 +148,11 @@ On Windows : - You may execute the following commands :
 The project uses Google Tests for testing. They first need to be compiled to be executed.
 You can launch the tests by launching the compiled test binaries.
 
-Lauch the regular compilation with CMake
+Launch the regular compilation with CMake
 ``` bash
-rm -rf build && mkdir build && cd build && cmake .. & make
+rm -rf build && mkdir build && cd build && cmake .. && make
 ```
-The test binaries will be in the build directory. Just lanch them. For example:
+The test binaries will be in the build directory. Just launch them. For example:
 ``` bash
 ./registry_tests
 ```
@@ -181,7 +181,7 @@ See more infos in the documentation, page "Adding Content".
 
 Please consult the comparative study document [docs/comparatives_case_study.md](./docs/comparatives_case_study.md)
 
-## **Thank for reading**
+## **Thanks for reading**
 
 Feel free to read the CONTRIBUTING.md. Do not hesitate to contact any member for any questions or remarks. You can click on each following name.
 
