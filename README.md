@@ -137,8 +137,6 @@ You have to install (libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-d
     cd ..
     "./r-type_server"
     "./r-type_client"
-    "./r-type_room"
-    "./r-type_admin_panel"
 ```
 
 Before launching the server, you have to define your server secret key, used to generate robust authentication tokens.
@@ -169,8 +167,6 @@ On Windows : - You may execute the following commands :
     cmake --build . --config Release
     copy ".\Release\r-type_server.exe" .
     copy ".\Release\r-type_client.exe" .
-    copy ".\Release\r-type_room.exe" .
-    copy ".\Release\r-type_admin_panel.exe" .
 ```
 
 ### **Testing program** 
