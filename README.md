@@ -116,13 +116,18 @@ You have to install (libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-d
     "./r-type_admin_panel"
 ```
 
-Before launching the server, you have to define your server secret key for generating robust tokens.
-Follow the instructions below : 
+Before launching the server, you have to define your server secret key, used to generate robust authentication tokens.
+The key is never versioned: create it from the template, then load it into your environment.
 
 ```bash
-  cd network/RtypeServer/Scripts
-  source set_env.sh
+  cd network/RTypeServer/Secrets
+  cp .secret_key.example .secret_key.txt
+  sed -i "s/change-me/$(openssl rand -hex 32)/" .secret_key.txt
+  cd ../Scripts
+  source set_env.sh        # exports SERVER_SECRET_KEY
 ```
+
+The SQLite database (`Database/r-type.db`) is created automatically the first time the server starts.
 
 On Windows : - You may execute the following commands :
 ```bash
@@ -157,7 +162,7 @@ The test binaries will be in the build directory. Just launch them. For example:
 ./registry_tests
 ```
 
-## **For developers**
+## **For game designers**
 
 ### **Add content**
 
@@ -173,13 +178,12 @@ See more infos in the documentation, page "Adding Content".
 ### **Documentation**
 
 🧠 **Code Reference:** Generated with [Doxygen](https://www.doxygen.nl/)  
-📘 **Technical Docs:** [Notion Documentation](https://amazing-partridge-567)  
 📜 **Communication Protocol:** [docs/protocol.md](./docs/protocol.md)  
-💾 **Database Schema:** [docs/database.md](./docs/database.md)
+💾 **Database Schema:** [DatabaseManager.hpp](./network/RTypeServer/Managers/DatabaseManager.hpp) (tables are created in `initialize()`)
 
 ### **Technologies choices**
 
-Please consult the comparative study document [docs/comparatives_case_study.md](./docs/comparatives_case_study.md)
+Please consult the comparative study document [Comparative Study.md](./Comparative%20Study.md)
 
 ## **Thanks for reading**
 
